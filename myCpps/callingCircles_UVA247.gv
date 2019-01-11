@@ -1,0 +1,9 @@
+digraph
+{
+    Ben -> Alexander;
+    Alexander -> Dolly;
+    Dolly -> Ben;
+    Dolly -> Benedict;
+    Benedict -> Dolly;
+    Alexander -> Aaron;
+}

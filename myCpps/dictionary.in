@@ -1,0 +1,1175 @@
+
+-- Users(18/151):4M
+aemaulana:23d
+ayushgrg04:3M
+bithack:3M
+felix_halim:2M
+feodorv:3M
+HANDOUS:2M
+Hatem_Khirouni:3M
+johirbuet:2M
+mahafaltu:12d
+maruf_hosen47:3M
+metaphysis:3M
+NOYON31:3M
+Ruhan:1M
+russell_07:1M
+shikhorroy:22d
+Shurjo42:3M
+Tasin[}:1M
+thechange:1M
+	
+
+To sign in, please login to the UVa Online Judge site.
+
+If you have done so, click the sign in button below.
+Invisible 	
+[ Sign In ] 	
+	uHunt
+hunt problems that matter
+
+uHunt is a complementary tool for UVa online-judge that keeps statistics, provide selections of problems to solve, and exposes a web API for other web developers to build upon it. See a brief history of uHunt.
+
+To submit your solution, use UVa Quick Submit.
+
+Your UVa username:
+
+Search Problem Number:  
+11137 - Ingenuous Cubrency   [ statistics / discuss]   (hide)
+View : [ last | yours(1) ]     Show : [ 5 | 10 | 50 | 100 | 500   Submissions
+  # 	Rank 	  User (username) 	  Verdict 	Lang 	Time 	Submit Time
+21419045  	1047 	Shawn Liang (shawnliang) 	  Accepted 	C++11 	0.000 	15 mins ago
+21415274  	1046 	Himanshu Rai (himanshu520) 	  Accepted 	C++11 	0.000 	18 hours ago
+21414266  	1045 	Debashish Deka (humble_coder) 	  Accepted 	C++11 	0.000 	21 hours ago
+21414210  	- 	Debashish Deka (humble_coder) 	  Wrong answer 	C++11 	- 	22 hours ago
+21413340  	1044 	Shahadat Hossen (shakil2021) 	  Accepted 	C++ 	0.000 	1 days ago
+21412438  	1044 	Bill (vjudge9) 	  Accepted 	C++11 	0.000 	1 days ago
+21409807  	1044 	Bill (vjudge9) 	  Accepted 	C++ 	0.000 	1 days ago
+21391971  	1043 	Pedro Anselmo Santana De Angeli (PedroX345) 	  Accepted 	C++11 	0.000 	4 days ago
+21391940  	- 	Pedro Anselmo Santana De Angeli (PedroX345) 	  Wrong answer 	C++11 	- 	4 days ago
+21390908  	1043 	赵子龙 (vjudge3) 	  Accepted 	C++11 	0.000 	4 days ago
+21382478  	1042 	kawsarul alam (uvshuvo) 	  Accepted 	C++11 	0.000 	6 days ago
+21381421  	3718 	William Beard (mac989898) 	  Accepted 	Java 	0.080 	6 days ago
+21378052  	3691 	关云长 (vjudge1) 	  Accepted 	C++11 	0.070 	7 days ago
+21378036  	3744 	关云长 (vjudge1) 	  Accepted 	Java 	0.090 	7 days ago
+21377595  	3690 	Tridip (tridipkundu) 	  Accepted 	C++11 	0.070 	7 days ago
+21374703  	1042 	关云长 (vjudge1) 	  Accepted 	C++ 	0.000 	7 days ago
+21374305  	3549 	Quazi Rakibul Islam (ishaanrakib4282) 	  Accepted 	C++11 	0.040 	7 days ago
+21374299  	- 	Quazi Rakibul Islam (ishaanrakib4282) 	  Wrong answer 	C++11 	- 	7 days ago
+21373069  	1042 	Sam (vjudge7) 	  Accepted 	C++11 	0.000 	8 days ago
+21371817  	- 	张翼德 (vjudge2) 	  Time limit 	C++ 	- 	8 days ago
+21371564  	1042 	Tom (vjudge6) 	  Accepted 	C++ 	0.000 	8 days ago
+21370093  	1042 	关云长 (vjudge1) 	  Accepted 	C++ 	0.000 	8 days ago
+21368046  	1041 	shoaib tasrif (ste_sust) 	  Accepted 	C++11 	0.000 	8 days ago
+21368012  	- 	shoaib tasrif (ste_sust) 	  Wrong answer 	C++11 	- 	8 days ago
+21367506  	3744 	Jim (vjudge10) 	  Accepted 	Java 	0.090 	9 days ago
+21366670  	1041 	马孟起 (vjudge4) 	  Accepted 	C++ 	0.000 	9 days ago
+21365665  	1041 	Bill (vjudge9) 	  Accepted 	C++11 	0.000 	9 days ago
+21362863  	1041 	Tom (vjudge6) 	  Accepted 	C++ 	0.000 	9 days ago
+21362731  	- 	关云长 (vjudge1) 	  Time limit 	C++ 	- 	9 days ago
+21362727  	- 	赵子龙 (vjudge3) 	  Time limit 	C++ 	- 	9 days ago
+21362314  	1041 	Bill (vjudge9) 	  Accepted 	C++11 	0.000 	10 days ago
+21362278  	3549 	Jim (vjudge10) 	  Accepted 	C++11 	0.040 	10 days ago
+21358810  	1041 	Tom (vjudge6) 	  Accepted 	C++ 	0.000 	10 days ago
+21358754  	- 	Jim (vjudge10) 	  Wrong answer 	C++ 	- 	10 days ago
+21357997  	- 	关云长 (vjudge1) 	  Wrong answer 	C++11 	- 	10 days ago
+21357911  	1041 	关云长 (vjudge1) 	  Accepted 	C++11 	0.000 	10 days ago
+21357554  	1041 	Tom (vjudge6) 	  Accepted 	C++11 	0.000 	10 days ago
+21357531  	1041 	马孟起 (vjudge4) 	  Accepted 	C++ 	0.000 	10 days ago
+21357506  	4281 	黄汉升 (vjudge5) 	  Accepted 	C++11 	2.550 	10 days ago
+21357474  	1041 	Bill (vjudge9) 	  Accepted 	C++11 	0.000 	10 days ago
+21357462  	1041 	Bill (vjudge9) 	  Accepted 	C++ 	0.000 	10 days ago
+21357449  	3370 	关云长 (vjudge1) 	  Accepted 	C++ 	0.030 	10 days ago
+21357379  	1041 	张翼德 (vjudge2) 	  Accepted 	C++11 	0.000 	10 days ago
+21357348  	1041 	Bill (vjudge9) 	  Accepted 	C++ 	0.000 	10 days ago
+21357334  	3651 	黄汉升 (vjudge5) 	  Accepted 	C++11 	0.060 	10 days ago
+21357294  	1041 	马孟起 (vjudge4) 	  Accepted 	C++11 	0.000 	10 days ago
+21357206  	- 	Bill (vjudge9) 	  Time limit 	C++11 	- 	10 days ago
+21357188  	- 	赵子龙 (vjudge3) 	  Time limit 	C++11 	- 	10 days ago
+21357185  	1041 	张翼德 (vjudge2) 	  Accepted 	C++ 	0.000 	10 days ago
+21357033  	1040 	Amit Sarker (Peregrine_Falcon) 	  Accepted 	C++11 	0.000 	10 days ago
+21356989  	1040 	Tom (vjudge6) 	  Accepted 	C++11 	0.000 	10 days ago
+21356937  	3370 	张翼德 (vjudge2) 	  Accepted 	C++11 	0.030 	10 days ago
+21354114  	1040 	Tom (vjudge6) 	  Accepted 	C++11 	0.000 	11 days ago
+21354113  	1039 	Benedick Asdyo (benedick) 	  Accepted 	C++ 	0.000 	11 days ago
+21348159  	1038 	João Mário Soares Silva (JMoicano) 	  Accepted 	C++ 	0.000 	12 days ago
+21344158  	1037 	Abd Mahfuz (Mahfuz_shovon) 	  Accepted 	C++11 	0.000 	13 days ago
+21338918  	1036 	不可结缘 (不可结缘) 	  Accepted 	C++ 	0.000 	14 days ago
+21338912  	- 	不可结缘 (不可结缘) 	  Runtime error 	C++ 	- 	14 days ago
+21332767  	3898 	kribo barobo (kribobarobo) 	  Accepted 	Java 	0.150 	15 days ago
+21329666  	4268 	MD Tawab Alam Khan (heartbreaker1990) 	  Accepted 	C++11 	2.020 	16 days ago
+21328626  	2082 	Israel (thextroid) 	  Accepted 	C++ 	0.010 	16 days ago
+21316745  	1035 	Mahmudul Hasan (codebreaker007) 	  Accepted 	C++ 	0.000 	18 days ago
+21310286  	3766 	Fabio Andrés Sierra (fabres21s) 	  Accepted 	Java 	0.100 	19 days ago
+21310266  	- 	Fabio Andrés Sierra (fabres21s) 	  Wrong answer 	Java 	- 	19 days ago
+21310263  	- 	Fabio Andrés Sierra (fabres21s) 	  Wrong answer 	Java 	- 	19 days ago
+21310254  	- 	Fabio Andrés Sierra (fabres21s) 	  Wrong answer 	Java 	- 	19 days ago
+21310233  	- 	Fabio Andrés Sierra (fabres21s) 	  Runtime error 	Java 	- 	19 days ago
+21301345  	1035 	张翼德 (vjudge2) 	  Accepted 	C++11 	0.000 	22 days ago
+21299028  	1034 	Shadman Shihab (shadman_shihab) 	  Accepted 	C++11 	0.000 	22 days ago
+21295396  	1033 	আহসান শফিক শাওন (শাওন) 	  Accepted 	C++ 	0.000 	23 days ago
+21278734  	4129 	MasudSaomRayhan (MasudSaomRayhan) 	  Accepted 	Java 	0.290 	26 days ago
+21278717  	- 	MasudSaomRayhan (MasudSaomRayhan) 	  Compile error 	Java 	- 	26 days ago
+21278704  	- 	MasudSaomRayhan (MasudSaomRayhan) 	  Compile error 	Java 	- 	26 days ago
+21276293  	1032 	আপাতত নাই (hobe) 	  Accepted 	C++ 	0.000 	26 days ago
+21269819  	- 	赵子龙 (vjudge3) 	  Compile error 	ANSI C 	- 	28 days ago
+21269815  	- 	Bill (vjudge9) 	  Wrong answer 	C++11 	- 	28 days ago
+21269811  	1032 	Tom (vjudge6) 	  Accepted 	C++11 	0.000 	28 days ago
+21269803  	- 	Bob (vjudge8) 	  Wrong answer 	C++11 	- 	28 days ago
+21269794  	- 	Jim (vjudge10) 	  Wrong answer 	C++ 	- 	28 days ago
+21269786  	1032 	关云长 (vjudge1) 	  Accepted 	C++ 	0.000 	28 days ago
+21269782  	1032 	关云长 (vjudge1) 	  Accepted 	C++ 	0.000 	28 days ago
+21269765  	- 	赵子龙 (vjudge3) 	  Wrong answer 	C++ 	- 	28 days ago
+21258045  	1031 	Martin Helmut Domínguez Álvarez (nitram_mh) 	  Accepted 	C++ 	0.000 	2018-05-04 03:29
+21258004  	- 	Martin Helmut Domínguez Álvarez (nitram_mh) 	  Wrong answer 	C++ 	- 	2018-05-04 03:14
+21254543  	1030 	Irvin Delano (delanobgt) 	  Accepted 	C++11 	0.000 	2018-05-03 17:45
+21252613  	- 	Mario Molina (amc1704) 	  Wrong answer 	C++11 	- 	2018-05-03 11:37
+21252604  	- 	Mario Molina (amc1704) 	  Wrong answer 	C++11 	- 	2018-05-03 11:35
+21252540  	1029 	Mario Molina (amc1704) 	  Accepted 	C++11 	0.000 	2018-05-03 11:19
+21252486  	1029 	Andres (andresyun) 	  Accepted 	C++ 	0.000 	2018-05-03 11:08
+21252385  	1028 	Alberto (albertto1) 	  Accepted 	C++ 	0.000 	2018-05-03 10:43
+21252315  	1027 	Armando Ruiz (Diagsrmd97) 	  Accepted 	C++11 	0.000 	2018-05-03 10:31
+21252200  	- 	Armando Ruiz (Diagsrmd97) 	  Wrong answer 	C++11 	- 	2018-05-03 10:09
+21252185  	- 	Armando Ruiz (Diagsrmd97) 	  Wrong answer 	C++11 	- 	2018-05-03 10:07
+21252177  	- 	Armando Ruiz (Diagsrmd97) 	  Compile error 	C++11 	- 	2018-05-03 10:05
+21252160  	- 	Armando Ruiz (Diagsrmd97) 	  Compile error 	C++11 	- 	2018-05-03 10:02
+21252009  	3548 	Guillermo Carsolio (mcarsolio44) 	  Accepted 	Python 	0.040 	2018-05-03 09:19
+21252004  	3651 	Guillermo Carsolio (mcarsolio44) 	  Accepted 	Python 	0.060 	2018-05-03 09:17
+21252003  	3718 	Guillermo Carsolio (mcarsolio44) 	  Accepted 	Python 	0.080 	2018-05-03 09:17
+21251960  	3898 	Guillermo Carsolio (mcarsolio44) 	  Accepted 	Python 	0.150 	2018-05-03 09:04
+21251830  	1026 	PabloPA (Pradopablo) 	  Accepted 	C++11 	0.000 	2018-05-03 08:21
+21251500  	1026 	Oswaldo David García Rodríguez (Acknatron) 	  Accepted 	C++11 	0.000 	2018-05-03 05:25
+21250456  	1025 	Sezan Ahmed (sezan175) 	  Accepted 	C++11 	0.000 	2018-05-03 00:41
+21250446  	- 	Sezan Ahmed (sezan175) 	  Runtime error 	C++11 	- 	2018-05-03 00:39
+21250440  	- 	Sezan Ahmed (sezan175) 	  Runtime error 	C++11 	- 	2018-05-03 00:39
+21250277  	1024 	Jose Angel (angelpenapp) 	  Accepted 	C++ 	0.000 	2018-05-03 00:02
+21250168  	1023 	Andres (andresyun) 	  Accepted 	C++ 	0.000 	2018-05-02 23:50
+21249389  	1023 	Oswaldo David García Rodríguez (Acknatron) 	  Accepted 	ANSI C 	0.000 	2018-05-02 22:32
+21249370  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Time limit 	ANSI C 	- 	2018-05-02 22:29
+21249348  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Time limit 	ANSI C 	- 	2018-05-02 22:26
+21249340  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Runtime error 	ANSI C 	- 	2018-05-02 22:25
+21249322  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Wrong answer 	ANSI C 	- 	2018-05-02 22:24
+21249309  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Wrong answer 	C++11 	- 	2018-05-02 22:22
+21249301  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Compile error 	ANSI C 	- 	2018-05-02 22:21
+21249277  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Runtime error 	ANSI C 	- 	2018-05-02 22:20
+21249265  	1023 	Oswaldo David García Rodríguez (Acknatron) 	  Accepted 	ANSI C 	0.000 	2018-05-02 22:19
+21249254  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Runtime error 	ANSI C 	- 	2018-05-02 22:18
+21249250  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Runtime error 	ANSI C 	- 	2018-05-02 22:17
+21249243  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Runtime error 	ANSI C 	- 	2018-05-02 22:17
+21249224  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Compile error 	ANSI C 	- 	2018-05-02 22:15
+21249212  	1023 	Oswaldo David García Rodríguez (Acknatron) 	  Accepted 	C++11 	0.000 	2018-05-02 22:15
+21249157  	1023 	Oswaldo David García Rodríguez (Acknatron) 	  Accepted 	C++11 	0.000 	2018-05-02 22:10
+21249143  	1022 	Oswaldo David García Rodríguez (Acknatron) 	  Accepted 	C++11 	0.000 	2018-05-02 22:09
+21249135  	- 	Oswaldo David García Rodríguez (Acknatron) 	  Wrong answer 	C++11 	- 	2018-05-02 22:08
+21248112  	4129 	Bob (vjudge8) 	  Accepted 	C++11 	0.290 	2018-05-02 20:14
+21245046  	1021 	Manuel García (manuelgh) 	  Accepted 	C++ 	0.000 	2018-05-02 12:01
+21245037  	- 	Manuel García (manuelgh) 	  Wrong answer 	C++ 	- 	2018-05-02 11:59
+21244348  	- 	Vladimir Salvador (dinnosc) 	  Time limit 	C++11 	- 	2018-05-02 07:27
+21244243  	- 	Vladimir Salvador (dinnosc) 	  Time limit 	C++11 	- 	2018-05-02 06:33
+21244234  	- 	Vladimir Salvador (dinnosc) 	  Time limit 	C++11 	- 	2018-05-02 06:28
+21244226  	- 	Vladimir Salvador (dinnosc) 	  Time limit 	C++11 	- 	2018-05-02 06:23
+21244207  	- 	Vladimir Salvador (dinnosc) 	  Time limit 	C++11 	- 	2018-05-02 06:12
+21239331  	1020 	Samantha (samanthahhdez) 	  Accepted 	C++11 	0.000 	2018-05-01 13:30
+21239076  	1019 	A (aabb199) 	  Accepted 	C++11 	0.000 	2018-05-01 12:13
+21237694  	1018 	Arnob Biswas (Arnob114348) 	  Accepted 	ANSI C 	0.000 	2018-05-01 03:21
+21234530  	1018 	黄汉升 (vjudge5) 	  Accepted 	C++11 	0.000 	2018-04-30 16:06
+21234442  	1018 	Jorge Niño (JorgeANino) 	  Accepted 	C++11 	0.000 	2018-04-30 15:48
+21234441  	1017 	Jorge Niño (JorgeANino) 	  Accepted 	C++11 	0.000 	2018-04-30 15:48
+21234438  	- 	Jorge Niño (JorgeANino) 	  Compile error 	C++11 	- 	2018-04-30 15:47
+21234435  	- 	Jorge Niño (JorgeANino) 	  Compile error 	C++ 	- 	2018-04-30 15:46
+21233212  	1017 	Dante Flores (DanteMaxFM) 	  Accepted 	C++11 	0.000 	2018-04-30 10:52
+21233199  	1016 	Dante Flores (DanteMaxFM) 	  Accepted 	C++11 	0.000 	2018-04-30 10:48
+21233183  	- 	Dante Flores (DanteMaxFM) 	  Wrong answer 	C++11 	- 	2018-04-30 10:44
+21232276  	1015 	Hugo Pérez (haperezso) 	  Accepted 	C++11 	0.000 	2018-04-30 03:47
+21221844  	1014 	TheHalfBloodPrince (Frdhsn) 	  Accepted 	C++11 	0.000 	2018-04-28 10:37
+21215827  	1013 	Rodrigo Amaral (Rodrigoaf61) 	  Accepted 	C++11 	0.000 	2018-04-27 07:30
+21195392  	1012 	Guillermo Barrón (barrons.guillermo) 	  Accepted 	C++11 	0.000 	2018-04-24 12:50
+21195378  	1012 	赵子龙 (vjudge3) 	  Accepted 	C++11 	0.000 	2018-04-24 12:46
+21195349  	- 	Guillermo Barrón (barrons.guillermo) 	  Wrong answer 	C++11 	- 	2018-04-24 12:36
+21193879  	- 	Jim (vjudge10) 	  Runtime error 	Java 	- 	2018-04-24 04:40
+21193868  	3690 	Tom (vjudge6) 	  Accepted 	Java 	0.070 	2018-04-24 04:36
+21193866  	- 	黄汉升 (vjudge5) 	  Compile error 	Java 	- 	2018-04-24 04:36
+21193856  	3690 	马孟起 (vjudge4) 	  Accepted 	Java 	0.070 	2018-04-24 04:33
+21193816  	3610 	关云长 (vjudge1) 	  Accepted 	Java 	0.050 	2018-04-24 04:18
+21193802  	3718 	张翼德 (vjudge2) 	  Accepted 	Java 	0.080 	2018-04-24 04:16
+21193786  	- 	Jim (vjudge10) 	  Runtime error 	Java 	- 	2018-04-24 04:13
+21193780  	3718 	马孟起 (vjudge4) 	  Accepted 	Java 	0.080 	2018-04-24 04:12
+21193778  	- 	黄汉升 (vjudge5) 	  Compile error 	Java 	- 	2018-04-24 04:11
+21193776  	- 	黄汉升 (vjudge5) 	  Runtime error 	Java 	- 	2018-04-24 04:11
+21193730  	3690 	黄汉升 (vjudge5) 	  Accepted 	Java 	0.070 	2018-04-24 04:01
+21193725  	- 	黄汉升 (vjudge5) 	  Wrong answer 	Java 	- 	2018-04-24 04:00
+21193716  	3548 	张翼德 (vjudge2) 	  Accepted 	Java 	0.040 	2018-04-24 03:58
+21193617  	3690 	关云长 (vjudge1) 	  Accepted 	Java 	0.070 	2018-04-24 03:33
+21193612  	- 	马孟起 (vjudge4) 	  Compile error 	Java 	- 	2018-04-24 03:32
+21193605  	- 	黄汉升 (vjudge5) 	  Compile error 	ANSI C 	- 	2018-04-24 03:31
+21193538  	3718 	Jim (vjudge10) 	  Accepted 	Java 	0.080 	2018-04-24 03:16
+21193310  	3766 	Jim (vjudge10) 	  Accepted 	Java 	0.100 	2018-04-24 02:21
+21193159  	1011 	Francisco Palacios (frankpa97@hotmail.com) 	  Accepted 	C++ 	0.000 	2018-04-24 01:44
+21190909  	1011 	马孟起 (vjudge4) 	  Accepted 	C++ 	0.000 	2018-04-23 18:59
+21190107  	3717 	Gary Antezana (garu2) 	  Accepted 	Java 	0.080 	2018-04-23 15:36
+21186966  	1011 	Tom (vjudge6) 	  Accepted 	C++11 	0.000 	2018-04-23 00:21
+21186802  	3933 	Gary Antezana (garu2) 	  Accepted 	Java 	0.160 	2018-04-22 23:55
+21186703  	- 	Gary Antezana (garu2) 	  Wrong answer 	Java 	- 	2018-04-22 23:41
+21183154  	1010 	Tay Qi Xiang (Xiang73558) 	  Accepted 	C++11 	0.000 	2018-04-22 09:56
+21183119  	3690 	David (Dasterr) 	  Accepted 	Java 	0.070 	2018-04-22 09:46
+21183106  	3689 	David (Dasterr) 	  Accepted 	Java 	0.070 	2018-04-22 09:41
+21181100  	3717 	张翼德 (vjudge2) 	  Accepted 	Java 	0.080 	2018-04-21 23:46
+21180585  	1009 	Abir Hasan Mubin (abirhasanmubin) 	  Accepted 	C++ 	0.000 	2018-04-21 22:19
+21180580  	1009 	赵子龙 (vjudge3) 	  Accepted 	C++ 	0.000 	2018-04-21 22:18
+21172650  	1008 	Liang jiachen (pirate_luffy) 	  Accepted 	C++11 	0.000 	2018-04-20 17:27
+21172633  	- 	Liang jiachen (pirate_luffy) 	  Wrong answer 	C++11 	- 	2018-04-20 17:23
+21158662  	1007 	cyc (ygsldr) 	  Accepted 	C++ 	0.000 	2018-04-18 17:49
+21155372  	1006 	Md. Basim Uddin Ahmed (basim_sust) 	  Accepted 	C++11 	0.000 	2018-04-18 02:16
+21154473  	3547 	sohel (lehos) 	  Accepted 	C++11 	0.040 	2018-04-17 22:59
+21150633  	- 	Al hel shoumik (alsmk) 	  Wrong answer 	C++ 	- 	2018-04-17 05:39
+21147895  	1005 	Ifta Khairul Alam Adil (ikaadil) 	  Accepted 	C++11 	0.000 	2018-04-16 20:09
+21146337  	1005 	Sam (vjudge7) 	  Accepted 	C++11 	0.000 	2018-04-16 13:17
+21144974  	1004 	Akash Lanard (s_da_sailor) 	  Accepted 	C++11 	0.000 	2018-04-16 02:45
+21141000  	1004 	马孟起 (vjudge4) 	  Accepted 	C++ 	0.000 	2018-04-15 11:45
+21137026  	3546 	H.M.ZAKARIA (MO11) 	  Accepted 	C++ 	0.040 	2018-04-14 17:30
+21124238  	1004 	马孟起 (vjudge4) 	  Accepted 	C++ 	0.000 	2018-04-12 16:34
+21122557  	1004 	Bob (vjudge8) 	  Accepted 	C++ 	0.000 	2018-04-12 11:12
+21122105  	1004 	Sam (vjudge7) 	  Accepted 	C++ 	0.000 	2018-04-12 08:30
+21119822  	1004 	Bob (vjudge8) 	  Accepted 	C++11 	0.000 	2018-04-11 21:40
+21119641  	1004 	关云长 (vjudge1) 	  Accepted 	C++11 	0.000 	2018-04-11 21:13
+21117661  	1004 	赵子龙 (vjudge3) 	  Accepted 	C++ 	0.000 	2018-04-11 16:12
+21117529  	1004 	马孟起 (vjudge4) 	  Accepted 	C++ 	0.000 	2018-04-11 15:50
+21116451  	1004 	Bob (vjudge8) 	  Accepted 	C++11 	0.000 	2018-04-11 12:13
+21116288  	1004 	赵子龙 (vjudge3) 	  Accepted 	C++ 	0.000 	2018-04-11 11:21
+21116264  	- 	Tom (vjudge6) 	  Wrong answer 	C++ 	- 	2018-04-11 11:15
+21116172  	1004 	关云长 (vjudge1) 	  Accepted 	C++ 	0.000 	2018-04-11 10:41
+21116163  	1004 	Tom (vjudge6) 	  Accepted 	C++ 	0.000 	2018-04-11 10:36
+21116159  	- 	Sam (vjudge7) 	  Compile error 	C++ 	- 	2018-04-11 10:36
+21116076  	1004 	Jim (vjudge10) 	  Accepted 	C++ 	0.000 	2018-04-11 10:16
+21113904  	1004 	张翼德 (vjudge2) 	  Accepted 	C++ 	0.000 	2018-04-10 22:22
+21113560  	2082 	Bob (vjudge8) 	  Accepted 	C++11 	0.010 	2018-04-10 21:14
+21113461  	1004 	黄汉升 (vjudge5) 	  Accepted 	C++11 	0.000 	2018-04-10 20:59
+21113252  	1004 	Jim (vjudge10) 	  Accepted 	C++11 	0.000 	2018-04-10 20:18
+21112662  	1004 	赵子龙 (vjudge3) 	  Accepted 	C++11 	0.000 	2018-04-10 18:06
+21112618  	1004 	Sam (vjudge7) 	  Accepted 	C++11 	0.000 	2018-04-10 17:54
+21111946  	1004 	Bill (vjudge9) 	  Accepted 	C++ 	0.000 	2018-04-10 15:29
+21109216  	1004 	Bob (vjudge8) 	  Accepted 	C++ 	0.000 	2018-04-10 00:20
+21109212  	- 	马孟起 (vjudge4) 	  Compile error 	ANSI C 	- 	2018-04-10 00:20
+21108991  	1004 	Bob (vjudge8) 	  Accepted 	C++11 	0.000 	2018-04-09 23:30
+21106370  	3012 	黄汉升 (vjudge5) 	  Accepted 	C++ 	0.020 	2018-04-09 15:40
+21106366  	- 	Sam (vjudge7) 	  Compile error 	ANSI C 	- 	2018-04-09 15:40
+21088563  	1003 	Milos (losmi247) 	  Accepted 	C++11 	0.000 	2018-04-06 01:31
+21086094  	1002 	Feng Chen (sukhoeing) 	  Accepted 	C++11 	0.000 	2018-04-05 16:43
+21084717  	1001 	munazer montasir (IIUCAKASH) 	  Accepted 	C++11 	0.000 	2018-04-05 11:25
+21072352  	1000 	julius beckham (juww) 	  Accepted 	C++11 	0.000 	2018-04-03 03:20
+21069860  	1000 	Bob (vjudge8) 	  Accepted 	C++11 	0.000 	2018-04-02 19:48
+21069712  	999 	Tasnid Mahin (tasnidmahin) 	  Accepted 	C++11 	0.000 	2018-04-02 19:10
+21069688  	999 	Taran (Taran106) 	  Accepted 	C++11 	0.000 	2018-04-02 19:02
+21069674  	998 	Taran (Taran106) 	  Accepted 	C++11 	0.000 	2018-04-02 18:59
+21069660  	- 	Taran (Taran106) 	  Wrong answer 	C++11 	- 	2018-04-02 18:54
+21069462  	- 	Tasnid Mahin (tasnidmahin) 	  Wrong answer 	C++11 	- 	2018-04-02 17:49
+21069398  	- 	Tasnid Mahin (tasnidmahin) 	  Wrong answer 	C++11 	- 	2018-04-02 17:27
+21057168  	998 	赵子龙 (vjudge3) 	  Accepted 	C++11 	0.000 	2018-03-31 10:34
+21034295  	997 	MD.Raihanur Rahman (R Raihan) 	  Accepted 	C++11 	0.000 	2018-03-28 05:02
+21034289  	997 	黄汉升 (vjudge5) 	  Accepted 	C++11 	0.000 	2018-03-28 05:00
+21034260  	- 	马孟起 (vjudge4) 	  Wrong answer 	C++11 	- 	2018-03-28 04:51
+21032941  	996 	Ostap (spiker) 	  Accepted 	C++11 	0.000 	2018-03-28 00:05
+21032939  	996 	关云长 (vjudge1) 	  Accepted 	C++11 	0.000 	2018-03-28 00:05
+21031763  	996 	赵子龙 (vjudge3) 	  Accepted 	C++ 	0.000 	2018-03-27 21:27
+21022913  	996 	Tom (vjudge6) 	  Accepted 	C++ 	0.000 	2018-03-26 21:03
+21022911  	- 	黄汉升 (vjudge5) 	  Compile error 	Java 	- 	2018-03-26 21:02
+21019478  	995 	Sajal Debnath (BU) (Sajal Dn) 	  Accepted 	C++11 	0.000 	2018-03-26 10:26
+21017226  	994 	Sakib (introns) 	  Accepted 	C++11 	0.000 	2018-03-26 01:08
+21012594  	2081 	luogu_bot4 (luogu_bot4) 	  Accepted 	C++ 	0.010 	2018-03-25 11:48
+21000341  	993 	Tasin Hoque (Tasin[}) 	  Accepted 	C++11 	0.000 	2018-03-23 13:03
+20989684  	993 	Jim (vjudge10) 	  Accepted 	C++11 	0.000 	2018-03-22 00:12
+20989681  	992 	Ali Hasan Md. Linkon (Linkon45) 	  Accepted 	C++11 	0.000 	2018-03-22 00:11
+20986723  	991 	Inamul Haque Shibly (inam) 	  Accepted 	C++11 	0.000 	2018-03-21 19:04
+20973607  	990 	MD. NAKIBUL HASSAN (naim2711) 	  Accepted 	C++ 	0.000 	2018-03-20 03:47
+20973594  	- 	MD. NAKIBUL HASSAN (naim2711) 	  Wrong answer 	C++ 	- 	2018-03-20 03:45
+20967103  	989 	franks jhon colque zegarra (frandux) 	  Accepted 	C++ 	0.000 	2018-03-19 04:29
+20966763  	988 	Tom (tomo61098) 	  Accepted 	C++ 	0.000 	2018-03-19 02:28
+20964802  	2080 	wilabo (wilabo) 	  Accepted 	C++11 	0.010 	2018-03-18 19:51
+20954110  	987 	Rafael Westphal (rafaelwestphal) 	  Accepted 	C++11 	0.000 	2018-03-17 00:42
+20941565  	986 	MD.Hafizur Rahman (hafiz_samrat) 	  Accepted 	C++11 	0.000 	2018-03-15 09:25
+20941560  	986 	黄汉升 (vjudge5) 	  Accepted 	C++11 	0.000 	2018-03-15 09:25
+20938076  	2080 	黄汉升 (vjudge5) 	  Accepted 	C++11 	0.010 	2018-03-14 20:56
+20921066  	985 	Nasib Sultan (Nasib Sultan) 	  Accepted 	C++11 	0.000 	2018-03-12 14:03
+20907312  	3650 	lfh1840 (lfh1840) 	  Accepted 	C++11 	0.060 	2018-03-10 15:55
+20905098  	984 	Gacontapta (gacontapta) 	  Accepted 	C++ 	0.000 	2018-03-10 09:39
+20892501  	983 	Arifkhan (Arifkhan) 	  Accepted 	C++11 	0.000 	2018-03-08 15:41
+20878125  	983 	seed_zero (zeed_zero) 	  Accepted 	C++ 	0.000 	2018-03-06 14:48
+20866300  	983 	seed_zero (zeed_zero) 	  Accepted 	C++ 	0.000 	2018-03-04 11:25
+20866228  	- 	seed_zero (zeed_zero) 	  Wrong answer 	C++ 	- 	2018-03-04 11:04
+20866210  	- 	seed_zero (zeed_zero) 	  Wrong answer 	C++ 	- 	2018-03-04 10:59
+20866171  	- 	seed_zero (zeed_zero) 	  Wrong answer 	C++ 	- 	2018-03-04 10:52
+20866161  	- 	seed_zero (zeed_zero) 	  Wrong answer 	C++ 	- 	2018-03-04 10:52
+20863472  	3545 	luogu_bot1 (luogu_bot1) 	  Accepted 	C++11 	0.040 	2018-03-03 22:58
+20861628  	982 	bennettz (631121499) 	  Accepted 	C++ 	0.000 	2018-03-03 16:24
+20842660  	981 	John Ibañez (CrkTonny) 	  Accepted 	C++11 	0.000 	2018-02-28 07:01
+20841913  	980 	Bjarni Thor (DecapitatedO) 	  Accepted 	C++11 	0.000 	2018-02-28 02:54
+20841309  	980 	Sam (vjudge7) 	  Accepted 	C++11 	0.000 	2018-02-28 00:53
+20841302  	979 	H J Monir (monir_sec) 	  Accepted 	C++11 	0.000 	2018-02-28 00:52
+20840706  	3544 	luogu_bot3 (luogu_bot3) 	  Accepted 	C++ 	0.040 	2018-02-27 22:56
+20836862  	978 	Juan Pablo Benjamin Cortes (cortesjpb) 	  Accepted 	C++11 	0.000 	2018-02-27 08:27
+20825003  	2079 	M M Mehedi Hasan (MMMH) 	  Accepted 	C++11 	0.010 	2018-02-25 02:06
+20824993  	2078 	M M Mehedi Hasan (UMEHEDI) 	  Accepted 	C++11 	0.010 	2018-02-25 02:03
+20812208  	978 	Paulius (Photon_) 	  Accepted 	C++11 	0.000 	2018-02-22 19:05
+20812053  	978 	naimur_rahman (naimur_rahman) 	  Accepted 	C++11 	0.000 	2018-02-22 18:25
+20807830  	978 	cmd2do (cmd2do) 	  Accepted 	C++ 	0.000 	2018-02-21 23:24
+20807807  	- 	cmd2do (cmd2do) 	  Wrong answer 	C++ 	- 	2018-02-21 23:21
+20805914  	978 	cmd2do (cmd2do) 	  Accepted 	C++11 	0.000 	2018-02-21 16:45
+20805913  	978 	cmd2do (cmd2do) 	  Accepted 	C++11 	0.000 	2018-02-21 16:45
+20805911  	978 	cmd2do (cmd2do) 	  Accepted 	C++11 	0.000 	2018-02-21 16:45
+20805872  	- 	cmd2do (cmd2do) 	  Wrong answer 	C++11 	- 	2018-02-21 16:37
+20805490  	978 	cmd2do (cmd2do) 	  Accepted 	C++ 	0.000 	2018-02-21 15:23
+20805468  	- 	cmd2do (cmd2do) 	  Wrong answer 	C++ 	- 	2018-02-21 15:20
+20800578  	978 	Atiq Rahman (Atique) 	  Accepted 	C++11 	0.000 	2018-02-20 13:48
+20800568  	977 	Atiq Rahman (Atique) 	  Accepted 	C++11 	0.000 	2018-02-20 13:42
+20794721  	3369 	Mohamed (natsu25) 	  Accepted 	C++11 	0.030 	2018-02-19 07:31
+20791145  	3609 	Tahsin Rashad (Sephiroth616) 	  Accepted 	Java 	0.050 	2018-02-18 14:42
+20791141  	- 	Tahsin Rashad (Sephiroth616) 	  Runtime error 	Java 	- 	2018-02-18 14:40
+20791129  	- 	Tahsin Rashad (Sephiroth616) 	  Runtime error 	Java 	- 	2018-02-18 14:36
+20786784  	976 	Ratul Bhowmick (Ratul1997) 	  Accepted 	C++11 	0.000 	2018-02-17 15:48
+20771133  	975 	Matheus Leon (kLeonn) 	  Accepted 	C++11 	0.000 	2018-02-14 00:42
+20768791  	974 	udW6mnt7 (foysal ahmmed) 	  Accepted 	C++11 	0.000 	2018-02-13 16:46
+20765626  	973 	Alberto (DobleTempo) 	  Accepted 	C++11 	0.000 	2018-02-12 23:32
+20765374  	972 	洪忠駿 (NaiveRed) (NaiveRed) 	  Accepted 	C++ 	0.000 	2018-02-12 22:41
+20757976  	971 	Rezoan Shakil (Prince77) 	  Accepted 	C++ 	0.000 	2018-02-11 10:17
+20757385  	970 	Toufique Imam (sabertooth9) 	  Accepted 	C++11 	0.000 	2018-02-11 04:05
+20756318  	969 	Samiul Siddiqui (Samiwolf) 	  Accepted 	C++11 	0.000 	2018-02-10 23:26
+20751442  	968 	Sagar Das (sagarthecoder) 	  Accepted 	C++11 	0.000 	2018-02-10 00:10
+20749155  	967 	Sourav Chakraborty (Dream kid) 	  Accepted 	C++11 	0.000 	2018-02-09 16:15
+20739842  	966 	kira (kira.cse.diu) 	  Accepted 	C++11 	0.000 	2018-02-07 22:21
+20735378  	3544 	cupvjudge (cupvjudge) 	  Accepted 	C++11 	0.040 	2018-02-07 01:08
+20734594  	3543 	cupvjudge (cupvjudge) 	  Accepted 	C++11 	0.040 	2018-02-06 23:37
+20732652  	965 	sohag (sohag123) 	  Accepted 	C++11 	0.000 	2018-02-06 17:52
+20731490  	964 	Md Faizul Haque (Faizul_BU) 	  Accepted 	C++ 	0.000 	2018-02-06 12:55
+20720230  	963 	Glodxdu Xlotfe (fareetex) 	  Accepted 	C++11 	0.000 	2018-02-04 10:28
+20720229  	963 	Bill (vjudge9) 	  Accepted 	C++11 	0.000 	2018-02-04 10:28
+20718524  	2077 	Nazir Nayal (CHAOSCONTROL) 	  Accepted 	C++11 	0.010 	2018-02-03 23:09
+20718517  	- 	Nazir Nayal (CHAOSCONTROL) 	  Wrong answer 	C++11 	- 	2018-02-03 23:07
+20718138  	962 	Sirjanpreet Singh Banga (sirjan13) 	  Accepted 	C++11 	0.000 	2018-02-03 22:03
+20707797  	2076 	Guillermo (guillermo_0114) 	  Accepted 	C++ 	0.010 	2018-02-02 07:36
+20702182  	961 	Shazil Arian (Shazil Arian) 	  Accepted 	C++11 	0.000 	2018-02-01 12:13
+20700437  	3542 	Nister (Nister) 	  Accepted 	C++11 	0.040 	2018-02-01 02:32
+20700431  	- 	Nister (Nister) 	  Wrong answer 	C++11 	- 	2018-02-01 02:30
+20700430  	- 	Nister (Nister) 	  Compile error 	C++11 	- 	2018-02-01 02:29
+20695844  	961 	关云长 (vjudge1) 	  Accepted 	C++11 	0.000 	2018-01-31 13:40
+20689147  	961 	Sodbayar (TARS_MN) 	  Accepted 	C++ 	0.000 	2018-01-30 13:00
+20686705  	- 	Unsocial_A (Unsocial_A) 	  Wrong answer 	C++11 	- 	2018-01-29 23:52
+20686470  	- 	Unsocial_A (Unsocial_A) 	  Wrong answer 	C++11 	- 	2018-01-29 22:46
+20686457  	- 	Unsocial_A (Unsocial_A) 	  Time limit 	C++11 	- 	2018-01-29 22:44
+20686356  	- 	Unsocial_A (Unsocial_A) 	  Wrong answer 	C++11 	- 	2018-01-29 22:27
+20682362  	960 	Víctor Racsó Galván Oyola (racsosabe) 	  Accepted 	C++ 	0.000 	2018-01-29 08:16
+20678189  	959 	Wen Shen (zx1230516) 	  Accepted 	C++ 	0.000 	2018-01-28 15:55
+20678118  	- 	Wen Shen (zx1230516) 	  Wrong answer 	C++ 	- 	2018-01-28 15:37
+20671897  	958 	John Virgilio B. Afable Jr. (jvirgil) 	  Accepted 	C++11 	0.000 	2018-01-27 12:00
+20663747  	957 	Priyanka (Priyankabhowmick) 	  Accepted 	C++ 	0.000 	2018-01-25 22:47
+20658172  	956 	Sodbayar (TARS_MN) 	  Accepted 	C++ 	0.000 	2018-01-24 22:41
+20656843  	956 	Sam (vjudge7) 	  Accepted 	C++11 	0.000 	2018-01-24 17:54
+20656712  	955 	Filip (fvargson) 	  Accepted 	C++11 	0.000 	2018-01-24 17:25
+20656702  	- 	Filip (fvargson) 	  Compile error 	C++11 	- 	2018-01-24 17:23
+20652722  	954 	Bohao Sun (Die_Welle) 	  Accepted 	C++11 	0.000 	2018-01-23 23:42
+20652671  	954 	Sam (vjudge7) 	  Accepted 	C++11 	0.000 	2018-01-23 23:34
+20652257  	954 	马孟起 (vjudge4) 	  Accepted 	C++11 	0.000 	2018-01-23 22:17
+20652253  	- 	Jim (vjudge10) 	  Compile error 	C++11 	- 	2018-01-23 22:16
+20652239  	3542 	Jim (vjudge10) 	  Accepted 	C++11 	0.040 	2018-01-23 22:13
+20640599  	3542 	Max Hasan.DIU.CSE (Max_Hasan) 	  Accepted 	C++11 	0.040 	2018-01-21 16:37
+20640593  	3609 	Max Hasan.DIU.CSE (Max_Hasan) 	  Accepted 	C++11 	0.050 	2018-01-21 16:36
+20640570  	3541 	Max Hasan.DIU.CSE (Max_Hasan) 	  Accepted 	C++11 	0.040 	2018-01-21 16:30
+20640567  	- 	Max Hasan.DIU.CSE (Max_Hasan) 	  Compile error 	C++ 	- 	2018-01-21 16:29
+20633705  	954 	Maratonando (j_maratonando) 	  Accepted 	C++11 	0.000 	2018-01-20 09:11
+20632420  	954 	Maratonando (j_maratonando2) 	  Accepted 	C++11 	0.000 	2018-01-20 00:51
+20631363  	3744 	Omar Emad (Omar_Emad) 	  Accepted 	Java 	0.090 	2018-01-19 21:14
+20631307  	3688 	Omar Emad (Omar_Emad) 	  Accepted 	Java 	0.070 	2018-01-19 20:59
+20631305  	- 	Omar Emad (Omar_Emad) 	  PresentationE 	Java 	- 	2018-01-19 20:58
+20630475  	3649 	Carlos Aparecido Serrato Junior (nicowxd) 	  Accepted 	C++11 	0.060 	2018-01-19 17:34
+20628789  	3717 	Maratonando (j_maratonando3) 	  Accepted 	C++11 	0.080 	2018-01-19 11:41
+20628756  	954 	Maratonando (j_maratonando2) 	  Accepted 	C++11 	0.000 	2018-01-19 11:33
+20628729  	954 	Maratonando (j_maratonando) 	  Accepted 	C++11 	0.000 	2018-01-19 11:24
+20628682  	954 	Maratonando (j_maratonando3) 	  Accepted 	C++11 	0.000 	2018-01-19 11:14
+20628668  	954 	Maratonando (j_maratonando2) 	  Accepted 	C++11 	0.000 	2018-01-19 11:11
+20628623  	954 	Maratonando (j_maratonando3) 	  Accepted 	C++11 	0.000 	2018-01-19 11:03
+20628616  	954 	Maratonando (j_maratonando2) 	  Accepted 	C++11 	0.000 	2018-01-19 11:02
+20628602  	3649 	Maratonando (j_maratonando) 	  Accepted 	C++11 	0.060 	2018-01-19 11:00
+20627755  	953 	Morshed Alam Raju (Morshed Raju) 	  Accepted 	C++ 	0.000 	2018-01-19 04:20
+20627726  	- 	Morshed Alam Raju (Morshed Raju) 	  Time limit 	C++ 	- 	2018-01-19 04:10
+20625972  	3608 	yasmine (YasmineMaheeb) 	  Accepted 	Java 	0.050 	2018-01-18 21:32
+20625938  	3607 	Abdulrahman Ibrahim (Abdoronic) 	  Accepted 	Java 	0.050 	2018-01-18 21:25
+20625918  	- 	Abdulrahman Ibrahim (Abdoronic) 	  Runtime error 	Java 	- 	2018-01-18 21:21
+20625889  	- 	Abdulrahman Ibrahim (Abdoronic) 	  Runtime error 	Java 	- 	2018-01-18 21:15
+20625869  	- 	Abdulrahman Ibrahim (Abdoronic) 	  Runtime error 	Java 	- 	2018-01-18 21:12
+20625757  	3687 	Zeyad Khattab (zeyad49) 	  Accepted 	Java 	0.070 	2018-01-18 20:48
+20622387  	952 	fuad hasan (fuad036) 	  Accepted 	C++11 	0.000 	2018-01-18 06:04
+20608345  	951 	Qiu Qiu (metaphysis) 	  Accepted 	C++11 	0.000 	2018-01-15 12:23
+20599061  	951 	Arifur Rahman Rabbi (Null_Factor) 	  Accepted 	C++11 	0.000 	2018-01-13 02:19
+20599041  	950 	Arifur Rahman Rabbi (Null_Factor) 	  Accepted 	C++11 	0.000 	2018-01-13 02:13
+20588032  	949 	Rajendran K (briyani) 	  Accepted 	C++11 	0.000 	2018-01-10 04:31
+20583393  	948 	MD. Istiad Hossain (notorious94) 	  Accepted 	C++11 	0.000 	2018-01-09 02:30
+20583242  	3686 	Avi Verma (sungodavi) 	  Accepted 	Java 	0.070 	2018-01-09 01:54
+20583237  	- 	Avi Verma (sungodavi) 	  Runtime error 	Java 	- 	2018-01-09 01:53
+20583233  	- 	Avi Verma (sungodavi) 	  Runtime error 	Java 	- 	2018-01-09 01:52
+20583220  	- 	Avi Verma (sungodavi) 	  Runtime error 	Java 	- 	2018-01-09 01:48
+20577502  	947 	Al hel shoumik (alsmk) 	  Accepted 	C++ 	0.000 	2018-01-07 15:18
+20576241  	947 	Md Shamim Hossain (Shamim_A) 	  Accepted 	C++11 	0.000 	2018-01-07 03:05
+20575088  	946 	Ahnaf Shahriar Asif (asifthegreat) 	  Accepted 	C++11 	0.000 	2018-01-06 21:20
+20564903  	945 	Sarah Abu Elayyan (SElayyan) 	  Accepted 	C++11 	0.000 	2018-01-04 00:33
+20558050  	944 	parul (parul_bansal) 	  Accepted 	C++11 	0.000 	2018-01-02 03:10
+20557278  	943 	Dima Trubca (DimaTC) 	  Accepted 	C++11 	0.000 	2018-01-01 22:29
+20557253  	- 	Dima Trubca (DimaTC) 	  Wrong answer 	C++11 	- 	2018-01-01 22:25
+20551728  	943 	naimur_rahman (naimur_rahman) 	  Accepted 	C++ 	0.000 	2017-12-30 23:21
+20551718  	943 	naimur_rahman (naimur_rahman) 	  Accepted 	C++ 	0.000 	2017-12-30 23:19
+20551712  	943 	naimur_rahman (naimur_rahman) 	  Accepted 	C++ 	0.000 	2017-12-30 23:17
+20551703  	943 	naimur_rahman (naimur_rahman) 	  Accepted 	C++ 	0.000 	2017-12-30 23:15
+20551695  	943 	naimur_rahman (naimur_rahman) 	  Accepted 	C++ 	0.000 	2017-12-30 23:13
+20551685  	- 	naimur_rahman (naimur_rahman) 	  Time limit 	C++ 	- 	2017-12-30 23:11
+20551676  	942 	naimur_rahman (naimur_rahman) 	  Accepted 	C++ 	0.000 	2017-12-30 23:09
+20551673  	- 	naimur_rahman (naimur_rahman) 	  Time limit 	C++ 	- 	2017-12-30 23:08
+20551647  	- 	naimur_rahman (naimur_rahman) 	  Time limit 	C++ 	- 	2017-12-30 23:01
+20551633  	- 	naimur_rahman (naimur_rahman) 	  Compile error 	C++ 	- 	2017-12-30 22:56
+20547178  	2075 	Back2Past (icpc_ex) 	  Accepted 	C++11 	0.010 	2017-12-29 16:21
+20535249  	941 	Sergio Sanchez (Valgt) 	  Accepted 	C++ 	0.000 	2017-12-26 07:49
+20530693  	940 	anik (Rizvi_anik) 	  Accepted 	C++11 	0.000 	2017-12-24 21:39
+20530538  	939 	Hasan Shihab (shb_cse_me) 	  Accepted 	C++11 	0.000 	2017-12-24 20:54
+20520344  	939 	黄汉升 (vjudge5) 	  Accepted 	C++ 	0.000 	2017-12-21 19:24
+20520343  	- 	马孟起 (vjudge4) 	  Compile error 	Java 	- 	2017-12-21 19:24
+20518741  	3648 	Zhiqi Yin (lejb) 	  Accepted 	C++11 	0.060 	2017-12-21 06:23
+20517993  	3540 	Subangkar Karmaker Shanto (Subangkar Karmaker Shanto) 	  Accepted 	C++11 	0.040 	2017-12-21 00:48
+20515223  	3685 	Yoseph Audrian (Kutubers) 	  Accepted 	Java 	0.070 	2017-12-20 17:43
+20514979  	938 	Chandra Vincent Grafianto (shoukanjou) 	  Accepted 	C++ 	0.000 	2017-12-20 17:06
+20514770  	937 	ivan (chriztian16) 	  Accepted 	C++ 	0.000 	2017-12-20 16:28
+20514603  	937 	Bill (vjudge9) 	  Accepted 	C++ 	0.000 	2017-12-20 16:11
+20508387  	936 	Kevin (kaixiang4515) 	  Accepted 	ANSI C 	0.000 	2017-12-19 11:52
+20503692  	3684 	Sourabh Aggarwal (sourabh23) 	  Accepted 	C++11 	0.070 	2017-12-18 11:17
+20501129  	936 	Bob (vjudge8) 	  Accepted 	C++ 	0.000 	2017-12-17 20:11
+20501123  	- 	Jim (vjudge10) 	  Wrong answer 	C++ 	- 	2017-12-17 20:11
+20501115  	- 	Bob (vjudge8) 	  Wrong answer 	C++ 	- 	2017-12-17 20:10
+20499764  	935 	Towfique Ahmed (tufaan42) 	  Accepted 	C++ 	0.000 	2017-12-17 14:01
+20498277  	3368 	Cristhian Camilo Gomez Neira (CristhianGomezN) 	  Accepted 	C++11 	0.030 	2017-12-17 01:34
+20470879  	934 	S.T. Saikat (stsaikat_SUST) 	  Accepted 	C++ 	0.000 	2017-12-11 00:44
+20469543  	933 	Ashraful Haque Chowdhury (The_mover) 	  Accepted 	C++11 	0.000 	2017-12-10 18:02
+20459330  	932 	Hasibul Haque Himel (fire_tornado) 	  Accepted 	C++11 	0.000 	2017-12-08 17:16
+20454814  	4245 	Kushagra (KushagraKumar) 	  Accepted 	C++ 	1.400 	2017-12-07 16:11
+20454805  	- 	Kushagra (KushagraKumar) 	  Time limit 	C++11 	- 	2017-12-07 16:10
+20450763  	931 	Gabriela Nathania H. (than_duran98) 	  Accepted 	C++ 	0.000 	2017-12-06 19:33
+20442314  	3540 	TCC (hshs910248) 	  Accepted 	C++ 	0.040 	2017-12-04 22:14
+20442311  	3539 	TCC (hshs910248) 	  Accepted 	C++ 	0.040 	2017-12-04 22:13
+20437536  	3743 	Joaquin Ordoñez Soliz (josord) 	  Accepted 	Java 	0.090 	2017-12-03 20:16
+20437018  	3971 	Joaquin Ordoñez Soliz (josord) 	  Accepted 	Java 	0.180 	2017-12-03 18:42
+20435421  	3971 	Joaquin Ordoñez Soliz (josord) 	  Accepted 	Java 	0.180 	2017-12-03 10:47
+20435408  	- 	Joaquin Ordoñez Soliz (josord) 	  Time limit 	Java 	- 	2017-12-03 10:42
+20433379  	931 	seed_zero (zeed_zero) 	  Accepted 	C++ 	0.000 	2017-12-02 21:23
+20432392  	930 	maksud alam chowdhury (maksud prime) 	  Accepted 	C++11 	0.000 	2017-12-02 17:34
+20431103  	929 	Noszály Csaba (nosy) 	  Accepted 	C++11 	0.000 	2017-12-02 12:31
+20429984  	928 	Agustín Nieto García (anietog1) 	  Accepted 	C++ 	0.000 	2017-12-02 05:10
+20429966  	927 	fabio zapata (fazd) 	  Accepted 	C++ 	0.000 	2017-12-02 04:59
+20428277  	- 	Shaila Nasrin (shaila13) 	  Compile error 	ANSI C 	- 	2017-12-01 22:32
+20428244  	- 	黄汉升 (vjudge5) 	  Compile error 	C++11 	- 	2017-12-01 22:27
+20428189  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 22:16
+20428176  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 22:15
+20428154  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 22:11
+20428138  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 22:08
+20428121  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 22:06
+20428109  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 22:05
+20428094  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 22:04
+20428079  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 22:02
+20428058  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 21:59
+20428051  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 21:58
+20428018  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 21:51
+20428008  	- 	Shaila Nasrin (shaila13) 	  Compile error 	C++11 	- 	2017-12-01 21:49
+20427980  	- 	关云长 (vjudge1) 	  Compile error 	C++11 	- 	2017-12-01 21:46
+20427970  	- 	赵子龙 (vjudge3) 	  Compile error 	C++11 	- 	2017-12-01 21:45
+20427949  	- 	Sam (vjudge7) 	  Compile error 	C++11 	- 	2017-12-01 21:42
+20425750  	926 	Octavany (octa_vany) 	  Accepted 	C++11 	0.000 	2017-12-01 14:11
+20421144  	925 	Shaila Nasrin (shaila13) 	  Accepted 	C++11 	0.000 	2017-11-30 15:25
+20421093  	- 	Shaila Nasrin (shaila13) 	  Runtime error 	C++11 	- 	2017-11-30 15:15
+20421084  	- 	Shaila Nasrin (shaila13) 	  Runtime error 	C++11 	- 	2017-11-30 15:13
+20417087  	- 	arpit agarwal (intetsu) 	  Time limit 	C++11 	- 	2017-11-29 19:56
+20417036  	- 	arpit agarwal (intetsu) 	  Wrong answer 	C++11 	- 	2017-11-29 19:47
+20414552  	924 	Matthew Gavin (mgavin2) 	  Accepted 	C++11 	0.000 	2017-11-29 04:54
+20414367  	923 	Siko rena (Sasa96) 	  Accepted 	C++11 	0.000 	2017-11-29 03:41
+20413593  	923 	cmd2do (cmd2do) 	  Accepted 	C++11 	0.000 	2017-11-29 00:18
+20408416  	923 	Jim (vjudge10) 	  Accepted 	C++11 	0.000 	2017-11-27 23:08
+20405988  	923 	Manuel Alejandro Lopez Perez (a01208598) 	  Accepted 	C++11 	0.000 	2017-11-27 13:29
+20405985  	- 	Manuel Alejandro Lopez Perez (a01208598) 	  Compile error 	C++11 	- 	2017-11-27 13:28
+20405965  	923 	Manuel Alejandro Lopez Perez (a01208598) 	  Accepted 	C++11 	0.000 	2017-11-27 13:24
+20405942  	923 	Manuel Alejandro Lopez Perez (a01208598) 	  Accepted 	C++11 	0.000 	2017-11-27 13:15
+20405940  	923 	Manuel Alejandro Lopez Perez (a01208598) 	  Accepted 	C++11 	0.000 	2017-11-27 13:14
+20405937  	923 	Manuel Alejandro Lopez Perez (a01208598) 	  Accepted 	C++11 	0.000 	2017-11-27 13:14
+20405934  	- 	Manuel Alejandro Lopez Perez (a01208598) 	  Wrong answer 	C++11 	- 	2017-11-27 13:14
+20405932  	923 	Manuel Alejandro Lopez Perez (a01208598) 	  Accepted 	C++11 	0.000 	2017-11-27 13:13
+20405696  	3539 	Jim (vjudge10) 	  Accepted 	C++ 	0.040 	2017-11-27 12:01
+20405693  	3367 	William (yellow_fellow) 	  Accepted 	C++11 	0.030 	2017-11-27 12:00
+20405691  	- 	William (yellow_fellow) 	  Time limit 	C++11 	- 	2017-11-27 12:00
+20405005  	922 	Rodolfo (RudyMtz7) 	  Accepted 	C++ 	0.000 	2017-11-27 07:37
+20404966  	922 	Bernardo Laing (Blaing) 	  Accepted 	ANSI C 	0.000 	2017-11-27 07:25
+20404956  	- 	Bernardo Laing (Blaing) 	  Compile error 	ANSI C 	- 	2017-11-27 07:23
+20404933  	- 	Bernardo Laing (Blaing) 	  Wrong answer 	ANSI C 	- 	2017-11-27 07:17
+20404927  	- 	Bernardo Laing (Blaing) 	  Wrong answer 	ANSI C 	- 	2017-11-27 07:15
+20404921  	- 	Bernardo Laing (Blaing) 	  Wrong answer 	ANSI C 	- 	2017-11-27 07:12
+20404885  	- 	Bernardo Laing (Blaing) 	  Time limit 	C++11 	- 	2017-11-27 07:05
+20404879  	922 	Bernardo Laing (Blaing) 	  Accepted 	C++11 	0.000 	2017-11-27 07:03
+20404872  	- 	Bernardo Laing (Blaing) 	  Time limit 	ANSI C 	- 	2017-11-27 07:01
+20404869  	- 	Bernardo Laing (Blaing) 	  Time limit 	ANSI C 	- 	2017-11-27 06:59
+20404868  	921 	Bernardo Laing (Blaing) 	  Accepted 	C++11 	0.000 	2017-11-27 06:59
+20404866  	- 	Bernardo Laing (Blaing) 	  Time limit 	ANSI C 	- 	2017-11-27 06:56
+20404836  	3850 	Alan Macías (A01206107) 	  Accepted 	Java 	0.130 	2017-11-27 06:47
+20404793  	- 	Taaha (taaha) 	  Wrong answer 	ANSI C 	- 	2017-11-27 06:26
+20404791  	920 	Carlos Andres Ruiz Munoz (A01014735) 	  Accepted 	C++ 	0.000 	2017-11-27 06:26
+20404790  	- 	Taaha (taaha) 	  Wrong answer 	C++ 	- 	2017-11-27 06:25
+20404781  	- 	Taaha (taaha) 	  Wrong answer 	C++ 	- 	2017-11-27 06:20
+20404568  	3716 	Andrea Quezada (andyq) 	  Accepted 	Java 	0.080 	2017-11-27 04:48
+20404520  	- 	Andrea Quezada (andyq) 	  Wrong answer 	Java 	- 	2017-11-27 04:29
+20404499  	- 	Andrea Quezada (andyq) 	  Runtime error 	Java 	- 	2017-11-27 04:21
+20394457  	3789 	Bruno Maglioni (Maglo22) 	  Accepted 	Java 	0.110 	2017-11-25 01:21
+20394346  	- 	Bruno Maglioni (Maglo22) 	  Runtime error 	Java 	- 	2017-11-25 00:49
+20394270  	- 	Bruno Maglioni (Maglo22) 	  Runtime error 	Java 	- 	2017-11-25 00:29
+20394235  	- 	Bruno Maglioni (Maglo22) 	  Runtime error 	Java 	- 	2017-11-25 00:19
+20390318  	919 	Javier Iñaqui Aicinena Vargas (a01700585) 	  Accepted 	C++ 	0.000 	2017-11-24 09:54
+20387811  	918 	Karim Tera (KarimTera) 	  Accepted 	C++11 	0.000 	2017-11-23 21:12
+20383174  	917 	Zubayer Rahman (zubayer_sust) 	  Accepted 	C++11 	0.000 	2017-11-22 23:18
+20381242  	916 	Ishan Rayeen (ishan0445) 	  Accepted 	C++11 	0.000 	2017-11-22 16:32
+20380870  	915 	Omar (Menona) 	  Accepted 	C++ 	0.000 	2017-11-22 15:05
+20377788  	915 	张翼德 (vjudge2) 	  Accepted 	C++11 	0.000 	2017-11-21 22:13
+20377761  	3539 	马孟起 (vjudge4) 	  Accepted 	C++11 	0.040 	2017-11-21 22:08
+20376158  	- 	shamim (ms_login) 	  Runtime error 	C++11 	- 	2017-11-21 15:33
+20376140  	915 	shamim (ms_login) 	  Accepted 	C++11 	0.000 	2017-11-21 15:29
+20376125  	914 	Miguel Angel Navarro Mata (miguelxngx) 	  Accepted 	C++11 	0.000 	2017-11-21 15:26
+20376118  	913 	shamim (ms_login) 	  Accepted 	C++11 	0.000 	2017-11-21 15:25
+20376116  	- 	Miguel Angel Navarro Mata (miguelxngx) 	  Wrong answer 	C++11 	- 	2017-11-21 15:24
+20374851  	912 	Pablo Pozos (Pablop) 	  Accepted 	ANSI C 	0.000 	2017-11-21 05:44
+20374542  	2075 	Sam (vjudge7) 	  Accepted 	C++ 	0.010 	2017-11-21 03:25
+20374480  	- 	赵子龙 (vjudge3) 	  Wrong answer 	ANSI C 	- 	2017-11-21 03:08
+20374475  	- 	Tom (vjudge6) 	  Wrong answer 	ANSI C 	- 	2017-11-21 03:06
+20374437  	- 	Tom (vjudge6) 	  Wrong answer 	ANSI C 	- 	2017-11-21 02:58
+View : [ the-top | nearby ]     Show : [ 5 | 10 | 50 | 100 | 500   Ranklist
+  # 	Rank 	  User (username) 	Lang 	Time 	Submit Time
+5093320  	1 	Onacă Daniel (daniel.onaca) 	ANSI C 	0.000 	2006-11-01 04:02
+5935964  	2 	Ioannis Chatzimichos (feedWARd) 	ANSI C 	0.000 	2007-09-24 22:11
+5945988  	3 	Abu Zahed Jony(SUST) (jonySUST) 	C++ 	0.000 	2007-09-29 15:25
+5982303  	4 	lucky16g (lucky16g) 	C++ 	0.000 	2007-10-17 13:34
+6048618  	5 	Jason Lee (LazyKoala) 	C++ 	0.000 	2007-11-14 11:50
+
+Show : 5 | 10 | 25 | 50 | 100   Live Submissions (hide)
+    # 		  Problem Title 	  User (username) 	  Verdict 	Lang 	Time 	Best 	Rank 	Submit Time
+ 21419131 	483 	| discuss Word Scramble 	Arif shahriar riad (Shahriar Reyad) 	 Accepted 	ANSI C 	0.000 	0.000 	4290 	11 secs ago
+ 21419130 	11777 	| discuss Automate the Grades 	Nuhash Afnan (Nuhash) 	 Wrong answer 	C++11 	- 	0.000 	- 	17 secs ago
+ 21419129 	1343 	| discuss The Rotation Game 	张翼德 (vjudge2) 	 Wrong answer 	C++11 	- 	0.040 	- 	27 secs ago
+ 21419128 	12861 	| discuss Help cupid 	Sam (vjudge7) 	 Wrong answer 	Java 	- 	0.000 	- 	42 secs ago
+ 21419127 	10006 	| discuss Carmichael Numbers 	Tom (vjudge6) 	 Time limit 	C++ 	- 	0.000 	- 	52 secs ago
+
+Shawn Liang (shawnliang) statistics
+Show : 5 | 10 | 50 | 100 | 500 | ALL     Last Submissions
+  Problem 	  Verdict 	Lang 	Time 	Best 	Rank 	Submit Time
+| discuss 11137 - Ingenuous Cubrency 	 Accepted 	C++11 	0.000 	0.000 	1047 	15 mins ago
+| discuss 10465 - Homer Simpson 	 Accepted 	C++11 	0.120 	0.000 	1209 	22 hours ago
+| discuss 357 - Let Me Count The Ways 	 Accepted 	C++11 	0.000 	0.000 	1500 	2 days ago
+| discuss 10261 - Ferry Loading 	 Accepted 	C++11 	0.040 	0.000 	264 	3 days ago
+| discuss 10261 - Ferry Loading 	 Wrong answer 	C++11 	- 	0.000 	- 	3 days ago
+
+Solved : 84, Submissions : 190
+
+100 108 111 136 151 231 305 311 357 437 481 487 493 495 550 555 565 574 623 624 628 639 725 750 787 1152 1193 1262 1589 10025 10049 10063 10098 10125 10130 10137 10161 10170 10196 10261 10276 10284 10315 10344 10375 10382 10465 10483 10567 10624 10664 10751 10815 10819 10940 10954 10976 11057 11059 11137 11157 11230 11231 11236 11240 11254 11264 11292 11342 11389 11456 11520 11526 11565 11790 11879 11900 11988 11997 12210 12290 12321 12405 12527 <<less
+
+Tried but not yet solved : 1
+
+10982
+Competitive Programming Exercises
+
+
+FB Page | Info | Buy
+Edition: 1st, 2nd, 3rd
+3rd Edition's Exercises (switch to: 1st, 2nd, 3rd )
+Book Chapters 	Starred ★ 	ALL
+1. Introduction 	
+	
+	2%
+	
+	
+	2%
+2. Data Structures and Libraries 	
+	
+	5%
+	
+	
+	2%
+3. Problem Solving Paradigms 	
+	
+	34%
+	
+	
+	20%
+4. Graph 	
+	
+	0%
+	
+	
+	0%
+5. Mathematics 	
+	
+	9%
+	
+	
+	5%
+6. String Processing 	
+	
+	0%
+	
+	
+	0%
+7. (Computational) Geometry 	
+	
+	0%
+	
+	
+	0%
+8. More Advanced Topics 	
+	
+	0%
+	
+	
+	0%
+9. Rare Topics 	
+	
+	0%
+	
+	
+	2%
+
+Steven Halim and I published the Competitive Programming book which is targetted to help regular computer science students to quickly get up and running for the ACM ICPC as well as IOI. The book discusses the types of problems that are frequently occurs in programming contests. The exercises have been integrated to this uHunt tool so that you can keep track of your progress. To get started, select a chapter from the table on the right. Each chapter has starred problems (i.e., a must try problem). Happy solving :)
+
+
+Complete Search (19/110 = 17%)
+ Iterative (One Loop, Linear Scan) (1/7)
+  102 - Ecological Bin Packing 	| discuss 	Lev 0 	 --- ? ---
+  256 - Quirksome Squares 	| discuss 	Lev 1 	 --- ? ---
+  927 - Integer Sequences from Addition of Terms 	★ | discuss 	Lev 3 	 --- ? ---
+  1237 - Expert Enough? 	★ | discuss 	Lev 3 	 --- ? ---
+  10976 - Fractions Again?! 	★ | discuss 	Lev 2 	 ✔ 0.000s/1439
+  11001 - Necklace 	| discuss 	Lev 3 	 --- ? ---
+  11078 - Open Credit System 	| discuss 	Lev 3 	 --- ? ---
+ Iterative (Two Nested Loops) (1/12)
+  105 - The Skyline Problem 	| discuss 	Lev 1 	 --- ? ---
+  347 - Run 	| discuss 	Lev 3 	 --- ? ---
+  471 - Magic Numbers 	| discuss 	Lev 3 	 --- ? ---
+  617 - Nonstop Travel 	| discuss 	Lev 4 	 --- ? ---
+  725 - Division 	| discuss 	Lev 2 	 ✔ 0.400s/4024
+  1260 - Sales 	★ | discuss 	Lev 3 	 --- ? ---
+  10041 - Vito's Family 	| discuss 	Lev 1 	 --- ? ---
+  10487 - Closest Sums 	★ | discuss 	Lev 2 	 --- ? ---
+  10730 - Antiarithmetic? 	| discuss 	Lev 3 	 --- ? ---
+  11242 - Tour de France 	★ | discuss 	Lev 3 	 --- ? ---
+  12488 - Start Grid 	| discuss 	Lev 4 	 --- ? ---
+  12583 - Memory Overflow 	| discuss 	Lev 4 	 --- ? ---
+ Iterative (Three or More Nested Loops, Easier) (1/14)
+  154 - Recycling 	| discuss 	Lev 3 	 --- ? ---
+  188 - Perfect Hash 	| discuss 	Lev 3 	 --- ? ---
+  441 - Lotto 	★ | discuss 	Lev 2 	 --- ? ---
+  626 - Ecosystem 	| discuss 	Lev 4 	 --- ? ---
+  703 - Triple Ties: The Organizer's Nightmare 	| discuss 	Lev 4 	 --- ? ---
+  735 - Dart-a-Mania 	★ | discuss 	Lev 3 	 --- ? ---
+  10102 - The path in the colored field 	★ | discuss 	Lev 3 	 --- ? ---
+  10502 - Counting Rectangles 	| discuss 	Lev 3 	 --- ? ---
+  10662 - The Wedding 	| discuss 	Lev 4 	 --- ? ---
+  10908 - Largest Square 	| discuss 	Lev 3 	 --- ? ---
+  11059 - Maximum Product 	| discuss 	Lev 2 	 ✔ 0.000s/1596
+  11975 - Tele-loto 	| discuss 	Lev 6 	 --- ? ---
+  12498 - Ant's Shopping Mall 	| discuss 	Lev 5 	 --- ? ---
+  12515 - Movie Police 	| discuss 	Lev 5 	 --- ? ---
+ Iterative (Three or More Nested Loops, Harder) (5/17)
+  253 - Cube painting 	| discuss 	Lev 2 	 --- ? ---
+  296 - Safebreaker 	| discuss 	Lev 4 	 --- ? ---
+  386 - Perfect Cubes 	| discuss 	Lev 2 	 --- ? ---
+  10125 - Sumsets 	| discuss 	Lev 3 	 ✔ 0.070s/389(1)
+  10177 - (2/3/4)-D Sqr/Rects/Cubes/Boxes? 	| discuss 	Lev 3 	 --- ? ---
+  10360 - Rat Attack 	| discuss 	Lev 3 	 --- ? ---
+  10365 - Blocks 	| discuss 	Lev 3 	 --- ? ---
+  10483 - The Sum Equals the Product 	| discuss 	Lev 5 	 ✔ 0.000s/26(1)
+  10660 - Citizen attention offices 	★ | discuss 	Lev 4 	 --- ? ---
+  10973 - Triangle Counting 	| discuss 	Lev 4 	 --- ? ---
+  11108 - Tautology 	| discuss 	Lev 4 	 --- ? ---
+  11236 - Grocery store 	★ | discuss 	Lev 4 	 ✔ 0.470s/564
+  11342 - Three-square 	| discuss 	Lev 3 	 ✔ 0.140s/920
+  11548 - Blackboard Bonanza 	| discuss 	Lev 5 	 --- ? ---
+  11565 - Simple Equations 	★ | discuss 	Lev 3 	 ✔ 0.000s/577
+  11804 - Argentina 	| discuss 	Lev 3 	 --- ? ---
+  11959 - Dice 	| discuss 	Lev 4 	 --- ? ---
+ Iterative (Fancy Techniques) (1/15)
+  140 - Bandwidth 	| discuss 	Lev 3 	 --- ? ---
+  234 - Switching Channels 	| discuss 	Lev 5 	 --- ? ---
+  435 - Block Voting 	| discuss 	Lev 3 	 --- ? ---
+  639 - Don't Get Rooked 	| discuss 	Lev 2 	 ✔ 0.000s/748
+  1047 - Zones 	★ | discuss 	Lev 4 	 --- ? ---
+  1064 - Network 	| discuss 	Lev 5 	 --- ? ---
+  11205 - The broken pedometer 	| discuss 	Lev 4 	 --- ? ---
+  11412 - Dig the Holes 	| discuss 	Lev 5 	 --- ? ---
+  11553 - Grid Game 	★ | discuss 	Lev 3 	 --- ? ---
+  11742 - Social Constraints 	| discuss 	Lev 3 	 --- ? ---
+  12249 - Overlapping Scenes 	| discuss 	Lev 5 	 --- ? ---
+  12346 - Water Gate Management 	| discuss 	Lev 5 	 --- ? ---
+  12348 - Fun Coloring 	| discuss 	Lev 6 	 --- ? ---
+  12406 - Help Dexter 	| discuss 	Lev 4 	 --- ? ---
+  12455 - Bars 	★ | discuss 	Lev 3 	 --- ? ---
+ Recursive Backtracking (Easy) (5/13)
+  167 - The Sultan's Successors 	| discuss 	Lev 2 	 --- ? ---
+  380 - Call Forwarding 	| discuss 	Lev 4 	 --- ? ---
+  539 - The Settlers of Catan 	| discuss 	Lev 3 	 --- ? ---
+  624 - CD 	★ | discuss 	Lev 2 	 ✔ 0.030s/3069
+  628 - Passwords 	| discuss 	Lev 3 	 ✔ 0.010s/200
+  677 - All Walks of length "n" from the first node 	| discuss 	Lev 3 	 --- ? ---
+  729 - The Hamming Distance Problem 	| discuss 	Lev 2 	 --- ? ---
+  750 - 8 Queens Chess Problem 	| discuss 	Lev 2 	 ✔ 0.000s/1175
+  10276 - Hanoi Tower Troubles Again! 	| discuss 	Lev 2 	 ✔ 0.000s/874
+  10344 - 23 out of 5 	| discuss 	Lev 2 	 ✔ 0.220s/576
+  10452 - Marcus 	| discuss 	Lev 3 	 --- ? ---
+  10576 - Y2K Accounting Bug 	★ | discuss 	Lev 3 	 --- ? ---
+  11085 - Back to the 8-Queens 	★ | discuss 	Lev 3 	 --- ? ---
+ Recursive Backtracking (Medium) (3/18)
+  222 - Budget Travel 	| discuss 	Lev 4 	 --- ? ---
+  301 - Transportation 	| discuss 	Lev 3 	 --- ? ---
+  331 - Mapping the Swaps 	| discuss 	Lev 3 	 --- ? ---
+  487 - Boggle Blitz 	| discuss 	Lev 4 	 ✔ 0.100s/142
+  524 - Prime Ring Problem 	★ | discuss 	Lev 2 	 --- ? ---
+  571 - Jugs 	| discuss 	Lev 3 	 --- ? ---
+  574 - Sum It Up 	★ | discuss 	Lev 2 	 ✔ 0.000s/1581
+  598 - Bundling Newspapers 	| discuss 	Lev 4 	 --- ? ---
+  775 - Hamiltonian Cycle 	| discuss 	Lev 4 	 --- ? ---
+  10001 - Garden of Eden 	| discuss 	Lev 4 	 --- ? ---
+  10063 - Knuth's Permutation 	| discuss 	Lev 3 	 ✔ 0.030s/137(3)
+  10460 - Find the Permuted String 	| discuss 	Lev 4 	 --- ? ---
+  10475 - Help the Leaders 	| discuss 	Lev 4 	 --- ? ---
+  10503 - The dominoes solitaire 	★ | discuss 	Lev 3 	 --- ? ---
+  10506 - The Ouroboros problem 	| discuss 	Lev 5 	 --- ? ---
+  10950 - Bad Code 	| discuss 	Lev 5 	 --- ? ---
+  11201 - The problem of the crazy linguist 	| discuss 	Lev 5 	 --- ? ---
+  11961 - DNA 	| discuss 	Lev 5 	 --- ? ---
+ Recursive Backtracking (Harder) (2/14)
+  129 - Krypton Factor 	| discuss 	Lev 3 	 --- ? ---
+  165 - Stamps 	| discuss 	Lev 4 	 --- ? ---
+  193 - Graph Coloring 	★ | discuss 	Lev 2 	 --- ? ---
+  208 - Firetruck 	| discuss 	Lev 3 	 --- ? ---
+  416 - LED Test 	★ | discuss 	Lev 3 	 --- ? ---
+  433 - Bank (Not Quite O.C.R.) 	| discuss 	Lev 4 	 --- ? ---
+  565 - Pizza Anyone? 	| discuss 	Lev 4 	 ✔ 1.360s/412(3)
+  861 - Little Bishops 	| discuss 	Lev 3 	 --- ? ---
+  868 - Numerical Maze 	| discuss 	Lev 5 	 --- ? ---
+  1262 - Password 	★ | discuss 	Lev 4 	 ✔ 0.010s/357
+  10094 - Place the Guards 	| discuss 	Lev 4 	 --- ? ---
+  10128 - Queue 	| discuss 	Lev 3 	 --- ? ---
+  10582 - ASCII Labyrinth 	| discuss 	Lev 5 	 --- ? ---
+  11090 - Going in Cycle!! 	| discuss 	Lev 4 	 --- ? ---
+Dynamic Programming (15/67 = 22%)
+ Max 1D Range Sum (1/4)
+  507 - Jill Rides Again 	| discuss 	Lev 2 	 --- ? ---
+  787 - Maximum Sub-sequence Product 	★ | discuss 	Lev 3 	 ✔ 0.000s/49(1)
+  10684 - The jackpot 	★ | discuss 	Lev 2 	 --- ? ---
+  10755 - Garbage Heap 	★ | discuss 	Lev 3 	 --- ? ---
+ Max 2D Range Sum (1/7)
+  108 - Maximum Sum 	★ | discuss 	Lev 1 	 ✔ 0.020s/4676
+  836 - Largest Submatrix 	| discuss 	Lev 2 	 --- ? ---
+  983 - Localized Summing for Blurring 	| discuss 	Lev 4 	 --- ? ---
+  10074 - Take the Land 	| discuss 	Lev 2 	 --- ? ---
+  10667 - Largest Block 	| discuss 	Lev 3 	 --- ? ---
+  10827 - Maximum sum on a torus 	★ | discuss 	Lev 3 	 --- ? ---
+  11951 - Area 	★ | discuss 	Lev 4 	 --- ? ---
+ Longest Increasing Subsequence (LIS) (6/11)
+  111 - History Grading 	| discuss 	Lev 1 	 ✔ 0.000s/1163
+  231 - Testing the CATCHER 	| discuss 	Lev 2 	 ✔ 0.000s/1978
+  437 - The Tower of Babylon 	| discuss 	Lev 2 	 ✔ 0.000s/933
+  481 - What Goes Up 	★ | discuss 	Lev 2 	 ✔ 0.020s/889(3)
+  497 - Strategic Defense Initiative 	| discuss 	Lev 2 	 --- ? ---
+  1196 - Tiling Up Blocks 	| discuss 	Lev 4 	 --- ? ---
+  10131 - Is Bigger Smarter? 	| discuss 	Lev 2 	 --- ? ---
+  10534 - Wavio Sequence 	| discuss 	Lev 3 	 --- ? ---
+  11368 - Nested Dolls 	| discuss 	Lev 4 	 --- ? ---
+  11456 - Trainsorting 	★ | discuss 	Lev 3 	 ✔ 0.000s/214
+  11790 - Murcia's Skyline 	★ | discuss 	Lev 3 	 ✔ 0.020s/130(1)
+ 0-1 Knapsack (Subset Sum) (4/12)
+  562 - Dividing coins 	| discuss 	Lev 2 	 --- ? ---
+  990 - Diving for Gold 	| discuss 	Lev 3 	 --- ? ---
+  1213 - Sum of Different Primes 	| discuss 	Lev 3 	 --- ? ---
+  10130 - SuperSale 	| discuss 	Lev 2 	 ✔ 0.160s/4799
+  10261 - Ferry Loading 	| discuss 	Lev 3 	 ✔ 0.040s/264(1)
+  10616 - Divisible Group Sums 	★ | discuss 	Lev 3 	 --- ? ---
+  10664 - Luggage 	| discuss 	Lev 2 	 ✔ 0.000s/1385
+  10819 - Trouble of 13-Dots 	★ | discuss 	Lev 3 	 ✔ 0.090s/387(1)
+  11003 - Boxes 	| discuss 	Lev 3 	 --- ? ---
+  11341 - Term Strategy 	| discuss 	Lev 4 	 --- ? ---
+  11566 - Let's Yum Cha! 	★ | discuss 	Lev 4 	 --- ? ---
+  11658 - Best Coalitions 	| discuss 	Lev 4 	 --- ? ---
+ Coin Change (CC) (2/8)
+  147 - Dollars 	| discuss 	Lev 2 	 --- ? ---
+  166 - Making Change 	| discuss 	Lev 3 	 --- ? ---
+  357 - Let Me Count The Ways 	★ | discuss 	Lev 1 	 ✔ 0.000s/1500
+  674 - Coin Change 	| discuss 	Lev 1 	 --- ? ---
+  10306 - e-Coins 	★ π | | discuss 	Lev 3 	 --- ? ---
+  10313 - Pay the Price 	| discuss 	Lev 3 	 --- ? ---
+  11137 - Ingenuous Cubrency 	| discuss 	Lev 2 	 ✔ 0.000s/1047
+  11517 - Exact Change 	★ π | | discuss 	Lev 3 	 --- ? ---
+ Traveling Salesman Problem (TSP) (0/3)
+  216 - Getting in Line 	★ | discuss 	Lev 2 	 --- ? ---
+  10496 - Collecting Beepers 	★ | discuss 	Lev 3 	 --- ? ---
+  11284 - Shopping Trip 	★ | discuss 	Lev 4 	 --- ? ---
+ Non Classical (The Easier Ones) (1/22)
+  116 - Unidirectional TSP 	| discuss 	Lev 2 	 --- ? ---
+  196 - Spreadsheet 	| discuss 	Lev 3 	 --- ? ---
+  1261 - String Popping 	| discuss 	Lev 4 	 --- ? ---
+  10003 - Cutting Sticks 	| discuss 	Lev 1 	 --- ? ---
+  10036 - Divisibility 	| discuss 	Lev 2 	 --- ? ---
+  10086 - Test the Rods 	| discuss 	Lev 4 	 --- ? ---
+  10337 - Flight Planner 	★ | discuss 	Lev 3 	 --- ? ---
+  10400 - Game Show Math 	| discuss 	Lev 3 	 --- ? ---
+  10446 - The Marriage Interview :-) 	| discuss 	Lev 3 	 --- ? ---
+  10465 - Homer Simpson 	| discuss 	Lev 2 	 ✔ 0.120s/1209
+  10520 - Determine it 	| discuss 	Lev 4 	 --- ? ---
+  10688 - The Poor Giant 	| discuss 	Lev 4 	 --- ? ---
+  10721 - Bar Codes 	★ | discuss 	Lev 3 	 --- ? ---
+  10910 - Marks Distribution 	| discuss 	Lev 3 	 --- ? ---
+  10912 - Simple Minded Hashing 	| discuss 	Lev 3 	 --- ? ---
+  10943 - How do you add? 	★ | discuss 	Lev 2 	 --- ? ---
+  10980 - Lowest Price in Town 	| discuss 	Lev 4 	 --- ? ---
+  11026 - A Grouping Problem 	| discuss 	Lev 4 	 --- ? ---
+  11407 - Squares 	| discuss 	Lev 3 	 --- ? ---
+  11420 - Chest of Drawers 	| discuss 	Lev 3 	 --- ? ---
+  11450 - Wedding shopping 	π | | discuss 	Lev 2 	 --- ? ---
+  11703 - sqrt log sin 	| discuss 	Lev 3 	 --- ? ---
+Greedy (14/44 = 31%)
+ Classical, Usually Easier (6/8)
+  410 - Station Balance 	| discuss 	Lev 3 	 --- ? ---
+  1193 - Radar Installation 	| discuss 	Lev 5 	 ✔ 0.000s/157(3)
+  10020 - Minimal coverage 	| discuss 	Lev 3 	 --- ? ---
+  10382 - Watering Grass 	| discuss 	Lev 3 	 ✔ 0.000s/363
+  11264 - Coin Collector 	★ | discuss 	Lev 3 	 ✔ 0.000s/878
+  11389 - The Bus Driver Problem 	★ | discuss 	Lev 2 	 ✔ 0.000s/1399
+  12321 - Gas Stations 	| discuss 	Lev 4 	 ✔ 0.100s/391
+  12405 - Scarecrow 	★ | discuss 	Lev 2 	 ✔ 0.000s/1363
+ Involving Sorting (Or The Input Is Already Sorted) (3/15)
+  10026 - Shoemaker's Problem 	| discuss 	Lev 2 	 --- ? ---
+  10037 - Bridge 	| discuss 	Lev 3 	 --- ? ---
+  10249 - The Grand Dinner 	| discuss 	Lev 3 	 --- ? ---
+  10670 - Work Reduction 	| discuss 	Lev 3 	 --- ? ---
+  10763 - Foreign Exchange 	| discuss 	Lev 2 	 --- ? ---
+  10785 - The Mad Numerologist 	| discuss 	Lev 3 	 --- ? ---
+  11100 - The Trip, 2007 	★ | discuss 	Lev 3 	 --- ? ---
+  11103 - WFF 'N PROOF 	| discuss 	Lev 4 	 --- ? ---
+  11269 - Setting Problems 	| discuss 	Lev 4 	 --- ? ---
+  11292 - Dragon of Loowater 	★ π | | discuss 	Lev 2 	 ✔ 0.020s/2502
+  11369 - Shopaholic 	| discuss 	Lev 2 	 --- ? ---
+  11729 - Commando War 	| discuss 	Lev 2 	 --- ? ---
+  11900 - Boiled Eggs 	| discuss 	Lev 2 	 ✔ 0.000s/1087
+  12210 - A Match Making Problem 	★ | discuss 	Lev 3 	 ✔ 0.000s/132
+  12485 - Perfect Choir 	| discuss 	Lev 4 	 --- ? ---
+ Non Classical, Usually Harder (5/21)
+  311 - Packets 	| discuss 	Lev 3 	 ✔ 0.000s/232
+  668 - Parliament 	| discuss 	Lev 4 	 --- ? ---
+  10152 - ShellSort 	| discuss 	Lev 2 	 --- ? ---
+  10340 - All in All 	| discuss 	Lev 1 	 --- ? ---
+  10440 - Ferry Loading II 	| discuss 	Lev 3 	 --- ? ---
+  10602 - Editor Nottoobad 	| discuss 	Lev 3 	 --- ? ---
+  10656 - Maximum Sum (II) 	★ | discuss 	Lev 2 	 --- ? ---
+  10672 - Marbles on a tree 	π | | discuss 	Lev 4 	 --- ? ---
+  10700 - Camel trading 	| discuss 	Lev 3 	 --- ? ---
+  10714 - Ants 	| discuss 	Lev 2 	 --- ? ---
+  10718 - Bit Mask 	★ | discuss 	Lev 3 	 --- ? ---
+  10982 - Troublemakers 	| discuss 	Lev 5 	 Tried (8)
+  11054 - Wine trading in Gergovia 	| discuss 	Lev 3 	 --- ? ---
+  11157 - Dynamic Frog 	★ | discuss 	Lev 3 	 ✔ 0.000s/456
+  11230 - Annoying painting tool 	| discuss 	Lev 4 	 ✔ 0.010s/38
+  11240 - Antimonotonicity 	| discuss 	Lev 4 	 ✔ 0.030s/44(3)
+  11335 - Discrete Pursuit 	| discuss 	Lev 5 	 --- ? ---
+  11520 - Fill the Square 	| discuss 	Lev 3 	 ✔ 0.000s/538
+  11532 - Simple Adjacency Maximization 	| discuss 	Lev 4 	 --- ? ---
+  11567 - Moliu Number Generator 	| discuss 	Lev 4 	 --- ? ---
+  12482 - Short Story Competition 	| discuss 	Lev 4 	 --- ? ---
+Divide and Conquer (2/20 = 10%)
+ Binary Search (2/13)
+  679 - Dropping Balls 	| discuss 	Lev 2 	 --- ? ---
+  957 - Popes 	| discuss 	Lev 3 	 --- ? ---
+  10077 - The Stern-Brocot Number System 	| discuss 	Lev 2 	 --- ? ---
+  10474 - Where is the Marble? 	| discuss 	Lev 1 	 --- ? ---
+  10567 - Helping Fill Bates 	★ | discuss 	Lev 3 	 ✔ 0.140s/797(2)
+  10611 - The Playboy Chimp 	| discuss 	Lev 2 	 --- ? ---
+  10706 - Number Sequence 	| discuss 	Lev 3 	 --- ? ---
+  10742 - The New Rule in Euphomia 	| discuss 	Lev 4 	 --- ? ---
+  11057 - Exact Sum 	★ | discuss 	Lev 2 	 ✔ 0.030s/1719(2)
+  11621 - Small Factors 	| discuss 	Lev 4 	 --- ? ---
+  11701 - Cantor 	| discuss 	Lev 5 	 --- ? ---
+  11876 - N + NOD (N) 	| discuss 	Lev 3 	 --- ? ---
+  12192 - Grapevine 	★ | discuss 	Lev 4 	 --- ? ---
+ Binary Search the Answer (0/6)
+  10341 - Solve It 	★ π | | discuss 	Lev 2 	 --- ? ---
+  11413 - Fill the Containers 	★ | discuss 	Lev 3 	 --- ? ---
+  11881 - Internal Rate of Return 	| discuss 	Lev 5 	 --- ? ---
+  11935 - Through the Desert 	| discuss 	Lev 4 	 --- ? ---
+  12032 - The Monkey and the Oiled Bamboo 	★ | discuss 	Lev 3 	 --- ? ---
+  12190 - Electric Bill 	| discuss 	Lev 4 	 --- ? ---
+ Other Divide and Conquer Problems (0/1)
+  183 - Bit Maps 	★ | discuss 	Lev 3 	 --- ? ---
+
+Next Problems to Solve
+
+You can view your unsolved/solved problems, sort them, filter by volume, etc. If you just want to solve as many problems as quickly as possible, it's convinient to pick problems according to the dacu (distinct accepted users) in descending order. The bigger the dacu the easier the problem should be and the more probable it will appear in the UVa discussion board.
+Show : [ 25 | 50 | 100 ] 
+View : [ unsolved | solved | both ]  
+Volume : v5
+No 	Number 	  Problem Title 	nos 	anos 	%anos 	dacu 	best
+1 	591 	| discuss Box of Bricks 	76335 	25159 	32% 	19263 	0.000
+2 	579 	| discuss Clock Hands 	47090 	20337 	43% 	15198 	0.000
+3 	575 	| discuss Skew Binary 	23239 	16213 	69% 	13149 	0.000
+4 	543 	| discuss Goldbach's Conjecture 	48327 	20182 	41% 	12504 	0.000
+5 	573 	| discuss The Snail 	33514 	14300 	42% 	11740 	0.000
+6 	572 	| discuss Oil Deposits 	31741 	19429 	61% 	11508 	0.000
+7 	541 	| discuss Error Correction 	23205 	13156 	56% 	10177 	0.000
+8 	514 	| discuss Rails 	41169 	15911 	38% 	8467 	0.000
+9 	562 	| discuss Dividing coins 	41100 	13823 	33% 	7819 	0.000
+10 	583 	| discuss Prime Factors 	52015 	14672 	28% 	7796 	0.030
+11 	530 	| discuss Binomial Showdown 	38850 	9817 	25% 	7619 	0.000
+12 	568 	| discuss Just the Facts 	17465 	9347 	53% 	7035 	0.000
+13 	524 	| discuss Prime Ring Problem 	41193 	12509 	30% 	6555 	0.000
+14 	558 	| discuss Wormholes 	19465 	9778 	50% 	6166 	0.000
+15 	532 	| discuss Dungeon Master 	21759 	8485 	38% 	5341 	0.000
+16 	567 	| discuss Risk 	17963 	7545 	42% 	4880 	0.000
+17 	536 	| discuss Tree Recovery 	11825 	7663 	64% 	4648 	0.000
+18 	507 	| discuss Jill Rides Again 	25012 	7322 	29% 	4599 	0.000
+19 	537 	| discuss Artificial Intelligence? 	16586 	5916 	35% 	4396 	0.000
+20 	594 	| discuss One Little, Two Little, Three Little Endians 	9767 	6085 	62% 	4335 	0.000
+21 	534 	| discuss Frogger 	16010 	6444 	40% 	4118 	0.000
+22 	540 	| discuss Team Queue 	24430 	8503 	34% 	3860 	0.000
+23 	544 	| discuss Heavy Cargo 	10967 	5513 	50% 	3775 	0.000
+24 	531 	| discuss Compromise 	19506 	5786 	29% 	3584 	0.000
+25 	576 	| discuss Haiku Review 	6990 	4122 	58% 	3489 	0.000
+	
+Volumes
+v1 	
+	
+	5%
+v2 	
+	
+	1%
+v3 	
+	
+	3%
+v4 	
+	
+	5%
+v5 	
+	
+	4%
+v6 	
+	
+	4%
+v7 	
+	
+	3%
+v8 	
+	
+	0%
+v9 	
+	
+	0%
+v10 	
+	
+	0%
+v11 	
+	
+	2%
+v12 	
+	
+	1%
+v13 	
+	
+	0%
+v14 	
+	
+	0%
+v15 	
+	
+	1%
+v16 	
+	
+	0%
+v17 	
+	
+	0%
+v100 	
+	
+	4%
+v101 	
+	
+	6%
+v102 	
+	
+	3%
+v103 	
+	
+	4%
+v104 	
+	
+	2%
+v105 	
+	
+	1%
+v106 	
+	
+	2%
+v107 	
+	
+	1%
+v108 	
+	
+	2%
+v109 	
+	
+	3%
+v110 	
+	
+	2%
+v111 	
+	
+	2%
+v112 	
+	
+	7%
+v113 	
+	
+	2%
+v114 	
+	
+	1%
+v115 	
+	
+	3%
+v116 	
+	
+	0%
+v117 	
+	
+	1%
+v118 	
+	
+	1%
+v119 	
+	
+	3%
+v120 	
+	
+	0%
+v121 	
+	
+	0%
+v122 	
+	
+	2%
+v123 	
+	
+	1%
+v124 	
+	
+	1%
+v125 	
+	
+	1%
+v126 	
+	
+	0%
+v127 	
+	
+	0%
+v128 	
+	
+	0%
+v129 	
+	
+	0%
+v130 	
+	
+	0%
+v131 	
+	
+	0%
+v132 	
+	
+	0%
+ALL 	
+	
+	1%
+World Ranklist
+
+Below is the Author Ranklist (it is a bit different in the sorting order: ac, nos instead of ac, tried, nos). The additional columns: "2d, 7d, 31d" represents the number of (distinct) solved problems in the past 2 days, 7 days, 31 days.
+    World Ranklist Show: above [ 10 | 20 | 50 | 100 ]; below [ 10 | 20 | 50 | 100 ]  
+Rank 	Name 	Username 	AC 	Subs 	2d 	7d 	31d 	3m 	1y
+13066 	Mosaddek Adnan Sikder 	Oronno05 	83 	178 	- 	- 	- 	- 	-
+13067 	Ho Chung Yin Billy 	SICATIVE 	83 	179 	- 	- 	- 	- 	-
+13068 	Luis Alberto Cisneros Alvarez 	luisaca 	83 	179 	- 	- 	- 	- 	-
+13069 	Pranoy Das 	pranoy12001 	83 	180 	- 	- 	- 	1 	1
+13070 	Diego 	amildie 	83 	181 	- 	- 	- 	- 	-
+13071 	zongyueyang 	zyy2015 	83 	181 	- 	- 	- 	- 	-
+13072 	Squadack 	Squadack 	83 	182 	- 	- 	- 	- 	4
+13073 	MD. MAHSIN-UL-ISLAM 	mahsin 	83 	184 	- 	- 	- 	- 	-
+13074 	Alif Raditya R 	LinkinFire 	83 	184 	- 	- 	- 	- 	-
+13075 	mafiulhasanmatin 	mafiulhasanmatin 	83 	188 	- 	- 	- 	- 	-
+13076 	Shawn Liang 	shawnliang 	83 	190 	1 	4 	13 	40 	83
+13077 	[C++] Fung Yin Chun 	ycfung 	83 	191 	- 	- 	- 	- 	-
+13078 	Saiful Islam Rasel 	Saiful Islam Rasel 	83 	191 	- 	- 	1 	5 	83
+13079 	fake 	fake fake 	83 	193 	- 	- 	- 	- 	-
+13080 	Joseph Nathanael Witanto 	josephnw 	83 	195 	- 	- 	- 	- 	-
+13081 	Ahmed Dider Rahat 	Rahat07 	83 	197 	- 	- 	- 	- 	-
+13082 	Reid Barton 	--- ? --- 	83 	199 	- 	- 	- 	- 	-
+13083 	Iqbal Nouyed 	iqbalnaved 	83 	200 	- 	- 	- 	- 	32
+13084 	horba 	philip20336 	83 	201 	- 	- 	- 	- 	-
+13085 	bestin_1 	bestin_1 	83 	205 	- 	- 	4 	26 	83
+13086 	Hansen 	hanzzzen 	83 	213 	- 	- 	- 	- 	-
+
+Statistics Comparer
+
+It is good to have partners (or rivals) in any competitions. Rivals can give you strong motivations to improve yourself. One of the motivations can be: "to solve any problem that your rivals solves, just to stay ahead from your rivals :)".
+
+Using set manipulations you can merge your statistics with your partners and compare it with other groups of rivals :D interesting, isn't it? See the following examples. Later on, the variables A,B,C,D,E should be replaced by the usernames of the users.
+
+    To know what are the the problems you (A) have solved but your rivals (B,C,D,E) do not, execute the following set operation: A-B-C-D-E or A-(B+C+D+E).
+    Suppose you and your partners form a group (A,C) and your rivals form another group (B,E). To see what problems that your group hasn't solved but your rival has, execute this set operation: (A+C)-(B+E).
+    Now if you want to know what are the problems that your group and your rivals have not solved, there is a special set S which contains all problems in UVa. So you can do set operation: S-(A+C)-(B+E) or S-(A+C+B+E) or S-A-C-B-E.
+    There are other special sets: cp3 and cp3s which contains all problems in the 3rd edition Competitive Programming book and the starred only. For the 1st and 2nd edition exercises, change the number accordingly (cp1, cp1s, cp2, cp2s). 
+
+The available operators are: union +, subtraction -, intersection &, and brackets ( ) to force operator precedence.
+Expression:
+
+
+Web API - Build Your Own Tool
+
+I have published a Web API for acquiring real-time UVa statistics. Please subscribe to uhunt-api mailing list to receive updates and discuss about the API. You are free to use the API to build your own statistical tools. Let me know if you have build a great tool based on this API. I will add your tool to the list below:
+
+    uHunt Components - demonstrates how the API can be used to build uHunt website (see series.html for building the training series).
+    UVa Arena by সুদীপ্ত চন্দ্র (dipu_sust)
+    UVa Management Tool and Chrome Extension by Lâm Phan Việt
+    UVa Command Line Tool by Bao Hong Tan
+    Programming Practice Center by Andrés Felipe Pineda
+    Windows Phone App: UVa Tools by Héctor Galindo
+    Windows Phone App: UVa Stats by Jonathon Simister.
+    Android App: uHunt by Kaidul Islam.
+    uHunt wrapper for PHP by Kaspars. 
+
+uHunt Web API Change Log:
+
+    15 Feb 2015 - Added contests API to list all contests and fetch all past submissions.
+    10 Apr 2014 - Added optional parameter to get the user submissions larger than {min-sid}.
+    25 Jul 2013 - Added problem status (0 = unavailable, 1 = normal, 2 = special judge).
+    21 May 2013 - Added subs-user-last to retrieve last submissions from a specific user.
+    18 May 2013 - Added Competitive Programming Book Exercises API.
+    20 Mar 2013
+    Breaking change to the Live Event if there is no event for ~1 minute.
+    Added User Ranklist API to get users from a specific rank positions.
+    14 Mar 2013 - Added new problem ranklist API. 
+
+Virtual Contests Generator
+
+It is important to measure your performance under contest settings. If you want to solve 5 problems in 3 hours, this tool can help you to measure it. First, pick (using the problem picker) a set of unsolved problems (categorized by the difficulty levels). Then set the start date and duration and create a virtual contest using the following generator. If you want compete against shadow contestants from the past UVa contests, you can click the past contests and select from one of the past UVa contests. The link to the virtual contest will appear after you generate it (only people that know the link are able to view it).
+Contestants UVa IDs 	
+UVa Problem Numbers 	 Problem Picker  |  Past Contests 
+Contest Date and Duration 	  hh:mm   Duration (suffix: h=hours, d=days, w=week)
+  	
+
+Frequently Asked Questions
+
+    Q: What are the meaning of the colors on some problem numbers?
+    A: The problem number will will be colored Red if it was last submitted less than 2 days ago, Green for less than 1 week ago, Blue for less than 1 month ago, Orange if the problem is not yet Accepted, otherwise, Black. In the ChatBox and in the Live Submissions, some problem numbers will be underlined if you have solved the problem. The bold problem numbers in the statistics denotes that the runtime of your submission is equal to the best runtime (rank 1 of that problem).
+
+
+
+© Felix Halim 2016

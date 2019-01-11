@@ -1,0 +1,18 @@
+graph
+{
+    node [shape = box style = filled];
+    A[style = filled,fillcolor = cyan];
+    B[style = filled,fillcolor = cyan];
+    H[style = filled,fillcolor = cyan];    
+    A -- B;
+    A -- C;
+    A -- H;
+    B -- D;
+    B -- C;
+    B -- F;
+    C -- D;
+    C -- F;
+    C -- H;
+    D -- F;
+    F -- H;
+}
