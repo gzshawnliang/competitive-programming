@@ -47,12 +47,25 @@ int solve(int nowPos, int nowUse, vector<int> & f, vector<boot> & a, vector<vect
             }
             else
             {
-                ans = min(ans, solve(i, nowUse + 1, f, a, visit));
+                //ans = min(ans, solve(i, nowUse + 1, f, a, visit));
 
                 if (i > nowPos)
                 {
                     ans = min(ans, solve(i, nowUse, f, a, visit));
                 }
+            }
+        }
+
+
+        for (int i = nowUse+1; i <= b - 1 ; ++i)
+        {
+            if (f[nowPos] > a[i].s)
+            {
+                continue;
+            }
+            else
+            {
+                ans = min(ans, solve(nowPos, i, f, a, visit));
             }
         }
 
