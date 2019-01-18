@@ -18,55 +18,46 @@ ofstream fout("reststops.out");
 
 struct stop
 {
-    int x;
-    int c;
-    int _pos;
+    long long x;
+    long long c;
 
-    bool operator<(const stop & temp) const
+    bool operator<(const stop &temp) const
     {
-        return c > temp.c;
+        if (c != temp.c)
+        {
+            return c > temp.c;
+        }
+        else
+        {
+            return x > temp.x;
+        }
     }
 };
 
 int main()
 {
-    long long l, n, rf, rb, b = 0, ans = 0; fin >> l >> n >> rf >> rb;
+    long long l, n, rf, rb, b = 0, f = 0, t, ans = 0; fin >> l >> n >> rf >> rb;
 
-    vector<stop> s1(n), s2;
+    vector<stop> s(n);
 
-    for (int i = 0; i <= n - 1; ++i)
+    for (long long i = 0; i <= n - 1; ++i)
     {
-        fin >> s1[i].x >> s1[i].c;
-        s1[i]._pos = i;
+        fin >> s[i].x >> s[i].c;
     }
+    t = rf - rb;
 
-    s2 = s1;
-    sort(s2.begin(), s2.end());
+    sort(s.begin(), s.end());
 
-    int j = 0, _time = 0;
-    vector<bool> visit(n, false);
-    for (int i = 0; i <= n - 1; ++i)
+    ans += s[0].c * s[0].x * t;
+
+    long long last = 0;
+    for (long long i = 1; i <= n - 1; ++i)
     {
-        while (visit[s2[j]._pos] == true)
+        if (s[i].x > s[last].x)
         {
-            ++j;
+            ans += s[i].c * (s[i].x - s[last].x) * t;
+            last = i;
         }
-
-        _time += (s1[i].x - b) * (rf - rb);
-
-        if (s2[j]._pos == i)
-        {
-            if (visit[s2[j]._pos] == false)
-            {
-                ans += s2[j].c * _time;
-                _time = 0;
-            }
-
-            ++j;
-        }
-
-        b = s1[i].x;
-        visit[i] = true;
     }
 
     fout << ans << '\n';
