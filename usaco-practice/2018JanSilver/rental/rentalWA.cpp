@@ -27,24 +27,45 @@ struct store
     }
 };
 
-long long checkMilk(long long & stoI, long long g, vector<store> & sto)
+long long checkMilk(bool mode, long long & stoI, long long g1, long long g2, vector<store> & sto)
 {
     int m = sto.size(), i = stoI;
     long long ans = 0;
 
-    while (i <= m - 1 && g > 0)
+    while (i <= m - 1 && g1 > 0)
     {
-        if (sto[i].maxG >= g)
+        if (sto[i].maxG >= g1)
         {
-            ans += g * sto[i].price;
+            ans += g1 * sto[i].price;
 
-            g = 0;
+            if (i <= m - 2 && mode == 0)
+            {
+                ans -= checkMilk(1, stoI, g2, g2, sto);
+
+                sto[i].maxG -= g1;
+
+                ans += checkMilk(1, stoI, g2, g2, sto);
+
+                sto[i].maxG += g1;
+            }
+
+            g1 = 0;
         }
         else
         {
-            ans += sto[i].maxG * sto[i].price;      
+            ans += sto[i].maxG * sto[i].price;
 
-            g -= sto[i].maxG;
+            if (i <= m - 2 && mode == 0)
+            {
+                sto[i].maxG -= sto[i].maxG;
+
+                ans *= 2;
+                ans -= checkMilk(1, stoI, g2, g2, sto);
+
+                sto[i].maxG += sto[i].maxG;
+            }
+
+            g1 -= sto[i].maxG;
 
             ++i;
         }
@@ -56,22 +77,29 @@ long long checkMilk(long long & stoI, long long g, vector<store> & sto)
 long long sellMilk(long long & stoI, long long g, vector<store> & sto)
 {
     int m = sto.size();
+    long long ans = 0;
 
     while (stoI <= m - 1 && g > 0)
     {
         if (sto[stoI].maxG >= g)
         {
+            ans += g * sto[stoI].price;
+
             sto[stoI].maxG -= g;
             g = 0;
         }
         else
         {
+            ans += sto[stoI].maxG * sto[stoI].price;
+
             g -= sto[stoI].maxG;
             sto[stoI].maxG = 0;
 
             ++stoI;
         }
     }
+
+    return ans;
 }
 
 int main()
@@ -85,7 +113,7 @@ int main()
     {
         fin >> cow[i];
     }
-    sort(cow.begin(), cow.end(), greater<long long>());
+    sort(cow.begin(), cow.end());
 
     for (int i = 0; i <= m - 1; ++i)
     {
@@ -97,48 +125,42 @@ int main()
     {
         fin >> nei[i];
     }
-    sort(nei.begin(), nei.end());
+    sort(nei.begin(), nei.end(), greater<long long>());
 
-    if (r < n)
-    {
-        long long temp = n - r;
-        for (int c = 1; c <= temp; ++c)
-        {
-            nei.insert(nei.begin(), 0);
-            ++r;
-        }
-    }
-    else if (r > n)
-    {
-        long long temp = r - n;
-        for (int c = 1; c <= temp; ++c)
-        {
-            nei.erase(nei.begin());
-            --r;
-        }
-    }
-
-    long long stoI = 0, ans = 0;
+    long long stoI = 0, neiI = 0, ans = 0;
     for (int i = 0; i <= n - 1; ++i)
     {
-        int stoRes = 0, neiRes = 0;
-
+        long long resSto = 0, resNei = 0;
         if (stoI <= m - 1)
         {
-            stoRes = checkMilk(stoI, cow[i], sto);
+            if (i <= n - 2)
+            {
+                resSto = checkMilk(0, stoI, cow[i], cow[i + 1], sto);
+            }
+            else
+            {
+                resSto = checkMilk(0, stoI, cow[i], 0, sto);
+            }
+        }
+        
+        if (neiI <= r - 1)
+        {
+            resNei = nei[neiI];
         }
 
-        neiRes = nei[i];
-
-        if (stoRes >= neiRes)
+        if (resSto + resNei == 0)
         {
-            sellMilk(stoI, cow[i], sto);
-
-            ans += stoRes;
+            break;
+        }
+        else if (resSto >= resNei)
+        {
+            ans += sellMilk(stoI, cow[i], sto);
         }
         else
         {
-            ans += neiRes;
+            ++neiI;
+
+            ans += resNei;
         }
     }
 
