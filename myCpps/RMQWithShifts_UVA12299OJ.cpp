@@ -6,10 +6,9 @@ using namespace std;
 class fenwickTree
 {
     private:
-    
-    vector<int> a;
-    vector<int> s;
 
+    vector<int> c;
+    
     int lowbit(int x)
     {
         return x & (-x);
@@ -17,12 +16,14 @@ class fenwickTree
 
     public:
 
+    vector<int> a;
+
     fenwickTree(vector<int> & in)
     {
         int n = in.size();
 
         a = in;
-        s.assign(n + 1, INT_MAX);
+        c.assign(n + 1, INT_MAX);
 
         for (int i = 0; i <= n - 1; ++i)
         {
@@ -34,13 +35,13 @@ class fenwickTree
     {
         ++k;
 
-        int n = s.size();
+        int n = c.size();
 
         a[k - 1] = temp;
 
-        for (int i = k; i <= n - 1; i += lowbit(i))
+        for (int i = k; i <= n; i += lowbit(i))
         {
-            s[i] = min(s[i], temp);
+            c[i] = min(c[i], temp);
         }
     }
 
@@ -52,9 +53,9 @@ class fenwickTree
 
         while (l != r)
         {
-            for (--r; r >= l + lowbit(r); r -= lowbit(r))
+            for (--r; r > l + lowbit(r); r -= lowbit(r))
             {
-                ans = min(ans, s[r]);
+                ans = min(ans, c[r]);
             }
 
             ans = min(ans, a[r - 1]);
@@ -104,6 +105,7 @@ int main()
             }
         }
 
+
         if (in[0] == 'q')
         {
             cout << tree.query(num[0] - 1, num[1] - 1) << '\n';
@@ -113,7 +115,7 @@ int main()
             int sizeN = num.size();
             for (int i = 0; i <= sizeN - 2; ++i)
             {
-                int tempA = a[num[i] - 1], tempB = a[num[i + 1] - 1];
+                int tempA = tree.a[num[i] - 1], tempB = tree.a[num[i + 1] - 1];
                 tree.update(num[i] - 1, tempB); tree.update(num[i + 1] - 1, tempA);
             }
         }

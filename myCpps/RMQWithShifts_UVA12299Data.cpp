@@ -16,13 +16,13 @@ int main()
         //***************************
         //在此处写入测试数据
         //***************************
-        int N = 10;
+        int N = 100;
         //int q = rdNum.GetRand(2, 300);
-        int q = 7;
+        int q = 50;
         fout << N << " " <<q << "\n";
         for (int i = 0; i <= N - 1; ++i)
         {
-            fout << rdNum.GetRand(1, 1e1) <<  " ";
+            fout << rdNum.GetRand(1, 1e2) <<  " ";
         }
         fout << "\n" ;
         int q2=q-1;
