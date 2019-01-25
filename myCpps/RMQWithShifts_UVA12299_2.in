@@ -1,0 +1,12 @@
+7 10
+17 13 3 6 7 9 2 
+shift(5,7)
+shift(2,3)
+shift(5,6)
+shift(3,7)
+shift(3,6)
+shift(3,5)
+shift(3,7)
+shift(1,4)
+shift(5,6)
+query(1,4)
