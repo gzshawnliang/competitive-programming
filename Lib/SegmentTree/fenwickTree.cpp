@@ -20,12 +20,12 @@ class fenwickTree
     {
         int n = in.size();
 
-        a = in;
+        a.assign(n, 0);
         s.assign(n + 1, 0);
 
         for (int i = 0; i <= n - 1; ++i)
         {
-            update(i, a[i]);
+            update(i, in[i]);
         }
     }
 
@@ -33,9 +33,11 @@ class fenwickTree
     {
         ++k;
 
+        a[k - 1] += delta;
+
         int n = s.size();
 
-        for (int i = k; i <= n - 1; i += lowbit(i))
+        for (int i = k; i <= n; i += lowbit(i))
         {
             s[i] += delta;
         }

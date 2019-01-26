@@ -5,81 +5,89 @@ using namespace std;
 ifstream fin("RMQWithShifts_UVA12299.in");
 ofstream fout("RMQWithShifts_UVA12299.out");
 
+
 class fenwickTree
 {
     private:
-
-    vector<int> c;
-    
     int lowbit(int x)
     {
         return x & (-x);
     }
 
     public:
-
     vector<int> a;
+    vector<int> s;
 
     fenwickTree(vector<int> & in)
     {
         int n = in.size();
 
         a = in;
-        c.assign(n + 1, INT_MAX);
+        s.assign(n, INT_MAX);
 
-        for (int i = 0; i <= n - 1; ++i)
+        for (int i = 1; i <= n; ++i)
         {
             update(i, a[i]);
         }
     }
 
-    void update(int k, int temp)
+    void update(int x, int d)
     {
-        ++k;
-
-        int n = a.size();
-
-        a[k - 1] = temp;
-
-        for (int i = k; i <= n; i += lowbit(i))
+        int n = s.size();
+        a[x] = d;
+        while (x <= n)
         {
-            c[i] = min(c[i], temp);
+            if (s[x] > d)
+            {
+                s[x] = d;
+            }
+            else break;
+                
+            x = x + lowbit(x);
         }
     }
 
     int query(int l, int r)
     {
-        ++l; ++r;
+        int n = s.size();
 
-        int ans = a[r - 1];
-
+        int ans = a[r];
         while (l != r)
         {
-            for (--r; r > l + lowbit(r); r -= lowbit(r))
+            r--;
+            while (r - lowbit(r) > l)
             {
-                ans = min(ans, c[r]);
+                ans = min(ans, s[r]);
+                r -= lowbit(r);
             }
-
-            ans = min(ans, a[r - 1]);
+            ans = min(ans, a[r]);
         }
-
         return ans;
     }
 };
 
+int main2()
+{
+    int x = 6;
+
+    fout << (x & (-x)) << '\n';
+
+    return 0;
+}
+
 int main()
 {
     int n, q; fin >> n >> q;
-    vector<int> a(n);
+    vector<int> a(n + 1);
 
-    for (int i = 0; i <= n - 1; ++i)
+    for (int i = 1; i <= n; ++i)
     {
         fin >> a[i];
     }
 
     fenwickTree tree(a);
 
-    for (int c = 1; c <= q; ++c)
+    for (int s = 1; s <= q; ++s)
     {
         string in; fin >> in;
 
@@ -105,12 +113,19 @@ int main()
             }
         }
 
-        // for (int i = 0; i <= n - 1; ++i)
-        // {
-        //     if (i > 0) fout << ' ';
-        //     fout << tree.a[i];
-        // }
-        // fout << '\n';
+        fout << "s:";
+        for (int i = 1; i <= n; ++i)
+        {
+            fout << ' ' << tree.s[i];
+        }
+        fout << '\n';
+
+        fout << "a:";
+        for (int i = 1; i <= n; ++i)
+        {
+            fout << ' ' << tree.a[i];
+        }
+        fout << "\n\n";
 
         if (in[0] == 'q')
         {
@@ -121,8 +136,8 @@ int main()
             int sizeN = num.size();
             for (int i = 0; i <= sizeN - 2; ++i)
             {
-                int tempA = tree.a[num[i] - 1], tempB = tree.a[num[i + 1] - 1];
-                tree.update(num[i] - 1, tempB); tree.update(num[i + 1] - 1, tempA);
+                int tempA = tree.a[num[i]], tempB = tree.a[num[i + 1]];
+                tree.update(num[i], tempB); tree.update(num[i + 1], tempA);
             }
         }
     }

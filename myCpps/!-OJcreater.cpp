@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "RMQWithShifts_UVA12299"; //*
+const string CPPfile = "potentiometers_UVA12086"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
