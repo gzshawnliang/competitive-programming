@@ -2,7 +2,63 @@
 
 using namespace std;
 
-//1-index的树去movieCollection_UVA1513.cpp查看
+class fenwickTree1index
+{
+    private:
+
+    int lowbit(int x)
+    {
+        return x & (-x);
+    }
+
+    public:
+
+    vector<int> a;
+    vector<int> s;
+
+    fenwickTree(vector<int> & in)
+    {
+        int n = in.size();
+
+        a.assign(n, 0);
+        s.assign(n, 0);
+
+        for (int i = 1; i <= n - 1; ++i)
+        {
+            update(i, in[i]);
+        }
+    }
+
+    void update(int k, int delta)
+    {
+        int n = s.size() - 1;
+
+        a[k] += delta;
+
+        for (int i = k; i <= n; i += lowbit(i))
+        {
+            s[i] += delta;
+        }
+    }
+
+    int query(int k)
+    {
+        int n = s.size() - 1;
+        int ans = 0;
+
+        for (int i = k; i >= 1; i -= lowbit(i))
+        {
+            ans += s[i];
+        }
+
+        return ans;
+    }
+
+    int sum(int i, int j)
+    {
+        return query(j) - query(i - 1);
+    }
+};
 
 class fenwickTree
 {
