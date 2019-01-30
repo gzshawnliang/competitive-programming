@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "garbageHeap_UVA10755"; //*
+const string CPPfile = "largestSubmatrix_UVA836"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
