@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "cityGame_UVA1330"; //*
+const string CPPfile = "localizedSummingForBlurring_UVA983"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
