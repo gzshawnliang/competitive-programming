@@ -1,9 +1,10 @@
+#include <bits/stdc++.h>
 #include <chrono>
-#include <iostream>
-#include <vector>
-
 using namespace std;
 using namespace std::chrono;
+
+//ifstream fin("checkTime.in");
+//ofstream fout("checkTime.out");
 
 //note:计时器，可拥有测量模块的运行时间
 struct Timer
@@ -67,37 +68,45 @@ struct Timer
     }
 };
 
-void testData(int itemCount)
+double testTime(int itemCount)
 {
-    //int itemCount = (int)1e9;
+    Timer t;
+
     vector<int> v1;
-    cout << "filling " << itemCount << " items in vector:";
 
     for (size_t i = 0; i <= itemCount - 1; ++i)
     {
         v1.push_back(i);
     }
+
+    return t.elapsed();
+}
+
+int testLoop(double _time)
+{
+    int l = 1, r = 2*1e8;
+    while (r - l > 20000)
+    {
+        int m = (l + r) / 2;
+
+        if (testTime(m) < _time)
+        {
+            l = m + 1;
+        }
+        else
+        {
+            r = m;
+        }
+    }
+
+    return (l + r) / 2;
 }
 
 int main()
 {
-    Timer t; //开始计时
-    testData((int)1e7); //一千万
-    cout << "seconds:" << t.elapsed() << endl; //打印秒
-    // cout << "milliseconds:" << t.elapsed() << endl;                  //打印fun函数耗时多少毫秒
-    // cout << "microseconds:" << t.elapsed_micro() << endl;            //打印微秒
-    // cout << "nanoseconds:" << t.elapsed_nano() << endl;              //打印纳秒
-    // cout << "seconds:" << t.elapsed_seconds() << endl;               //打印秒
-    // cout << "minutes:" << t.elapsed_minutes() << endl;               //打印分钟
-    // cout << "hours:" << t.elapsed_hours() << endl;                   //打印小时
-    
-    t.reset();
-    testData((int)1e8); //一亿
-    cout << "seconds:" << t.elapsed() << endl; //打印秒
+     //开始计时
 
-    t.reset();
-    testData((int)1e9); //十亿
-    cout << "seconds:" << t.elapsed() << endl; //打印秒
+    cout << testTime(123456789) << endl; //打印秒
 
     return 0;
 }
