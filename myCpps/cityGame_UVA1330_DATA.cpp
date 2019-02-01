@@ -14,7 +14,7 @@ int main()
 {
     srand(time(0));
 
-    int k = 100, n = 10, m = 10;
+    int k = 10, n = 10, m = 10;
 
     fout << k << '\n'; 
     for (int c = 1; c <= k; ++c)
