@@ -106,7 +106,7 @@ int main()
 {
      //开始计时
 
-    cout << testTime(123456789) << endl; //打印秒
+    cout << testTime(9000000) << endl; //打印秒
 
     return 0;
 }
