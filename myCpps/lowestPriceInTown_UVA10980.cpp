@@ -25,6 +25,7 @@ struct scheme
     }
 };
 
+//浮点数四舍五入
 int round_double(double number)
 {
     return (number > 0.0) ? floor(number + 0.5) : ceil(number - 0.5);
