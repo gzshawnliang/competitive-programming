@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "identifyingConcurrentEvents_UVA334"; //*
+const string CPPfile = "SumUpThePrimesTL_UVA10419"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
