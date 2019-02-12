@@ -5,6 +5,29 @@ using namespace std;
 //ifstream fin("math.in");
 //ofstream fout("math.out");
 
+string join(string a, string b)
+{
+    int sizeA = a.size(), sizeB = b.size(); 
+    string ans = "";
+
+    for (int i = 0; i <= sizeA - 1; ++i)
+    {
+        ans += a[i];
+    }
+
+    for (int i = 0; i <= sizeB - 1; ++i)
+    {
+        ans += b[i];
+    }
+
+    return ans;
+}
+
+string sub(int i, int j, string & s)
+{
+    return s.substr(i, j - i + 1);
+}
+
 int calBracketPos_next(int pos, string & s)
 {
     int n = s.size();
@@ -62,100 +85,32 @@ void calBracketPos(string s, vector<int> & bracketPos)
     }
 }
 
-string join(string a, string b)
-{
-    int sizeA = a.size(), sizeB = b.size(); 
-    string ans = "";
-
-    for (int i = 0; i <= sizeA - 1; ++i)
-    {
-        ans += a[i];
-    }
-
-    for (int i = 0; i <= sizeB - 1; ++i)
-    {
-        ans += b[i];
-    }
-
-    return ans;
-}
-
-string sub(int i, int j, string & s)
-{
-    return s.substr(i, j - i + 1);
-}
-
-string timeMonomial(string a, string b) // a +&, b +&
-{
-    int sizeA = a.size(), sizeB = b.size(); 
-
-    string aK = "", bK = "", ans = "";
-
-    for (int i = 0; i <= sizeA - 1; ++i)
-    {
-        if (a[i] >= '0' && a[i] <= '9')
-        {
-            aK += a[i];
-        }
-        else
-        {
-            ans += a[i];
-        }
-    }
-    if (aK == "" || aK == "+")
-    {
-        aK = "1";
-    }
-    else if (aK == "-")
-    {
-        aK = "-1";
-    }
-
-    for (int i = 0; i <= sizeB - 1; ++i)
-    {
-        if (b[i] >= '0' && b[i] <= '9')
-        {
-            bK += b[i];
-        }
-        else
-        {
-            ans += b[i];
-        }
-    }
-    if (bK == "" || bK == "+")
-    {
-        bK = "1";
-    }
-    else if (bK == "-")
-    {
-        bK = "-1";
-    }
-
-    sort(ans.begin(), ans.end());
-
-    return join(to_string(stoi(aK) * stoi(bK)), ans);
-}
-
-string timePolynomial(string a, string b) // a +&, b +&
-{
-    
-}
-
 string simplify(string s)
 {
+    int n = s.size();
+    for (int i = 0; i <= n - 1; ++i)
+    {
+        if (s[i] == ' ')
+        {
+            s.erase(s.begin() + i);
+            --i; --n;
+        }
+    }
+
     char last = 'n';
 
     if (s[0] != '-')
     {
         s.insert(s.begin(), '+');
         last = '+';
+        ++n;
     }
     else
     {
         last = '-';
     }
 
-    int n = s.size(), _count;
+    int _count = 0;
     map<string, int> m;
 
     string temp1 = "";
@@ -246,8 +201,147 @@ string simplify(string s)
     return ans;
 }
 
+string timeMonomial(string a, string b) // a +&, b +&
+{
+    int sizeA = a.size(), sizeB = b.size(); 
+
+    string aK = "", bK = "", ans = "";
+
+    for (int i = 0; i <= sizeA - 1; ++i)
+    {
+        if ((a[i] >= '0' && a[i] <= '9') || a[i] == '+' || a[i] == '-')
+        {
+            aK += a[i];
+        }
+        else
+        {
+            ans += a[i];
+        }
+    }
+    if (aK == "" || aK == "+")
+    {
+        aK = "1";
+    }
+    else if (aK == "-")
+    {
+        aK = "-1";
+    }
+
+    for (int i = 0; i <= sizeB - 1; ++i)
+    {
+        if ((b[i] >= '0' && b[i] <= '9') || b[i] == '+' || b[i] == '-')
+        {
+            bK += b[i];
+        }
+        else
+        {
+            ans += b[i];
+        }
+    }
+    if (bK == "" || bK == "+")
+    {
+        bK = "1";
+    }
+    else if (bK == "-")
+    {
+        bK = "-1";
+    }
+
+    sort(ans.begin(), ans.end());
+
+    return join(to_string(stoi(aK) * stoi(bK)), ans);
+}
+
+string timePolynomial(string a, string b) // a +&, b +&
+{
+    a = simplify(a);
+    b = simplify(b);
+
+    char last;
+
+    int nA = a.size();
+    string tempA = "";
+    vector<string> _a;
+
+    if (a[0] != '-')
+    {
+        last = '+';
+    }
+    else
+    {
+        last = '-';
+    }
+
+    for (int i = 0; i <= nA; ++i)
+    {
+        if (a[i] == '+' || a[i] == '-' || i == nA)
+        {
+            if (last == '-') tempA.insert(tempA.begin(), last);
+            _a.push_back(tempA);
+            tempA = "";
+
+            last = a[i];
+        }
+        else
+        {
+            tempA += a[i];
+        }
+    }
+
+    int nB = b.size();
+    string tempB = "";
+    vector<string> _b;
+
+    if (b[0] != '-')
+    {
+        last = '+';
+    }
+    else
+    {
+        last = '-';
+    }
+
+    for (int i = 0; i <= nB; ++i)
+    {
+        if (b[i] == '+' || b[i] == '-' || i == nB)
+        {
+            if (last == '-') tempB.insert(tempB.begin(), last);
+            _b.push_back(tempB);
+            tempB = "";
+
+            last = b[i];
+        }
+        else
+        {
+            tempB += b[i];
+        }
+    }
+
+    string ans = "";
+    int sizeA = _a.size(), sizeB = _b.size();
+
+    for (int i = 0; i <= sizeA - 1; ++i)
+    {
+        for (int j = 0; j <= sizeB - 1; ++j)
+        {
+            string now = timeMonomial(_a[i], _b[j]);
+
+            if (now[0] != '+' && now[0] != '-' && ans != "")
+            {
+                ans += '+';
+            }
+            ans += now;
+        }
+    }
+
+    ans = simplify(ans);
+
+    return ans;
+}
+
 int main()
 {
+    cout << "\n\n";
     while (true)
     {
         // string s;
@@ -267,10 +361,17 @@ int main()
         //     }
         // }
 
-        cout << timeMonomial("5ac", "c") << '\n';
+        string s = "1";
+
+        for (int c = 1; c <= 5; ++c)
+        {
+            s = timePolynomial("ab + ac + bc", s);
+            cout << s << '\n';
+        }
 
         break;
     }
+    cout << '\n';
     
     return 0;
 }
