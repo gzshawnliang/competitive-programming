@@ -20,7 +20,7 @@ struct door
     int d;
 };
 
-char f[200 + 2][200 + 2][2];
+//char f[200 + 2][200 + 2][2];
 // int g[200][200];
 // int a[200][200];
 
@@ -28,7 +28,7 @@ int main()
 {
     while (true)
     {
-        memset(f, '.', sizeof(f));
+        //memset(f, '.', sizeof(f));
         // memset(a, INT_MAX, sizeof(a));
         // memset(g, INT_MAX, sizeof(g));
 
@@ -71,11 +71,7 @@ int main()
             }
         }
 
-        //char f[200 + 2][200 + 2][2];
-        //memset(f, '.', sizeof(f));
-
-        //vector<vector<vector<char>>> f(maxX + 2, vector<vector<char>>(maxY + 2, vector<char>(2, '.')));
-        //vector<string> f(maxX + 2, "..");
+        vector<vector<vector<char>>> f(maxX + 2, vector<vector<char>>(maxY + 2, vector<char>(2, '.')));
 
         for (int i = 0; i <= m - 1; ++i)
         {
