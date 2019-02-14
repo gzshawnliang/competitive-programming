@@ -85,6 +85,27 @@ function StartProcess
     return $sw.ElapsedMilliseconds
 }
 
+function showExitCodeInfo()
+{
+    param (
+        $exitCode
+    )
+
+    if ($exitCode -ne 0 ) 
+    {
+        if($exitCode -eq 999)
+        {
+            Write-Host ",error:must be Time Limit Exceeded" -ForegroundColor Red
+            return 
+        }
+        else 
+        {
+            Write-Host ",error:Run-time error or exceeded memory limits" -ForegroundColor Red
+            return 
+        }
+    }    
+}
+
 #执行exe文件，使用不同的.in文件，根据exitCode输出提示
 function StartProcessWithNewInputFile{
     param (
@@ -99,20 +120,20 @@ function StartProcessWithNewInputFile{
     {
         Write-Host ",input file: [$($inputFileName)]" -NoNewline
     }
-
-    if ($exitCode -ne 0 ) 
-    {
-        if($exitCode -eq 999)
-        {
-            Write-Host ",error:must be Time Limit Exceeded" -ForegroundColor Red
-            return 
-        }
-        else 
-        {
-            Write-Host ",error:Run-time error or exceeded memory limits" -ForegroundColor Red
-            return 
-        }
-    }
+    showExitCodeInfo $exitCode
+    # if ($exitCode -ne 0 ) 
+    # {
+    #     if($exitCode -eq 999)
+    #     {
+    #         Write-Host ",error:must be Time Limit Exceeded" -ForegroundColor Red
+    #         return 
+    #     }
+    #     else 
+    #     {
+    #         Write-Host ",error:Run-time error or exceeded memory limits" -ForegroundColor Red
+    #         return 
+    #     }
+    # }
 
     if ($DoTest.IsPresent) 
     {
@@ -326,8 +347,17 @@ if (Test-Path $SourceFileName) {
             New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
             # 可现实显示终端，实现cin输入，计算运行时间有些误差。可有进程返回值"
+            # 2019-2-14 此方法，如开三维vector可能会引发std::bad_alloc，暂时屏蔽
             # StartProcess $exeFileName
-            StartProcessWithNewInputFile $exeFileName 
+            # StartProcessWithNewInputFile $exeFileName 
+
+            # 此方法解决'std::bad_alloc'问题
+            $sw = [Diagnostics.Stopwatch]::StartNew()
+            & $exeFileName 
+            $sw.Stop()
+            $msg="$($File.BaseName + $File.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+            Write-Host $msg -ForegroundColor Green -NoNewline
+            showExitCodeInfo $LASTEXITCODE
             Write-Host ""
         }
     }
