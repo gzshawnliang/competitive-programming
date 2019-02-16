@@ -352,6 +352,7 @@ if (Test-Path $SourceFileName) {
             # StartProcessWithNewInputFile $exeFileName 
 
             # 此方法解决'std::bad_alloc'问题
+            Set-Location -Path $File.DirectoryName 
             $sw = [Diagnostics.Stopwatch]::StartNew()
             & $exeFileName 
             $sw.Stop()
