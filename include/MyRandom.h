@@ -12,6 +12,7 @@ struct random
     private:
         default_random_engine generator;
         std::uniform_int_distribution<unsigned long long> distr; 
+        std::bernoulli_distribution distrBool;
 
     //note:注意：高精度种子(微秒级别，仅windows)
     unsigned long long GetPerformanceSeed()
@@ -49,6 +50,11 @@ struct random
     {
         return distr(generator);
     }
+
+    bool GetBoolRand()
+    {
+        return distrBool(generator);
+    }    
 
     //产生[a,b]之间不重复的随机数,缺点：如数据量比较大占内存
     vector<int> GetUniqueRand(int a,int b)
