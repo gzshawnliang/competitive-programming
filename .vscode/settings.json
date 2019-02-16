@@ -101,7 +101,7 @@
         "xthread": "cpp"
     },
     // "C_Cpp.intelliSenseEngineFallback": "Disabled",
-    "C_Cpp.errorSquiggles": "Enabled",
+    "C_Cpp.errorSquiggles": "Disabled",
     "python.jediEnabled": false,
     "python.pythonPath": "C:\\Python35\\python.exe"
 }

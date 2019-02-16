@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//2进制转16进制
 string binToHex(string bit_string)
 {
     bitset<64> b3(bit_string);
@@ -42,46 +43,6 @@ unordered_map<char, string> hexToBinary = {
     {'F', "1111"}
     };
 
-string hexToBin(string hex_string)
-{
-    string result;
-    stringstream ss;
-
-    for (int i = 0; i <= hex_string.size() - 1; ++i)
-    {
-         switch(hex_string[i])
-         {
-             case '0': ss<<"0000"; break;
-             case '1': ss<<"0001"; break;
-             case '2': ss<<"0010"; break;
-             case '3': ss<<"0011"; break;
-             case '4': ss<<"0100"; break;
-             case '5': ss<<"0101"; break;
-             case '6': ss<<"0110"; break;
-             case '7': ss<<"0111"; break;
-             case '8': ss<<"1000"; break;
-             case '9': ss<<"1001"; break;
-             case 'A': ss<<"1010"; break;
-             case 'B': ss<<"1011"; break;
-             case 'C': ss<<"1100"; break;
-             case 'D': ss<<"1101"; break;
-             case 'E': ss<<"1110"; break;
-             case 'F': ss<<"1111"; break;
-             case 'a': ss<<"1010"; break;
-             case 'b': ss<<"1011"; break;
-             case 'c': ss<<"1100"; break;
-             case 'd': ss<<"1101"; break;
-             case 'e': ss<<"1110"; break;
-             case 'f': ss<<"1111"; break;
-             default:  ss<<"nInvalid hexadecimal digit "<<hex_string[i];
-         }        
-    }
-
-    ss >> result;
-    return result;
-}
-
-
 string repeat(const string & s, int n) 
 { 
     if(n<=0)
@@ -100,81 +61,88 @@ int main()
 {
     // ifstream fin("createAncientData.in");
 
-    int fileCount=30;
+    int fileCount=5;
     random myRand;
     
     ofstream fout;
     ofstream fout2;
     for (int ifile = 1; ifile <= fileCount; ++ifile)
     {
-        fout.open("data_new_3_"+ to_string(ifile)+".out");
-        fout2.open("data_new_3_"+ to_string(ifile)+".txt");
-        int testCase=10;
+        fout.open("data_new_2_"+ to_string(ifile)+".out");
+        fout2.open("data_new_2_"+ to_string(ifile)+".txt");
+        int testCase=20;
         while(testCase--)
         {
             int H=myRand.GetRand(1,200);
-            int W=myRand.GetRand(1,50)*4;
+            int W=myRand.GetRand(1,12)*4;
+            int backgroundCount =myRand.GetRand(1,2)*4;
             
-            fout << H << " " << W << "\n";
+            fout << H << " " << W+backgroundCount << "\n";
+            //fout2 << H << " " << W+backgroundCount << "\n";        
             vector<string> vecBin;
             
+            bool existHole=false;
             for (int i = 0; i <= H - 1; ++i)
             {
                 string binString=repeat("1",W);
-                int left = myRand.GetRand(1,W/2);
-                int right = myRand.GetRand(1,W/2);
-
-                while(left+right>W)
-                {
-                    left = myRand.GetRand(1,W/2);
-                    right = myRand.GetRand(1,W/2);                    
-                }
                 
-                string oneString=repeat("1",W-left-right);
-
-
-
-                int left1 = myRand.GetRand(0,(oneString.size()-1));
-                int right1 = left1 + myRand.GetRand(1,(oneString.size()-1));
-                while(right1>oneString.size()-1)
+                int onePieCount=myRand.GetRand(1,3);
+                while(onePieCount--)
                 {
-                    left1 = myRand.GetRand(0,(oneString.size()-1));
-                    right1 = left1 + myRand.GetRand(0,(oneString.size()-1));                  
-                }
-
-                for (int k = left1; k <= right1; ++k)
-                {
-                    oneString[k]='0';
-                }  
-
-                if(right1-left1>=5)
-                {
-                    int left2 = left1 + myRand.GetRand(1,(right1-left1)/2);
-                    int right2 = left2 + myRand.GetRand(1,(right1-left1)/4);
-
-                    for (int k = left2; k <= right2; ++k)
+                    int beginId=myRand.GetRand(0,W);
+                    int endId=beginId+myRand.GetRand(0,W);
+                    if(endId<=W-1)
                     {
-                        oneString[k]='1';
-                    }          
+                        for (int j = beginId; j <=endId; ++j)
+                        {
+                            binString[j]='0';
+                        }
+                        existHole=true;
+                    }
                 }
-               
-                binString=repeat("0",left) + oneString +repeat("0",right);;
                 
-                if(binString.size()>W)
+                for (int j = 0; j <= backgroundCount - 1; ++j)
                 {
-                    binString = binString.substr(1,W);
+                    if(myRand.GetBoolRand()==true)
+                    {
+                        binString.push_back('0');
+                    }
+                    else
+                    {
+                        binString = "0" + binString;
+                    }
                 }
-
                 vecBin.push_back(binString);
-                fout<< binString << "\n";
             }
 
-
+            if(!existHole)
+            {
+                vector<int> rd=myRand.GetUniqueRand(1,H);
+                int icount=myRand.GetRand(0,H-1);
+                for (int i = 0; i <= icount - 1; ++i)
+                {
+                    int beginId=myRand.GetRand(0,W-1);
+                    int endId=beginId+myRand.GetRand(0,W);
+                    if(endId<=W-1)
+                    {
+                        for (int j = beginId; j <=endId; ++j)
+                        {
+                            vecBin[rd[i]][j]='0';
+                        }
+                    }
+                    else
+                    {
+                        vecBin[rd[i]][beginId]='0';
+                    }
+                    
+                }
+            }
+            
             vector<string> vecHex(vecBin.size());
             int maxHexSize=0;
             for (int i = 0; i <= vecBin.size() - 1; ++i)
             {
-                //fout << vecBin[i]<< "\n";
+                fout << vecBin[i]<< "\n";
                 string hexString = binToHex(vecBin[i]);
                 vecHex[i]=hexString;
                 maxHexSize = maxHexSize>hexString.size()?maxHexSize:hexString.size();

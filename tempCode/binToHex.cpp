@@ -5,7 +5,7 @@ using namespace std;
 string binToHex(string bit_string)
 {
     //string bit_string = "00000000000001110000000000";
-    bitset<32> b3(bit_string);
+    bitset<256> b3(bit_string);
     //cout << b3.to_string() << '\n';
     unsigned long a = b3.to_ulong();
     
