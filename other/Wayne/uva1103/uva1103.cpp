@@ -13,8 +13,8 @@
 
 using namespace std;
 
-ifstream fin("data_new_3_1.txt");
-ofstream fout("data_new_3_1.ac");
+ifstream fin("uva1103.in");
+ofstream fout("uva1103.out");
 
 vector<string> trans;
 string t(char in)

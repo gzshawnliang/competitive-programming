@@ -107,8 +107,8 @@ int main()
     ofstream fout2;
     for (int ifile = 1; ifile <= fileCount; ++ifile)
     {
-        fout.open("data_new_3_"+ to_string(ifile)+".out");
-        fout2.open("data_new_3_"+ to_string(ifile)+".txt");
+        fout.open("data_new_4_"+ to_string(ifile)+".bin");
+        fout2.open("data_new_4_"+ to_string(ifile)+".in");
         int testCase=10;
         while(testCase--)
         {
