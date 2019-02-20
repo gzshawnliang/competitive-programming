@@ -2,42 +2,50 @@
 
 using namespace std;
 
-//判断一个数字x二进制下第i位是不是等于1。
-bool getMask(int x, int i)
+const int n = 4, inf = INT_MAX / 2;
+
+vector<vector<int>> dist
 {
-    return (x & (1 << (i - 1))) > 0;
-}
-
-//将一个数字x二进制下第i位更改成1。
-void setMask(int & x, int i)
-{
-    //x = x | (1 << (i - 1));
-    x |= (1 << (i - 1));
-}
-
-//把一个数字二进制下最靠右的第一个1去掉。
-void removeMask(int & x)
-{
-    //x = x & (x - 1);
-    x &= (x - 1);
-}
-
-int vetexCount = 4;
-
-vector<vector<int>> dist = {
     {0, 10, 15, 20},
     {10, 0, 35, 25},
     {15, 35, 0, 30},
-    {20, 25, 30, 0}};
+    {20, 25, 30, 0}
+};
 
-vector<vector<int>> dp(vetexCount, vector<int>(1 << vetexCount, INT_MAX));
+vector<vector<int>> dp(n, vector<int>(1 << n, inf));
 
+void solve(int u, int visit)
+{
+    if (visit == ((1 << n) - 1))
+    {
+        dp[u][visit] = dist[u][0];
+        return;
+    }
 
+    if (dp[u][visit] < inf)
+    {
+        return;
+    }
 
+    int ans = inf;
+    for (int v = 0; v <= n - 1; ++v)
+    {
+        if ((visit & (1 << v)) == 0)
+        {
+            int temp = visit | (1 << v);
+            solve(v, temp);
+
+            ans = min(ans, dist[u][v] + dp[v][temp]);
+        }
+    }
+
+    dp[u][visit] = ans;
+}
 
 int main()
 {
+    solve(0, 0);
+    cout << dp[0][0] << '\n';
 
-    
     return 0;
 }
