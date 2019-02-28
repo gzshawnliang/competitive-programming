@@ -22,5 +22,9 @@ int main()
     int a=5;
     d=a;
     d=d/3;
+    // int dp[10000][10000];
+    // int size2=sizeof(dp)/sizeof(dp[0][0]);
+    // cout << sizeof(dp) << "\n";
+    // cout << sizeof(dp[0][0]) << "\n";
     return 0;
 }
