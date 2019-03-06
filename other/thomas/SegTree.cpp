@@ -18,10 +18,9 @@ const int INF=INT_MAX;
 class SegTree
 {
   private:
-    /* data */
-    int sourSize;
-    vector<int> sour;
-    vector<int> segTree;
+    int sourSize;           //原数组的大小
+    vector<int> sour;       //原数组
+    vector<int> segTree;    //线段树的数组
 
     void iniSeqTree(int left, int right, int node)
     {
@@ -91,6 +90,7 @@ class SegTree
         sour = p_Sour;
         sourSize = sour.size();
         segTree.assign(sourSize * 4, INF);
+        
         iniSeqTree(0, sourSize - 1, 1);
     }
 
