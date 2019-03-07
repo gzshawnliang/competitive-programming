@@ -41,10 +41,10 @@ void change(int k,int side,int nn){
     tree[k].num=max(tree[k*2].num,tree[k*2+1].num);
 }
 int main(){
-/*
+
     freopen("i.in", "r", stdin);      
     freopen("i.out", "w", stdout);  
-*/
+
 
     int n,m;
     cin>>n>>m;
