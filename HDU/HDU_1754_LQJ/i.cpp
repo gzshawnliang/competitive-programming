@@ -20,7 +20,7 @@ void build(int k,int left,int right){
 }
 int check(int k,int x,int y){
     if(tree[k].l>y||tree[k].r<x){
-        return -1;
+        return 0;
     }
     if(tree[k].l>=x && tree[k].r<=y){
         return tree[k].num;
@@ -44,27 +44,27 @@ int main(){
 
     freopen("i.in", "r", stdin);      
     freopen("i.out", "w", stdout);  
-
-
+    ios_base::sync_with_stdio(false);
+	std::cin.tie(NULL);  
     int n,m;
-    cin>>n>>m;
-    for(int i=0;i<n;++i){
-        cin>>a[i];
-    }
-    build(1,0,n-1);
     char c;
-    int a,b;
-    while(c=getchar()){
-        if(c==EOF){
-            return 0;
+    int a1,b1;
+    while(cin>>n>>m){
+        for(int i=0;i<n;++i){
+            cin>>a[i];
         }
-        if(c=='Q'){
-            cin>>a>>b;
-            cout<<check(1,a-1,b-1)<<'\n';
-        }else if(c=='U'){
-            cin>>a>>b;
-            change(1,a-1,b);
+        build(1,0,n-1);
+        for(int test=0;test<m;++test){
+            cin>>c;
+            if(c=='Q'){
+                cin>>a1>>b1;
+                cout<<check(1,a1-1,b1-1)<<'\n';
+            }else if(c=='U'){
+                cin>>a1>>b1;
+                change(1,a1-1,b1);
+            }
         }
     }
+    cout.flush();
     return 0;
 }
