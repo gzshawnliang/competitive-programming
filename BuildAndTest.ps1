@@ -12,6 +12,7 @@
 #              1.多组数据测试，cpp文件所在的文件夹下所有.in文件都自动用来测试。
 #              2.cpp代码标准输入需要读入同名的.in文件，例如 line.cpp，就必须包含freopen("line.in", "r", stdin);或ifstream fin("line.in");
 #              3.程序返回非零的值代表运行时错误。
+#  * @更新:     2019-03-12 21:01:42,增加java的支持
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -264,26 +265,23 @@ function RunTest ($processExecFileName)
     }
 }
 
-
-
-#主程序，编译执行
-if (Test-Path $SourceFileName) {
-
+# 编译C++并且执行
+function BuildCppAndRun($SourceFileName)
+{
     $File = Get-Item -Path $SourceFileName
 
     #编译器命令行
     if([String]::IsNullOrEmpty($env:CppCompiler))
     {
-        $gplusplus = "g++.exe"
+        $cppCompilerCmd = "g++.exe"
     }
     else
     {
-        $gplusplus = $env:CppCompiler+ "\g++.exe"
+        $cppCompilerCmd = $env:CppCompiler+ "\g++.exe"
     }
-    
 
     #显示编译器信息
-    start-process $gplusplus "--version" -wait -NoNewWindow
+    start-process $cppCompilerCmd "--version" -wait -NoNewWindow
 
     $exeFileName = $File.DirectoryName + "\" + $File.BaseName + ".exe" 
 
@@ -323,10 +321,10 @@ if (Test-Path $SourceFileName) {
     if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
         $arguments += " " + $CompilerArgs
     }
-   
+
     #开始编译
-    Write-Host $gplusplus $arguments 
-    start-process $gplusplus $arguments -wait -NoNewWindow
+    Write-Host $cppCompilerCmd $arguments 
+    start-process $cppCompilerCmd $arguments -wait -NoNewWindow
 
     #是否成功生成exe文件
     if (Test-Path $exeFileName) {
@@ -361,6 +359,121 @@ if (Test-Path $SourceFileName) {
             showExitCodeInfo $LASTEXITCODE
             Write-Host ""
         }
+    }
+}
+
+# 编译Java并且执行
+function BuildJavaAndRun($SourceFileName)
+{
+    $File = Get-Item -Path $SourceFileName
+
+    #编译器命令行
+    $javaCompilerCmd = "javac.exe"
+    # if([String]::IsNullOrEmpty($env:CppCompiler))
+    # {
+        
+    # }
+    # else
+    # {
+    #     $javaCompilerCmd = $env:CppCompiler+ "\g++.exe"
+    # }
+
+    #显示编译器信息
+    start-process $javaCompilerCmd "-version" -wait -NoNewWindow
+
+    $exeFileName = $File.DirectoryName + "\" + $File.BaseName + ".class" 
+
+    #如果有exe文件则删除
+    if (Test-Path $exeFileName) {
+
+        # 如果进程在运行则先停止
+        $processName=$File.BaseName
+        if($null -eq (Get-Process $processName  -ErrorAction SilentlyContinue)) 
+        {
+            Write-Host "$processName.class is not running"
+        } 
+        else 
+        {
+            Write-Host "$processName.class is running,try to stop the process."
+            # Stop-Process -Name $processName
+            # $procs = Get-Process -Name $processName | Stop-Process -Force
+            $procs = Get-Process -Name $processName 
+            Write-Output $procs
+
+            $procs | Stop-Process -Force
+            Get-Process | Where-Object {$_.HasExited}
+            $procs | Wait-Process
+            Get-Process | Where-Object {$_.HasExited}
+            Start-Sleep -s 1
+            
+            Write-Host "$processName.class is stoped."
+        }
+
+        # 删除exe文件
+        Write-Host  "delete the old executable file $exeFileName"
+        Remove-Item $exeFileName -Force
+    }
+    
+    #编译参数
+    $arguments = "-g:none -J-Duser.language=en $SourceFileName"
+    # if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
+    #     $arguments += " " + $CompilerArgs
+    # }
+    # $arguments += " " + $SourceFileName
+
+    #开始编译
+    Write-Host $javaCompilerCmd $arguments 
+    start-process $javaCompilerCmd $arguments -wait -NoNewWindow
+
+    #是否成功生成exe文件
+    if (Test-Path $exeFileName) {
+
+        #获取当前exe文件信息
+        $File = Get-Item -Path $exeFileName
+
+        Write-Host "java compile successfully."
+
+        if ($DoTest.IsPresent) 
+        {
+            Write-Host "now test $($File.BaseName + $File.Extension)"
+            RunTest($exeFileName)
+        }
+        else 
+        {
+            Write-Host "now run $($File.BaseName + $File.Extension)"    
+            New-Variable -Name exitCode
+            # 使用System.Diagnostics.Process方式启动exe
+            # 可现实显示终端，实现cin输入，计算运行时间有些误差。可有进程返回值"
+            # 2019-2-14 此方法，如开三维vector可能会引发std::bad_alloc，暂时屏蔽
+            # StartProcess $exeFileName
+            # StartProcessWithNewInputFile $exeFileName 
+
+            # 此方法解决'std::bad_alloc'问题
+            Set-Location -Path $File.DirectoryName 
+            $sw = [Diagnostics.Stopwatch]::StartNew()
+            $javacmd = "java"
+            &$javacmd -cp $($File.DirectoryName) $($File.BaseName)
+            $sw.Stop()
+            $msg="$($File.BaseName + $File.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+            Write-Host $msg -ForegroundColor Green -NoNewline
+            showExitCodeInfo $LASTEXITCODE
+            Write-Host ""
+        }
+    }
+}
+
+
+#主程序，编译C++并且执行
+if (Test-Path $SourceFileName) {
+
+    $SrcFile = Get-Item -Path $SourceFileName
+    if($SrcFile.Extension.ToLower() -eq ".cpp")
+    {
+        BuildCppAndRun($SourceFileName)
+    }
+    elseif($SrcFile.Extension.ToLower() -eq ".java")
+    {
+        BuildJavaAndRun($SourceFileName)
     }
 }
 else {
