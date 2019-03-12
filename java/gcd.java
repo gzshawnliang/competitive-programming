@@ -1,6 +1,6 @@
 import java.math.BigInteger;
 
-public class HelloWorld {
+public class gcd {
 
     public static int gcd(int a, int b) {
         BigInteger b1 = BigInteger.valueOf(a);
