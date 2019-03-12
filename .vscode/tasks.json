@@ -137,7 +137,25 @@
             "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
-        },        
+        }, 
+        {
+            "taskName": "rebuild and run(java)",
+            "suppressTaskName": true,
+            "command": "powershell",
+            "args": [
+                "-executionpolicy",
+                "bypass",
+                "-File",
+                "${workspaceFolder}\\BuildAndTest.ps1",
+                "-SourceFileName",
+                "${fileDirname}\\${fileBasenameNoExtension}.java",
+                "-ShowShellConsole"
+            ],
+            "isShellCommand": true,
+            "isBuildCommand": true,
+            "echoCommand": true,
+            "showOutput": "always"
+        },               
         {
             "taskName": "rebuild and test(multi files)",
             "suppressTaskName": true,
