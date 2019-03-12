@@ -18,16 +18,16 @@ const int INF = INT_MAX;
 class SegTree
 {
   private:
-    int sourSize;         //原数组的大小
-    vector<int> sour;     //原数组
-    vector<int> segTree;  //线段树的数组
-    vector<int> lazyTree; //Lazy Propagation 延迟传播更新标记
+    int sourSize;             //原数组的大小
+    const vector<int> * sour; //原数组
+    vector<int> segTree;      //线段树的数组
+    vector<int> lazyTree;     //Lazy Propagation 延迟传播更新标记
 
     void build(int left, int right, int node)
     {
         if (left == right)
         {
-            segTree[node] = sour[left];
+            segTree[node] = (*sour)[left];
             return;
         }
         int mid = (left + right) / 2;
@@ -86,7 +86,7 @@ class SegTree
         //已经是叶节点
         if (nodeLeft == nodeRight)
         {
-            sour[index] = newVal;
+            //sour[index] = newVal;
             segTree[node] = newVal;
             return;
         }
@@ -138,7 +138,7 @@ class SegTree
         //已经是叶节点
         if (nodeLeft == nodeRight)
         {
-            sour[nodeLeft] = newVal;
+            //sour[nodeLeft] = newVal;
             segTree[node] = newVal;
             return;
         }
@@ -151,10 +151,10 @@ class SegTree
     }
 
   public:
-    SegTree(const vector<int> & p_Sour)
+    SegTree(const vector<int> * p_Sour)
     {
         sour = p_Sour;
-        sourSize = sour.size();
+        sourSize = sour->size();
         segTree.assign(sourSize * 4, INF);
         lazyTree.assign(sourSize * 4, 0);
 
@@ -183,7 +183,7 @@ class SegTree
 
         for (int i = 0; i <= sourSize - 1; ++i)
         {
-            cout << sour[i] << " ";
+            cout << sour->at(i) << " ";
         }
         cout << "\n";
     }
@@ -208,7 +208,7 @@ vector<int> readData()
 int main()
 {
     vector<int> vec1 = readData();
-    SegTree sTree(vec1);
+    SegTree sTree(&vec1);
 
     sTree.update(3, 5);
     cout << "3~5:" << sTree.query(1, 3) << "\n";
