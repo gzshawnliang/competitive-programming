@@ -104,5 +104,8 @@
     "C_Cpp.errorSquiggles":"Enabled",
     "python.jediEnabled": false,
     "python.pythonPath": "C:\\Python35\\python.exe",
+
+    "java.debug.settings.enableRunDebugCodeLens": false,
+    //JDK 8
     "java.home": "C:\\Program Files\\ojdkbuild\\java-1.8.0-openjdk-1.8.0.201-1"
 }
