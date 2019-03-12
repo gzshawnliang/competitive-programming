@@ -462,10 +462,11 @@ function BuildJavaAndRun($SourceFileName)
     }
 }
 
+[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US'
 
 #主程序，编译C++并且执行
 if (Test-Path $SourceFileName) {
-
+    
     $SrcFile = Get-Item -Path $SourceFileName
     if($SrcFile.Extension.ToLower() -eq ".cpp")
     {
