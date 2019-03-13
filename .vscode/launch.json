@@ -2,12 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "java Launch - Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
             "name": "C++ Launch (GDB)",
             "type": "cppdbg",
             "request": "launch",
@@ -34,6 +28,12 @@
                     "ignoreFailures": true
                 }
             ]
-        }
+        },
+        {
+            "type": "java",
+            "name": "java Launch - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        }        
     ]
 }
