@@ -8,6 +8,7 @@ public class test2 {
         System.out.println(i * i);
         long l = i;
         System.out.println(l * l);
+        
         //System.out.println(20296 / (l - i));
     }
 }

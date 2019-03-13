@@ -8,9 +8,9 @@ ofstream fout("IHateIt_1754.out");
 class SegTree
 {
   private:
-    int sizeA;           //原数组的大小
-    vector<int> a;       //原数组
-    vector<int> segTree; //线段树的数组
+    int sizeA;
+    vector<int> a;
+    vector<int> segTree;
 
     void build(int l, int r, int i)
     {
