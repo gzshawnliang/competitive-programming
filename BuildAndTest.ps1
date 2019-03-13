@@ -336,7 +336,7 @@ function BuildCppAndRun($SourceFileName)
 
         if ($DoTest.IsPresent) 
         {
-            Write-Host "now test $($File.BaseName + $File.Extension)"
+            Write-Host "now run $($File.BaseName + $File.Extension)"
             RunTest($exeFileName)
         }
         else 
