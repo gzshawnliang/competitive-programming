@@ -26,21 +26,15 @@ class segTree
     {
         if (nowRight < l || nowLeft > r)
         {
-           	cout.flush();
            	return 0;
-        }
-        if (nowLeft == nowRight)
-        {
-            _segTree[i].v += _segTree[i].flag;
-            _segTree[i].flag = 0;
-
-            return _segTree[i].v;
         }
         
         _segTree[i].v += ((nowRight - nowLeft + 1) * _segTree[i].flag);
-        _segTree[i * 2].flag += _segTree[i].flag;
-        _segTree[i * 2 + 1].flag += _segTree[i].flag;
-
+        if (nowLeft != nowRight)
+        {
+            _segTree[i * 2].flag += _segTree[i].flag;
+            _segTree[i * 2 + 1].flag += _segTree[i].flag;
+        }
         _segTree[i].flag = 0;
 
         if (nowLeft >= l && nowRight <= r)
@@ -55,18 +49,26 @@ class segTree
 
     void update(long long l, long long r, long long v, long long i, long long nowLeft, long long nowRight)
     {
+        _segTree[i].v += ((nowRight - nowLeft + 1) * _segTree[i].flag);
+        if (nowLeft != nowRight)
+        {
+            _segTree[i * 2].flag += _segTree[i].flag;
+            _segTree[i * 2 + 1].flag += _segTree[i].flag;
+        }
+        _segTree[i].flag = 0;
+
         if (r < nowLeft || l > nowRight)
         {
             return;
         }
-        if (nowLeft == nowRight)
-        {
-            _segTree[i].flag += v;
-            return;
-        }
         if (nowLeft >= l && nowRight <= r)
         {
-            _segTree[i].flag += v;
+            _segTree[i].v += ((nowRight - nowLeft + 1) * v);
+            if (nowLeft != nowRight)
+            {
+                _segTree[i * 2].flag += v;
+                _segTree[i * 2 + 1].flag += v;
+            }
             return;
         }
 
@@ -74,6 +76,8 @@ class segTree
 
         update(l, r, v, i * 2, nowLeft, m);
         update(l, r, v, i * 2 + 1, m + 1, nowRight);
+
+        _segTree[i].v = _segTree[i * 2].v + _segTree[i * 2 + 1].v;
     }
 
   public:
@@ -99,7 +103,8 @@ int main()
 {
 	ios_base::sync_with_stdio(false);
 	std::cin.tie(NULL);
-    long long testCase; cin >> testCase;
+    long long testCase;
+    cin >> testCase;
     for (long long t = 1; t <= testCase; ++t)
     {
         long long n = 0, m = 0;
@@ -112,16 +117,19 @@ int main()
 
         for (long long c = 1; c <= m; ++c)
         {
-            bool command; cin >> command;
+            bool command;
+            cin >> command;
 
             if (command == 0)
             {
-                long long l, r, v; cin >> l >> r >> v;
+                long long l, r, v;
+                cin >> l >> r >> v;
                 tree.update(l - 1, r - 1, v);
             }
             else
             {
-                long long l, r; cin >> l >> r;
+                long long l, r;
+                cin >> l >> r;
 
                 long long ans = tree.query(l - 1, r - 1);
                 cout << ans << '\n';
