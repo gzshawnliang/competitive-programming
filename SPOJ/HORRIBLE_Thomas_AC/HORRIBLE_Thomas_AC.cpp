@@ -61,22 +61,7 @@ class SegTree
             return INF;
         }
 
-        // if (lazyTree[node] != 0)
-        // {
-        //     // This node needs to be updated
-        //     segTree[node] += lazyTree[node]  * (nodeRight-nodeLeft+1); // Update it
-
-        //     if (nodeLeft != nodeRight)
-        //     {
-        //         lazyTree[node * 2] += lazyTree[node];     //左节点标记延迟
-        //         lazyTree[node * 2 + 1] += lazyTree[node]; //右节点标记延迟
-        //     }
-
-        //     lazyTree[node] = 0; // Reset it
-        // }
-
         updateLazy(node,nodeLeft,nodeRight);
-
 
         //查询的区间包含节点的区间
         if (nodeLeft >= left && nodeRight <= right)
@@ -127,20 +112,6 @@ class SegTree
 
     void updateRange(LL left, LL right, LL newVal, LL node, LL nodeLeft, LL nodeRight)
     {
-        //node此节点需要更新
-        // if (lazyTree[node] != 0)
-        // {
-        //     segTree[node] += lazyTree[node]  * (nodeRight-nodeLeft+1) ; // 更新
-
-        //     if (nodeLeft != nodeRight)
-        //     {
-        //         lazyTree[node * 2] += lazyTree[node];     //左节点标记延迟
-        //         lazyTree[node * 2 + 1] += lazyTree[node]; //右节点标记延迟
-        //     }
-
-        //     lazyTree[node] = 0; // Reset it
-        // }  
-
         updateLazy(node,nodeLeft,nodeRight);
 
         //不在区间内

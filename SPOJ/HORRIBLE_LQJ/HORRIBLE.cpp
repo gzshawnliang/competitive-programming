@@ -1,137 +1,118 @@
+#include<iostream>
 #include<stdio.h>
 #include<algorithm>
-#include<iostream>
 #include<string.h>
-#include<queue>
-#include<stack>
-#include<map>
 #include<math.h>
 using namespace std;
-typedef long long LL;
-LL tree[6*100005];
-LL cnt[6*100005];
-LL aa[100005];
-void down(int k);
-void up(int k,int v);
-LL  ask(int l,int r,int k,int n,int m);
-void  in(int l,int r,int k,int n,int m,int u);
+using LL=long long;
+struct seg
+{
+    LL l;
+    LL r;
+    LL sum;
+    LL lazy;
+};
+seg tree[400000];
+void build(int k,int left,int right)
+{
+    tree[k].l=left;
+    tree[k].r=right;
+    tree[k].sum=tree[k].lazy=0;
+    if(left==right)
+    {
+        return;
+    }
+    int mid=(left+right)>>1;
+    build(k*2,left,mid);
+    build(k*2+1,mid+1,right);
+}
+void update(int k,int x,int y,int num)
+{
+    if(tree[k].lazy!=0)
+    {
+        tree[k].sum+=(tree[k].r-tree[k].l+1)*tree[k].lazy;
+        if(tree[k].l!=tree[k].r)
+        {
+            tree[k*2].lazy+=tree[k].lazy;
+            tree[k*2+1].lazy+=tree[k].lazy;
+        }
+        tree[k].lazy=0;
+    }
+    if(tree[k].l>y||tree[k].r<x){
+        return;
+    }
+    if(tree[k].l>=x&&tree[k].r<=y)
+    {
+        tree[k].sum+=(tree[k].r-tree[k].l+1)*num;
+        if(tree[k].l!=tree[k].r)
+        {
+            tree[k*2].lazy+=num;
+            tree[k*2+1].lazy+=num;
+        }
+        return;
+    }
+    LL mid=(tree[k].l+tree[k].r)>>1;
+    update(k*2,x,y,num);
+    update(k*2+1,x,y,num);
+    tree[k].sum=tree[k*2].sum+tree[k*2+1].sum;
+}
+LL query(int k,int x,int y)
+{
+    if(tree[k].r<x||tree[k].l>y){
+        return 0;
+    }
+    if(tree[k].lazy!=0)
+    {
+        tree[k].sum+=(tree[k].r-tree[k].l+1)*tree[k].lazy;
+        if(tree[k].l!=tree[k].r)
+        {
+            tree[k*2].lazy+=tree[k].lazy;
+            tree[k*2+1].lazy+=tree[k].lazy;
+        }
+        tree[k].lazy=0;
+    }
+    if(tree[k].l>=x&&tree[k].r<=y)
+    {
+        return tree[k].sum;
+    }
+    LL mid=(tree[k].l+tree[k].r)>>1;
+    return query(k*2,x,y)+query(k*2+1,x,y);
+}
 int main(void)
 {
-    freopen("HORRIBLE.in", "r", stdin);      
-    freopen("HORRIBLE.out", "w", stdout);  
+//     freopen("HORRIBLE.in", "r", stdin);      
+//     freopen("HORRIBLE.out", "w", stdout);  
     ios_base::sync_with_stdio(false);
-	std::cin.tie(NULL);  
-    int i,j,k;
-    scanf("%d",&k);
-    int s;
-    int n,m;
-    for(s=1; s<=k; s++)
+    std::cin.tie(NULL);  
+    LL testCase; 
+    cin >> testCase;
+    for (LL t = 1; t <= testCase; ++t)
     {
-        scanf("%d %d",&n,&m);
-        memset(tree,0,sizeof(tree));
-        memset(cnt,0,sizeof(cnt));
-        int flag=0;
-        while(m--)
+        LL n = 0, m = 0;
+        cin >> n >> m;
+        if (n + m == 0)
+            break;
+        build(1,0,n-1);
+        for (LL c = 1; c <= m; ++c)
         {
-            int x,y;
-            int xx,yy,zz;
-            scanf("%d",&x);
-            if(x==0)
+            bool command; 
+            cin >> command;
+            if (command == 0)
             {
-                scanf("%d %d %d",&xx,&yy,&zz);
-                in(xx,yy,0,0,n-1,zz);
+                LL l, r, v; 
+                cin >> l >> r >> v;
+                update(1,l-1,r-1,v);
+
             }
             else
             {
-                scanf("%d %d",&xx,&yy);
-                LL as=ask(xx,yy,0,0,n-1);
-                aa[flag++]=as;
+                LL l, r; 
+                cin >> l >> r;
+                LL ans = query(1,l - 1, r - 1);
+                cout << ans << '\n';
             }
-
         }
-        for(i=0; i<flag; i++)
-            printf("%lld\n",aa[i]);
     }
     cout.flush();
-}
-void down(int k)
-{
-        cnt[2*k+1]+=cnt[k];
-        cnt[2*k+2]+=cnt[k];
-        cnt[k]=0;
-}
-void up(int k,int v)
-{
-        int cc=k;
-        tree[cc]+=cnt[k]*v;
-        if(cc==0)return ;
-        while(cc>=0)
-        {
-                cc=(cc-1)/2;
-                tree[cc]=tree[2*cc+1]+tree[2*cc+2];
-                if(cc==0)
-                        return ;
-        }
-}
-LL  ask(int l,int r,int k,int n,int m)
-{
-        if(l>m||r<n)
-        {
-                if(cnt[k]>0)
-                {
-                        up(k,m-n+1);
-                        down(k);
-                }
-                return 0;
-        }
-        else if(l<=n&&r>=m)
-        {
-                if(cnt[k]>0)
-                {
-                        up(k,m-n+1);
-                        down(k);
-                        return tree[k];
-                }
-                else return tree[k];
-        }
-        else
-        {
-                if(cnt[k]>0)
-                {
-
-                        down(k);
-                }
-                LL nx=ask(l,r,2*k+1,n,(n+m)/2);
-                LL ny=ask(l,r,2*k+2,(n+m)/2+1,m);
-                return nx+ny;
-        }
-}
-void  in(int l,int r,int k,int n,int m,int u)
-{
-        if(l>m||r<n)
-        {
-                if(cnt[k]>0)
-                {
-                        up(k,m-n+1);
-                        down(k);
-                }
-                return ;
-        }
-        else if(l<=n&&r>=m)
-        {
-                cnt[k]+=u;
-                up(k,m-n+1);
-                down(k);
-                return ;
-        }
-        else
-        {
-                if(cnt[k]>0)
-                {
-
-                        down(k);
-                }
-                in(l,r,2*k+1,n,(n+m)/2,u);
-                in(l,r,2*k+2,(n+m)/2+1,m,u);
-        }
+    return 0;
 }
