@@ -123,6 +123,9 @@
     "C_Cpp.errorSquiggles":"Enabled",
 
     "java.debug.settings.enableRunDebugCodeLens": false,
+    // //JDK11
+    // "java.home": "C:\\Program Files\\ojdkbuild\\java-11-openjdk-11.0.2-1",
+    
     //JDK 8
     "java.home": "C:\\Program Files\\ojdkbuild\\java-1.8.0-openjdk-1.8.0.201-1",
     "java.format.settings.url": "EclipseJavaFormatter.xml",
@@ -130,6 +133,4 @@
     "editor.formatOnPaste": true,
     "editor.formatOnType": true
 
-    //JDK11
-    //"java.home": "C:\\Program Files\\ojdkbuild\\java-11-openjdk-11.0.2-1"
 }
