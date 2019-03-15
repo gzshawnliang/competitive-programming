@@ -15,12 +15,5 @@ public class test {
         String decB = Long.toString(b, 10);
         System.out.println("Octal representation" + " of B : " + decB);
 
-        int a1=10;
-        int b1=12;
-        int c=113;
-        int d=-34;
-        int e= Math.max(a1, b1);
-
-
     }
 }
