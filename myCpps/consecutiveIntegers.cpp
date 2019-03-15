@@ -26,7 +26,7 @@ int main()
             return 0;
         }
 
-        for (int l =  sqrt(2 * n); l >= 1; --l)
+        for (int l = sqrt(2 * n); l >= 1; --l)
         {
             int a = (2 * n + l - l * l) / (2 * l);
             if ((2 * a + l - 1) * l == 2 * n)
