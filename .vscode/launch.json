@@ -31,7 +31,7 @@
         },
         {
             "type": "java",
-            "name": "java Launch",
+            "name": "Java Launch",
             "request": "launch",
             "mainClass": "",
             "cwd":"${fileDirname}",
