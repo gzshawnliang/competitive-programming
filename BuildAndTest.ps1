@@ -315,9 +315,13 @@ function BuildCppAndRun($SourceFileName) {
             $isRedirectStdInOut = $false
             if ($RedirectStdInOut.IsPresent -and (Test-Path $currInFile)) {
                 $isRedirectStdInOut = $true
+                Write-Host "now run $($File.BaseName + $File.Extension) redirecting $($File.BaseName).in and $($File.BaseName).out into Stdin and Stdout"
+            }
+            else {
+                Write-Host "now run $($File.BaseName + $File.Extension)"
             }
 
-            Write-Host "now run $($File.BaseName + $File.Extension)"    
+            
             New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
             # 可现实显示终端，实现cin输入，计算运行时间有些误差。可有进程返回值"
