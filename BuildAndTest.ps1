@@ -425,10 +425,10 @@ function BuildJavaAndRun($SourceFileName)
     Write-Host $javaCompilerCmd $arguments 
     start-process $javaCompilerCmd $arguments -wait -NoNewWindow
 
-    #是否成功生成exe文件
+    #是否成功生成class文件
     if (Test-Path $exeFileName) {
 
-        #获取当前exe文件信息
+        #获取当前class文件信息
         $File = Get-Item -Path $exeFileName
 
         Write-Host "java compile successfully."
