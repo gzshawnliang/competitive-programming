@@ -13,6 +13,8 @@
 #              2.cpp代码标准输入需要读入同名的.in文件，例如 line.cpp，就必须包含freopen("line.in", "r", stdin);或ifstream fin("line.in");
 #              3.程序返回非零的值代表运行时错误。
 #  * @更新:     2019-03-12 21:01:42,增加java的支持,显示错误消息改成英文
+#  * @更新:     2019-03-15 20:17:00,stdin/stdout重新定向到.in/.out文件，指定参数RedirectStdInOut即可。
+#               vscode绑定的快捷键是ctl+f11
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -180,7 +182,8 @@ function RunTest ($processExecFileName) {
             Remove-Item $currInTmpFile -Force
         }
 
-        if (Test-Path $currOutFile) { # 运行之前先移除上次的out文件
+        if (Test-Path $currOutFile) {
+            # 运行之前先移除上次的out文件
             Remove-Item $currOutFile -Force
         }
 
@@ -188,7 +191,8 @@ function RunTest ($processExecFileName) {
         
         Rename-Item $currInFileWithPath $currInTmpFile
 
-        if (Test-Path $currOutFile) { #
+        if (Test-Path $currOutFile) {
+            #
             Rename-Item $currOutFile $currOutTmpFile
         }
 
@@ -203,13 +207,15 @@ function RunTest ($processExecFileName) {
         $sourceInName = $currPathName + "\" + $inputFile.Name
         Copy-Item $sourceInName -destination $currInFileWithPath  -force
 
-        if (Test-Path $currOutFile) { # 运行之前先移除上次的out文件
+        if (Test-Path $currOutFile) {
+            # 运行之前先移除上次的out文件
             Remove-Item $currOutFile -Force
         }
 
         StartProcessWithNewInputFile $exeFileName $($inputFile.Name)
 
-        if (Test-Path $currOutFile) { # 成功运行
+        if (Test-Path $currOutFile) {
+            # 成功运行
             $destOutName = $currPathName + "\" + $inputFile.BaseName + ".out"
             if (Test-Path $destOutName) {
                 Remove-Item $destOutName -Force
@@ -229,7 +235,8 @@ function RunTest ($processExecFileName) {
         Rename-Item $currInTmpFile $currInFileWithPath
     }
 
-    if (Test-Path $currOutTmpFile) { #
+    if (Test-Path $currOutTmpFile) {
+        #
         Rename-Item $currOutTmpFile $currOutFile 
     }
 }
