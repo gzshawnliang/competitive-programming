@@ -100,14 +100,35 @@
         "shared_mutex": "cpp",
         "xthread": "cpp"
     },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.stfolder": true,
+        "**/.vscode": true,
+        "**/*.exe": true,
+        "**/*.class": true,
+        ".clang-format": true,
+        "EclipseJavaFormatter.xml": true,
+        ".stignore": true,
+        "**/*.ps1": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },    
     // "C_Cpp.intelliSenseEngineFallback": "Disabled",
     "C_Cpp.errorSquiggles":"Enabled",
-    "python.jediEnabled": false,
-    "python.pythonPath": "C:\\Python35\\python.exe",
 
     "java.debug.settings.enableRunDebugCodeLens": false,
     //JDK 8
-    "java.home": "C:\\Program Files\\ojdkbuild\\java-1.8.0-openjdk-1.8.0.201-1"
+    "java.home": "C:\\Program Files\\ojdkbuild\\java-1.8.0-openjdk-1.8.0.201-1",
+    "java.format.settings.url": "EclipseJavaFormatter.xml",
+    "java.format.settings.profile": "MyJavaVSStyple",
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true
 
     //JDK11
     //"java.home": "C:\\Program Files\\ojdkbuild\\java-11-openjdk-11.0.2-1"
