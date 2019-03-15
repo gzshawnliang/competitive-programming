@@ -31,9 +31,11 @@
         },
         {
             "type": "java",
-            "name": "java Launch - Current File",
+            "name": "java Launch",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "",
+            "cwd":"${fileDirname}",
+            "console":"integratedTerminal"
         }        
     ]
 }
