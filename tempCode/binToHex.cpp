@@ -21,7 +21,7 @@ string hexToBin(string hex_string)
 {
     string result;
     stringstream ss;
-
+    
     for (int i = 0; i <= hex_string.size() - 1; ++i)
     {
          switch(hex_string[i])
@@ -66,6 +66,8 @@ int main()
     source="65b2";
     result = hexToBin(source);
     cout << source << " -> " << result << "\n";
-
+    int n;
+    cin >> n;
+    cout << n;
     return 0;
 }

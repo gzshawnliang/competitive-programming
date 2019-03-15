@@ -126,12 +126,12 @@
                 "-executionpolicy",
                 "bypass",
                 "-File",
-                "${workspaceFolder}\\BuildAndRun.ps1",
+                "${workspaceFolder}\\BuildAndTest.ps1",
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
-                "-ShowShellConsole",
+                "-RedirectStdInOut",
                 "-CompilerArgs",                        
-                "-std=gnu++11 -O2 -lm -DONLINE_JUDGE -DCODE_STATISTICS -I ${workspaceFolder}\\include"
+                "-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include"
             ],
             "isShellCommand": true,
             "isBuildCommand": true,
