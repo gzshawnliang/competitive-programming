@@ -15,7 +15,7 @@
             "MIMode": "gdb",
             "miDebuggerPath": "${env:CppCompiler}\\gdb.exe",
             "preLaunchTask": "g++",
-            "internalConsoleOptions": "openOnSessionStart",
+            "internalConsoleOptions":"neverOpen",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
