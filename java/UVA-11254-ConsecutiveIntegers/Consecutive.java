@@ -16,8 +16,9 @@ public class Consecutive
         // Scanner cin = new Scanner(new File("Main.in"));
         // PrintWriter cout = new PrintWriter(new BufferedWriter(new FileWriter("Main.out")));
 
-        // 标准输入输出
-        Scanner cin = new Scanner(System.in);
+        // 标准输入输出,Scanner比较慢,使用FastScanner: http://neerc.ifmo.ru/trains/information/Template.java
+        Scanner cin = new Scanner(System.in); 
+
         PrintWriter cout = new PrintWriter(System.out, true);
 
         while (true)
