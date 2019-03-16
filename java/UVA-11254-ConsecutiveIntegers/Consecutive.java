@@ -8,7 +8,7 @@ import java.lang.Math;
  * https://thesparkboy.wordpress.com/2016/11/01/runtime-error-in-uva-for-java-users/
  * https://uva.onlinejudge.org/data/p100.java.html
  */
-public class Main
+public class Consecutive
 {
     public static void main(String[] args) throws IOException
     {
