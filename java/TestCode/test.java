@@ -14,6 +14,5 @@ public class test {
 
         String decB = Long.toString(b, 10);
         System.out.println("Octal representation" + " of B : " + decB);
-
     }
 }
