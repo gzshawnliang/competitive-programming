@@ -14,7 +14,8 @@
 #              3.程序返回非零的值代表运行时错误。
 #  * @更新:     2019-03-12 21:01:42,增加java的支持,显示错误消息改成英文
 #  * @更新:     2019-03-15 20:17:00,stdin/stdout重新定向到.in/.out文件，指定参数RedirectStdInOut即可。
-#               vscode绑定的快捷键是ctl+f11
+#              vscode绑定的快捷键是ctl+f11
+#  * @更新:     2019-03-17 13:28 解决java代码中有中午注释，会编译出现error: unmappable character for encoding GBK
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -420,7 +421,7 @@ function BuildJavaAndRun($SourceFileName) {
     }
     
     #编译参数
-    $arguments = "-g:none -J-Duser.language=en $SourceFileName"
+    $arguments = "-g:none -encoding UTF8 -J-Duser.language=en $SourceFileName"
     # if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
     #     $arguments += " " + $CompilerArgs
     # }
