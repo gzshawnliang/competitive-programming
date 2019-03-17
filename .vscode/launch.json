@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "C++ Launch (GDB)",
             "type": "cppdbg",
@@ -33,7 +34,7 @@
             "type": "java",
             "name": "Java Launch",
             "request": "launch",
-            "mainClass": "",
+            "mainClass": "${file}",
             "cwd":"${fileDirname}",
             "console":"integratedTerminal",
             "internalConsoleOptions": "neverOpen"

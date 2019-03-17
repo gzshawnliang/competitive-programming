@@ -123,6 +123,7 @@
     "C_Cpp.errorSquiggles":"Enabled",
 
     "java.debug.settings.enableRunDebugCodeLens": false,
+    "java.debug.settings.forceBuildBeforeLaunch":false,
     // RedHat JDK11
     // "java.home": "C:\\Program Files\\RedHat\\java-11-openjdk-11.0.2-2",
     
