@@ -1,6 +1,6 @@
 import java.math.BigInteger;
 
-public class gcdTest
+public class gcdTest2
 {
     public static int gcd(int a, int b)
     {
@@ -21,7 +21,7 @@ public class gcdTest
     // Driver method
     public static void main(String[] args)
     {
-        System.out.println(gcd(5, 15));
+        System.out.println(gcd(3, 15));
         System.out.println(gcd(10000000000L, 600000000L));
     }
 }
