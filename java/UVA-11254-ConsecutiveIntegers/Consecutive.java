@@ -17,13 +17,12 @@ public class Consecutive
         // PrintWriter cout = new PrintWriter(new BufferedWriter(new FileWriter("Main.out")));
 
         // 标准输入输出,Scanner比较慢,使用FastScanner: http://neerc.ifmo.ru/trains/information/Template.java
-        Scanner cin = new Scanner(System.in); 
-
-        PrintWriter cout = new PrintWriter(System.out, true);
+        Scanner in = new Scanner(System.in); 
+        PrintWriter out = new PrintWriter(System.out, true);
 
         while (true)
         {
-            int n = cin.nextInt();
+            int n = in.nextInt();
             if (n == -1)
             {
                 break;
@@ -35,7 +34,7 @@ public class Consecutive
                 if ((2 * a + l - 1) * l == 2 * n)
                 {
                     // 0.210s
-                    cout.println(String.format("%s = %s + ... + %s", n, a, a + l - 1));
+                    out.println(String.format("%s = %s + ... + %s", n, a, a + l - 1));
 
                     // 0.150s
                     // cout.print(n);
@@ -47,7 +46,7 @@ public class Consecutive
                 }
             }
         }
-        cin.close();
-        cout.close();
+        in.close();
+        out.close();
     }
 }
