@@ -311,11 +311,34 @@ function BuildCppAndRun($SourceFileName) {
         }
         else {
             $currInFile = $File.DirectoryName + "\" + $File.BaseName + ".in" 
-            $currOutFile = $File.DirectoryName + "\" + $File.BaseName + ".out" 
             $isRedirectStdInOut = $false
+            #检测in文件，规则：
+            #1）c++文件移除拓展名cpp.in
+            #2）c++文件移除拓展名移除OJ后缀.in
+            #3）Input.in
+            #4）Input.txt
+            #5）input.in
+            #6）input.txt
+            #out文件=in文件名移除拓展名.out
+            $inputFileArray = @(($File.BaseName + ".in").ToString(), ($File.BaseName.Trim("OJ") + ".in").ToString() , "Input.in", "Input.txt", "input.in", "input.txt");
+
+            foreach ($n in $inputFileArray) {
+                if (Test-Path ($File.DirectoryName + "\" + $n)) {
+                    # Write-Host($n + ":OK")
+                    $currInFile = $File.DirectoryName + "\" + $n
+                    Write-Host($currInFile)
+                    break
+                }
+                else {
+                    Write-Host($n + ":Not OK")
+                } 
+            }
+            $currOutFile = ""
             if ($RedirectStdInOut.IsPresent -and (Test-Path $currInFile)) {
                 $isRedirectStdInOut = $true
-                Write-Host "now run $($File.BaseName + $File.Extension) redirecting $($File.BaseName).in and $($File.BaseName).out into Stdin and Stdout"
+                $inFileObj = Get-Item -Path $currInFile
+                $currOutFile = $inFileObj.DirectoryName + "\" + $inFileObj.BaseName + ".out"
+                Write-Host "now run $($File.BaseName + $File.Extension) redirecting $($inFileObj.BaseName).in and $($inFileObj.BaseName).out into Stdin and Stdout"
             }
             else {
                 Write-Host "now run $($File.BaseName + $File.Extension)"
