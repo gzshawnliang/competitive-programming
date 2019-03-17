@@ -35,7 +35,8 @@
             "request": "launch",
             "mainClass": "",
             "cwd":"${fileDirname}",
-            "console":"integratedTerminal"
+            "console":"integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
         }        
     ]
 }
