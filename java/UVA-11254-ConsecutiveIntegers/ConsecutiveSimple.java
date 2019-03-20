@@ -4,9 +4,10 @@ import java.lang.Math;
 
 public class ConsecutiveSimple
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) 
     {
-        Scanner in = new Scanner(System.in); 
+        Scanner in = new Scanner(System.in);
+        PrintStream out = System.out;
         while (true)
         {
             int n = in.nextInt();
@@ -20,12 +21,12 @@ public class ConsecutiveSimple
                 int a = (2 * n + l - l * l) / (2 * l);
                 if ((2 * a + l - 1) * l == 2 * n)
                 {
-                    System.out.println(String.format("%s = %s + ... + %s", n, a, a + l - 1));
+                    out.println(String.format("%s = %s + ... + %s", n, a, a + l - 1));
                     break;
                 }
             }
         }
         in.close();
-        System.out.close();
+        out.close();
     }
 }
