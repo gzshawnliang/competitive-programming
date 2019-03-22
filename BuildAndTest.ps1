@@ -29,7 +29,7 @@ param(
 Set-Variable TLEWarningMsec -option Constant -value 1600        #Time Limit Exceeded 超时警告（毫秒）
 Set-Variable TLEErrorMsec -option Constant -value 2000          #Time Limit Exceeded 超时错误（毫秒）
 Set-Variable TLETerminateMsec -option Constant -value 60000      #Time Limit Exceeded 超时终止（毫秒）
-
+$JavaMainClassName = "Main" #Java Main Class Name
 
 #执行exe文件，返回exitCode
 function StartProcess {
@@ -373,91 +373,61 @@ function BuildCppAndRun($SourceFileName) {
 
 # 编译Java并且执行
 function BuildJavaAndRun($SourceFileName) {
-    $File = Get-Item -Path $SourceFileName
-
     #编译器命令行
     $javaCompilerCmd = "javac.exe"
-    # if([String]::IsNullOrEmpty($env:CppCompiler))
-    # {
-        
-    # }
-    # else
-    # {
-    #     $javaCompilerCmd = $env:CppCompiler+ "\g++.exe"
-    # }
 
     #显示编译器信息
     start-process $javaCompilerCmd "-version" -wait -NoNewWindow
-
-    $exeFileName = $File.DirectoryName + "\" + $File.BaseName + ".class" 
-
-    #如果有exe文件则删除
-    if (Test-Path $exeFileName) {
-
-        # 如果进程在运行则先停止
-        $processName = $File.BaseName
-        if ($null -eq (Get-Process $processName  -ErrorAction SilentlyContinue)) {
-            Write-Host "$processName.class is not running"
-        } 
-        else {
-            Write-Host "$processName.class is running,try to stop the process."
-            # Stop-Process -Name $processName
-            # $procs = Get-Process -Name $processName | Stop-Process -Force
-            $procs = Get-Process -Name $processName 
-            Write-Output $procs
-
-            $procs | Stop-Process -Force
-            Get-Process | Where-Object {$_.HasExited}
-            $procs | Wait-Process
-            Get-Process | Where-Object {$_.HasExited}
-            Start-Sleep -s 1
-            
-            Write-Host "$processName.class is stoped."
-        }
-
-        # 删除exe文件
-        Write-Host  "delete the old executable file $exeFileName"
-        Remove-Item $exeFileName -Force
-    }
     
+    $File = Get-Item -Path $SourceFileName
+
+    Write-Output "removing $($File.Directory.FullName) \*.class"
+    Remove-Item -Path "$($File.Directory.FullName)\*.class"
+
+   
     #编译参数
     $arguments = "-g:none -encoding UTF8 -J-Duser.language=en $SourceFileName"
-    # if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
-    #     $arguments += " " + $CompilerArgs
-    # }
-    # $arguments += " " + $SourceFileName
 
     #开始编译
     Write-Host $javaCompilerCmd $arguments 
     start-process $javaCompilerCmd $arguments -wait -NoNewWindow
+    
+    $exeFileName = $File.DirectoryName + "\*.class" 
+    $exeMainFileName = $File.DirectoryName + "\" + $JavaMainClassName + ".class" 
 
     #是否成功生成class文件
-    if (Test-Path $exeFileName) {
+    if (Test-Path $exeFileName ) {
+        Write-Host "java compile successfully."
 
         #获取当前class文件信息
-        $File = Get-Item -Path $exeFileName
+        $File = (Get-Item $exeFileName)[0]
 
-        Write-Host "java compile successfully."
+        if (-Not (Test-Path $exeMainFileName)){
+            $JavaMainClassName = $File.BaseName
+        }
 
         if ($DoTest.IsPresent) {
             Write-Host "now test $($File.BaseName + $File.Extension)"
             RunTest($exeFileName)
         }
         else {
-            Write-Host "now run $($File.BaseName + $File.Extension)"    
-            New-Variable -Name exitCode
+            # Write-Host "now run $($File.BaseName + $File.Extension):   " -NoNewline
+            # New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
             # 可现实显示终端，实现cin输入，计算运行时间有些误差。可有进程返回值"
             # 2019-2-14 此方法，如开三维vector可能会引发std::bad_alloc，暂时屏蔽
             # StartProcess $exeFileName
             # StartProcessWithNewInputFile $exeFileName 
 
-            # 此方法解决'std::bad_alloc'问题
             Set-Location -Path $File.DirectoryName 
-            $sw = [Diagnostics.Stopwatch]::StartNew()
             $javacmd = "java"
-            &$javacmd -cp $($File.DirectoryName) $($File.BaseName)
+            Write-Host $javacmd -cp $($File.DirectoryName) $($File.BaseName)
+            
+            $sw = [Diagnostics.Stopwatch]::StartNew()
+            # &$javacmd -cp $($File.DirectoryName) $($File.BaseName)
+            & $javacmd -cp $($File.DirectoryName) $JavaMainClassName
             $sw.Stop()
+            
             $msg = "$($File.BaseName + $File.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
             Write-Host $msg -ForegroundColor Green -NoNewline
             showExitCodeInfo $LASTEXITCODE
@@ -466,7 +436,9 @@ function BuildJavaAndRun($SourceFileName) {
     }
 }
 
-[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US'
+# [Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US'
+# [Threading.Thread]::CurrentThread.CurrentCulture = 'en-US'
+# [cultureinfo]::CurrentCulture = 'en-US'
 
 #主程序，编译C++并且执行
 if (Test-Path $SourceFileName) {
