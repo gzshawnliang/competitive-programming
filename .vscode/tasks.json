@@ -143,6 +143,19 @@
             "suppressTaskName": true,
             "command": "powershell",
             "args": [
+                "-Command",
+                "[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole"
+            ],
+            "isShellCommand": true,
+            "isBuildCommand": true,
+            "echoCommand": true,
+            "showOutput": "always"
+        }, 
+        {
+            "taskName": "rebuild and run(java2)",
+            "suppressTaskName": true,
+            "command": "powershell",
+            "args": [
                 "-executionpolicy",
                 "bypass",
                 "-File",
@@ -155,7 +168,8 @@
             "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
-        },               
+        },
+        
         {
             "taskName": "rebuild and test(multi files)",
             "suppressTaskName": true,

@@ -13,12 +13,12 @@ public class MainUVA
     public static void main(String[] args) throws IOException
     {
         // 文件输入输出
-        // Scanner in = new Scanner(new File("Main.in"));
-        // PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Main.out")));
+        Scanner in = new Scanner(new File("MainUVA.in"));
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("MainUVA.out")));
 
         // 标准输入输出,Scanner比较慢,使用FastScanner: http://neerc.ifmo.ru/trains/information/Template.java
-        Scanner in = new Scanner(System.in); 
-        PrintWriter out = new PrintWriter(System.out, true);
+        // Scanner in = new Scanner(System.in); 
+        // PrintWriter out = new PrintWriter(System.out, true);
 
         while (true)
         {

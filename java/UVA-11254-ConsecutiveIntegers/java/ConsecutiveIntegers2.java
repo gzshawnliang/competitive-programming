@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 import java.lang.Math;
 
-class Main2
+class Main
 {
     public static void main(String[] args) throws IOException
     {
