@@ -430,7 +430,8 @@ function BuildJavaAndRun($SourceFileName) {
             Write-Host
             Set-Location -Path $File.DirectoryName 
             
-            Write-Host "Current Dir:    $($File.DirectoryName)" 
+            Write-Host "Change to current directory:"
+            Write-Host $File.DirectoryName
 
             # Write-Host $javacmd -cp $($File.DirectoryName) $($File.BaseName)
             Write-Host "run command:    " -NoNewline
