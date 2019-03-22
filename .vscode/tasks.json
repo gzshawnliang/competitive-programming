@@ -139,13 +139,13 @@
             "showOutput": "always"
         }, 
         {
-            // vs输出窗口强制显示英文提示，否则出现乱码
+            // vscode输出窗口强制显示英文提示，否则出现乱码
             "taskName": "rebuild and run(java)",
             "suppressTaskName": true,
             "command": "powershell",
             "args": [
                 "-Command",
-                "[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole"
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole\""
             ],
             "isShellCommand": true,
             "isBuildCommand": true,

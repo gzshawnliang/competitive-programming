@@ -255,6 +255,7 @@ function BuildCppAndRun($SourceFileName) {
     }
 
     #显示编译器信息
+    Write-Host
     start-process $cppCompilerCmd "--version" -wait -NoNewWindow
 
     $exeFileName = $File.DirectoryName + "\" + $File.BaseName + ".exe" 
@@ -295,6 +296,7 @@ function BuildCppAndRun($SourceFileName) {
     }
 
     #开始编译
+    Write-Host
     Write-Host $cppCompilerCmd $arguments 
     start-process $cppCompilerCmd $arguments -wait -NoNewWindow
 
@@ -303,8 +305,12 @@ function BuildCppAndRun($SourceFileName) {
 
         #获取当前exe文件信息
         $File = Get-Item -Path $exeFileName
-
+        Write-Host
         Write-Host "g++ compile successfully."
+        Write-Host
+
+        # 设置当前目录为源码目录
+        Set-Location -Path $File.DirectoryName 
 
         if ($DoTest.IsPresent) {
             Write-Host "now run $($File.BaseName + $File.Extension)"
@@ -327,7 +333,7 @@ function BuildCppAndRun($SourceFileName) {
                 if (Test-Path ($File.DirectoryName + "\" + $n)) {
                     # Write-Host($n + ":OK")
                     $currInFile = $File.DirectoryName + "\" + $n
-                    Write-Host($currInFile)
+                    # Write-Host($currInFile)
                     break
                 }
                 else {
@@ -344,7 +350,6 @@ function BuildCppAndRun($SourceFileName) {
             else {
                 Write-Host "now run $($File.BaseName + $File.Extension)"
             }
-
             
             New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
@@ -375,13 +380,16 @@ function BuildCppAndRun($SourceFileName) {
 function BuildJavaAndRun($SourceFileName) {
     #编译器命令行
     $javaCompilerCmd = "javac.exe"
+    $javacmd = 'java'
 
     #显示编译器信息
+    Write-Host
     start-process $javaCompilerCmd "-version" -wait -NoNewWindow
+    start-process $javacmd "-version" -wait -NoNewWindow    
     
     $File = Get-Item -Path $SourceFileName
-
-    Write-Output "removing $($File.Directory.FullName) \*.class"
+    Write-Host
+    Write-Host "removing $($File.Directory.FullName)\*.class"
     Remove-Item -Path "$($File.Directory.FullName)\*.class"
 
    
@@ -389,6 +397,7 @@ function BuildJavaAndRun($SourceFileName) {
     $arguments = "-g:none -encoding UTF8 -J-Duser.language=en $SourceFileName"
 
     #开始编译
+    Write-Host
     Write-Host $javaCompilerCmd $arguments 
     start-process $javaCompilerCmd $arguments -wait -NoNewWindow
     
@@ -402,7 +411,7 @@ function BuildJavaAndRun($SourceFileName) {
         #获取当前class文件信息
         $File = (Get-Item $exeFileName)[0]
 
-        if (-Not (Test-Path $exeMainFileName)){
+        if (-Not (Test-Path $exeMainFileName)) {
             $JavaMainClassName = $File.BaseName
         }
 
@@ -418,17 +427,21 @@ function BuildJavaAndRun($SourceFileName) {
             # 2019-2-14 此方法，如开三维vector可能会引发std::bad_alloc，暂时屏蔽
             # StartProcess $exeFileName
             # StartProcessWithNewInputFile $exeFileName 
-
+            Write-Host
             Set-Location -Path $File.DirectoryName 
-            $javacmd = "java"
-            Write-Host $javacmd -cp $($File.DirectoryName) $($File.BaseName)
             
+            Write-Host "Current Dir:    $($File.DirectoryName)" 
+
+            # Write-Host $javacmd -cp $($File.DirectoryName) $($File.BaseName)
+            Write-Host "run command:    " -NoNewline
+            Write-Host $javacmd '-D"user.language=en"' $JavaMainClassName
             $sw = [Diagnostics.Stopwatch]::StartNew()
             # &$javacmd -cp $($File.DirectoryName) $($File.BaseName)
-            & $javacmd -cp $($File.DirectoryName) $JavaMainClassName
+            # & $javacmd -cp $($File.DirectoryName) $JavaMainClassName
+            & $javacmd '-D"user.language=en"' $JavaMainClassName
             $sw.Stop()
-            
-            $msg = "$($File.BaseName + $File.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+            Write-Host
+            $msg = "$($JavaMainClassName + $File.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
             Write-Host $msg -ForegroundColor Green -NoNewline
             showExitCodeInfo $LASTEXITCODE
             Write-Host ""
@@ -436,11 +449,11 @@ function BuildJavaAndRun($SourceFileName) {
     }
 }
 
-# [Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US'
+
 # [Threading.Thread]::CurrentThread.CurrentCulture = 'en-US'
 # [cultureinfo]::CurrentCulture = 'en-US'
 
-#主程序，编译C++并且执行
+#主程序，编译C++/Java并且执行
 if (Test-Path $SourceFileName) {
     
     $SrcFile = Get-Item -Path $SourceFileName

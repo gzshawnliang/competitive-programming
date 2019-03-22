@@ -136,7 +136,8 @@ int main()
 {
     freopen("GSS1_2.in", "r", stdin);
     freopen("GSS1_2.out", "w", stdout);
-	// ios_base::sync_with_stdio(false);
+
+    // ios_base::sync_with_stdio(false);
 	// std::cin.tie(NULL);
     long long N;
     cin >> N;
