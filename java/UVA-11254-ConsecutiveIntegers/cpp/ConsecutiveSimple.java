@@ -21,7 +21,8 @@ public class ConsecutiveSimple
                 int a = (2 * n + l - l * l) / (2 * l);
                 if ((2 * a + l - 1) * l == 2 * n)
                 {
-                    out.println(String.format("%s = %s + ... + %s", n, a, a + l - 1));
+                    String s = String.format("%s = %s + ... + %s", n, a, a + l - 1);
+                    out.println(s);
                     break;
                 }
             }
