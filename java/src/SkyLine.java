@@ -14,7 +14,6 @@ import java.io.*;
 import java.util.*;
 import java.lang.Math;
 
-
 class Main
 {
     public static void main(String[] args) throws IOException
@@ -33,7 +32,7 @@ class Main
     }
 }
 
-//0.81s
+// 0.81s
 class SkyLineArray
 {
     public void Solve(Scanner in, PrintStream out)
@@ -76,7 +75,7 @@ class SkyLineArray
 
             int ans1 = Arrays.stream(dpI).max().getAsInt();
             int ans2 = Arrays.stream(dpD).max().getAsInt();
-            
+
             // int ans1 = IntStream.of(dpI).max().getAsInt();
             // int ans2 = IntStream.of(dpD).max().getAsInt();
             String ans = "Case " + c + ". ";

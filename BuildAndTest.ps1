@@ -468,12 +468,10 @@ function BuildJavaAndRun($SourceFileName) {
                     if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
                         Write-Host "Compare $leftFile -> $rightFile"
                         & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                        Write-Host
                     }
-                    
-
                 }
             }
-            Write-Host 
             Write-Host $msg -ForegroundColor Green -NoNewline
             showExitCodeInfo $LASTEXITCODE
             Write-Host 
