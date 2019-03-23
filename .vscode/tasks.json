@@ -111,7 +111,9 @@
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-CompilerArgs",            
-                "-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include"
+                "\"-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include\"",
+                "-WorkspaceFolder",
+                "\"${workspaceFolder}\""                
             ],
             "isShellCommand": true,
             "isBuildCommand": true,
@@ -131,7 +133,9 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-RedirectStdInOut",
                 "-CompilerArgs",                        
-                "-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include"
+                "\"-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include\"",
+                "-WorkspaceFolder",
+                "\"${workspaceFolder}\""
             ],
             "isShellCommand": true,
             "isBuildCommand": true,
@@ -145,7 +149,7 @@
             "command": "powershell",
             "args": [
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole\""
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole -WorkspaceFolder \"${workspaceFolder}\" \""
             ],
             "isShellCommand": true,
             "isBuildCommand": true,

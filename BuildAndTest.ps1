@@ -15,7 +15,8 @@
 #  * @更新:     2019-03-12 21:01:42,增加java的支持,显示错误消息改成英文
 #  * @更新:     2019-03-15 20:17:00,stdin/stdout重新定向到.in/.out文件，指定参数RedirectStdInOut即可。
 #              vscode绑定的快捷键是ctl+f11
-#  * @更新:     2019-03-17 13:28 解决java代码中有中午注释，会编译出现error: unmappable character for encoding GBK
+#  * @更新:     2019-03-17 13:28 解决java代码中有中文注释，会编译出现error: unmappable character for encoding GBK
+#  * @更新:     2019-03-23 08:10 编译运行C++/Java文件之后，检测如存在out、ok文件就比较结果
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -23,7 +24,8 @@ param(
     [switch] $ShowShellConsole,
     [switch] $DoTest,
     [switch] $RedirectStdInOut,
-    [String] $CompilerArgs 
+    [String] $CompilerArgs,
+    [String] $WorkspaceFolder 
 )
 
 Set-Variable TLEWarningMsec -option Constant -value 1600        #Time Limit Exceeded 超时警告（毫秒）
@@ -244,7 +246,7 @@ function RunTest ($processExecFileName) {
 
 # 编译C++并且执行
 function BuildCppAndRun($SourceFileName) {
-    $File = Get-Item -Path $SourceFileName
+    $SourFile = Get-Item -Path $SourceFileName
 
     #编译器命令行
     if ([String]::IsNullOrEmpty($env:CppCompiler)) {
@@ -258,13 +260,13 @@ function BuildCppAndRun($SourceFileName) {
     Write-Host
     start-process $cppCompilerCmd "--version" -wait -NoNewWindow
 
-    $exeFileName = $File.DirectoryName + "\" + $File.BaseName + ".exe" 
+    $exeFileName = $SourFile.DirectoryName + "\" + $SourFile.BaseName + ".exe" 
 
     #如果有exe文件则删除
     if (Test-Path $exeFileName) {
 
         # 如果进程在运行则先停止
-        $processName = $File.BaseName
+        $processName = $SourFile.BaseName
         if ($null -eq (Get-Process $processName  -ErrorAction SilentlyContinue)) {
             Write-Host "$processName.exe is not running"
         } 
@@ -304,20 +306,20 @@ function BuildCppAndRun($SourceFileName) {
     if (Test-Path $exeFileName) {
 
         #获取当前exe文件信息
-        $File = Get-Item -Path $exeFileName
+        $ExeFile = Get-Item -Path $exeFileName
         Write-Host
         Write-Host "g++ compile successfully."
         Write-Host
 
         # 设置当前目录为源码目录
-        Set-Location -Path $File.DirectoryName 
+        Set-Location -Path $ExeFile.DirectoryName 
 
         if ($DoTest.IsPresent) {
-            Write-Host "now run $($File.BaseName + $File.Extension)"
+            Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
             RunTest($exeFileName)
         }
         else {
-            $currInFile = $File.DirectoryName + "\" + $File.BaseName + ".in" 
+            $currInFile = $ExeFile.DirectoryName + "\" + $ExeFile.BaseName + ".in" 
             $isRedirectStdInOut = $false
             #检测in文件，规则：
             #1）c++文件移除拓展名cpp.in
@@ -327,12 +329,12 @@ function BuildCppAndRun($SourceFileName) {
             #5）input.in
             #6）input.txt
             #out文件=in文件名移除拓展名.out
-            $inputFileArray = @(($File.BaseName + ".in").ToString(), ($File.BaseName.Trim("OJ") + ".in").ToString() , "Input.in", "Input.txt", "input.in", "input.txt");
+            $inputFileArray = @(($ExeFile.BaseName + ".in").ToString(), ($ExeFile.BaseName.Trim("OJ") + ".in").ToString() , "Input.in", "Input.txt", "input.in", "input.txt");
 
             foreach ($n in $inputFileArray) {
-                if (Test-Path ($File.DirectoryName + "\" + $n)) {
+                if (Test-Path ($ExeFile.DirectoryName + "\" + $n)) {
                     # Write-Host($n + ":OK")
-                    $currInFile = $File.DirectoryName + "\" + $n
+                    $currInFile = $ExeFile.DirectoryName + "\" + $n
                     # Write-Host($currInFile)
                     break
                 }
@@ -345,10 +347,10 @@ function BuildCppAndRun($SourceFileName) {
                 $isRedirectStdInOut = $true
                 $inFileObj = Get-Item -Path $currInFile
                 $currOutFile = $inFileObj.DirectoryName + "\" + $inFileObj.BaseName + ".out"
-                Write-Host "now run $($File.BaseName + $File.Extension) redirecting $($inFileObj.BaseName).in and $($inFileObj.BaseName).out into Stdin and Stdout"
+                Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension) redirecting $($inFileObj.BaseName).in and $($inFileObj.BaseName).out into Stdin and Stdout"
             }
             else {
-                Write-Host "now run $($File.BaseName + $File.Extension)"
+                Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
             }
             
             New-Variable -Name exitCode
@@ -368,10 +370,25 @@ function BuildCppAndRun($SourceFileName) {
             }
             
             $sw.Stop()
-            $msg = "$($File.BaseName + $File.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+            $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+
+            Write-Host
+            if ($LASTEXITCODE -eq 0 ) {
+                $leftFile = $SourFile.BaseName + ".ok"
+                $rightFile = $SourFile.BaseName + ".out"
+                if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
+                    if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
+                        Write-Host "Compare $leftFile -> $rightFile : " -NoNewline
+                        & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                    }
+                    
+
+                }
+            }
+            Write-Host
             Write-Host $msg -ForegroundColor Green -NoNewline
             showExitCodeInfo $LASTEXITCODE
-            Write-Host ""
+            Write-Host
         }
     }
 }
@@ -387,10 +404,10 @@ function BuildJavaAndRun($SourceFileName) {
     start-process $javaCompilerCmd "-version" -wait -NoNewWindow
     start-process $javacmd "-version" -wait -NoNewWindow    
     
-    $File = Get-Item -Path $SourceFileName
+    $SourFile = Get-Item -Path $SourceFileName
     Write-Host
-    Write-Host "removing $($File.Directory.FullName)\*.class"
-    Remove-Item -Path "$($File.Directory.FullName)\*.class"
+    Write-Host "removing $($SourFile.Directory.FullName)\*.class"
+    Remove-Item -Path "$($SourFile.Directory.FullName)\*.class"
 
    
     #编译参数
@@ -401,26 +418,26 @@ function BuildJavaAndRun($SourceFileName) {
     Write-Host $javaCompilerCmd $arguments 
     start-process $javaCompilerCmd $arguments -wait -NoNewWindow
     
-    $exeFileName = $File.DirectoryName + "\*.class" 
-    $exeMainFileName = $File.DirectoryName + "\" + $JavaMainClassName + ".class" 
+    $exeFileName = $SourFile.DirectoryName + "\*.class" 
+    $exeMainFileName = $SourFile.DirectoryName + "\" + $JavaMainClassName + ".class" 
 
     #是否成功生成class文件
     if (Test-Path $exeFileName ) {
         Write-Host "java compile successfully."
 
         #获取当前class文件信息
-        $File = (Get-Item $exeFileName)[0]
+        $FirstClassFile = (Get-Item $exeFileName)[0]
 
         if (-Not (Test-Path $exeMainFileName)) {
-            $JavaMainClassName = $File.BaseName
+            $JavaMainClassName = $FirstClassFile.BaseName
         }
 
         if ($DoTest.IsPresent) {
-            Write-Host "now test $($File.BaseName + $File.Extension)"
+            Write-Host "now test $($FirstClassFile.BaseName + $FirstClassFile.Extension)"
             RunTest($exeFileName)
         }
         else {
-            # Write-Host "now run $($File.BaseName + $File.Extension):   " -NoNewline
+            # Write-Host "now run $($FirstClassFile.BaseName + $FirstClassFile.Extension):   " -NoNewline
             # New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
             # 可现实显示终端，实现cin输入，计算运行时间有些误差。可有进程返回值"
@@ -428,24 +445,37 @@ function BuildJavaAndRun($SourceFileName) {
             # StartProcess $exeFileName
             # StartProcessWithNewInputFile $exeFileName 
             Write-Host
-            Set-Location -Path $File.DirectoryName 
+            Set-Location -Path $FirstClassFile.DirectoryName 
             
             Write-Host "Change to current directory:"
-            Write-Host $File.DirectoryName
+            Write-Host $FirstClassFile.DirectoryName
 
-            # Write-Host $javacmd -cp $($File.DirectoryName) $($File.BaseName)
+            # Write-Host $javacmd -cp $($FirstClassFile.DirectoryName) $($FirstClassFile.BaseName)
             Write-Host "run command:    " -NoNewline
             Write-Host $javacmd '-D"user.language=en"' $JavaMainClassName
             $sw = [Diagnostics.Stopwatch]::StartNew()
-            # &$javacmd -cp $($File.DirectoryName) $($File.BaseName)
-            # & $javacmd -cp $($File.DirectoryName) $JavaMainClassName
+            # &$javacmd -cp $($FirstClassFile.DirectoryName) $($FirstClassFile.BaseName)
+            # & $javacmd -cp $($FirstClassFile.DirectoryName) $JavaMainClassName
             & $javacmd '-D"user.language=en"' $JavaMainClassName
             $sw.Stop()
+            $msg = "$($JavaMainClassName + $FirstClassFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
             Write-Host
-            $msg = "$($JavaMainClassName + $File.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+            if ($LASTEXITCODE -eq 0 ) {
+                $leftFile = $SourFile.BaseName + ".ok"
+                $rightFile = $SourFile.BaseName + ".out"
+                if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
+                    if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
+                        Write-Host "Compare $leftFile -> $rightFile"
+                        & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                    }
+                    
+
+                }
+            }
+            Write-Host 
             Write-Host $msg -ForegroundColor Green -NoNewline
             showExitCodeInfo $LASTEXITCODE
-            Write-Host ""
+            Write-Host 
         }
     }
 }
