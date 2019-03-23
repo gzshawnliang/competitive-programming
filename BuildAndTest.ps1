@@ -374,15 +374,16 @@ function BuildCppAndRun($SourceFileName) {
 
             Write-Host
             if ($LASTEXITCODE -eq 0 ) {
-                $leftFile = $SourFile.BaseName + ".ok"
-                $rightFile = $SourFile.BaseName + ".out"
-                if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
-                    if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
-                        Write-Host "Compare $leftFile -> $rightFile : " -NoNewline
-                        & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                if (Test-Path $currInFile) {
+                    $inFileObj = Get-Item -Path $currInFile
+                    $leftFile = $inFileObj.BaseName + ".ok"
+                    $rightFile = $inFileObj.BaseName + ".out"
+                    if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
+                        if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
+                            Write-Host "Compare $leftFile -> $rightFile : " -NoNewline
+                            & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                        }
                     }
-                    
-
                 }
             }
             Write-Host
