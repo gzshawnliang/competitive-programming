@@ -193,7 +193,6 @@ class SkyLineVector
 
             int ans1 = Collections.max(dpI);
             int ans2 = Collections.max(dpD);
-            ;
 
             String ans = "Case " + c + ". ";
             if (ans1 >= ans2)
