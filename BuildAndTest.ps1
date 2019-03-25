@@ -339,7 +339,7 @@ function BuildCppAndRun($SourceFileName) {
                     break
                 }
                 else {
-                    Write-Host($n + ":Not OK")
+                    # Write-Host($n + ":Not OK")
                 } 
             }
             $currOutFile = ""
