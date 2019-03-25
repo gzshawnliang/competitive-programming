@@ -6,20 +6,19 @@
     "args": [
         "/c",
         "chcp 65001"
-    ],    
-    "tasks": [
-        {
+    ],
+    "tasks": [{
             "taskName": "rebuild python",
             "command": "python",
             "args": ["${file}"],
             "showOutput": "always",
             "options": {
-                "env":{
+                "env": {
                     "PYTHONIOENCODING": "UTF-8"
-                  }
-              },
+                }
+            },
             "isShellCommand": true
-        },        
+        },
         {
             "taskName": "g++",
             "command": "${env:CppCompiler}\\g++.exe",
@@ -84,7 +83,7 @@
             "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
-        },        
+        },
         {
             "taskName": "run",
             "suppressTaskName": true,
@@ -97,7 +96,7 @@
             "isShellCommand": true,
             "isBuildCommand": true,
             "echoCommand": true,
-            "showOutput":"always"
+            "showOutput": "always"
         },
         {
             "taskName": "rebuild and run(local)",
@@ -110,10 +109,10 @@
                 "${workspaceFolder}\\BuildAndTest.ps1",
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
-                "-CompilerArgs",            
+                "-CompilerArgs",
                 "\"-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include\"",
                 "-WorkspaceFolder",
-                "\"${workspaceFolder}\""                
+                "\"${workspaceFolder}\""
             ],
             "isShellCommand": true,
             "isBuildCommand": true,
@@ -132,7 +131,7 @@
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-RedirectStdInOut",
-                "-CompilerArgs",                        
+                "-CompilerArgs",
                 "\"-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include\"",
                 "-WorkspaceFolder",
                 "\"${workspaceFolder}\""
@@ -141,7 +140,7 @@
             "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
-        }, 
+        },
         {
             // vscode输出窗口强制显示英文提示，否则出现乱码
             "taskName": "rebuild and run(java)",
@@ -155,7 +154,7 @@
             "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
-        }, 
+        },
         {
             "taskName": "rebuild and run(java2)",
             "suppressTaskName": true,
@@ -174,7 +173,7 @@
             "echoCommand": true,
             "showOutput": "always"
         },
-        
+
         {
             "taskName": "rebuild and test(multi files)",
             "suppressTaskName": true,
@@ -187,7 +186,7 @@
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-DoTest",
-                "-CompilerArgs",        
+                "-CompilerArgs",
                 "-std=gnu++11 -O2 -lm -DONLINE_JUDGE -DCODE_STATISTICS -I ${workspaceFolder}\\include"
             ],
             "isShellCommand": true,
@@ -211,6 +210,6 @@
             "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
-        }        
+        }
     ]
 }
