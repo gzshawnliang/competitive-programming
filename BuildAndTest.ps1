@@ -382,11 +382,12 @@ function BuildCppAndRun($SourceFileName) {
                         if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
                             Write-Host "Compare $leftFile -> $rightFile : " -NoNewline
                             & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                            Write-Host
                         }
                     }
                 }
             }
-            Write-Host
+            
             Write-Host $msg -ForegroundColor Green -NoNewline
             showExitCodeInfo $LASTEXITCODE
             Write-Host
