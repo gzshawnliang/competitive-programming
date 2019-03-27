@@ -66,8 +66,5 @@ int main()
     source="65b2";
     result = hexToBin(source);
     cout << source << " -> " << result << "\n";
-    int n;
-    cin >> n;
-    cout << n;
     return 0;
 }
