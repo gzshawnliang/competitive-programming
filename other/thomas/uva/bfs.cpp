@@ -35,7 +35,7 @@ int main()
             if (v==1 && visited[i] ==0)
             {
                 q.push(i);
-                visited[i] = 1;
+                visited[i] = 1;     //i已经访问过
                 cout << i << " ";
             }
         }
