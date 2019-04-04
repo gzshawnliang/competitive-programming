@@ -37,7 +37,7 @@ int bfs(int s, int t,int n, vector<int> & parent, const vector<vector<int>> & ba
     return 0;
 }
 
-int maxflow(int s, int t, int n, vector<vector<int>> & bandwidth)
+int maxflow_EdmondsKarp(int s, int t, int n, vector<vector<int>> & bandwidth)
 {
     int flow = 0;
 
@@ -88,7 +88,7 @@ int main()
             a[u][v] += c;
             a[v][u] += c;
         }
-        int ans = maxflow(s,t,n,a);
+        int ans = maxflow_EdmondsKarp(s, t, n, a);
 
         fout << "Network " << caseId << '\n';
         fout << "The bandwidth is " << ans << ".\n\n";
