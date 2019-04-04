@@ -67,6 +67,7 @@ int main()
 {
     int n = 0;
     int caseId = 1;
+    
     while (fin >> n)
     {
         if (n == 0)
@@ -74,6 +75,7 @@ int main()
             break;
         }
         vector<vector<int>> a(n + 1, vector<int>(n + 1, 0));
+
         int s = 0;
         int t = 0;
         int m = 0;
