@@ -26,7 +26,7 @@ int solve(int start, int end, vector<bool> & visit, vector<vector<int>> & a, vec
             int now = end;
             while (now != start)
             {
-                _min = min(_min, a[now][f[now]]);
+                _min = min(_min, a[f[now]][now]);
 
                 now = f[now];
             }
@@ -34,7 +34,7 @@ int solve(int start, int end, vector<bool> & visit, vector<vector<int>> & a, vec
             now = end;
             while (now != start)
             {
-                a[now][f[now]] -= _min;
+                a[now][f[now]] += _min;
                 a[f[now]][now] -= _min;
 
                 now = f[now];
