@@ -132,6 +132,6 @@
     "java.format.settings.url": "EclipseJavaFormatter.xml",
     "java.format.settings.profile": "MyJavaVSStyple",
     //"editor.formatOnPaste": true,
-    "editor.formatOnType": true
+    "editor.formatOnType": false
 
 }

@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "QueriesI"; //*
+const string CPPfile = "internetBandwidth_UVA820"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
