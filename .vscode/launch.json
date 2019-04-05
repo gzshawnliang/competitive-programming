@@ -14,7 +14,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "${env:CppCompiler}\\gdb.exe",
+            "miDebuggerPath": "gdb.exe",
             "preLaunchTask": "g++",
             "internalConsoleOptions":"neverOpen",
             "setupCommands": [

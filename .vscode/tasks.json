@@ -21,7 +21,7 @@
         },
         {
             "taskName": "g++",
-            "command": "${env:CppCompiler}\\g++.exe",
+            "command": "g++.exe",
             "args": [
                 "-g",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
@@ -54,7 +54,7 @@
         {
             "taskName": "build",
             "suppressTaskName": true,
-            "command": "${env:CppCompiler}\\g++.exe",
+            "command": "g++.exe",
             "args": [
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-o",
