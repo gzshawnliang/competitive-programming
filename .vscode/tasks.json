@@ -99,7 +99,8 @@
             "showOutput": "always"
         },
         {
-            "taskName": "rebuild and run(local)",
+            //vscode输出窗口不强制显示英文提示，可能错误出现乱码
+            "taskName": "rebuild and run(local) chs",
             "suppressTaskName": true,
             "command": "powershell",
             "args": [
@@ -119,6 +120,20 @@
             "echoCommand": true,
             "showOutput": "always"
         },
+        {
+            //vscode输出窗口强制显示英文提示，否则出现乱码
+            "taskName": "rebuild and run(local)",
+            "suppressTaskName": true,
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.cpp -CompilerArgs '-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+            ],
+            "isShellCommand": true,
+            "isBuildCommand": true,
+            "echoCommand": true,
+            "showOutput": "always",
+        },        
         {
             "taskName": "rebuild and run(onlinejudge)",
             "suppressTaskName": true,
