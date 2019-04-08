@@ -2,8 +2,6 @@
 
 using namespace std;
 
-ifstream fin("softwareAllocation_UVA259.in");
-ofstream fout("softwareAllocation_UVA259.out");
 
 const int n = 40, inf = INT_MAX / 2;
 const string trans2 = "sABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789e";
@@ -86,21 +84,19 @@ int solve(int start, int end, vector<bool> & visit, vector<char> & computer, vec
 
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	std::cin.tie(NULL);
     while (true)
     {
         bool _end = true;
         int total = 0;
         vector<vector<int>> a(n, vector<int>(n, 0));
 
-        // fout << trans1('s') << ' ' << trans1('e');
-        // for (char ch = 'A'; ch <= 'Z'; ++ch) fout << ' ' << trans1(ch);
-        // for (char ch = '0'; ch <= '9'; ++ch) fout << ' ' << trans1(ch);
-        // fout << '\n'; break;
 
         while (true)
         {
             string in = "";
-            getline(fin, in);
+            getline(cin, in);
 
             if (in == "") break;
 
@@ -141,17 +137,19 @@ int main()
 
         if (ans < total)
         {
-            fout << "!\n";
+            cout << "!\n";
         }
         else
         {
             for (int i = 0; i <= 9; ++i)
             {
-                fout << computer[i];
+                cout << computer[i];
             }
-            fout << '\n';
+            cout << '\n';
         }
     }
 
-    return 0;
+   	cout.flush();
+   	return 0;
 }
+
