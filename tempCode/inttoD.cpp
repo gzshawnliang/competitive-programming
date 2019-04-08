@@ -6,10 +6,10 @@
 #include <iomanip>
 #include <iostream>
 #include <list>
+#include <map>
+#include <set>
 #include <string>
 #include <vector>
-#include <set>
-#include <map>
 
 using namespace std;
 
@@ -33,8 +33,6 @@ using namespace std;
 //         cout<<s<< "\n";
 //     }
 
-
-    
 //     return 0;
 // }
 
