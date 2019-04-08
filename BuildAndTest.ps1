@@ -366,7 +366,15 @@ function BuildCppAndRun($SourceFileName) {
                 Get-Content $currInFile | & $exeFileName > $currOutFile
             }
             else {
-                & $exeFileName     
+                & $exeFileName
+                # try {
+                #     & $exeFileName 2>$null
+                #   } catch [RemoteException] {
+                #     # oops remove-item failed. Write warning then quit 
+                #     # replace the following with what you want to do
+                #     write-warning "Remove-item encounter error: $_"
+                #     return # script failed
+                #   }                
             }
             
             $sw.Stop()
