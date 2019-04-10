@@ -82,14 +82,45 @@ class EdmondsKarp
 class Dinic
 {
   private:
-    vector<vector<int>> * bandwidth;
-    vector<vector<int>>  levelGraph;
-    int n;
+    //vector<vector<int>> * bandwidth;
+    vector<vector<int>> levelGraph;
+    int n;          //图的顶点数
+    int s;          //源点
+    int t;          //汇点
 
-    void bfs(int s, int t, vector<int> & level)
+    int dfs(int curr,int flow, const vector<int> & level,vector<int> & parent)
+    {
+        if(curr==t)
+        {
+            return flow;
+        }
+
+        for (int i = 1; i <= n ; ++i)
+        {
+            if( curr != i  
+            && levelGraph[curr][i] >0           //联通
+            && level[i]==level[curr]+1)         //是分层图的下一层 
+            {
+                flow = min(flow, levelGraph[curr][i]);
+                parent[i] = curr;
+
+                int result = dfs(i, flow, level, parent);
+                if(result >0)
+                {
+                    // levelGraph[curr][i] -= result;
+                    // levelGraph[i][curr] += result;
+                    return result;
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    bool bfs_LevelGraph(vector<int> & level)
     {
         vector<int> visted(n + 1, false);
-        visted[s]=true;
+        //visted[s]=true;
         level[s] = 0;
         queue<int> q;
         q.push(s);
@@ -101,58 +132,79 @@ class Dinic
 
             for (int next = 1; next <= n; ++next)
             {
-                if ((*bandwidth)[cur][next] > 0 && cur != next && visted[next] == false)
+                if (levelGraph[cur][next] > 0 
+                && cur != next 
+                //&& visted[next] == false 
+                && level[next]<0)
                 {
-                    visted[next] = true;
+                    //visted[next] = true;
                     level[next] = level[cur] + 1;
                     if (next == t)
                     {
-                        return;
+                        return true;
                     }
                     q.push(next);
                 }
             }
         }
+        if (level[t] > 0)
+            return true;
+        else
+            return false;   //汇点的level小于零,表明BFS不到汇点 
     }
 
   public:
-    Dinic(vector<vector<int>> * bandwidth1, int size1)
+    Dinic(vector<vector<int>> * bandwidth1,int s, int t, int size1)
     {
+        levelGraph = *bandwidth1;
         this->n = size1;
-        this->bandwidth = bandwidth1;
-        levelGraph= * bandwidth1;
+        this->s = s;
+        this->t = t;
     }
 
-    int Maxflow(int s, int t)
+    int Maxflow()
     {
-        int flow = 0;
+        int totalFlow = 0;
 
         while (true)
         {
+            //建立分层网络
             vector<int> level(n + 1, -1);
-            bfs(s, t, level);
-            // int new_flow = 0;
-            // if (new_flow == 0)
-            // {
-            //     break;
-            // }
-            // flow += new_flow;
-            // int cur = t;
-            // while (cur != s)
-            // {
-            //     int prev = level[cur];
-            //     (*bandwidth)[prev][cur] -= new_flow;
-            //     (*bandwidth)[cur][prev] += new_flow;
-            //     cur = prev;
-            // }
-            for (auto i : level)
+            bool result = bfs_LevelGraph(level);
+            if(result==false)
             {
-                cout << i << " ";
+                //分层网络无法到汇点
+                break;
             }
-            break;
+
+            //寻找增广路
+            vector<int> parent(n + 1, -1);
+            parent[s]=-2;
+            int new_flow = dfs(s,INF,level,parent);
+            if (new_flow == 0)
+            {
+                //没有路到达t
+                break;
+            }
+
+            totalFlow += new_flow;
+            int cur = t;
+            while (cur != s)
+            {
+                int prev = parent[cur];
+                levelGraph[prev][cur] -= new_flow;
+                levelGraph[cur][prev] += new_flow;
+                cur = prev;
+            }
+
+            // for (auto i : level)
+            // {
+            //     cout << i << " ";
+            // }
+
         }
 
-        return flow;
+        return totalFlow;
     }
 };
 
@@ -186,8 +238,8 @@ int main()
         // EdmondsKarp EdmondsKarp1(&a,n);
         // int ans = EdmondsKarp1.Maxflow(s, t);
 
-        Dinic Dinic1(&a, n);
-        int ans = Dinic1.Maxflow(s, t);
+        Dinic Dinic1(&a, s, t, n);
+        int ans = Dinic1.Maxflow();
 
         fout << "Network " << caseId << '\n';
         fout << "The bandwidth is " << ans << ".\n\n";
