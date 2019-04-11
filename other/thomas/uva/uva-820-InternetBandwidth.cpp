@@ -64,6 +64,7 @@ class EdmondsKarp
             {
                 break;
             }
+            //cout << new_flow << " ";
             flow += new_flow;
             int cur = t;
             while (cur != s)
@@ -154,22 +155,27 @@ class Dinic
     }
 
   public:
-    Dinic(vector<vector<int>> * bandwidth1,int s, int t, int size1)
+    Dinic(vector<vector<int>> * bandwidth1, int size1)
     {
         levelGraph = *bandwidth1;
         this->n = size1;
-        this->s = s;
-        this->t = t;
+
     }
 
-    int Maxflow()
+    int Maxflow(int s, int t)
     {
-        int totalFlow = 0;
+        this->s = s;
+        this->t = t;
 
+        int totalFlow = 0;
+        
+        
         while (true)
         {
             //建立分层网络
             vector<int> level(n + 1, -1);
+            //memset(&level[0], -1, sizeof(level[0]) * level.size());
+
             bool result = bfs_LevelGraph(level);
             if(result==false)
             {
@@ -179,6 +185,7 @@ class Dinic
 
             //寻找增广路
             vector<int> parent(n + 1, -1);
+            //memset(&parent[0], -1, sizeof(parent[0]) * parent.size());
             parent[s]=-2;
             int new_flow = dfs(s,INF,level,parent);
             if (new_flow == 0)
@@ -186,6 +193,7 @@ class Dinic
                 //没有路到达t
                 break;
             }
+            cout << new_flow << " ";
 
             totalFlow += new_flow;
             int cur = t;
@@ -238,8 +246,8 @@ int main()
         // EdmondsKarp EdmondsKarp1(&a,n);
         // int ans = EdmondsKarp1.Maxflow(s, t);
 
-        Dinic Dinic1(&a, s, t, n);
-        int ans = Dinic1.Maxflow();
+        Dinic Dinic1(&a, n);
+        int ans = Dinic1.Maxflow(s, t);
 
         fout << "Network " << caseId << '\n';
         fout << "The bandwidth is " << ans << ".\n\n";
