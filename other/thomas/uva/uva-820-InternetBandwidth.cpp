@@ -4,7 +4,6 @@ using namespace std;
 
 ifstream fin("uva-820-InternetBandwidth.in");
 ofstream fout("uva-820-InternetBandwidth.out");
-ofstream fout2("uva-820-InternetBandwidth.debug");
 
 const int INF = INT_MAX / 2;
 
@@ -95,7 +94,6 @@ class Dinic
     {
         if (curr == t)
         {
-            fout2 << flow << "\n";
             return flow;
         }
 
