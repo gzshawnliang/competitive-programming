@@ -4,6 +4,7 @@ using namespace std;
 
 ifstream fin("uva-820-InternetBandwidth.in");
 ofstream fout("uva-820-InternetBandwidth.out");
+ofstream fout2("uva-820-InternetBandwidth.debug");
 
 const int INF = INT_MAX / 2;
 
@@ -11,7 +12,7 @@ class EdmondsKarp
 {
 
   private:
-    vector<vector<int>> * bandwidth;
+    vector<vector<int>> bandwidth;
     int n;
 
     int bfs(int s, int t, vector<int> & parent)
@@ -29,10 +30,10 @@ class EdmondsKarp
 
             for (int next = 1; next <= n; ++next)
             {
-                if (parent[next] == -1 && (*bandwidth)[cur][next] > 0 && cur != next)
+                if (parent[next] == -1 && bandwidth[cur][next] > 0 && cur != next)
                 {
                     parent[next] = cur;
-                    int new_flow = min(flow, (*bandwidth)[cur][next]);
+                    int new_flow = min(flow, bandwidth[cur][next]);
                     if (next == t)
                     {
                         return new_flow;
@@ -46,10 +47,10 @@ class EdmondsKarp
     }
 
   public:
-    EdmondsKarp(vector<vector<int>> * bandwidth1, int size1)
+    EdmondsKarp(vector<vector<int>> & sourGraph, int size1)
     {
         this->n = size1;
-        this->bandwidth = bandwidth1;
+        this->bandwidth = sourGraph;
     }
 
     int Maxflow(int s, int t)
@@ -70,8 +71,8 @@ class EdmondsKarp
             while (cur != s)
             {
                 int prev = parent[cur];
-                (*bandwidth)[prev][cur] -= new_flow;
-                (*bandwidth)[cur][prev] += new_flow;
+                bandwidth[prev][cur] -= new_flow;
+                bandwidth[cur][prev] += new_flow;
                 cur = prev;
             }
         }
@@ -93,17 +94,20 @@ class Dinic
     int dfs(int curr, int flow, const vector<int> & level)
     {
         if (curr == t)
+        {
+            fout2 << flow << "\n";
             return flow;
+        }
 
         for (int i = 1; i <= n; ++i)
         {
             if (levelGraph[curr][i] > 0         //联通
                 && level[i] == level[curr] + 1) //是分层图的下一层
             {
-                int f = min(flow, levelGraph[curr][i]);
+                int minflow = min(flow, levelGraph[curr][i]);
 
-                int result = dfs(i, f, level);
-                if (result > 0) //能到汇点(result > 0)
+                int result = dfs(i, minflow, level);
+                if (result > 0)         //能到汇点result > 0
                 {
                     //回溯时候更改路径上的正向流和反向流
                     levelGraph[curr][i] -= result;
@@ -128,8 +132,8 @@ class Dinic
 
             for (int next = 1; next <= n; ++next)
             {
-                if (levelGraph[cur][next] > 0 //若该残量不为0
-                    && level[next] < 0        //next还未分配层次
+                if (levelGraph[cur][next] > 0       //若该残量不为0
+                    && level[next] < 0              //next还未分配层次
                 )
                 {
                     level[next] = level[cur] + 1;
@@ -140,13 +144,13 @@ class Dinic
         if (level[t] > 0)
             return true;
         else
-            return false; //汇点的level小于零,表明BFS不到汇点
+            return false;//汇点的level小于零,表明BFS不到汇点
     }
 
   public:
-    Dinic(vector<vector<int>> * bandwidth1, int size1)
+    Dinic(vector<vector<int>> & sourGraph, int size1)
     {
-        levelGraph = *bandwidth1;
+        levelGraph = sourGraph;
         this->n = size1;
     }
 
@@ -159,8 +163,10 @@ class Dinic
 
         while (true)
         {
-            //建立分层网络，无法到汇点停止
+            //第i个节点的层次数组
             vector<int> level(n + 1, -1);
+
+            //建立分层网络，无法到汇点停止
             bool result = bfs_CreateLevelGraph(level);
             if (result == false)
             {
@@ -169,9 +175,10 @@ class Dinic
             }
 
             //dfs深度搜索寻找增广路，找不到停止循环
+            int inf=INF;
             while (true)
             {
-                int new_flow = dfs(s, INF, level);
+                int new_flow = dfs(s, inf, level);
                 if (new_flow == 0)
                 {
                     //找不到增广路退出
@@ -217,10 +224,10 @@ int main()
             a[v][u] += c;
         }
 
-        // EdmondsKarp EdmondsKarp1(&a,n);
+        // EdmondsKarp EdmondsKarp1(a, n);
         // int ans = EdmondsKarp1.Maxflow(s, t);
 
-        Dinic Dinic1(&a, n);
+        Dinic Dinic1(a, n);
         int ans = Dinic1.Maxflow(s, t);
 
         fout << "Network " << caseId << '\n';
