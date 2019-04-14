@@ -1,4 +1,5 @@
-//#define NDEBUG
+// #define NDEBUG
+// #include <assert>
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,15 +9,19 @@ int main()
 {
     //code
     // C++11 style further ahead
-    auto m = std::map<int, std::string>{{1, "Ann"}};
-    m[1] = "Ben0";
-    //assert(m.at(1) == "1Ben");
+    vector<string> a = {"Ann", "Thomas"};
+    a[1] = "Ann";
+    int b;
+    //b2=0;
+    b=0;
+
+    assert(true);
     
-    //assert(false);
-    
-    m = std::map<int, std::string>{{1, "Ann"}};
-    //m.insert({1,"Ben"});
-    assert(m.at(1) != "Ann");
+    // cerr <<"while2222" << "\n";
+
+    // cerr <<67676 << "\n";
+
+    assert(a[1] != "Ann");
     
     return 0;
 }

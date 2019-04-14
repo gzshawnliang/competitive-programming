@@ -127,7 +127,7 @@
             "command": "powershell",
             "args": [
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.cpp -CompilerArgs '-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.cpp -CompilerArgs '-std=gnu++11 -O2 -Wall -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "isBuildCommand": true,
