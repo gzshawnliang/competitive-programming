@@ -11,17 +11,20 @@ int main()
     // C++11 style further ahead
     vector<string> a = {"Ann", "Thomas"};
     a[1] = "Ann";
-    int b;
-    //b2=0;
-    b=0;
+    // int b;
+    // //b2=0;
+    // b=0;
 
-    assert(true);
+    assert(false);
     
     // cerr <<"while2222" << "\n";
 
     // cerr <<67676 << "\n";
 
     assert(a[1] != "Ann");
+
+
+    assert(2<1);
     
     return 0;
 }
