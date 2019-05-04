@@ -31,7 +31,6 @@ int main()
         g[u][v] = w;              // directed graph
     }
 
-    // (Modified) Dijkstra's routine
     vector<int> dist(V, INF);
     dist[s] = 0;
     queue<int> q;

@@ -1,14 +1,21 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
-// typedef pair<int, int> ii;
-// typedef vector<int> vi;
-// typedef vector<ii> vii;
-
-class v
+class vertex
 {
-    int u;
+    public:
+        int dist;
+        int v;
+        vertex(int d,int id)
+        {
+            dist=d;
+            v=id;
+        };
+
+    bool operator<(const vertex & b) const
+    {
+        return this->dist > b.dist;
+    }        
 };
 
 const int INF = 1e9; // INF = 1B, not 2^31-1 to avoid overflow
@@ -16,7 +23,7 @@ const int INF = 1e9; // INF = 1B, not 2^31-1 to avoid overflow
 int main()
 {
     /*
-  // Graph in Figure 4.17
+  // Graph 
   5 7 0
   0 1 2
   0 2 6
@@ -30,46 +37,47 @@ int main()
     freopen("dijkstra.in", "r", stdin);
 
     int V, E, s;
-    cin >> V >> E >>s;
-    vector<vector<pair<int, int>>> AL(V, vector<pair<int, int>>());
-    vector<vector<int>> g(V, vector<int>(V,-1));
-    for (int i = 0; i < E; ++i)
+    cin >> V >> E >> s;
+    vector<vector<vertex>> g(V, vector<vertex>());
+    for (int i = 0; i <= E-1; ++i)
     {
         int u, v, w;
-        cin >> u >> v >>w;
-        AL[u].emplace_back(v, w); // directed graph
-        g[u][v]=w;  // directed graph
+        cin >> u >> v >> w;
+        g[u].push_back(vertex(w,v)); // directed graph
     }
 
     // (Modified) Dijkstra's routine
     vector<int> dist(V, INF);
     dist[s] = 0;
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    pq.push({0, s});
-    
-    // sort the pairs by increasing distance from s
+    priority_queue<vertex> pq;
+    pq.push(vertex(0,s));
+
     while (!pq.empty())
     {
-        pair<int, int> front = pq.top();
-        pq.pop();                               // greedy: get shortest unvisited vertex
-        int d = front.first;
-        int u = front.second;
-        if (d > dist[u])
-            continue; // this is a very important check
-            
-        for (int j = 0; j < (int)AL[u].size(); j++)
+        vertex f = pq.top();
+        pq.pop();
+
+        //当前取出的路径更长，则忽略（重要）
+        if (f.dist > dist[f.v])
+            continue; 
+
+        int u=f.v;
+        for (int j = 0; j < (int)g[u].size(); ++j)
         {
-            pair<int, int> v = AL[u][j]; // all outgoing edges from u
-            if (dist[u] + v.second < dist[v.first])
+            vertex next = g[u][j];      //all outgoing edges from u
+
+            //发现更短的路径，更新数组dist，放入优先队列
+            if (dist[u] + next.dist < dist[next.v])
             {
-                dist[v.first] = dist[u] + v.second; // relax operation
-                pq.push(pair<int, int>(dist[v.first], v.first));
+                dist[next.v] = dist[u] + next.dist;              // relax operation
+                pq.push(next);
             }
         }
     }
 
-    for (int u = 0; u < V; ++u)
-        cout <<"SSSP("<<s<<","<<u <<") = "<< dist[u] << "\n";
-
+    for (int t = 1; t <= V-1; ++t)
+    {
+        cout << "SSSP(" << s << "," << t << ") = " << dist[t] << "\n";
+    }
     return 0;
 }
