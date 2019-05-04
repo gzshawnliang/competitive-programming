@@ -133,7 +133,21 @@
             "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always",
-        },     
+        },  
+        {
+            //DevC++弹出输出窗口
+            "taskName": "rebuild and run(DevCppMode)",
+            "suppressTaskName": true,
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.cpp -CompilerArgs '-std=gnu++11 -O2 -Wall -lm -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
+            ],
+            "isShellCommand": true,
+            "isBuildCommand": true,
+            "echoCommand": true,
+            "showOutput": "always",
+        },            
         {
             "taskName": "rebuild and run(onlinejudge)",
             "suppressTaskName": true,
