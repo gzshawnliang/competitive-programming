@@ -17,6 +17,7 @@
 #              vscode绑定的快捷键是ctl+f11
 #  * @更新:     2019-03-17 13:28 解决java代码中有中文注释，会编译出现error: unmappable character for encoding GBK
 #  * @更新:     2019-03-23 08:10 编译运行C++/Java文件之后，检测如存在out、ok文件就比较结果
+#  * @更新:     2019-05-04 18:14 增加开关$DevCppMode，可(F10)使用Dev-C++模式弹出窗口，好处是可以在弹出dos窗口进行cin输入
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -24,6 +25,7 @@ param(
     [switch] $ShowShellConsole,
     [switch] $DoTest,
     [switch] $RedirectStdInOut,
+    [switch] $DevCppMode,
     [String] $CompilerArgs,
     [String] $WorkspaceFolder 
 )
@@ -42,6 +44,7 @@ function StartProcess {
 
     # Write-Host $processExecFileName
     $currExecfileName = [System.IO.Path]::GetFileName($processExecFileName)
+    $currExecfile = Get-Item -Path $processExecFileName
 
     $ps = new-object System.Diagnostics.Process
     $ps.StartInfo.Filename = $processExecFileName 
@@ -51,7 +54,7 @@ function StartProcess {
     else {
         $ps.StartInfo.UseShellExecute = $false
     }
-    $ps.StartInfo.WorkingDirectory = $File.DirectoryName
+    $ps.StartInfo.WorkingDirectory = $currExecfile.DirectoryName
     $sw = [Diagnostics.Stopwatch]::StartNew()
     $ps.start() | Out-Null
     # $ps.WaitForExit()
@@ -244,6 +247,22 @@ function RunTest ($processExecFileName) {
     }
 }
 
+function StartConsolePauserRun {
+    param (
+        $processExecFileName
+    )
+
+    # Write-Host $processExecFileName
+    $SourExeFile = Get-Item -Path $processExecFileName
+    $ps = new-object System.Diagnostics.Process
+    $ps.StartInfo.Filename = "$WorkspaceFolder\ConsolePauser.exe"
+    $ps.StartInfo.Arguments=$SourExeFile.FullName
+    $ps.StartInfo.UseShellExecute = $true
+    $ps.StartInfo.WorkingDirectory = $SourExeFile.DirectoryName
+    $ps.start() | Out-Null
+    $ps.WaitForExit()
+}
+
 # 编译C++并且执行
 function BuildCppAndRun($SourceFileName) {
     $SourFile = Get-Item -Path $SourceFileName
@@ -360,45 +379,48 @@ function BuildCppAndRun($SourceFileName) {
             # StartProcess $exeFileName
             # StartProcessWithNewInputFile $exeFileName 
 
-            # 使用powershell call operator (&)解决'std::bad_alloc'问题
-            $sw = [Diagnostics.Stopwatch]::StartNew()
-            if ($isRedirectStdInOut -eq $true) {
-                Get-Content $currInFile | & $exeFileName > $currOutFile
+            if($DevCppMode.IsPresent)
+            {
+                # 使用Dev-C++ 方式的弹dos窗口，好处是可以在dos进行cin输入
+                StartConsolePauserRun($exeFileName)
+                Write-Host "$($ExeFile.BaseName + $ExeFile.Extension) closed." 
             }
             else {
-                & $exeFileName
-                # try {
-                #     & $exeFileName 2>$null
-                #   } catch [RemoteException] {
-                #     # oops remove-item failed. Write warning then quit 
-                #     # replace the following with what you want to do
-                #     write-warning "Remove-item encounter error: $_"
-                #     return # script failed
-                #   }                
-            }
-            
-            $sw.Stop()
-            $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
-
-            Write-Host
-            if ($LASTEXITCODE -eq 0 ) {
-                if (Test-Path $currInFile) {
-                    $inFileObj = Get-Item -Path $currInFile
-                    $leftFile = $inFileObj.BaseName + ".ok"
-                    $rightFile = $inFileObj.BaseName + ".out"
-                    if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
-                        if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
-                            Write-Host "Compare $leftFile -> $rightFile : " -NoNewline
-                            & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
-                            Write-Host
+                # 使用powershell call operator (&)解决'std::bad_alloc'问题
+                $sw = [Diagnostics.Stopwatch]::StartNew()
+                if ($isRedirectStdInOut -eq $true) {
+                    Get-Content $currInFile | & $exeFileName > $currOutFile
+                }
+                else {
+                    # 使用vscode out 方式运行，不可以进行cin输入
+                    & $exeFileName
+                }
+                
+                $sw.Stop()
+                $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+                
+                Write-Host
+                if ($LASTEXITCODE -eq 0 ) {
+                    if (Test-Path $currInFile) {
+                        $inFileObj = Get-Item -Path $currInFile
+                        $leftFile = $inFileObj.BaseName + ".ok"
+                        $rightFile = $inFileObj.BaseName + ".out"
+                        if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
+                            if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
+                                Write-Host "Compare $leftFile -> $rightFile : " -NoNewline
+                                & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                                Write-Host
+                            }
                         }
                     }
                 }
+                
+                Write-Host $msg -ForegroundColor Green -NoNewline
+                showExitCodeInfo $LASTEXITCODE
+                Write-Host                
             }
-            
-            Write-Host $msg -ForegroundColor Green -NoNewline
-            showExitCodeInfo $LASTEXITCODE
-            Write-Host
+
+
         }
     }
 }
@@ -487,7 +509,6 @@ function BuildJavaAndRun($SourceFileName) {
         }
     }
 }
-
 
 # [Threading.Thread]::CurrentThread.CurrentCulture = 'en-US'
 # [cultureinfo]::CurrentCulture = 'en-US'
