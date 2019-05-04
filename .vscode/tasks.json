@@ -133,7 +133,7 @@
             "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always",
-        },        
+        },     
         {
             "taskName": "rebuild and run(onlinejudge)",
             "suppressTaskName": true,
