@@ -62,7 +62,7 @@ int main()
             continue; 
 
         int u=f.v;
-        for (int j = 0; j < (int)g[u].size(); ++j)
+        for (unsigned int j = 0; j < g[u].size(); ++j)
         {
             vertex next = g[u][j];      //all outgoing edges from u
 
