@@ -6,13 +6,7 @@ int main()
 {
     int n, ans = 0;
     cin >> n;
-    // vector<int> b={1,2,3};
-    // int c=b.size();
-    // for (unsigned int i = 0; i <= b.size() - 1; ++i)
-    // {
-    //     cout <<b[i]<<"\n";    
-    // }
-    
+
     if (n < 10)
     {
         cout << 9 << '\n';
