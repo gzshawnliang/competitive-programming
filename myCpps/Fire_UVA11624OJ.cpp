@@ -121,8 +121,6 @@ int main()
                     {
                         if (a[next.y][next.x].ch == '.' || (a[next.y][next.x].ch == 'F' && a[next.y][next.x].round > next.round))
                         {
-                            
-
                             visit[next.y][next.x] = true;
 
                             jPos.push(next);
