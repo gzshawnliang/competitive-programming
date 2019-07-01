@@ -120,7 +120,7 @@
         "**/.factorypath": true
     },    
     // "C_Cpp.intelliSenseEngineFallback": "Disabled",
-    "C_Cpp.errorSquiggles":"Enabled",
+    "C_Cpp.errorSquiggles":"Disabled",
 
     "java.debug.settings.enableRunDebugCodeLens": false,
     "java.debug.settings.forceBuildBeforeLaunch":false,
