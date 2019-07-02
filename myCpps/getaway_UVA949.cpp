@@ -145,7 +145,7 @@ int main()
         queue<segment> q; q.push(_segment(0, turn(0, 0, nx, ny)));
         vector<bool> visit(nx * ny, false);
 
-        cout << nx << "," << ny << ":";
+        //cout << nx << "," << ny << ":";
 
         int ans = -1;
         while (q.empty() == false && ans == -1)
@@ -190,9 +190,10 @@ int main()
             {
                 q.push(_segment(now.t + 1, now.num));
             }
+            //cout << q.size() << '\n';
         }
 
-        cout << ans << ",time:" << time1.elapsed() << '\n';
+        //cout << ans << ",time:" << time1.elapsed() << '\n';
         fout << ans << '\n';
     }
 
