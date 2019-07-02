@@ -19,13 +19,8 @@ struct node
 };
 
 
-//int dd[105][105][4];
 int main()
 {
-    int n=0, m=0, q;
-    int i, j;
-    int sx, sy, ex, ey, tx=0, ty=0, tt;
-    int x, y, time;
 
     freopen("getaway_UVA949.in", "r", stdin);
     freopen("getaway_UVA949.out", "w", stdout);
@@ -36,26 +31,32 @@ int main()
     
     while (true)
     {
-        cin >> n >> m;
+        int nv=0, nh=0;
+        cin >> nv >> nh;
 
         if (!cin.good())
         {
             break;
         }
 
-        //不允许通过的路
-        vector<vector<vector<int>>> dd(n+1,vector<vector<int>>(m+1,vector<int>(4,1)));
-        vector<vector<set<int>>> monitor(n+1,vector<set<int>>(m+1));
-        
-        cin >> q;
+        //dd[x][y][z]代表xyz允许通过的路
+        vector<vector<vector<int>>> dd(nv+1,vector<vector<int>>(nh+1,vector<int>(4,1)));
 
-        while (q--)
+        //monitor[x][y]代表xy处的监视器时间，用唯一set表示
+        vector<vector<set<int>>> monitor(nv+1,vector<set<int>>(nh+1));
+
+        int r;
+        cin >> r;
+
+        while (r--)
         {
+            int sx, sy, ex, ey;
             cin >> sx >> sy >> ex >> ey;
             
-            for (j = 0; j < 4; j++)
+            for (int j = 0; j < 4; j++)
             {
-                tx = sx + dx[j], ty = sy + dy[j];
+                int tx = sx + dx[j];
+                int ty = sy + dy[j];
                 
                 if (tx == ex && ty == ey)
                 {
@@ -63,14 +64,16 @@ int main()
                 }
             }
         }
-        cin >> q;
-        while (q--)
+        int m;
+        cin >> m;
+        while (m--)
         {
+            int sx, sy, time;
             cin >> time  >> sx >> sy;
             monitor[sx][sy].insert(time);
         }
 
-        if (n == 1 && m == 1)
+        if (nv == 1 && nh == 1)
         {
             cout <<"0\n";
             continue;
@@ -80,7 +83,7 @@ int main()
         q.push(node(0,0,0));
 
         
-        vector<vector<int>> dist(n+1,vector<int>(m+1,INF)); //dist[x][y]代表到达x,y最小时间
+        vector<vector<int>> dist(nv+1,vector<int>(nh+1,INF)); //dist[x][y]代表到达x,y最小时间
         // int dist[105][105] = {};
         // memset(dist, 63, sizeof(dist));
 
@@ -90,28 +93,28 @@ int main()
         while (!q.empty())
         {
 
-            x = q.front().X;
-            y = q.front().Y;
-            time = q.front().T;
+            int x = q.front().X;
+            int y = q.front().Y;
+            int time = q.front().T;
             q.pop();
 
             ++time;
 
-            for (i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; ++i)
             {
                 if (dd[x][y][i] == 0)
                 {
                     continue;
                 }
 
-                tx = x + dx[i];
-                ty = y + dy[i];
+                int tx = x + dx[i];
+                int ty = y + dy[i];
 
-                if (tx < 0 || ty < 0 || tx >= n || ty >= m)
-                {
+                if (tx < 0 || ty < 0 || tx >= nv || ty >= nh)
+                {   //超出边界了
                     continue;
                 }
-                tt = time;
+                int tt = time;
 
                 //while (monitor[tx][ty].find(tt) != monitor[tx][ty].end())
                 while (monitor[tx][ty].count(tt) != 0)
@@ -119,6 +122,7 @@ int main()
                     ++tt;
                 }
 
+                //当前时间小于已记录的最小时间
                 if (tt < dist[tx][ty])
                 {
                     dist[tx][ty] = tt;
@@ -126,7 +130,7 @@ int main()
                 }
             }
         }
-        cout << dist[n - 1][m - 1] << '\n';
+        cout << dist[nv - 1][nh - 1] << '\n';
     }
     return 0;
 }
