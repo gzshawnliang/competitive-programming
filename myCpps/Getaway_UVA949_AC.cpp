@@ -116,6 +116,7 @@ int main()
                 }
                 int tt = time;
 
+                //查找tt是否在set里面。如果在则等待
                 //while (monitor[tx][ty].find(tt) != monitor[tx][ty].end())
                 while (monitor[tx][ty].count(tt) != 0)
                 {
