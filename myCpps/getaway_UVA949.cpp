@@ -7,68 +7,6 @@ using namespace std::chrono;
 ifstream fin("getaway_UVA949.in");
 ofstream fout("getaway_UVA949.out");
 
-struct Timer
-{
-
-  private:
-    time_point<high_resolution_clock> m_begin;
-        
-  public:
-    Timer() : m_begin(high_resolution_clock::now()) {}
-
-    
-    void reset() 
-    { 
-        m_begin = high_resolution_clock::now(); 
-    }
-
-    //默认输出秒(浮点数)
-    double elapsed() const
-    {
-        return elapsed_seconds_double();
-    }
-
-    //毫秒
-    long long elapsed_milli() const
-    {
-        return duration_cast<chrono::milliseconds>(high_resolution_clock::now() - m_begin).count();
-    }
-
-    //微秒
-    long long elapsed_micro() const
-    {
-        return duration_cast<chrono::microseconds>(high_resolution_clock::now() - m_begin).count();
-    }
-    //纳秒
-    long long elapsed_nano() const
-    {
-        return duration_cast<chrono::nanoseconds>(high_resolution_clock::now() - m_begin).count();
-    }
-    //秒
-    long long elapsed_seconds() const
-    {
-        return duration_cast<chrono::seconds>(high_resolution_clock::now() - m_begin).count();
-    }
-
-    //默认输出秒(浮点数)
-    double elapsed_seconds_double() const
-    {
-        return (double)elapsed_milli() / 1000.0;
-    }
-
-    //分
-    long long elapsed_minutes() const
-    {
-        return duration_cast<chrono::minutes>(high_resolution_clock::now() - m_begin).count();
-    }
-    //时
-    long long elapsed_hours() const
-    {
-        return duration_cast<chrono::hours>(high_resolution_clock::now() - m_begin).count();
-    }
-};
-
-
 struct segment
 {
     int t;
@@ -102,7 +40,6 @@ int main()
 
     while (true)
     {
-        Timer time1;
         int nx = 0, ny = 0; fin >> nx >> ny;
         if (nx + ny == 0) break;
 
@@ -193,7 +130,7 @@ int main()
             //cout << q.size() << '\n';
         }
 
-        //cout << ans << ",time:" << time1.elapsed() << '\n';
+        //cout << ans << '\n';
         fout << ans << '\n';
     }
 
