@@ -74,6 +74,7 @@ struct segment
     int t;
     int num;
 };
+
 segment _segment(int t, int num)
 {
     segment temp{t, num}; return temp;
