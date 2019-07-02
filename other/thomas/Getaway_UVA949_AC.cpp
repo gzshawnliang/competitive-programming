@@ -108,12 +108,12 @@ int main()
 
                 if (nowX < 0 || nowY < 0 || nowX >= nv || nowY >= nh)
                 { 
-                    //超出边界了
+                    //已经超出边界
                     continue;
                 }
                 int nowTime = time;
 
-                //查找tt是否在set里面。如果在则等待
+                //查找tt是否在set里面。如果在则等待find 和 count性能差不多
                 //while (monitor[nowX][nowY].find(nowTime) != monitor[nowX][nowY].end())
                 while (monitor[nowX][nowY].count(nowTime) != 0)
                 {
