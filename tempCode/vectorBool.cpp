@@ -2,6 +2,11 @@
 
 using namespace std;
 
+void printBitSet()
+{
+    
+}
+
 int main()
 {
     bitset<10> b1;
