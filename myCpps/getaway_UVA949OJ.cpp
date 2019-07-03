@@ -1,16 +1,20 @@
 #include <bits/stdc++.h>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 
 struct segment
 {
+    bool wait;
     int t;
     int num;
 };
-segment _segment(int t, int num)
+
+segment _segment(bool wait, int t, int num)
 {
-    segment temp{t, num}; return temp;
+    segment temp{wait, t, num}; return temp;
 }
 
 bool g0(int x, int y, int nx, int ny)
@@ -72,12 +76,13 @@ int main()
         for (int c = 1; c <= m; ++c)
         {
             int t, x, y; cin >> t >> x >> y;
-            
+
             pass[t] = turn(x, y, nx, ny);
         }
 
-        queue<segment> q; q.push(_segment(0, turn(0, 0, nx, ny)));
-        vector<bool> visit(nx * ny, false);
+        queue<segment> q; q.push(_segment(false, 0, turn(0, 0, nx, ny)));
+        vector<int> d(nx * ny, nx * ny + 1);
+
 
         int ans = -1;
         while (q.empty() == false && ans == -1)
@@ -90,11 +95,17 @@ int main()
                 break;
             }
 
-            visit[now.num] = true;
+            if (d[now.num] <= now.t && now.wait == false)
+            {
+                continue;
+            }
+
+            d[now.num] = now.t;
             
             for (int p = 0; p <= 3; ++p)
             {
                 segment next;
+                next.wait = false;
                 next.t = now.t + 1;
                 next.num = now.num + numP[p];
 
@@ -106,7 +117,7 @@ int main()
                 {
                     continue;
                 }
-                else if (visit[next.num] == true)
+                else if (d[next.num] < nx * ny + 1)
                 {
                     continue;
                 }
@@ -120,7 +131,7 @@ int main()
 
             if (pass[now.t + 1] != now.num)
             {
-                q.push(_segment(now.t + 1, now.num));
+                q.push(_segment(true, now.t + 1, now.num));
             }
         }
 
