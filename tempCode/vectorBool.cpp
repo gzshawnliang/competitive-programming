@@ -11,6 +11,7 @@ int main()
 {
     bitset<10> b1;
     vector<bitset<10>> b2(8);
+    
     b1[2]=1;
     cout << b1[1] << " " << b1[2] << "\n";
 
