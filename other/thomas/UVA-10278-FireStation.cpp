@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
 
-//#define SZ(a)            (int)a.size()
-//#define stlloop(v)       for(__typeof(v.begin()) it=v.begin();it!=v.end();it++)
 
 using namespace std;
 
@@ -14,11 +12,7 @@ using namespace std;
 //const int fy[]={-1,  1, -2,  2, -2,  2, -1,  1}; // Knights Move
 /*------------------------------------------------*/
 
-/*-----------------------Bitmask------------------*/
-//int Set(int N,int pos){return N=N | (1<<pos);}
-//int reset(int N,int pos){return N= N & ~(1<<pos);}
-//bool check(int N,int pos){return (bool)(N & (1<<pos));}
-/*------------------------------------------------*/
+
 
 using ll = long long;
 const ll INF = LLONG_MAX / 2;
@@ -41,7 +35,11 @@ struct data
 
 class solution
 {
-
+  private:
+    vector<vector<int>> graph;
+    vector<vector<int>> cost;
+    set<int> existingFireStationSet;
+    
   public:
     solution(vector<vector<int>> & graph, vector<vector<int>> & cost, set<int> & existingFireStationSet)
     {
@@ -91,11 +89,7 @@ class solution
         return ret;
     }
 
-  private:
-    vector<vector<int>> graph;
-    vector<vector<int>> cost;
 
-    set<int> existingFireStationSet;
 };
 
 int main()
