@@ -53,8 +53,8 @@ int main()
     {
         int a, b, c, d; fin >> a >> b >> c >> d;
 
-        vector<vector<vector<int>>> dp(a + 1, vector<vector<int>>(b + 1, vector<int>(c + 1, inf)));   
-        dp[0][0][c] = 0;
+        vector<vector<int>> dp(a + 1, vector<int>(b + 1, inf));   
+        dp[0][0] = 0;
 
         vector<int> ans(max(a, max(b, max(c, d))) + 1, inf);
         priority_queue<segment> pq; pq.push(_segment(0, 0, c, 0));
@@ -62,17 +62,16 @@ int main()
         {
             segment now = pq.top(); pq.pop();
 
-            if (now.total >= dp[now.j1][now.j2][now.j3] && now.total > 0)
+            if (now.total >= dp[now.j1][now.j2] && now.total > 0)
             {
                 continue;
             }
 
-            dp[now.j1][now.j2][now.j3] = now.total;
+            dp[now.j1][now.j2] = now.total;
 
             ans[now.j1] = min(ans[now.j1], now.total);
             ans[now.j2] = min(ans[now.j2], now.total);
             ans[now.j3] = min(ans[now.j3], now.total);
-
 
             segment temp;
 
@@ -82,6 +81,7 @@ int main()
                 {
                     temp = now; // 1 -> 2
                     temp.total += pour(a, temp.j1, b, temp.j2);
+
                     pq.push(temp);
                 }
 
@@ -89,6 +89,7 @@ int main()
                 {
                     temp = now; // 1 -> 3
                     temp.total += pour(a, temp.j1, c, temp.j3);
+
                     pq.push(temp);
                 }
             }
@@ -99,6 +100,7 @@ int main()
                 {
                     temp = now; // 2 -> 1
                     temp.total += pour(b, temp.j2, a, temp.j1);
+
                     pq.push(temp);
                 }
 
@@ -106,6 +108,7 @@ int main()
                 {
                     temp = now; // 2 -> 3
                     temp.total += pour(b, temp.j2, c, temp.j3);
+                    
                     pq.push(temp);
                 }
             }
@@ -116,6 +119,7 @@ int main()
                 {
                     temp = now; // 3 -> 1
                     temp.total += pour(c, temp.j3, a, temp.j1);
+
                     pq.push(temp);
                 }
 
@@ -123,6 +127,7 @@ int main()
                 {
                     temp = now; // 3 -> 2
                     temp.total += pour(c, temp.j3, b, temp.j2);
+
                     pq.push(temp);
                 }
             }
