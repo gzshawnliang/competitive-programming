@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "fill_UVA10603"; //*
+const string CPPfile = "highestPaidToll_UVA12047"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
@@ -137,7 +137,7 @@ int main()
                 ++i;
             }
 
-            if (i <= in.size() - 2)
+            if (i <= size - 2)
             {
                 if (in[i] == '/' && in[i + 1] == '/')
                 {
