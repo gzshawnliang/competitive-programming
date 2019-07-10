@@ -102,7 +102,7 @@ int main()
         {
             edge nowEdge = edges[i];
 
-            if (dS[nowEdge.u] + a[nowEdge.u][nowEdge.v] + dE[nowEdge.v] <= pMax)
+            if (dS[nowEdge.u] + a[nowEdge.u][nowEdge.v] + dE[nowEdge.v] <= pMax && dS[nowEdge.u] < inf && dE[nowEdge.v] < inf)
             {
                 ans = max(ans, a[nowEdge.u][nowEdge.v]);
             }
