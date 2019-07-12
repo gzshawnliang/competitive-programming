@@ -218,7 +218,7 @@ int main()
 {
     
     /*
-        Graph 
+        Graph V=6 E=7 Start=0
         6 7 0
 
         0 1 1
@@ -242,10 +242,9 @@ int main()
         g[u].push_back(vertex(w, v)); // directed graph
     }
     dijkstra dij(V, E, g);
+    dij.RunMultiPath(S);    //跑dijkstra算法
 
-    int target = 5; //终点
-
-    dij.RunMultiPath(S);
+    int target = 5;         //目标终点
 
     vector<vector<int>> multiPath = dij.GetMultiPath(target);
     cout << '\n';
