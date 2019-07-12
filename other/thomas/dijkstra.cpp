@@ -28,7 +28,7 @@ class dijkstra
     vector<vector<vertex>> g;
     vector<int> father; //father[v]=u,表示顶点v是通过u过来的u->v;初始值-1
 
-    vector<set<int>> father2; //father2[v]=u,表示顶点v是通过u(u是数组)过来的u->v;初始值-1
+    vector<set<int>> multiFather; //multiFather[v]=u,表示顶点v是通过u(u是数组)过来的u->v;初始值-1
     vector<vector<int>> multiPath;
 
     void dfsPath(int curr, int source, vector<int> & path)
@@ -38,7 +38,7 @@ class dijkstra
             multiPath.push_back(path);
             return;
         }
-        set<int> tmpFather = father2[curr];
+        set<int> tmpFather = multiFather[curr];
         for (auto i : tmpFather)
         {
             path.push_back(i);
@@ -57,7 +57,7 @@ class dijkstra
         father.resize(V);
         fill(father.begin(), father.end(), -1);
 
-        father2.resize(V);
+        multiFather.resize(V);
     };
 
     vector<int> GetOnePath(int n) //到顶点n的最短路（单条）
@@ -193,16 +193,16 @@ class dijkstra
                 if (dist[u] + next.dist < dist[next.v])
                 {
                     dist[next.v] = dist[u] + next.dist; // 松弛操作
-                    father2[next.v].clear();
-                    father2[next.v].insert(u);
+                    multiFather[next.v].clear();
+                    multiFather[next.v].insert(u);
                     pq.push(next);
                 }
                 else if (dist[u] + next.dist == dist[next.v])
                 {
                     dist[next.v] = dist[u] + next.dist; // 松弛操作
-                    if (father2[next.v].count(u) == 0)
+                    if (multiFather[next.v].count(u) == 0)
                     {
-                        father2[next.v].insert(u);
+                        multiFather[next.v].insert(u);
                     }
                     pq.push(next);
                 }
