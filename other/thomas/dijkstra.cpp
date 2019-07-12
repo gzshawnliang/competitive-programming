@@ -26,8 +26,8 @@ class dijkstra
     int V;
     int E;
     vector<vector<vertex>> g;      //图的数组
-    vector<int> father;            //father[v]=u,表示顶点v是通过u过来的u->v;初始值-1
-    vector<set<int>> multiFather;  //multiFather[v]=u,表示顶点v是通过u(u是数组)过来的u->v;初始值-1
+    vector<int> father;            //father[v]=u,顶点v的父亲是u，代表v是通过u过来的u->v;初始值-1
+    vector<set<int>> multiFather;  //multiFather[v]=u,顶点v的父亲是u数组，多个父亲，代表顶点v是通过u(u是数组)过来的u->v;初始值空数组。用set取代数组，强制里面元素是唯一的
     vector<vector<int>> multiPath; //多条路径二维数组
 
     void dfsPath(int curr, int source, vector<int> & path)
