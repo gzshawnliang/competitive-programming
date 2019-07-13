@@ -1,0 +1,5 @@
+1
+2
+Berlin Paris 18 4
+Paris Madrid 0 5
+Berlin Madrid
