@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "minefield_UVA11338"; //*
+const string CPPfile = "theGreatEscape_UVA10967"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
