@@ -44,7 +44,7 @@ int main()
 
     _b testb;
 
-    testb.b1=345;
+    //testb.k1;
     
     return 0;
 }
