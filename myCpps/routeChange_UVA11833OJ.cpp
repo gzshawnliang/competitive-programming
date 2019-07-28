@@ -2,8 +2,6 @@
 
 using namespace std;
 
-ifstream fin("routeChange_UVA11833.in");
-ofstream fout("routeChange_UVA11833.out");
 
 const int inf = INT_MAX / 3;
 
@@ -24,16 +22,18 @@ segment _segment(int u, int t)
 
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	std::cin.tie(NULL);
     while (true)
     {
-        int n = 0, m = 0, cc = 0, kk = 0; fin >> n >> m >> cc >> kk;
+        int n = 0, m = 0, cc = 0, kk = 0; cin >> n >> m >> cc >> kk;
         if (n + m + cc + kk == 0) break;
 
         vector<vector<int>> a(n, vector<int>(n, inf)),
                             g(n);
         for (int c = 1; c <= m; ++c)
         {
-            int u, v, t; fin >> u >> v >> t;
+            int u, v, t; cin >> u >> v >> t;
             a[u][v] = t; a[v][u] = a[u][v];
             g[u].push_back(v); g[v].push_back(u);
         }
@@ -71,8 +71,10 @@ int main()
             }
         }
 
-        fout << dp[cc - 1] << '\n';
+        cout << dp[cc - 1] << '\n';
     }
 
-    return 0;
+   	cout.flush();
+   	return 0;
 }
+
