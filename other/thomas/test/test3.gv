@@ -1,9 +1,0 @@
-graph
-{
-    node [shape = box style = filled];
-    lisbon -- london [label="6"];
-    lisbon -- paris [label="5"];
-    london -- paris [label="1"];
-    london -- berlin [label="2"];
-    paris -- berlin [label="10"];
-}
