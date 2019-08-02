@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "unidirectionalTSP_UVA116"; //*
+const string CPPfile = "NEW_maximumSum_UVA108"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
