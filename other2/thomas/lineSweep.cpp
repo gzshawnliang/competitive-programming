@@ -47,7 +47,7 @@ class segTree
     {
         if (tree[i].flag >= 1) //如果标记为>=1，则长度等于这个线段的高度
             tree[i].len = y_axis[tree[i].end] - y_axis[tree[i].start];
-        else if (tree[i].start + 1 == tree[i].end) //如果为叶子阶段，且标记为0，则置1
+        else if (tree[i].start + 1 == tree[i].end) //如果为叶子阶段，且标记为0，则长度置0
             tree[i].len = 0;
         else //如果不是叶子节点，那么此节点的长度就是子节点的长度之和
             tree[i].len = tree[2 * i].len + tree[2 * i + 1].len;
@@ -104,7 +104,7 @@ int main()
     int k = 0;
     for (int i = 0; i <= N - 1; ++i)
     {
-        int x1, y1, x2, y2;
+        double  x1, y1, x2, y2;
         fin >> x1 >> y1 >> x2 >> y2;
 
         int left = k;
@@ -129,6 +129,7 @@ int main()
     }
 
     sort(y_axis.begin(), y_axis.end());
+
     //去重，重要
     auto iter = unique(y_axis.begin(), y_axis.end());
     y_axis.resize(iter - y_axis.begin());
