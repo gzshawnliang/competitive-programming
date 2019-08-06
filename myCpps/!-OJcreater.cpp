@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "theClosestPairProblem_UVA10245"; //*
+const string CPPfile = "simpleMindedHashing_UVA10912"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
