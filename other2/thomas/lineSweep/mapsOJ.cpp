@@ -2,11 +2,7 @@
 
 using namespace std;
 
-ifstream fin("maps.in");
-ofstream fout("maps.out");
-
 const int inf = INT_MAX / 2;
-
 const int maxP = 400;
 
 class rect
@@ -37,12 +33,14 @@ line _line(int x, int y1, int y2)
 
 int main()
 {
-    fout << fixed << setprecision(2);
+	ios_base::sync_with_stdio(false);
+	std::cin.tie(NULL);
+    cout << fixed << setprecision(2);
 
     int t = 0;
     while (true)
     {
-        int n = 0; fin >> n;
+        int n = 0; cin >> n;
         if (n == 0) break;
 
         ++t;
@@ -51,7 +49,12 @@ int main()
         set<double> _set;
         for (int i = 0; i <= n - 1; ++i)
         {
-            fin >> a_t[i].x1 >> a_t[i].y1 >> a_t[i].x2 >> a_t[i].y2;
+            double t1, t2, t3, t4; cin >> t1 >> t2 >> t3 >> t4;
+            a_t[i].x1 = min(t1, t3);
+            a_t[i].y1 = min(t2, t4);
+            a_t[i].x2 = max(t1, t3);
+            a_t[i].y2 = max(t2, t4);
+
             _set.insert(a_t[i].x1);
             _set.insert(a_t[i].y1);
             _set.insert(a_t[i].x2);
@@ -88,7 +91,7 @@ int main()
         sort(l.begin(), l.end());
 
         int sizeL = l.size();
-        vector<double> h(itod.size() + 1, 0.0);
+        vector<double> h(sizeL, 0.0);
         for (int i = 0; i <= sizeL - 2; ++i)
         {
             int nowX = l[i].x, nextX = l[i + 1].x;
@@ -124,11 +127,11 @@ int main()
             ans += (h[i] * (itod[nextX] - itod[nowX]));
         }
 
-        //ans = (int)(ans * 100.0 + 0.5) / 100.0;
-
-        fout << "Test case #" << t << '\n';
-        fout << "Total explored area: " << ans << '\n';
+        cout << "Test case #" << t << '\n';
+        cout << "Total explored area: " << ans << "\n\n";
 
     }
-    return 0;
+   	cout.flush();
+   	return 0;
 }
+

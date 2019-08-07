@@ -2,8 +2,6 @@
 
 using namespace std;
 
-ifstream fin("maps.in");
-ofstream fout("maps.out");
 
 const int inf = INT_MAX / 2;
 
@@ -37,12 +35,14 @@ line _line(int x, int y1, int y2)
 
 int main()
 {
-    fout << fixed << setprecision(2);
+	ios_base::sync_with_stdio(false);
+	std::cin.tie(NULL);
+    cout << fixed << setprecision(2);
 
     int t = 0;
     while (true)
     {
-        int n = 0; fin >> n;
+        int n = 0; cin >> n;
         if (n == 0) break;
 
         ++t;
@@ -51,7 +51,7 @@ int main()
         set<double> _set;
         for (int i = 0; i <= n - 1; ++i)
         {
-            fin >> a_t[i].x1 >> a_t[i].y1 >> a_t[i].x2 >> a_t[i].y2;
+            cin >> a_t[i].x1 >> a_t[i].y1 >> a_t[i].x2 >> a_t[i].y2;
             _set.insert(a_t[i].x1);
             _set.insert(a_t[i].y1);
             _set.insert(a_t[i].x2);
@@ -124,11 +124,12 @@ int main()
             ans += (h[i] * (itod[nextX] - itod[nowX]));
         }
 
-        //ans = (int)(ans * 100.0 + 0.5) / 100.0;
 
-        fout << "Test case #" << t << '\n';
-        fout << "Total explored area: " << ans << '\n';
+        cout << "Test case #" << t << '\n';
+        cout << "Total explored area: " << ans << '\n';
 
     }
-    return 0;
+   	cout.flush();
+   	return 0;
 }
+
