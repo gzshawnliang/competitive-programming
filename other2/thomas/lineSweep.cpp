@@ -98,20 +98,19 @@ int main()
 {
     int N;
     fin >> N;
-    vector<line> lines(N * 2);
-    vector<int> y_axis(N * 2);
-
+    vector<line> lines(N * 2);  //竖线集合
+    set<int> y_axisSet;         //Y坐标集合,使用set保证不重复
     int k = 0;
     for (int i = 0; i <= N - 1; ++i)
     {
         double  x1, y1, x2, y2;
         fin >> x1 >> y1 >> x2 >> y2;
+        
+        y_axisSet.insert(y1);
+        y_axisSet.insert(y2);
 
-        int left = k;
-        int right = k + 1;
-
-        y_axis[left] = y1;
-        y_axis[right] = y2;
+        int left = k;       //矩形左边竖线
+        int right = k + 1;  //矩形右边竖线
 
         lines[left].flag = 1;
         lines[right].flag = -1;
@@ -127,23 +126,24 @@ int main()
 
         k += 2;
     }
+    sort(lines.begin(), lines.end());   //按x左边到右排序lines
 
-    sort(y_axis.begin(), y_axis.end());
-
-    //去重，重要
-    auto iter = unique(y_axis.begin(), y_axis.end());
-    y_axis.resize(iter - y_axis.begin());
-
-    //按x左边到右排序lines
-    sort(lines.begin(), lines.end());
+    //使用vector访问Y坐标集合快一些
+    vector<int> y_axis(y_axisSet.begin(),y_axisSet.end());
 
     segTree segtree1(y_axis);
     segtree1.build(1, 0, y_axis.size() - 1);
 
     int totalArea = 0;
+    
     //开始扫描线段
     for (int i = 0; i <= k - 1; ++i)
     {
+        if ((size_t) i + 1 >= lines.size())  //最后一竖线不扫描
+        {
+            break;
+        }
+
         //找到这条线的下顶点所表示的线段下标
         int startY = lower_bound(y_axis.begin(), y_axis.end(), lines[i].y_start) - y_axis.begin();
 
@@ -154,7 +154,9 @@ int main()
         segtree1.updata(1, startY, endY, lines[i].flag);
 
         //面积累加
-        totalArea += segtree1.tree[1].len * (lines[i + 1].x - lines[i].x);
+        int currArea = segtree1.tree[1].len * (lines[i + 1].x - lines[i].x);
+        cout << "h:" << segtree1.tree[1].len << ",w:" << lines[i + 1].x - lines[i].x << ",Area" << currArea << '\n';
+        totalArea += currArea;
     }
     fout << totalArea << '\n';
 
