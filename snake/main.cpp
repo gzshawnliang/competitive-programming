@@ -6,8 +6,8 @@ ifstream fin("main.in");
 ofstream fout("main.out");
 
 const int ny = 6, nx = 6;
-const vector<int> yp = {-1, 0, 1, 0},
-            xp = {0, 1, 0, -1};
+const vector<int>   yp = {-1, 0, 1, 0},
+                    xp = {0, 1, 0, -1};
 
 vector<int> _vector
 (
@@ -18,6 +18,7 @@ vector<int> _vector
     int e,
     int f
 )
+
 {
     vector<int> temp = {a, b, c, d, e, f}; return temp;
 }
