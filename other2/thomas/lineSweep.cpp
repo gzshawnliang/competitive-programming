@@ -134,7 +134,7 @@ int main()
     segTree segtree1(y_axis);
     segtree1.build(1, 0, y_axis.size() - 1);
 
-    int totalArea = 0;
+    double totalArea = 0;
     
     //开始扫描线段
     for (int i = 0; i <= k - 1; ++i)
@@ -153,10 +153,15 @@ int main()
         //更新这个两个下标所对应的线段的状态，line[I].flag传入的是1或者-1
         segtree1.updata(1, startY, endY, lines[i].flag);
 
-        //面积累加
-        int currArea = segtree1.tree[1].len * (lines[i + 1].x - lines[i].x);
-        cout << "h:" << segtree1.tree[1].len << ",w:" << lines[i + 1].x - lines[i].x << ",Area" << currArea << '\n';
-        totalArea += currArea;
+        //计算面积
+        double h = segtree1.tree[1].len;
+        double w = (lines[i + 1].x - lines[i].x);
+        double currArea = h * w;
+
+        //debug
+        cout << "h:" << setw(5) << h << "  w:" << setw(5) << w << "  Area:" << setw(10)<< currArea << '\n';
+
+        totalArea += currArea;  //面积累加
     }
     fout << totalArea << '\n';
 
