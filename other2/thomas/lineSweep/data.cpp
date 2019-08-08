@@ -16,19 +16,29 @@ int main()
         //***************************
         //在此处写入测试数据
         //***************************
-        int testCase = 1000;
+        int testCase = 1;
 
         while (testCase--)
         {
-            int N = rdNum.GetRand(1, 4);
+            int N = rdNum.GetRand(1000, 1000);
             fout << N << "\n";
             for (int i = 0; i <= N - 1; ++i)
             {
                 double x1, y1, x2, y2;
-                x1 = rdNum.GetRand(0, 10);
-                x2 = x1 + rdNum.GetRand(1, 10);
-                y1 = rdNum.GetRand(0, 10);
-                y2 = x1 + rdNum.GetRand(1, 10);
+                x1 = rdNum.GetRand(0, 100000);
+                x2 = rdNum.GetRand(1, 100000);
+                while (x1>=x2)
+                {
+                    x2 = rdNum.GetRand(1, 100000);
+                }
+                
+                y1 = rdNum.GetRand(0, 100000);
+                y2 = rdNum.GetRand(1, 100000);
+                while (y1>=y2)
+                {
+                    y2 = rdNum.GetRand(1, 100000);
+                }                
+
                 fout << x1 << " " << y1 << " " << x2 << " " << y2 << '\n';
             }
         }

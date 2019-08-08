@@ -7,7 +7,7 @@ ofstream fout("maps.out");
 
 const int inf = INT_MAX / 2;
 
-const int maxP = 400;
+const int maxP = 4000;
 
 class rect
 {
@@ -94,28 +94,37 @@ int main()
 
         int sizeL = l.size();
         vector<double> h(sizeL, 0.0);
+        
         for (int i = 0; i <= sizeL - 2; ++i)
         {
             int nowX = l[i].x, nextX = l[i + 1].x;
 
             if (nowX == nextX) continue;
 
+            //thisH.assign(maxP,0);
             vector<int> thisH(maxP, 0);
+            
             for (int j = 0; j <= n - 1; ++j)
             {
                 if (a[j].x1 <= nowX && nextX <= a[j].x2)
                 {
                     for (int y = a[j].y1; y <= a[j].y2 - 1; ++y)
                     {
+                        //cout << y << "," << thisH.size() << "\n";
                         thisH[y] = 1;
                     }
                 }
             }
 
+            //cout << "------------------\n";
+
             for (int y = 0; y <= maxP - 1; ++y)
             {
                 if (thisH[y] == 1)
                 {
+                    // if(i==0 && y==399)
+                    //     cout <<i << "," << y << "," << itod.size() << "\n";
+
                     h[i] += (itod[y + 1] - itod[y]);
                 }
             }

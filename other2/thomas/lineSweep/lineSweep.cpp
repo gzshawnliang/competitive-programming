@@ -163,10 +163,10 @@ int main()
         //使用vector访问Y坐标集合快一些
         vector<double> y_axis(y_axisSet.begin(), y_axisSet.end());
 
-        segTree * segTree1 = new segTree(y_axis);
-        //segTree segTree1(y_axis);
+        //segTree * segTree1 = new segTree(y_axis);
+        segTree segTree1(y_axis);
 
-        segTree1->build(1, 0, y_axis.size() - 1);
+        segTree1.build(1, 0, y_axis.size() - 1);
 
         double totalArea = 0;
 
@@ -180,20 +180,20 @@ int main()
             int endY = lower_bound(y_axis.begin(), y_axis.end(), lines[i].y_end) - y_axis.begin();
 
             //更新这个两个下标所对应的线段的状态，line[I].flag传入的是1或者-1
-            segTree1->updata(1, startY, endY, lines[i].flag);
+            segTree1.updata(1, startY, endY, lines[i].flag);
 
             if ((size_t)i + 1 >= lines.size()) //最后一竖线不扫描
             {
                 break;
             }
             //计算面积
-            double h = segTree1->tree[1].len;
+            double h = segTree1.tree[1].len;
             double w = (lines[i + 1].x - lines[i].x);
             double currArea = h * w;
 
             totalArea += currArea; //面积累加
         }
-        delete segTree1;
+        //delete segTree1;
         cout << "Test case #" << caseT << '\n';
         cout << "Total explored area: " << totalArea << "\n\n";
     }
