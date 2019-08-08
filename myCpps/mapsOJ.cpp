@@ -51,7 +51,12 @@ int main()
         set<double> _set;
         for (int i = 0; i <= n - 1; ++i)
         {
-            cin >> a_t[i].x1 >> a_t[i].y1 >> a_t[i].x2 >> a_t[i].y2;
+            double t1, t2, t3, t4; cin >> t1 >> t2 >> t3 >> t4;
+            a_t[i].x1 = min(t1, t3);
+            a_t[i].y1 = min(t2, t4);
+            a_t[i].x2 = max(t1, t3);
+            a_t[i].y2 = max(t2, t4);
+
             _set.insert(a_t[i].x1);
             _set.insert(a_t[i].y1);
             _set.insert(a_t[i].x2);
@@ -88,7 +93,7 @@ int main()
         sort(l.begin(), l.end());
 
         int sizeL = l.size();
-        vector<double> h(itod.size() + 1, 0.0);
+        vector<double> h(sizeL, 0.0);
         for (int i = 0; i <= sizeL - 2; ++i)
         {
             int nowX = l[i].x, nextX = l[i + 1].x;
@@ -126,7 +131,7 @@ int main()
 
 
         cout << "Test case #" << t << '\n';
-        cout << "Total explored area: " << ans << '\n';
+        cout << "Total explored area: " << ans << "\n\n";
 
     }
    	cout.flush();
