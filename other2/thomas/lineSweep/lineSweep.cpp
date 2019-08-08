@@ -5,6 +5,9 @@ using namespace std;
 //abcdefghijklmnopqrstuvwxyz0123456789
 //ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
 
+ifstream fin("lineSweep.in");
+ofstream fout("lineSweep.out");
+
 class line
 {
   public:
@@ -35,10 +38,9 @@ class node
     }
 };
 
-class segTree
-{
-  private:
+
     vector<double> y_axis;
+    vector<node> tree;
 
     void calcul(int i)
     {
@@ -50,17 +52,25 @@ class segTree
             tree[i].len = tree[2 * i].len + tree[2 * i + 1].len;
     }
 
-  public:
-    vector<node> tree;
 
-    segTree(vector<double> & y_axis1)
+    
+
+    void segTree(vector<double> & y_axis1)
     {
         y_axis = y_axis1;
-        tree.assign(y_axis1.size() * 4, node());
+        tree.resize(y_axis1.size());
+        tree.assign(y_axis1.size(), node());
+        
     }
 
     void build(int i, int s, int e)
     {
+        //cout << "build:"<< i << "," << tree.size() <<"\n";
+        // if(i>tree.size())
+        // {
+        //     return;
+        // }
+
         //建立线段树
         tree[i].start = s;
         tree[i].end = e;
@@ -76,6 +86,13 @@ class segTree
 
     void updata(int i, int s, int e, int flag)
     {
+        //cout << "build:"<< i << "," << tree.size() <<"\n";
+        // if(i>tree.size())
+        // {
+        //     return;
+        // }
+
+
         if (tree[i].start > e || tree[i].end < s) //不符合条件
             return;
 
@@ -89,37 +106,45 @@ class segTree
         updata(2 * i + 1, s, e, flag);
         calcul(i);
     }
-};
+
 
 int main()
 {
-    freopen("lineSweep.in", "r", stdin);      
-    freopen("lineSweep.out", "w", stdout);
-    cout << fixed << setprecision(2);
+    // freopen("lineSweep.in", "r", stdin);
+    // freopen("lineSweep.out", "w", stdout);
+
+    fout << fixed << setprecision(2);
 
     int caseT = 0;
     while (true)
     {
-        int N=0;
-        cin >> N;
-        if(N==0)
+        int N = 0;
+        fin >> N;
+        if (N == 0)
         {
             break;
         }
         ++caseT;
-        vector<line> lines(N * 2);  //竖线集合
-        set<double> y_axisSet;         //Y坐标集合,使用set保证不重复
+        vector<line> lines(N * 2); //竖线集合
+        set<double> y_axisSet;     //Y坐标集合,使用set保证不重复
         int k = 0;
         for (int i = 0; i <= N - 1; ++i)
         {
-            double  x1, y1, x2, y2;
-            cin >> x1 >> y1 >> x2 >> y2;
-            
+            double x1, y1, x2, y2;
+            //fin >> x1 >> y1 >> x2 >> y2;
+            double s1, t1, s2, t2;
+            fin >> s1 >> t1 >> s2 >> t2;
+
+            x1 = min(s1, s2);
+            y1 = min(t1, t2);
+            x2 = max(s1, s2);
+            y2 = max(t1, t2);
+
             y_axisSet.insert(y1);
             y_axisSet.insert(y2);
 
-            int left = k;       //矩形左边竖线
-            int right = k + 1;  //矩形右边竖线
+            int left = k;      //矩形左边竖线
+            int right = k + 1; //矩形右边竖线
 
             lines[left].flag = 1;
             lines[right].flag = -1;
@@ -135,23 +160,25 @@ int main()
 
             k += 2;
         }
-        sort(lines.begin(), lines.end());   //按x左边到右排序lines
+        sort(lines.begin(), lines.end()); //按x左边到右排序lines
 
         //使用vector访问Y坐标集合快一些
-        vector<double> y_axis(y_axisSet.begin(),y_axisSet.end());
+        vector<double> y_axis(y_axisSet.begin(), y_axisSet.end());
 
-        segTree segtree1(y_axis);
-        segtree1.build(1, 0, y_axis.size() - 1);
+        segTree(y_axis);
+
+        build(1, 0, y_axis.size() - 1);
 
         double totalArea = 0;
-        
+
         //开始扫描线段
+        //cout << caseT << ".";
         for (int i = 0; i <= k - 1; ++i)
         {
-            if ((size_t) i + 1 >= lines.size())  //最后一竖线不扫描
-            {
-                break;
-            }
+            // if ((size_t)i + 1 >= lines.size()) //最后一竖线不扫描
+            // {
+            //     break;
+            // }
 
             //找到这条线的下顶点所表示的线段下标
             int startY = lower_bound(y_axis.begin(), y_axis.end(), lines[i].y_start) - y_axis.begin();
@@ -160,23 +187,25 @@ int main()
             int endY = lower_bound(y_axis.begin(), y_axis.end(), lines[i].y_end) - y_axis.begin();
 
             //更新这个两个下标所对应的线段的状态，line[I].flag传入的是1或者-1
-            segtree1.updata(1, startY, endY, lines[i].flag);
+            updata(1, startY, endY, lines[i].flag);
 
+            if ((size_t)i + 1 >= lines.size()) //最后一竖线不扫描
+            {
+                break;
+            }
             //计算面积
-            double h = segtree1.tree[1].len;
+            double h = tree[1].len;
             double w = (lines[i + 1].x - lines[i].x);
             double currArea = h * w;
 
             //debug
             //cout << "h:" << setw(5) << h << "  w:" << setw(5) << w << "  Area:" << setw(10)<< currArea << '\n';
 
-            totalArea += currArea;  //面积累加
+            totalArea += currArea; //面积累加
         }
-        cout << "Test case #" << caseT << '\n';
-        cout << "Total explored area: " << totalArea << '\n';        
+        fout << "Test case #" << caseT << '\n';
+        fout << "Total explored area: " << totalArea << "\n\n";
     }
-    
-
 
     return 0;
 }
