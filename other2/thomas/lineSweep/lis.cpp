@@ -33,7 +33,6 @@ int lengthOfLISDp(vector<int> & nums)
     return ans;
 }
 
-
 /*Sweep Line 算法
 该算法主要是维护了一个已经访问过的最长的递增序列，当新的数来临时，
 找到序列中第一个比该数大的数进行替换，如果都比该数小，则将该数放
@@ -78,7 +77,7 @@ int lengthOfLISLineSweep(vector<int> & nums)
 
 int main()
 {
-    vector<int> test{6, 2, 5, 1, 7, 4, 8,3};
+    vector<int> test{6, 2, 5, 1, 7, 4, 8, 3};
 
     cout << lengthOfLISDp(test) << '\n';
     cout << lengthOfLISLineSweep(test) << '\n';
