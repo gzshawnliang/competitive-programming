@@ -48,5 +48,8 @@ int main()
     removeMask(x);
     cout << bitset<8>(x).to_string() << '\n';
 
+    int k = 1 << 4;
+    cout << "k=" << k << '\n';
+
     return 0;
 }
