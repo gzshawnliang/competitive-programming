@@ -51,5 +51,8 @@ int main()
     int k = 1 << 4;
     cout << "k=" << k << '\n';
 
+    // vector<int> vec = {1, 2, 3, 4, 5, 6, 7};
+    // vec[10000]=10;
+
     return 0;
 }
