@@ -78,7 +78,7 @@ int lengthOfLISLineSweep(vector<int> & nums)
 int main()
 {
     vector<int> test{6, 2, 5, 1, 7, 4, 8, 3};
-
+    
     cout << lengthOfLISDp(test) << '\n';
     cout << lengthOfLISLineSweep(test) << '\n';
 
