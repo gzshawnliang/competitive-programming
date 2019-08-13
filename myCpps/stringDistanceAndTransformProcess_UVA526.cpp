@@ -59,14 +59,14 @@ int main()
         {
             dp[i][0] = i;
             posAdd[i][0] = -1 * i;
-            f[i][0] = _node(2, i, '~', i - 1, 0);
+            f[i][0] = _node(2, i + posAdd[i - 1][0], '~', i - 1, 0);
         }
 
         for (int j = 1; j <= sizeB; ++j)
         {
             dp[0][j] = j;
             posAdd[0][j] = j;
-            f[0][j] = _node(1, j, b[j], 0, j - 1);
+            f[0][j] = _node(1, 1 + posAdd[0][j - 1], b[j], 0, j - 1);
         }
         
         for (int i = 1; i <= sizeA; ++i)
