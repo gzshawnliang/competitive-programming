@@ -105,7 +105,9 @@ int main()
     string target = "AGTAAGTAGGC";
     cout << source << "->" << target << '\n';
     cout << "edit distance Dp = " << minDistanceDp(source, target) << '\n';
-    cout << "edit distance Recursion = " << minDistanceRecursion(source, target, source.length(), target.length()) << '\n';
+    cout << "edit distance Recursion = ";
+    cout << minDistanceRecursion(source, target, source.length(), target.length()) << '\n';
 
     return 0;
 }
+
