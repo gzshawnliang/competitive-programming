@@ -101,8 +101,8 @@ int minDistanceDp(string word1, string word2)
 
 int main()
 {
-    string source = "sailn";
-    string target = "failing";
+    string source = "AGTCTGACGC";
+    string target = "AGTAAGTAGGC";
     cout << source << "->" << target << '\n';
     cout << "edit distance Dp = " << minDistanceDp(source, target) << '\n';
     cout << "edit distance Recursion = " << minDistanceRecursion(source, target, source.length(), target.length()) << '\n';
