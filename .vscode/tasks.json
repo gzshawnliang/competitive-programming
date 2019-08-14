@@ -102,8 +102,12 @@
             //vscode输出窗口不强制显示英文提示，可能错误出现乱码
             "taskName": "rebuild and run(local) chs",
             "suppressTaskName": true,
-            "command": "powershell",
+            "command": "cmd",
             "args": [
+                "/C",
+                "@chcp 65001",
+                "&&",
+                "powershell",
                 "-executionpolicy",
                 "bypass",
                 "-File",
