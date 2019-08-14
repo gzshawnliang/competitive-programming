@@ -2,8 +2,8 @@
 
 using namespace std;
 
-//ifstream fin("LCS.in");
-//ofstream fout("LCS.out");
+ifstream fin("LCS.in");
+ofstream fout("LCS.out");
 
 int LCSRecursion(string & word1, string & word2, int i, int j)
 {
@@ -21,6 +21,30 @@ int LCSRecursion(string & word1, string & word2, int i, int j)
         return max(LCSRecursion(word1, word2, i - 1, j),
                    LCSRecursion(word1, word2, i, j - 1));
     }
+}
+
+int LCSLength(string & word1, string & word2)
+{
+    int n = word1.length();
+    int m = word2.length();
+
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1));
+
+    // 初始化空字符串的情况
+    for (int i = 1; i <= n; ++i)
+        dp[i][0] = 0;
+
+    for (int j = 1; j <= m; ++j)
+        dp[0][j] = 0;
+
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= m; ++j)
+            if (word1[i - 1] == word2[j - 1])
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            else
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+
+    return dp[n][m];
 }
 
 int LCSDp(string & word1, string & word2, vector<vector<string>> & path)
@@ -90,8 +114,28 @@ void printLCS(vector<vector<string>> & path, string & word1, int i, int j)
 
 int main()
 {
+    while (true)
+    {
+        string x = "";
+        string y = "";
+
+        getline(fin, x);
+        if (fin.good() == false)
+        {
+            break;
+        }
+        getline(fin, y);
+        fout << LCSLength(x, y) << "\n";
+    }
+    return 0;
+}
+
+int main2()
+{
+    //算法导论例子
     string x = "ABCBDAB";
     string y = "BDCABA";
+
     vector<vector<string>> path;
 
     cout << setw(14) << "X: " << x << '\n';
@@ -106,20 +150,20 @@ int main()
     //输出过程
     cout << "\n输出过程\n";
     cout << "--------------------\n";
-    
+
     cout << "  ";
-    for (auto k:y)
+    for (auto k : y)
         cout << k << " ";
 
-    int k=0;
-    for (auto i:path)
+    int k = 0;
+    for (auto i : path)
     {
-        int l=0;
-        if(k>0)
-            cout << x[k-1] << " ";
-        for (auto j:i)
+        int l = 0;
+        if (k > 0)
+            cout << x[k - 1] << " ";
+        for (auto j : i)
         {
-            if(l>0)
+            if (l > 0)
                 cout << j << " ";
 
             ++l;
@@ -128,6 +172,6 @@ int main()
         ++k;
     }
     cout << "--------------------\n";
-    cout << "完成" <<'\n';
+    cout << "完成" << '\n';
     return 0;
 }
