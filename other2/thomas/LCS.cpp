@@ -100,11 +100,13 @@ int main()
     cout << setw(14) << "LCSDp: " << LCSDp(x, y, path) << '\n';
 
     cout << setw(14) << "LCS: ";
+    //构造LCS
     printLCS(path, x, x.length(), y.length());
 
 
     //输出过程
-    cout << "\n--------------------\n";
+    cout << "\n输出过程\n";
+    cout << "--------------------\n";
     
     cout << "  ";
     for (auto k:y)
