@@ -525,6 +525,6 @@ if (Test-Path $SourceFileName) {
     }
 }
 else {
-    Write-Host  "file $SourceFileName does not exist" -ForegroundColor Red
+    Write-Host  "source file $SourceFileName does not exist" -ForegroundColor Red
 }
 
