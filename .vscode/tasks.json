@@ -124,8 +124,12 @@
             //vscode输出窗口强制显示英文提示，否则出现乱码
             "taskName": "rebuild and run(local)",
             "suppressTaskName": true,
-            "command": "powershell",
+            "command": "cmd",
             "args": [
+                "/C",
+                "@chcp 65001",
+                "&&",
+                "powershell",
                 "-Command",
                 "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++11 -O2 -Wall -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
