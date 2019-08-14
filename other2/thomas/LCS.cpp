@@ -102,14 +102,31 @@ int main()
     cout << setw(14) << "LCS: ";
     printLCS(path, x, x.length(), y.length());
 
+
+    //输出过程
+    cout << "\n--------------------\n";
+    
+    cout << "  ";
+    for (auto k:y)
+        cout << k << " ";
+
+    int k=0;
     for (auto i:path)
     {
+        int l=0;
+        if(k>0)
+            cout << x[k-1] << " ";
         for (auto j:i)
         {
-            cout << j << " ";
+            if(l>0)
+                cout << j << " ";
+
+            ++l;
         }
         cout << '\n';
+        ++k;
     }
+    cout << "--------------------\n";
     cout << "完成" <<'\n';
     return 0;
 }
