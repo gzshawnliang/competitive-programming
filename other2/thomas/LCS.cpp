@@ -248,6 +248,7 @@ int main()
     cout << setw(14) << "Y: " << y << '\n';
     cout << setw(14) << "LCSRecursion: ";
     cout << LCSRecursion(x, y, x.length(), y.length()) << '\n';
+
     cout << setw(14) << "LCSDp: " << LCS2Dp(x, y, path) << '\n';
     cout << setw(14) << "LCS: ";
 
