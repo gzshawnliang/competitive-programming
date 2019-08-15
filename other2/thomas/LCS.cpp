@@ -220,9 +220,9 @@ void printLCS(vector<vector<string>> & path, string & word1, int i, int j)
     }
 }
 
-int main()
+int main_uva10405()
 {
-    //10405 - Longest Common Subsequence
+    //UVA 10405 - Longest Common Subsequence
     while (fin.good())
     {
         string x = "";
