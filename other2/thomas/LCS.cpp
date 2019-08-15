@@ -31,7 +31,7 @@ int LCSRecursion(string & word1, string & word2, int i, int j)
     }
 }
 
-/**LCS DP版本（滚动数组），仅计算长度
+/**LCS DP版本（滚动数组），仅计算长度。空间复杂度优化，时间复杂度一样
  * 
  * @param  {string} word1 : 【输入】第一个字符
  * @param  {string} word2 : 【输入】第二个字符
@@ -62,7 +62,7 @@ int LCS2Length(string & word1, string & word2)
     return dp[n % 2][m];
 }
 
-/**LCS DP版本(滚动数组)，计算长度和路径
+/**LCS DP版本(滚动数组)，计算长度和路径。空间复杂度优化，时间复杂度一样
  * 
  * @param  {string} word1                : 【输入】第一个字符
  * @param  {string} word2                : 【输入】第二个字符
@@ -111,7 +111,7 @@ int LCS2Dp(string & word1, string & word2, vector<vector<string>> & path)
     return dp[n % 2][m];
 }
 
-/**LCS DP版本(正常数组)，仅计算长度
+/**LCS DP版本(正常数组)，仅计算长度。
  * 
  * @param  {string} word1 : 【输入】第一个字符
  * @param  {string} word2 : 【输入】第二个字符
@@ -193,7 +193,7 @@ int LCSDp(string & word1, string & word2, vector<vector<string>> & path)
     return dp[n][m];
 }
 
-/**打印输出路径
+/**打印输出路径(正常数组)
  * 
  * @param  {vector<vector<string>>} path : 【输入】路径数组
  * @param  {string} word1                : 【输入】第一个字符
