@@ -236,9 +236,9 @@ int main_uva10405()
     return 0;
 }
 
-int main2()
+int main()
 {
-    //算法导论例子
+    //算法导论例子P222
     string x = "ABCBDAB";
     string y = "BDCABA";
 
