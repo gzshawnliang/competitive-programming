@@ -153,7 +153,9 @@ int LCSDp(string & word1, string & word2, vector<vector<string>> & path)
     int n = word1.length();
     int m = word2.length();
 
-    vector<vector<int>> dp(n + 1, vector<int>(m + 1));
+    //dp[i][j] 截止到word1前i项，word2前j项的最长的LCS长度（最优解）
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1));  
+    
     path.resize(n + 1, vector<string>(m + 1));
 
     // 初始化空字符串的情况
