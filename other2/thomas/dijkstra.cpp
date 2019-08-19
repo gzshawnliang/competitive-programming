@@ -1,3 +1,7 @@
+/** 基础练习题
+ * https://www.spoj.com/problems/EZDIJKST/
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
