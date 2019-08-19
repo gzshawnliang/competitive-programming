@@ -5,22 +5,34 @@ using namespace std;
 //const int maxnode = (int)1e6*10;
 
 const int maxnode = (int)1e2;   //最大节点数量
+const int sigmaSize =26;        //字符集的大小，小写字母a~z=26,Ascii所有字符128
 
-int tr[maxnode][26];        //tr保存每个节点的子节点。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
+int tr[maxnode][sigmaSize];     //tr保存每个节点的子节点。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
 
+
+
+/**在计算机科学中，trie，又称前缀树或字典树
+ * 常见应用如下
+ * 1 – Substring Check
+ * 2 – Searching All Patterns
+ * 3 – Longest Repeated Substring
+ * 4 – Build Linear Time Suffix Array
+ * 5 – Longest Common Substring
+ * 6 – Longest Palindromic Substring
+ */
 class trie
 {
   public:
-    int sigmaSize;          //字符集的大小，小写字母a~z=26,Ascii所有字符128
+    //int sigmaSize;          //字符集的大小，小写字母a~z=26,Ascii所有字符128
     //vector<vector<int>> tr; //tr保存每个节点的子节点。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
     
     bitset<maxnode> isEndChar;  // isEndChar[i],第i个结点是否是字符串的最尾的字符
     
     int nodeIdx;                //节点的编号，从1开始
 
-    trie(int sigmaSize)
+    trie()
     {
-        this->sigmaSize = sigmaSize;
+        //this->sigmaSize = sigmaSize;
         // tr.clear();
         // tr.shrink_to_fit();
         // tr.assign(maxnode, vector<int>(sigmaSize, 0));
@@ -28,6 +40,9 @@ class trie
         nodeIdx = 0;
     }
 
+    ~trie()
+    {
+    }
     
     /*插入字符串s*/
     void insert(const string & s)
@@ -109,7 +124,7 @@ int main()
     //大数据测试
     // freopen("Trie.in", "r", stdin);      
     // freopen("Trie.out", "w", stdout);     
-    // trie trie1(26);
+    // trie trie1();
     // int n;
     // cin >> n ;
     // for (int i = 0; i <= n - 1; ++i)
@@ -129,7 +144,7 @@ int main()
 
     //例子
     vector<string> a = {"abcd", "abd", "cdd", "efg", "hij", "hi"};
-    trie trie1(26);
+    trie trie1;
     int i = 0;
     for (auto s : a)
     {
