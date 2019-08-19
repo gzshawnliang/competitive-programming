@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//INF = 1B, not 2^31-1 to avoid overflow
+const int INF = 1e9; 
+
 class vertex
 {
   public:
@@ -17,8 +20,6 @@ class vertex
         return this->distance > b.distance;
     }
 };
-
-const int INF = 1e9; // INF = 1B, not 2^31-1 to avoid overflow
 
 class dijkstra
 {
@@ -87,8 +88,7 @@ class dijkstra
             reverse(i.begin(), i.end());
             multiPath2.push_back(i);
         }
-        return 
-        ;
+        return;
     }
 
     void RunNoPath(int s)
