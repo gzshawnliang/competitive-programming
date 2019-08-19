@@ -40,23 +40,45 @@ struct random
         distr.param(std::uniform_int_distribution<unsigned long long>::param_type(a, b));
     }
 
-    //note取得[a,b]的随机整数,a,b可以很大在long long范围
+    
+    /**取得[a,b]的随机整数,a,b可以很大在long long范围
+     * 
+     * @param  {unsigned} long : 【输入】较小的整数
+     * @param  {unsigned} long : 【输入】较大的整数
+     * @return {unsigned}      : 【返回】随机数
+     */
     unsigned long long GetRand(unsigned long long  a,unsigned long long  b)
     {
         distr.param(std::uniform_int_distribution<unsigned long long>::param_type(a, b));   
         return distr(generator);
     }
+
+    
+    /**取得[a,b]的随机整数,a,b在构造函数设定
+     * 
+     * @return {unsigned}  : 【返回】随机数
+     */
     unsigned long long GetRand()
     {
         return distr(generator);
     }
 
+    /**获取随机布尔数
+     * 
+     * @return {bool}  : 随机布尔数
+     */
     bool GetBoolRand()
     {
         return distrBool(generator);
     }    
 
-    //产生[a,b]之间不重复的随机数,缺点：如数据量比较大占内存
+    //note：如数据量比较大占内存
+    /**产生[a,b]之间不重复的随机数
+     * 
+     * @param  {int} a        : 【输入】较小的整数
+     * @param  {int} b        : 【输入】较大的整数
+     * @return {vector<int>}  : 【返回】不重复的随机数的数组
+     */
     vector<int> GetUniqueRand(int a,int b)
     {
         vector<int> vi;
