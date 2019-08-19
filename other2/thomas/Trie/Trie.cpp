@@ -14,7 +14,7 @@ class trie
     int sigmaSize;          //字符集的大小，小写字母a~z=26,Ascii所有字符128
     //vector<vector<int>> tr; //tr[i][j] 表示结点 i 的 j 字符指向的下一个结点
     
-    bitset<maxnode> exist;
+    bitset<maxnode> exist;  // 该结点结尾的字符串是否存在
     int cnt;
 
     trie(int sigmaSize)
@@ -55,7 +55,7 @@ class trie
      * @param  {string} s : 
      * @return {bool}     : 
      */
-    bool find(const string & s)
+    bool contains(const string & s)
     { 
         //查找字符串
         int p = 0;
@@ -76,7 +76,7 @@ class trie
      * @param  {string} s : 
      * @return {bool}     : 
      */
-    bool start_with(const string & s)
+    bool containsPrefix(const string & s)
     { 
         //查找字符串前缀
         int p = 0;
@@ -90,6 +90,16 @@ class trie
             p = tr[p][c];
         }
         return true;
+    }
+
+    // todo
+    /**移除字符串s
+     * 
+     * @param  {string} s : 
+     */
+    void remove(const string & s)
+    {
+
     }
 
   private:
@@ -127,7 +137,7 @@ int main()
     // {
     //     string s;
     //     cin >>s;
-    //     cout << trie1.find(s) << '\n';
+    //     cout << trie1.contains(s) << '\n';
     // }
 
     //例子
@@ -139,8 +149,8 @@ int main()
         ++i;
         trie1.insert(s);
     }
-    cout << trie1.find("te") << '\n';
-    cout << trie1.start_with("te") << '\n';
+    cout << trie1.contains("te") << '\n';
+    cout << trie1.containsPrefix("te") << '\n';
 
     cout.flush();
     fclose(stdin);
