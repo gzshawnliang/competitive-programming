@@ -4,18 +4,19 @@ using namespace std;
 
 //const int maxnode = (int)1e6*10;
 
-const int maxnode = (int)1e2;
+const int maxnode = (int)1e2;   //最大节点数量
 
-int tr[maxnode][26];        //tr[i][j] 表示结点 i 的 j 字符指向的下一个结点
+int tr[maxnode][26];        //tr保存每个节点的子节点。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
 
 class trie
 {
   public:
     int sigmaSize;          //字符集的大小，小写字母a~z=26,Ascii所有字符128
-    //vector<vector<int>> tr; //tr[i][j] 表示结点 i 的 j 字符指向的下一个结点
+    //vector<vector<int>> tr; //tr保存每个节点的子节点。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
     
-    bitset<maxnode> exist;  // 该结点结尾的字符串是否存在
-    int cnt;
+    bitset<maxnode> isEndChar;  // isEndChar[i],第i个结点是否是字符串的最尾的字符
+    
+    int nodeIdx;                //节点的编号，从1开始
 
     trie(int sigmaSize)
     {
@@ -24,79 +25,65 @@ class trie
         // tr.shrink_to_fit();
         // tr.assign(maxnode, vector<int>(sigmaSize, 0));
         memset(tr,0,sizeof(tr));
-        cnt = 0;
+        nodeIdx = 0;
     }
 
     
-    /**插入字符串s
-     * 
-     * @param  {string} s : 
-     */
+    /*插入字符串s*/
     void insert(const string & s)
     {
-        int p = 0;
+        int next = 0;
         int len=s.length();
         for (int i = 0; i <= len-1; ++i)
         {
             int c = idx(s[i]);
-            if (tr[p][c] == 0) // 如果没有，就添加结点
+            if (tr[next][c] == 0) // 如果没有，就添加结点
             {
-                ++cnt;
-                tr[p][c] = cnt;
+                ++nodeIdx;
+                tr[next][c] = nodeIdx;
             }
-            p = tr[p][c];
+            next = tr[next][c];
         }
-        exist[p] = 1;
+        isEndChar[next] = 1;
     }
 
     
-    /**是否存在s字符串
-     * 
-     * @param  {string} s : 
-     * @return {bool}     : 
-     */
+    /*是否存在s字符串*/
     bool contains(const string & s)
     { 
         //查找字符串
-        int p = 0;
+        int next = 0;
         int len=s.length();
         for (int i = 0; i <= len-1; ++i)
         {
             int c = idx(s[i]);
-            if (tr[p][c] == 0)
+            if (tr[next][c] == 0)
                 return 0;
 
-            p = tr[p][c];
+            next = tr[next][c];
         }
-        return exist[p];
+        return isEndChar[next];
     }
 
-    /**是否存在s开头的字符串
-     * 
-     * @param  {string} s : 
-     * @return {bool}     : 
-     */
+    /*是否存在s开头的字符串*/
     bool containsPrefix(const string & s)
     { 
         //查找字符串前缀
-        int p = 0;
+        int next = 0;
         int len=s.length();
         for (int i = 0; i <= len-1; ++i)
         {
             int c = idx(s[i]);
-            if (tr[p][c] == 0)
+            if (tr[next][c] == 0)
                 return 0;
 
-            p = tr[p][c];
+            next = tr[next][c];
         }
         return true;
     }
 
     // todo
-    /**移除字符串s
-     * 
-     * @param  {string} s : 
-     */
+    /*移除字符串s*/
     void remove(const string & s)
     {
 
@@ -141,7 +128,7 @@ int main()
     // }
 
     //例子
-    vector<string> a = {"a", "to", "tea", "ted", "ten", "i", "in", "inn"};
+    vector<string> a = {"abcd", "abd", "cdd", "efg", "hij", "hi"};
     trie trie1(26);
     int i = 0;
     for (auto s : a)
@@ -149,8 +136,8 @@ int main()
         ++i;
         trie1.insert(s);
     }
-    cout << trie1.contains("te") << '\n';
-    cout << trie1.containsPrefix("te") << '\n';
+    cout << trie1.contains("ab") << '\n';
+    cout << trie1.containsPrefix("ab") << '\n';
 
     cout.flush();
     fclose(stdin);
