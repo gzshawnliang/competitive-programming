@@ -4,7 +4,7 @@ using namespace std;
 
 //const int MAX_NODE = (int)1e6*10;
 
-const int MAX_NODE = (int)1e6*10; //最大节点数量
+const int MAX_NODE = (int)1e2; //最大节点数量
 const int MAX_CHAR = 26;       //字符集的大小，小写字母a~z=26,Ascii所有字符128
 
 //todo:数据量大的时候100万以上，vector初始化比固定数组慢，原因未知
@@ -36,6 +36,8 @@ class trie
      * @param  {char} c : 
      * @return {int}    : 
      */
+
+
     int idx(char c)
     {
         return c - 'a';
@@ -71,12 +73,16 @@ public:
         //tr.assign(MAX_NODE,{0});
         //int (*tr)[26] = new int[MAX_NODE][26]; 
 
+        clear();
+    }
+
+    void clear()
+    {
         memset(tr, 0, sizeof(tr));
         memset(WordCount, 0, sizeof(WordCount));
         lastCharTag.reset();
         nodeIdx = 0;
     }
-
 
     /*插入字符串s*/
     void insert(const string & s)
@@ -97,34 +103,42 @@ public:
         ++WordCount[next];
     }
 
-    // todo
-    /*建立单个字符的trie，包含子串*/
+    /*插入字符串s*/
     void buildSingleString(const string & s)
     {
         int next = 0;
         int len = s.length();
+        vector<int> lastIds;
+        lastIds.push_back(next);
+
         for (int i = 0; i <= len - 1; ++i)
         {
             int c = idx(s[i]);
-            if (tr[next][c] == 0) // 如果没有，就添加结点
+            vector<int> lastIds2;
+            for(auto j:lastIds)
             {
-                //孩子
-                ++nodeIdx;
-                tr[next][c] = nodeIdx;
-                lastCharTag[next] = 1;  //所有子串都做标记
-                ++WordCount[next];
-
-                //兄弟
-                int brother=next+1;
-                ++nodeIdx;
-                tr[brother][c] = nodeIdx;
-                lastCharTag[brother] = 1;  //所有子串都做标记
-                ++WordCount[brother];
-
+                next=j;
+                if (tr[next][c] == 0) // 如果没有，就添加结点
+                {
+                    ++nodeIdx;
+                    tr[next][c] = nodeIdx;
+                    lastIds2.push_back(nodeIdx);
+               
+                }
+                else
+                {
+                    lastIds2.push_back(tr[next][c]);
+                }
+                lastCharTag[tr[next][c]] = 1;
+                ++WordCount[tr[next][c]];                 
             }
-            next = tr[next][c];
+            //next = tr[next][c];
+            lastIds.clear();
+            lastIds.assign(lastIds2.begin(),lastIds2.end());
+            lastIds.push_back(0);
         }
-    }
+
+    }    
 
     /*是否存在s字符串*/
     bool exists(const string & s)
@@ -295,19 +309,25 @@ int main()
     //例子
     vector<string> a = {"abcd", "abd", "ab", "cdd", "efg", "hij", "hi", "cdd"};
     trie trie1;
+    for (auto s : a)
+    {
+        trie1.insert(s);
+    }
+    cout << trie1.exists("ab") << '\n';
+    cout << trie1.existsPrefix("ab") << '\n';
+    cout << trie1.count("cdd") << '\n';
+    cout << trie1.countPrefix("ab") << '\n';
+    cout << "-------------------" << '\n';
+    trie1.clear();
 
-    trie1.buildSingleString("abc");
-
-    // int i = 0;
-    // for (auto s : a)
-    // {
-    //     ++i;
-    //     trie1.insert(s);
-    // }
-    // cout << trie1.exists("ab") << '\n';
-    // cout << trie1.existsPrefix("ab") << '\n';
-    // cout << trie1.count("cdd") << '\n';
-    // cout << trie1.countPrefix("ab") << '\n';
+    string s="abcak";
+    trie1.buildSingleString(s);
+    cout << trie1.exists("ab") << '\n';
+    cout << trie1.exists("abc") << '\n';
+    cout << trie1.exists("bc") << '\n';
+    cout << trie1.exists("cak") << '\n';
+    cout << trie1.exists("ka") << '\n';
+    cout << trie1.exists("ck") << '\n';
 
     return 0;
 }
