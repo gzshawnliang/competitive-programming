@@ -4,8 +4,8 @@ using namespace std;
 
 //const int MAX_NODE = (int)1e6*10;
 
-const int MAX_NODE = (int)1e2; //最大节点数量
-const int MAX_CHAR = 26;       //字符集的大小，小写字母a~z=26,Ascii所有字符128
+const int MAX_NODE = (int)1e4; //最大节点数量
+const int MAX_CHAR = 128;      //字符集的大小，小写字母a~z=26,Ascii所有字符128
 
 //todo:数据量大的时候100万以上，vector初始化比固定数组慢，原因未知
 int tr[MAX_NODE][MAX_CHAR]; //tr节点的子节点。i是节点唯一编号，j是字符编号(ascii码-'a')。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
@@ -27,7 +27,7 @@ bitset<MAX_NODE> vist = 0;    // 节点是否访问过dfs使用
  */
 class trie
 {
-   private:
+  private:
     //vector<vector<int>> tr;
     //vector<vector<int>> * tr; //tr保存每个节点的子节点。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
 
@@ -37,10 +37,9 @@ class trie
      * @return {int}    : 
      */
 
-
     int idx(char c)
     {
-        return c - 'a';
+        return c - '\0';
     }
 
     void dfsChildren(int currIdx, int & result)
@@ -61,8 +60,7 @@ class trie
         }
     }
 
-
-public:
+  public:
     trie()
     {
         //this->MAX_CHAR = MAX_CHAR;
@@ -71,7 +69,7 @@ public:
         //tr.assign(MAX_NODE, vector<int>(MAX_CHAR));
 
         //tr.assign(MAX_NODE,{0});
-        //int (*tr)[26] = new int[MAX_NODE][26]; 
+        //int (*tr)[26] = new int[MAX_NODE][26];
 
         clear();
     }
@@ -115,30 +113,28 @@ public:
         {
             int c = idx(s[i]);
             vector<int> lastIds2;
-            for(auto j:lastIds)
+            for (auto j : lastIds)
             {
-                next=j;
+                next = j;
                 if (tr[next][c] == 0) // 如果没有，就添加结点
                 {
                     ++nodeIdx;
                     tr[next][c] = nodeIdx;
                     lastIds2.push_back(nodeIdx);
-               
                 }
                 else
                 {
                     lastIds2.push_back(tr[next][c]);
                 }
                 lastCharTag[tr[next][c]] = 1;
-                ++WordCount[tr[next][c]];                 
+                ++WordCount[tr[next][c]];
             }
             //next = tr[next][c];
             lastIds.clear();
-            lastIds.assign(lastIds2.begin(),lastIds2.end());
+            lastIds.assign(lastIds2.begin(), lastIds2.end());
             lastIds.push_back(0);
         }
-
-    }    
+    }
 
     /*是否存在s字符串*/
     bool exists(const string & s)
@@ -313,21 +309,35 @@ int main()
     {
         trie1.insert(s);
     }
+
     cout << trie1.exists("ab") << '\n';
     cout << trie1.existsPrefix("ab") << '\n';
     cout << trie1.count("cdd") << '\n';
     cout << trie1.countPrefix("ab") << '\n';
-    cout << "-------------------" << '\n';
+    cout << "---------------------------" << '\n';
     trie1.clear();
 
-    string s="abcak";
+    // string s="abcak";
+    // trie1.buildSingleString(s);
+    // cout << trie1.exists("ab") << '\n';
+    // cout << trie1.exists("abc") << '\n';
+    // cout << trie1.exists("bc") << '\n';
+    // cout << trie1.exists("cak") << '\n';
+    // cout << trie1.exists("ka") << '\n';
+    // cout << trie1.exists("ck") << '\n';
+    
+    string s = "THIS IS A TEST TEXT$";
+    vector<string> pattern = {"TEST", "A", " ", "IS A", " IS A", "TEST1", "THIS IS GOOD", "TES", "TESA", "ISB"};
     trie1.buildSingleString(s);
-    cout << trie1.exists("ab") << '\n';
-    cout << trie1.exists("abc") << '\n';
-    cout << trie1.exists("bc") << '\n';
-    cout << trie1.exists("cak") << '\n';
-    cout << trie1.exists("ka") << '\n';
-    cout << trie1.exists("ck") << '\n';
+    // cout << trie1.exists("ab") << '\n';
+    cout << s <<'\n';
+    cout << "---------------------------" << '\n';
+    for (auto s1 : pattern)
+    {
+        string s2 = trie1.exists(s1) ? "" : "NOT";
+        s1 = "<" + s1 + ">";
+        cout << "Pattern " << std::left << setw(15) << s1 << " is " << setw(3) << s2 << " a Substring" << '\n';
+    }
 
     return 0;
 }
