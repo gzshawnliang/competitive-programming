@@ -103,7 +103,7 @@ public:
         ++WordCount[next];
     }
 
-    /*插入字符串s*/
+    /*创建单个字符和子串的Trie*/
     void buildSingleString(const string & s)
     {
         int next = 0;
