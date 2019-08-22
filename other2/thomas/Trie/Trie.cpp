@@ -7,7 +7,7 @@ using namespace std;
 const int MAX_NODE = (int)1e4; //最大节点数量
 const int MAX_CHAR = 128;      //字符集的大小，小写字母a~z=26,Ascii所有字符128
 
-//todo:数据量大的时候100万以上，vector初始化比固定数组慢，原因未知
+//NOTE:数据量大的时候100万以上，vector初始化比固定数组慢
 int tr[MAX_NODE][MAX_CHAR]; //tr节点的子节点。i是节点唯一编号，j是字符编号(ascii码-'a')。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
 
 int WordCount[MAX_NODE]; // 第i个结点如果是字符串的最尾的字符，存储此字符串的数量
