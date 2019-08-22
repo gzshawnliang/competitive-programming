@@ -300,7 +300,7 @@ int main_map_bigData()
  * 
  * @return {int}  : 
  */
-int main()
+int main_trie_smallData()
 {
     //例子
     vector<string> a = {"abcd", "abd", "ab", "cdd", "efg", "hij", "hi", "cdd"};
@@ -326,8 +326,8 @@ int main()
     // cout << trie1.exists("ka") << '\n';
     // cout << trie1.exists("ck") << '\n';
     
-    string s = "THIS IS A TEST TEXT$";
-    vector<string> pattern = {"TEST", "A", " ", "IS A", " IS A", "TEST1", "THIS IS GOOD", "TES", "TESA", "ISB"};
+    string s = "THIS IS A SHORT TEXT$";
+    vector<string> pattern = {"SHORT", "A", " ", "IS A", " IS A", "TEST1", "THIS IS GOOD", "TES", "TESA", "ISB"};
     trie1.buildSingleString(s);
     // cout << trie1.exists("ab") << '\n';
     cout << s <<'\n';
@@ -339,5 +339,15 @@ int main()
         cout << "Pattern " << std::left << setw(15) << s1 << " is " << setw(3) << s2 << " a Substring" << '\n';
     }
 
+    return 0;
+}
+
+
+int main()
+{
+    //main_trie_bigData();
+    //main_map_bigData();
+
+    main_trie_smallData();
     return 0;
 }
