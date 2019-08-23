@@ -1,13 +1,13 @@
 # /***********************************************************
-#  * @Ãû³Æ:     ±àÒë²¢ÔËĞĞc++´úÂë£¬×Ô¶¯¼ÆËãÔËĞĞÊ±¼ä
-#  * @×÷Õß:	  ÁºçóÊ¥ 
-#  * @´´½¨Ê±¼ä: 2017-11-23 21:06:03 
-#  * @ĞŞ¸ÄÈË:   ÁºçóÊ¥ 
-#  * @ĞŞ¸ÄÊ±¼ä: 2017-12-23 21:07:12
-#  * @±¸×¢:     ĞèÒªpowershell 5.1ÔËĞĞ,ÏÂÔØµØÖ·ÈçÏÂ
+#  * @åç§°:     ç¼–è¯‘å¹¶è¿è¡Œc++ä»£ç ï¼Œè‡ªåŠ¨è®¡ç®—è¿è¡Œæ—¶é—´
+#  * @ä½œè€…:	  æ¢çåœ£ 
+#  * @åˆ›å»ºæ—¶é—´: 2017-11-23 21:06:03 
+#  * @ä¿®æ”¹äºº:   æ¢çåœ£ 
+#  * @ä¿®æ”¹æ—¶é—´: 2017-12-23 21:07:12
+#  * @å¤‡æ³¨:     éœ€è¦powershell 5.1è¿è¡Œ,ä¸‹è½½åœ°å€å¦‚ä¸‹
 #               (Windows Management Framework 5.1)
 #               https://www.microsoft.com/en-us/download/details.aspx?id=54616
-#  * @¸üĞÂ:     2017-12-23 21:07:42,Ôö¼Ó±àÒëÔËĞĞÖ®Ç°ÅĞ¶Ï¶ÔÓ¦µÄ½ø³ÌÊÇ·ñÔÚÔËĞĞ,Èç¹û½ø³ÌÔÚÔËĞĞÔòÏÈÍ£Ö¹
+#  * @æ›´æ–°:     2017-12-23 21:07:42,å¢åŠ ç¼–è¯‘è¿è¡Œä¹‹å‰åˆ¤æ–­å¯¹åº”çš„è¿›ç¨‹æ˜¯å¦åœ¨è¿è¡Œ,å¦‚æœè¿›ç¨‹åœ¨è¿è¡Œåˆ™å…ˆåœæ­¢
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -22,18 +22,18 @@ if (Test-Path $SourceFileName) {
 
     $File = Get-Item -Path $SourceFileName
 
-    #±àÒëÆ÷ÃüÁîĞĞ
+    #ç¼–è¯‘å™¨å‘½ä»¤è¡Œ
     $gplusplus = "g++.exe"
 
-    #ÏÔÊ¾±àÒëÆ÷ĞÅÏ¢
+    #æ˜¾ç¤ºç¼–è¯‘å™¨ä¿¡æ¯
     start-process $gplusplus "--version" -wait -NoNewWindow
 
     $exeFileName = $File.DirectoryName + "\" + $File.BaseName + ".exe" 
 
-    #Èç¹ûÓĞexeÎÄ¼şÔòÉ¾³ı
+    #å¦‚æœæœ‰exeæ–‡ä»¶åˆ™åˆ é™¤
     if (Test-Path $exeFileName) {
 
-        # Èç¹û½ø³ÌÔÚÔËĞĞÔòÏÈÍ£Ö¹
+        # å¦‚æœè¿›ç¨‹åœ¨è¿è¡Œåˆ™å…ˆåœæ­¢
         $processName=$File.BaseName
         if((Get-Process $processName  -ErrorAction SilentlyContinue) -eq $null) 
         {
@@ -47,25 +47,25 @@ if (Test-Path $SourceFileName) {
             Write-Host "$processName.exe is stoped."
         }
 
-        # É¾³ıexeÎÄ¼ş
+        # åˆ é™¤exeæ–‡ä»¶
         Write-Host  "delete the old executable file $exeFileName"
         Remove-Item $exeFileName -Force
     }
     
-    #±àÒë²ÎÊı
+    #ç¼–è¯‘å‚æ•°
     $arguments = "$SourceFileName -o $exeFileName"
     if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
         $arguments += " " + $CompilerArgs
     }
    
-    #¿ªÊ¼±àÒë
+    #å¼€å§‹ç¼–è¯‘
     Write-Host $gplusplus $arguments 
     start-process $gplusplus $arguments -wait -NoNewWindow
 
-    #ÊÇ·ñ³É¹¦Éú³ÉexeÎÄ¼ş
+    #æ˜¯å¦æˆåŠŸç”Ÿæˆexeæ–‡ä»¶
     if (Test-Path $exeFileName) {
 
-        #»ñÈ¡µ±Ç°exeÎÄ¼şĞÅÏ¢
+        #è·å–å½“å‰exeæ–‡ä»¶ä¿¡æ¯
         $File = Get-Item -Path $exeFileName
 
         Write-Host "g++ compile successfully."
@@ -75,7 +75,7 @@ if (Test-Path $SourceFileName) {
         # & $exeFileName 
         # $sw.Stop()
         # Write-Host "$($File.BaseName + $File.Extension) program exited after $($sw.Elapsed) "  
-        # Write-Host "[start-process]-------------------------------Îó²î1s£¬¿ÉÄÜÆô¶¯½ø³ÌµÄÊ±¼ä²»ÓÃ"
+        # Write-Host "[start-process]-------------------------------è¯¯å·®1sï¼Œå¯èƒ½å¯åŠ¨è¿›ç¨‹çš„æ—¶é—´ä¸ç”¨"
         # $sw = [Diagnostics.Stopwatch]::StartNew()
         # $process = start-process -FilePath $exeFileName -WorkingDirectory $File.DirectoryName -Wait -NoNewWindow -PassThru
         # $sw.Stop()
@@ -84,8 +84,8 @@ if (Test-Path $SourceFileName) {
         # C:\cygwin64\bin\time.exe -f "Process exited after %e seconds" $exeFileName
         
         if ($ShowShellConsole.IsPresent) {
-            # Ê¹ÓÃSystem.Diagnostics.Process·½Ê½Æô¶¯exe
-            # ¿ÉÏÖÊµÏÔÊ¾ÖÕ¶Ë£¬ÊµÏÖcinÊäÈë£¬¼ÆËãÔËĞĞÊ±¼äÓĞĞ©Îó²î¡£¿ÉÓĞ½ø³Ì·µ»ØÖµ"
+            # ä½¿ç”¨System.Diagnostics.Processæ–¹å¼å¯åŠ¨exe
+            # å¯ç°å®æ˜¾ç¤ºç»ˆç«¯ï¼Œå®ç°cinè¾“å…¥ï¼Œè®¡ç®—è¿è¡Œæ—¶é—´æœ‰äº›è¯¯å·®ã€‚å¯æœ‰è¿›ç¨‹è¿”å›å€¼"
             $ps = new-object System.Diagnostics.Process
             $ps.StartInfo.Filename = $exeFileName 
             $ps.StartInfo.UseShellExecute = $true
@@ -98,9 +98,9 @@ if (Test-Path $SourceFileName) {
             Write-Host $msg -ForegroundColor Green
         }
         else {
-            # Ê¹ÓÃ & ·ûºÅ·½Ê½Æô¶¯exe£¬Ã»ÓĞ¿ØÖÆÌ¨ÖÕ¶Ë£¬²»ÄÜcinÊäÈë£¬¼ÆËãÔËĞĞÊ±¼ä±È½Ï¾«×¼£¬ÎŞ½ø³Ì·µ»ØÖµ"
+            # ä½¿ç”¨ & ç¬¦å·æ–¹å¼å¯åŠ¨exeï¼Œæ²¡æœ‰æ§åˆ¶å°ç»ˆç«¯ï¼Œä¸èƒ½cinè¾“å…¥ï¼Œè®¡ç®—è¿è¡Œæ—¶é—´æ¯”è¾ƒç²¾å‡†ï¼Œæ— è¿›ç¨‹è¿”å›å€¼"
             
-            # ÉèÖÃµ±Ç°Ä¿Â¼ÎªexeÎÄ¼şÄ¿Â¼
+            # è®¾ç½®å½“å‰ç›®å½•ä¸ºexeæ–‡ä»¶ç›®å½•
             Set-Location $File.DirectoryName            
             $sw = [Diagnostics.Stopwatch]::StartNew()
             & $exeFileName 
@@ -109,11 +109,11 @@ if (Test-Path $SourceFileName) {
             Write-Host $msg  -ForegroundColor Green
         }
 
-        # Write-Host "\n[Measure-Command]-------------------------------¾«×¼"
+        # Write-Host "\n[Measure-Command]-------------------------------ç²¾å‡†"
         # $processRunElapsed = (Measure-Command {& $exeFileName }).ToString()
         # Write-Host "the program exited after $processRunElapsed"  -ForegroundColor Green
         
-        #  Write-Host "\n[cmd /c]-------------------------------¾«×¼"
+        #  Write-Host "\n[cmd /c]-------------------------------ç²¾å‡†"
         #  $sw = [Diagnostics.Stopwatch]::StartNew()
         #  cmd /c $exeFileName
         #  $sw.Stop()

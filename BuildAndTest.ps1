@@ -7,6 +7,9 @@
 #  * @备注:     需要powershell 5.1运行,下载地址如下
 #               (Windows Management Framework 5.1)
 #               https://www.microsoft.com/en-us/download/details.aspx?id=54616
+#              Win10第一次使用如遇到SecurityError: (:) [], PSSecurityException，解决办法
+#               1.管理员进入powershell命令行 
+#               2.执行命令：Set-ExecutionPolicy RemoteSigned
 #  * @更新:     2017-12-23 21:07:42,增加编译运行之前判断对应的进程是否在运行,如果进程在运行则先停止
 #  * @更新:     2018-11-13 08:07:42,增加多组数据运行测试，显示程序返回值
 #              1.多组数据测试，cpp文件所在的文件夹下所有.in文件都自动用来测试。
