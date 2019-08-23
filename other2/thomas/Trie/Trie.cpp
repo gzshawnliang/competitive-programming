@@ -339,6 +339,10 @@ int main_trie_smallData()
         cout << "Pattern " << std::left << setw(15) << s1 << " is " << setw(3) << s2 << " a Substring" << '\n';
     }
 
+    trie1.clear();
+    s="ababab";
+    trie1.buildSingleString(s);
+    cout << trie1.exists("bababa") << '\n';
     return 0;
 }
 
