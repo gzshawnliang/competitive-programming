@@ -4,7 +4,7 @@ using namespace std;
 
 //const int MAX_NODE = (int)1e6*10;
 
-const int MAX_NODE = (int)1e7; //最大节点数量
+const int MAX_NODE = (int)1e4; //最大节点数量
 const int MAX_CHAR = 26;      //字符集的大小，小写字母a~z=26,Ascii所有字符128
 
 //NOTE:数据量大的时候100万以上，vector初始化比固定数组慢
@@ -110,25 +110,35 @@ class trie
         {
             if(tr[0][start] !=0)
             {
-                int subStringCount=1;
-                int currbadCharCount=0;
+                // dfsSubString(tr[0][start],subStringCount,currbadCharCount);
+                // ans +=subStringCount;
 
-                if(isGood[start] == 0)
-                {
-                    ++currbadCharCount;
-                }
+                int subStringCount = findSubString(tr[0][start]);
+                ans +=subStringCount;                    
                 
-
-                if(currbadCharCount<=maxAccNumber)
-                {
-                    dfsSubString(tr[0][start],subStringCount,currbadCharCount);
-                    ans +=subStringCount;
-                }
             }
         }
         return ans;
     }
 
+    int findSubString(int currIdx)
+    {
+        int subStringCount = 0;
+        int badCharCount =0;
+
+        for (int c = 0; c < 26-1; ++c)
+        {
+            if(tr[currIdx][c] !=0 )
+            {
+                if(isGood[c] == 0)
+                    ++badCharCount;
+                
+                currIdx = tr[currIdx][c];  
+            }
+        }
+        return subStringCount;
+        
+    }
     
     void dfsSubString(int currIdx, int & subStringCount,int currbadCharCount)
     {
@@ -138,7 +148,6 @@ class trie
         }
         else
         {
-            
             for(int c=0;c<=26-1;++c)
             {
                 if(tr[currIdx][c] !=0)
@@ -163,7 +172,6 @@ class trie
             
         }
     }
-
 };
 
 int main()
