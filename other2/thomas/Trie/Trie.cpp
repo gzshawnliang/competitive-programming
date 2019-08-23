@@ -5,7 +5,7 @@ using namespace std;
 //const int MAX_NODE = (int)1e6*10;
 
 const int MAX_NODE = (int)1e4; //最大节点数量
-const int MAX_CHAR = 128;      //字符集的大小，小写字母a~z=26,Ascii所有字符128
+const int MAX_CHAR = 26;      //字符集的大小，小写字母a~z=26,Ascii所有字符128
 
 //NOTE:数据量大的时候100万以上，vector初始化比固定数组慢
 int tr[MAX_NODE][MAX_CHAR]; //tr节点的子节点。i是节点唯一编号，j是字符编号(ascii码-'a')。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
@@ -39,7 +39,7 @@ class trie
 
     int idx(char c)
     {
-        return c - '\0';
+        return c - 'a';
     }
 
     void dfsChildren(int currIdx, int & result)
@@ -312,6 +312,7 @@ int main_trie_smallData()
 
     cout << trie1.exists("ab") << '\n';
     cout << trie1.existsPrefix("ab") << '\n';
+    
     cout << trie1.count("cdd") << '\n';
     cout << trie1.countPrefix("ab") << '\n';
     cout << "---------------------------" << '\n';

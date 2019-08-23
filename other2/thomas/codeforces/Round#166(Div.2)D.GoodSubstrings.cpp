@@ -9,36 +9,21 @@ const int MAX_CHAR = 26;      //字符集的大小，小写字母a~z=26,Ascii所
 
 //NOTE:数据量大的时候100万以上，vector初始化比固定数组慢
 int tr[MAX_NODE][MAX_CHAR]; //tr节点的子节点。i是节点唯一编号，j是字符编号(ascii码-'a')。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
+int subStrNode[MAX_NODE]; // 第i个结点如果是那个开头的子串
 
-int WordCount[MAX_NODE]; // 第i个结点如果是字符串的最尾的字符，存储此字符串的数量
-
-bitset<MAX_NODE> lastCharTag; // lastCharTag[i],第i个结点是否是字符串的最尾的字符
 int nodeIdx;                  //节点的编号，从1开始
 bitset<MAX_NODE> vist = 0;    // 节点是否访问过dfs使用
 
 bitset<27> isGood;
-int maxAccNumber;
 
-/**在计算机科学中，trie，又称前缀树或字典树
- * 常见应用如下
- * 1 – Substring Check
- * 2 – Searching All Patterns
- * 3 – Longest Repeated Substring
- * 4 – Build Linear Time Suffix Array
- * 5 – Longest Common Substring
- * 6 – Longest Palindromic Substring
- */
+int badStringValue[MAX_NODE];
+
+
 class trie
 {
   private:
-    //vector<vector<int>> tr;
-    //vector<vector<int>> * tr; //tr保存每个节点的子节点。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
 
-    /**字符c的索引编号
-     * 
-     * @param  {char} c : 
-     * @return {int}    : 
-     */
+    int maxAccNumber;//the maximum acceptable number of bad characters in a good substring.
 
     int idx(char c)
     {
@@ -46,15 +31,10 @@ class trie
     }
 
   public:
-    trie()
+    int goodStrNumber;
+    trie(int maxAccNumber)
     {
-        //this->MAX_CHAR = MAX_CHAR;
-        //tr.clear();
-        //tr.reserve(MAX_NODE);
-        //tr.assign(MAX_NODE, vector<int>(MAX_CHAR));
-
-        //tr.assign(MAX_NODE,{0});
-        //int (*tr)[26] = new int[MAX_NODE][26];
+        this->maxAccNumber=maxAccNumber;
 
         clear();
     }
@@ -62,19 +42,18 @@ class trie
     void clear()
     {
         memset(tr, 0, sizeof(tr));
-        memset(WordCount, 0, sizeof(WordCount));
-        lastCharTag.reset();
+        memset(subStrNode, -1, sizeof(subStrNode));
         nodeIdx = 0;
+        this->goodStrNumber=0;
     }
 
-    /*创建单个字符和子串的Trie*/
     void buildSingleString(const string & s)
     {
         int next = 0;
         int len = s.length();
         vector<int> lastIds;
         lastIds.push_back(next);
-
+        
         for (int i = 0; i <= len - 1; ++i)
         {
             int c = idx(s[i]);
@@ -87,90 +66,42 @@ class trie
                     ++nodeIdx;
                     tr[next][c] = nodeIdx;
                     lastIds2.push_back(nodeIdx);
+
+                    if(next==0)
+                    {
+                        subStrNode[nodeIdx]=c;
+                    }
+                    else
+                    {
+                        subStrNode[nodeIdx]=subStrNode[next];
+                    }
+                    if(isGood[c]==0)    //bad string
+                    {
+                        ++badStringValue[nodeIdx];
+
+                        if(badStringValue[c]<=maxAccNumber)
+                        {
+                            ++goodStrNumber;
+                        }
+
+                    }
+                    else 
+                    {
+                        int currcol=subStrNode[nodeIdx];
+
+                            ++goodStrNumber;
+                    }
                 }
                 else
                 {
                     lastIds2.push_back(tr[next][c]);
                 }
-                lastCharTag[tr[next][c]] = 1;
-                ++WordCount[tr[next][c]];
             }
-            //next = tr[next][c];
             lastIds.clear();
             lastIds.assign(lastIds2.begin(), lastIds2.end());
             lastIds.push_back(0);
         }
-    }
-
-    int travel()
-    {
-        int ans=0;
-        
-        for(int start=0;start<=25;++start)
-        {
-            if(tr[0][start] !=0)
-            {
-                // dfsSubString(tr[0][start],subStringCount,currbadCharCount);
-                // ans +=subStringCount;
-
-                int subStringCount = findSubString(tr[0][start]);
-                ans +=subStringCount;                    
-                
-            }
-        }
-        return ans;
-    }
-
-    int findSubString(int currIdx)
-    {
-        int subStringCount = 0;
-        int badCharCount =0;
-
-        for (int c = 0; c < 26-1; ++c)
-        {
-            if(tr[currIdx][c] !=0 )
-            {
-                if(isGood[c] == 0)
-                    ++badCharCount;
-                
-                currIdx = tr[currIdx][c];  
-            }
-        }
-        return subStringCount;
-        
-    }
-    
-    void dfsSubString(int currIdx, int & subStringCount,int currbadCharCount)
-    {
-        if(currbadCharCount>maxAccNumber)
-        {
-            return;
-        }
-        else
-        {
-            for(int c=0;c<=26-1;++c)
-            {
-                if(tr[currIdx][c] !=0)
-                {
-                    if(isGood[c] ==0)
-                        ++currbadCharCount;
-                    
-                    if(currbadCharCount>maxAccNumber)
-                    {
-                        --currbadCharCount;
-                        continue;
-                    }
-
-                    ++subStringCount;
-                    dfsSubString(tr[currIdx][c],subStringCount,currbadCharCount);
-
-                    if(isGood[c] == 0)
-                        --currbadCharCount;
-                }
-
-            }
-            
-        }
+        cout <<"";
     }
 };
 
@@ -183,12 +114,13 @@ int main()
     cin>>sourceStr;
     string goobBadStr;
     cin>>goobBadStr;
-    cin>>maxAccNumber;
+    int k;
+    cin>>k;
 
     reverse(goobBadStr.begin(),goobBadStr.end());
     isGood = bitset<27>(goobBadStr);
-    trie trie1;
+    trie trie1(k);
     trie1.buildSingleString(sourceStr);
-    cout << trie1.travel() <<'\n';
+    cout << trie1.goodStrNumber <<'\n';
     return 0;
 }
