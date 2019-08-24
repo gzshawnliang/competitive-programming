@@ -117,33 +117,114 @@ class trie
     }
 };
 
+class trieS
+{
+  private:
+
+    // int num = 1;
+    // vector<int> count;
+    // vector<vector<int>> a, g;
+
+  public:
+
+    int num = 1;
+    vector<int> count;
+    vector<vector<int>> a, g;
+
+    trieS()
+    {
+        count.assign(nc, 0);
+        a.assign(nc, vector<int>(cc, -1));
+        g.assign(nc, vector<int>());
+    }
+    
+    void build(const string & s)
+    {
+        int size = s.size();
+        vector<int> lastNum;
+        for (int i = 0; i <= size - 1; ++i)
+        {
+            if (i == 0)
+            {
+                a[0][s[i]] = num;
+                g[0].push_back(s[i]);
+                lastNum.push_back(num);
+                ++num;
+            }
+            else
+            {
+                vector<int> lastNumTemp = lastNum; lastNum.clear();
+                int sizeL = lastNumTemp.size();
+                for (int j = 0; j <= sizeL - 1; ++j)
+                {
+                    int last = lastNumTemp[j];
+
+                    if (a[last][s[i]] == -1)
+                    {
+                        a[last][s[i]] = num;
+                        g[last].push_back(s[i]);
+                        lastNum.push_back(num);
+                        ++num;
+                    }
+                }
+
+                if (a[0][s[i]] == -1)
+                {
+                    a[0][s[i]] = num;
+                    g[0].push_back(s[i]);
+                    lastNum.push_back(num);
+                    ++num;
+                }
+
+                if (a[a[0][s[i - 1]]][s[i]] == -1)
+                {
+                    a[a[0][s[i - 1]]][s[i]] = num;
+                    g[a[0][s[i - 1]]].push_back(s[i]);
+                    lastNum.push_back(num);
+                    ++num;
+                }
+            }
+        }
+    };
+
+    bool find(const string & s)
+    {
+        int size = s.size(), last = 0;
+        for (int i = 0; i <= size - 1; ++i)
+        {
+            if (a[last][s[i]] == -1)
+            {
+                return 0;
+            }
+            else
+            {
+                last = a[last][s[i]];
+            }
+        }
+        return 1;
+    }
+};
+
 int main()
 {
-    //例子
-    // vector<string> a = {"abcd", "abd", "ab", "cdd", "efg", "hij", "hi", "cdd"};
-    // trie trie1;
-    // for (auto s : a)
+    // vector<string> as = {"abcd", "abd", "ab", "cdd", "efg", "hij", "hi", "cdd"};
+
+    // trie t;
+    // for (auto s : as)
     // {
-    //     trie1.insert(s);
+    //     t.insert(s);
     // }
 
-    // cout << trie1.exists("ab") << '\n';
-    // cout << trie1.existsPrefix("ab") << '\n';
+    // vector<string> ans =  t.findPrefix("hi");
+    // for (auto s : ans)
+    // {
+    //     fout << s << '\n';
+    // }
 
-    vector<string> as = {"abcd", "abd", "ab", "cdd", "efg", "hij", "hi", "cdd"};
-
-    trie t;
-    for (auto s : as)
-    {
-        t.insert(s);
-    }
-
-    vector<string> ans =  t.findPrefix("hi");
-    for (auto s : ans)
-    {
-        fout << s << '\n';
-    }
-
+    string s = "abcdefcc";
+    trieS t; t.build(s);
+    fout << t.find("fcc") << '\n';
+    fout << t.find("cdef") << '\n';
 
     return 0;
 }
