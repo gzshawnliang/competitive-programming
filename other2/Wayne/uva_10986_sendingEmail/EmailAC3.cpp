@@ -7,10 +7,10 @@ struct node
     int p;        //p点编号
     int distance; //p->S的最短距离
 
-    node(int d, int idx)
+    node(int idx, int d)
     {
-        distance = d;
         p = idx;
+        distance = d;        
     }
 
     bool operator<(const node & newnode) const
@@ -44,8 +44,8 @@ int main()
             int a, b, d;
             cin >> a >> b >> d;
 
-            g[a].push_back(node(d, b)); //双向图 a->b:d
-            g[b].push_back(node(d, a)); //      b->a:d
+            g[a].push_back(node(b, d)); //双向图 a->b:d
+            g[b].push_back(node(a, d)); //      b->a:d
         }
 
         // 从 S 点开始跑 Dijkstra
@@ -53,7 +53,7 @@ int main()
         distance[S] = 0;                //S->S的最短距离是 0
 
         priority_queue<node> pq;
-        pq.push(node(0, S));            //放入起点
+        pq.push(node(S,0));            //放入起点
 
         while (!pq.empty())
         {
@@ -75,7 +75,7 @@ int main()
                 if (distance[v] > distance[u] + distance_u_v) //如果 距离(s->v) > 距离(s->u) + 距离(u->v)
                 {
                     distance[v] = distance[u] + distance_u_v; //松弛：更新距离(s->v)
-                    pq.push(node(distance[v], v));            //放入队列
+                    pq.push(node(v, distance[v]));            //放入队列
                 }
             }
         }
