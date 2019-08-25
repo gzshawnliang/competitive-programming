@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//ifstream fin("testvec.in");
-//ofstream fout("testvec.out");
 const int INF =INT_MAX /2;
 const int N = 20000;
 int main()
