@@ -82,10 +82,8 @@ int main()
         }
 
         cout <<"Case #"<< caseNo << ": ";
-        if (distance[T] != INF)
-            cout << distance[T] << '\n';
-        else
-            cout << "unreachable\n";
+        if (distance[T] != INF)     cout << distance[T] << '\n';
+        else                        cout << "unreachable\n";
 
         ++caseNo;
     }
