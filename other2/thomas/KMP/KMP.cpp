@@ -33,34 +33,38 @@ class KMP
 {
   private:
     string P;
-    vector<int> next;  //next[j]表示当P[j] != T[i] 时候，j要回到那个位置
-    int m;          // m = length of P
+    vector<int> next;   //next[j]表示当P[j] != T[i] 时候，j要回到那个位置
+    int m;              //m = length of P
 
-    void build()
+    void build(const string & P)
     { 
         //调用kmpSearch()之前调用此函数
+
+        //初始化变量
+        this->P = P;
+        m = P.length();
+        next.assign(m+1,0);
+
         int j = 0;
         int k = -1;
 
         next[0] = -1; // 起始值，-1代表移动i
         while (j <= m-1)
-        { // pre-process the pattern string P
+        { 
+            //使用字符串P预处理数组next
             while (k >= 0 && P[j] != P[k])
-                k = next[k]; // if different, reset k using b
+                k = next[k]; // 如果不同，使用next数组重设k值,直到相同或-1（开始指针的位置）
             
             ++j;
-            ++k;      // if same, advance both pointers
-            next[j] = k; // observe j = 8, 9, 10, 11, 12 with k = 0, 1, 2, 3, 4
+            ++k;        //如果一样，两个指针都往右移动next[j+1]==k+1
+            next[j] = k;
         }
-    } // in the example of P = "SEVENTY SEVEN" above
+    } 
 
   public:
     KMP(const string & P1)
     {
-        this->P = P1;
-        m = P.length();
-        next.assign(m+1,0);
-        build();
+        build(P1);
     }
 
     KMP()
@@ -98,10 +102,7 @@ class KMP
 
     vector<int> kmpSearch(const string & T,const string & P)
     {
-        this->P = P;
-        m = P.length();
-        next.assign(m+1,0);
-        build();
+        build(P);
         return kmpSearch(T);
     }    
 };
