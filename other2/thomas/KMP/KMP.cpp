@@ -33,21 +33,24 @@ class KMP
 {
   private:
     string P;
-    vector<int> b;  // b = back table
+    vector<int> next;  //next[j]表示当P[j] != T[i] 时候，j要回到那个位置
     int m;          // m = length of P
 
     void build()
-    { // call this before calling kmpSearch()
-        int i = 0, j = -1;
-        b[0] = -1; // starting values
-        while (i < m)
+    { 
+        //调用kmpSearch()之前调用此函数
+        int j = 0;
+        int k = -1;
+
+        next[0] = -1; // 起始值，-1代表移动i
+        while (j <= m-1)
         { // pre-process the pattern string P
-            while (j >= 0 && P[i] != P[j])
-                j = b[j]; // if different, reset j using b
+            while (k >= 0 && P[j] != P[k])
+                k = next[k]; // if different, reset k using b
             
-            i++;
-            j++;      // if same, advance both pointers
-            b[i] = j; // observe i = 8, 9, 10, 11, 12 with j = 0, 1, 2, 3, 4
+            ++j;
+            ++k;      // if same, advance both pointers
+            next[j] = k; // observe j = 8, 9, 10, 11, 12 with k = 0, 1, 2, 3, 4
         }
     } // in the example of P = "SEVENTY SEVEN" above
 
@@ -56,12 +59,18 @@ class KMP
     {
         this->P = P1;
         m = P.length();
-        b.assign(m+1,0);
+        next.assign(m+1,0);
         build();
     }
+
+    KMP()
+    {
+        next.clear();
+    }
+
     ~KMP()
     {
-        b.clear();
+        next.clear();
     }
 
     vector<int> kmpSearch(const string & T)
@@ -74,42 +83,58 @@ class KMP
         while (i < n)
         { // search through string T
             while (j >= 0 && T[i] != P[j])
-                j = b[j]; // if different, reset j using b
+                j = next[j]; // if different, reset j using b
             i++;
             j++; // if same, advance both pointers
             if (j == m)
             { // a match found when j == m
                 v.push_back(i - j);
                 //printf("P is found at index %d in T\n", i - j);
-                j = b[j]; // prepare j for the next possible match
+                j = next[j]; // prepare j for the next possible match
             }
         }
         return v;
     }
+
+    vector<int> kmpSearch(const string & T,const string & P)
+    {
+        this->P = P;
+        m = P.length();
+        next.assign(m+1,0);
+        build();
+        return kmpSearch(T);
+    }    
 };
+
+void printVec(const vector<int> & v)
+{
+    for (auto a : v)
+    {
+        cout  << " "<< a ;
+    }
+    cout << "\n";
+}
 
 int main()
 {
     string T = "AABAACAADAABAABA";
     string P = "AABA";
-    vector<int> v = match(T, P);
 
+    vector<int> v = match(T, P);
     cout << "暴力:";
-    for (auto a : v)
-    {
-        cout << " "<< a ;
-    }
-    //cout << "\n-----------------------\n";
-    cout << "\n";
+    printVec(v);
 
     v.clear();
     KMP kmp1(P);
     v = kmp1.kmpSearch(T);
     cout << "KMP:";
-    for (auto a : v)
-    {
-        cout  << " "<< a ;
-    }
+    printVec(v);
+
+    cout << "暴力:";    
+    cout << "KMP2:";
+    KMP kmp2;
+    v = kmp2.kmpSearch(T,P);
+    printVec(v);
 
     return 0;
 }
