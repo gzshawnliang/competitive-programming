@@ -23,18 +23,16 @@ ofstream fout("UVA11475.out");
 
 class KMP
 {
-  private:
-    string P;
-    vector<int> next;   //next[j]表示当P[j] != T[i] 时候，j要回到那个位置
-    int m;              //m = length of P
+    public:
 
-    void build(const string & P)
+    int build(const string & P)
     { 
         //调用kmpSearch()之前调用此函数
 
+        vector<int> next;   //next[j]表示当P[j] != T[i] 时候，j要回到那个位置
+
         //初始化变量
-        this->P = P;
-        m = P.length();
+        int m = P.length();
         next.assign(m+1,0);
 
         int j = 0;
@@ -51,15 +49,9 @@ class KMP
             ++k;        //如果一样，两个指针都往右移动next[j+1]==k+1
             next[j] = k;
         }
-        Len=next[m];
+        return next[m];
     } 
 
-  public:
-    int Len;
-    KMP(const string & P1)
-    {
-        build(P1);
-    }
 };
 
 int main()
@@ -67,15 +59,13 @@ int main()
     string s;
     while (fin>>s)
     {
-        //cout << s << '\n';
-
         string p=s;
         reverse(p.begin(),p.end());
         string p1=p+"-"+s;
-        KMP kmp(p1);
-        fout << s << p.substr(kmp.Len,p.length()-1) << '\n';
+        KMP kmp;
+        int len=kmp.build(p1);
+        fout << s << p.substr(len,p.length()-1) << '\n';
     };
     
-
     return 0;
 }
