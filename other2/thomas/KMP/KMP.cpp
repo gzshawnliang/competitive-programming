@@ -29,6 +29,35 @@ vector<int> match(const string & T, const string & P)
     return v;
 }
 
+vector<int> match2(const string & T, const string & P)
+{
+    vector<int> v;
+    int n = T.length();
+    int m = P.length();
+
+    int i = 0;
+    int j = 0; // 匹配的起始值
+
+    while (i <= n - 1)
+    {
+        while (j <= m - 1)
+        {
+            if (T[i + j] != P[j])
+                break; // 在j的位置不同，不匹配，不继续查找
+
+            if (j == m - 1) //j移动到m的位置时，此刻已经是匹配，位置是i
+            {
+                v.push_back(i);
+                break;
+            }
+            ++j;
+        }
+        j = 0; //j回到起始位置，为下次寻找匹配做准备
+        ++i;
+    }
+    return v;
+}
+
 class KMP
 {
   private:
@@ -79,22 +108,25 @@ class KMP
 
     vector<int> kmpSearch(const string & T)
     {
-        int n=T.length();          // n = length of T
+        int n = T.length();
         vector<int> v;
 
-        // this is similar as kmpPreprocess(), but on string T
-        int i = 0, j = 0; // starting values
-        while (i < n)
-        { // search through string T
+        // 类似build，但这次是T字符串
+        int i = 0;
+        int j = 0; // 匹配的起始值
+        while (i <= n-1)
+        { 
+            //T字符串从头到尾搜寻
             while (j >= 0 && T[i] != P[j])
-                j = next[j]; // if different, reset j using b
+                j = next[j]; // 在j的位置不同，用next数组重新设置j
+            
+            //如果相同，同时移动i,j
             i++;
-            j++; // if same, advance both pointers
+            j++; 
             if (j == m)
-            { // a match found when j == m
+            {   //j移动到m的位置时，此刻已经是匹配的了匹配位置是i-j
                 v.push_back(i - j);
-                //printf("P is found at index %d in T\n", i - j);
-                j = next[j]; // prepare j for the next possible match
+                j = next[j];        //重新设置j，为下次寻找匹配做准备
             }
         }
         return v;
@@ -121,7 +153,7 @@ int main()
     string T = "AABAACAADAABAABA";
     string P = "AABA";
 
-    vector<int> v = match(T, P);
+    vector<int> v = match2(T, P);
     cout << "暴力:";
     printVec(v);
 
