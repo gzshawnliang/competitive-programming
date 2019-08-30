@@ -23,49 +23,47 @@ ofstream fout("UVA11475.out");
 
 class KMP
 {
-    public:
-
+  public:
     int build(const string & P)
-    { 
+    {
         //调用kmpSearch()之前调用此函数
 
-        vector<int> next;   //next[j]表示当P[j] != T[i] 时候，j要回到那个位置
+        vector<int> next; //next[j]表示当P[j] != T[i] 时候，j要回到那个位置
 
         //初始化变量
         int m = P.length();
-        next.assign(m+1,0);
+        next.assign(m + 1, 0);
 
         int j = 0;
         int k = -1;
 
         next[0] = -1; // 起始值，-1代表移动i
-        while (j <= m-1)
-        { 
+        while (j <= m - 1)
+        {
             //使用字符串P预处理数组next
             while (k >= 0 && P[j] != P[k])
                 k = next[k]; // 如果不同，使用next数组重设k值,直到相同或-1（开始指针的位置）
-            
+
             ++j;
-            ++k;        //如果一样，两个指针都往右移动next[j+1]==k+1
+            ++k; //如果一样，两个指针都往右移动next[j+1]==k+1
             next[j] = k;
         }
         return next[m];
-    } 
-
+    }
 };
 
 int main()
 {
     string s;
-    while (fin>>s)
+    while (fin >> s)
     {
-        string p=s;
-        reverse(p.begin(),p.end());
-        string p1=p+"-"+s;
+        string p = s;
+        reverse(p.begin(), p.end());
+        string p1 = p + "-" + s;
         KMP kmp;
-        int len=kmp.build(p1);
-        fout << s << p.substr(len,p.length()-1) << '\n';
+        int len = kmp.build(p1);
+        fout << s << p.substr(len, p.length() - 1) << '\n';
     };
-    
+
     return 0;
 }
