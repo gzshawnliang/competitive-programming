@@ -62,7 +62,7 @@ class KMP
 {
   private:
     string P;
-    vector<int> next;   //next[j]表示当P[j] != T[i] 时候，j要回到那个位置
+    vector<int> next;   //next[j]表示当P[j] != T[i] 时候，j要回到那个位置(长度为j的字符串最长公共前后缀的值)
     int m;              //m = length of P
 
     void build(const string & P)
@@ -141,29 +141,35 @@ class KMP
 
 void printVec(const vector<int> & v)
 {
-    for (auto a : v)
+    if(v.size()==0)
     {
-        cout  << " "<< a ;
+        cout << "none";
+    }
+    else 
+    {
+        for (auto a : v)
+        {
+            cout  << " "<< a ;
+        }
     }
     cout << "\n";
 }
 
 int main()
 {
-    string T = "AABAACAADAABAABA";
-    string P = "AABA";
+    string T = "AABAACAADAABAABA";      //"ababeababkl";
+    string P = "AABA";                  //"ababeabab";
 
     vector<int> v = match2(T, P);
-    cout << "暴力:";
+    cout << "暴力 :";
     printVec(v);
 
     v.clear();
     KMP kmp1(P);
     v = kmp1.kmpSearch(T);
-    cout << "KMP:";
+    cout << "KMP :";
     printVec(v);
 
-    cout << "暴力:";    
     cout << "KMP2:";
     KMP kmp2;
     v = kmp2.kmpSearch(T,P);
