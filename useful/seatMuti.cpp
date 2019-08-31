@@ -5,7 +5,7 @@ using namespace std;
 ifstream fin("seat.in");
 ofstream fout("seat.out");
 
-const int yt = 4, xt = 3, st = yt * xt;
+const int yt = 5, xt = 6, st = yt * xt;
 
 const bool brick2canTurn = true;
 
@@ -36,29 +36,58 @@ brick _brick(int y, int x, string type)
     brick temp{y, x, type}; return temp;
 }
 
+void spaceOut(int sml, string & s)
+{
+    int size = s.size();
+    fout << s;
+    for (int c = 1; c <= sml - size; ++c) fout << ' ';
+}
+
 int main()
 {
     srand(time(0));
 
+    int sml = 0;
     vector<vector<vector<string>>> a(5);
 
-    vector<string> a40 = {"a1","a2","a3","a4"};
-    a[4].push_back(a40);
+    while (true)
+    {
+        string in = ""; getline(fin, in);
+        if (in == "") break;
 
-    vector<string> a20 = {"b1","b2"};
-    a[2].push_back(a20);
+        stringstream gin(in);
+        vector<string> res;
 
-    vector<string> a21 = {"c1","c2"};
-    a[2].push_back(a21);
+        while (true)
+        {
+            string temp = ""; gin >> temp;
+            if (temp == "") break;
 
-    vector<string> a22 = {"d1","d2"};
-    a[2].push_back(a22);
+            sml = max(sml, (int)temp.size());
 
-    vector<string> a10 = {"e1"};
-    a[1].push_back(a10);
+            res.push_back(temp);
+        }
 
-    vector<string> a11 = {"f1"};
-    a[1].push_back(a11);
+        a[res.size()].push_back(res);
+    }
+
+    // vector<string> a40 = {"a1","a2","a3","a4"};
+    // a[4].push_back(a40);
+
+    // vector<string> a20 = {"b1","b2"};
+    // a[2].push_back(a20);
+
+    // vector<string> a21 = {"c1","c2"};
+    // a[2].push_back(a21);
+
+    // vector<string> a22 = {"d1","d2"};
+    // a[2].push_back(a22);
+
+    // vector<string> a10 = {"e1"};
+    // a[1].push_back(a10);
+
+    // vector<string> a11 = {"f1"};
+    // a[1].push_back(a11);
 
     vector<int> typeCount(5, 0);
     for (int c = 1; c <= 4; ++c)
@@ -204,64 +233,131 @@ int main()
         }
     }
 
-    for (int y = 1; y <= yt; ++y)
-    {
-        for (int x = 1; x <= xt; ++x)
-        {
-            for (int c1 = 0; c1 <= typeCount[1]; ++c1)
-            {
-                for (int c2 = 0; c2 <= typeCount[2]; ++c2)
-                {
-                    for (int c4 = 0; c4 <= typeCount[4]; ++c4)
-                    {
-                        if (dp[y][x][c1][c2][c4].size() > 0)
-                        {
-                            fout << "dp[" << y << "][" << x << "] [" << c1 << "][" << c2 << "][" << c4 << "]:\n";
+    // for (int y = 1; y <= yt; ++y)
+    // {
+    //     for (int x = 1; x <= xt; ++x)
+    //     {
+    //         for (int c1 = 0; c1 <= typeCount[1]; ++c1)
+    //         {
+    //             for (int c2 = 0; c2 <= typeCount[2]; ++c2)
+    //             {
+    //                 for (int c4 = 0; c4 <= typeCount[4]; ++c4)
+    //                 {
+    //                     if (dp[y][x][c1][c2][c4].size() > 0)
+    //                     {
+    //                         fout << "dp[" << y << "][" << x << "] [" << c1 << "][" << c2 << "][" << c4 << "]:\n";
 
-                            int size = dp[y][x][c1][c2][c4].size();
-                            for (int i = 0; i <= size - 1; ++i)
-                            {
-                                fout << "   #" << i << ": ";
+    //                         int size = dp[y][x][c1][c2][c4].size();
+    //                         for (int i = 0; i <= size - 1; ++i)
+    //                         {
+    //                             fout << "   #" << i << ": ";
 
-                                bool first = true;
-                                for (auto k : dp[y][x][c1][c2][c4][i])
-                                {
-                                    if (first == true) first = false;
-                                    else fout << ", ";
+    //                             bool first = true;
+    //                             for (auto k : dp[y][x][c1][c2][c4][i])
+    //                             {
+    //                                 if (first == true) first = false;
+    //                                 else fout << ", ";
 
-                                    fout << '(' << k.y << ", " << k.x << ')' << ' ' << k.type;
-                                }
-                                fout << '\n';
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    //                                 fout << '(' << k.y << ", " << k.x << ')' << ' ' << k.type;
+    //                             }
+    //                             fout << '\n';
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     vector<vector<brick>> ans = dp[yt][xt][typeCount[1]][typeCount[2]][typeCount[4]];
     int sizeAns = ans.size();
 
-    vector<brick> final = ans[getRand(0, sizeAns - 1)];
-    int sizeFinal = final.size();
-    vector<vector<string>> g(yt, vector<string>(xt, "~"));
-
-    for (int c = 1; c <= 4; ++c)
+    for (int _i = 0; _i <= sizeAns - 1; ++_i)
     {
-        if (c == 3) continue;
-        shuffle(500, a[c]);
-    }
+        vector<brick> final = ans[_i];
+        int sizeFinal = final.size();
+        vector<vector<string>> g(yt, vector<string>(xt, "~"));
 
-    vector<int> is(5, 0);
-    for (int i = 0; i <= sizeFinal - 1; ++i)
-    {
-        brick now = final[i];
-
-        if (now.type == "1x1")
+        for (int c = 1; c <= 4; ++c)
         {
-
+            if (c == 3 || a[c].size() == 0) continue;
+            shuffle(500, a[c]);
         }
+
+        vector<int> is(5, 0);
+        vector<vector<string>> out(yt, vector<string>(xt));
+        for (int i = 0; i <= sizeFinal - 1; ++i)
+        {
+            brick nowBrick = final[i];
+            int y = nowBrick.y, x = nowBrick.x;
+
+            if (nowBrick.type == "1x1")
+            {
+                vector<string> nowG = a[1][is[1]];
+                //shuffle(20, nowG);
+
+                out[y][x] = nowG[0];
+
+                ++is[1];
+            }
+            else if (nowBrick.type == "1x2")
+            {
+                vector<string> nowG = a[2][is[2]];
+                shuffle(20, nowG);
+
+                out[y][x] = nowG[0];
+                out[y][x + 1] = nowG[1];
+
+                ++is[2];
+            }
+            else if (nowBrick.type == "2x1")
+            {
+                vector<string> nowG = a[2][is[2]];
+                shuffle(20, nowG);
+
+                out[y][x] = nowG[0];
+                out[y + 1][x] = nowG[1];
+
+                ++is[2];
+            }
+            else if (nowBrick.type == "2x2")
+            {
+                vector<string> nowG = a[4][is[4]];
+                shuffle(20, nowG);
+
+                out[y][x] = nowG[0];
+                out[y][x + 1] = nowG[1];
+                out[y + 1][x] = nowG[2];
+                out[y + 1][x + 1] = nowG[3];
+
+                ++is[4];
+            }
+        }
+
+        // if
+        // (
+        //     out[2][0] != "Shawn" &&
+        //     out[2][1] != "Shawn" &&
+        //     out[2][2] != "Shawn" &&
+        //     out[2][3] != "Shawn" &&
+        //     out[2][4] != "Shawn" &&
+        //     out[2][5] != "Shawn"
+        // )
+        // {
+        //     continue;
+        // }
+
+        for (int y = 0; y <= yt - 1; ++y)
+        {
+            for (int x = 0; x <= xt - 1; ++x)
+            {
+                if (x > 0) fout << ' ';
+                spaceOut(sml, out[y][x]);
+            }
+            fout << '\n';
+        }
+
+        fout << '\n';
     }
 
     return 0;
