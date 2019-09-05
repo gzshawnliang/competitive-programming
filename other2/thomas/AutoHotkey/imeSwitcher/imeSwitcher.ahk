@@ -4,10 +4,12 @@
 
 ;-------- https://autohotkey.com/boards/viewtopic.php?f=6&t=18519 ---
 
+Menu, Tray, Tip,Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法
+
 ;Control + 1  English (USA)
 ^1::
 SetDefaultKeyboard(0x0409) ; English (USA)
-DisplayTextOnScreen("中文输入已关闭")
+DisplayTextOnScreen("United States - English")
 return
 
 ;Control + 2 中文输入法
@@ -38,12 +40,15 @@ else
 	SetFormat, Integer, D		;切换到10进制
 	;当前是中文输入法，马上切换英文
 	SetDefaultKeyboard(0x0409) ; english-US
-	DisplayTextOnScreen("中文输入已关闭")
+	DisplayTextOnScreen("United States - English")
 }
 
 return
 
-SetDefaultKeyboard(LocaleID){
+
+
+SetDefaultKeyboard(LocaleID)
+{
 	Global
 	SPI_SETDEFAULTINPUTLANG := 0x005A
 	SPIF_SENDWININICHANGE := 2
