@@ -118,6 +118,42 @@ LControl & LShift::
 	}
 	return
 
+; 大写打开/关闭指示器，有延迟，指示器消失之前不能输入
+; g_LastCtrlKeyDownTime := 0
+; g_AbortSendEsc := false
+; g_ControlRepeatDetected := false
+
+; *CapsLock::
+;     if (g_ControlRepeatDetected)
+;     {
+;         return
+;     }
+
+; 	DisplayTextOnScreen("大写打开",500)
+
+;     send,{CapsLock}
+;     g_LastCtrlKeyDownTime := A_TickCount
+;     g_AbortSendEsc := false
+;     g_ControlRepeatDetected := true
+
+;     return
+
+; *CapsLock Up::
+;     SetCapsLockState Off
+; 	DisplayTextOnScreen("大写关闭",500)
+;     g_ControlRepeatDetected := false
+;     if (g_AbortSendEsc)
+;     {
+;         return
+;     }
+	
+;     current_time := A_TickCount
+;     time_elapsed := current_time - g_LastCtrlKeyDownTime
+;     if (time_elapsed <= 250)
+;     {
+;         SetCapsLockState Off
+;     }
+;     return
 
 SetDefaultKeyboard2(LocaleID)
 {
@@ -156,4 +192,5 @@ DisplayTextOnScreen(DisText,sleepTime:=600)
 	sleep, %sleepTime%
 	Gui, Destroy
 }
+
 ;=====================================================
