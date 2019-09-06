@@ -54,7 +54,8 @@ SetDefaultKeyboard(LocaleID)
 	DllCall("SystemParametersInfo", "UInt", SPI_SETDEFAULTINPUTLANG, "UInt", 0, "UPtr", &Lan%LocaleID%, "UInt", SPIF_SENDWININICHANGE)
 
 	WinGet, windows, List
-	Loop %windows% {
+	Loop %windows% 
+	{
 		PostMessage 0x50, 0, %Lan%, , % "ahk_id " windows%A_Index%
 	}
 }
