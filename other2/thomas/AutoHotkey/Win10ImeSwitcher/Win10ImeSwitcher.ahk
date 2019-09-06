@@ -5,6 +5,79 @@
 
 Menu, Tray, Tip,Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法
 
+#Persistent  ; Keep the script running until the user exits it.
+Menu, Tray, NoStandard
+Menu, Tray, Add, 开机启动  ; Creates a new menu item.
+Menu, Tray, Add				; Creates a separator line.
+Menu, Tray, Add, 取消开机启动  ; Creates a new menu item.
+Menu, Tray, Add				; Creates a separator line.
+Menu, Tray, Add, 关于  ; Creates a new menu item.
+Menu, Tray, Add, 退出  ; Creates a new menu item.
+
+If FileExist(A_AppData . "\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk" )
+{
+	Menu,Tray,Check,开机启动
+	Menu, Tray, Disable, 开机启动
+	Menu, Tray, Enable, 取消开机启动
+	Menu, Tray, Icon, accessibilitycpl.dll, 11
+	Return
+}
+else
+{
+	Menu, Tray, Disable, 取消开机启动
+	Menu, Tray, Icon, accessibilitycpl.dll, 12
+}
+return
+
+开机启动:
+	; DisplayTextOnScreen(A_ScriptDir,3000)
+	; DisplayTextOnScreen(A_ScriptFullPath,3000)
+
+	; Menu,Tray,ToggleCheck,开机启动
+	If FileExist(A_AppData . "\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk")
+	{
+		FileDelete, % A_AppData "\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk"
+	}
+	FileCreateShortcut, %A_ScriptFullPath%, %A_AppData%\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk
+	Menu,Tray,Check,开机启动
+	Menu, Tray, Disable, 开机启动
+	Menu, Tray, Enable, 取消开机启动
+	Menu, Tray, Icon, accessibilitycpl.dll, 11
+	return
+
+取消开机启动:
+	If FileExist(A_AppData . "\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk")
+	{
+		FileDelete, % A_AppData "\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk"
+	}
+	Menu,Tray,Uncheck,开机启动
+	Menu, Tray, Enable, 开机启动
+	Menu, Tray, Disable, 取消开机启动
+	Menu, Tray, Icon, accessibilitycpl.dll, 12
+	return
+
+关于:
+	; DisplayTextOnScreen("Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法",5000)
+
+    Gui, Color, 37474F
+    Gui -Caption	
+
+    Gui, Font, s28,Microsoft YaHei
+	Gui, +AlwaysOnTop +Disabled -SysMenu +Owner 
+	Gui, Add, Text,cffffff,Win10输入法传统切换
+	Gui, Font, s18,Microsoft YaHei
+	Gui, Add, Text,cffffff,Control + Space 切换中英文输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法
+
+	Gui, Show, xCenter yCenter, 状态, NoActivate, 
+	sleep, 5000
+	Gui, Destroy
+
+	return
+
+退出:
+	ExitApp
+	return
+
 ;Control + 1  English (USA)
 ^1::
 SetDefaultKeyboard(0x0409) ; English (USA)
@@ -42,6 +115,14 @@ else
 
 return
 
+
+SetDefaultKeyboard2(LocaleID)
+{
+    WinExist("A")
+    ControlGetFocus, CtrlInFocus
+    PostMessage, 0x50, 0, % LocaleID, %CtrlInFocus%	
+}
+
 SetDefaultKeyboard(LocaleID)
 {
 	Global
@@ -60,7 +141,7 @@ SetDefaultKeyboard(LocaleID)
 	}
 }
 
-DisplayTextOnScreen(DisText)
+DisplayTextOnScreen(DisText,sleepTime:=600)
 {
     Gui, Color, 37474F
     Gui -Caption	
@@ -69,7 +150,7 @@ DisplayTextOnScreen(DisText)
 	Gui, +AlwaysOnTop +Disabled -SysMenu +Owner 
 	Gui, Add, Text,cffffff,%DisText%
 	Gui, Show, xCenter yCenter, 状态, NoActivate, 
-	sleep, 600
+	sleep, %sleepTime%
 	Gui, Destroy
 }
 ;=====================================================
