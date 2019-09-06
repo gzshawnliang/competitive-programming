@@ -3,6 +3,8 @@
 ; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947%28v=vs.85%29.aspx
 ;-------- https://autohotkey.com/boards/viewtopic.php?f=6&t=18519 ---
 
+#SingleInstance force
+
 Menu, Tray, Tip,Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法
 
 #Persistent  ; Keep the script running until the user exits it.
