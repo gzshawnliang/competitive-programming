@@ -95,10 +95,29 @@ return
 	SetDefaultKeyboard(0x0804) ; Chinese
 	DisplayTextOnScreen("中文输入已开启")
 	return
-
-;Control + Shift (左) 切换中英文输入法
-;Control + Space 切换中英文输入法
+;
+;Control + Shift (左) 循环切换输入法（支撑多钟输入法）
 LControl & LShift::
+	SendInput #{Space}
+	Sleep, 50
+
+	SetFormat, Integer, H		;切换到16进制
+	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
+	if currLocaleID=0x4090409
+	{
+		SetFormat, Integer, D		;切换到10进制
+		;当前是英文输入法
+		DisplayTextOnScreen("United States - English")
+	}
+	else
+	{
+		SetFormat, Integer, D		;切换到10进制
+		;当前是中文输入法
+		DisplayTextOnScreen("中文输入已开启")
+	}	
+	return
+
+;Control + Space 切换中英文输入法	
 ^space::
 	SetFormat, Integer, H		;切换到16进制
 	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
@@ -155,6 +174,13 @@ LControl & LShift::
 ;     }
 ;     return
 
+ToggleInputLang()
+{
+    WinExist("A")
+    ControlGetFocus, CtrlInFocus
+    PostMessage, 0x50,2,, %CtrlInFocus% 
+}
+
 SetDefaultKeyboard2(LocaleID)
 {
     WinExist("A")
@@ -176,7 +202,7 @@ SetDefaultKeyboard(LocaleID)
 	WinGet, windows, List
 	Loop %windows% 
 	{
-		PostMessage 0x50, 0, %Lan%, , % "ahk_id " windows%A_Index%
+		PostMessage 0x50, 0, %Lan%, , % "ahk_id" windows%A_Index%
 	}
 }
 
@@ -193,4 +219,4 @@ DisplayTextOnScreen(DisText,sleepTime:=600)
 	Gui, Destroy
 }
 
-;=====================================================
+
