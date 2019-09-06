@@ -23,13 +23,13 @@ If FileExist(A_AppData . "\Microsoft\Windows\Start Menu\Programs\Startup\Win10Im
 	Menu,Tray,Check,开机启动
 	Menu, Tray, Disable, 开机启动
 	Menu, Tray, Enable, 取消开机启动
-	Menu, Tray, Icon, accessibilitycpl.dll, 11
+	Menu, Tray, Icon, DDORes.dll, 108
 	Return
 }
 else
 {
 	Menu, Tray, Disable, 取消开机启动
-	Menu, Tray, Icon, accessibilitycpl.dll, 12
+	Menu, Tray, Icon, DDORes.dll, 110
 }
 return
 
@@ -46,7 +46,7 @@ return
 	Menu,Tray,Check,开机启动
 	Menu, Tray, Disable, 开机启动
 	Menu, Tray, Enable, 取消开机启动
-	Menu, Tray, Icon, accessibilitycpl.dll, 11
+	Menu, Tray, Icon, DDORes.dll, 108
 	return
 
 取消开机启动:
@@ -57,7 +57,7 @@ return
 	Menu,Tray,Uncheck,开机启动
 	Menu, Tray, Enable, 开机启动
 	Menu, Tray, Disable, 取消开机启动
-	Menu, Tray, Icon, accessibilitycpl.dll, 12
+	Menu, Tray, Icon, DDORes.dll, 110
 	return
 
 关于:
@@ -84,40 +84,39 @@ return
 
 ;Control + 1  English (USA)
 ^1::
-SetDefaultKeyboard(0x0409) ; English (USA)
-DisplayTextOnScreen("United States - English")
-return
+	SetDefaultKeyboard(0x0409) ; English (USA)
+	DisplayTextOnScreen("United States - English")
+	return
 
 ;Control + ' 中文输入法
 ;Control + 2 中文输入法
 ^'::
 ^2::
-SetDefaultKeyboard(0x0804) ; Chinese
-DisplayTextOnScreen("中文输入已开启")
-return
+	SetDefaultKeyboard(0x0804) ; Chinese
+	DisplayTextOnScreen("中文输入已开启")
+	return
 
 ;Control + Shift (左) 切换中英文输入法
 ;Control + Space 切换中英文输入法
 LControl & LShift::
 ^space::
-SetFormat, Integer, H		;切换到16进制
-currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
-if currLocaleID=0x4090409
-{
-	SetFormat, Integer, D		;切换到10进制
-	;当前是英文输入法，马上切换中文
-	SetDefaultKeyboard(0x0804) ; Chinese
-	DisplayTextOnScreen("中文输入已开启")
-}
-else
-{
-	SetFormat, Integer, D		;切换到10进制
-	;当前是中文输入法，马上切换英文
-	SetDefaultKeyboard(0x0409) ; english-US
-	DisplayTextOnScreen("United States - English")
-}
-
-return
+	SetFormat, Integer, H		;切换到16进制
+	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
+	if currLocaleID=0x4090409
+	{
+		SetFormat, Integer, D		;切换到10进制
+		;当前是英文输入法，马上切换中文
+		SetDefaultKeyboard(0x0804) ; Chinese
+		DisplayTextOnScreen("中文输入已开启")
+	}
+	else
+	{
+		SetFormat, Integer, D		;切换到10进制
+		;当前是中文输入法，马上切换英文
+		SetDefaultKeyboard(0x0409) ; english-US
+		DisplayTextOnScreen("United States - English")
+	}
+	return
 
 
 SetDefaultKeyboard2(LocaleID)
