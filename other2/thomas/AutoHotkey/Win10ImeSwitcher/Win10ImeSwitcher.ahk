@@ -1,7 +1,6 @@
 ﻿; https://msdn.microsoft.com/en-us/library/dd318693%28v=vs.85%29.aspx
 ; "The specified language must be displayable using the current system character set." (SystemParametersInfo function)
 ; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947%28v=vs.85%29.aspx
-
 ;-------- https://autohotkey.com/boards/viewtopic.php?f=6&t=18519 ---
 
 Menu, Tray, Tip,Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法
@@ -12,19 +11,17 @@ SetDefaultKeyboard(0x0409) ; English (USA)
 DisplayTextOnScreen("United States - English")
 return
 
+;Control + ' 中文输入法
 ;Control + 2 中文输入法
+^'::
 ^2::
 SetDefaultKeyboard(0x0804) ; Chinese
 DisplayTextOnScreen("中文输入已开启")
 return
 
-;Control + ' 中文输入法
-^'::
-SetDefaultKeyboard(0x0804) ; Chinese
-DisplayTextOnScreen("中文输入已开启")
-return
-
+;Control + Shift (左) 切换中英文输入法
 ;Control + Space 切换中英文输入法
+LControl & LShift::
 ^space::
 SetFormat, Integer, H		;切换到16进制
 currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
@@ -44,8 +41,6 @@ else
 }
 
 return
-
-
 
 SetDefaultKeyboard(LocaleID)
 {
@@ -69,7 +64,7 @@ DisplayTextOnScreen(DisText)
     Gui, Color, 37474F
     Gui -Caption	
 
-    Gui, Font, s32,Microsoft YaHei
+    Gui, Font, s28,Microsoft YaHei
 	Gui, +AlwaysOnTop +Disabled -SysMenu +Owner 
 	Gui, Add, Text,cffffff,%DisText%
 	Gui, Show, xCenter yCenter, 状态, NoActivate, 
