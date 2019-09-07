@@ -1,9 +1,11 @@
 ﻿; Win10传统切换中英文输入法
-; Control + Space 切换中英文输入法
-; Control + Shift （左）循环切换输入法,bug:MBP 2016 Bootcamp上失效
-; Control + 1  English (USA)
-; Control + 2 中文输入法
-; Control + ' 中文输入法
+; CapsLock          切换中英文输入法(caps模式)
+; Control + Space	切换中英文输入法
+; Control + Shift 	（左）循环切换输入法,bug:MBP 2016 Bootcamp上失效
+; Control + 1  		English (USA)
+; Control + 2 		中文输入法
+; Control + ' 		中文输入法
+
 ; todo:循环切换输入法需显示名称
 ; 参考
 ; https://msdn.microsoft.com/en-us/library/dd318693%28v=vs.85%29.aspx
@@ -26,7 +28,7 @@ if(currMode=1)
 }
 global g_IsCapsLockMode := !g_IsWin7Mode
 
-aboutText :="CapsLock            切换中英文输入法(caps模式)`nControl + Space 切换中英文输入法(传统模式)`nControl + Shift （左）循环切换输入法(传统模式)`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法"
+aboutText :="CapsLock            切换中英文输入法(caps模式)`nControl + Space 切换中英文输入法(传统模式)`nControl + Shift （左）循环切换输入法(传统模式)`nControl + 1         English (USA)`nControl + 2         中文输入法`nControl + '          中文输入法"
 
 Menu, Tray, Tip, Win10输入法切换`n%aboutText%
 
