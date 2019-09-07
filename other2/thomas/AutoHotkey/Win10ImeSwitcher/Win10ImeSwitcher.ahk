@@ -134,10 +134,12 @@ CapsLock模式:
     Gui, Color, 37474F
     Gui -Caption	
 
-    Gui, Font, s28,Microsoft YaHei
+    Gui, Font, s28,Segoe UI
 	Gui, +AlwaysOnTop +Disabled -SysMenu +Owner 
 	Gui, Add, Text,cffffff,Win10输入法切换
-	Gui, Font, s18,Microsoft YaHei
+	Gui, Font, s16
+	Gui, Add, Text,cffffff,By Thomas Liang
+	Gui, Font, s18
 	Gui, Add, Text,cffffff,%aboutText%
 
 	Gui, Show, xCenter yCenter, 状态, NoActivate, 
@@ -284,5 +286,3 @@ DisplayTextOnScreen(DisText,sleepTime:=600)
 	sleep, %sleepTime%
 	Gui, Destroy
 }
-
-
