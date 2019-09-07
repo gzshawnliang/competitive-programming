@@ -1,9 +1,11 @@
 ﻿; Win10传统切换中英文输入法
 ; Control + Space 切换中英文输入法
-; Control + Shift （左）循环切换输入法
+; Control + Shift （左）循环切换输入法,bug:MBP 2016 Bootcamp上失效
 ; Control + 1  English (USA)
 ; Control + 2 中文输入法
 ; Control + ' 中文输入法
+; todo:循环切换输入法需显示名称
+; 参考
 ; https://msdn.microsoft.com/en-us/library/dd318693%28v=vs.85%29.aspx
 ; "The specified language must be displayable using the current system character set." (SystemParametersInfo function)
 ; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947%28v=vs.85%29.aspx
