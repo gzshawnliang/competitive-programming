@@ -109,7 +109,8 @@ return
 ;Control + Shift (左) 循环切换输入法（支撑多钟输入法）
 LControl & LShift::
 	SendInput #{Space}
-	Sleep, 50
+	; todo：MBP需要用500ms，普通电脑50，原因未知
+	Sleep, 500
 
 	SetFormat, Integer, H		;切换到16进制
 	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
