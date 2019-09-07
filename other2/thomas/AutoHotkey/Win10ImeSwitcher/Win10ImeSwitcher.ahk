@@ -15,6 +15,7 @@
 ; https://www.autohotkey.com/docs/commands/_SingleInstance.htm
 #SingleInstance force
 
+;获取当前模式，0代表win7模式，1代表CapsLock模式
 currMode := 0
 RegRead, currMode, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, mode
 global g_IsWin7Mode :=True
@@ -25,9 +26,9 @@ if(currMode=1)
 }
 global g_IsCapsLockMode := !g_IsWin7Mode
 
-aboutText :="Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + Shift （左）循环切换输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法"
+aboutText :="CapsLock            切换中英文输入法(caps模式)`nControl + Space 切换中英文输入法(传统模式)`nControl + Shift （左）循环切换输入法(传统模式)`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法"
 
-Menu, Tray, Tip,%aboutText%
+Menu, Tray, Tip, Win10输入法切换`n%aboutText%
 
 #Persistent  ; Keep the script running until the user exits it.
 
@@ -57,20 +58,27 @@ else
 	Menu, Tray, Disable, 取消开机启动
 	Menu, Tray, Icon, DDORes.dll, 110
 }
+
 return
 
 setMenuMode()
 {
 
-	if (g_IsWin7Mode = True)		
+	if (g_IsWin7Mode = True)
+	{
 		Menu,Tray,Check,传统Win7模式
+		DisplayTextOnScreen("输入法切换是：传统Win7模式")
+	}
 	else							
+	{
 		Menu,Tray,UnCheck,传统Win7模式
+	}
 	
 	if (g_IsCapsLockMode  = True) 
 	{
 		Menu,Tray,Check,CapsLock模式
-		SetCapsLockState, AlwaysOff     
+		SetCapsLockState, AlwaysOff
+		DisplayTextOnScreen("输入法切换是：CapsLock模式")
 	}
 	else 
 	{
@@ -128,7 +136,7 @@ CapsLock模式:
 
     Gui, Font, s28,Microsoft YaHei
 	Gui, +AlwaysOnTop +Disabled -SysMenu +Owner 
-	Gui, Add, Text,cffffff,Win10输入法传统切换
+	Gui, Add, Text,cffffff,Win10输入法切换
 	Gui, Font, s18,Microsoft YaHei
 	Gui, Add, Text,cffffff,%aboutText%
 
@@ -156,8 +164,6 @@ CapsLock模式:
 	DisplayTextOnScreen("中文输入已开启")
 	return
 ;
-
-
 
 
 #if (g_IsWin7Mode= True)
@@ -233,7 +239,6 @@ CapsLock模式:
 		return
 }
 
-
 ToggleInputLang()
 {
     WinExist("A")
@@ -275,6 +280,7 @@ DisplayTextOnScreen(DisText,sleepTime:=600)
 	Gui, +AlwaysOnTop +Disabled -SysMenu +Owner 
 	Gui, Add, Text,cffffff,%DisText%
 	Gui, Show, xCenter yCenter, 状态, NoActivate, 
+	Sleep -1
 	sleep, %sleepTime%
 	Gui, Destroy
 }
