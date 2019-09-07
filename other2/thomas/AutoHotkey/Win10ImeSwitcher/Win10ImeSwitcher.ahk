@@ -1,10 +1,10 @@
 ﻿; Win10传统切换中英文输入法
-; CapsLock          切换中英文输入法(caps模式)
-; Control + Space	切换中英文输入法
-; Control + Shift 	（左）循环切换输入法,bug:MBP 2016 Bootcamp上失效
-; Control + 1  		English (USA)
-; Control + 2 		中文输入法
-; Control + ' 		中文输入法
+; CapsLock或ScrollLock   切换中英文输入法(caps模式),ScrollLock
+; Control + Space        切换中英文输入法
+; Control + Shift(左)    循环切换输入法
+; Control + 1            English (USA)
+; Control + 2            中文输入法
+; Control + '            中文输入法
 
 ; todo:循环切换输入法需显示名称
 ; 参考
@@ -28,8 +28,9 @@ if(currMode=1)
 }
 global g_IsCapsLockMode := !g_IsWin7Mode
 
-aboutText :="CapsLock            切换中英文输入法(caps模式)`nControl + Space 切换中英文输入法(传统模式)`nControl + Shift （左）循环切换输入法(传统模式)`nControl + 1         English (USA)`nControl + 2         中文输入法`nControl + '          中文输入法"
-
+; aboutText :="CapsLock或ScrollLock  切换中英文输入法(caps模式)`nControl + Space           切换中英文输入法(传统模式)`nControl + Shift(左)        循环切换输入法(传统模式)`nControl + 1               English (USA)`nControl + 2               中文输入法`nControl + '                中文输入法"
+; aboutText :="CapsLock或ScrollLock       切换中英文输入法(caps模式)`nControl + Space           切换中英文输入法(传统模式)`nControl + Shift(左)       循环切换输入法(传统模式)`nControl + 1               English (USA)`nControl + 2               中文输入法`nControl + '               中文输入法`n"
+aboutText :=" CapsLock或ScrollLock   切换中英文输入法(caps模式),ScrollLock`n Control + Space            切换中英文输入法`n Control + Shift(左)        循环切换输入法`n Control + 1                   English (USA)`n Control + 2                   中文输入法`n Control + '                    中文输入法"
 Menu, Tray, Tip, Win10输入法切换`n%aboutText%
 
 #Persistent  ; Keep the script running until the user exits it.
@@ -80,12 +81,14 @@ setMenuMode()
 	{
 		Menu,Tray,Check,CapsLock模式
 		SetCapsLockState, AlwaysOff
+		SetScrollLockState, AlwaysOff
 		DisplayTextOnScreen("输入法切换是：CapsLock模式")
 	}
 	else 
 	{
 		Menu,Tray,UnCheck,CapsLock模式
-		SetCapsLockState, Off     
+		SetCapsLockState, Off   
+		SetScrollLockState,Off  
 	}
 }
 
@@ -218,9 +221,10 @@ CapsLock模式:
 }
 
 
-; CapsLock切换中英文输入法		
+; CapsLock切换中英文输入法
 #if (g_IsCapsLockMode)
 {
+	ScrollLock::
 	CapsLock::
 		SetFormat, Integer, H		;切换到16进制
 		currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
