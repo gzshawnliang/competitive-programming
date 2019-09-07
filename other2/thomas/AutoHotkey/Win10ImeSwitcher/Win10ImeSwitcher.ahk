@@ -109,8 +109,8 @@ return
 ;Control + Shift (左) 循环切换输入法（支撑多钟输入法）
 LControl & LShift::
 	SendInput #{Space}
-	; todo：MBP需要用500ms，普通电脑50，原因未知
-	Sleep, 500
+	; todo：电池状态下MBP需要用200ms，普通电脑50ms，原因未知。可能跟cpu降速有关。
+	Sleep, 200
 
 	SetFormat, Integer, H		;切换到16进制
 	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
