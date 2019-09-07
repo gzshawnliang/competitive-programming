@@ -1,13 +1,21 @@
-﻿; https://msdn.microsoft.com/en-us/library/dd318693%28v=vs.85%29.aspx
+﻿; Win10传统切换中英文输入法
+; Control + Space 切换中英文输入法
+; Control + Shift （左）循环切换输入法
+; Control + 1  English (USA)
+; Control + 2 中文输入法
+; Control + ' 中文输入法
+; https://msdn.microsoft.com/en-us/library/dd318693%28v=vs.85%29.aspx
 ; "The specified language must be displayable using the current system character set." (SystemParametersInfo function)
 ; https://msdn.microsoft.com/en-us/library/windows/desktop/ms724947%28v=vs.85%29.aspx
-;-------- https://autohotkey.com/boards/viewtopic.php?f=6&t=18519 ---
+; https://autohotkey.com/boards/viewtopic.php?f=6&t=18519 ---
 
 ; 仅允许唯一一个实例运行，如果第二个开启，自动刷新
 ; https://www.autohotkey.com/docs/commands/_SingleInstance.htm
 #SingleInstance force
 
-Menu, Tray, Tip,Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法
+aboutText :="Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + Shift （左）循环切换输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法"
+
+Menu, Tray, Tip,%aboutText%
 
 #Persistent  ; Keep the script running until the user exits it.
 Menu, Tray, NoStandard
@@ -70,7 +78,7 @@ return
 	Gui, +AlwaysOnTop +Disabled -SysMenu +Owner 
 	Gui, Add, Text,cffffff,Win10输入法传统切换
 	Gui, Font, s18,Microsoft YaHei
-	Gui, Add, Text,cffffff,Control + Space 切换中英文输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法
+	Gui, Add, Text,cffffff,%aboutText%
 
 	Gui, Show, xCenter yCenter, 状态, NoActivate, 
 	sleep, 5000
