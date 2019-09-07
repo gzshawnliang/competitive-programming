@@ -166,7 +166,7 @@ CapsLock模式:
 ;
 
 
-#if (g_IsWin7Mode= True)
+#if (g_IsWin7Mode = True)
 {
 	;Control + Shift (左) 循环切换输入法（支撑多钟输入法）
 	LControl & LShift::
