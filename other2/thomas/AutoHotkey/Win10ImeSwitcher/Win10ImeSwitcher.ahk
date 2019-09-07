@@ -15,18 +15,34 @@
 ; https://www.autohotkey.com/docs/commands/_SingleInstance.htm
 #SingleInstance force
 
+currMode := 0
+RegRead, currMode, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, mode
+global g_IsWin7Mode :=True
+
+if(currMode=1)
+{
+	g_IsWin7Mode :=False
+}
+global g_IsCapsLockMode := !g_IsWin7Mode
+
 aboutText :="Win10输入法传统切换`nControl + Space 切换中英文输入法`nControl + Shift （左）循环切换输入法`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法"
 
 Menu, Tray, Tip,%aboutText%
 
 #Persistent  ; Keep the script running until the user exits it.
+
 Menu, Tray, NoStandard
 Menu, Tray, Add, 开机启动  ; Creates a new menu item.
-Menu, Tray, Add				; Creates a separator line.
+;Menu, Tray, Add				; Creates a separator line.
 Menu, Tray, Add, 取消开机启动  ; Creates a new menu item.
+Menu, Tray, Add				; Creates a separator line.
+Menu, Tray, Add, 传统Win7模式  ; Creates a new menu item.
+Menu, Tray, Add, CapsLock模式  ; Creates a new menu item.
 Menu, Tray, Add				; Creates a separator line.
 Menu, Tray, Add, 关于  ; Creates a new menu item.
 Menu, Tray, Add, 退出  ; Creates a new menu item.
+
+setMenuMode()
 
 If FileExist(A_AppData . "\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk" )
 {
@@ -42,6 +58,40 @@ else
 	Menu, Tray, Icon, DDORes.dll, 110
 }
 return
+
+setMenuMode()
+{
+
+	if (g_IsWin7Mode = True)		
+		Menu,Tray,Check,传统Win7模式
+	else							
+		Menu,Tray,UnCheck,传统Win7模式
+	
+	if (g_IsCapsLockMode  = True) 
+	{
+		Menu,Tray,Check,CapsLock模式
+		SetCapsLockState, AlwaysOff     
+	}
+	else 
+	{
+		Menu,Tray,UnCheck,CapsLock模式
+		SetCapsLockState, Off     
+	}
+}
+
+传统Win7模式:
+	g_IsWin7Mode :=True
+	global g_IsCapsLockMode := !g_IsWin7Mode
+	setMenuMode()
+	RegWrite, REG_SZ, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, mode, 0
+	return
+
+CapsLock模式:
+	g_IsWin7Mode :=False
+	global g_IsCapsLockMode := !g_IsWin7Mode
+	setMenuMode()
+	RegWrite, REG_SZ, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, mode, 1
+	return
 
 开机启动:
 	; DisplayTextOnScreen(A_ScriptDir,3000)
@@ -106,84 +156,83 @@ return
 	DisplayTextOnScreen("中文输入已开启")
 	return
 ;
-;Control + Shift (左) 循环切换输入法（支撑多钟输入法）
-LControl & LShift::
-	SendInput #{Space}
-	; todo：电池状态下MBP需要用200ms，普通电脑50ms，原因未知。可能跟cpu降速有关。
-	Sleep, 200
 
-	SetFormat, Integer, H		;切换到16进制
-	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
-	if currLocaleID=0x4090409
-	{
-		SetFormat, Integer, D		;切换到10进制
-		;当前是英文输入法
-		DisplayTextOnScreen("United States - English")
-	}
-	else
-	{
-		SetFormat, Integer, D		;切换到10进制
-		;当前是中文输入法
-		DisplayTextOnScreen("中文输入已开启")
-	}	
-	return
 
-;Control + Space 切换中英文输入法	
-^space::
-	SetFormat, Integer, H		;切换到16进制
-	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
-	if currLocaleID=0x4090409
-	{
-		SetFormat, Integer, D		;切换到10进制
-		;当前是英文输入法，马上切换中文
-		SetDefaultKeyboard(0x0804) ; Chinese
-		DisplayTextOnScreen("中文输入已开启")
-	}
-	else
-	{
-		SetFormat, Integer, D		;切换到10进制
-		;当前是中文输入法，马上切换英文
-		SetDefaultKeyboard(0x0409) ; english-US
-		DisplayTextOnScreen("United States - English")
-	}
-	return
 
-; 大写打开/关闭指示器，有延迟，指示器消失之前不能输入
-; g_LastCtrlKeyDownTime := 0
-; g_AbortSendEsc := false
-; g_ControlRepeatDetected := false
 
-; *CapsLock::
-;     if (g_ControlRepeatDetected)
-;     {
-;         return
-;     }
+#if (g_IsWin7Mode= True)
+{
+	;Control + Shift (左) 循环切换输入法（支撑多钟输入法）
+	LControl & LShift::
+		SendInput #{Space}
+		; todo：电池状态下MBP需要用200ms，普通电脑50ms，原因未知。可能跟cpu降速有关。
+		Sleep, 200
 
-; 	DisplayTextOnScreen("大写打开",500)
+		SetFormat, Integer, H		;切换到16进制
+		currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
+		if currLocaleID=0x4090409
+		{
+			SetFormat, Integer, D		;切换到10进制
+			;当前是英文输入法
+			DisplayTextOnScreen("United States - English")
+		}
+		else
+		{
+			SetFormat, Integer, D		;切换到10进制
+			;当前是中文输入法
+			DisplayTextOnScreen("中文输入已开启")
+		}	
+		
+		return	
 
-;     send,{CapsLock}
-;     g_LastCtrlKeyDownTime := A_TickCount
-;     g_AbortSendEsc := false
-;     g_ControlRepeatDetected := true
 
-;     return
+	;Control + Space 切换中英文输入法	
+	^space::
+		SetFormat, Integer, H		;切换到16进制
+		currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
+		if currLocaleID=0x4090409
+		{
+			SetFormat, Integer, D		;切换到10进制
+			;当前是英文输入法，马上切换中文
+			SetDefaultKeyboard(0x0804) ; Chinese
+			DisplayTextOnScreen("中文输入已开启")
+		}
+		else
+		{
+			SetFormat, Integer, D		;切换到10进制
+			;当前是中文输入法，马上切换英文
+			SetDefaultKeyboard(0x0409) ; english-US
+			DisplayTextOnScreen("United States - English")
+		}
+		return
+}
 
-; *CapsLock Up::
-;     SetCapsLockState Off
-; 	DisplayTextOnScreen("大写关闭",500)
-;     g_ControlRepeatDetected := false
-;     if (g_AbortSendEsc)
-;     {
-;         return
-;     }
-	
-;     current_time := A_TickCount
-;     time_elapsed := current_time - g_LastCtrlKeyDownTime
-;     if (time_elapsed <= 250)
-;     {
-;         SetCapsLockState Off
-;     }
-;     return
+
+; CapsLock切换中英文输入法		
+#if (g_IsCapsLockMode)
+{
+	CapsLock::
+		SetFormat, Integer, H		;切换到16进制
+		currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
+		if currLocaleID=0x4090409
+		{
+			SetFormat, Integer, D		;切换到10进制
+			;当前是英文输入法，马上切换中文
+			SetDefaultKeyboard(0x0804) ; Chinese
+			sleep,200
+			DisplayTextOnScreen("中文输入已开启")
+		}
+		else
+		{
+			SetFormat, Integer, D		;切换到10进制
+			;当前是中文输入法，马上切换英文
+			SetDefaultKeyboard(0x0409) ; english-US
+			sleep,200
+			DisplayTextOnScreen("United States - English")
+		}
+		return
+}
+
 
 ToggleInputLang()
 {
