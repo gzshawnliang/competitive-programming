@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "freeParentheses_UVA1238"; //*
+const string CPPfile = "extendtoPalindromes_UVA11475"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
