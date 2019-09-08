@@ -1,4 +1,5 @@
 ﻿; Win10传统切换中英文输入法
+; CapsLock 	切换中英文输入法(caps模式)
 ; Control + Space 切换中英文输入法
 ; Control + Shift （左）循环切换输入法
 ; Control + 1  English (USA)
