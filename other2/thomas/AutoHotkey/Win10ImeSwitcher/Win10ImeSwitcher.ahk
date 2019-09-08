@@ -185,7 +185,6 @@ CapsLock模式:
 		return
 }
 
-
 ; CapsLock切换中英文输入法		
 #if (g_IsCapsLockMode)
 {
@@ -289,5 +288,3 @@ DisplayTextOnScreen(DisText,sleepTime:=600)
 	sleep, %sleepTime%
 	Gui, Destroy
 }
-
-
