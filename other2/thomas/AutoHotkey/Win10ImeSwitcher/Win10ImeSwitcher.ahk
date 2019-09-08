@@ -1,11 +1,9 @@
 ﻿; Win10传统切换中英文输入法
-; CapsLock或ScrollLock   切换中英文输入法(caps模式),ScrollLock
-; Control + Space        切换中英文输入法
-; Control + Shift(左)    循环切换输入法
-; Control + 1            English (USA)
-; Control + 2            中文输入法
-; Control + '            中文输入法
-
+; Control + Space 切换中英文输入法
+; Control + Shift （左）循环切换输入法
+; Control + 1  English (USA)
+; Control + 2 中文输入法
+; Control + ' 中文输入法
 ; todo:循环切换输入法需显示名称
 ; 参考
 ; https://msdn.microsoft.com/en-us/library/dd318693%28v=vs.85%29.aspx
@@ -28,16 +26,15 @@ if(currMode=1)
 }
 global g_IsCapsLockMode := !g_IsWin7Mode
 
-; aboutText :="CapsLock或ScrollLock  切换中英文输入法(caps模式)`nControl + Space           切换中英文输入法(传统模式)`nControl + Shift(左)        循环切换输入法(传统模式)`nControl + 1               English (USA)`nControl + 2               中文输入法`nControl + '                中文输入法"
-; aboutText :="CapsLock或ScrollLock       切换中英文输入法(caps模式)`nControl + Space           切换中英文输入法(传统模式)`nControl + Shift(左)       循环切换输入法(传统模式)`nControl + 1               English (USA)`nControl + 2               中文输入法`nControl + '               中文输入法`n"
-aboutText :=" CapsLock或ScrollLock   切换中英文输入法(caps模式),ScrollLock`n Control + Space            切换中英文输入法`n Control + Shift(左)        循环切换输入法`n Control + 1                   English (USA)`n Control + 2                   中文输入法`n Control + '                    中文输入法"
+aboutText :="CapsLock            切换中英文输入法(caps模式)`nControl + Space 切换中英文输入法(传统模式)`nControl + Shift （左）循环切换输入法(传统模式)`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法"
+
 Menu, Tray, Tip, Win10输入法切换`n%aboutText%
 
-#Persistent  ; Keep the script running until the user exits it.
+#Persistent  ; 保持脚本运行，直达用户退出
 
+; 创建菜单
 Menu, Tray, NoStandard
 Menu, Tray, Add, 开机启动  ; Creates a new menu item.
-;Menu, Tray, Add				; Creates a separator line.
 Menu, Tray, Add, 取消开机启动  ; Creates a new menu item.
 Menu, Tray, Add				; Creates a separator line.
 Menu, Tray, Add, 传统Win7模式  ; Creates a new menu item.
@@ -46,23 +43,30 @@ Menu, Tray, Add				; Creates a separator line.
 Menu, Tray, Add, 关于  ; Creates a new menu item.
 Menu, Tray, Add, 退出  ; Creates a new menu item.
 
+; 设置模式
 setMenuMode()
 
-If FileExist(A_AppData . "\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk" )
-{
-	Menu,Tray,Check,开机启动
-	Menu, Tray, Disable, 开机启动
-	Menu, Tray, Enable, 取消开机启动
-	Menu, Tray, Icon, DDORes.dll, 108
-	Return
-}
-else
-{
-	Menu, Tray, Disable, 取消开机启动
-	Menu, Tray, Icon, DDORes.dll, 110
-}
+; 检测开机启动设置
+checkAutoStartup()
 
 return
+
+checkAutoStartup()
+{
+	If FileExist(A_AppData . "\Microsoft\Windows\Start Menu\Programs\Startup\Win10ImeSwitcher.lnk" )
+	{
+		Menu,Tray,Check,开机启动
+		Menu, Tray, Disable, 开机启动
+		Menu, Tray, Enable, 取消开机启动
+		Menu, Tray, Icon, DDORes.dll, 108
+		Return
+	}
+	else
+	{
+		Menu, Tray, Disable, 取消开机启动
+		Menu, Tray, Icon, DDORes.dll, 110
+	}
+}
 
 setMenuMode()
 {
@@ -81,14 +85,12 @@ setMenuMode()
 	{
 		Menu,Tray,Check,CapsLock模式
 		SetCapsLockState, AlwaysOff
-		SetScrollLockState, AlwaysOff
 		DisplayTextOnScreen("输入法切换是：CapsLock模式")
 	}
 	else 
 	{
 		Menu,Tray,UnCheck,CapsLock模式
-		SetCapsLockState, Off   
-		SetScrollLockState,Off  
+		SetCapsLockState, Off     
 	}
 }
 
@@ -139,12 +141,10 @@ CapsLock模式:
     Gui, Color, 37474F
     Gui -Caption	
 
-    Gui, Font, s28,Segoe UI
+    Gui, Font, s28,Microsoft YaHei
 	Gui, +AlwaysOnTop +Disabled -SysMenu +Owner 
 	Gui, Add, Text,cffffff,Win10输入法切换
-	Gui, Font, s16
-	Gui, Add, Text,cffffff,By Thomas Liang
-	Gui, Font, s18
+	Gui, Font, s18,Microsoft YaHei
 	Gui, Add, Text,cffffff,%aboutText%
 
 	Gui, Show, xCenter yCenter, 状态, NoActivate, 
@@ -170,90 +170,84 @@ CapsLock模式:
 	SetDefaultKeyboard(0x0804) ; Chinese
 	DisplayTextOnScreen("中文输入已开启")
 	return
-;
 
-
-#if (g_IsWin7Mode = True)
+#if (g_IsWin7Mode= True)
 {
 	;Control + Shift (左) 循环切换输入法（支撑多钟输入法）
 	LControl & LShift::
-		SendInput #{Space}
-		; todo：电池状态下MBP需要用200ms，普通电脑50ms，原因未知。可能跟cpu降速有关。
-		Sleep, 200
-
-		SetFormat, Integer, H		;切换到16进制
-		currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
-		if currLocaleID=0x4090409
-		{
-			SetFormat, Integer, D		;切换到10进制
-			;当前是英文输入法
-			DisplayTextOnScreen("United States - English")
-		}
-		else
-		{
-			SetFormat, Integer, D		;切换到10进制
-			;当前是中文输入法
-			DisplayTextOnScreen("中文输入已开启")
-		}	
-		
+		ToggleAllInputLang()
 		return	
-
 
 	;Control + Space 切换中英文输入法	
 	^space::
-		SetFormat, Integer, H		;切换到16进制
-		currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
-		if currLocaleID=0x4090409
-		{
-			SetFormat, Integer, D		;切换到10进制
-			;当前是英文输入法，马上切换中文
-			SetDefaultKeyboard(0x0804) ; Chinese
-			DisplayTextOnScreen("中文输入已开启")
-		}
-		else
-		{
-			SetFormat, Integer, D		;切换到10进制
-			;当前是中文输入法，马上切换英文
-			SetDefaultKeyboard(0x0409) ; english-US
-			DisplayTextOnScreen("United States - English")
-		}
+		ToggleChsEngLang()
 		return
 }
 
 
-; CapsLock切换中英文输入法
+; CapsLock切换中英文输入法		
 #if (g_IsCapsLockMode)
 {
-	ScrollLock::
 	CapsLock::
-		SetFormat, Integer, H		;切换到16进制
-		currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
-		if currLocaleID=0x4090409
-		{
-			SetFormat, Integer, D		;切换到10进制
-			;当前是英文输入法，马上切换中文
-			SetDefaultKeyboard(0x0804) ; Chinese
-			sleep,200
-			DisplayTextOnScreen("中文输入已开启")
-		}
-		else
-		{
-			SetFormat, Integer, D		;切换到10进制
-			;当前是中文输入法，马上切换英文
-			SetDefaultKeyboard(0x0409) ; english-US
-			sleep,200
-			DisplayTextOnScreen("United States - English")
-		}
+		ToggleChsEngLang()
 		return
 }
 
-ToggleInputLang()
+; 中英输入法切换
+ToggleChsEngLang()
+{
+	SetFormat, Integer, H		;切换到16进制
+	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
+	if currLocaleID=0x4090409
+	{
+		SetFormat, Integer, D		;切换到10进制
+		;当前是英文输入法，马上切换中文
+		SetDefaultKeyboard(0x0804) ; Chinese
+		sleep,200
+		DisplayTextOnScreen("中文输入已开启")
+	}
+	else
+	{
+		SetFormat, Integer, D		;切换到10进制
+		;当前是中文输入法，马上切换英文
+		SetDefaultKeyboard(0x0409) ; english-US
+		sleep,200
+		DisplayTextOnScreen("United States - English")
+	}
+}
+
+; 循环切换输入法（支撑多钟输入法）
+ToggleAllInputLang()
+{
+	SendInput #{Space}
+	; todo：电池状态下MBP需要用200ms，普通电脑50ms，原因未知。可能跟cpu降速有关。
+	Sleep, 200
+
+	SetFormat, Integer, H		;切换到16进制
+	currLocaleID:= % DllCall("GetKeyboardLayout", Int,DllCall("GetWindowThreadProcessId", int,WinActive("A"), Int,0))
+	if currLocaleID=0x4090409
+	{
+		SetFormat, Integer, D		;切换到10进制
+		;当前是英文输入法
+		DisplayTextOnScreen("United States - English")
+	}
+	else
+	{
+		SetFormat, Integer, D		;切换到10进制
+		;当前是中文输入法
+		DisplayTextOnScreen("中文输入已开启")
+	}	
+}
+
+; 循环切换输入法（支撑多钟输入法）（第二种方式）
+ToggleAllInputLang2()
 {
     WinExist("A")
     ControlGetFocus, CtrlInFocus
     PostMessage, 0x50,2,, %CtrlInFocus% 
 }
 
+; 根据LocaleID设置输入法（第二种方式）
 SetDefaultKeyboard2(LocaleID)
 {
     WinExist("A")
@@ -261,6 +255,7 @@ SetDefaultKeyboard2(LocaleID)
     PostMessage, 0x50, 0, % LocaleID, %CtrlInFocus%	
 }
 
+; 根据LocaleID设置输入法
 SetDefaultKeyboard(LocaleID)
 {
 	Global
@@ -279,6 +274,7 @@ SetDefaultKeyboard(LocaleID)
 	}
 }
 
+; 显示屏幕信息
 DisplayTextOnScreen(DisText,sleepTime:=600)
 {
     Gui, Color, 37474F
@@ -292,3 +288,5 @@ DisplayTextOnScreen(DisText,sleepTime:=600)
 	sleep, %sleepTime%
 	Gui, Destroy
 }
+
+
