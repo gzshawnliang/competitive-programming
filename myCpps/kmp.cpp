@@ -21,10 +21,23 @@ vector<int> KmpSearch(string & T,string & P)
     return pos;
 }
 
+bool KmpExistSearch(string & T,string & P)
+{
+    bool isExisted;
+    vector<int> next = createNext(P);
+
+    //begin search
+
+    return isExisted;
+}
+
 int main()
 {
-    string s = "ababababababababcabababab",
-           t = "abababc";
+    // string s = "ababababababababcabababab",
+    //        t = "abababc";
+
+    string s = "krfxmjtbbbrywsrndqengumtgnbmpvzdsjw",
+           t = "tbbry";
 
     int sizeS = s.size(), sizeT = t.size();
 

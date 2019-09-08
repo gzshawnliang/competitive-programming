@@ -12,7 +12,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "extendtoPalindromes_UVA11475"; //*
+const string CPPfile = "secretWord_UVA12467"; //*
 //***************************************
 
 ifstream fin(CPPfile + ".cpp");
