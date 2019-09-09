@@ -1,2 +1,4 @@
-"C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in Win10ImeSwitcher.ahk /icon "Win10ImeSwitcher2.ico"
-Win10ImeSwitcher.exe
+SET current_path=%~dp0
+TASKKILL /F /IM Win10ImeSwitcher.exe
+"%PROGRAMFILES%\AutoHotkey\Compiler\Ahk2Exe.exe" /in "%current_path%Win10ImeSwitcher.ahk" /icon "%current_path%Win10ImeSwitcher2.ico"
+start Win10ImeSwitcher.exe
