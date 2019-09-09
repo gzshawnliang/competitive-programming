@@ -10,7 +10,7 @@ class KMP
 {
   private:
     string P;
-    vector<int> next;   //next[j]表示当P[j] != T[i] 时候，j要回到那个位置(长度为j的字符串最长公共前后缀的值)
+    vector<int> next;   //next[j]表示当P[j] != T[i] 时候，j要回到那个位置(长度为j的字符串最长公共前后缀的值),也就是前缀和后缀公共部分的最大长度
     int m;              //m = length of P
 
     void build(const string & P)
