@@ -12,7 +12,8 @@
  *              012345678
  * p1:p+'-'+s = bebe-ebeb
  * 
- * 使用next数组得知p1最长前后缀长度是3（beb），next的最后一项的值
+ * 使用next数组得知p1最长前后缀长度是3（beb），next的最后一项的值len
+ * ans = s + p去掉最长公共前后缀 = p.substr(len, p.length() - 1) 
  * @题目来源：    https://uva.onlinejudge.org/external/114/11475.pdf
 ===========================================================
 */
