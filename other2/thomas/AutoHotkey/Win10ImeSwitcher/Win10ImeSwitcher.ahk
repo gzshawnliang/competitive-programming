@@ -15,6 +15,7 @@
 ; 仅允许唯一一个实例运行，如果第二个开启，自动刷新
 ; https://www.autohotkey.com/docs/commands/_SingleInstance.htm
 #SingleInstance force
+#Persistent  ; 保持脚本运行，直达用户退出
 
 ;获取当前模式，0代表win7模式，1代表CapsLock模式
 currMode := 0
@@ -27,11 +28,18 @@ if(currMode=1)
 }
 global g_IsCapsLockMode := !g_IsWin7Mode
 
+currDisplayMsgOnScreenMode := 1
+RegRead, currDisplayMsgOnScreenMode, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, DisplayMsgOnScreen
+global g_DisplayMsgOnScreen :=True
+
+if(currDisplayMsgOnScreenMode=0)
+{
+	g_DisplayMsgOnScreen :=False
+}
+
 aboutText :="CapsLock            切换中英文输入法(caps模式)`nControl + Space 切换中英文输入法(传统模式)`nControl + Shift （左）循环切换输入法(传统模式)`nControl + 1  English (USA)`nControl + 2 中文输入法`nControl + ' 中文输入法"
 
 Menu, Tray, Tip, Win10输入法切换`n%aboutText%
-
-#Persistent  ; 保持脚本运行，直达用户退出
 
 ; 创建菜单
 Menu, Tray, NoStandard
@@ -41,6 +49,9 @@ Menu, Tray, Add				; Creates a separator line.
 Menu, Tray, Add, 传统Win7模式  ; Creates a new menu item.
 Menu, Tray, Add, CapsLock模式  ; Creates a new menu item.
 Menu, Tray, Add				; Creates a separator line.
+Menu, Tray, Add, 显示屏幕信息  ; Creates a new menu item.
+Menu, Tray, Add, 关闭屏幕信息  ; Creates a new menu item.
+Menu, Tray, Add				; Creates a separator line.
 Menu, Tray, Add, 关于  ; Creates a new menu item.
 Menu, Tray, Add, 退出  ; Creates a new menu item.
 
@@ -49,6 +60,9 @@ setMenuMode()
 
 ; 检测开机启动设置
 checkAutoStartup()
+
+;设置是否显示屏幕信息，如果显示有一定界面堵塞，影响键盘快速输入
+setMenuDisplayMsgMode()
 
 return
 
@@ -95,16 +109,48 @@ setMenuMode()
 	}
 }
 
+setMenuDisplayMsgMode()
+{
+	if (g_DisplayMsgOnScreen = True)
+	{
+		Menu,Tray,Check,显示屏幕信息
+		Menu,Tray,UnCheck,关闭屏幕信息
+
+		Menu, Tray, Disable, 显示屏幕信息
+		Menu, Tray, Enable, 关闭屏幕信息
+	}
+	else							
+	{
+		Menu,Tray,UnCheck,显示屏幕信息
+		Menu,Tray,Check,关闭屏幕信息
+
+		Menu, Tray, Enable, 显示屏幕信息
+		Menu, Tray, Disable, 关闭屏幕信息	
+	}
+}
+
+显示屏幕信息:
+	g_DisplayMsgOnScreen:=True
+	setMenuDisplayMsgMode()
+	RegWrite, REG_SZ, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, DisplayMsgOnScreen, 1
+	return
+
+关闭屏幕信息:
+	g_DisplayMsgOnScreen:=False
+	setMenuDisplayMsgMode()
+	RegWrite, REG_SZ, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, DisplayMsgOnScreen, 0
+	return
+
 传统Win7模式:
 	g_IsWin7Mode :=True
-	global g_IsCapsLockMode := !g_IsWin7Mode
+	g_IsCapsLockMode := !g_IsWin7Mode
 	setMenuMode()
 	RegWrite, REG_SZ, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, mode, 0
 	return
 
 CapsLock模式:
 	g_IsWin7Mode :=False
-	global g_IsCapsLockMode := !g_IsWin7Mode
+	g_IsCapsLockMode := !g_IsWin7Mode
 	setMenuMode()
 	RegWrite, REG_SZ, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, mode, 1
 	return
@@ -277,6 +323,9 @@ SetDefaultKeyboard(LocaleID)
 ; 显示屏幕信息
 DisplayTextOnScreen(DisText,sleepTime:=600)
 {
+	if(g_DisplayMsgOnScreen=False)
+		return
+
     Gui, Color, 37474F
     Gui -Caption	
 
