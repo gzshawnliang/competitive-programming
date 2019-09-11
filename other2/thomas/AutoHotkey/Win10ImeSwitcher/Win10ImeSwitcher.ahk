@@ -28,6 +28,7 @@ if(currMode=1)
 }
 global g_IsCapsLockMode := !g_IsWin7Mode
 
+;是否显示屏幕信息，如果显示有600ms延迟。在快速输入的时候回遗漏按下的按键
 currDisplayMsgOnScreenMode := 1
 RegRead, currDisplayMsgOnScreenMode, HKEY_CURRENT_USER\SOFTWARE\Win10ImeSwitcher, DisplayMsgOnScreen
 global g_DisplayMsgOnScreen :=True
