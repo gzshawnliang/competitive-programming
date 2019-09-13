@@ -77,7 +77,10 @@ void findFile(const char * dir,const string & c_FileName,string & ans)
     
     FindClose(hFind);
 }
-
+/**
+ * 获取当前路径
+ * @return {string}  : 
+ */
 string CurrPath() 
 {
     char buffer[MAX_PATH];
