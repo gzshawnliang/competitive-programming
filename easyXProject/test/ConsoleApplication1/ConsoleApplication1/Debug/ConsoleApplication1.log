@@ -1,3 +1,6 @@
 ﻿  ConsoleApplication1.cpp
-d:\code\gzshawnliang\competitive-programming\easyxproject\test\consoleapplication1\consoleapplication1\consoleapplication1.cpp(16): warning C4101: 'm': unreferenced local variable
+d:\code\gzshawnliang\competitive-programming\easyxproject\test\consoleapplication1\consoleapplication1\consoleapplication1.cpp(53): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+d:\code\gzshawnliang\competitive-programming\easyxproject\test\consoleapplication1\consoleapplication1\consoleapplication1.cpp(54): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+d:\code\gzshawnliang\competitive-programming\easyxproject\test\consoleapplication1\consoleapplication1\consoleapplication1.cpp(59): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\code\gzshawnliang\competitive-programming\easyxproject\test\consoleapplication1\consoleapplication1\consoleapplication1.cpp(63): warning C4101: 'm': unreferenced local variable
   ConsoleApplication1.vcxproj -> D:\code\gzshawnliang\competitive-programming\easyXProject\test\ConsoleApplication1\Debug\ConsoleApplication1.exe
