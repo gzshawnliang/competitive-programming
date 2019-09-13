@@ -14,7 +14,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "secretWord_UVA12467"; //*
+const string CPPfile = "wheresWaldorf_UVA10010"; //*
 //***************************************
 
 ifstream fin;
@@ -108,7 +108,7 @@ int main()
         cout << noFoundErrMsg << '\n';
         return 0;
     }
-    string OjCpp=cppfileFullName.substr(0,cppfileFullName.length()-4) + "OJ1.cpp";
+    string OjCpp=cppfileFullName.substr(0,cppfileFullName.length()-4) + "OJ.cpp";
     fout.open(OjCpp);
 
 
