@@ -33,8 +33,8 @@ param(
     [String] $WorkspaceFolder 
 )
 
-Set-Variable TLEWarningMsec -option Constant -value 1600        #Time Limit Exceeded 超时警告（毫秒）
-Set-Variable TLEErrorMsec -option Constant -value 2000          #Time Limit Exceeded 超时错误（毫秒）
+Set-Variable TLEWarningMsec -option Constant -value 3000        #Time Limit Exceeded 超时警告（毫秒）
+Set-Variable TLEErrorMsec -option Constant -value 5000          #Time Limit Exceeded 超时错误（毫秒）
 Set-Variable TLETerminateMsec -option Constant -value 60000      #Time Limit Exceeded 超时终止（毫秒）
 $JavaMainClassName = "Main" #Java Main Class Name
 
