@@ -14,7 +14,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "wheresWaldorf_UVA10010"; //*
+const string CPPfile = "stringPartition_UVA11258"; //*
 //***************************************
 
 ifstream fin;
