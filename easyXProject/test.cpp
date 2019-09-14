@@ -1,41 +1,96 @@
-// 编译环境：Visual C++ 6.0，EasyX 20180504(beta)
-// http://www.easyx.cn
-//
-#include <graphics.h>
 #include <conio.h>
+#include <bits/stdc++.h>
+#include <graphics.h>
+using namespace std;
+
+const double PI = 3.1415926;
+
+void move(int & x, int & y, int d, int speed) 
+{
+    double _d = d;
+    _d = _d / 180.0 * PI;
+
+    x += speed * sin(_d);
+    if (d != 90) y -= speed * cos(_d);
+}
+
+int direction(int x1, int y1, int x2, int y2)
+{
+	if (y1 == y2)
+	{
+		if (x1 < x2)
+		{
+			return 90;
+		}
+		else
+		{
+			return 270;
+		}
+	}
+
+	int ans = round(atan(((double)x1 - (double)x2) / ((double)y2 - (double)y1)) / PI * 180.0);
+	if (y1 < y2) ans += 180;
+
+	return ans;
+}
 
 int main()
 {
-	// 初始化图形窗口
 	initgraph(640, 480);
 
-	MOUSEMSG m;		// 定义鼠标消息
-
+	int x = 100, y = 100, d = 0, s = 5;
 	while(true)
 	{
-		// 获取一条鼠标消息
-		m = GetMouseMsg();
+		if (GetAsyncKeyState((int)'W') && GetAsyncKeyState((int)'A'))
+        {
+            d = 315;
+            move(x, y, d, s);
+        }
+        else if (GetAsyncKeyState((int)'W') && GetAsyncKeyState((int)'D'))
+        {
+            d = 45;
+            move(x, y, d, s);
+        }
+        else if (GetAsyncKeyState((int)'S') && GetAsyncKeyState((int)'A'))
+        {
+            d = 225;
+            move(x, y, d, s);
+        }
+        else if (GetAsyncKeyState((int)'S') && GetAsyncKeyState((int)'D'))
+        {
+            d = 135;
+            move(x, y, d, s);
+        }
+        else if (GetAsyncKeyState((int)'W'))
+        {
+            d = 0;
+            move(x, y, d, s);
+        }
+        else if (GetAsyncKeyState((int)'S'))
+        {
+            d = 180;
+            move(x, y, d, s);
+        }
+        else if (GetAsyncKeyState((int)'A'))
+        {
+            d = 270;
+            move(x, y, d, s);
+        }
+        else if (GetAsyncKeyState((int)'D'))
+        {
+            d = 90;
+            move(x, y, d, s);
+        }
 
-		switch(m.uMsg)
-		{
-			case WM_MOUSEMOVE:
-				// 鼠标移动的时候画红色的小点
-				putpixel(m.x, m.y, RED);
-				break;
+		cleardevice();
+		rectangle(x - 10, y - 10, x + 10, y + 10);
 
-			case WM_LBUTTONDOWN:
-				// 如果点左键的同时按下了 Ctrl 键
-				if (m.mkCtrl)
-					// 画一个大方块
-					rectangle(m.x-10, m.y-10, m.x+10, m.y+10);
-				else
-					// 画一个小方块
-					rectangle(m.x-5, m.y-5, m.x+5, m.y+5);
-				break;
+		int tempX = 100, tempY = 100;
+		rectangle(tempX - 10, tempY - 10, tempX + 10, tempY + 10);
+		move(tempX, tempY, direction(tempX, tempY, x, y), 40);
+		rectangle(tempX - 10, tempY - 10, tempX + 10, tempY + 10);
 
-			case WM_RBUTTONUP:
-				return 0;	// 按鼠标右键退出程序
-		}
+		Sleep(50);
 	}
 
 	// 关闭图形窗口
