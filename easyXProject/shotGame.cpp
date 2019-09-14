@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int xpn = 1920, ypn = 1080;
+const int xpn = 1500, ypn = 900;
 const int ps = 5;
 
 const double PI = 3.1415926;
@@ -211,7 +211,8 @@ int main()
 
         if (GetAsyncKeyState(VK_ESCAPE))
         {
-            closegraph();
+            //closegraph();
+            break;
         }
 
 		cleardevice();
@@ -256,4 +257,5 @@ int main()
 
     // 关闭图形窗口
     closegraph();
+    return 0;
 }
