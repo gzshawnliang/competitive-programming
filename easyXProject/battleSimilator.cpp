@@ -189,7 +189,7 @@ int main()
             temp.attackCountMax = 10;
             temp.attackDamage = 20;
             temp.movementSpeed = 5;
-            temp.range = 5;
+            temp.range = 15;
             temp.minRange = 0;
             temp.troupType = type::worrior;
 
@@ -209,7 +209,7 @@ int main()
             temp.attackCountMax = 10;
             temp.attackDamage = 20;
             temp.movementSpeed = 5;
-            temp.range = 5;
+            temp.range = 15;
             temp.minRange = 0;
             temp.troupType = type::worrior;
 
@@ -289,18 +289,6 @@ int main()
                     if (blue[i].minRange * blue[i].minRange >= minD)
                     {
                         move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, red[minDIndex].x, red[minDIndex].y), blue[i].movementSpeed * -1);
-
-                        int minDS = inf;
-                        for (int k = 0; k <= sizeB - 1; ++k)
-                        {
-                            if (i == k) continue;
-                            minDS = min(minDS, distance2(blue[i].x, blue[i].y, blue[k].x, blue[k].y));
-                        }
-
-                        if (minDS < troupHitboxSize * troupHitboxSize)
-                        {
-                            move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, red[minDIndex].x, red[minDIndex].y), blue[i].movementSpeed * 1 + 2);
-                        }
                     }
 
                     if (blue[i].attackCount == 0)
@@ -313,18 +301,30 @@ int main()
                 else
                 {
                     move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, red[minDIndex].x, red[minDIndex].y), blue[i].movementSpeed);
+                }
+            }
 
-                    int minDS = inf;
-                    for (int k = 0; k <= sizeB - 1; ++k)
-                    {
-                        if (i == k) continue;
-                        minDS = min(minDS, distance2(blue[i].x, blue[i].y, blue[k].x, blue[k].y));
-                    }
+            for (int k = 0; k <= sizeB - 1; ++k)
+            {
+                if (i == k) continue;
 
-                    if (minDS < troupHitboxSize * troupHitboxSize)
-                    {
-                        move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, red[minDIndex].x, red[minDIndex].y), blue[i].movementSpeed * -1 - 2);
-                    }
+                int nowD = distance2(blue[i].x, blue[i].y, blue[k].x, blue[k].y);
+
+                if (nowD < troupHitboxSize * troupHitboxSize)
+                {
+                    move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, blue[k].x, blue[k].y), (int)((double)blue[i].movementSpeed * -0.7));
+                    move(blue[k].x, blue[k].y, direction(blue[i].x, blue[i].y, blue[k].x, blue[k].y), (int)((double)blue[i].movementSpeed * 0.7));
+                }
+            }
+
+            for (int k = 0; k <= sizeR - 1; ++k)
+            {
+                int nowD = distance2(blue[i].x, blue[i].y, red[k].x, red[k].y);
+
+                if (nowD < troupHitboxSize * troupHitboxSize)
+                {
+                    move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, red[k].x, red[k].y), (int)((double)blue[i].movementSpeed * -0.7));
+                    move(red[k].x, red[k].y, direction(blue[i].x, blue[i].y, red[k].x, red[k].y), (int)((double)blue[i].movementSpeed * 0.7));
                 }
             }
         }
@@ -349,18 +349,6 @@ int main()
                     if (red[i].minRange * red[i].minRange >= minD)
                     {
                         move(red[i].x, red[i].y, direction(red[i].x, red[i].y, blue[minDIndex].x, blue[minDIndex].y), red[i].movementSpeed * -1);
-
-                        int minDS = inf;
-                        for (int k = 0; k <= sizeR - 1; ++k)
-                        {
-                            if (i == k) continue;
-                            minDS = min(minDS, distance2(red[i].x, red[i].y, red[k].x, red[k].y));
-                        }
-
-                        if (minDS < troupHitboxSize * troupHitboxSize)
-                        {
-                            move(red[i].x, red[i].y, direction(red[i].x, red[i].y, blue[minDIndex].x, blue[minDIndex].y), red[i].movementSpeed * 1 + 2);
-                        }
                     }
                     
                     if (red[i].attackCount == 0)
@@ -373,18 +361,30 @@ int main()
                 else
                 {
                     move(red[i].x, red[i].y, direction(red[i].x, red[i].y, blue[minDIndex].x, blue[minDIndex].y), red[i].movementSpeed);
+                }
+            }
 
-                    int minDS = inf;
-                    for (int k = 0; k <= sizeR - 1; ++k)
-                    {
-                        if (i == k) continue;
-                        minDS = min(minDS, distance2(red[i].x, red[i].y, red[k].x, red[k].y));
-                    }
+            for (int k = 0; k <= sizeR - 1; ++k)
+            {
+                if (i == k) continue;
 
-                    if (minDS < troupHitboxSize * troupHitboxSize)
-                    {
-                        move(red[i].x, red[i].y, direction(red[i].x, red[i].y, blue[minDIndex].x, blue[minDIndex].y), red[i].movementSpeed * -1 - 2);
-                    }
+                int nowD = distance2(red[i].x, red[i].y, red[k].x, red[k].y);
+
+                if (nowD < troupHitboxSize * troupHitboxSize)
+                {
+                    move(red[i].x, red[i].y, direction(red[i].x, red[i].y, red[k].x, red[k].y), (int)((double)red[i].movementSpeed * -0.7));
+                    move(red[k].x, red[k].y, direction(red[i].x, red[i].y, red[k].x, red[k].y), (int)((double)red[i].movementSpeed * 0.7));
+                }
+            }
+
+            for (int k = 0; k <= sizeB - 1; ++k)
+            {
+                int nowD = distance2(red[i].x, red[i].y, blue[k].x, blue[k].y);
+
+                if (nowD < troupHitboxSize * troupHitboxSize)
+                {
+                    move(red[i].x, red[i].y, direction(red[i].x, red[i].y, blue[k].x, blue[k].y), (int)((double)red[i].movementSpeed * -0.7));
+                    move(blue[k].x, blue[k].y, direction(red[i].x, red[i].y, blue[k].x, blue[k].y), (int)((double)red[i].movementSpeed * 0.7));
                 }
             }
         }
