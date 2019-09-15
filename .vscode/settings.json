@@ -112,7 +112,6 @@
         "**/*.ilk": true,
         "**/*.obj": true,
         "**/*.pdb": true,
-        "**/*.bat": true,
         "**/*.class": true,
         ".clang-format": true,
         "EclipseJavaFormatter.xml": true,
