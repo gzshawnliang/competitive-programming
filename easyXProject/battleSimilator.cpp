@@ -4,8 +4,8 @@
 
 using namespace std;
 
-const int xpn = 1500, ypn = 900, inf = INT_MAX / 3;
-const double PI = 3.1415926;
+const int xpn = 1500, ypn = 900, inf = INT_MAX / 3, doubleKSpr = 70, doubleKSpc = 100;
+const double PI = 3.1415926, collideBackPers = 0.5, collidePushPers = 0.7;
 
 int camX = 0, camY = 0, camD = 0, camS = 15;
 
@@ -168,52 +168,82 @@ int main()
 
     vector<troup> blue, red;
 
+    troup tempBT;
+    tempBT.isAttacked = false;
+
+    tempBT.healthMax = 100;
+    tempBT.health = tempBT.healthMax;
+    tempBT.attackCount = 0;
+    tempBT.attackCountMax = 10;
+    tempBT.attackDamage = 20;
+    tempBT.movementSpeed = 5;
+    tempBT.range = 15;
+    tempBT.minRange = 0;
+    tempBT.troupType = type::worrior;
+
+
+    troup tempRT;
+    tempRT.isAttacked = false;
+
+    tempRT.healthMax = 100;
+    tempRT.health = tempRT.healthMax;
+    tempRT.attackCount = 0;
+    tempRT.attackCountMax = 10;
+    tempRT.attackDamage = 20;
+    tempRT.movementSpeed = 5;
+    tempRT.range = 15;
+    tempRT.minRange = 0;
+    tempRT.troupType = type::worrior;
+
     MOUSEMSG m;
     while (true)
     {
+        m = GetMouseMsg();
+
         if (updateCamPos() == true)
         {
             cleardevice();
             draw(blue, red);
         }
-
-        if (m.uMsg == WM_LBUTTONDOWN)
+        if (m.uMsg == WM_LBUTTONDBLCLK)
         {
-            troup temp;
-            temp.isAttacked = false;
-            temp.x = m.x + camX;
-            temp.y = m.y + camY;
-            temp.healthMax = 100;
-            temp.health = temp.healthMax;
-            temp.attackCount = 0;
-            temp.attackCountMax = 10;
-            temp.attackDamage = 20;
-            temp.movementSpeed = 5;
-            temp.range = 15;
-            temp.minRange = 0;
-            temp.troupType = type::worrior;
+            for (int c = 1; c <= doubleKSpc - 1; ++c)
+            {
+                tempBT.x = m.x + camX + getRand(0, doubleKSpr) - doubleKSpr / 2;
+                tempBT.y = m.y + camY + getRand(0, doubleKSpr) - doubleKSpr / 2;
+                blue.push_back(tempBT);
+            }
 
-            blue.push_back(temp);
+            cleardevice();
+            draw(blue, red);
+        }
+        else if (m.uMsg == WM_RBUTTONDBLCLK)
+        {
+            for (int c = 1; c <= doubleKSpc - 1; ++c)
+            {
+                tempRT.x = m.x + camX + getRand(0, doubleKSpr) - doubleKSpr / 2;
+                tempRT.y = m.y + camY + getRand(0, doubleKSpr) - doubleKSpr / 2;
+                red.push_back(tempRT);
+            }
+
+            cleardevice();
+            draw(blue, red);
+        }
+        else if (m.uMsg == WM_LBUTTONDOWN)
+        {
+            tempBT.x = m.x;
+            tempBT.y = m.y;
+            blue.push_back(tempBT);
+
             cleardevice();
             draw(blue, red);
         }
         else if (m.uMsg == WM_RBUTTONDOWN)
         {
-            troup temp;
-            temp.isAttacked = false;
-            temp.x = m.x + camX;
-            temp.y = m.y + camY;
-            temp.healthMax = 100;
-            temp.health = temp.healthMax;
-            temp.attackCount = 0;
-            temp.attackCountMax = 10;
-            temp.attackDamage = 20;
-            temp.movementSpeed = 5;
-            temp.range = 15;
-            temp.minRange = 0;
-            temp.troupType = type::worrior;
+            tempRT.x = m.x;
+            tempRT.y = m.y;
+            red.push_back(tempRT);
 
-            red.push_back(temp);
             cleardevice();
             draw(blue, red);
         }
@@ -224,8 +254,6 @@ int main()
         }
 
         Sleep(5);
-
-        m = GetMouseMsg();
     }
 
     //blue.push_back(_troup(false, 100, 100, 100, 0, 10, 10, 5, 15, type::worrior));
@@ -312,8 +340,8 @@ int main()
 
                 if (nowD < troupHitboxSize * troupHitboxSize)
                 {
-                    move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, blue[k].x, blue[k].y), (int)((double)blue[i].movementSpeed * -0.7));
-                    move(blue[k].x, blue[k].y, direction(blue[i].x, blue[i].y, blue[k].x, blue[k].y), (int)((double)blue[i].movementSpeed * 0.7));
+                    move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, blue[k].x, blue[k].y), (int)((double)blue[i].movementSpeed * -1 * collideBackPers));
+                    move(blue[k].x, blue[k].y, direction(blue[i].x, blue[i].y, blue[k].x, blue[k].y), (int)((double)blue[i].movementSpeed * collidePushPers));
                 }
             }
 
@@ -323,8 +351,8 @@ int main()
 
                 if (nowD < troupHitboxSize * troupHitboxSize)
                 {
-                    move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, red[k].x, red[k].y), (int)((double)blue[i].movementSpeed * -0.7));
-                    move(red[k].x, red[k].y, direction(blue[i].x, blue[i].y, red[k].x, red[k].y), (int)((double)blue[i].movementSpeed * 0.7));
+                    move(blue[i].x, blue[i].y, direction(blue[i].x, blue[i].y, red[k].x, red[k].y), (int)((double)blue[i].movementSpeed * -1 * collideBackPers));
+                    move(red[k].x, red[k].y, direction(blue[i].x, blue[i].y, red[k].x, red[k].y), (int)((double)blue[i].movementSpeed * collidePushPers));
                 }
             }
         }
@@ -372,8 +400,8 @@ int main()
 
                 if (nowD < troupHitboxSize * troupHitboxSize)
                 {
-                    move(red[i].x, red[i].y, direction(red[i].x, red[i].y, red[k].x, red[k].y), (int)((double)red[i].movementSpeed * -0.7));
-                    move(red[k].x, red[k].y, direction(red[i].x, red[i].y, red[k].x, red[k].y), (int)((double)red[i].movementSpeed * 0.7));
+                    move(red[i].x, red[i].y, direction(red[i].x, red[i].y, red[k].x, red[k].y), (int)((double)red[i].movementSpeed * -1 * collideBackPers));
+                    move(red[k].x, red[k].y, direction(red[i].x, red[i].y, red[k].x, red[k].y), (int)((double)red[i].movementSpeed * collidePushPers));
                 }
             }
 
@@ -383,8 +411,8 @@ int main()
 
                 if (nowD < troupHitboxSize * troupHitboxSize)
                 {
-                    move(red[i].x, red[i].y, direction(red[i].x, red[i].y, blue[k].x, blue[k].y), (int)((double)red[i].movementSpeed * -0.7));
-                    move(blue[k].x, blue[k].y, direction(red[i].x, red[i].y, blue[k].x, blue[k].y), (int)((double)red[i].movementSpeed * 0.7));
+                    move(red[i].x, red[i].y, direction(red[i].x, red[i].y, blue[k].x, blue[k].y), (int)((double)red[i].movementSpeed * -1 * collideBackPers));
+                    move(blue[k].x, blue[k].y, direction(red[i].x, red[i].y, blue[k].x, blue[k].y), (int)((double)red[i].movementSpeed * collidePushPers));
                 }
             }
         }
