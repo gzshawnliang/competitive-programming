@@ -126,6 +126,16 @@
     // "C_Cpp.intelliSenseEngineFallback": "Disabled",
     "C_Cpp.errorSquiggles":"Enabled",
 
+
+    "terminal.integrated.shell.windows": "cmd.exe",
+    //"terminal.integrated.shell.windows": "C:\\cmder\\Cmder.exe",
+    "terminal.integrated.shellArgs.windows": [
+        "/K","C:\\cmder\\vendor\\init.bat"
+    ],
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+ 
+
     "java.debug.settings.enableRunDebugCodeLens": false,
     "java.debug.settings.forceBuildBeforeLaunch":false,
     // RedHat JDK11
