@@ -390,6 +390,10 @@ int main()
         }
 
         updateCamPos();
+        // if (sizeB > 0)
+        // {
+        //     camX = blue[0].x - xpn / 2; camY = blue[0].y - ypn / 2;
+        // }
 
         cleardevice();
         draw(blue, red);
