@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int xpn = 1500, ypn = 900, inf = INT_MAX / 3, doubleKSpr = 70, doubleKSpc = 100;
+const int xpn = 1200, ypn = 700, inf = INT_MAX / 3, doubleKSpr = 70, doubleKSpc = 20;
 const double PI = 3.1415926, collideBackPers = 0.5, collidePushPers = 0.7;
 
 int camX = 0, camY = 0, camD = 0, camS = 15;
@@ -136,6 +136,9 @@ void draw(vector<troup> & blue, vector<troup> & red)
         setcolor(RGB(255,255,255));
         setfillcolor(RGB(0,0,255));
         fillrectangle(blue[i].x - r - camX, blue[i].y - r - camY, blue[i].x + r - camX, blue[i].y + r - camY);
+
+        setfillcolor(RGB(0,255,0));
+        fillrectangle(blue[i].x - r - camX, blue[i].y - r - camY, blue[i].x - r + (int)((double)(blue[i].health) / (double)(blue[i].healthMax) * (double)(r) * 2.0) - camX, blue[i].y + r - camY);
     }
     for (int i = 0; i <= sizeR - 1; ++i)
     {
@@ -145,6 +148,16 @@ void draw(vector<troup> & blue, vector<troup> & red)
         setcolor(RGB(255,255,255));
         setfillcolor(RGB(255,0,0));
         fillrectangle(red[i].x - r - camX, red[i].y - r - camY, red[i].x + r - camX, red[i].y + r - camY);
+    }
+
+    string text = to_string(sizeB) + " B----R " + to_string(sizeR);
+	
+    int sizeT = text.size(), x = 10, y = 10;
+    for (int i = 0; i <= sizeT - 1; ++i)
+    {
+        moveto(x, y);
+        outtext(text[i]);
+        x += 9;
     }
 }
 
@@ -231,8 +244,8 @@ int main()
         }
         else if (m.uMsg == WM_LBUTTONDOWN)
         {
-            tempBT.x = m.x;
-            tempBT.y = m.y;
+            tempBT.x = m.x + camX;
+            tempBT.y = m.y + camY;
             blue.push_back(tempBT);
 
             cleardevice();
@@ -240,8 +253,8 @@ int main()
         }
         else if (m.uMsg == WM_RBUTTONDOWN)
         {
-            tempRT.x = m.x;
-            tempRT.y = m.y;
+            tempRT.x = m.x + camX;
+            tempRT.y = m.y + camY;
             red.push_back(tempRT);
 
             cleardevice();
