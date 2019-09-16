@@ -17,7 +17,7 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 
 //***************************************
-const string CPPfile = "stringPartition_UVA11258"; //*
+const string CPPfile = "Abnormal89s_UVA11888"; //*
 //***************************************
 
 ifstream fin;
@@ -46,7 +46,7 @@ string findFile(const string & c_FileName)
 
         if(p2.path().filename()==c_FileName)
         {
-            return p2.path().string();
+           return p2.path().string();
         }
     }
     return "";
