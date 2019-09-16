@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <experimental/filesystem>
 
 using namespace std;
 
@@ -104,7 +105,7 @@ int main()
         {
             fout << "simple" << '\n';
         }
-        else if(v.size()==2 && v[0]==0 && v[1]==s.length())
+        else if(v.size()== 2 && v[0]==0 && v[1]==s.length())
         {
             fout << "palindrome" << '\n';
         }

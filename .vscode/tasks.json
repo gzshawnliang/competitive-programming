@@ -28,6 +28,7 @@
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-lpsapi",
+                "-lstdc++fs",
                 "-std=gnu++11",
                 "-DDEBUG",
                 "-I",
@@ -60,6 +61,7 @@
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-lpsapi",
+                "-lstdc++fs",
                 "-I",
                 "${workspaceFolder}\\include",
                 "-std=gnu++11"
@@ -115,7 +117,7 @@
                 "-SourceFileName",
                 "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
                 "-CompilerArgs",
-                "\"-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include\"",
+                "\"-std=gnu++11 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
                 "-WorkspaceFolder",
                 "\"${workspaceFolder}\""
             ],
@@ -135,7 +137,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++11 -O2 -Wall -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++11 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "isBuildCommand": true,
@@ -149,7 +151,7 @@
             "command": "powershell",
             "args": [
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++11 -O2 -Wall -lm -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++11 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "isBuildCommand": true,
@@ -169,7 +171,7 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-RedirectStdInOut",
                 "-CompilerArgs",
-                "\"-std=gnu++11 -O2 -lm -I ${workspaceFolder}\\include\"",
+                "\"-std=gnu++11 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
                 "-WorkspaceFolder",
                 "\"${workspaceFolder}\""
             ],
@@ -224,7 +226,7 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-DoTest",
                 "-CompilerArgs",
-                "-std=gnu++11 -O2 -lm -DONLINE_JUDGE -DCODE_STATISTICS -I ${workspaceFolder}\\include"
+                "-std=gnu++11 -O2 -lm -lstdc++fs -DONLINE_JUDGE -DCODE_STATISTICS -I ${workspaceFolder}\\include"
             ],
             "isShellCommand": true,
             "isBuildCommand": true,
