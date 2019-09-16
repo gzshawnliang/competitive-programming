@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int xpn = 1200, ypn = 700, inf = INT_MAX / 3, doubleKSpr = 70, doubleKSpc = 20;
+const int xpn = 1200, ypn = 700, inf = INT_MAX / 3, doubleKSpr = 500, doubleKSpc = 100;
 const double PI = 3.1415926, collideBackPers = 0.5, collidePushPers = 0.7;
 
 int camX = 0, camY = 0, camD = 0, camS = 15;
@@ -125,6 +125,16 @@ troup _troup(bool isAttacked, int x, int y, int healthMax, int health, int attac
     troup temp{isAttacked, x, y, healthMax, health, attackCount, attackCountMax, attackDamage, movementSpeed, range, minRange, troupType}; return temp;
 }
 
+void drawHealthBar(int x, int y, int r, int h, int health, int healthMax)
+{
+    health = max(health, 0);
+
+    setcolor(RGB(255,255,255));
+    setfillcolor(RGB(0,255,0));
+    rectangle(x - r, y - h, x + r, y + h);
+    fillrectangle(x - r, y - h, x - r + (int)((double)(2 * r) * (double)(health) / (double)(healthMax)), y + h);
+}
+
 void draw(vector<troup> & blue, vector<troup> & red)
 {
     int sizeB = blue.size(), sizeR = red.size();
@@ -137,8 +147,7 @@ void draw(vector<troup> & blue, vector<troup> & red)
         setfillcolor(RGB(0,0,255));
         fillrectangle(blue[i].x - r - camX, blue[i].y - r - camY, blue[i].x + r - camX, blue[i].y + r - camY);
 
-        setfillcolor(RGB(0,255,0));
-        fillrectangle(blue[i].x - r - camX, blue[i].y - r - camY, blue[i].x - r + (int)((double)(blue[i].health) / (double)(blue[i].healthMax) * (double)(r) * 2.0) - camX, blue[i].y + r - camY);
+        if (blue[i].health < blue[i].healthMax) drawHealthBar(blue[i].x - camX, blue[i].y - camY - 8, 4, 1, blue[i].health, blue[i].healthMax);
     }
     for (int i = 0; i <= sizeR - 1; ++i)
     {
@@ -148,6 +157,8 @@ void draw(vector<troup> & blue, vector<troup> & red)
         setcolor(RGB(255,255,255));
         setfillcolor(RGB(255,0,0));
         fillrectangle(red[i].x - r - camX, red[i].y - r - camY, red[i].x + r - camX, red[i].y + r - camY);
+
+        if (red[i].health < red[i].healthMax) drawHealthBar(red[i].x - camX, red[i].y - camY - 8, 4, 1, red[i].health, red[i].healthMax);
     }
 
     string text = to_string(sizeB) + " B----R " + to_string(sizeR);
@@ -165,7 +176,7 @@ int main()
 {
     srand(time(0));
 		
-    initgraph(xpn, ypn);
+    initgraph(xpn, ypn, SHOWCONSOLE);
     //setwritemode(R2_XORPEN);
 
     // bool isAttacked;
@@ -189,7 +200,7 @@ int main()
     tempBT.attackCount = 0;
     tempBT.attackCountMax = 10;
     tempBT.attackDamage = 20;
-    tempBT.movementSpeed = 5;
+    tempBT.movementSpeed = 2;
     tempBT.range = 15;
     tempBT.minRange = 0;
     tempBT.troupType = type::worrior;
@@ -203,7 +214,7 @@ int main()
     tempRT.attackCount = 0;
     tempRT.attackCountMax = 10;
     tempRT.attackDamage = 20;
-    tempRT.movementSpeed = 5;
+    tempRT.movementSpeed = 2;
     tempRT.range = 15;
     tempRT.minRange = 0;
     tempRT.troupType = type::worrior;
@@ -439,7 +450,7 @@ int main()
         cleardevice();
         draw(blue, red);
 
-        Sleep(50);
+        Sleep(25);
     }
     
     closegraph();
