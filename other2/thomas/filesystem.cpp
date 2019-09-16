@@ -7,10 +7,6 @@ namespace fs = std::experimental::filesystem;
 
 using namespace std;
 
-namespace fs = std::experimental::filesystem;
-
-using namespace std;
-
 void v()
 {
     fs::path p = fs::current_path();
