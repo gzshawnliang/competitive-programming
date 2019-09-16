@@ -213,7 +213,7 @@ int main()
         fout << in << '\n';
     }
 
-    cout << OjCpp << '\n';
+    cout << "Create OJ file: " << OjCpp << " succeed!" << '\n';
     
     return 0;
 }
