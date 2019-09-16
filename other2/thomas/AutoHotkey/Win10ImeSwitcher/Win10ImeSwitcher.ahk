@@ -236,6 +236,7 @@ CapsLock模式:
 #if (g_IsCapsLockMode)
 {
 	CapsLock::
+		SetCapsLockState, AlwaysOff
 		ToggleChsEngLang()
 		return
 }
