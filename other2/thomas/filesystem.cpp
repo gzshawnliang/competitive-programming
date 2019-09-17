@@ -1,9 +1,14 @@
 #include <bits/stdc++.h>
-#include <experimental/filesystem>
-
 #include <windows.h>
 
-namespace fs = std::experimental::filesystem;
+//只用GCC版本大于8，并且c++ 2017才能使用include <filesystem>，否则只能使用include <experimental/filesystem>
+#if __GNUC__>=8 && __cplusplus >= 201703L
+    #include <filesystem>
+    namespace fs = std::filesystem;
+#else
+    #include <experimental/filesystem>
+    namespace fs = std::experimental::filesystem;
+#endif
 
 using namespace std;
 

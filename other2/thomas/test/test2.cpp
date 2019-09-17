@@ -1,22 +1,18 @@
-#include <algorithm>
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <set>
-#include <string>
-#include <vector>
-#include <stack>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 
 int main()
 {
-    vector<vector<int>> b((int)1e4, vector<int>((int)1e4,0));
-    double a=1.8;
+    //GCC版本
+    cout << __VERSION__ << "\n";
+    cout << __GNUC__ << "\n";
+    cout << __GNUC_MINOR__ << "\n";
+    cout << __GNUC_PATCHLEVEL__ << "\n";
+    cout <<  __BASE_FILE__  << "\n";
+    vector<int> a;
+    a.push_back(34);
     
     return 0;
 }

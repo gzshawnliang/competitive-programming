@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "C++ Launch (GDB)",
             "type": "cppdbg",
@@ -19,6 +18,11 @@
             "internalConsoleOptions":"neverOpen",
             "setupCommands": [
                 {
+                    "description": "gdbinit",
+                    "text": "python import sys;sys.path.insert(0, 'C:/C++Compiler/MinGW/GCC-8.3.0/mingw64/share/gcc-8.3.0/python');from libstdcxx.v6.printers import register_libstdcxx_printers;register_libstdcxx_printers (None)",
+                    "ignoreFailures": false
+                },
+                {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
@@ -28,7 +32,14 @@
                     "description": "ignore SIGPIPE",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            // "logging": {
+            //     "moduleLoad": false,
+            //     "trace": true,
+            //     "engineLogging": true,
+            //     "exceptions": true
+            //     // "traceResponse": true
+            //  }
         },
         {
             "type": "java",
