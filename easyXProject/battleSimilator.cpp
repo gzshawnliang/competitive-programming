@@ -4,7 +4,8 @@
 
 using namespace std;
 
-const int xpn = 1200, ypn = 700, inf = INT_MAX / 3, doubleKSpr = 500, doubleKSpc = 100;
+int xpn = 1200, ypn = 700;
+const int inf = INT_MAX / 3, doubleKSpr = 500, doubleKSpc = 100;
 const double PI = 3.1415926, collideBackPers = 0.5, collidePushPers = 0.7;
 
 int camX = 0, camY = 0, camD = 0, camS = 15;
@@ -174,9 +175,19 @@ void draw(vector<troup> & blue, vector<troup> & red)
 
 int main()
 {
+    int scrWidth = GetSystemMetrics(SM_CXSCREEN);
+    int scrHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    xpn = scrWidth - 0;
+    ypn = scrHeight - 150;
+
     srand(time(0));
-		
-    initgraph(xpn, ypn, SHOWCONSOLE);
+    HWND hWnd = initgraph(xpn, ypn, SHOWCONSOLE);
+
+    SetWindowText(hWnd, "Battle Similator");
+    SetWindowPos(hWnd, HWND_TOP, (scrWidth - xpn) / 2, (scrHeight - ypn) / 2 - 50, xpn, ypn, SWP_SHOWWINDOW);
+
+    BeginBatchDraw();
     //setwritemode(R2_XORPEN);
 
     // bool isAttacked;
@@ -200,21 +211,21 @@ int main()
     tempBT.attackCount = 0;
     tempBT.attackCountMax = 10;
     tempBT.attackDamage = 20;
-    tempBT.movementSpeed = 2;
-    tempBT.range = 15;
-    tempBT.minRange = 0;
+    tempBT.movementSpeed = 3;
+    tempBT.range = 300;
+    tempBT.minRange = 200;
     tempBT.troupType = type::worrior;
 
 
     troup tempRT;
     tempRT.isAttacked = false;
 
-    tempRT.healthMax = 100;
+    tempRT.healthMax = 1000000;
     tempRT.health = tempRT.healthMax;
     tempRT.attackCount = 0;
-    tempRT.attackCountMax = 10;
-    tempRT.attackDamage = 20;
-    tempRT.movementSpeed = 2;
+    tempRT.attackCountMax = 1;
+    tempRT.attackDamage = 50;
+    tempRT.movementSpeed = 10;
     tempRT.range = 15;
     tempRT.minRange = 0;
     tempRT.troupType = type::worrior;
@@ -277,6 +288,7 @@ int main()
             break;
         }
 
+        FlushBatchDraw();
         Sleep(5);
     }
 
@@ -447,12 +459,14 @@ int main()
         //     camX = blue[0].x - xpn / 2; camY = blue[0].y - ypn / 2;
         // }
 
+        FlushBatchDraw();
         cleardevice();
         draw(blue, red);
-
-        Sleep(25);
+        
+        Sleep(30);
     }
     
+    EndBatchDraw();
     closegraph();
     return 0;
 }
