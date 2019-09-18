@@ -25,7 +25,7 @@ const int MAXC = 26;
 //vector<vector<int>> g;
 
 /**
- * AC?????
+ * AC自动机
  */
 class AhoCorasick
 {
