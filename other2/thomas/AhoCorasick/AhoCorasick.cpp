@@ -7,44 +7,33 @@ using namespace std;
 // Should be equal to the sum of the length of all keywords. 
 const int MAXS = 500; 
   
-// Maximum number of characters in input alphabet 
+// 最大字符数，如全是小写英文字符则是26
 const int MAXC = 26; 
   
-// OUTPUT FUNCTION IS IMPLEMENTED USING out[] 
-// Bit i in this mask is one if the word with index i 
-// appears when the machine enters this state. 
-//int out[MAXS]; 
-//vector<int> out;
-  
-// FAILURE FUNCTION IS IMPLEMENTED USING f[] 
-//int f[MAXS]; 
-//vector<int> f;
-  
-// GOTO FUNCTION (OR TRIE) IS IMPLEMENTED USING g[][] 
-//int g[MAXS][MAXC]; 
-//vector<vector<int>> g;
-
 /**
  * AC自动机模板
  */
 class AhoCorasick
 {
     private:
-        //匹配模式（多个）
+        //字符数组，匹配模式（多个）
         vector<string> P;
         
-        // OUTPUT FUNCTION IS IMPLEMENTED USING out[] 
+        // 输出函数 OUTPUT FUNCTION IS IMPLEMENTED USING out[] 
         // Bit i in this mask is one if the word with index i 
         // appears when the machine enters this state. 
         vector<int> out;  
         
-        // FAILURE FUNCTION IS IMPLEMENTED USING f[]         
+        // 失配函数 FAILURE FUNCTION IS IMPLEMENTED USING f[]         
         vector<int> f;
 
-        // GOTO FUNCTION (OR TRIE) IS IMPLEMENTED USING g[][] 
-        vector<vector<int>> g;
+        // 转移函数(Trie) 简单的使用 _goto[][] 二维数组
+        vector<vector<int>> _goto;
 
     public:
+        //匹配结果(多个)，第i个字符在第j个位置匹配
+        vector<pair<int,int>> result;
+
         AhoCorasick(const vector<string> & p)
         {
             P=p;
@@ -53,12 +42,13 @@ class AhoCorasick
             out.assign(MAXS, 0);
 
             // Initialize all values in goto function as -1.
-            g.assign(MAXS, vector<int>(MAXC + 1, -1));  
+            _goto.assign(MAXS, vector<int>(MAXC + 1, -1));  
 
             // FAILURE FUNCTION IS IMPLEMENTED USING f[] 
             // Initialize values in fail function 
     
             f.assign(MAXS,-1);
+            result.clear();
 
             buildMatchingMachine();
         }
@@ -77,12 +67,12 @@ class AhoCorasick
             //out.assign(MAXS, 0);
 
             // Initialize all values in goto function as -1.
-            //g.assign(MAXS, vector<int>(MAXC + 1, -1));
+            //_goto.assign(MAXS, vector<int>(MAXC + 1, -1));
 
             // Initially, we just have the 0 state
             int states = 1;
 
-            // Construct values for goto function, i.e., fill g[][]
+            // Construct values for goto function, i.e., fill _goto[][]
             // This is same as building a Trie for arr[]
             for (int i = 0; i <= k - 1; ++i)
             {
@@ -90,16 +80,22 @@ class AhoCorasick
                 int currentState = 0;
 
                 // Insert all characters of current word in arr[]
-                for (int j = 0; j <= word.size() - 1; ++j)
+                int wordLen = word.size();
+
+                //空字符串不处理
+                if (wordLen == 0)
+                    continue;
+
+                for (int j = 0; j <= wordLen - 1; ++j)
                 {
                     int ch = word[j] - 'a';
 
                     // Allocate a new node (create a new state) if a
                     // node for ch doesn't exist.
-                    if (g[currentState][ch] == -1)
-                        g[currentState][ch] = states++;
+                    if (_goto[currentState][ch] == -1)
+                        _goto[currentState][ch] = states++;
 
-                    currentState = g[currentState][ch];
+                    currentState = _goto[currentState][ch];
                 }
 
                 // Add current word in output function
@@ -110,8 +106,8 @@ class AhoCorasick
             // root (or state 0) in Trie, add a goto edge to state
             // 0 itself
             for (int ch = 0; ch < MAXC; ++ch)
-                if (g[0][ch] == -1)
-                    g[0][ch] = 0;
+                if (_goto[0][ch] == -1)
+                    _goto[0][ch] = 0;
 
             // Now, let's build the failure function
 
@@ -130,10 +126,10 @@ class AhoCorasick
                 // All nodes of depth 1 have failure function value
                 // as 0. For example, in above diagram we move to 0
                 // from states 1 and 3.
-                if (g[0][ch] != 0)
+                if (_goto[0][ch] != 0)
                 {
-                    f[g[0][ch]] = 0;
-                    q.push(g[0][ch]);
+                    f[_goto[0][ch]] = 0;
+                    q.push(_goto[0][ch]);
                 }
             }
 
@@ -151,7 +147,7 @@ class AhoCorasick
                 {
                     // If goto function is defined for character 'ch'
                     // and 'state'
-                    if (g[state][ch] != -1)
+                    if (_goto[state][ch] != -1)
                     {
                         // Find failure state of removed state
                         int failure = f[state];
@@ -159,17 +155,17 @@ class AhoCorasick
                         // Find the deepest node labeled by proper
                         // suffix of string from root to current
                         // state.
-                        while (g[failure][ch] == -1)
+                        while (_goto[failure][ch] == -1)
                             failure = f[failure];
 
-                        failure = g[failure][ch];
-                        f[g[state][ch]] = failure;
+                        failure = _goto[failure][ch];
+                        f[_goto[state][ch]] = failure;
 
                         // Merge output values
-                        out[g[state][ch]] |= out[failure];
+                        out[_goto[state][ch]] |= out[failure];
 
                         // Insert the next level node (of Trie) in Queue
-                        q.push(g[state][ch]);
+                        q.push(_goto[state][ch]);
                     }
                 }
             }
@@ -188,10 +184,10 @@ class AhoCorasick
             int ch = nextInput - 'a';
 
             // If goto is not defined, use failure function
-            while (g[answer][ch] == -1)
+            while (_goto[answer][ch] == -1)
                 answer = f[answer];
 
-            return g[answer][ch];
+            return _goto[answer][ch];
         }
 
         void searchWords(const string & text)
@@ -216,12 +212,14 @@ class AhoCorasick
 
                 // Match found, print all matching words of P[]
                 // using output function.
-                for (int j = 0; j <= P.size() - 1; ++j)
+                int pLen = P.size();
+                for (int j = 0; j <= pLen - 1; ++j)
                 {
                     if (out[currentState] & (1 << j))
                     {
-                        cout << "Word " << P[j] << " appears from "
-                             << i - P[j].size() + 1 << " to " << i << endl;
+                        result.push_back(make_pair(j,i - P[j].size() + 1));
+                        // cout << "Word " << P[j] << " appears from "
+                        //      << i - P[j].size() + 1 << " to " << i << endl;
                     }
                 }
             }
@@ -239,11 +237,29 @@ int main()
     // Word hers appears from 4 to 7    
 
     
-    vector<string> P = {"aba", "bab"}; 
-    string T = "ababababac"; 
+    vector<string> P = {"she", "his", "he", "hers",""}; 
+    string T = "sheishere"; 
 
     AhoCorasick ac(P);
     ac.searchWords(T);
+
+    if (!ac.result.empty())
+    {
+        for (auto i : ac.result)
+        {
+            cout << "Word "
+                 << P[i.first]
+                 << " appears from "
+                 << i.second
+                 << " to "
+                 << i.second + P[i.first].size() - 1
+                 << '\n';
+        }
+    }
+    else
+    {
+        cout << "find nothing" << '\n';
+    }
 
     return 0;
 }
