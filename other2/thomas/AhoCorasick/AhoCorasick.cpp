@@ -25,11 +25,12 @@ const int MAXC = 26;
 //vector<vector<int>> g;
 
 /**
- * AC自动机
+ * AC自动机模板
  */
 class AhoCorasick
 {
     private:
+        //匹配模式（多个）
         vector<string> P;
         
         // OUTPUT FUNCTION IS IMPLEMENTED USING out[] 
