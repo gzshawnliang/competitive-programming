@@ -11,12 +11,12 @@ const int MAXS = 500;
 const int MAXC = 26; 
   
 /**
- * AC自动机模板
+ * AC自动机模板，实现多模式匹配
  */
 class AhoCorasick
 {
     private:
-        //字符数组，匹配模式（多个）
+        //多个匹配模式（字符串数组）
         vector<string> P;
         
         // 输出函数 OUTPUT FUNCTION IS IMPLEMENTED USING out[] 
@@ -30,11 +30,7 @@ class AhoCorasick
         // 转移函数(Trie) 简单的使用 _goto[][] 二维数组
         vector<vector<int>> _goto;
 
-    public:
-        //匹配结果(多个)，第i个字符在第j个位置匹配
-        vector<pair<int,int>> result;
-
-        AhoCorasick(const vector<string> & p)
+        void init(const vector<string> & p)
         {
             P=p;
 
@@ -48,8 +44,35 @@ class AhoCorasick
             // Initialize values in fail function 
     
             f.assign(MAXS,-1);
-            result.clear();
+        }
 
+        // Returns the next state the machine will transition to using goto
+        // and failure functions.
+        // currentState - The current state of the machine. Must be between
+        //                0 and the number of states - 1, inclusive.
+        // nextInput - The next character that enters into the machine.
+        int findNextState(int currentState, char nextInput)
+        {
+            int answer = currentState;
+            int ch = nextInput - 'a';
+
+            // If goto is not defined, use failure function
+            while (_goto[answer][ch] == -1)
+                answer = f[answer];
+
+            return _goto[answer][ch];
+        }        
+
+    public:
+        
+        /**
+         * 构造函数 
+         * 
+         * @param  {vector<string>} p : 需要查找的字符串数组
+         */
+        AhoCorasick(const vector<string> & p)
+        {
+            init(p);
             buildMatchingMachine();
         }
 
@@ -59,15 +82,14 @@ class AhoCorasick
         //         in the text.
         // Returns the number of states that the built machine has.
         // States are numbered 0 up to the return value - 1, inclusive.
+
+        /**建立字符串匹配机器
+         * 
+         * @return {int}  : 返回匹配机器拥有的的状态数量
+         */
         int buildMatchingMachine()
         {
             int k = P.size();
-
-            // Initialize all values in output function as 0.
-            //out.assign(MAXS, 0);
-
-            // Initialize all values in goto function as -1.
-            //_goto.assign(MAXS, vector<int>(MAXC + 1, -1));
 
             // Initially, we just have the 0 state
             int states = 1;
@@ -82,7 +104,7 @@ class AhoCorasick
                 // Insert all characters of current word in arr[]
                 int wordLen = word.size();
 
-                //空字符串不处理
+                //空字符串不查找，不处理
                 if (wordLen == 0)
                     continue;
 
@@ -93,7 +115,10 @@ class AhoCorasick
                     // Allocate a new node (create a new state) if a
                     // node for ch doesn't exist.
                     if (_goto[currentState][ch] == -1)
-                        _goto[currentState][ch] = states++;
+                    {
+                        ++states;
+                        _goto[currentState][ch] = states;
+                    }
 
                     currentState = _goto[currentState][ch];
                 }
@@ -173,29 +198,17 @@ class AhoCorasick
             return states;
         }
 
-        // Returns the next state the machine will transition to using goto
-        // and failure functions.
-        // currentState - The current state of the machine. Must be between
-        //                0 and the number of states - 1, inclusive.
-        // nextInput - The next character that enters into the machine.
-        int findNextState(int currentState, char nextInput)
+        /**
+         * 查找单词
+         * @param  {string} text            : 【输入】源字符串
+         * @return {vector<pair<int,int>>}  : 匹配结果(多个)，第i个字符在第j个位置匹配
+         */
+        vector<pair<int,int>> searchWords(const string & text)
         {
-            int answer = currentState;
-            int ch = nextInput - 'a';
 
-            // If goto is not defined, use failure function
-            while (_goto[answer][ch] == -1)
-                answer = f[answer];
-
-            return _goto[answer][ch];
-        }
-
-        void searchWords(const string & text)
-        {
             // Preprocess patterns.
             // Build machine with goto, failure and output functions
-            
-            
+            vector<pair<int,int>> result;
 
             // Initialize current state
             int currentState = 0;
@@ -223,6 +236,8 @@ class AhoCorasick
                     }
                 }
             }
+
+            return result;
         }
 };
 
@@ -241,11 +256,12 @@ int main()
     string T = "sheishere"; 
 
     AhoCorasick ac(P);
-    ac.searchWords(T);
 
-    if (!ac.result.empty())
+    auto result = ac.searchWords(T);
+
+    if (!result.empty())
     {
-        for (auto i : ac.result)
+        for (auto i : result)
         {
             cout << "Word "
                  << P[i.first]
