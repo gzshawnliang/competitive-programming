@@ -197,10 +197,10 @@ class AhoCorasick
     }
 
     /**
-         * 查找单词
-         * @param  {string} text            : 【输入】源字符串
-         * @return {vector<pair<int,int>>}  :  匹配结果(多个)，pair<i,j>第i个字符在第j个位置匹配
-         */
+     * 查找单词
+     * @param  {string} text            : 【输入】源字符串
+     * @return {vector<pair<int,int>>}  :  匹配结果(多个)，pair<i,j>第i个字符在第j个位置匹配
+    */
     vector<pair<int, int>> searchWords(const string & text)
     {
 
