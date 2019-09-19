@@ -55,17 +55,15 @@
         {
             "taskName": "build",
             "suppressTaskName": true,
-            "command": "g++.exe",
+            "command": "cmd",
             "args": [
-                "${fileDirname}\\${fileBasenameNoExtension}.cpp",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "-lpsapi",
-                "-lstdc++fs",
-                "-I",
-                "${workspaceFolder}\\include",
-                "-std=gnu++17"
-            ], // 编译命令参数
+                "/C",
+                "@chcp 65001",
+                "&&",
+                "powershell",
+                "-Command",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -NotRun -CompilerArgs '-std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+            ],
             "problemMatcher": {
                 "owner": "cpp",
                 "fileLocation": [
@@ -96,7 +94,6 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
         },
@@ -122,7 +119,6 @@
                 "\"${workspaceFolder}\""
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
         },
@@ -140,7 +136,6 @@
                 "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always",
         },  
@@ -154,7 +149,6 @@
                 "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++17 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always",
         },            
@@ -176,7 +170,6 @@
                 "\"${workspaceFolder}\""
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
         },
@@ -190,7 +183,6 @@
                 "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole -WorkspaceFolder \"${workspaceFolder}\" \""
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
         },
@@ -208,7 +200,6 @@
                 "-ShowShellConsole"
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
         },
@@ -229,7 +220,6 @@
                 "-std=gnu++17 -O2 -lm -lstdc++fs -DONLINE_JUDGE -DCODE_STATISTICS -I ${workspaceFolder}\\include"
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
         },
@@ -246,7 +236,6 @@
                 "${fileDirname}"
             ],
             "isShellCommand": true,
-            "isBuildCommand": true,
             "echoCommand": true,
             "showOutput": "always"
         }

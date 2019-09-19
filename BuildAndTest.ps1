@@ -21,6 +21,7 @@
 #  * @更新:     2019-03-17 13:28 解决java代码中有中文注释，会编译出现error: unmappable character for encoding GBK
 #  * @更新:     2019-03-23 08:10 编译运行C++/Java文件之后，检测如存在out、ok文件就比较结果
 #  * @更新:     2019-05-04 18:14 增加开关$DevCppMode，可(F10)使用Dev-C++模式弹出窗口，好处是可以在弹出dos窗口进行cin输入
+#  * @更新:     2019-09-19 12:10 增加开关$NotRun (F8)仅编译，不运行编译后的exe程序，适合快速使用编译器进行语法检查
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -29,6 +30,7 @@ param(
     [switch] $DoTest,
     [switch] $RedirectStdInOut,
     [switch] $DevCppMode,
+    [switch] $NotRun,
     [String] $CompilerArgs,
     [String] $WorkspaceFolder 
 )
@@ -331,6 +333,11 @@ function BuildCppAndRun($SourceFileName) {
         $ExeFile = Get-Item -Path $exeFileName
         Write-Host
         Write-Host "g++ compile successfully."
+        
+
+        if ($NotRun.IsPresent) {
+            exit
+        }
         Write-Host
 
         # 设置当前目录为源码目录
