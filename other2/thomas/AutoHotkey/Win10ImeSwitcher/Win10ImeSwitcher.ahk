@@ -205,16 +205,16 @@ CapsLock模式:
 	ExitApp
 	return
 
-;Control + 1  English (USA)
-^1::
+;Control + 1  English (USA),添加~前缀，保留原本Control + 1键的输出
+~^1::
 	SetDefaultKeyboard(0x0409) ; English (USA)
 	DisplayTextOnScreen("United States - English")
 	return
 
-;Control + ' 中文输入法
-;Control + 2 中文输入法
-^'::
-^2::
+;Control + ' 中文输入法,添加~前缀，保留原本Control + '键的输出
+;Control + 2 中文输入法,添加~前缀，保留原本Control + 2键的输出
+~^'::
+~^2::
 	SetDefaultKeyboard(0x0804) ; Chinese
 	DisplayTextOnScreen("中文输入已开启")
 	return

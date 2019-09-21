@@ -15,7 +15,7 @@ const int MAXC = 26;
 class AhoCorasick
 {
   private:
-    //多个匹配模式（字符串数组）
+    //多个匹配模式字符（字符串数组）
     vector<string> P;
 
     // 输出函数 OUTPUT FUNCTION IS IMPLEMENTED USING out[]
