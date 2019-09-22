@@ -17,7 +17,7 @@ namespace fs = std::experimental::filesystem;
 using namespace std;
 
 //***************************************
-const string CPPfile = "Abnormal89s_UVA11888"; //*
+const string CPPfile = "Bishops_UVA10237"; //*
 //***************************************
 
 ifstream fin;

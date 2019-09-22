@@ -5,7 +5,7 @@
 using namespace std;
 
 int xpn = 1200, ypn = 700;
-const int inf = INT_MAX / 3, doubleKSpr = 500, doubleKSpc = 100;
+const int inf = INT_MAX / 3, doubleKSpr = 250, doubleKSpc = 100;
 const double PI = 3.1415926, collideBackPers = 0.5, collidePushPers = 0.7;
 
 int camX = 0, camY = 0, camD = 0, camS = 15;
@@ -144,22 +144,64 @@ void draw(vector<troup> & blue, vector<troup> & red)
         int r = 5;
         if (blue[i].isAttacked == true) r = 7;
         
-        setcolor(RGB(255,255,255));
-        setfillcolor(RGB(0,0,255));
-        fillrectangle(blue[i].x - r - camX, blue[i].y - r - camY, blue[i].x + r - camX, blue[i].y + r - camY);
+        if (blue[i].troupType == type::worrior)
+        {
+            setcolor(RGB(255,255,255));
+            setfillcolor(RGB(0,0,255));
+            fillrectangle(blue[i].x - r - camX, blue[i].y - r - camY, blue[i].x + r - camX, blue[i].y + r - camY);
 
-        if (blue[i].health < blue[i].healthMax) drawHealthBar(blue[i].x - camX, blue[i].y - camY - 8, 4, 1, blue[i].health, blue[i].healthMax);
+            if (blue[i].health < blue[i].healthMax) drawHealthBar(blue[i].x - camX, blue[i].y - camY - 8, 4, 1, blue[i].health, blue[i].healthMax);
+        }
+        else if (blue[i].troupType == type::gaint)
+        {
+            r = (double)r * 1.5;
+
+            setcolor(RGB(255,255,255));
+            setfillcolor(RGB(0,0,255));
+            fillrectangle(blue[i].x - r - camX, blue[i].y - r - camY, blue[i].x + r - camX, blue[i].y + r - camY);
+
+            if (blue[i].health < blue[i].healthMax) drawHealthBar(blue[i].x - camX, blue[i].y - camY - 15, 4, 1, blue[i].health, blue[i].healthMax);
+        }
+        else if (blue[i].troupType == type::archer)
+        {
+            setcolor(RGB(255,255,255));
+            setfillcolor(RGB(0,0,255));
+            fillcircle(blue[i].x - camX, blue[i].y- camY, r);
+
+            if (blue[i].health < blue[i].healthMax) drawHealthBar(blue[i].x - camX, blue[i].y - camY - 8, 4, 1, blue[i].health, blue[i].healthMax);
+        }
     }
     for (int i = 0; i <= sizeR - 1; ++i)
     {
         int r = 5;
         if (red[i].isAttacked == true) r = 7;
+        
+        if (red[i].troupType == type::worrior)
+        {
+            setcolor(RGB(255,255,255));
+            setfillcolor(RGB(255,0,0));
+            fillrectangle(red[i].x - r - camX, red[i].y - r - camY, red[i].x + r - camX, red[i].y + r - camY);
 
-        setcolor(RGB(255,255,255));
-        setfillcolor(RGB(255,0,0));
-        fillrectangle(red[i].x - r - camX, red[i].y - r - camY, red[i].x + r - camX, red[i].y + r - camY);
+            if (red[i].health < red[i].healthMax) drawHealthBar(red[i].x - camX, red[i].y - camY - 8, 4, 1, red[i].health, red[i].healthMax);
+        }
+        else if (red[i].troupType == type::gaint)
+        {
+            r = (double)r * 1.5;
 
-        if (red[i].health < red[i].healthMax) drawHealthBar(red[i].x - camX, red[i].y - camY - 8, 4, 1, red[i].health, red[i].healthMax);
+            setcolor(RGB(255,255,255));
+            setfillcolor(RGB(255,0,0));
+            fillrectangle(red[i].x - r - camX, red[i].y - r - camY, red[i].x + r - camX, red[i].y + r - camY);
+
+            if (red[i].health < red[i].healthMax) drawHealthBar(red[i].x - camX, red[i].y - camY - 15, 4, 1, red[i].health, red[i].healthMax);
+        }
+        else if (red[i].troupType == type::archer)
+        {
+            setcolor(RGB(255,255,255));
+            setfillcolor(RGB(255,0,0));
+            fillcircle(red[i].x - camX, red[i].y- camY, r);
+
+            if (red[i].health < red[i].healthMax) drawHealthBar(red[i].x - camX, red[i].y - camY - 8, 4, 1, red[i].health, red[i].healthMax);
+        }
     }
 
     string text = to_string(sizeB) + " B----R " + to_string(sizeR);
@@ -203,89 +245,180 @@ int main()
 
     vector<troup> blue, red;
 
-    troup tempBT;
-    tempBT.isAttacked = false;
+    troup temp;
+    temp.isAttacked = false;
+    temp.healthMax = 100;
+    temp.health = temp.healthMax;
+    temp.attackCount = 0;
+    temp.attackCountMax = 10;
+    temp.attackDamage = 20;
+    temp.movementSpeed = 3;
+    temp.range = 15;
+    temp.minRange = 0;
+    temp.troupType = type::worrior;
 
-    tempBT.healthMax = 100;
-    tempBT.health = tempBT.healthMax;
-    tempBT.attackCount = 0;
-    tempBT.attackCountMax = 10;
-    tempBT.attackDamage = 20;
-    tempBT.movementSpeed = 3;
-    tempBT.range = 300;
-    tempBT.minRange = 200;
-    tempBT.troupType = type::worrior;
-
-
-    troup tempRT;
-    tempRT.isAttacked = false;
-
-    tempRT.healthMax = 1000000;
-    tempRT.health = tempRT.healthMax;
-    tempRT.attackCount = 0;
-    tempRT.attackCountMax = 1;
-    tempRT.attackDamage = 50;
-    tempRT.movementSpeed = 10;
-    tempRT.range = 15;
-    tempRT.minRange = 0;
-    tempRT.troupType = type::worrior;
-
+    int pDelay = 0;
+    vector<string> lastOpe;
     MOUSEMSG m;
     while (true)
     {
-        m = GetMouseMsg();
+        if (MouseHit()) m = GetMouseMsg();
+        if (pDelay > 0) --pDelay;
 
         if (updateCamPos() == true)
         {
             cleardevice();
             draw(blue, red);
         }
-        if (m.uMsg == WM_LBUTTONDBLCLK)
+        if (GetAsyncKeyState((int)'F'))
         {
-            for (int c = 1; c <= doubleKSpc - 1; ++c)
+            if (pDelay == 0)
             {
-                tempBT.x = m.x + camX + getRand(0, doubleKSpr) - doubleKSpr / 2;
-                tempBT.y = m.y + camY + getRand(0, doubleKSpr) - doubleKSpr / 2;
-                blue.push_back(tempBT);
+                if (lastOpe.size() == 0)
+                {
+
+                }
+                else if (lastOpe.back() == "blue")
+                {
+                    blue.erase(blue.begin() + blue.size() - 1);
+                }
+                else if (lastOpe.back() == "red")
+                {
+                    red.erase(red.begin() + red.size() - 1);
+                }
+                else if (lastOpe.back() == "blueM")
+                {
+                    for (int c = 1; c <= doubleKSpc - 1; ++c)
+                    {
+                        blue.erase(blue.begin() + blue.size() - 1);
+                    }
+                }
+                else if (lastOpe.back() == "redM")
+                {
+                    for (int c = 1; c <= doubleKSpc - 1; ++c)
+                    {
+                        red.erase(red.begin() + red.size() - 1);
+                    }
+                }
+
+                if (lastOpe.size() > 0) lastOpe.erase(lastOpe.begin() + lastOpe.size() - 1);
+
+                cleardevice();
+                draw(blue, red);
+
+                pDelay = 20;
             }
-
-            cleardevice();
-            draw(blue, red);
         }
-        else if (m.uMsg == WM_RBUTTONDBLCLK)
-        {
-            for (int c = 1; c <= doubleKSpc - 1; ++c)
-            {
-                tempRT.x = m.x + camX + getRand(0, doubleKSpr) - doubleKSpr / 2;
-                tempRT.y = m.y + camY + getRand(0, doubleKSpr) - doubleKSpr / 2;
-                red.push_back(tempRT);
-            }
-
-            cleardevice();
-            draw(blue, red);
-        }
-        else if (m.uMsg == WM_LBUTTONDOWN)
-        {
-            tempBT.x = m.x + camX;
-            tempBT.y = m.y + camY;
-            blue.push_back(tempBT);
-
-            cleardevice();
-            draw(blue, red);
-        }
-        else if (m.uMsg == WM_RBUTTONDOWN)
-        {
-            tempRT.x = m.x + camX;
-            tempRT.y = m.y + camY;
-            red.push_back(tempRT);
-
-            cleardevice();
-            draw(blue, red);
-        }
-
         if (GetAsyncKeyState(VK_SPACE))
         {
             break;
+        }
+
+        if (m.uMsg == WM_LBUTTONDBLCLK)
+        {
+            if (pDelay == 0)
+            {
+                for (int c = 1; c <= doubleKSpc - 1; ++c)
+                {
+                    temp.x = m.x + camX + getRand(0, doubleKSpr * 2) - doubleKSpr;
+                    temp.y = m.y + camY + getRand(0, doubleKSpr * 2) - doubleKSpr;
+                    blue.push_back(temp);
+                }
+
+                cleardevice();
+                draw(blue, red);
+
+                lastOpe.push_back("blueM");
+                pDelay = 20;
+            }
+        }
+        else if (m.uMsg == WM_RBUTTONDBLCLK)
+        {
+            if (pDelay == 0)
+            {
+                for (int c = 1; c <= doubleKSpc - 1; ++c)
+                {
+                    temp.x = m.x + camX + getRand(0, doubleKSpr * 2) - doubleKSpr;
+                    temp.y = m.y + camY + getRand(0, doubleKSpr * 2) - doubleKSpr;
+                    red.push_back(temp);
+                }
+
+                cleardevice();
+                draw(blue, red);
+
+                lastOpe.push_back("redM");
+                pDelay = 20;
+            }
+        }
+        else if (m.uMsg == WM_LBUTTONDOWN)
+        {
+            if (pDelay == 0)
+            {
+                temp.x = m.x + camX;
+                temp.y = m.y + camY;
+                blue.push_back(temp);
+
+                cleardevice();
+                draw(blue, red);
+
+                lastOpe.push_back("blue");
+                pDelay = 20;
+            }
+        }
+        else if (m.uMsg == WM_RBUTTONDOWN)
+        {
+            if (pDelay == 0)
+            {
+                temp.x = m.x + camX;
+                temp.y = m.y + camY;
+                red.push_back(temp);
+
+                cleardevice();
+                draw(blue, red);
+
+                lastOpe.push_back("red");
+                pDelay = 20;
+            }
+        }
+
+        if (GetAsyncKeyState((int)'Z'))
+        {
+            temp.isAttacked = false;
+            temp.healthMax = 100;
+            temp.health = temp.healthMax;
+            temp.attackCount = 0;
+            temp.attackCountMax = 10;
+            temp.attackDamage = 20;
+            temp.movementSpeed = 4;
+            temp.range = 15;
+            temp.minRange = 0;
+            temp.troupType = type::worrior;
+        }
+        else if (GetAsyncKeyState((int)'X'))
+        {
+            temp.isAttacked = false;
+            temp.healthMax = 1000;
+            temp.health = temp.healthMax;
+            temp.attackCount = 0;
+            temp.attackCountMax = 20;
+            temp.attackDamage = 50;
+            temp.movementSpeed = 2;
+            temp.range = 20;
+            temp.minRange = 0;
+            temp.troupType = type::gaint;
+        }
+        else if (GetAsyncKeyState((int)'C'))
+        {
+            temp.isAttacked = false;
+            temp.healthMax = 70;
+            temp.health = temp.healthMax;
+            temp.attackCount = 0;
+            temp.attackCountMax = 30;
+            temp.attackDamage = 20;
+            temp.movementSpeed = 2;
+            temp.range = 300;
+            temp.minRange = 50;
+            temp.troupType = type::archer;
         }
 
         FlushBatchDraw();
