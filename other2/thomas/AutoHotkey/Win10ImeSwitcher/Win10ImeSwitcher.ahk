@@ -227,14 +227,15 @@ CapsLock模式:
 		return	
 
 	;Control + Space 切换中英文输入法	
-	^space::
+	~^space::
 		ToggleChsEngLang()
 		return
 }
 
-; CapsLock切换中英文输入法		
+; CapsLock切换中英文输入法
 #if (g_IsCapsLockMode)
 {
+
 	CapsLock::
 		SetCapsLockState, AlwaysOff
 		ToggleChsEngLang()
