@@ -9,10 +9,17 @@
 #include <string>
 #include <vector>
 
-#include <experimental/filesystem>      //gcc7使用实验性功能。Gcc8或以上使用 include <filesystem>
-#include <windows.h>
+//c++2017和gcc8或以上使用filesystem,低于此版本使用实验性功能。
+#if __GNUC__>=8 && __cplusplus >= 201703L
+    #include <filesystem>
+    namespace fs = std::filesystem;
+#else
+    #include <experimental/filesystem>
+    namespace fs = std::experimental::filesystem;
+#endif
+//#include <windows.h>
 
-namespace fs = std::experimental::filesystem;
+//namespace fs = std::experimental::filesystem;
 
 using namespace std;
 
