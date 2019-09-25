@@ -54,9 +54,6 @@ struct node2
     {
         this->c=p_c;
     }
-    node2()
-    {
-    }    
 };
 
 struct LCRS
@@ -160,7 +157,7 @@ void createTree2(vector<node2> & tree)
     tree[5].children.push_back(11);
 }
 /*
-    左孩子右兄弟树
+    左孩子右兄弟树LCRS
             A
            /
           /
@@ -204,7 +201,7 @@ LCRS createLCRSTree()
 int main()
 {
     node root1= createTree();
-    vector<node2> tree(26);
+    vector<node2> tree(26,node2('\0'));
     createTree2(tree);
 
     LCRS root2= createLCRSTree();
