@@ -157,6 +157,14 @@ void createTree2(vector<node2> & tree)
     tree[5].children.push_back(11);
 }
 /*
+    正常的树
+                   A
+                 //|\ \
+               / / | \  \
+              B C  D  E  F
+              |   /|\   / \
+              G  H I J K   L
+
     左孩子右兄弟树LCRS
             A
            /

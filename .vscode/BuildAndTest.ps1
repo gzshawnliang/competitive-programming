@@ -260,7 +260,7 @@ function StartConsolePauserRun {
     # Write-Host $processExecFileName
     $SourExeFile = Get-Item -Path $processExecFileName
     $ps = new-object System.Diagnostics.Process
-    $ps.StartInfo.Filename = "$WorkspaceFolder\ConsolePauser.exe"
+    $ps.StartInfo.Filename = "$WorkspaceFolder\.vscode\ConsolePauser.exe"
     $ps.StartInfo.Arguments=$SourExeFile.FullName
     $ps.StartInfo.UseShellExecute = $true
     $ps.StartInfo.WorkingDirectory = $SourExeFile.DirectoryName
@@ -418,7 +418,7 @@ function BuildCppAndRun($SourceFileName) {
                         if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
                             if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
                                 Write-Host "Compare $leftFile -> $rightFile : " -NoNewline
-                                & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                                & "$WorkspaceFolder\.vscode\compareTextFiles.ps1" $leftFile $rightFile
                                 Write-Host
                             }
                         }
@@ -508,7 +508,7 @@ function BuildJavaAndRun($SourceFileName) {
                 if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
                     if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
                         Write-Host "Compare $leftFile -> $rightFile"
-                        & "$WorkspaceFolder\compareTextFiles.ps1" $leftFile $rightFile
+                        & "$WorkspaceFolder\.vscode\compareTextFiles.ps1" $leftFile $rightFile
                         Write-Host
                     }
                 }

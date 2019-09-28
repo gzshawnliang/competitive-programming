@@ -21,7 +21,7 @@
         },
         {
             "taskName": "g++",
-            "command": "g++.exe",
+            "command": "${workspaceFolder}\\.vscode\\BuildDebug.bat",
             "args": [
                 "-g",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
@@ -62,7 +62,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -NotRun -CompilerArgs '-std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -NotRun -CompilerArgs '-std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "problemMatcher": {
                 "owner": "cpp",
@@ -110,7 +110,7 @@
                 "-executionpolicy",
                 "bypass",
                 "-File",
-                "${workspaceFolder}\\BuildAndTest.ps1",
+                "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
                 "-SourceFileName",
                 "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
                 "-CompilerArgs",
@@ -133,7 +133,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "echoCommand": true,
@@ -146,7 +146,7 @@
             "command": "powershell",
             "args": [
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++17 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++17 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "echoCommand": true,
@@ -160,7 +160,7 @@
                 "-executionpolicy",
                 "bypass",
                 "-File",
-                "${workspaceFolder}\\BuildAndTest.ps1",
+                "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-RedirectStdInOut",
@@ -180,7 +180,7 @@
             "command": "powershell",
             "args": [
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole -WorkspaceFolder \"${workspaceFolder}\" \""
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole -WorkspaceFolder \"${workspaceFolder}\" \""
             ],
             "isShellCommand": true,
             "echoCommand": true,
@@ -194,7 +194,7 @@
                 "-executionpolicy",
                 "bypass",
                 "-File",
-                "${workspaceFolder}\\BuildAndTest.ps1",
+                "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.java",
                 "-ShowShellConsole"
@@ -212,7 +212,7 @@
                 "-executionpolicy",
                 "bypass",
                 "-File",
-                "${workspaceFolder}\\BuildAndTest.ps1",
+                "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-DoTest",
@@ -231,7 +231,7 @@
                 "-executionpolicy",
                 "bypass",
                 "-File",
-                "${workspaceFolder}\\CompareMultilFiles.ps1",
+                "${workspaceFolder}\\.vscode\\CompareMultilFiles.ps1",
                 "-InitialDirectory",
                 "${fileDirname}"
             ],
