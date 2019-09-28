@@ -2,7 +2,7 @@
 REM 启动gdb之前删除进程，防止错误
 cmd /c chcp 65001
 rem (tasklist|find /i "gdb.exe" && taskkill /im gdb.exe /f) & g++.exe %*
-tasklist|find /i "gdb.exe" && taskkill /im gdb.exe /f
+tasklist|%SystemRoot%\system32\find.exe /i "gdb.exe" && taskkill /im gdb.exe /f
 echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 gdb -version
 echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
