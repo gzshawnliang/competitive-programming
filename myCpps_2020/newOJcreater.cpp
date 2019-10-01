@@ -24,7 +24,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "blobsInTheBoard_UVA11391"; //*
+const string CPPfile = "howBigIsIt_UVA10012"; //*
 //***************************************
 
 ifstream fin;

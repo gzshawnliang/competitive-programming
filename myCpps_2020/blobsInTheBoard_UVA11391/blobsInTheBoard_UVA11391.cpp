@@ -48,6 +48,37 @@ bool inside(ll y, ll x, ll ny, ll nx)
     return y >= 0 && y <= ny - 1 && x >= 0 && x <= nx - 1;
 }
 
+ll get(ll x, ll pos)
+{
+    return (x & (1 << pos)) > 0;
+}
+
+void to1(ll & x, ll pos)
+{
+    x |= (1 << pos);
+}
+
+void to0(ll & x, ll pos)
+{
+    x &= ~(1 << pos);
+}
+
+int main2()
+{
+    int nowX = 192, ny = 3, nx = 3;
+    vector<vector<ll>> now = itov(nowX, ny, nx);
+    for (ll y = 0; y <= ny - 1; ++y)
+    {
+        for (ll x = 0; x <= nx - 1; ++x)
+        {
+            fout << now[y][x];
+        }
+        fout << '\n';
+    }
+
+    return 0;
+}
+
 int main()
 {
     vector<ll> py = {-1, -1, 0, 1, 1, 1, 0, -1},
@@ -80,12 +111,11 @@ int main()
 
                 if (dp[nowX] > 0)
                 {
-                    vector<vector<ll>> now = itov(nowX, ny, nx);
                     for (ll y = 0; y <= ny - 1; ++y)
                     {
                         for (ll x = 0; x <= nx - 1; ++x)
                         {
-                            if (now[y][x] == 1)
+                            if (get(nowX, y * nx + x) == 1)
                             {
                                 for (ll p = 0; p <= 8 - 1; ++p)
                                 {
@@ -94,19 +124,17 @@ int main()
 
                                     if (inside(sty, stx, ny, nx) == true && inside(ty, tx, ny, nx) == true)
                                     {
-                                        if (now[sty][stx] == 1 && now[ty][tx] == 0)
+                                        if (get(nowX, sty * nx + stx) == 1 && get(nowX, ty * nx + tx) == 0)
                                         {
-                                            now[y][x] = 0; now[sty][stx] = 0; now[ty][tx] = 1;
+                                            ll nextX = nowX;
+                                            to0(nextX, y * nx + x); to0(nextX, sty * nx + stx); to1(nextX, ty * nx + tx);
 
-                                            ll now_i = vtoi(now);
-                                            dp[now_i] += dp[nowX];
-                                            if (next_exist[now_i] == 0)
+                                            dp[nextX] += dp[nowX];
+                                            if (next_exist[nextX] == 0)
                                             {
-                                                next.push_back(now_i);
-                                                next_exist[now_i] = 1;
+                                                next.push_back(nextX);
+                                                next_exist[nextX] = 1;
                                             }
-
-                                            now[y][x] = 1; now[sty][stx] = 1; now[ty][tx] = 0;
                                         }
                                     }
                                 }
@@ -133,7 +161,7 @@ int main()
         //             }
         //             fout << '\n';
         //         }
-        //         fout << dp[nowX] << "\n\n";
+        //         fout << dp[nowX] << '\n';
         //     }
         // }
 

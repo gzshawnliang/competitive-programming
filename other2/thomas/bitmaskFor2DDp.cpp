@@ -22,9 +22,9 @@ class bitOperator
      * @param  {int} m : 数值
      * @return {int}   : 0或1
      */
-    int getMask(int i, int j, int m)
+    int get(int i, int j, int m)
     {
-        return (((1 << (i * Cols + j)) & m) != 0);
+        return ((1 << (i * Cols + j)) & m) != 0;
     }
 
     /**
@@ -45,7 +45,7 @@ class bitOperator
      * @param  {int} j : 第j列
      * @param  {int} m : 数值
      */
-    void setMask1(int i, int j, int & m)
+    void set1(int i, int j, int & m)
     {
         m |= (1 << (i * Cols + j));
         
@@ -57,7 +57,7 @@ class bitOperator
      * @param  {int} j : 第j列
      * @param  {int} m : 数值
      */
-    void setMask0(int i, int j, int & m)
+    void set0(int i, int j, int & m)
     {
         m &= ~(1 << (i * Cols + j));
         
@@ -74,7 +74,7 @@ class bitOperator
             cout << setw(11);
             for (int j = 0; j <= 4 - 1; ++j)
             {
-                cout << getMask(i, j, m) << " ";
+                cout << get(i, j, m) << " ";
             }
             cout << '\n';
         }
@@ -102,9 +102,19 @@ int main()
     bitOp.printBin(m);
     bitOp.printArray(m);
 
-    bitOp.setMask0(1, 0, m);
+    bitOp.set0(1, 0, m);
     bitOp.printBin(m);
     bitOp.printArray(m);
+
+    return 0;
+}
+
+
+int main3()
+{
+
+    int a =1 << 3;
+    cout << setw(6) << a << " -> "  << bitset<16>(a).to_string() << '\n'; 
 
     return 0;
 }
