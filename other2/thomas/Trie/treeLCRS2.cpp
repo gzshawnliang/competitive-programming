@@ -170,7 +170,7 @@ class LCRS
 
 int main()
 {
-    //freopen("treeLCRS.in", "r", stdin);
+    freopen("treeLCRS.in", "r", stdin);
     LCRS lcrsTree;
     lcrsTree.fillTree();
     lcrsTree.printTree();
