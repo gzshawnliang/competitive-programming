@@ -98,7 +98,8 @@
         "cuchar": "cpp",
         "resumable": "cpp",
         "shared_mutex": "cpp",
-        "xthread": "cpp"
+        "xthread": "cpp",
+        "any": "cpp"
     },
     "files.exclude": {
         "**/.git": true,
