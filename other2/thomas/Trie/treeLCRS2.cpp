@@ -41,6 +41,7 @@ struct node
 class LCRS
 {
     // LCRS也可以用3个一维数组
+    //The left-child, right-sibling representation (LCRS)
     // vector<int> parent;
     // vector<int> left;
     // vector<int> left;
