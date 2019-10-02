@@ -40,6 +40,11 @@ struct node
 
 class LCRS
 {
+    // LCRS也可以用3个一维数组
+    // vector<int> parent;
+    // vector<int> left;
+    // vector<int> left;
+
     vector<node> tree;
 
     public:
