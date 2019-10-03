@@ -5,6 +5,7 @@ using namespace std;
 const int NIL = -1;
 
 const int MAX_SIZE = 4000 * 1000 + 10;
+//const int MAX_SIZE = 1000;              //设置小数组方便调试
 
 class trie
 {

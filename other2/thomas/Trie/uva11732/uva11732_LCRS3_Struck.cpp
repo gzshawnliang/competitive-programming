@@ -2,10 +2,6 @@
 
 using namespace std;
 
-const int NIL = -1;
-
-const int MAX_SIZE = 4001 * 1000 + 100;
-
 struct node
 {
     char ch;       //结点上的字符
@@ -15,10 +11,12 @@ struct node
     long long sum; //表示有多少个儿子
 };
 
-const int maxn = 4000 * 1000 + 10;
+const int NIL = -1;
 
-//node tree[maxn];      //trie数组节点
-node tree[1000];        //trie数组节点
+const int MAX_SIZE = 4000 * 1000 + 10;  //数组最大节点
+//const int MAX_SIZE = 1000;              //设置小数组方便调试
+
+node tree[MAX_SIZE];      //trie数组节点
 
 class trie
 {
@@ -31,7 +29,7 @@ class trie
 
     void init()
     {
-        //tree.assign(maxn,node());  //trie数组节点,数据量大使用固定数值并放入全局变量，使用全局内存区
+        //tree.assign(MAX_SIZE,node());  //trie数组节点,数据量大使用固定数值并放入全局变量，使用全局内存区
 
         nodeId = 0;
         tree[nodeId].parent = NIL;
