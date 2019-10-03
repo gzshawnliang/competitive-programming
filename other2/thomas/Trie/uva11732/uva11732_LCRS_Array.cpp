@@ -29,6 +29,7 @@ class trie
         ans = 0;
     }
 
+    //第一种方法:边建树边统计>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     /**
      * 插入字符串s（包括最后的'\0'），沿途更新totalSum，顺便更新ans
      * @param  {string} s : 插入的字符串s
@@ -36,50 +37,46 @@ class trie
     void insert(const string & s)
     {
         int len = s.length();
-
         int father = 0; //父节点节点
-        int curr;       //当前节点
 
         //需要循环到len的位置:'\0'
         for (int i = 0; i <= len; ++i)
         {
-            // 找字符s[i]
-            char si = s[i];
-            bool found = false;
+            int curr = NIL; //当前节点
 
             //从上层节点father第1个儿子开始找，不停的找右兄弟，直到没有右兄弟，rSibling=-1
-            for (curr = lSon[father]; curr != NIL; curr = rSibling[curr])
+            for (int j = lSon[father]; j != NIL; j = rSibling[j])
             {
-                if (ch[curr] == si)
+                if (ch[j] == s[i])
                 { 
                     // 找到了
-                    found = true;
-                    break;
+                    ans += (totalSum[j] *2);
+                    curr = j;
                 }
+                else
+                {
+                    ans += totalSum[j];
+                }
+                
             }
             
-            //没找到新建节点
-            if (!found)
+            //没找到字符s[i]，新建节点
+            if (curr==NIL)
             {
                 // 新建结点,进行唯一编号，自增长
                 ++nodeId;
                 curr = nodeId;
 
                 rSibling[curr] = lSon[father];
-                ch[curr] = si;
+                ch[curr] = s[i];
                 lSon[curr] = NIL;
                 totalSum[curr] = 0;
 
                 lSon[father] = curr; // 替换上层节点的儿子为当前节点,插入到链表的首部
             }
 
-            ans += (totalSum[father] + totalSum[curr]);
-            if (i == len)
-                totalSum[curr] += 1;                        //特判结尾 Trie中不会进入结尾字符,需特判统计
-
-            totalSum[father] +=1;  //记录有多少儿子
-            father = curr;
-            
+            father = curr;          //当前节点设置成父节点，下次循环使用
+            totalSum[father] +=1;  //儿子数量+1
         }
     }
 
@@ -88,7 +85,7 @@ class trie
         return ans;
     }
 
-    //第二种方法>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //第二种方法:先建树再统计>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     /**
      * 插入字符串s（包括最后的'\0'），沿途更新totalSum，不更新ans
      * @param  {string} s : 插入的字符串s
