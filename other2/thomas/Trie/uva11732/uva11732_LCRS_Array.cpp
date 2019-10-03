@@ -8,7 +8,7 @@ const int MAX_SIZE = 4000 * 1000 + 10;
 
 struct trie
 {
-    int lSon[MAX_SIZE];     //lSon[i]为第i个结点的左儿子编号
+    int lSon[MAX_SIZE];     // lSon[i]为第i个结点的左儿子编号
     int rSibling[MAX_SIZE]; // rSibling[i]为第i个结点的右兄弟编号
     char ch[MAX_SIZE];      // ch[i]为第i个结点上的字符
     int totalSum[MAX_SIZE]; // totalSum[i]为第i个结点为根的子树包含的叶结点总数
@@ -97,7 +97,6 @@ trie trie1;
 int main()
 {
     freopen("uva11732.in", "r", stdin);
-    //freopen("uva11732.out", "w", stdout);
     int kase = 0;
 
     while (true)
