@@ -8,8 +8,18 @@ struct node
     int parent;    //指向父节点
     int lSon;      //指向左儿子
     int rSibling;  //指向右边的兄弟节点
-    long long sum; //表示有多少个儿子(该结点为根的子树包含的叶结点总数)
+    long long sum; //已此结点为根的子树包含的叶结点总数，例如ab,ac,ad;a的数量是3
 };
+
+/*
+     a
+    /|\
+    bcd
+----------------    
+    a
+    |
+    b->c->d
+*/
 
 const int NIL = -1;
 
@@ -77,7 +87,7 @@ class trie
                 tree[curr].rSibling = tree[father].lSon;    //上层节点的左儿子就是右兄弟
                 tree[curr].ch = s[i];                       //当前节点字符是s[i]
                 tree[curr].lSon = NIL;                      //新建的节点暂时无左儿子
-                tree[curr].sum = 0;                         //新建的节点暂时儿子数量是0
+                tree[curr].sum = 0;                         //新建的节点，暂时数量是0,在循环结束+1
 
                 tree[father].lSon = curr;                   //替换父节点的左儿子为当前节点
             }
