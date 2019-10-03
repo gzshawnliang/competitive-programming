@@ -37,7 +37,7 @@ class trie
     void insert(const string & s)
     {
         int len = s.length();
-        int father = 0; //父节点节点
+        int father = 0; //父节点节点,从根节点开始
 
         //需要循环到len的位置:'\0'
         for (int i = 0; i <= len; ++i)

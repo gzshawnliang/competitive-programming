@@ -21,7 +21,6 @@ node tree[MAX_SIZE];      //trie数组节点
 class trie
 {
     //vector<node> tree;     //trie数组节点,数据量大使用固定数值并放入全局变量
-
     int nodeId; //节点编号，自增长
 
   public:
@@ -46,7 +45,7 @@ class trie
     void insert(const string & s)
     {
         int len = s.size();
-        int father = 0; //父节点节点
+        int father = 0; //父节点节点,从根节点开始
 
         //需要循环到len的位置:'\0'
         for (int i = 0; i <= len; ++i)
