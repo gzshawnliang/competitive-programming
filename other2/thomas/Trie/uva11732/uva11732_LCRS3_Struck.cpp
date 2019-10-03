@@ -17,7 +17,8 @@ struct node
 
 const int maxn = 4000 * 1000 + 10;
 
-node tree[maxn]; //trie数组节点
+//node tree[maxn];      //trie数组节点
+node tree[1000];        //trie数组节点
 
 class trie
 {
@@ -40,6 +41,10 @@ class trie
         ans = 0;
     }
 
+    /**
+     * 插入字符串s（包括最后的'\0'），沿途更新totalSum，顺便更新ans
+     * @param  {string} s : 插入的字符串s
+     */
     void insert(const string & s)
     {
         int len = s.size();
@@ -47,13 +52,14 @@ class trie
         int father = 0; //父节点节点
         int curr;       //当前节点
 
-        //从上层节点father第1个儿子开始找，不停的找右兄弟，直到没有右兄弟，right=-1
+        //需要循环到len的位置:'\0'
         for (int i = 0; i <= len; ++i)
         {
 
             char si = s[i];     //  找字符s[i]
             bool found = false; //  是否发现字符s[i]
 
+            //从上层节点father第1个儿子开始找，不停的找右兄弟，直到没有右兄弟，rSibling=-1
             for (curr = tree[father].lSon; curr != NIL; curr = tree[curr].rSibling)
             {
                 if (tree[curr].ch == si)
@@ -70,18 +76,18 @@ class trie
                 // 新建结点,进行唯一编号，自增长
                 ++nodeId;
                 curr = nodeId;
-                tree[curr].parent = father;
-                tree[curr].rSibling = tree[father].lSon; //上层节点的儿子就是右兄弟
-                tree[curr].ch = si;                      //当前节点字符是s[i]
-                tree[curr].sum = 0;
-                tree[curr].lSon = NIL; //暂时无左儿子
+                tree[curr].parent = father;                 //设置父节点(暂时无用)
+                tree[curr].rSibling = tree[father].lSon;    //上层节点的左儿子就是右兄弟
+                tree[curr].ch = si;                         //当前节点字符是s[i]
+                tree[curr].lSon = NIL;                      //新建的节点暂时无左儿子
+                tree[curr].sum = 0;                         //新建的节点暂时儿子数量是0
 
-                tree[father].lSon = curr; //替换上层节点的儿子为当前节点
+                tree[father].lSon = curr;                   //替换上层节点的儿子为当前节点
             }
 
             ans += (tree[father].sum + tree[curr].sum);
             if (i == len)
-                tree[curr].sum += 1; //特判结尾 Trie中不会进入结尾字符,需特判统计
+                tree[curr].sum += 1;                        //特判结尾 Trie中不会进入结尾字符,需特判统计
 
             tree[father].sum += 1; //记录有多少儿子
             father = curr;

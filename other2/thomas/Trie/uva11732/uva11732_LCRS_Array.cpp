@@ -6,15 +6,18 @@ const int NIL = -1;
 
 const int MAX_SIZE = 4000 * 1000 + 10;
 
-struct trie
+class trie
 {
-    int lSon[MAX_SIZE];     // lSon[i]为第i个结点的左儿子编号
-    int rSibling[MAX_SIZE]; // rSibling[i]为第i个结点的右兄弟编号
-    char ch[MAX_SIZE];      // ch[i]为第i个结点上的字符
-    int totalSum[MAX_SIZE]; // totalSum[i]为第i个结点为根的子树包含的叶结点总数
+    int lSon[MAX_SIZE];             // lSon[i]为第i个结点的左儿子编号
+    int rSibling[MAX_SIZE];         // rSibling[i]为第i个结点的右兄弟编号
+    char ch[MAX_SIZE];              // ch[i]为第i个结点上的字符
+    long long totalSum[MAX_SIZE];   // totalSum[i]为第i个结点为根的子树包含的叶结点总数
 
-    int nodeId;    // 节点编号，自增长
-    long long ans; // 答案
+    int nodeId;                     // 节点编号，自增长
+    long long ans;                  // 答案
+
+    public:
+
     void init()
     {
         // 初始时只有一个根结点
@@ -25,14 +28,18 @@ struct trie
         ans = 0;
     }
 
-    // 插入字符串s（包括最后的'\0'），沿途更新tot
+    /**
+     * 插入字符串s（包括最后的'\0'），沿途更新totalSum，顺便更新ans
+     * @param  {string} s : 插入的字符串s
+     */
     void insert(const string & s)
     {
         int len = s.length();
 
         int father = 0; //父节点节点
         int curr;       //当前节点
-        ++totalSum[0];
+
+        //需要循环到len的位置:'\0'
         for (int i = 0; i <= len; ++i)
         {
             // 找字符s[i]
@@ -43,11 +50,14 @@ struct trie
             for (curr = lSon[father]; curr != NIL; curr = rSibling[curr])
             {
                 if (ch[curr] == si)
-                { // 找到了
+                { 
+                    // 找到了
                     found = true;
                     break;
                 }
             }
+            
+            //没找到新建节点
             if (!found)
             {
                 // 新建结点,进行唯一编号，自增长
@@ -56,14 +66,76 @@ struct trie
 
                 rSibling[curr] = lSon[father];
                 ch[curr] = si;
-                totalSum[curr] = 0;
                 lSon[curr] = NIL;
+                totalSum[curr] = 0;
 
                 lSon[father] = curr; // 替换上层节点的儿子为当前节点,插入到链表的首部
             }
 
+            ans += (totalSum[father] + totalSum[curr]);
+            if (i == len)
+                totalSum[curr] += 1;                        //特判结尾 Trie中不会进入结尾字符,需特判统计
+
+            totalSum[father] +=1;  //记录有多少儿子
             father = curr;
-            ++totalSum[father];
+            
+        }
+    }
+
+    long long count()
+    {
+        return ans;
+    }
+
+    //第二种方法>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    /**
+     * 插入字符串s（包括最后的'\0'），沿途更新totalSum，不更新ans
+     * @param  {string} s : 插入的字符串s
+     */    
+    void insert2(const string & s)
+    {
+        int len = s.length();
+
+        int father = 0; //父节点节点
+        int curr;       //当前节点
+        ++totalSum[0];
+
+        //需要循环到len的位置:'\0'
+        for (int i = 0; i <= len; ++i)
+        {
+            // 找字符s[i]
+            char si = s[i];
+            bool found = false;
+
+            //从上层节点father第1个儿子开始找，不停的找右兄弟，直到没有右兄弟，rSibling=-1
+            for (curr = lSon[father]; curr != NIL; curr = rSibling[curr])
+            {
+                if (ch[curr] == si)
+                { 
+                    // 找到了
+                    found = true;
+                    break;
+                }
+            }
+
+            //没找到新建节点
+            if (!found)
+            {
+                // 新建结点,进行唯一编号，自增长
+                ++nodeId;
+                curr = nodeId;
+
+                rSibling[curr] = lSon[father];
+                ch[curr] = si;
+                lSon[curr] = NIL;
+                totalSum[curr] = 0;
+
+                lSon[father] = curr; // 替换上层节点的儿子为当前节点,插入到链表的首部
+            }
+
+            totalSum[father] +=1;  //记录有多少儿子
+            father = curr;
+            
         }
     }
 
@@ -84,15 +156,16 @@ struct trie
     }
 
     // 统计
-    long long count()
+    long long count2()
     {
         ans = 0;
         dfs(0, 0);
         return ans;
     }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 };
 
-trie trie1;
+trie trie1;     //数据量大使用全局变量
 
 int main()
 {
