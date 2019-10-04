@@ -14,7 +14,8 @@ struct dot
 };
 dot _dot(double x, double y)
 {
-    dot temp{x, y}; return temp;
+    dot temp{x, y};
+    return temp;
 }
 
 int main()
@@ -23,14 +24,17 @@ int main()
 
     while (true)
     {
-        int n = 0; fin >> n;
-        if (n == 0) break;
+        int n = 0;
+        fin >> n;
+        if (n == 0)
+            break;
 
         double xt = 0.0;
         vector<dot> a;
         for (int c = 1; c <= n; ++c)
         {
-            double h, d; fin >> h >> d;
+            double h, d;
+            fin >> h >> d;
 
             a.push_back(_dot(xt, h));
             a.push_back(_dot(xt + d, h));
