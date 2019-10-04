@@ -24,7 +24,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "howBigIsIt_UVA10012"; //*
+const string CPPfile = "leapsTallBuildings_UVA10372"; //*
 //***************************************
 
 ifstream fin;
