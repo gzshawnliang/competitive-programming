@@ -59,9 +59,9 @@ class trie
                 }
                 
             }
-            
+
             //没找到字符s[i]，新建节点
-            if (curr==NIL)
+            if (curr == NIL)
             {
                 // 新建结点,进行唯一编号，自增长
                 ++nodeId;
@@ -72,11 +72,11 @@ class trie
                 lSon[curr] = NIL;
                 totalSum[curr] = 0;
 
-                lSon[father] = curr; // 替换上层节点的儿子为当前节点,插入到链表的首部
+                lSon[father] = curr;            // 替换上层节点的儿子为当前节点,插入到链表的首部
             }
 
-            father = curr;          //当前节点设置成父节点，下次循环使用
-            totalSum[father] +=1;  //儿子数量+1
+            father = curr;                      //当前节点设置成父节点，下次循环使用
+            totalSum[father] +=1;               //儿子数量+1
         }
     }
 
@@ -189,3 +189,5 @@ int main()
     }
     return 0;
 }
+
+

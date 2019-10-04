@@ -78,7 +78,7 @@ class trie
             }
 
             //没找到字符s[i]，新建节点
-            if (curr==NIL)
+            if (curr == NIL)
             {
                 // 新建结点,进行唯一编号，自增长
                 ++nodeId;
