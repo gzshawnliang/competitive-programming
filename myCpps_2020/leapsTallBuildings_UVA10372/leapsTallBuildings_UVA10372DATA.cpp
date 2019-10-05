@@ -104,25 +104,25 @@ int main()
 
     fout.open("leapsTallBuildings_UVA10372.in");
 
-    int testCase=10;
+    int testCase=100;
     while (testCase--)
     {
         //***************************
         //在此处写入测试数据
         //***************************
-        int N = rdNum.GetRand(3, 4);
+        int N = rdNum.GetRand(3, 100);
         fout << N << "\n";
         N--;
-        fout << 0 << " " << rdNum.GetRand(10,100)/10 << "\n";
+        fout << 0 << " " << rdNum.GetRand(10,1000)/10.0 << "\n";
         while (N--)
         {
             if(N<=0)
             {
-                fout << 0 << " " << rdNum.GetRand(10,100)/10 << "\n";                
+                fout << 0 << " " << rdNum.GetRand(10,10000)/10.0 << "\n";                
             }
             else
             {
-                fout << rdNum.GetRand(10,100)/10 << " " << rdNum.GetRand(10,100)/10 << "\n";            
+                fout << rdNum.GetRand(10,1000)/10.0 << " " << rdNum.GetRand(10,1000)/10.0 << "\n";            
             }
             
             
