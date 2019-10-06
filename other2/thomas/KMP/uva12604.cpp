@@ -3,14 +3,14 @@ using namespace std;
 
 const unsigned Base = 7; // 任一質數 // 不能2
 
-int countStr(const string & encryptedText, const string & plainText)
+int countStrHash(const string & encryptedText, const string & plainText)
 {
     int cnt = 0;
     unsigned baseMax = 1;
     unsigned strHash, patHash;
     strHash = encryptedText[0];
     patHash = plainText[0];
-    for (int i = 1; plainText[i]; i++)
+    for (int i = 1; plainText[i]; ++i)
     {
         patHash = patHash * Base + plainText[i];
         strHash = strHash * Base + encryptedText[i];
@@ -18,7 +18,7 @@ int countStr(const string & encryptedText, const string & plainText)
     }
     if (patHash == strHash)
         ++cnt;
-        
+
     for (int i = plainText.length(), j = 0; encryptedText[i]; ++i, ++j)
     {
         strHash = (strHash - baseMax * encryptedText[j]) * Base + encryptedText[i];
@@ -28,7 +28,7 @@ int countStr(const string & encryptedText, const string & plainText)
     return cnt;
 }
 
-int KMP(const string & encryptedText, const string & plainText)
+int countStrKMP(const string & encryptedText, const string & plainText)
 {
     /*build failure function*/
     vector<int> fail(50005);
@@ -50,6 +50,7 @@ int KMP(const string & encryptedText, const string & plainText)
             fail[i] = -1;
         }
     }
+
     /*KMP*/
     int cnt = 0;
     j = 0;
@@ -72,8 +73,7 @@ int KMP(const string & encryptedText, const string & plainText)
 
     return cnt;
 }
-//char Alphabet[65], plainText[50005], encryptedText[500005];
-int ans[50005];
+
 int main()
 {
     freopen("uva12604.in", "r", stdin);
@@ -82,25 +82,27 @@ int main()
     cin >> testCase;
     while (testCase--)
     {
-        string Alphabet;
+        string alphabet;
         string plainText;
         string encryptedText;
 
         vector<int> pos(128); // pos['a'] = 0; pos['w'] = 1;// 表上'a'在第0個位置，下一個是'w'
-        //scanf("%s%s%s", Alphabet, plainText, encryptedText);
-        cin >> Alphabet >> plainText >> encryptedText;
-        for (int i = 0; Alphabet[i]; i++)
+
+        vector<int> ans(50005);
+
+        cin >> alphabet >> plainText >> encryptedText;
+        for (int i = 0; alphabet[i]; i++)
         {
-            pos[Alphabet[i]] = i;
+            pos[alphabet[i]] = i;
         }
-        int AlphaL = Alphabet.length();
-        Alphabet[AlphaL] = Alphabet[0];
-        Alphabet[AlphaL + 1] = 0;
+        int alphaLen = alphabet.length();
+        alphabet[alphaLen] = alphabet[0];
+        alphabet[alphaLen + 1] = 0;
         int ansi = 0;
-        for (int i = 0; i < AlphaL; i++)
+        for (int i = 0; i < alphaLen; i++)
         {
-            if (countStr(encryptedText, plainText) == 1)
-            //if(KMP(encryptedText, plainText) == 1)
+            if (countStrHash(encryptedText, plainText) == 1)
+            //if(countStrKMP(encryptedText, plainText) == 1)
             {
                 ans[ansi] = i;
                 ++ansi;
@@ -108,7 +110,7 @@ int main()
             for (int j = 0; plainText[j]; j++)
             {
                 int k = pos[plainText[j]]; // k在table中第幾個
-                plainText[j] = Alphabet[k + 1];
+                plainText[j] = alphabet[k + 1];
             }
         }
         if (ansi == 0)
