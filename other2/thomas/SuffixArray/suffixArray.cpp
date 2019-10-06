@@ -65,7 +65,7 @@ int main()
     //string s="heheheda";
 
     vector<int> SA(s.length());     //后缀数组：SA[i]表示第i小的后缀在原串中的起始位置
-    vector<int> rank(s.length());   //名次数组：第i原字符串的缀在SA[i]的排名为rank[i]，rank[SA[i]]=i
+    vector<int> rank(s.length());   //名次数组：第i原字符串的缀在SA[i]的排名为rank[i]，rank[SA[i]]=i,rank和sa互为逆操作，即sa[rank[i]] = i;rank[sa[i]] = i;（所以我们只要求得其一，就能O(n）算出另一个）
     vector<int> height(s.length()); //高度数组：是一个一维数组，保存了相邻两个后缀的最长公共前缀（Longest Common Prefix，LCP）长度，height[i]定义为sa[i－1]和sa[i]的最长公共前缀（Longest Common Prefix, LCP）长度
 
     createSuffixArray(s, SA, rank, height);
