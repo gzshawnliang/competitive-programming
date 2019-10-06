@@ -18,7 +18,6 @@
     namespace fs = std::experimental::filesystem;
 #endif
 //#include <windows.h>
-
 //namespace fs = std::experimental::filesystem;
 
 using namespace std;
