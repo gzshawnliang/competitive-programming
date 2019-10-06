@@ -1,48 +1,47 @@
-/* 題目: UVa 12604 - Caesar Cipher
- * Language: C++
- * Created on: 2016年10月12日
- *   Author: hanting
- */
 #include <bits/stdc++.h>
 using namespace std;
-unsigned Base = 7; // 任一質數 // 不能2
-int countStr(char * str, char * pat)
+
+const unsigned Base = 7; // 任一質數 // 不能2
+
+int countStr(const string & encryptedText, const string & plainText)
 {
     int cnt = 0;
     unsigned baseMax = 1;
     unsigned strHash, patHash;
-    strHash = str[0];
-    patHash = pat[0];
-    for (int i = 1; pat[i]; i++)
+    strHash = encryptedText[0];
+    patHash = plainText[0];
+    for (int i = 1; plainText[i]; i++)
     {
-        patHash = patHash * Base + pat[i];
-        strHash = strHash * Base + str[i];
+        patHash = patHash * Base + plainText[i];
+        strHash = strHash * Base + encryptedText[i];
         baseMax *= Base;
     }
     if (patHash == strHash)
-        cnt++;
-    for (int i = strlen(pat), j = 0; str[i]; i++, j++)
+        ++cnt;
+        
+    for (int i = plainText.length(), j = 0; encryptedText[i]; ++i, ++j)
     {
-        strHash = (strHash - baseMax * str[j]) * Base + str[i];
+        strHash = (strHash - baseMax * encryptedText[j]) * Base + encryptedText[i];
         if (strHash == patHash)
-            cnt++;
+            ++cnt;
     }
     return cnt;
 }
-int fail[50005];
-int KMP(char * str, char * pat)
+
+int KMP(const string & encryptedText, const string & plainText)
 {
     /*build failure function*/
+    vector<int> fail(50005);
     fail[0] = -1;
     int j;
-    for (int i = 1; pat[i]; i++)
+    for (int i = 1; plainText[i]; ++i)
     {
         j = fail[i - 1];
-        while (j >= 0 && pat[i] != pat[j + 1])
+        while (j >= 0 && plainText[i] != plainText[j + 1])
         {
             j = fail[j];
         }
-        if (pat[i] == pat[j + 1])
+        if (plainText[i] == plainText[j + 1])
         {
             fail[i] = j + 1;
         }
@@ -54,40 +53,47 @@ int KMP(char * str, char * pat)
     /*KMP*/
     int cnt = 0;
     j = 0;
-    for (int i = 0; str[i]; i++)
+    for (int i = 0; encryptedText[i]; ++i)
     {
-        while (j >= 1 && str[i] != pat[j])
+        while (j >= 1 && encryptedText[i] != plainText[j])
         {
             j = fail[j - 1] + 1;
         }
-        if (str[i] == pat[j])
+        if (encryptedText[i] == plainText[j])
         {
-            j++;
+            ++j;
         }
-        if (!pat[j])
+        if (!plainText[j])
         {
-            cnt++;
+            ++cnt;
             j = fail[j - 1] + 1;
         }
     }
 
     return cnt;
 }
-char Alphabet[65], plainText[50005], encryptedText[500005];
+//char Alphabet[65], plainText[50005], encryptedText[500005];
 int ans[50005];
 int main()
 {
+    freopen("uva12604.in", "r", stdin);
+
     int testCase;
-    scanf("%d", &testCase);
+    cin >> testCase;
     while (testCase--)
     {
-        int pos[128]; // pos['a'] = 0; pos['w'] = 1;// 表上'a'在第0個位置，下一個是'w'
-        scanf("%s%s%s", Alphabet, plainText, encryptedText);
+        string Alphabet;
+        string plainText;
+        string encryptedText;
+
+        vector<int> pos(128); // pos['a'] = 0; pos['w'] = 1;// 表上'a'在第0個位置，下一個是'w'
+        //scanf("%s%s%s", Alphabet, plainText, encryptedText);
+        cin >> Alphabet >> plainText >> encryptedText;
         for (int i = 0; Alphabet[i]; i++)
         {
             pos[Alphabet[i]] = i;
         }
-        int AlphaL = strlen(Alphabet);
+        int AlphaL = Alphabet.length();
         Alphabet[AlphaL] = Alphabet[0];
         Alphabet[AlphaL + 1] = 0;
         int ansi = 0;
@@ -96,7 +102,8 @@ int main()
             if (countStr(encryptedText, plainText) == 1)
             //if(KMP(encryptedText, plainText) == 1)
             {
-                ans[ansi++] = i;
+                ans[ansi] = i;
+                ++ansi;
             }
             for (int j = 0; plainText[j]; j++)
             {
@@ -106,20 +113,20 @@ int main()
         }
         if (ansi == 0)
         {
-            puts("no solution");
+            cout << "no solution\n";
         }
         else if (ansi == 1)
         {
-            printf("unique: %d\n", ans[0]);
+            cout << "unique: " << ans[0] << "\n";
         }
         else
         {
-            printf("ambiguous: ");
+            cout << "ambiguous: ";
             for (int i = 0; i < ansi - 1; i++)
             {
-                printf("%d ", ans[i]);
+                cout << ans[i] << " ";
             }
-            printf("%d\n", ans[ansi - 1]);
+            cout << ans[ansi - 1] << "\n";
         }
     }
     return 0;
