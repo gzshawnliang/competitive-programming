@@ -2,8 +2,6 @@
 
 using namespace std;
 
-ifstream fin("strcmpAnyone_UVA11732.in");
-ofstream fout("strcmpAnyone_UVA11732.out");
 
 using ll = long long;
 const ll maxL = 4000 * 1000;
@@ -82,10 +80,12 @@ class trie
 
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	std::cin.tie(NULL);
     int _t = 0;
     while (true)
     {
-        ll n = 0; fin >> n;
+        ll n = 0; cin >> n;
         if (n == 0) break;
         ++_t;
 
@@ -94,12 +94,14 @@ int main()
 
         for (ll c = 1; c <= n; ++c)
         {
-            string s; fin >> s;
+            string s; cin >> s;
             t.insert(s);
         }
 
-        fout << "Case " << _t << ": " << t.ans << '\n';
+        cout << "Case " << _t << ": " << t.ans << '\n';
     }
 
-    return 0;
+   	cout.flush();
+   	return 0;
 }
+
