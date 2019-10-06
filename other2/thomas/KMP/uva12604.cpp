@@ -87,7 +87,6 @@ int main()
         string encryptedText;
 
         vector<int> pos(128); // pos['a'] = 0; pos['w'] = 1;// 表上'a'在第0個位置，下一個是'w'
-
         vector<int> ans(50005);
 
         cin >> alphabet >> plainText >> encryptedText;
