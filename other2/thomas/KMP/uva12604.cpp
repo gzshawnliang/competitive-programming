@@ -1,28 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const unsigned Base = 7; // 任一質數 // 不能2
+const unsigned Base = 37; // 任一质数 ,不能2,质数7可能会相撞
 
 int countStrHash(const string & encryptedText, const string & plainText)
 {
     int cnt = 0;
     unsigned baseMax = 1;
-    unsigned strHash, patHash;
-    strHash = encryptedText[0];
-    patHash = plainText[0];
+    unsigned encryptedTextHashCode, plainTextHashCode;
+    encryptedTextHashCode = encryptedText[0];
+    plainTextHashCode = plainText[0];
     for (int i = 1; plainText[i]; ++i)
     {
-        patHash = patHash * Base + plainText[i];
-        strHash = strHash * Base + encryptedText[i];
+        plainTextHashCode = plainTextHashCode * Base + plainText[i];
+        encryptedTextHashCode = encryptedTextHashCode * Base + encryptedText[i];
         baseMax *= Base;
     }
-    if (patHash == strHash)
+    if (plainTextHashCode == encryptedTextHashCode)
         ++cnt;
 
     for (int i = plainText.length(), j = 0; encryptedText[i]; ++i, ++j)
     {
-        strHash = (strHash - baseMax * encryptedText[j]) * Base + encryptedText[i];
-        if (strHash == patHash)
+        encryptedTextHashCode = (encryptedTextHashCode - baseMax * encryptedText[j]) * Base + encryptedText[i];
+        if (encryptedTextHashCode == plainTextHashCode)
             ++cnt;
     }
     return cnt;
