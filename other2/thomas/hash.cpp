@@ -15,16 +15,55 @@ int hashCode2(const string & x, int prime)
     return hashValue % prime;
 }
 
-unsigned long long hashCode3(const string  & x)
+
+
+unsigned long long hashCode3(const string & x)
 {
-    int len=x.length();
-    unsigned long long ans=0,p=1;
-    for(int i=0;i<=len-1;++i)
+    int len = x.length();
+    unsigned long long ans = 0, p = 1;
+    for (int i = 0; i <= len - 1; ++i)
     {
-        ans=ans*p+x[i];
-        p*=13331;
+        ans = ans * p + x[i];
+        p *= 13331;
     }
     return ans;
+}
+
+/**
+ * 
+ * @param  {string} x  : 
+ * @param  {int} M     : 
+ * @return {unsigned}  : 
+ */
+unsigned long long hashCode4(const string & x,int M)
+{
+    unsigned long long hash=0;
+    int len = x.length();
+    int R = 101;    //进制
+
+    // int j=len-1;
+    // for (int i = 0; i <=len-1; ++i)
+    // {
+    //     hash += x[i] * pow(R,j);
+    //     j--;
+    // }
+    /*
+        霍纳规则(Horner Rule)，最少的乘法运算策略
+        hash(abc)=a*R^2 + b*R^1 + c*R^0 = ((a*R + b) * R) + c
+
+        参考：
+        https://en.wikipedia.org/wiki/Horner's_method
+        https://zh.wikipedia.org/wiki/秦九韶算法
+    */
+
+    hash=0;
+    for (int i = 0; i <=len-1; ++i)
+    {
+        hash = R * hash + x[i];
+        //如果过大造成溢出，可以将行换成：
+        //hash = (R * hash + x[i]) % M;
+    }
+    return hash % M;
 }
 
 int main()
@@ -55,9 +94,10 @@ int main()
     // cout << h2(832487234) <<'\n';
 
     cout << "----------------" << "\n";
-    cout << hashCode3("a") << '\n';
-    cout << hashCode3("b") << '\n';
-    cout << hashCode3("ab") << '\n';
+    // cout << hashCode4("a",1009) << '\n';
+    // cout << hashCode4("b",1009) << '\n';
+    // cout << hashCode4("ab",1009) << '\n';
+    cout << hashCode4("abc",1009) << '\n';
     cout << "----------------" << "\n";    
 
     return 0;
