@@ -29,6 +29,7 @@ int hashCode(const string & s)
 
     /*
         霍纳规则(Horner Rule)，最少的乘法运算策略
+        用进制的算法
         hash(abc)=a*BASE^2 + b*BASE^1 + c*BASE^0 = ((a*BASE + b) * BASE) + c
 
         参考：
