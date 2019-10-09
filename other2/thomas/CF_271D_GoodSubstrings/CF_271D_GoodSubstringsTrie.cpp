@@ -24,7 +24,7 @@ class trie
     int tr[MAX_NODE][MAX_CHAR];         //tr节点的子节点。i是节点唯一编号，j是字符编号(ascii码-'a')。tr[i][j]表示编号是i的节点，j字符指向的下一个结点编号(顺序)。i是按顺序编号，j是按字符编号（-'a'）。0代表没节点
     int nodeIdx;                        //节点的编号，从1开始
 
-    int maxAccBadChar; //the maximum acceptable number of bad characters in a good substring.
+    int maxAccBadChar;                  //the maximum acceptable number of bad characters in a good substring.
 
     int idx(char c)
     {
@@ -74,24 +74,24 @@ class trie
                 {
                     ++nodeIdx;
                     tr[next][c] = nodeIdx;
-                    ++(this->totalGoodSub);
+
+                    ++(this->totalGoodSub); //节点的数量就是子串的数量
                 }
 
                 next = tr[next][c];
-                
-                
             }
         }
     }
 };
 
-trie trie1;
+trie trie1;     //数据量大，放入全局内存区
 
 int main()
 {
-    //Round#166(Div.2)D.GoodSubstrings
-    //freopen("Round#166(Div.2)D.GoodSubstrings.in", "r", stdin);
-    //freopen("Round#166(Div.2)D.GoodSubstrings.out", "w", stdout);
+    #ifndef ONLINE_JUDGE
+        freopen("CF_271D_GoodSubstrings.in", "r", stdin);
+        freopen("CF_271D_GoodSubstrings.out", "w", stdout);
+    #endif
     string sourceStr;
     cin >> sourceStr;
     string goobBadStr;
