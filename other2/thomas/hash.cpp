@@ -66,6 +66,25 @@ unsigned long long hashCode4(const string & x,int M)
     return hash % M;
 }
 
+/*
+哈希攻击
+当R=31的时候
+Aa和BB的哈希值相同
+*/
+unsigned long long hashCode5(const string & x)
+{
+    unsigned long long hash=0;
+    int len = x.length();
+    int R = 31;    //进制
+
+    hash=0;
+    for (int i = 0; i <=len-1; ++i)
+    {
+        hash = R * hash + x[i];
+    }
+    return hash ;
+}
+
 int main()
 {
     // cout << hashCode(13) << '\n';
@@ -97,7 +116,8 @@ int main()
     // cout << hashCode4("a",1009) << '\n';
     // cout << hashCode4("b",1009) << '\n';
     // cout << hashCode4("ab",1009) << '\n';
-    cout << hashCode4("abc",1009) << '\n';
+    cout << hashCode5("Aa") << '\n';
+    cout << hashCode5("BB") << '\n';
     cout << "----------------" << "\n";    
 
     return 0;
