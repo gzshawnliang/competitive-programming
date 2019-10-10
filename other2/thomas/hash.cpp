@@ -116,8 +116,8 @@ int main()
     // cout << hashCode4("a",1009) << '\n';
     // cout << hashCode4("b",1009) << '\n';
     // cout << hashCode4("ab",1009) << '\n';
-    cout << hashCode5("Aa") << '\n';
-    cout << hashCode5("BB") << '\n';
+    cout << hashCode5("zAa") << '\n';
+    cout << hashCode5("zBB") << '\n';
     cout << "----------------" << "\n";    
 
     return 0;
