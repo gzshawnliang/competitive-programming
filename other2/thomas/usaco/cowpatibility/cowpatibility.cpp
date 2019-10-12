@@ -9,12 +9,14 @@ const int maxN = 50005;
 
 int main()
 {
-    int n; //牛的数量
+    long long n; //牛的数量
     fin >> n;
 
     /*
         dp[i,j]:口味值是i的对应的牛编号，
         j用bitset表示，例如 dp[1][0000110] 口味值是1的有第1头牛、第2头牛
+                                |||||||
+                                6543210
     */
     map<int, bitset<maxN>> dp;
 
@@ -39,11 +41,14 @@ int main()
         bitset<maxN> p;
         for (int j = 1; j <= 5; ++j)
         {
-            int currFlavor = a[i][j];
-            p |= dp[currFlavor];
+            int currFlavor = a[i][j];       //当前口味：currFlavor
+            p |= dp[currFlavor];            //统计有哪些奶牛有currFlavor口味
         }
-        ans += (n - p.count());
+        //ans += (n - p.count());
+        ans += p.count();
     }
-    fout << ans / 2 << "\n";
+    ans /=2;
+    //fout << ans / 2 << "\n";
+    fout << (n*(n-1) / 2) - ans << "\n";
     return 0;
 }
