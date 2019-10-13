@@ -111,14 +111,22 @@ int main()
     // cout << h2(99) <<'\n';
     
     // cout << h2(832487234) <<'\n';
-
+    cout << 1;
     cout << "----------------" << "\n";
     // cout << hashCode4("a",1009) << '\n';
     // cout << hashCode4("b",1009) << '\n';
     // cout << hashCode4("ab",1009) << '\n';
     cout << hashCode5("zAa") << '\n';
     cout << hashCode5("zBB") << '\n';
-    cout << "----------------" << "\n";    
+    cout << "----------------" << "\n";
+
+    string s = "skdfghdhgkfdrhweg;lkdfasdfhuiewr";
+    int n = s.length();
+    for (int i = 0; i <= n - 1; ++i)
+    {
+        cout << s[i] << '\n';
+    }
+    ++n;
 
     return 0;
 }
