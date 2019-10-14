@@ -4,8 +4,7 @@ using namespace std;
 
 using ull = unsigned long long;
 
-const ull M = 1e9 + 7;
-const ull R = 13331;
+const ull R = 13331;            //质数
 
 bool check(const string & s, const int & m, int L)
 {
