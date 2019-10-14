@@ -4,22 +4,51 @@ using namespace std;
 
 using ull = unsigned long long;
 
-const int M = 1e9 + 7;
-const int B = 1031;
+const ull M = 1e9 + 7;
+const ull R = 26;
 
 //ifstream cin("stammeringAliens_Uva12206.in");
 //ofstream fout("stammeringAliens_Uva12206.out");
 
-bool check(const string & s, const int & m, int L)
+unsigned long long hashCode(const string & x)
 {
-    unordered_map<string, int> umap;
-    int len = s.length();
+    int len = x.length();
+    unsigned long long ans = 0, p = 1;
     for (int i = 0; i <= len - 1; ++i)
     {
-        string subStr = s.substr(i, L);
+        ans = ans * p + x[i];
+        p *= 13331;
+    }
+    return ans;
+}
 
-        ++umap[subStr];
-        if (umap[subStr] >= m)
+bool check(const string & s, const int & m, int L)
+{
+    unordered_map<ull, int> umap;
+    int len = s.length();
+    
+    ull subStrHash = 0;      //子串哈希值
+    ull rMax = 1 ;
+    for (int i = 0; i <= L - 1; ++i)
+    {
+        subStrHash = (subStrHash * R + s[i]);
+        if(i>0)
+            rMax *= R;
+    }
+    ++umap[subStrHash];
+    if (umap[subStrHash] >= m)
+    {
+        return true;
+    }
+
+    for (int i = 1; i + L <= len ; ++i)
+    {
+        subStrHash -= (rMax*s[i-1]);
+        subStrHash *= R;
+        subStrHash += s[i+L-1];
+        
+        ++umap[subStrHash];
+        if (umap[subStrHash] >= m)
         {
             return true;
         }
@@ -31,14 +60,34 @@ int getPos(const string & s, const int & m, int L)
 {
     int subPos = -1;
 
-    unordered_map<string, int> umap;
+    unordered_map<ull, int> umap;
     int len = s.length();
-    for (int i = 0; i <= len - L; ++i)
-    {
-        string subStr = s.substr(i, L);
 
-        ++umap[subStr];
-        if (umap[subStr] >= m)
+    ull subStrHash = 0;      //子串哈希值
+    ull rMax = 1 ;
+    for (int i = 0; i <= L - 1; ++i)
+    {
+        subStrHash = (subStrHash * R + s[i]);
+        if(i>0)
+            rMax *= R;
+    }
+    ++umap[subStrHash];
+    if (umap[subStrHash] >= m)
+    {
+        subPos=0;
+    }
+
+    for (int i = 1; i + L <= len ; ++i)
+    {
+        //string subStr = s.substr(i, L);
+        //ull hcode = hashCode(subStr);
+
+        subStrHash -= (rMax*s[i-1]);
+        subStrHash *= R;
+        subStrHash += s[i+L-1];
+
+        ++umap[subStrHash];
+        if (umap[subStrHash] >= m)
         {
             subPos = i;
         }
@@ -51,7 +100,8 @@ int main()
     #ifndef ONLINE_JUDGE
         freopen("stammeringAliens_Uva12206.in", "r", stdin);
         //freopen("stammeringAliens_Uva12206.out", "w", stdout);
-    #endif    
+    #endif
+
     while (true)
     {
         int m;
