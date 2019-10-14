@@ -5,22 +5,7 @@ using namespace std;
 using ull = unsigned long long;
 
 const ull M = 1e9 + 7;
-const ull R = 26;
-
-//ifstream cin("stammeringAliens_Uva12206.in");
-//ofstream fout("stammeringAliens_Uva12206.out");
-
-unsigned long long hashCode(const string & x)
-{
-    int len = x.length();
-    unsigned long long ans = 0, p = 1;
-    for (int i = 0; i <= len - 1; ++i)
-    {
-        ans = ans * p + x[i];
-        p *= 13331;
-    }
-    return ans;
-}
+const ull R = 13331;
 
 bool check(const string & s, const int & m, int L)
 {
@@ -79,9 +64,6 @@ int getPos(const string & s, const int & m, int L)
 
     for (int i = 1; i + L <= len ; ++i)
     {
-        //string subStr = s.substr(i, L);
-        //ull hcode = hashCode(subStr);
-
         subStrHash -= (rMax*s[i-1]);
         subStrHash *= R;
         subStrHash += s[i+L-1];
