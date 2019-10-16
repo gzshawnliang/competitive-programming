@@ -99,7 +99,11 @@
         "resumable": "cpp",
         "shared_mutex": "cpp",
         "xthread": "cpp",
-        "any": "cpp"
+        "any": "cpp",
+        "memory_resource": "cpp",
+        "variant": "cpp",
+        "charconv": "cpp",
+        "bit": "cpp"
     },
     "files.exclude": {
         "**/.git": true,
