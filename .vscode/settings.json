@@ -2,7 +2,6 @@
 {
     "editor.quickSuggestions": true,
     "files.encoding": "utf8",
-    "files.autoGuessEncoding": true,
     "files.associations": {
         "string": "cpp",
         "iostream": "cpp",
