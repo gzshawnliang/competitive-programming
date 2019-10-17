@@ -58,8 +58,8 @@ int main()
                     code3 = code3 * R1 + (*it);
                 }
             }
-            ++hashMap[code0*code1];
-            ++hashMap[code2*code3];
+            ++hashMap[code0*code1];     //第一哈希值
+            ++hashMap[code2*code3];     //第二哈希值
         }
     }
     ull ans=0;
