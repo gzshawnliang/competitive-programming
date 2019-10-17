@@ -2,6 +2,11 @@
 {
     "editor.quickSuggestions": true,
     "files.encoding": "utf8",
+    // 针对 [cpp] 语言，配置替代编辑器设置。
+    "[cpp]": {
+        "files.encoding":"utf8",
+        "files.autoGuessEncoding": false,      
+    },     
     "files.associations": {
         "string": "cpp",
         "iostream": "cpp",
