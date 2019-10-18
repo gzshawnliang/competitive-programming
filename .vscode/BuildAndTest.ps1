@@ -49,7 +49,7 @@ function StartProcess {
         [ref]$exitCode
     )
 
-    Write-Host $processExecFileName
+    # Write-Host $processExecFileName
     $currExecfileName = [System.IO.Path]::GetFileName($processExecFileName)
     $currExecfile = Get-Item -Path $processExecFileName
 
@@ -62,7 +62,7 @@ function StartProcess {
         $ps.StartInfo.UseShellExecute = $false
     }
     $ps.StartInfo.WorkingDirectory = $currExecfile.DirectoryName
-    Write-Host $currExecfile.DirectoryName
+    # Write-Host $currExecfile.DirectoryName
     
     $sw = [Diagnostics.Stopwatch]::StartNew()
     $ps.start() | Out-Null
@@ -71,7 +71,7 @@ function StartProcess {
     if ($DoTest.IsPresent) {
         $processTimeOut = $TLETerminateMsec
     }
-    Write-Host $processTimeOut
+    # Write-Host $processTimeOut
     if (!$ps.WaitForExit($processTimeOut) ) { 
         $ps.Kill()
         $ps.WaitForExit()
@@ -83,11 +83,19 @@ function StartProcess {
     }
     else {
         $sw.Stop()
-        $exitCode.Value = $ps.ExitCode        
-        $msg = "$currExecfileName program exited after $($sw.Elapsed) with return value $($exitCode.Value)"
-    }
-    
-    If ($exitCode.Value -eq 0) {
+		$exitCode.Value = $ps.ExitCode
+		$peakPagedMemorySize64 = 0
+		$peakPagedMemorySize64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakPagefileUsage($ps.Handle)
+		$msg = "$currExecfileName program exited after $($sw.Elapsed) with return value $($exitCode.Value)"
+		if ($peakPagedMemorySize64 -gt 0)
+		{
+			# 格式化输出
+			#https://ss64.com/ps/syntax-f-operator.html
+			$msg = $msg + ",Memory:{0,8:n0} KB" -f ($peakPagedMemorySize64/1024)
+		}
+	}
+	
+	If ($exitCode.Value -eq 0) {
         Write-Host $msg -ForegroundColor Green -NoNewLine
     }  
     Else {
@@ -212,7 +220,7 @@ function RunTest ($processExecFileName) {
         }
 
     }
-    Write-Host "测试"
+    # Write-Host "测试"
     $allInputFiles = Get-ChildItem -Path $currPathName | Where-Object {$_.FullName -like "*.in" } 
     
     foreach ($inputFile in $allInputFiles) {
@@ -508,7 +516,7 @@ function BuildCppAndRun($SourceFileName) {
                 $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
                 if($peakPagedMemorySize64 -gt 0)
                 {
-                    $msg= $msg + "Memory Usage: {0:n0} KB." -f ($peakPagedMemorySize64/1024)                    
+                    $msg= $msg + "Memory: {0:n0} KB." -f ($peakPagedMemorySize64/1024)                    
                 }
                 
                 Write-Host
