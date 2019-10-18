@@ -216,7 +216,7 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-DoTest",
                 "-CompilerArgs",
-                "-std=gnu++17 -O2 -lm -lstdc++fs -DONLINE_JUDGE -DCODE_STATISTICS -I ${workspaceFolder}\\include"
+                "-std=gnu++17 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include"
             ],
             "isShellCommand": true,
             "echoCommand": true,
