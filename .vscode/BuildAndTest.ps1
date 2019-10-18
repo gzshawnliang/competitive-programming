@@ -22,6 +22,7 @@
 #  * @更新:     2019-03-23 08:10 编译运行C++/Java文件之后，检测如存在out、ok文件就比较结果
 #  * @更新:     2019-05-04 18:14 增加开关$DevCppMode，可(F10)使用Dev-C++模式弹出窗口，好处是可以在弹出dos窗口进行cin输入
 #  * @更新:     2019-09-19 12:10 增加开关$NotRun (F8)仅编译，不运行编译后的exe程序，适合快速使用编译器进行语法检查
+#  * @更新:     2019-10-18 17:02 使用 GetProcessMemoryInfo 测量程序运行内存，暂时只有CPP生效
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -268,8 +269,77 @@ function StartConsolePauserRun {
     $ps.WaitForExit()
 }
 
+# 使用C#调用GetProcessMemoryInfo ,用来测量程序占用的内存（psapi.dll）Win32 API
+
+Add-Type -TypeDefinition @"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace ProcessMemoryInfo
+{
+    public class ProcessMemoryInfo
+    {
+        [DllImport("KERNEL32.DLL")]
+        private static extern int OpenProcess(uint dwDesiredAccess, int bInheritHandle, uint dwProcessId);
+        [DllImport("KERNEL32.DLL")]
+        private static extern int CloseHandle(int handle);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct PROCESS_MEMORY_COUNTERS
+        {
+            public uint cb;             // The size of the structure, in bytes (DWORD).
+            public uint PageFaultCount;         // The number of page faults (DWORD).
+            public UIntPtr PeakWorkingSetSize;     // The peak working set size, in bytes (SIZE_T).
+            public UIntPtr WorkingSetSize;         // The current working set size, in bytes (SIZE_T).
+            public UIntPtr QuotaPeakPagedPoolUsage;    // The peak paged pool usage, in bytes (SIZE_T).
+            public UIntPtr QuotaPagedPoolUsage;    // The current paged pool usage, in bytes (SIZE_T).
+            public UIntPtr QuotaPeakNonPagedPoolUsage; // The peak nonpaged pool usage, in bytes (SIZE_T).
+            public UIntPtr QuotaNonPagedPoolUsage;     // The current nonpaged pool usage, in bytes (SIZE_T).
+            public UIntPtr PagefileUsage;          // The Commit Charge value in bytes for this process (SIZE_T). Commit Charge is the total amount of memory that the memory manager has committed for a running process.
+            public UIntPtr PeakPagefileUsage;      // The peak value in bytes of the Commit Charge during the lifetime of this process (SIZE_T).
+        }
+
+        [DllImport("psapi.dll")]
+        private static extern bool GetProcessMemoryInfo(IntPtr hProcess, out PROCESS_MEMORY_COUNTERS counters, uint size);
+
+        public static long GetPeakWorkingSetSize(int currentProcessHandle)
+        {
+            return GetPeakWorkingSetSize(new IntPtr(currentProcessHandle));
+        }
+
+        public static long GetPeakWorkingSetSize(IntPtr currentProcessHandle)
+        {
+            PROCESS_MEMORY_COUNTERS pr = new PROCESS_MEMORY_COUNTERS();
+
+            if (GetProcessMemoryInfo(currentProcessHandle, out pr, 1024) == false)
+                return 0;
+
+            return (long)pr.PeakWorkingSetSize.ToUInt64();
+        }
+
+        public static long GetPeakPagefileUsage(int currentProcessHandle)
+        {
+            return GetPeakPagefileUsage(new IntPtr(currentProcessHandle));
+        }
+        public static long GetPeakPagefileUsage(IntPtr currentProcessHandle)
+        {
+            PROCESS_MEMORY_COUNTERS pr = new PROCESS_MEMORY_COUNTERS();
+
+            if (GetProcessMemoryInfo(currentProcessHandle, out pr, 1024) == false)
+                return 0;
+
+            return (long)pr.PeakPagefileUsage.ToUInt64();
+        }
+    }
+}
+"@
+
 # 编译C++并且执行
 function BuildCppAndRun($SourceFileName) {
+
     $SourFile = Get-Item -Path $SourceFileName
 
     #编译器命令行
@@ -398,16 +468,39 @@ function BuildCppAndRun($SourceFileName) {
             else {
                 # 使用powershell call operator (&)解决'std::bad_alloc'问题
                 $sw = [Diagnostics.Stopwatch]::StartNew()
+                
+                # 内存测量，参加
+                # https://docs.microsoft.com/zh-cn/windows/win32/api/psapi/ns-psapi-process_memory_counters
+                # The peak working set size, in bytes.
+                # $memoryPeakWorkingSet64=0       
+                
+                # The peak value in bytes of the Commit Charge during the lifetime of this process.
+                $memoryPeakPagedMemorySize64=0
                 if ($isRedirectStdInOut -eq $true) {
                     Get-Content $currInFile | & $exeFileName > $currOutFile
+                    $sw.Stop()
                 }
                 else {
                     # 使用vscode out 方式运行，不可以进行cin输入
-                    & $exeFileName
+                    # & $exeFileName
+                    
+                    $ps = new-object System.Diagnostics.Process
+                    $ps.StartInfo.Filename = $exeFileName 
+                    $ps.StartInfo.UseShellExecute = $false
+                    
+                    $ps.StartInfo.WorkingDirectory = $ExeFile.DirectoryName
+                    $ps.start() | Out-Null
+                    $ps.WaitForExit()
+                    $LASTEXITCODE=$ps.ExitCode
+                    $sw.Stop()
+                    
+                    # 使用C#调用GetProcessMemoryInfo 
+                    # Write-Host [DoSomeMath]::Addition(5,2)
+                    # [void][reflection.assembly]::LoadFile("$PSScriptRoot\ProcessMemoryInfo.dll")
+                    # $memoryPeakWorkingSet64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakWorkingSetSize($ps.Handle)
+                    $memoryPeakPagedMemorySize64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakPagefileUsage($ps.Handle)
                 }
-                
-                $sw.Stop()
-                $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+                $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). Memory Usage: {0:n0} KB." -f ($memoryPeakPagedMemorySize64/1024)
                 
                 Write-Host
                 if ($LASTEXITCODE -eq 0 ) {
