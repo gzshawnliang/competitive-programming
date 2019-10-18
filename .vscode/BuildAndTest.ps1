@@ -23,13 +23,14 @@
 #  * @更新:     2019-05-04 18:14 增加开关$DevCppMode，可(F10)使用Dev-C++模式弹出窗口，好处是可以在弹出dos窗口进行cin输入
 #  * @更新:     2019-09-19 12:10 增加开关$NotRun (F8)仅编译，不运行编译后的exe程序，适合快速使用编译器进行语法检查
 #  * @更新:     2019-10-18 17:02 使用 GetProcessMemoryInfo 测量程序运行内存，暂时只有CPP生效
+#  * @更新:     2019-10-18 19:26 取消ctl+f11重新定向到功能，大型input文件非常慢，不好测量程序运行时间
 # ***********************************************************/
 [CmdletBinding()]
 param(
     [String] $SourceFileName = $(throw "Source File Name is required."),
     [switch] $ShowShellConsole,
     [switch] $DoTest,
-    [switch] $RedirectStdInOut,
+    # [switch] $RedirectStdInOut,
     [switch] $DevCppMode,
     [switch] $NotRun,
     [String] $CompilerArgs,
@@ -48,7 +49,7 @@ function StartProcess {
         [ref]$exitCode
     )
 
-    # Write-Host $processExecFileName
+    Write-Host $processExecFileName
     $currExecfileName = [System.IO.Path]::GetFileName($processExecFileName)
     $currExecfile = Get-Item -Path $processExecFileName
 
@@ -61,6 +62,8 @@ function StartProcess {
         $ps.StartInfo.UseShellExecute = $false
     }
     $ps.StartInfo.WorkingDirectory = $currExecfile.DirectoryName
+    Write-Host $currExecfile.DirectoryName
+    
     $sw = [Diagnostics.Stopwatch]::StartNew()
     $ps.start() | Out-Null
     # $ps.WaitForExit()
@@ -68,7 +71,7 @@ function StartProcess {
     if ($DoTest.IsPresent) {
         $processTimeOut = $TLETerminateMsec
     }
-
+    Write-Host $processTimeOut
     if (!$ps.WaitForExit($processTimeOut) ) { 
         $ps.Kill()
         $ps.WaitForExit()
@@ -209,7 +212,7 @@ function RunTest ($processExecFileName) {
         }
 
     }
-    # Write-Host "测试"
+    Write-Host "测试"
     $allInputFiles = Get-ChildItem -Path $currPathName | Where-Object {$_.FullName -like "*.in" } 
     
     foreach ($inputFile in $allInputFiles) {
@@ -419,38 +422,41 @@ function BuildCppAndRun($SourceFileName) {
         }
         else {
             $currInFile = $ExeFile.DirectoryName + "\" + $ExeFile.BaseName + ".in" 
-            $isRedirectStdInOut = $false
-            #检测in文件，规则：
-            #1）c++文件移除拓展名cpp.in
-            #2）c++文件移除拓展名移除OJ后缀.in
-            #3）Input.in
-            #4）Input.txt
-            #5）input.in
-            #6）input.txt
-            #out文件=in文件名移除拓展名.out
-            $inputFileArray = @(($ExeFile.BaseName + ".in").ToString(), ($ExeFile.BaseName.Trim("OJ") + ".in").ToString() , "Input.in", "Input.txt", "input.in", "input.txt");
+            # $isRedirectStdInOut = $false
+            # #检测in文件，规则：
+            # #1）c++文件移除拓展名cpp.in
+            # #2）c++文件移除拓展名移除OJ后缀.in
+            # #3）Input.in
+            # #4）Input.txt
+            # #5）input.in
+            # #6）input.txt
+            # #out文件=in文件名移除拓展名.out
+            # $inputFileArray = @(($ExeFile.BaseName + ".in").ToString(), ($ExeFile.BaseName.Trim("OJ") + ".in").ToString() , "Input.in", "Input.txt", "input.in", "input.txt");
 
-            foreach ($n in $inputFileArray) {
-                if (Test-Path ($ExeFile.DirectoryName + "\" + $n)) {
-                    # Write-Host($n + ":OK")
-                    $currInFile = $ExeFile.DirectoryName + "\" + $n
-                    # Write-Host($currInFile)
-                    break
-                }
-                else {
-                    # Write-Host($n + ":Not OK")
-                } 
-            }
-            $currOutFile = ""
-            if ($RedirectStdInOut.IsPresent -and (Test-Path $currInFile)) {
-                $isRedirectStdInOut = $true
-                $inFileObj = Get-Item -Path $currInFile
-                $currOutFile = $inFileObj.DirectoryName + "\" + $inFileObj.BaseName + ".out"
-                Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension) redirecting $($inFileObj.BaseName).in and $($inFileObj.BaseName).out into Stdin and Stdout"
-            }
-            else {
-                Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
-            }
+            # foreach ($n in $inputFileArray) {
+            #     if (Test-Path ($ExeFile.DirectoryName + "\" + $n)) {
+            #         # Write-Host($n + ":OK")
+            #         $currInFile = $ExeFile.DirectoryName + "\" + $n
+            #         # Write-Host($currInFile)
+            #         break
+            #     }
+            #     else {
+            #         # Write-Host($n + ":Not OK")
+            #     } 
+            # }
+            # $currOutFile = ""
+
+            # if ($RedirectStdInOut.IsPresent -and (Test-Path $currInFile)) {
+            #     $isRedirectStdInOut = $true
+            #     $inFileObj = Get-Item -Path $currInFile
+            #     $currOutFile = $inFileObj.DirectoryName + "\" + $inFileObj.BaseName + ".out"
+            #     Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension) redirecting $($inFileObj.BaseName).in and $($inFileObj.BaseName).out into Stdin and Stdout"
+            # }
+            # else {
+            #     Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
+            # }
+
+            Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
             
             New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
@@ -466,41 +472,44 @@ function BuildCppAndRun($SourceFileName) {
                 Write-Host "$($ExeFile.BaseName + $ExeFile.Extension) closed." 
             }
             else {
-                # 使用powershell call operator (&)解决'std::bad_alloc'问题
-                $sw = [Diagnostics.Stopwatch]::StartNew()
                 
-                # 内存测量，参加
+                # $sw = [Diagnostics.Stopwatch]::StartNew()
+                
+                # 内存测量，参考
                 # https://docs.microsoft.com/zh-cn/windows/win32/api/psapi/ns-psapi-process_memory_counters
                 # The peak working set size, in bytes.
                 # $memoryPeakWorkingSet64=0       
                 
                 # The peak value in bytes of the Commit Charge during the lifetime of this process.
-                $memoryPeakPagedMemorySize64=0
-                if ($isRedirectStdInOut -eq $true) {
-                    Get-Content $currInFile | & $exeFileName > $currOutFile
-                    $sw.Stop()
+                $peakPagedMemorySize64=0
+
+                # 使用powershell call operator (&)解决'std::bad_alloc'问题
+                # & $exeFileName
+                
+                $ps = new-object System.Diagnostics.Process
+                $ps.StartInfo.Filename = $exeFileName 
+                $ps.StartInfo.UseShellExecute = $false
+                $ps.StartInfo.WorkingDirectory = $ExeFile.DirectoryName
+
+                # 开始计时
+                $sw = [Diagnostics.Stopwatch]::StartNew()
+
+                $ps.start() | Out-Null
+                $ps.WaitForExit()
+                $LASTEXITCODE=$ps.ExitCode
+                $sw.Stop()
+                
+                # 使用C#调用GetProcessMemoryInfo 
+                # [void][reflection.assembly]::LoadFile("$PSScriptRoot\ProcessMemoryInfo.dll")
+                # $memoryPeakWorkingSet64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakWorkingSetSize($ps.Handle)
+                $peakPagedMemorySize64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakPagefileUsage($ps.Handle)
+
+
+                $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
+                if($peakPagedMemorySize64 -gt 0)
+                {
+                    $msg= $msg + "Memory Usage: {0:n0} KB." -f ($peakPagedMemorySize64/1024)                    
                 }
-                else {
-                    # 使用vscode out 方式运行，不可以进行cin输入
-                    # & $exeFileName
-                    
-                    $ps = new-object System.Diagnostics.Process
-                    $ps.StartInfo.Filename = $exeFileName 
-                    $ps.StartInfo.UseShellExecute = $false
-                    
-                    $ps.StartInfo.WorkingDirectory = $ExeFile.DirectoryName
-                    $ps.start() | Out-Null
-                    $ps.WaitForExit()
-                    $LASTEXITCODE=$ps.ExitCode
-                    $sw.Stop()
-                    
-                    # 使用C#调用GetProcessMemoryInfo 
-                    # Write-Host [DoSomeMath]::Addition(5,2)
-                    # [void][reflection.assembly]::LoadFile("$PSScriptRoot\ProcessMemoryInfo.dll")
-                    # $memoryPeakWorkingSet64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakWorkingSetSize($ps.Handle)
-                    $memoryPeakPagedMemorySize64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakPagefileUsage($ps.Handle)
-                }
-                $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). Memory Usage: {0:n0} KB." -f ($memoryPeakPagedMemorySize64/1024)
                 
                 Write-Host
                 if ($LASTEXITCODE -eq 0 ) {
@@ -615,6 +624,7 @@ function BuildJavaAndRun($SourceFileName) {
 
 # [Threading.Thread]::CurrentThread.CurrentCulture = 'en-US'
 # [cultureinfo]::CurrentCulture = 'en-US'
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 #主程序，编译C++/Java并且执行
 if (Test-Path $SourceFileName) {

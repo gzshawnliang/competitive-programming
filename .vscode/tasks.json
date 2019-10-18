@@ -163,7 +163,6 @@
                 "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
-                "-RedirectStdInOut",
                 "-CompilerArgs",
                 "\"-std=gnu++17 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
                 "-WorkspaceFolder",
