@@ -23,7 +23,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "goodSubstrings_CF154C"; //*
+const string CPPfile = "goodSubstrings_CF271D"; //*
 //***************************************
 
 ifstream fin;

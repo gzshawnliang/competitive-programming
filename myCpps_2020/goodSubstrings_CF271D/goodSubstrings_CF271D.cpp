@@ -2,6 +2,8 @@
 
 using namespace std;
 
+ifstream fin("goodSubstrings_CF271D.in");
+ofstream fout("goodSubstrings_CF271D.out");
 
 using ull = unsigned long long;
 
@@ -9,21 +11,20 @@ const ull P = 10007;
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	std::cin.tie(NULL);
-    string s; cin >> s;
+    string s; fin >> s;
 
-    string temp; cin >> temp;
+    string temp; fin >> temp;
     vector<int> isGood(256, 0);
     for (int i = 0; i <= 26 - 1; ++i)
     {
         isGood['a' + i] = temp[i] - '0';
     }
 
-    int k; cin >> k;
+    int k; fin >> k;
 
     int n = s.size();
-    set<ull> sset;
+    //set<ull> sset;
+    unordered_set <ull> sset;
     for (int i = 0; i <= n - 1; ++i)
     {
         int count = 0;
@@ -39,9 +40,7 @@ int main()
         }
     }
 
-    cout << sset.size() << '\n';
+    fout << sset.size() << '\n';
 
-   	cout.flush();
-   	return 0;
+    return 0;
 }
-
