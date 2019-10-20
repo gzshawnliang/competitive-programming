@@ -23,7 +23,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "caesarCipher_UVA12604"; //*
+const string CPPfile = "goodSubstrings_CF271D"; //*
 //***************************************
 
 ifstream fin;
