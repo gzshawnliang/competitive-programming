@@ -23,7 +23,7 @@ int main()
     int k; cin >> k;
 
     int n = s.size();
-    unordered_set <ull> sset;
+    set<ull> sset;
     for (int i = 0; i <= n - 1; ++i)
     {
         int count = 0;
