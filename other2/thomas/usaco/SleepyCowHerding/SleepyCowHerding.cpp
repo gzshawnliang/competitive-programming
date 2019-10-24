@@ -33,6 +33,7 @@ int main(void)
     vector<int> A(N + 1);
     for (int i = 1; i <= N; ++i)
         fin >> A[i];
+    
     sort(A.begin() + 1, A.end());
 
     int answer_min = getMin(A);
