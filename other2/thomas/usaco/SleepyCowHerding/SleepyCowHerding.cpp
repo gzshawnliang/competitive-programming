@@ -15,6 +15,7 @@ int getMin(const vector<int> & A)
         return 2;
     if (A[N] - A[2] == N - 2 && A[2] - A[1] > 2)
         return 2;
+
     int r = 1, ans = N;
     for (int l = 1; l <= N; ++l)
     {
