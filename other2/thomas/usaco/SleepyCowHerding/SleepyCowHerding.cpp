@@ -19,14 +19,14 @@ int getMin(const vector<int> & A)
     int r = 1, ans = N;
     for (int l = 1; l <= N; ++l)
     {
-        while (r < N && A[r + 1] - A[l] <= N - 1)
+        while (r < N && A[r + 1] - A[l] +1 <= N)
             ++r;
         ans = min(ans, N - (r - l + 1));
     }
     return ans;
 }
 
-int main(void)
+int main()
 {
     int N;
     fin >> N;
