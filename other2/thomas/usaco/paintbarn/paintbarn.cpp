@@ -14,7 +14,7 @@ int main()
     {
         int a, b, c, d;
         cin >> a >> b >> c >> d;
-        for (int i = a; i <= c-1; ++i)
+        for (int i = a; i <= c - 1; ++i)
         {
             dp[i][b]++;
             dp[i][d]--;
