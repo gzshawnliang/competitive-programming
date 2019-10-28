@@ -16,10 +16,8 @@ int main()
         cin >> x1 >> y1 >> x2 >> y2;
         for (int i = x1; i <= x2 - 1; ++i)
         {
-            for (int j = y1; j <= y2 - 1; ++j)
-            {
-                ++dp[i][j];
-            }
+            ++dp[i][y1];
+            --dp[i][y2];
         }
     }
     int ans = 0;
@@ -29,6 +27,8 @@ int main()
         {
             if (dp[i][j] == k)
                 ++ans;
+            
+            dp[i][j+1] +=dp[i][j];
         }
     }
     cout << ans << endl;
