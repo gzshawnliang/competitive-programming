@@ -3,7 +3,6 @@
 using namespace std;
 
 using ull = unsigned long long;
-using ll = unsigned long long;
 const ull R1 = 999853; //质数
 const ull R2 = 708989; //质数
 
