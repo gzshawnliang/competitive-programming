@@ -24,16 +24,24 @@ int main()
     }
 
     int ans = 0;
-    //map<int,int> ans2;
+    map<int,int> ans2;
     for (int i = minX; i <= maxX +1; ++i)
     {
+            //cout << a[i] << "\n";
+            ++ans2[a[i]];
             if (a[i] == k)
                 ++ans;
             
             a[i+1] +=a[i];
-
-        
     }
+    // for(auto it=ans2.begin();it!=ans2.end();++it)
+    // {
+    //     if(it->second >1)
+    //     {
+    //         cout << it->first << ":" << it->second << "\n";
+    //     }
+    // }
+
     cout << ans << endl;
     
 }
