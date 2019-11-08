@@ -7,6 +7,28 @@
  * @修改时间：   2019-11-03 20:10:40 
  * @备注：      哈希算法，需要大质数，根据变换之后的字符反推哈希值,注意需
  *             要模运算，否则unsigned long long都会溢出
+ *             模运算规则 
+
+运算规则
+模运算与基本四则运算有些相似，但是除法例外。其规则如下：
+(1)     (a + b) % p = (a % p + b % p) % p 
+(2)     (a - b) % p = (a % p - b % p) % p 
+(3)     (a * b) % p = (a % p * b % p) % p 
+(4)     (a ^ b) % p = ((a % p)^b) % p 
+结合律：
+(5）    ((a+b) % p + c) % p = (a + (b+c) % p) % p 
+(6）    ((a*b) % p * c)% p = (a * (b*c) % p) % p 
+交换律：
+(7)     (a + b) % p = (b+a) % p 
+(8)     (a * b) % p = (b * a) % p
+分配律：
+(9)     ((a +b)% p * c) % p = ((a * c) % p + (b * c) % p) % p
+重要定理
+(10)    若a≡b (% p)，则对于任意的c，都有(a + c) ≡ (b + c) (%p)；
+(11)    若a≡b (% p)，则对于任意的c，都有(a * c) ≡ (b * c) (%p)；
+(12)    若a≡b (% p)，c≡d (% p)，则 (a + c) ≡ (b + d) (%p)，(a - c) ≡ (b - d) ，
+        (a * c) ≡ (b * d) (%p)，(a / c) ≡ (b / d) (%p)；
+ * 
  * @题目来源：   https://codeforces.com/problemset/problem/514/C
 ===========================================================
 */
@@ -22,14 +44,12 @@ const ull PRIME = 100000000743856857ull;
 
 ull hashCode(const string & s)
 {
-
-
     // for (int i = 0; i <= len - 1; ++i)
     // {
     //     //hashValue = R1 * hashValue + (s[i] - 'a'+1);
     //     hashValue = (R1 * hashValue + (s[i] - 'a' + 1)) % PRIME;
     // }
-    
+
     int len = s.length();
     ull hashValue = 0;
     for (int i = 0; i <= len - 1; ++i)
