@@ -54,10 +54,9 @@ int main()
         int len = w.length();
         ull hashValue1 = 0;
         for (int i = 0; i <= len - 1; ++i)
-        {
             //计算哈希                      转成小写
             hashValue1 = R1 * hashValue1 + tolower(w[i]);
-        }
+        
         wordHashMap[hashValue1] = w;
     }
 
@@ -65,11 +64,11 @@ int main()
     // vector<ll> dpHash(n + 1, -1);
 
     //dpHash[i]表示从截止到第i个字符为止的单词是什么，这个数组存单词，查看CF_633C_SpySyndrome2.xlsx
-    vector<string> dpString(n + 1, "-1");
+    vector<string> dpString(n + 1, "");
 
     int i = 0;
     //dpHash[0] = 0;
-    dpString[0] = "";
+    dpString[0] = "-1";
     while (i <= n - 1)
     {
         ull hashValue1 = 0;
@@ -77,11 +76,12 @@ int main()
         {
             hashValue1 = R1 * hashValue1 + t[j]; //反向计算j-i字符的哈希
 
-            //dpHash[j]!=-1表示这个单词前面已经有了单词了，保证不间断，wordHashMap.count(hashValue1)确保有这个单词
-            if (dpString[j] != "-1" && wordHashMap.count(hashValue1) == 1)
+            //dpHash[j].empty() == false表示这个单词前面已经有了单词了，保证不间断
+            //                                  wordHashMap.count(hashValue1)确保有这个单词
+            if (dpString[j].empty() == false && wordHashMap.count(hashValue1) == 1)
             {
-                //dpHash[i + 1] = hashValue1;
-                dpString[i + 1] = wordHashMap[hashValue1];
+                //dpString[i + 1] = wordHashMap[hashValue1];
+                dpString[i+1] = wordHashMap[hashValue1];
                 break;
             }
         }
@@ -96,13 +96,9 @@ int main()
         ans.push_back(w);
         i -= w.size();
     }
-    for (auto it = ans.rbegin(); it < ans.rend(); ++it)
-    {
-        cout << *it;
 
-        if (it != ans.rend() - 1)
-            cout << " ";
-    }
+    for (auto it = ans.rbegin(); it < ans.rend(); ++it)
+        cout << *it << " ";
 
     //递归输出
     //print(n,wordHashMap,dpHash);
