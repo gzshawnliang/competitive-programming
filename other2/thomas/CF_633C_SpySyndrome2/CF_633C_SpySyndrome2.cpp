@@ -1,19 +1,21 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-using ull=unsigned long long;
+using ll = long long;
+using ull = unsigned long long;
 
-const ull R1 = 3;                       //质数
-const ull PRIME = 100000000743856857ull; 
+const ull R1 = 131; //质数
 
-ull hashCode(const string & s)
+void print(int len, unordered_map<ull, string> & wordHashMap, const vector<ll> & dp)
 {
-    int len = s.length();
-    ull hashValue = 0;
-    for (int i = 0; i <= len - 1; ++i)
-        hashValue = (R1 * hashValue + (s[i] - 'a' + 1)) % PRIME;
+    if (len == 0)
+        return;
 
-    return hashValue;
+    ull currHash = dp[len];
+    int len2 = len - wordHashMap[currHash].size();
+    print(len2, wordHashMap, dp);
+
+    cout << wordHashMap[currHash] << " ";
 }
 
 int main()
@@ -24,59 +26,67 @@ int main()
     #endif
 
     int n;
-    cin >>n;
+    cin >> n;
 
     string t;
     cin >> t;
-    reverse(t.begin(),t.end());
-    
+
     int m;
-    cin>>m;
-    unordered_map<ull,string> wordHashMap;
+    cin >> m;
+    unordered_map<ull, string> wordHashMap;
 
-
-    vector<string> ans;
     for (int i = 0; i <= m - 1; ++i)
     {
         string w;
         cin >> w;
-        string w2=w;
-        transform(w2.begin(), w2.end(), w2.begin(), ::tolower);
-        wordHashMap[hashCode(w2)]=w;
-        
+        int len = w.length();
+        ull hashValue1 = 0;
+        for (int i = 0; i <= len - 1; ++i)
+        {
+            //计算哈希                      转成小写
+            hashValue1 = R1 * hashValue1 + tolower(w[i]);
+        }
+        wordHashMap[hashValue1] = w;
     }
 
+    vector<ll> dp(n + 1, -1); //dp[i]表示从第i个字符
+
     int i = 0;
+    dp[0] = 0;
     while (i <= n - 1)
     {
-        ull hashValue = 0;
-        bool found=false;
-        for (int j = i; j <= n - 1; ++j)
+        ull hashValue1 = 0;
+        for (int j = i; j >= 0; --j) //反向查找
         {
-            hashValue = (R1 * hashValue + (t[j] - 'a' + 1)) % PRIME;        
-            if(j!=i && wordHashMap.count(hashValue)==1)
+            hashValue1 = R1 * hashValue1 + t[j]; //反向计算j-i字符的哈希
+
+            if (dp[j] != -1 && wordHashMap.count(hashValue1) == 1)
             {
-                ans.push_back(wordHashMap[hashValue]);
-                i=j+1;
-                found=true;
+                dp[i + 1] = hashValue1;
                 break;
             }
         }
-        if(!found)
-            ++i;
-    }
-    
-    reverse(ans.begin(),ans.end());
-    i=0;
-    for(auto a:ans)
-    {
-        if(i==0)
-            cout << a;
-        else 
-            cout << " " << a;            
         ++i;
     }
-        
+
+    i = n;
+    vector<string> ans;
+    while (i > 0)
+    {
+        string w = wordHashMap[dp[i]];
+        ans.push_back(w);
+        i -= w.size();
+    }
+    for (auto it = ans.rbegin(); it < ans.rend(); ++it)
+    {
+        cout << *it;
+
+        if (it != ans.rend()-1 )
+            cout << " ";
+    }
+
+    //递归输出
+    //print(n,wordHashMap,dp);
 
     return 0;
 }
