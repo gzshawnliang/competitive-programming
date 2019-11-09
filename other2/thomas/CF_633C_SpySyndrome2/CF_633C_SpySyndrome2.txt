@@ -16,3 +16,8 @@ e
 er
 ear
 
+3
+aab
+2
+aa
+baa

@@ -9,6 +9,7 @@
  * @题目来源： https://codeforces.com/contest/633/problem/C
 ===========================================================
 */
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -60,10 +61,12 @@ int main()
         wordHashMap[hashValue1] = w;
     }
 
-    vector<ll> dp(n + 1, -1); //dp[i]表示从第i个字符
+    vector<ll> dpHash(n + 1, -1); //dpHash[i]表示从截止到第i个字符为止的单词是什么，这个数组存储哈希值
+    vector<string> dpString(n + 1); //dpHash[i]表示从截止到第i个字符为止的单词是什么，这个数组存单词
 
     int i = 0;
-    dp[0] = 0;
+    dpHash[0] = 0;
+    dpString[0] = "";
     while (i <= n - 1)
     {
         ull hashValue1 = 0;
@@ -71,9 +74,11 @@ int main()
         {
             hashValue1 = R1 * hashValue1 + t[j]; //反向计算j-i字符的哈希
 
-            if (dp[j] != -1 && wordHashMap.count(hashValue1) == 1)
+            //dpHash[j]!=-1表示这个单词前面已经有了单词了，保证不间断，wordHashMap.count(hashValue1)确保有这个单词
+            if (dpHash[j] != -1 && wordHashMap.count(hashValue1) == 1)
             {
-                dp[i + 1] = hashValue1;
+                dpHash[i + 1] = hashValue1;
+                dpString[i + 1]=wordHashMap[hashValue1];
                 break;
             }
         }
@@ -84,7 +89,7 @@ int main()
     vector<string> ans;
     while (i > 0)
     {
-        string w = wordHashMap[dp[i]];
+        string w = dpString[i];
         ans.push_back(w);
         i -= w.size();
     }
@@ -97,7 +102,7 @@ int main()
     }
 
     //递归输出
-    //print(n,wordHashMap,dp);
+    //print(n,wordHashMap,dpHash);
 
     return 0;
 }
