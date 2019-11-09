@@ -29,7 +29,7 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-lpsapi",
                 "-lstdc++fs",
-                "-std=gnu++17",
+                "-std=gnu++11",
                 "-DDEBUG",
                 "-I",
                 "${workspaceFolder}\\include"
@@ -62,7 +62,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -NotRun -CompilerArgs '-std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -NotRun -CompilerArgs '-std=gnu++11 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "problemMatcher": {
                 "owner": "cpp",
@@ -114,7 +114,7 @@
                 "-SourceFileName",
                 "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
                 "-CompilerArgs",
-                "\"-std=gnu++17 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
+                "\"-std=gnu++11 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
                 "-WorkspaceFolder",
                 "\"${workspaceFolder}\""
             ],
@@ -133,7 +133,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++11 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "echoCommand": true,
@@ -146,7 +146,7 @@
             "command": "powershell",
             "args": [
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++17 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++11 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "echoCommand": true,
@@ -164,7 +164,7 @@
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-CompilerArgs",
-                "\"-std=gnu++17 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
+                "\"-std=gnu++11 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
                 "-WorkspaceFolder",
                 "\"${workspaceFolder}\""
             ],
@@ -216,7 +216,7 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-DoTest",
                 "-CompilerArgs",
-                "-std=gnu++17 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include"
+                "-std=gnu++11 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include"
             ],
             "isShellCommand": true,
             "echoCommand": true,
