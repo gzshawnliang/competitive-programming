@@ -32,10 +32,10 @@ void print(int len, unordered_map<ull, string> & wordHashMap, const vector<ll> &
 
 int main()
 {
-    #ifndef ONLINE_JUDGE
-        freopen("CF_633C_SpySyndrome2.in", "r", stdin);
-        //freopen("CF_182D_CommonDivisors.out", "w", stdout);
-    #endif
+#ifndef ONLINE_JUDGE
+    freopen("CF_633C_SpySyndrome2.in", "r", stdin);
+    //freopen("CF_182D_CommonDivisors.out", "w", stdout);
+#endif
 
     int n;
     cin >> n;
@@ -61,11 +61,14 @@ int main()
         wordHashMap[hashValue1] = w;
     }
 
-    vector<ll> dpHash(n + 1, -1); //dpHash[i]表示从截止到第i个字符为止的单词是什么，这个数组存储哈希值
-    vector<string> dpString(n + 1); //dpHash[i]表示从截止到第i个字符为止的单词是什么，这个数组存单词
+    // //dpHash[i]表示从截止到第i个字符为止的单词是什么，这个数组存储哈希值,查看CF_633C_SpySyndrome2.xlsx
+    // vector<ll> dpHash(n + 1, -1);
+
+    //dpHash[i]表示从截止到第i个字符为止的单词是什么，这个数组存单词，查看CF_633C_SpySyndrome2.xlsx
+    vector<string> dpString(n + 1, "-1");
 
     int i = 0;
-    dpHash[0] = 0;
+    //dpHash[0] = 0;
     dpString[0] = "";
     while (i <= n - 1)
     {
@@ -75,10 +78,10 @@ int main()
             hashValue1 = R1 * hashValue1 + t[j]; //反向计算j-i字符的哈希
 
             //dpHash[j]!=-1表示这个单词前面已经有了单词了，保证不间断，wordHashMap.count(hashValue1)确保有这个单词
-            if (dpHash[j] != -1 && wordHashMap.count(hashValue1) == 1)
+            if (dpString[j] != "-1" && wordHashMap.count(hashValue1) == 1)
             {
-                dpHash[i + 1] = hashValue1;
-                dpString[i + 1]=wordHashMap[hashValue1];
+                //dpHash[i + 1] = hashValue1;
+                dpString[i + 1] = wordHashMap[hashValue1];
                 break;
             }
         }
@@ -97,7 +100,7 @@ int main()
     {
         cout << *it;
 
-        if (it != ans.rend()-1 )
+        if (it != ans.rend() - 1)
             cout << " ";
     }
 
