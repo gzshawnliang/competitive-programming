@@ -4,18 +4,8 @@ using namespace std;
 
 using ull = long long;
 
-int main()
+void solve()
 {
-    ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
-    std::cout.tie(NULL);
-
-#ifndef ONLINE_JUDGE
-    freopen("CF_82B_Sets.in", "r", stdin);
-    //freopen("CF_82B_Sets.out", "w", stdout);
-#endif
-
-    //code here
     ull n;
     cin >> n;
     ull lines = n * (n - 1) / 2;
@@ -53,12 +43,11 @@ int main()
         for (int j = 0; j <= lines - 1; ++j)
             for (auto it : sets[j])
                 locations[it].insert(j);
-            
-        
+
         map<set<ull>, set<ull>> ans;
         for (auto it : locations)
             ans[it.second].insert(it.first);
-            
+
         for (auto it : ans)
         {
             cout << it.second.size() << " ";
@@ -69,6 +58,19 @@ int main()
         }
         //cerr << "o";
     }
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    std::cout.tie(NULL);
+
+#ifndef ONLINE_JUDGE
+    freopen("CF_82B_Sets.in", "r", stdin);
+    //freopen("CF_82B_Sets.out", "w", stdout);
+#endif
+    solve();
 
     cout.flush();
     return 0;
