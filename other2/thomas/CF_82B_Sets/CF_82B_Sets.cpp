@@ -70,6 +70,7 @@ int main()
     freopen("CF_82B_Sets.in", "r", stdin);
     //freopen("CF_82B_Sets.out", "w", stdout);
 #endif
+
     solve();
 
     cout.flush();
