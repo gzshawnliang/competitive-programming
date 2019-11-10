@@ -85,6 +85,7 @@ unsigned long long hashCode5(const string & x)
     return hash ;
 }
 
+
 int main()
 {
     // cout << hashCode(13) << '\n';
@@ -116,17 +117,17 @@ int main()
     // cout << hashCode4("a",1009) << '\n';
     // cout << hashCode4("b",1009) << '\n';
     // cout << hashCode4("ab",1009) << '\n';
-    cout << hashCode5("zAa") << '\n';
-    cout << hashCode5("zBB") << '\n';
+    cout << hashCode5("Aa") << '\n';
+    cout << hashCode5("BB") << '\n';
     cout << "----------------" << "\n";
 
-    string s = "skdfghdhgkfdrhweg;lkdfasdfhuiewr";
-    int n = s.length();
-    for (int i = 0; i <= n - 1; ++i)
-    {
-        cout << s[i] << '\n';
-    }
-    ++n;
+    // string s = "skdfghdhgkfdrhweg;lkdfasdfhuiewr";
+    // int n = s.length();
+    // for (int i = 0; i <= n - 1; ++i)
+    // {
+    //     cout << s[i] << '\n';
+    // }
+    // ++n;
 
     return 0;
 }
