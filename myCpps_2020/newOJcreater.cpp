@@ -23,7 +23,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "subsequence_UVA1121"; //*
+const string CPPfile = "wattoAndMechanism_CF514C"; //*
 //***************************************
 
 ifstream fin;
