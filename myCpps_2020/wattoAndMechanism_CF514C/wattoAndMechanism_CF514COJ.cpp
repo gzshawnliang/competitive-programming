@@ -78,7 +78,7 @@ int main()
 
             // base *= k;
             // base %= mod;
-            base =(base *k) % mod;
+            base = (base * k) % mod;
         }
 
         if (flag == true)
