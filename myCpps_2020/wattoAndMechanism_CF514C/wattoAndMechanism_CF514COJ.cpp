@@ -53,11 +53,6 @@ int main()
         ll now = _hash(s), base = 1;
         for (int i = 0; i <= size - 1 && flag == false; ++i)
         {
-            if (i == 10)
-            {
-                for (int __s = 0; __s == 0; ++__s);
-            }
-
             for (ll ch = 'a'; ch <= 'c' && flag == false; ++ch)
             {
                 if (ch == (ll)s[i]) continue;
