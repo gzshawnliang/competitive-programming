@@ -217,7 +217,42 @@ namespace CFHelperUI
                 else
                     txtWorkingDir.Text = GetApplicationRoot();
 
-            
+            GetWindowsState();
+        }
+
+        private void GetWindowsState()
+        {
+            string sHeight = RegRead("Form.Height");
+            string sWidth = RegRead("Form.Width");
+            string sWindowState = RegRead("Form.WindowState");
+            if (sWindowState == "2")
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else if (!string.IsNullOrEmpty(sHeight) && !string.IsNullOrEmpty(sWidth))
+            {
+                if (int.TryParse(sHeight, out int iHeight) && int.TryParse(sWidth, out int iWidth))
+                {
+                    if (iHeight > 480 && iHeight <= Screen.PrimaryScreen.WorkingArea.Height && iWidth > 640 && iWidth <= Screen.PrimaryScreen.WorkingArea.Width)
+                    {
+                        this.Size = new Size(iWidth, iHeight);
+
+                        //居中
+                        this.Left = Screen.PrimaryScreen.WorkingArea.Width / 2 - iWidth / 2;
+                        this.Top = Screen.PrimaryScreen.WorkingArea.Height / 2 - iHeight / 2;
+                    }
+                }
+            }
+        }
+
+        private void SaveWindowsState()
+        {
+            RegWrite("Form.Height", this.Size.Height.ToString());
+            RegWrite("Form.Width", this.Size.Width.ToString());
+            if (this.WindowState == FormWindowState.Maximized)
+                RegWrite("Form.WindowState", "2");
+            else
+                RegWrite("Form.WindowState", "0");
         }
 
         private void txtProblemId_KeyDown(object sender, KeyEventArgs e)
@@ -237,11 +272,6 @@ namespace CFHelperUI
             if(Directory.Exists(Application.StartupPath+"\\..\\.."))
                 return new DirectoryInfo(Application.StartupPath + "\\..\\..").FullName;
             return Application.StartupPath;
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void butOK_Click(object sender, EventArgs e)
@@ -400,6 +430,11 @@ namespace CFHelperUI
                 string url = $"https://codeforces.com/problemset/problem/{this.contestId}/{id}";
                 System.Diagnostics.Process.Start(url);
             }
+        }
+
+        private void frmCFHelper_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveWindowsState();
         }
     }
 }

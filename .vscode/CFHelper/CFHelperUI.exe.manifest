@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CFHelperUI.exe" size="24496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CFHelperUI.exe" size="51632">
       <assemblyIdentity name="CFHelperUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IF35xq+LnhhNfukzyrS4TF/qi9czP/BVsH7vvcz9J9A=</dsig:DigestValue>
+        <dsig:DigestValue>vSLM3Dm9g6mizP+vfRwjU8jDpNljUsTvCi5R/mt29P8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -65,6 +65,15 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="App.ico" size="24550">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ZKXPP0ydikc44J1VaP0leT8d9izLBZ8O+FGTiR/9dYg=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="CFHelperUI.exe.config" size="161">
     <hash>
       <dsig:Transforms>

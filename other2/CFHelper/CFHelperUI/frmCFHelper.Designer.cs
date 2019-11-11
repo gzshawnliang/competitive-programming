@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCFHelper));
             this.txtProblemId = new System.Windows.Forms.TextBox();
             this.butGo = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -44,6 +45,8 @@
             // 
             // txtProblemId
             // 
+            this.txtProblemId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtProblemId.Location = new System.Drawing.Point(133, 38);
             this.txtProblemId.Margin = new System.Windows.Forms.Padding(4);
             this.txtProblemId.Name = "txtProblemId";
@@ -54,6 +57,7 @@
             // 
             // butGo
             // 
+            this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.butGo.Location = new System.Drawing.Point(517, 37);
             this.butGo.Margin = new System.Windows.Forms.Padding(4);
@@ -67,6 +71,9 @@
             // listView1
             // 
             this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.CheckBoxes = true;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
@@ -84,6 +91,7 @@
             // 
             // butOK
             // 
+            this.butOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butOK.Location = new System.Drawing.Point(409, 399);
             this.butOK.Margin = new System.Windows.Forms.Padding(4);
             this.butOK.Name = "butOK";
@@ -95,6 +103,7 @@
             // 
             // butCancel
             // 
+            this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.butCancel.Location = new System.Drawing.Point(517, 399);
             this.butCancel.Margin = new System.Windows.Forms.Padding(4);
@@ -142,6 +151,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Location = new System.Drawing.Point(16, 341);
@@ -153,6 +163,8 @@
             // 
             // txtWorkingDir
             // 
+            this.txtWorkingDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWorkingDir.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtWorkingDir.ForeColor = System.Drawing.Color.Maroon;
             this.txtWorkingDir.Location = new System.Drawing.Point(133, 341);
@@ -164,6 +176,7 @@
             // 
             // butBrowse
             // 
+            this.butBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butBrowse.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.butBrowse.Location = new System.Drawing.Point(517, 337);
             this.butBrowse.Margin = new System.Windows.Forms.Padding(4);
@@ -192,13 +205,12 @@
             this.Controls.Add(this.butGo);
             this.Controls.Add(this.txtProblemId);
             this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frmCFHelper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CFHelper";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCFHelper_FormClosed);
             this.Load += new System.EventHandler(this.frmCFHelper_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
