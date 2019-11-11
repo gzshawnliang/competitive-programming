@@ -158,6 +158,10 @@ namespace CFHelperUI
                 //CreateDirAndCppFile($"{currDir}\\{pathName}", $"{pathName}", cppCode);
                 //Console.WriteLine($"创建C++文件夹：\n{currDir}\\{pathName}\n完毕!输入任何键退出。");
             }
+            else if(o.status == "FAILED")
+            {
+                lblContest.Text = o.comment;
+            }
             else
             {
                 Console.WriteLine(o);
@@ -183,7 +187,6 @@ namespace CFHelperUI
             JObject jo = (JObject)JsonConvert.DeserializeObject(result);
             return jo;
         }
-
 
         private void frmCFHelper_Load(object sender, EventArgs e)
         {
@@ -351,6 +354,11 @@ namespace CFHelperUI
 
             RegistryKey sk1 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(subKey);
             sk1.SetValue(keyName.ToUpper(), value);
+        }
+
+        private void txtProblemId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }
