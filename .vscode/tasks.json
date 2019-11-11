@@ -7,7 +7,8 @@
         "/c",
         "chcp 65001"
     ],
-    "tasks": [{
+    "tasks": [
+        {
             "taskName": "rebuild python",
             "command": "python",
             "args": ["${file}"],
@@ -18,7 +19,14 @@
                 }
             },
             "isShellCommand": true
-        },
+        },     
+        {
+            "taskName": "CFHelperUI",
+            "command": "${workspaceFolder}\\.vscode\\CFHelper\\CFHelperUI.exe",
+            "args": [],
+            "showOutput": "always",
+            "isShellCommand": true
+        },             
         {
             "taskName": "g++",
             "command": "${workspaceFolder}\\.vscode\\BuildDebug.bat",
