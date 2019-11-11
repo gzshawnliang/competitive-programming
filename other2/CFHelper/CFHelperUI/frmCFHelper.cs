@@ -395,12 +395,12 @@ namespace CFHelperUI
 
         public string RegRead(string keyName)
         {
-            string subKey = "SOFTWARE\\" + Application.ProductName.ToUpper();
+            string subKey = "SOFTWARE\\" + Application.ProductName;
 
             RegistryKey sk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(subKey);
             if (sk != null)
             {
-                var o = sk.GetValue(keyName.ToUpper());
+                var o = sk.GetValue(keyName);
                 if (o != null)
                     return o.ToString();
             }
@@ -411,10 +411,10 @@ namespace CFHelperUI
 
         public void RegWrite(string keyName, string value)
         {
-            string subKey = "SOFTWARE\\" + Application.ProductName.ToUpper();
+            string subKey = "SOFTWARE\\" + Application.ProductName;
 
             RegistryKey sk1 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(subKey);
-            sk1.SetValue(keyName.ToUpper(), value);
+            sk1.SetValue(keyName, value);
         }
 
         private void txtProblemId_KeyPress(object sender, KeyPressEventArgs e)
