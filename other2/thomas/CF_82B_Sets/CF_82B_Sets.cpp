@@ -39,7 +39,7 @@ void solve()
     }
     else if (n > 2)
     {
-        map<ull, set<ull>> locations;
+        unordered_map<ull, set<ull>> locations;
         for (int j = 0; j <= lines - 1; ++j)
             for (auto it : sets[j])
                 locations[it].insert(j);
@@ -53,10 +53,9 @@ void solve()
             cout << it.second.size() << " ";
             for (auto it2 : it.second)
                 cout << it2 << " ";
-
             cout << "\n";
         }
-        //cerr << "o";
+        //cerr << "\n";        
     }
 }
 
