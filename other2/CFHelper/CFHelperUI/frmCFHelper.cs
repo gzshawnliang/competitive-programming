@@ -79,8 +79,10 @@ namespace CFHelperUI
 
                 lblContest.Text = o.result.contest.name;
 
-                this.listView1.Columns.Add("id",60, HorizontalAlignment.Left);
+                this.listView1.Columns.Add("id",36, HorizontalAlignment.Left);
                 this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+                this.listView1.Columns.Add("rating", 64, HorizontalAlignment.Left);
+                this.listView1.Columns.Add("tag", 300, HorizontalAlignment.Left);
                 this.listView1.BeginUpdate();
                 dynamic problemsList = o.result.problems;
                 foreach (dynamic problem in problemsList)
@@ -97,10 +99,21 @@ namespace CFHelperUI
 
                     ListViewItem lvi = new ListViewItem(problemindex.ToUpper());
                     lvi.SubItems.Add(problem.name.ToString());
+                    if(problem.rating !=null)
+                        lvi.SubItems.Add(problem.rating.ToString());
+                    else
+                        lvi.SubItems.Add("");
+                    string tags = "";
+                    foreach (var tag in problem.tags)
+                    {
+                        tags += tag.ToString() + ",";
+                    }
+                    lvi.SubItems.Add(tags);
                     this.listView1.Items.Add(lvi);
                     //Console.WriteLine(s);
                 }
                 this.listView1.EndUpdate();
+                this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
                 //Console.WriteLine("----------------------------------");
 
@@ -190,9 +203,12 @@ namespace CFHelperUI
 
         private void frmCFHelper_Load(object sender, EventArgs e)
         {
+            this.Text += GetApplicationRoot();
             txtWorkingDir.Text = RegRead("WorkingDir");
-            if (string.IsNullOrEmpty(txtWorkingDir.Text))
+            if (string.IsNullOrEmpty(txtWorkingDir.Text.TrimEnd()))
                 txtWorkingDir.Text = GetApplicationRoot();
+
+            
         }
 
         private void txtProblemId_KeyDown(object sender, KeyEventArgs e)
@@ -205,11 +221,13 @@ namespace CFHelperUI
 
         static string GetApplicationRoot()
         {
-            var exePath = Path.GetDirectoryName(System.Reflection
-                .Assembly.GetExecutingAssembly().CodeBase);
-            Regex appPathMatcher = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
-            var appRoot = appPathMatcher.Match(exePath).Value;
-            return appRoot;
+            //var exePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+            //Regex appPathMatcher = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
+            //var appRoot = appPathMatcher.Match(exePath).Value;
+            //return appRoot;
+            if(Directory.Exists(Application.StartupPath+"\\..\\.."))
+                return new DirectoryInfo(Application.StartupPath + "\\..\\..").FullName;
+            return Application.StartupPath;
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -341,10 +359,14 @@ namespace CFHelperUI
             string subKey = "SOFTWARE\\" + Application.ProductName.ToUpper();
 
             RegistryKey sk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(subKey);
-            if (sk == null)
-                return null;
-            else
-                return sk.GetValue(keyName.ToUpper()).ToString();
+            if (sk != null)
+            {
+                var o = sk.GetValue(keyName.ToUpper());
+                if (o != null)
+                    return o.ToString();
+            }
+
+            return null;
         }
 
 
@@ -359,6 +381,16 @@ namespace CFHelperUI
         private void txtProblemId_KeyPress(object sender, KeyPressEventArgs e)
         {
 
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            if (listView1.FocusedItem != null)
+            {
+                var id = listView1.FocusedItem.Text;
+                string url = $"https://codeforces.com/problemset/problem/{this.contestId}/{id}";
+                System.Diagnostics.Process.Start(url);
+            }
         }
     }
 }
