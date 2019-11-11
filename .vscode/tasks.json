@@ -23,7 +23,7 @@
         {
             "taskName": "CFHelperUI",
             "command": "${workspaceFolder}\\.vscode\\CFHelper\\CFHelperUI.exe",
-            "args": [],
+            "args": ["${workspaceFolder}"],
             "showOutput": "always",
             "isShellCommand": true
         },             

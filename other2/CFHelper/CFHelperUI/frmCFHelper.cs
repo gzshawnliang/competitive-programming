@@ -24,6 +24,7 @@ namespace CFHelperUI
     {
         private int contestId=0;
         private Dictionary<string, string> problemDict;
+        private readonly string _defaultDir;
 
         private string rootDir
         {
@@ -33,6 +34,11 @@ namespace CFHelperUI
         public frmCFHelper()
         {
             InitializeComponent();
+        }
+
+        public frmCFHelper(string defaultDir):this()
+        {
+            _defaultDir = defaultDir;
         }
 
         private void butCancel_Click(object sender, EventArgs e)
@@ -203,10 +209,13 @@ namespace CFHelperUI
 
         private void frmCFHelper_Load(object sender, EventArgs e)
         {
-            this.Text += GetApplicationRoot();
+            //this.Text += "["+_defaultDir;
             txtWorkingDir.Text = RegRead("WorkingDir");
             if (string.IsNullOrEmpty(txtWorkingDir.Text.TrimEnd()))
-                txtWorkingDir.Text = GetApplicationRoot();
+                if(!string.IsNullOrEmpty(_defaultDir))
+                    txtWorkingDir.Text = _defaultDir;
+                else
+                    txtWorkingDir.Text = GetApplicationRoot();
 
             
         }

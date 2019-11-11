@@ -11,11 +11,16 @@ namespace CFHelperUI
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            string defaultDir = string.Empty;
+            if (args.Length > 0)
+            {
+                defaultDir = args[0];
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmCFHelper());
+            Application.Run(new frmCFHelper(defaultDir));
         }
     }
 }
