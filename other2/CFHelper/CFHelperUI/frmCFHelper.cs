@@ -62,6 +62,8 @@ namespace CFHelperUI
             lblContest.Text = "";
             listView1.Columns.Clear();
             listView1.Items.Clear();
+            txtError.Visible = false;
+            txtError.Clear();
 
             string problemId = string.Empty;
 
@@ -75,121 +77,134 @@ namespace CFHelperUI
             }
 
             //Task<string> problems = GetProblemInfo(url);
-            dynamic o = GetResponse(url);
-            string ids = string.Empty;
+            try
+            {
+                dynamic o = GetResponse(url);
+                string ids = string.Empty;
+
+
+                if (o.status == "OK")
+                {
+                    problemDict = new Dictionary<string, string>();
+
+                    lblContest.Text = o.result.contest.name;
+
+                    this.listView1.Columns.Add("id", 36, HorizontalAlignment.Left);
+                    this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+                    this.listView1.Columns.Add("rating", 64, HorizontalAlignment.Left);
+                    this.listView1.Columns.Add("tag", 300, HorizontalAlignment.Left);
+                    this.listView1.BeginUpdate();
+                    dynamic problemsList = o.result.problems;
+                    foreach (dynamic problem in problemsList)
+                    {
+                        string problemindex = problem.index.ToString();
+
+                        if (!string.IsNullOrEmpty(problemId))
+                            if (problemId.ToUpper() != problemindex.ToUpper())
+                                continue;
+
+                        problemDict.Add(problemindex.ToUpper(), problem.name.ToString());
+                        string s = $"({problemindex.ToUpper()}){problem.name}";
+                        ids += $"{problem.index} ";
+
+                        ListViewItem lvi = new ListViewItem(problemindex.ToUpper());
+                        lvi.SubItems.Add(problem.name.ToString());
+                        if (problem.rating != null)
+                            lvi.SubItems.Add(problem.rating.ToString());
+                        else
+                            lvi.SubItems.Add("");
+                        string tags = "";
+                        foreach (var tag in problem.tags)
+                        {
+                            tags += tag.ToString() + ",";
+                        }
+                        lvi.SubItems.Add(tags);
+                        this.listView1.Items.Add(lvi);
+                        //Console.WriteLine(s);
+                    }
+                    this.listView1.EndUpdate();
+                    this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                    //Console.WriteLine("----------------------------------");
+
+                    //string pathName = string.Empty;
+                    //while (true)
+                    //{
+                    //    if (string.IsNullOrEmpty(problemId))
+                    //    {
+                    //        Console.Write($"请输入字母({ids.Trim()})选择problem：");
+                    //        problemId = Console.ReadLine();
+                    //        if (!problemDict.ContainsKey(problemId.ToUpper()))
+                    //        {
+                    //            problemId = string.Empty;
+                    //            continue;
+                    //        }
+
+                    //    }
+                    //    string choose = "N";
+
+                    //    Console.WriteLine(
+                    //        $"您已经选择：({problemId.ToUpper()}){problemDict[problemId.ToUpper()]}，是否继续？");
+                    //    Console.Write(
+                    //        $"输入 N 重新选择，输入任何键继续：");
+
+                    //    choose = Console.ReadLine().ToUpper();
+                    //    if (choose == "N")
+                    //    {
+                    //        problemId = string.Empty;
+                    //        continue;
+                    //    }
+
+
+                    //    pathName = FormatPathName($"CF_{contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
+                    //    Console.Write($"即将创建C++文件夹：{pathName}，是否继续？输入N重新选择，输入任何键继续：");
+                    //    choose = Console.ReadLine().ToUpper();
+                    //    if (choose == "N")
+                    //    {
+                    //        problemId = string.Empty;
+                    //        continue;
+                    //    }
+
+                    //    break;
+                    //}
+
+                    //string cppCode = "";
+                    //cppCode += $"/*\n";
+                    //cppCode += $"===========================================================\n";
+                    //cppCode += $"* @Name:           {contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}\n";
+                    //cppCode += $"* @Author:         \n";
+                    //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                    //cppCode += $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    //cppCode += $"* @Description:    \n";
+                    //cppCode += $"===========================================================\n";
+                    //cppCode += $"*/";
+                    //CreateDirAndCppFile($"{currDir}\\{pathName}", $"{pathName}", cppCode);
+                    //Console.WriteLine($"创建C++文件夹：\n{currDir}\\{pathName}\n完毕!输入任何键退出。");
+                }
+                else if (o.status == "FAILED")
+                {
+                    lblContest.Text = o.comment;
+                }
+                else
+                {
+                    Console.WriteLine(o);
+                }
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine(e);
+                txtError.Text = e.ToString();
+                txtError.Visible = true;
+                lblContest.Text = e.Message;
+                //throw;
+            }
             
 
-            if (o.status == "OK")
-            {
-                problemDict = new Dictionary<string, string>();
 
-                lblContest.Text = o.result.contest.name;
-
-                this.listView1.Columns.Add("id",36, HorizontalAlignment.Left);
-                this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
-                this.listView1.Columns.Add("rating", 64, HorizontalAlignment.Left);
-                this.listView1.Columns.Add("tag", 300, HorizontalAlignment.Left);
-                this.listView1.BeginUpdate();
-                dynamic problemsList = o.result.problems;
-                foreach (dynamic problem in problemsList)
-                {
-                    string problemindex = problem.index.ToString();
-
-                    if (!string.IsNullOrEmpty(problemId))
-                        if (problemId.ToUpper() != problemindex.ToUpper())
-                            continue;
-
-                    problemDict.Add(problemindex.ToUpper(), problem.name.ToString());
-                    string s = $"({problemindex.ToUpper()}){problem.name}";
-                    ids += $"{problem.index} ";
-
-                    ListViewItem lvi = new ListViewItem(problemindex.ToUpper());
-                    lvi.SubItems.Add(problem.name.ToString());
-                    if(problem.rating !=null)
-                        lvi.SubItems.Add(problem.rating.ToString());
-                    else
-                        lvi.SubItems.Add("");
-                    string tags = "";
-                    foreach (var tag in problem.tags)
-                    {
-                        tags += tag.ToString() + ",";
-                    }
-                    lvi.SubItems.Add(tags);
-                    this.listView1.Items.Add(lvi);
-                    //Console.WriteLine(s);
-                }
-                this.listView1.EndUpdate();
-                this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                //Console.WriteLine("----------------------------------");
-
-                //string pathName = string.Empty;
-                //while (true)
-                //{
-                //    if (string.IsNullOrEmpty(problemId))
-                //    {
-                //        Console.Write($"请输入字母({ids.Trim()})选择problem：");
-                //        problemId = Console.ReadLine();
-                //        if (!problemDict.ContainsKey(problemId.ToUpper()))
-                //        {
-                //            problemId = string.Empty;
-                //            continue;
-                //        }
-
-                //    }
-                //    string choose = "N";
-
-                //    Console.WriteLine(
-                //        $"您已经选择：({problemId.ToUpper()}){problemDict[problemId.ToUpper()]}，是否继续？");
-                //    Console.Write(
-                //        $"输入 N 重新选择，输入任何键继续：");
-
-                //    choose = Console.ReadLine().ToUpper();
-                //    if (choose == "N")
-                //    {
-                //        problemId = string.Empty;
-                //        continue;
-                //    }
-
-
-                //    pathName = FormatPathName($"CF_{contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-                //    Console.Write($"即将创建C++文件夹：{pathName}，是否继续？输入N重新选择，输入任何键继续：");
-                //    choose = Console.ReadLine().ToUpper();
-                //    if (choose == "N")
-                //    {
-                //        problemId = string.Empty;
-                //        continue;
-                //    }
-
-                //    break;
-                //}
-
-                //string cppCode = "";
-                //cppCode += $"/*\n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"* @Name:           {contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}\n";
-                //cppCode += $"* @Author:         \n";
-                //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                //cppCode += $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
-                //cppCode += $"* @Description:    \n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"*/";
-                //CreateDirAndCppFile($"{currDir}\\{pathName}", $"{pathName}", cppCode);
-                //Console.WriteLine($"创建C++文件夹：\n{currDir}\\{pathName}\n完毕!输入任何键退出。");
-            }
-            else if(o.status == "FAILED")
-            {
-                lblContest.Text = o.comment;
-            }
-            else
-            {
-                Console.WriteLine(o);
-            }
 
         }
 
-
-        public static JObject GetResponse(string url)
+        private JObject GetResponse(string url)
         {
 
             if (string.IsNullOrEmpty(url))
@@ -205,54 +220,6 @@ namespace CFHelperUI
             string result = response.Content.ReadAsStringAsync().Result;
             JObject jo = (JObject)JsonConvert.DeserializeObject(result);
             return jo;
-        }
-
-        private void frmCFHelper_Load(object sender, EventArgs e)
-        {
-            //this.Text += "["+_defaultDir;
-            txtWorkingDir.Text = RegRead("WorkingDir");
-            if (string.IsNullOrEmpty(txtWorkingDir.Text.TrimEnd()))
-                if(!string.IsNullOrEmpty(_defaultDir))
-                    txtWorkingDir.Text = _defaultDir;
-                else
-                    txtWorkingDir.Text = GetApplicationRoot();
-
-            GetWindowsState();
-        }
-
-        private void GetWindowsState()
-        {
-            string sHeight = RegRead("Form.Height");
-            string sWidth = RegRead("Form.Width");
-            string sWindowState = RegRead("Form.WindowState");
-            if (sWindowState == "2")
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else if (!string.IsNullOrEmpty(sHeight) && !string.IsNullOrEmpty(sWidth))
-            {
-                if (int.TryParse(sHeight, out int iHeight) && int.TryParse(sWidth, out int iWidth))
-                {
-                    if (iHeight > 480 && iHeight <= Screen.PrimaryScreen.WorkingArea.Height && iWidth > 640 && iWidth <= Screen.PrimaryScreen.WorkingArea.Width)
-                    {
-                        this.Size = new Size(iWidth, iHeight);
-
-                        //居中
-                        this.Left = Screen.PrimaryScreen.WorkingArea.Width / 2 - iWidth / 2;
-                        this.Top = Screen.PrimaryScreen.WorkingArea.Height / 2 - iHeight / 2;
-                    }
-                }
-            }
-        }
-
-        private void SaveWindowsState()
-        {
-            RegWrite("Form.Height", this.Size.Height.ToString());
-            RegWrite("Form.Width", this.Size.Width.ToString());
-            if (this.WindowState == FormWindowState.Maximized)
-                RegWrite("Form.WindowState", "2");
-            else
-                RegWrite("Form.WindowState", "0");
         }
 
         private void txtProblemId_KeyDown(object sender, KeyEventArgs e)
@@ -305,7 +272,7 @@ namespace CFHelperUI
                     cppCode += $"/*\n";
                     cppCode += $"===========================================================\n";
                     cppCode += $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
-                    cppCode += $"* @Author:         \n";
+                    cppCode += $"* @Author:         {txtAuthor.Text}\n";
                     cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
                     cppCode += $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
                     cppCode += $"* @Description:    \n";
@@ -315,8 +282,6 @@ namespace CFHelperUI
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
                     string result = CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
                     createResult.Add(problemId.ToUpper(),result);
-
-
                 }
 
                 msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
@@ -326,7 +291,14 @@ namespace CFHelperUI
                     msg += $"{fileName}:{(string.IsNullOrEmpty(createResult[problemId]) ? "成功" : createResult[problemId])}\n";
                 }
 
-                MessageBox.Show(this, msg, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                msg += "\n是否打开文件夹查看？";
+                if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information) ==
+                    DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(rootDir);
+                }
+                
+
             }
         }
 
@@ -392,31 +364,6 @@ namespace CFHelperUI
             }
         }
 
-
-        public string RegRead(string keyName)
-        {
-            string subKey = "SOFTWARE\\" + Application.ProductName;
-
-            RegistryKey sk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(subKey);
-            if (sk != null)
-            {
-                var o = sk.GetValue(keyName);
-                if (o != null)
-                    return o.ToString();
-            }
-
-            return null;
-        }
-
-
-        public void RegWrite(string keyName, string value)
-        {
-            string subKey = "SOFTWARE\\" + Application.ProductName;
-
-            RegistryKey sk1 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(subKey);
-            sk1.SetValue(keyName, value);
-        }
-
         private void txtProblemId_KeyPress(object sender, KeyPressEventArgs e)
         {
 
@@ -435,6 +382,79 @@ namespace CFHelperUI
         private void frmCFHelper_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveWindowsState();
+            RegWrite("Author", this.txtAuthor.Text); 
+        }
+
+        private void frmCFHelper_Load(object sender, EventArgs e)
+        {
+            //this.Text += "["+_defaultDir;
+            txtWorkingDir.Text = RegRead("WorkingDir");
+            if (string.IsNullOrEmpty(txtWorkingDir.Text.TrimEnd()))
+                if (!string.IsNullOrEmpty(_defaultDir))
+                    txtWorkingDir.Text = _defaultDir;
+                else
+                    txtWorkingDir.Text = GetApplicationRoot();
+
+            GetWindowsState();
+            this.txtAuthor.Text = RegRead("Author");
+        }
+
+        private string RegRead(string keyName)
+        {
+            string subKey = "SOFTWARE\\" + Application.ProductName;
+
+            RegistryKey sk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(subKey);
+            if (sk != null)
+            {
+                var o = sk.GetValue(keyName);
+                if (o != null)
+                    return o.ToString();
+            }
+
+            return null;
+        }
+
+        private void RegWrite(string keyName, string value)
+        {
+            string subKey = "SOFTWARE\\" + Application.ProductName;
+
+            RegistryKey sk1 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(subKey);
+            sk1.SetValue(keyName, value);
+        }
+
+        private void GetWindowsState()
+        {
+            string sHeight = RegRead("Form.Height");
+            string sWidth = RegRead("Form.Width");
+            string sWindowState = RegRead("Form.WindowState");
+            if (sWindowState == "2")
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else if (!string.IsNullOrEmpty(sHeight) && !string.IsNullOrEmpty(sWidth))
+            {
+                if (int.TryParse(sHeight, out int iHeight) && int.TryParse(sWidth, out int iWidth))
+                {
+                    if (iHeight > 480 && iHeight <= Screen.PrimaryScreen.WorkingArea.Height && iWidth > 640 && iWidth <= Screen.PrimaryScreen.WorkingArea.Width)
+                    {
+                        this.Size = new Size(iWidth, iHeight);
+
+                        //居中
+                        this.Left = Screen.PrimaryScreen.WorkingArea.Width / 2 - iWidth / 2;
+                        this.Top = Screen.PrimaryScreen.WorkingArea.Height / 2 - iHeight / 2;
+                    }
+                }
+            }
+        }
+
+        private void SaveWindowsState()
+        {
+            RegWrite("Form.Height", this.Size.Height.ToString());
+            RegWrite("Form.Width", this.Size.Width.ToString());
+            if (this.WindowState == FormWindowState.Maximized)
+                RegWrite("Form.WindowState", "2");
+            else
+                RegWrite("Form.WindowState", "0");
         }
     }
 }

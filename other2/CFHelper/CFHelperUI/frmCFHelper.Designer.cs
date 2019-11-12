@@ -41,6 +41,9 @@
             this.txtWorkingDir = new System.Windows.Forms.TextBox();
             this.butBrowse = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtAuthor = new System.Windows.Forms.TextBox();
+            this.txtError = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtProblemId
@@ -50,7 +53,7 @@
             this.txtProblemId.Location = new System.Drawing.Point(133, 38);
             this.txtProblemId.Margin = new System.Windows.Forms.Padding(4);
             this.txtProblemId.Name = "txtProblemId";
-            this.txtProblemId.Size = new System.Drawing.Size(370, 26);
+            this.txtProblemId.Size = new System.Drawing.Size(149, 26);
             this.txtProblemId.TabIndex = 0;
             this.txtProblemId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProblemId_KeyDown);
             this.txtProblemId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProblemId_KeyPress);
@@ -63,7 +66,7 @@
             this.butGo.Margin = new System.Windows.Forms.Padding(4);
             this.butGo.Name = "butGo";
             this.butGo.Size = new System.Drawing.Size(100, 28);
-            this.butGo.TabIndex = 1;
+            this.butGo.TabIndex = 2;
             this.butGo.Text = "Go";
             this.butGo.UseVisualStyleBackColor = true;
             this.butGo.Click += new System.EventHandler(this.butGo_Click);
@@ -96,7 +99,7 @@
             this.butOK.Margin = new System.Windows.Forms.Padding(4);
             this.butOK.Name = "butOK";
             this.butOK.Size = new System.Drawing.Size(100, 31);
-            this.butOK.TabIndex = 3;
+            this.butOK.TabIndex = 6;
             this.butOK.Text = "OK";
             this.butOK.UseVisualStyleBackColor = true;
             this.butOK.Click += new System.EventHandler(this.butOK_Click);
@@ -109,7 +112,7 @@
             this.butCancel.Margin = new System.Windows.Forms.Padding(4);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(100, 31);
-            this.butCancel.TabIndex = 4;
+            this.butCancel.TabIndex = 7;
             this.butCancel.Text = "Quit";
             this.butCancel.UseVisualStyleBackColor = true;
             this.butCancel.Click += new System.EventHandler(this.butCancel_Click);
@@ -123,7 +126,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 16);
             this.label1.TabIndex = 5;
-            this.label1.Text = "problemId";
+            this.label1.Text = "ProblemId";
             // 
             // label2
             // 
@@ -134,7 +137,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 16);
             this.label2.TabIndex = 6;
-            this.label2.Text = "problems";
+            this.label2.Text = "Problems";
             // 
             // lblContest
             // 
@@ -172,7 +175,7 @@
             this.txtWorkingDir.Name = "txtWorkingDir";
             this.txtWorkingDir.ReadOnly = true;
             this.txtWorkingDir.Size = new System.Drawing.Size(370, 21);
-            this.txtWorkingDir.TabIndex = 8;
+            this.txtWorkingDir.TabIndex = 4;
             // 
             // butBrowse
             // 
@@ -182,10 +185,47 @@
             this.butBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.butBrowse.Name = "butBrowse";
             this.butBrowse.Size = new System.Drawing.Size(100, 29);
-            this.butBrowse.TabIndex = 10;
+            this.butBrowse.TabIndex = 5;
             this.butBrowse.Text = "Browse";
             this.butBrowse.UseVisualStyleBackColor = true;
             this.butBrowse.Click += new System.EventHandler(this.butBrowse_Click);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(290, 41);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 16);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Author";
+            // 
+            // txtAuthor
+            // 
+            this.txtAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAuthor.Location = new System.Drawing.Point(354, 38);
+            this.txtAuthor.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAuthor.Name = "txtAuthor";
+            this.txtAuthor.Size = new System.Drawing.Size(149, 26);
+            this.txtAuthor.TabIndex = 1;
+            // 
+            // txtError
+            // 
+            this.txtError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtError.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtError.ForeColor = System.Drawing.Color.Maroon;
+            this.txtError.Location = new System.Drawing.Point(133, 73);
+            this.txtError.Margin = new System.Windows.Forms.Padding(4);
+            this.txtError.Multiline = true;
+            this.txtError.Name = "txtError";
+            this.txtError.ReadOnly = true;
+            this.txtError.Size = new System.Drawing.Size(370, 261);
+            this.txtError.TabIndex = 13;
+            this.txtError.Visible = false;
             // 
             // frmCFHelper
             // 
@@ -193,6 +233,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.txtError);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtAuthor);
             this.Controls.Add(this.butBrowse);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtWorkingDir);
@@ -231,6 +274,9 @@
         private System.Windows.Forms.TextBox txtWorkingDir;
         private System.Windows.Forms.Button butBrowse;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtAuthor;
+        private System.Windows.Forms.TextBox txtError;
     }
 }
 
