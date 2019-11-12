@@ -1,0 +1,17 @@
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Debug\CFHelperUI.exe
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Debug\CFHelperUI.pdb
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.Properties.Resources.resources
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.csproj.GenerateResource.cache
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.csproj.CoreCompileInputs.cache
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.exe
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.pdb
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.frmCFHelper.resources
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Debug\CFHelperUI.exe.config
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Debug\Newtonsoft.Json.dll
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Debug\Newtonsoft.Json.xml
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.csproj.CopyComplete
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Debug\CFHelperUI.exe.manifest
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Debug\CFHelperUI.application
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.exe.manifest
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.application
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Debug\CFHelperUI.csprojAssemblyReference.cache
