@@ -4,7 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2019/11/12 18:10:00
 * @url:            https://codeforces.com/contest/113/problem/B
-* @Description:    
+* @Description:    优化版
 ===========================================================
 */
 #include <bits/stdc++.h>
@@ -31,7 +31,6 @@ void solve()
     string t, s1, s2;
     cin >> t >> s1 >> s2;
     ull h1 = hashcode(s1);
-    //int len1 = s1.length();
 
     ull h2 = hashcode(s2);
     int len2 = s2.length();
@@ -45,8 +44,8 @@ void solve()
     {
         bool findStartSub=false;
 
-        ull hashValue1 = 0;
-        ull hashTotal = 0;
+        ull hashValue1 = 0;             //SubString:begin的哈希值
+        ull hashTotal = 0;              //从i~j字符串的哈希值
         for (int j = i; j <= n - 1; ++j) //查找SubString
         {
             hashTotal = R1 * hashTotal + t[j];
@@ -62,13 +61,13 @@ void solve()
 
             if(findStartSub==true && j-i+1>=len2)
             {
-                ull hashValue2 = 0;
+                ull hashValue2 = 0;                 //SubString:end的哈希值
                 for (int k = j-len2+1; k <= j; ++k)
                 {
                     hashValue2 = R1 * hashValue2 + t[k];
                     if(hashValue2 == h2)
                     {
-                        if(ansMap.count(hashTotal)==0)
+                        if(ansMap.count(hashTotal)==0)  //找到答案，放入唯一的set
                         {
                             ansMap.insert(hashTotal);
                             ++ans;
