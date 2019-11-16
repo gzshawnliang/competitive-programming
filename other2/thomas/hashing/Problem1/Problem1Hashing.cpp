@@ -4,6 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2019/11/12 18:10:00
 * @url:            https://www.quora.com/q/threadsiiithyderabad/String-Hashing-for-competitive-programming
+                   https://www.geeksforgeeks.org/palindrome-substring-queries/
 * @Description:    
 运算规则
 模运算与基本四则运算有些相似，但是除法例外。其规则如下：
@@ -11,8 +12,8 @@
         (p + b) % p = (p % p + b % p) % p = (0 + b % p) % p = b % p % p = b % p
         (a + b + c) % p = (a % p + b % p + c % p) % p
         (a + b + c + d) % p = (a % p + b % p + c % p+ d % p) % p
-(2)     (a - b) % p = (a % p - b % p + p) % p [Correct]
-        (a - b) % p = (a % p - b % p) % p  [Wrong] 可能负数
+(2)     (a - b) % p = (a % p - b % p + p) % p       [Correct]
+        (a - b) % p = (a % p - b % p) % p           [Wrong] 可能负数，例如（31-9） % 10
 (3)     (a * b) % p = (a % p * b % p) % p 
         (a * b * c) % p = ((a * b) % p * c % p) % p
         (a * b * c * d) % p = ((((a * b) % p * c) % p) * d) % p
