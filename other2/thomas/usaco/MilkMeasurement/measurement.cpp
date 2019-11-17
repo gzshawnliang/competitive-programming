@@ -16,22 +16,19 @@ struct measurement
 bool isEqual(const set<int> & set1, const set<int> & set2)
 {
     if (set1.size() != set2.size())
-    {
         return false;
-    }
-    else
-    {
-        auto it1 = set1.begin();
-        auto it2 = set2.begin();
-        while (it1 != set1.end())
-        {
-            if ((*it1) != (*it2))
-                return false;
 
-            ++it1;
-            ++it2;
-        }
+    auto it1 = set1.begin();
+    auto it2 = set2.begin();
+    while (it1 != set1.end())
+    {
+        if ((*it1) != (*it2))
+            return false;
+
+        ++it1;
+        ++it2;
     }
+    
     return true;
 }
 
