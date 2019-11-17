@@ -14,7 +14,7 @@ using namespace std;
 using ll = long long;
 using ull = unsigned long long;
 
-const ull R1 = 131; //质数
+const ull R1 = 137; //质数
 
 ull hashcode(const string & x)
 {
