@@ -12,19 +12,20 @@ struct measurement
     int change;
 };
 
-bool isEqual(set<int> & topSetBefore,set<int> & topSetAfter)
+/*检查两个set是否一样 */
+bool isEqual(const set<int> & set1, const set<int> & set2)
 {
-    if(topSetBefore.size() != topSetAfter.size())
+    if (set1.size() != set2.size())
     {
         return false;
     }
     else
     {
-        auto it1=topSetBefore.begin();
-        auto it2=topSetAfter.begin();
-        while (it1!=topSetBefore.end())
+        auto it1 = set1.begin();
+        auto it2 = set2.begin();
+        while (it1 != set1.end())
         {
-            if((*it1) !=(*it2))
+            if ((*it1) != (*it2))
                 return false;
 
             ++it1;
@@ -36,68 +37,68 @@ bool isEqual(set<int> & topSetBefore,set<int> & topSetAfter)
 
 int main()
 {
-    int N,G;
-    fin >> N>>G;
-    vector<measurement> a(N);
+    int N, G;
+    fin >> N >> G;
+    vector<measurement> a(N);           //产量日志
+
     for (int i = 0; i <= N - 1; ++i)
     {
-        fin >> a[i].day >> a[i].id >>a[i].change;        
+        fin >> a[i].day >> a[i].id >> a[i].change;
     }
 
-    sort(a.begin(), a.end(), [](const measurement & x, const measurement & y) 
-    {
+    //产量日志按时间排序（天）
+    sort(a.begin(), a.end(), [](const measurement & x, const measurement & y) {
         return x.day < y.day;
     });
 
-    map<int,int> cowMp;
-    map<int,set<int>,greater<int>> topMp;
+    map<int, int> cowMp;                       //cowMp[i]=j,第i头牛的当前产量是j
+    map<int, set<int>, greater<int>> milkMp;   //milkMp[i]={1,2,3},产量是i的牛有{1,2,3}
 
-    int ans=0;
+    int ans = 0;
 
     for (int i = 0; i <= N - 1; ++i)
     {
-        int id =a[i].id;
-        int beforeMilk=0;
+        int id = a[i].id;           //当前牛id
+        int milkBefore = 0;         //计算当前日志，改变之前产量
 
-        set<int> topSetBefore;
-        set<int> topSetAfter;
+        set<int> topSetBefore;      //改变之前最高产量的牛id的集合
+        set<int> topSetAfter;       //改变之后最高产量的牛id的集合
 
-        if(!topMp.empty())
-            topSetBefore= topMp.begin()->second; 
+        if (!milkMp.empty())
+            topSetBefore = milkMp.begin()->second;
 
-        if(cowMp.count(id)==0)
+        if (cowMp.count(id) == 0)
         {
             cowMp[id] = G + a[i].change;
         }
         else
         {
-            beforeMilk =cowMp[id];
-            cowMp[id] +=a[i].change;
+            milkBefore = cowMp[id];
+            cowMp[id] += a[i].change;
         }
 
-        int currMilk=cowMp[id];
-        topMp[currMilk].insert(id);
+        int milkAfter = cowMp[id];          //计算当前日志，改变之后的产量
+        milkMp[milkAfter].insert(id);       //插入产量是milkAfter的牛id
 
-        if(topMp.count(beforeMilk))
+        if (milkMp.count(milkBefore))       //删除产量是milkBefore的牛id
         {
-            if(topMp[beforeMilk].count(id)==1)
-                topMp[beforeMilk].erase(id);
+            if (milkMp[milkBefore].count(id) == 1)
+                milkMp[milkBefore].erase(id);
 
-            if(topMp[beforeMilk].empty())
+            if (milkMp[milkBefore].empty())  //产量是milkBefore的牛没有，则删除这项
             {
-                topMp.erase(beforeMilk);
-            }       
+                milkMp.erase(milkBefore);
+            }
         }
 
-        topSetAfter = topMp.begin()->second; 
+        topSetAfter = milkMp.begin()->second;
 
-        if(isEqual(topSetBefore,topSetAfter)==false)
+        if (isEqual(topSetBefore, topSetAfter) == false)    //改变之前和改变之后最高产量的牛id集合比较
         {
             ++ans;
         }
-        
-    }    
-    fout << ans << "\n";    
+    }
+    fout << ans << "\n";
 
     return 0;
 }
