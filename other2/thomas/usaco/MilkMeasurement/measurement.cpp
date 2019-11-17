@@ -48,8 +48,8 @@ int main()
         return x.day < y.day;
     });
 
-    map<int, int> cowMp;                       //cowMp[i]=j,第i头牛的当前产量是j
-    map<int, set<int>, greater<int>> milkMp;   //milkMp[i]={1,2,3},产量是i的牛有{1,2,3}
+    map<int, int> cowMap;                       //cowMap[i]=j,第i头牛的当前产量是j
+    map<int, set<int>, greater<int>> milkMap;   //milkMap[i]={1,2,3},产量是i的牛有{1,2,3}
 
     int ans = 0;
 
@@ -61,34 +61,34 @@ int main()
         set<int> topSetBefore;      //改变之前最高产量的牛id的集合
         set<int> topSetAfter;       //改变之后最高产量的牛id的集合
 
-        if (!milkMp.empty())
-            topSetBefore = milkMp.begin()->second;
+        if (!milkMap.empty())
+            topSetBefore = milkMap.begin()->second;
 
-        if (cowMp.count(id) == 0)
+        if (cowMap.count(id) == 0)
         {
-            cowMp[id] = G + a[i].change;
+            cowMap[id] = G + a[i].change;
         }
         else
         {
-            milkBefore = cowMp[id];
-            cowMp[id] += a[i].change;
+            milkBefore = cowMap[id];
+            cowMap[id] += a[i].change;
         }
 
-        int milkAfter = cowMp[id];          //计算当前日志，改变之后的产量
-        milkMp[milkAfter].insert(id);       //插入产量是milkAfter的牛id
+        int milkAfter = cowMap[id];          //计算当前日志，改变之后的产量
+        milkMap[milkAfter].insert(id);       //插入产量是milkAfter的牛id
 
-        if (milkMp.count(milkBefore))       //删除产量是milkBefore的牛id
+        if (milkMap.count(milkBefore))       //删除产量是milkBefore的牛id
         {
-            if (milkMp[milkBefore].count(id) == 1)
-                milkMp[milkBefore].erase(id);
+            if (milkMap[milkBefore].count(id) == 1)
+                milkMap[milkBefore].erase(id);
 
-            if (milkMp[milkBefore].empty())  //产量是milkBefore的牛没有，则删除这项
+            if (milkMap[milkBefore].empty())  //产量是milkBefore的牛没有，则删除这项
             {
-                milkMp.erase(milkBefore);
+                milkMap.erase(milkBefore);
             }
         }
 
-        topSetAfter = milkMp.begin()->second;
+        topSetAfter = milkMap.begin()->second;
 
         if (isEqual(topSetBefore, topSetAfter) == false)    //改变之前和改变之后最高产量的牛id集合比较
         {
