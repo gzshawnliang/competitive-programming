@@ -30,55 +30,58 @@ void solve()
 {
     string t, s1, s2;
     cin >> t >> s1 >> s2;
-    ull h1 = hashcode(s1);
+    ull hBegin = hashcode(s1);
+    int lenBegin = s1.length();
 
-    ull h2 = hashcode(s2);
-    int len2 = s2.length();
+    ull hEnd = hashcode(s2);
+    int lenEnd = s2.length();
 
     unordered_set<ull> ansMap;
-    ull ans=0;
+    ull ans = 0;
 
     int n = t.length();
 
     for (int i = 0; i <= n - 1; ++i)
     {
-        bool findStartSub=false;
+        bool findStartSub = false;
 
-        ull hashValue1 = 0;             //SubString:begin的哈希值
-        ull hashTotal = 0;              //从i~j字符串的哈希值
-        for (int j = i; j <= n - 1; ++j) //查找SubString
+        ull hashBegin = 0;                  //SubString:begin的哈希值
+        ull hashIJ = 0;                     //i~j字符串的哈希值
+        for (int j = i; j <= n - 1; ++j)    //查找SubString
         {
-            hashTotal = R1 * hashTotal + t[j];
+            if (findStartSub==false && j - i + 1 > lenBegin) //超出SubString:begin的长度仍未找到前缀
+                break;
 
-            if (findStartSub==false)
+            hashIJ = R1 * hashIJ + t[j];
+
+            if (findStartSub == false)
             {
-                hashValue1 = R1 * hashValue1 + t[j];
+                hashBegin = R1 * hashBegin + t[j];
 
-                if (hashValue1 == h1) //SubString:begin
-                    findStartSub=true;
-
+                if (hashBegin == hBegin) //SubString:begin
+                    findStartSub = true;
             }
 
-            if(findStartSub==true && j-i+1>=len2)
+            if (findStartSub == true && j - i + 1 >= lenEnd)
             {
-                ull hashValue2 = 0;                 //SubString:end的哈希值
-                for (int k = j-len2+1; k <= j; ++k)
+                ull hashEnd = 0; //SubString:end的哈希值
+                for (int k = j - lenEnd + 1; k <= j; ++k)
                 {
-                    hashValue2 = R1 * hashValue2 + t[k];
-                    if(hashValue2 == h2)
+                    hashEnd = R1 * hashEnd + t[k];
+                    if (hashEnd == hEnd)
                     {
-                        if(ansMap.count(hashTotal)==0)  //找到答案，放入唯一的set
+                        if (ansMap.count(hashIJ) == 0) //找到答案，放入唯一的set
                         {
-                            ansMap.insert(hashTotal);
+                            ansMap.insert(hashIJ);
                             ++ans;
                         }
                         break;
                     }
-                }                
+                }
             }
         }
     }
-    cout << ans<<"\n";
+    cout << ans << "\n";
 }
 
 int main()
