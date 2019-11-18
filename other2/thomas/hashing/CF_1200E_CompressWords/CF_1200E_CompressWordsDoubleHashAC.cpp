@@ -4,7 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2019/11/18 9:45:43
 * @url:            https://codeforces.com/contest/1200/problem/E
-* @Description:    
+* @Description:    Double Hash版本
 ===========================================================
 */
 #include <bits/stdc++.h>
@@ -24,7 +24,7 @@ vector<ll> h2;
 vector<ll> pow1;
 vector<ll> pow2;
  
-pair<ll, ll> subStrHash(int l, int r)
+pair<ll, ll> subStrHash(unsigned int l, unsigned int r)
 {
     ll ret1, ret2;
     if (l == 0)
@@ -45,20 +45,13 @@ void solve()
     int n;
     cin >> n;
     vector<string> a(n);
-    vector<int> pos(n);
- 
-    string t = "";
- 
+    int len =0;
     for (int i = 0; i <= n - 1; ++i)
     {
         cin >> a[i];
-        t += a[i];
-        if (i == 0)
-            pos[i] = a[i].length() - 1;
-        else
-            pos[i] = pos[i - 1] + a[i].length();
+        len +=a[i].length();
     }
-    int len = t.length();
+    ++len;
  
     h1.assign(len, 0);
     h2.assign(len, 0);
@@ -72,36 +65,59 @@ void solve()
         pow1[i] = pow1[i - 1] * P1 % MOD1;
         pow2[i] = pow2[i - 1] * P2 % MOD2;
     }
+
+    string ans = a[0];
  
     ll hashValue1 = 0;
     ll hashValue2 = 0;
-    for (int i = 0; i <= len - 1; ++i)
-    { //计算哈希
-        hashValue1 = (P1 * hashValue1 + t[i]) % MOD1;
-        hashValue2 = (P2 * hashValue2 + t[i]) % MOD2;
+    int ansLen=ans.length();
+    for (int i = 0; i <= ansLen - 1; ++i)
+    {   //计算哈希
+        hashValue1 = (P1 * hashValue1 + ans[i]) % MOD1;
+        hashValue2 = (P2 * hashValue2 + ans[i]) % MOD2;
         h1[i] = hashValue1;
         h2[i] = hashValue2;
     }
- 
-    string ans = a[0];
+
     for (int i = 1; i <= n - 1; ++i)
     {
         int maxJ = 0;
-        int beginPos = pos[i - 1] + 1;
-        for (int j = beginPos; j <= pos[i]; ++j)
+        int beginPos = ans.length() - 1;
+        int aLen=a[i].length();
+        ll hashValue1 = 0;
+        ll hashValue2 = 0;
+        for (int j = 0; j <= aLen-1; ++j)
         {
-            int currLen = j - beginPos + 1;
-            auto sub1 = subStrHash(beginPos, j);
-            auto sub2 = subStrHash(beginPos - currLen, beginPos - 1);
+            if(j>beginPos)
+                break;            
+
+            hashValue1 = (P1 * hashValue1 + a[i][j]) % MOD1;
+            hashValue2 = (P2 * hashValue2 + a[i][j]) % MOD2;
+
+            auto sub2 = subStrHash(beginPos - j, beginPos);
  
-            if (sub1.first == sub2.first && sub1.second == sub2.second) //字符串相同
-                maxJ = j;
+            if (hashValue1 == sub2.first && hashValue2 == sub2.second) //字符串相同
+                maxJ = j+1;
         }
-        if (maxJ > 0)
-            ans += a[i].substr(maxJ - beginPos + 1);
-        else
-            ans += a[i];
+        
+        string subStr=a[i].substr(maxJ);
+           
+        int subLen=subStr.length();
+        int j=ans.length()-1;
+        
+        ll hashValue_1 = h1[j];
+        ll hashValue_2 = h2[j];
+        for (int i = 0; i <= subLen - 1; ++i)
+        {
+            ++j;
+            hashValue_1 = (P1 * hashValue_1 + subStr[i]) % MOD1;
+            hashValue_2 = (P2 * hashValue_2 + subStr[i]) % MOD2;
+            h1[j] = hashValue_1;
+            h2[j] = hashValue_2;
+        }
+        ans += subStr;
     }
+
     cout << ans << "\n";
     //cout << ans.length() << "\n";
  
@@ -117,11 +133,12 @@ int main()
     ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
+
 #ifndef ONLINE_JUDGE
     freopen("CF_1200E_CompressWords.in", "r", stdin);
     //freopen("CF_1200E_CompressWords.out", "w", stdout);
 #endif
- 
+
     solve();
  
     cout.flush();
