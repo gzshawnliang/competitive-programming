@@ -128,6 +128,8 @@
         ".stignore": true,
         "**/*.ps1": true,
         "**/.classpath": true,
+        "**/.vs": true,
+        "**/.cache": true,
         "**/.project": true,
         "**/.settings": true,
         "**/.factorypath": true
