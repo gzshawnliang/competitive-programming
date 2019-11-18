@@ -4,7 +4,36 @@
 * @Author:         Shawn
 * @create Time:    2019/11/17 18:13:19
 * @url:            https://codeforces.com/contest/533/problem/E
-* @Description:    
+* @Description:    非哈希
+                   两个长度相等的字符串S，T，S!=T，长度是N，W满足
+                   1.长度是N+1，比S多一位
+                   2.W删除一个字符x能变成S，W删除另外一个字符y能变成T,x!=y
+                   求有多少个W
+                   
+                   S = A + x + B + C, 
+                   T = A + B + y + C,
+                   W = A + x + B + y + C, 
+
+                   S =  x + B , 
+                   T =  B + y ,
+                   W =  x + B + y , 
+
+                   S =  B  + x , 
+                   T =  y + B ,
+                   W =  y + B + x , 
+
+
+Suppose that S is obtained from W by deleteing the earlier symbol than T. 
+Then it is true that W = A + x + B + y + C, S = A + x + B + C, T = A + B + y + C, where x 
+and y are deleted symbols and A, B и C are some (possibly, empty) strings.
+
+Let's calculate A as a longest common prefix of S and T and C as a longest 
+common suffix. Remove both of them from strings. Now we now that x and y 
+are respectively the first letter of string S and last letter of string T. 
+Remove them too. The only thing left is to check if remaining parts of strings 
+are equal.
+
+Perform such operation for S and T and for T and S.                   
 ===========================================================
 */
 #include <bits/stdc++.h>
@@ -58,7 +87,7 @@ int main()
 
 #ifndef ONLINE_JUDGE
     freopen("CF_533E_CorrectingMistakes.in", "r", stdin);
-    //freopen("CF_533E_CorrectingMistakes.out", "w", stdout);
+    freopen("CF_533E_CorrectingMistakes.out", "w", stdout);
 #endif
 
     solve();
