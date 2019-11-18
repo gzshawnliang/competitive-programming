@@ -297,8 +297,8 @@ namespace CFHelperUI
                 {
                     System.Diagnostics.Process.Start(rootDir);
                 }
-                
 
+                Application.Exit();
             }
         }
 
