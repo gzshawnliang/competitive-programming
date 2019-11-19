@@ -88,9 +88,11 @@ $$
 hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD
 $$
 
+<img src="http://www.forkosh.com/mathtex.cgi? hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD">
+
 <img src="http://chart.googleapis.com/chart?cht=tx&chl=hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD" style="border:none;">
 
-<img src="https://latex.codecogs.com/png.download?%5Cinline%20hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l+1%7D%29%20%5C%25%20MOD+MOD%29%5C%25MOD" style="border:none;">
+
 
 
 ```c++
