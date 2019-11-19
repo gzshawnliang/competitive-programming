@@ -113,32 +113,34 @@ ll subStrHash(int l, int r)
 
 #### 获取子串的hash公式证明(没有模运算)
 $p=质数$，$l \leq r$
-
-证明：$hash[l,r]=hash[r]-hash[l-1] \times x^{r-l+1}$
-
+证明：$hash[l,r]=hash[r]-hash[l-1] \times p^{r-l+1}$
+___
 
 $$
 \begin{align}
-hash[l] &=s[0] \times x^{l} + s[1] \times x^{l-1} + s[2] \times x^{l-2} + \cdots +s[l]\\\\
-\Longrightarrow hash[l-1] &=s[0] \times x^{l-1} + s[1] \times x^{l-2} + s[2] \times x^{l-3} + \cdots +s[l-1]\\\\
-hash[r] &=s[0] \times x^{r} + s[1] \times x^{r-1} + s[2] \times x^{r-2} + \cdots +s[r]\\\\
-\Longrightarrow hash[l,r] &=s[l] \times x^{r-l} + s[l+1] \times x^{r-l-1} + s[l+2] \times x^{r-l-2} + \cdots +s[r]\\\\
+hash[l] &=s[0] \times p^{l} + s[1] \times p^{l-1} + s[2] \times p^{l-2} + \cdots +s[l]\\\\
+\Longrightarrow hash[l-1] &=s[0] \times p^{l-1} + s[1] \times p^{l-2} + s[2] \times p^{l-3} + \cdots +s[l-1]\\\\
+hash[r] &=s[0] \times p^{r} + s[1] \times p^{r-1} + s[2] \times p^{r-2} + \cdots +s[r]\\\\
+\Longrightarrow hash[l,r] &=s[l] \times p^{r-l} + s[l+1] \times p^{r-l-1} + s[l+2] \times p^{r-l-2} + \cdots +s[r]\\\\
 \end{align}
 $$
 
 $$
 \begin{align}
-hash[l,r]+hash[l-1] \times x^{r-l+1} & = hash[l,r]+ x^{r-l+1} \times (s[0] \times x^{l-1} + s[1] \times x^{l-2} + s[2] \times x^{l-3} + \cdots +s[l-1]) \\\\
-& = hash[l,r] + (s[0] \times x^{r} + s[1] \times x^{r-1} +  s[2] \times x^{r-2} + \cdots +s[l-1] \times x^{r-l+1}) \\\\
-& = s[0] \times x^{r} + s[1] \times x^{r-1} + s[2] \times x^{r-2} + s[l] \times x^{r-l} + s[l+1] \times x^{r-l-1} + s[l+2] \times x^{r-l-2} + \cdots +s[r] \\\\
+hash[l,r]+hash[l-1] \times p^{r-l+1} & = hash[l,r]+ p^{r-l+1} \times (s[0] \times p^{l-1} + s[1] \times p^{l-2} + s[2] \times p^{l-3} + \cdots +s[l-1]) \\\\
+& = hash[l,r] + (s[0] \times p^{r} + s[1] \times p^{r-1} +  s[2] \times p^{r-2} + \cdots +s[l-1] \times p^{r-l+1}) \\\\
+& = s[0] \times p^{r} + s[1] \times p^{r-1} + s[2] \times p^{r-2} + s[l] \times p^{r-l} + s[l+1] \times p^{r-l-1} + s[l+2] \times p^{r-l-2} + \cdots +s[r] \\\\
 & = hash[r]
 \end{align}
 $$
 
 所以
-$hash[l,r]=hash[r]-hash[l-1] \times x^{r-l+1}$
+$hash[l,r]=hash[r]-hash[l-1] \times p^{r-l+1}$
 
 #### 获取子串的hash公式证明(有模运算)
+$p=质数$，$l \leq r$
+证明：$hash[l,r]=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \text{PRIME} + \text{PRIME})\bmod \text{PRIME}$
+___
 
 ### 完整代码
 ```c++
