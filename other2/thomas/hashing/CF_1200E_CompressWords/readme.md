@@ -114,6 +114,9 @@ ll subStrHash(int l, int r)
 #### 获取子串的hash公式证明
 $x=质数$，$l \leq r$
 
+证明：$hash=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \text{PRIME} + \text{PRIME})\bmod \text{PRIME}$
+
+
 $$
 \begin{align}
 hash[l] &=s[0] \times x^{l} + s[1] \times x^{l-1} + s[2] \times x^{l-2} + \cdots +s[l]\\\\
@@ -131,6 +134,9 @@ hash[l,r]+hash[l-1] \times x^{r-l+1} & = hash[l,r]+ x^{r-l+1} \times (s[0] \time
 & = hash[r]
 \end{align}
 $$
+
+所以
+$hash=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \text{PRIME} + \text{PRIME})\bmod \text{PRIME}$
 
 ### 完整代码
 ```c++
