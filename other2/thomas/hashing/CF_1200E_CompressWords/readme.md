@@ -20,29 +20,24 @@ https://codeforces.com/contest/1200/problem/E
 
 例如"sample" 和 "please" ，合并就变成："samplease".
 
-<style>
-table {
-    width:100%;
-}
-</style>
-
 ## Examples
 
-| **input**                         |
+|
 |:----------------------------------|
+| **input**                         |
 | 5 <br>I want to order pizza       |
 | **output**                        |
 | Iwantorderpizza                   |
-||
+
+|
+|:----------------------------------|
 | **input**                         |
 | 5 <br>sample please ease in out   |
 | **output**                        |
 | sampleaseinout                    |
 
-|     |     |
-|-----|-----|
-|Foo  |37   |
-|Bar  |101  |
+
+
 
 ## 解题思路：hash
 
