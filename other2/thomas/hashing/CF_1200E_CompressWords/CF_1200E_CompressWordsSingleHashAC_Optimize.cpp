@@ -13,25 +13,19 @@ using namespace std;
 
 using ll = long long;
 
-const ll P1 = 131;
-const ll MOD1 = 201326611;
+const ll BASE = 131;
+const ll PRIME = 201326611;
 
-vector<ll> ansHash;
-vector<ll> pow1;
+vector<ll> hashArray;
+vector<ll> powArray;
 
-//O(1)取出子串的哈希值，使用之前需要测试
+//O(1)取出子串的哈希值，使用之前注意测试
 ll subStrHash(int l, int r)
 {
-    ll ret1;
     if (l == 0)
-    {
-        ret1 = (ansHash[r] % MOD1 + MOD1) % MOD1;
-    }
+        return (hashArray[r] % PRIME + PRIME) % PRIME;
     else
-    {
-        ret1 = ((ansHash[r] - ansHash[l - 1] * pow1[r - l + 1]) % MOD1 + MOD1) % MOD1;
-    }
-    return ret1;
+        return  ((hashArray[r] - hashArray[l - 1] * powArray[r - l + 1]) % PRIME + PRIME) % PRIME;
 }
 
 void solve()
@@ -46,24 +40,21 @@ void solve()
         totalLen += a[i].length();
     }
 
-    ansHash.assign(totalLen, 0);
-    pow1.assign(totalLen, 0);
+    hashArray.assign(totalLen, 0);
+    powArray.assign(totalLen, 0);
 
-    pow1[0] = 1;
+    powArray[0] = 1;
     for (int i = 1; i <= totalLen - 1; ++i)
-    {
-        pow1[i] = pow1[i - 1] * P1 % MOD1;
-    }
+        powArray[i] = powArray[i - 1] * BASE % PRIME;
 
     string ans = a[0];
-
     ll hashValue1 = 0;
     int ansLen = ans.length();
     for (int i = 0; i <= ansLen - 1; ++i)
     {
         //计算哈希
-        hashValue1 = (P1 * hashValue1 + ans[i]) % MOD1;
-        ansHash[i] = hashValue1;
+        hashValue1 = (BASE * hashValue1 + ans[i]) % PRIME;
+        hashArray[i] = hashValue1;
     }
 
     for (int i = 1; i <= n - 1; ++i)
@@ -80,7 +71,7 @@ void solve()
         {
 
             //计算前缀哈希值
-            hashPrefix = (P1 * hashPrefix + a[i][j]) % MOD1;
+            hashPrefix = (BASE * hashPrefix + a[i][j]) % PRIME;
 
             //计算后缀哈希值
             ll hashSuffix = subStrHash(beginPosSuffix - j, beginPosSuffix);
@@ -94,12 +85,12 @@ void solve()
         string subStr = a[i].substr(maxPrefixPos);
         int subLen = subStr.length();
         int j = ans.length() - 1;
-        ll hAns = ansHash[j];
+        ll hAns = hashArray[j];
         for (int i = 0; i <= subLen - 1; ++i)
         {
             ++j;
-            hAns = (P1 * hAns + subStr[i]) % MOD1;
-            ansHash[j] = hAns;
+            hAns = (BASE * hAns + subStr[i]) % PRIME;
+            hashArray[j] = hAns;
         }
 
         //增加ans的字符串
