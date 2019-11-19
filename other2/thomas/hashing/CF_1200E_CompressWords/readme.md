@@ -20,17 +20,23 @@ https://codeforces.com/contest/1200/problem/E
 
 例如"sample" 和 "please" ，合并就变成："samplease".
 
+<style>
+table th:first-of-type {  #first表示表格第一列
+    width: 100px; # 可使用%比例
+}
+</style>
 
 ## Examples
 
 | **input**                         |
-| ------------------------------    |
+| :---------------------------------|
 | 5 <br>I want to order pizza       |
 | **output**                        |
 | Iwantorderpizza                   |
 
+
 | **input**                         |
-| ----------------------------------|
+| :---------------------------------|
 | 5 <br>sample please ease in out   |
 | **output**                        |
 | sampleaseinout                    |
