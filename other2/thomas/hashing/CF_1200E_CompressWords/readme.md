@@ -36,7 +36,7 @@ https://codeforces.com/contest/1200/problem/E
 | sampleaseinout                    |
 
 
-### 解题思路：hash
+## 解题思路：hash
 
 1. 第1个word计算哈希存储到数组ansHash[i]；
 2. 循环第2个word的字符，计算前缀哈希，根据第1步的数组O(1)计算查找子串
@@ -46,12 +46,12 @@ https://codeforces.com/contest/1200/problem/E
 6. 最大的pos之后的字符组成的子串（substring）计算哈希添加到数组ansHash[i]
 
 
+### 第2个word的前缀和第1个word的后缀比较
 
-![](CF_1200E_CompressWords_1.png)
+![比较哈希](CF_1200E_CompressWords_1.png)
 
-
-
-
+### 第3个word的前缀和第1、2合并之后word的后缀比较
+![比较哈希](CF_1200E_CompressWords_2.png)
 
 ### 哈希知识点
 
