@@ -85,10 +85,10 @@ for (int i = 0; i <= ansLen - 1; ++i)
 
 若已知一个的字符串$|s|=n$的hash值：$hash[i]$,$1\leq i\leq n$，其子串，对应的hash值为：
 $$
-hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD
+hash=((hash[r]-hash[l-1]*p^{r-l+1})\%MOD+MOD)\%MOD
 $$
 
-![](http://latex.codecogs.com/gif.latex?%5Clarge%20hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l&plus;1%7D%29%20%5C%25%20MOD&plus;MOD%29%5C%25MOD)
+
 
 
 ```c++
