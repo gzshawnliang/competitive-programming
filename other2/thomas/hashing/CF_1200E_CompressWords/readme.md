@@ -1,3 +1,7 @@
+---
+export_on_save:
+ html: true
+---
 # 1200E. Compress Words 
 
 ### 来源
