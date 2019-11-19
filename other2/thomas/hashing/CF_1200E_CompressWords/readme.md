@@ -111,18 +111,18 @@ ll subStrHash(int l, int r)
 ```
 
 
-#### 获取子串的hash公式证明
-$x=质数$，$l \leq r$
+#### 获取子串的hash公式证明(没有模运算)
+$p=质数$，$l \leq r$
 
-证明：$hash[l,r]=hash[r]-hash[l-1]$
+证明：$hash[l,r]=hash[r]-hash[l-1] \times x^{r-l+1}$
 
 
 $$
 \begin{align}
 hash[l] &=s[0] \times x^{l} + s[1] \times x^{l-1} + s[2] \times x^{l-2} + \cdots +s[l]\\\\
-hash[l-1] &=s[0] \times x^{l-1} + s[1] \times x^{l-2} + s[2] \times x^{l-3} + \cdots +s[l-1]\\\\
+\Longrightarrow hash[l-1] &=s[0] \times x^{l-1} + s[1] \times x^{l-2} + s[2] \times x^{l-3} + \cdots +s[l-1]\\\\
 hash[r] &=s[0] \times x^{r} + s[1] \times x^{r-1} + s[2] \times x^{r-2} + \cdots +s[r]\\\\
-hash[l,r] &=s[l] \times x^{r-l} + s[l+1] \times x^{r-l-1} + s[l+2] \times x^{r-l-2} + \cdots +s[r]\\\\
+\Longrightarrow hash[l,r] &=s[l] \times x^{r-l} + s[l+1] \times x^{r-l-1} + s[l+2] \times x^{r-l-2} + \cdots +s[r]\\\\
 \end{align}
 $$
 
@@ -136,7 +136,9 @@ hash[l,r]+hash[l-1] \times x^{r-l+1} & = hash[l,r]+ x^{r-l+1} \times (s[0] \time
 $$
 
 所以
-$hash[l,r]=hash[r]-hash[l-1]$
+$hash[l,r]=hash[r]-hash[l-1] \times x^{r-l+1}$
+
+#### 获取子串的hash公式证明(有模运算)
 
 ### 完整代码
 ```c++
