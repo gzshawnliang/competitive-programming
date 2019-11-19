@@ -1,10 +1,10 @@
 # 1200E. Compress Words 
 
-### 来源
+## 来源
 
 https://codeforces.com/contest/1200/problem/E
 
-### 题意
+## 题意
 
 给定n（$1\leq n \leq 10^5$）个 words ：
 
@@ -21,7 +21,7 @@ https://codeforces.com/contest/1200/problem/E
 例如"sample" 和 "please" ，合并就变成："samplease".
 
 
-### Examples
+## Examples
 
 | **input**                         |
 | ------------------------------    |
@@ -39,7 +39,7 @@ https://codeforces.com/contest/1200/problem/E
 ## 解题思路：hash
 
 1. 第1个word计算哈希存储到数组ansHash[i]；
-2. 循环第2个word的字符，计算前缀哈希，根据第1步的数组O(1)计算查找子串
+2. 循环第2个word的字符，计算前缀哈希，根据第1步的数组O(1)计算后缀哈希
 3. 如果哈希值符合，表示第1个word的后缀和第2个word的前缀一样，记录位置pos
 4. 第3部循环查找，一直找到最大的pos，注意不要超过第1个word长度和第2个word的长度
 5. 最大的pos之后的字符组成的子串（substring）和第1个word合并
@@ -52,9 +52,13 @@ https://codeforces.com/contest/1200/problem/E
 ### 第3个word的前缀和第1、2合并之后word的后缀比较
 ![比较哈希](CF_1200E_CompressWords_2.png)
 
-### 哈希知识点
+### 循环第2个word的字符，计算前缀哈希，根据第1步的数组O(1)计算后缀哈希，如下：
+![比较哈希](CF_1200E_CompressWords_3.png)
 
-#### 质数的选取
+
+## 哈希知识点
+
+### 质数的选取
 
 ```c++
 using ll = long long;
@@ -62,14 +66,14 @@ const ll P1 = 131;
 const ll MOD1 = 201326611;
 ```
 
-#### 预计算质数的幂，以便方便取出子串的哈希
+### 预计算质数的幂，以便方便取出子串的哈希
 ```c++
 powArray[0] = 1;
 for (int i = 1; i <= totalLen - 1; ++i)
     powArray[i] = powArray[i - 1] * BASE % PRIME;
 ```
 
-#### 计算第1个word的哈希
+### 计算第1个word的哈希
 a[0]是第1个word,存储到 hashArray[i]数组
 ```c++
 string ans = a[0];
@@ -83,7 +87,7 @@ for (int i = 0; i <= ansLen - 1; ++i)
 }
 ```
 
-#### 获取子串的hash
+### 获取子串的hash
 
 如果我们求出一个word的Hash，就可以$O(1)$求解其子串（substring）的Hash值。
 公式的推导需要掌握。
