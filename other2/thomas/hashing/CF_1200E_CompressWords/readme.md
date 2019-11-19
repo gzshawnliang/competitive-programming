@@ -97,7 +97,7 @@ for (int i = 0; i <= ansLen - 1; ++i)
 
 若已知一个的字符串$|s|=n$的hash值：$hash[i]$,$1\leq i\leq n$，其子串，对应的hash值为：
 
-$hash=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \text{PRIME} + \text{PRIME})\bmod \text{PRIME}$
+$hash[l,r]=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \text{PRIME} + \text{PRIME})\bmod \text{PRIME}$
 
 ```c++
 //O(1)取出子串的哈希值，使用之前注意测试
@@ -114,7 +114,7 @@ ll subStrHash(int l, int r)
 #### 获取子串的hash公式证明
 $x=质数$，$l \leq r$
 
-证明：$hash=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \text{PRIME} + \text{PRIME})\bmod \text{PRIME}$
+证明：$hash[l,r]=hash[r]-hash[l-1]$
 
 
 $$
@@ -136,7 +136,7 @@ hash[l,r]+hash[l-1] \times x^{r-l+1} & = hash[l,r]+ x^{r-l+1} \times (s[0] \time
 $$
 
 所以
-$hash=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \text{PRIME} + \text{PRIME})\bmod \text{PRIME}$
+$hash[l,r]=hash[r]-hash[l-1]$
 
 ### 完整代码
 ```c++
