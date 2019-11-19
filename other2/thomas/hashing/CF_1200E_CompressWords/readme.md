@@ -112,23 +112,23 @@ ll subStrHash(int l, int r)
 
 
 #### 获取子串的hash公式证明
-$x=质数$，$l \le r$
+$x=质数$，$l \leq r$
 
 $$
 \begin{align}
-hash[i] &=s[0] \times x^{i} + s[1] \times x^{i-1} + s[2] \times x^{i-2} + \cdots +s[i]\\\\
-hash[i-1] &=s[0] \times x^{i-1} + s[1] \times x^{i-2} + s[2] \times x^{i-3} + \cdots +s[i-1]\\\\
-hash[j] &=s[0] \times x^{j} + s[1] \times x^{j-1} + s[2] \times x^{j-2} + \cdots +s[j]\\\\
-hash[i,j] &=s[i] \times x^{j-i} + s[i+1] \times x^{j-i-1} + s[i+2] \times x^{j-i-2} + \cdots +s[j]\\\\
+hash[l] &=s[0] \times x^{l} + s[1] \times x^{l-1} + s[2] \times x^{l-2} + \cdots +s[l]\\\\
+hash[l-1] &=s[0] \times x^{l-1} + s[1] \times x^{l-2} + s[2] \times x^{l-3} + \cdots +s[l-1]\\\\
+hash[r] &=s[0] \times x^{r} + s[1] \times x^{r-1} + s[2] \times x^{r-2} + \cdots +s[r]\\\\
+hash[l,r] &=s[l] \times x^{r-l} + s[l+1] \times x^{r-l-1} + s[l+2] \times x^{r-l-2} + \cdots +s[r]\\\\
 \end{align}
 $$
 
 $$
 \begin{align}
-hash[i,j]+hash[i-1] \times x^{j-i+1} & = hash[i,j]+ x^{j-i+1} \times (s[0] \times x^{i-1} + s[1] \times x^{i-2} + s[2] \times x^{i-3} + \cdots +s[i-1]) \\\\
-& = hash[i,j] + (s[0] \times x^{j} + s[1] \times x^{j-1} +  s[2] \times x^{j-2} + \cdots +s[i-1] \times x^{j-i+1}) \\\\
-& = s[0] \times x^{j} + s[1] \times x^{j-1} + s[2] \times x^{j-2} + s[i] \times x^{j-i} + s[i+1] \times x^{j-i-1} + s[i+2] \times x^{j-i-2} + \cdots +s[j] \\\\
-& = hash[j]
+hash[l,r]+hash[l-1] \times x^{r-l+1} & = hash[l,r]+ x^{r-l+1} \times (s[0] \times x^{l-1} + s[1] \times x^{l-2} + s[2] \times x^{l-3} + \cdots +s[l-1]) \\\\
+& = hash[l,r] + (s[0] \times x^{r} + s[1] \times x^{r-1} +  s[2] \times x^{r-2} + \cdots +s[l-1] \times x^{r-l+1}) \\\\
+& = s[0] \times x^{r} + s[1] \times x^{r-1} + s[2] \times x^{r-2} + s[l] \times x^{r-l} + s[l+1] \times x^{r-l-1} + s[l+2] \times x^{r-l-2} + \cdots +s[r] \\\\
+& = hash[r]
 \end{align}
 $$
 
