@@ -119,10 +119,10 @@ $p=质数$，$l \leq r$
 
 $$
 \begin{align}
-hash[l] &=s[0] \times x^{l} & + s[1] \times x^{l-1} + s[2] \times x^{l-2} + \cdots +s[l]\\\\
-\Longrightarrow hash[l-1] &=s[0] \times x^{l-1} & + s[1] \times x^{l-2} + s[2] \times x^{l-3} + \cdots +s[l-1]\\\\
-hash[r] &=s[0] \times x^{r} + s[1] \times x^{r-1} & + s[2] \times x^{r-2} + \cdots +s[r]\\\\
-\Longrightarrow hash[l,r] &=s[l] \times x^{r-l} & + s[l+1] \times x^{r-l-1} + s[l+2] \times x^{r-l-2} + \cdots +s[r]\\\\
+hash[l] &=s[0] \times x^{l} + s[1] \times x^{l-1} + s[2] \times x^{l-2} + \cdots +s[l]\\\\
+\Longrightarrow hash[l-1] &=s[0] \times x^{l-1} + s[1] \times x^{l-2} + s[2] \times x^{l-3} + \cdots +s[l-1]\\\\
+hash[r] &=s[0] \times x^{r} + s[1] \times x^{r-1} + s[2] \times x^{r-2} + \cdots +s[r]\\\\
+\Longrightarrow hash[l,r] &=s[l] \times x^{r-l} + s[l+1] \times x^{r-l-1} + s[l+2] \times x^{r-l-2} + \cdots +s[r]\\\\
 \end{align}
 $$
 
