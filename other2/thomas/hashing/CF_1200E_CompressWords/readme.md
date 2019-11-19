@@ -47,7 +47,6 @@ https://codeforces.com/contest/1200/problem/E
 
 
 ### 第2个word的前缀和第1个word的后缀比较
-
 ![比较哈希](CF_1200E_CompressWords_1.png)
 
 ### 第3个word的前缀和第1、2合并之后word的后缀比较
@@ -120,7 +119,6 @@ ll subStrHash(int l, int r)
 using namespace std;
 
 using ll = long long;
-
 const ll BASE = 131;
 const ll PRIME = 201326611;
 

@@ -12,7 +12,6 @@
 using namespace std;
 
 using ll = long long;
-
 const ll BASE = 131;
 const ll PRIME = 201326611;
 
