@@ -110,6 +110,7 @@ ll subStrHash(int l, int r)
 }
 ```
 
+
 #### 获取子串的hash公式证明
 $x=质数$，$j=i+k$
 
