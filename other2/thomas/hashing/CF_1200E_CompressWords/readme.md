@@ -90,6 +90,7 @@ $$
 
 ![](http://latex.codecogs.com/gif.latex?%5Clarge%20hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l&plus;1%7D%29%20%5C%25%20MOD&plus;MOD%29%5C%25MOD)
 
+![](https://latex.codecogs.com/png.download?hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l+1%7D%29%20%5C%25%20MOD+MOD%29%5C%25MOD)
 
 ```c++
 //O(1)取出子串的哈希值，使用之前需要测试
