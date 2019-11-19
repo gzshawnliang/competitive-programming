@@ -119,12 +119,14 @@ hash[i]=s[0] \times x^{i} + s[1] \times x^{i-1} + s[2] \times x^{i-2} + \cdots +
 hash[i-1]=s[0] \times x^{i-1} + s[1] \times x^{i-2} + s[2] \times x^{i-3} + \cdots +s[i-1]\\\\
 hash[j]=s[0] \times x^{j} + s[1] \times x^{j-1} + s[2] \times x^{j-2} + \cdots +s[j]\\\\
 hash[i,j]=s[i] \times x^{j-i} + s[i+1] \times x^{j-i-1} + s[i+2] \times x^{j-i-2} + \cdots +s[j]\\\\
+$$
+
+$$
 \begin{align}
-hash[i,j]+hash[i-1] \times x^{j-i+1} \\\\
-= hash[i,j]+ x^{j-i+1} \times (s[0] \times x^{i-1} + s[1] \times x^{i-2} + s[2] \times x^{i-3} + \cdots +s[i-1]) \\\\
-= hash[i,j] + (s[0] \times x^{j} + s[1] \times x^{j-1} +  s[2] \times x^{j-2} + \cdots +s[i-1] \times x^{j-i+1}) \\\\
-= s[0] \times x^{j} + s[1] \times x^{j-1} + s[2] \times x^{j-2} + s[i] \times x^{j-i} + s[i+1] \times x^{j-i-1} + s[i+2] \times x^{j-i-2} + \cdots +s[j] \\\\
-= hash[j]
+hash[i,j]+hash[i-1] \times x^{j-i+1} & =hash[i,j]+ x^{j-i+1} \times (s[0] \times x^{i-1} + s[1] \times x^{i-2} + s[2] \times x^{i-3} + \cdots +s[i-1]) \\
+& = hash[i,j] + (s[0] \times x^{j} + s[1] \times x^{j-1} +  s[2] \times x^{j-2} + \cdots +s[i-1] \times x^{j-i+1}) \\
+& = s[0] \times x^{j} + s[1] \times x^{j-1} + s[2] \times x^{j-2} + s[i] \times x^{j-i} + s[i+1] \times x^{j-i-1} + s[i+2] \times x^{j-i-2} + \cdots +s[j] \\
+& = hash[j]
 \end{align}
 $$
 
