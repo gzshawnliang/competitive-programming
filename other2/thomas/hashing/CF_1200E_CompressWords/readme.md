@@ -87,6 +87,10 @@ for (int i = 0; i <= ansLen - 1; ++i)
 
 $hash=((hash[r]-hash[l-1]*p^{r-l+1})$ $\\%$ MOD $+$MOD $)%$ $\\%$ MOD
 
+$$
+hash=((hash[r]-hash[l-1]*p^{r-l+1})\% MOD+MOD)\%MOD
+$$
+
 
 
 
