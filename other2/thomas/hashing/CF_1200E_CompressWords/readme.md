@@ -91,7 +91,10 @@ for (int i = 0; i <= ansLen - 1; ++i)
 $$
 hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD
 $$
-![](http://latex.codecogs.com/gif.latex?\inline \large hash%3D((hash[r]-hash[l-1]*p^{r-l&plus;1}) \%25 MOD&plus;MOD)\%25MOD)
+
+![](https://latex.codecogs.com/png.download?%5Cinline%20hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l+1%7D%29%20%5C%25%20MOD+MOD%29%5C%25MOD)
+
+![](https://latex.codecogs.com/svg.download?%5Cinline%20hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l+1%7D%29%20%5C%25%20MOD+MOD%29%5C%25MOD)
 
 ```c++
 //O(1)取出子串的哈希值，使用之前需要测试
