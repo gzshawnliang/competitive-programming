@@ -85,7 +85,7 @@ for (int i = 0; i <= ansLen - 1; ++i)
 
 若已知一个的字符串$|s|=n$的hash值：$hash[i]$,$1\leq i\leq n$，其子串，对应的hash值为：
 
-$hash=((hash[r]-hash[l-1]*p^{r-l+1})$ $\%$ MOD $+$MOD $)%$ $\%$ MOD
+$hash=((hash[r]-hash[l-1]*p^{r-l+1})$ $\\%$ MOD $+$MOD $)%$ $\%$ MOD
 
 
 
