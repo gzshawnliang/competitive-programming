@@ -142,6 +142,7 @@ $p=质数$，$l \leq r$
 证明：$hash[l,r]=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \text{PRIME} + \text{PRIME})\bmod \text{PRIME}$
 ___
 
+
 ### 完整代码
 ```c++
 /*
