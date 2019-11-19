@@ -22,14 +22,14 @@ https://codeforces.com/contest/1200/problem/E
 
 ## Examples
 
-|
+||
 |:----------------------------------|
 | **input**                         |
 | 5 <br>I want to order pizza       |
 | **output**                        |
 | Iwantorderpizza                   |
 
-|
+||
 |:----------------------------------|
 | **input**                         |
 | 5 <br>sample please ease in out   |
