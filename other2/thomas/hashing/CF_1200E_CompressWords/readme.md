@@ -85,10 +85,8 @@ for (int i = 0; i <= ansLen - 1; ++i)
 
 若已知一个的字符串$|s|=n$的hash值：$hash[i]$,$1\leq i\leq n$，其子串，对应的hash值为：
 
-$hash=((hash[r]-hash[l-1]*p^{r-l+1})$ $\\%$ MOD $+$MOD $)%$ $\\%$ MOD
-
 $$
-hash=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod PRIME + PRIME)\bmod PRIME
+hash=((hash[r]-hash[l-1] \times p^{r-l+1})\bmod \% PRIME + PRIME)\bmod PRIME
 $$
 
 
@@ -99,16 +97,10 @@ $$
 //O(1)取出子串的哈希值，使用之前需要测试
 ll subStrHash(int l, int r)
 {
-    ll ret1;
     if (l == 0)
-    {
-        ret1 = (ansHash[r] % MOD1 + MOD1) % MOD1;
-    }
+        return (ansHash[r] % MOD1 + MOD1) % MOD1;
     else
-    {
-        ret1 = ((ansHash[r] - ansHash[l - 1] * pow1[r - l + 1]) % MOD1 + MOD1) % MOD1;
-    }
-    return ret1;
+        return ((ansHash[r] - ansHash[l - 1] * pow1[r - l + 1]) % MOD1 + MOD1) % MOD1;
 }
 ```
 
