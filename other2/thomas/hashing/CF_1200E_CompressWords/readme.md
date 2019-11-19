@@ -45,6 +45,14 @@ https://codeforces.com/contest/1200/problem/E
 5. 最大的pos之后的字符组成的子串（substring）和第1个word合并
 6. 最大的pos之后的字符组成的子串（substring）计算哈希添加到数组ansHash[i]
 
+
+
+![](CF_1200E_CompressWords_1.png)
+
+
+
+
+
 ### 哈希知识点
 
 #### 质数的选取
