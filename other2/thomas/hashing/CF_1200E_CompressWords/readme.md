@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 # 1200E. Compress Words 
 
 ### 来源
@@ -87,12 +89,6 @@ for (int i = 0; i <= ansLen - 1; ++i)
 $$
 hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD
 $$
-
-<img src="http://www.forkosh.com/mathtex.cgi? hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD">
-
-<img src="http://chart.googleapis.com/chart?cht=tx&chl=hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD" style="border:none;">
-
-
 
 
 ```c++
