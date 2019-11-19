@@ -88,8 +88,7 @@ $$
 hash=((hash[r]-hash[l-1]*p^{r-l+1}) \% MOD+MOD)\%MOD
 $$
 
-![](https://latex.codecogs.com/png.download?hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l+1%7D%29%20%5C%25%20MOD+MOD%29%5C%25MOD)
-<img src="https://latex.codecogs.com/png.download?hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l+1%7D%29%20%5C%25%20MOD+MOD%29%5C%25MOD">
+![](http://latex.codecogs.com/gif.latex?%5Clarge%20hash%3D%28%28hash%5Br%5D-hash%5Bl-1%5D*p%5E%7Br-l&plus;1%7D%29%20%5C%25%20MOD&plus;MOD%29%5C%25MOD)
 
 
 ```c++
