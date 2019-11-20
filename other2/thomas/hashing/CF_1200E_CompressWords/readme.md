@@ -114,10 +114,10 @@ ll subStrHash(int l, int r)
 ##### 概述
 此规则就是将多项式转换为嵌套形式，例如,当$n=5$
 $$\begin{align}
-p^5+p^4+p^3+p^2+p &= p \times(p^4+p^3+p^2+p+1)\\\\
-&=p \times \big( p \times (p^3+p^2+p^1+1)+1 \big) \\\\
-&=p \times \Big( p \times \big(p \times (p^2+p^1+1)+1\big)+1 \Big)\\\\
-&=p \times \Bigg( p \times \bigg(p \times \big( p \times (p+1) +1 \big)+1\bigg)+1 \Bigg)
+p^5+p^4+p^3+p^2+p &= p \times(p^4+p^3+p^2+p+1)\\\\ \nonumber
+&=p \times \big( p \times (p^3+p^2+p^1+1)+1 \big) \\\\ \nonumber
+&=p \times \Big( p \times \big(p \times (p^2+p^1+1)+1\big)+1 \Big)\\\\ \nonumber
+&=p \times \Bigg( p \times \bigg(p \times \big( p \times (p+1) +1 \big)+1\bigg)+1 \Bigg) \nonumber
 \end{align}
 $$
 转化后, 阅读起来还像更费力了, 因为有很多括号.但是这个形式有一个最大的优点: 计算效率高!
@@ -133,7 +133,7 @@ $$
 
 |计算式                              |乘法运算（次数）                    |加法运算（次数）|
 |:--------------------------------- |:--------------------------------|:------------|
-| $p^{1000}+p^{999}+ \cdots +p^{2}+p$ |$$\begin{align} \nonumber & =999+998+997+\cdots +1 \\\\ \nonumber &= \Large \frac{(999+1)\times999}2\normalsize \\\\ \nonumber &= 499500 \end{align}$$   | $1000$         |
+| $p^{1000}+p^{999}+ \cdots +p^{2}+p$ |$$\begin{align} \nonumber & =999+998+997+\cdots +1 \\\\ \nonumber &= \frac{(999+1)\times999}2 \\\\ \nonumber &= 499500 \end{align}$$   | $1000$         |
 | $p \times \Bigg( p \times \bigg(p \times \big( p \times \cdots \times (p+1) + \cdots +1 \big)+1\bigg)+1 \Bigg)$  | $1000$ | $1000$ |
 
 ##### 时间复杂度
