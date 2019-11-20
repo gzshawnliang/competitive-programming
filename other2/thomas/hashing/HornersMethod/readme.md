@@ -42,7 +42,7 @@ hash[i] =s[0] \times p^{i} + s[1] \times p^{i-1} + s[2] \times p^{i-2}+ s[3] \ti
 $$
 
 ## 代码示例
-
+***
 $p^5+p^4+p^3+p^2+p$
 ```c++
 ull pow = 1;
@@ -54,6 +54,7 @@ for (int i = 1; i <= 5; ++i)
 }
 return hashcode;
 ```
+***
 $p \times \Bigg( p \times \bigg(p \times \big( p \times (p+1) +1 \big)+1\bigg)+1 \Bigg)$
 ```c++
 ull hashcode = 0;
@@ -62,6 +63,7 @@ for (int i = 1; i <= 5; ++i)
 
 return hashcode;
 ```
+***
 
 ## 通用公式
 $$\begin{align}
