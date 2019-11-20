@@ -97,12 +97,30 @@ return hashValue;
 $S=abcd,质数p=3$
 
 ASCII
+
 |字母|ASCII|
 |---|-----|
 | a | 97  |   
 | b | 98  |   
 | c | 99  |   
 | d | 100 |   
+
+
+||
+|:----------------------------------|
+| **input**                         |
+| 5 <br>I want to order pizza       |
+| **output**                        |
+| Iwantorderpizza                   |
+
+||
+|:----------------------------------|
+| **input**                         |
+| 5 <br>sample please ease in out   |
+| **output**                        |
+| sampleaseinout                    |
+
+
 
 普通方式
 $hash(S) =97\times p^3+98\times p^2+99\times p^1 +100 = 3898$
