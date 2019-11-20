@@ -133,7 +133,7 @@ $$
 
 |计算式                              |乘法运算（次数）                    |加法运算（次数）|
 |:--------------------------------- |:--------------------------------|:------------|
-| $p^{1000}+p^{999}+ \cdots +p^{2}+p$ |$$\begin{align} & =999+998+997+\cdots +1 \\\\ &= \Large \frac{(999+1)\times999}2\normalsize \\\\ &= 499500\end{align}$$   | $1000$         |
+| $p^{1000}+p^{999}+ \cdots +p^{2}+p$ |$$\begin{align} \nonumber & =999+998+997+\cdots +1 \\\\ &= \Large \frac{(999+1)\times999}2\normalsize \\\\ &= 499500\end{align}$$   | $1000$         |
 | $p \times \Bigg( p \times \bigg(p \times \big( p \times \cdots \times (p+1) + \cdots +1 \big)+1\bigg)+1 \Bigg)$  | $1000$ | $1000$ |
 
 ##### 时间复杂度
