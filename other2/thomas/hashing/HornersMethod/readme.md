@@ -65,7 +65,7 @@ return hashcode;
 
 ## 通用公式
 $$\begin{align}
-h(x) \nonumber &=a_0 + a_1\times p^1+a_2\times p^2+a_3\times p^3+ \cdots +a_n\times p^n\\ 
+h(x) \nonumber &=a_0 + a_1\times p^1+a_2\times p^2+a_3\times p^3+ \cdots +a_n\times p^n\\\\ 
      \nonumber &=a_0 + p \times \bigg(a_1+ p\times \Big(a_2 + p \times \big( a_3 + \cdots + p \times (a_{n-1}+a_n \times x) \cdots \big) \Big) \bigg)
 \end{align}
 $$
@@ -73,14 +73,14 @@ $$
 字符串$S$的长度$|S|=n,n \geq 0,S[0]=S_0,S[1]=S_1,\cdots\,S[i]=S_i$，哈希计算式：
 
 $$\begin{align}
-hash(S) \nonumber &=s_0 + s_1\times p^1+s_2\times p^2+s_3\times p^3+ \cdots +s_{n-1}\times p^{n-1}\\ 
+hash(S) \nonumber &=s_0 + s_1\times p^1+s_2\times p^2+s_3\times p^3+ \cdots +s_{n-1}\times p^{n-1}\\\\ 
      \nonumber &=s_0 + p \times \bigg(s_1+ p\times \Big(s_2 + p \times \big( s_3 + \cdots + p \times (s_{n-1}+s_n \times p) \cdots \big) \Big) \bigg)
 \end{align}
 $$
 
 一般倒过来计算
 $$\begin{align}
-hash(S) \nonumber &=s_0 \times p^{n-1} + s_1\times p^{n-2}+s_2\times p^{n-3}+s_3 \times p^{n-4}+ \cdots +s_{n-1}\times p^0\\ 
+hash(S) \nonumber &=s_0 \times p^{n-1} + s_1\times p^{n-2}+s_2\times p^{n-3}+s_3 \times p^{n-4}+ \cdots +s_{n-1}\times p^0\\\\ 
      \nonumber &=s_{n-1} + p \times \bigg(s_{n-2}+ p\times \Big(s_{n-3} + p \times \big(s_{n-4} + \cdots + p \times (s_1+s_0 \times p) \cdots \big) \Big) \bigg)
 \end{align}
 $$
