@@ -94,7 +94,7 @@ for (int i = 0; i <= len-1; ++i)
 return hashValue;
 ```
 ## 示例
-$S=abcd,质数p=3$
+$S=abcd,n=4$，质数 $p=3$
 
 ASCII
 
