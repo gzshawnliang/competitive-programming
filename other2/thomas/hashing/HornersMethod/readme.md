@@ -128,6 +128,5 @@ ASCII
 
 
 ## 参考
-https://zh.wikipedia.org/zh-hans/秦九韶算法
-
-https://en.wikipedia.org/wiki/Horner's_method
+<https://zh.wikipedia.org/zh-hans/秦九韶算法>
+<https://en.wikipedia.org/wiki/Horner's_method>
