@@ -110,6 +110,38 @@ ll subStrHash(int l, int r)
 }
 ```
 
+#### Horner's method 减少乘法运算
+此规则就是将多项式转换为嵌套形式，例如,当$n=5$
+$$\begin{align}
+p^5+p^4+p^3+p^2+p &= p \times(p^4+p^3+p^2+p+1)\\
+&=p \times \big( p \times (p^3+p^2+p^1+1)+1 \big) \\
+&=p \times \Big( p \times \big(p \times (p^2+p^1+1)+1\big)+1 \Big)\\
+&=p \times \Bigg( p \times \bigg(p \times \big( p \times (p+1) +1 \big)+1\bigg)+1 \Bigg)
+\end{align}
+$$
+转化后, 阅读起来还像更费力了, 因为有很多括号.但是这个形式有一个最大的优点: 计算效率高!
+
+$p^5+p^4+p^3+p^2+p$为例:乘法运算次数 = 4 + 3 + 2 + 1 = 10次, 加法运算次数 = 4次.
+转化为Horner形式后: $p \times \Bigg( p \times \bigg(p \times \big( p \times (p+1) +1 \big)+1\bigg)+1 \Bigg)$
+乘法运算次数 = 4次, 加法运算次数 = 4次，乘法运算明显减少, 而加法运算次数不变。
+
+当$n=1000$情况如何？
+乘法次数$=999+998+997+\cdots +1= \Large \frac{(999+1)\times999}2\normalsize = 499500$，加法次数$1000$
+乘法次数是 $\Large \frac{n \times(n-1)}2$,时间复杂度：$O(n^2)$，转化为Horner形式后时间复杂度是：$O(n)$
+
+#### MATLAB的Horner's method函数为horner 测试
+
+---
+
+$$\begin{align}
+hash[i] & =s[0] \times p^{0} + s[1] \times p^{1} + s[2] \times p^{2} + s[3] \times p^{3} + \cdots + s[i] \times p^{i} \\
+&=s[0]+p \times (s[1]+p \times (s[2]+p \times (s[3] + \cdots + p \times (a[i-1]+p \times a[i]) \cdots ))) \\
+\end{align}
+$$
+
+$$
+hash[i] =s[0] \times p^{i} + s[1] \times p^{i-1} + s[2] \times p^{i-2}+ s[3] \times p^{i-3} + \cdots +s[i] \\
+$$
 
 #### 获取子串的hash公式证明(没有模运算)
 $p=质数$，$l \leq r$
