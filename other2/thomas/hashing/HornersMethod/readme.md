@@ -71,7 +71,7 @@ h(x) \nonumber &=a_0 + a_1\times p^1+a_2\times p^2+a_3\times p^3+ \cdots +a_n\ti
      \nonumber &=a_0 + p \times \bigg(a_1+ p\times \Big(a_2 + p \times \big( a_3 + \cdots + p \times (a_{n-1}+a_n \times x) \cdots \big) \Big) \bigg)
 \end{align}
 $$
-## 字符串哈希应用
+## 字符串进制哈希应用
 字符串$S$的长度$|S|=n,n \geq 0,S[0]=S_0,S[1]=S_1,\cdots\,S[i]=S_i$，哈希计算式：
 
 $$\begin{align}
@@ -95,6 +95,18 @@ for (int i = 0; i <= len-1; ++i)
 
 return hashValue;
 ```
+
+数据大溢出可以使用模运算
+```c++
+int len = s.length();
+ull hashValue = 0;
+for (int i = 0; i <= len-1; ++i)
+    hashValue = (p * hashValue + s[i]) % PRIME;;
+
+return hashValue;
+```
+
+
 ## 示例
 $S=abcd,n=4$，质数 $p=3$
 
