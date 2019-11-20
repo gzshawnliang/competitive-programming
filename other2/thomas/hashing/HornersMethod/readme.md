@@ -106,11 +106,9 @@ ASCII
 | d | 100 |   
 
 
-普通方式
-$hash(S) =97\times p^3+98\times p^2+99\times p^1 +100 = 3898$
+普通方式：$hash(S) =97\times p^3+98\times p^2+99\times p^1 +100 = 3898$
 
-霍纳法则:
-$hash(S) =100+ p \times \big(99 + p \times (98 + 97 \times p)\big) = 3898$
+霍纳法则：$hash(S) =100+ p \times \big(99 + p \times (98 + 97 \times p)\big) = 3898$
 
 
 
