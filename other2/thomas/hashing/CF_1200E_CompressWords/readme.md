@@ -114,9 +114,9 @@ ll subStrHash(int l, int r)
 ##### 概述
 此规则就是将多项式转换为嵌套形式，例如,当$n=5$
 $$\begin{align}
-p^5+p^4+p^3+p^2+p &= p \times(p^4+p^3+p^2+p+1)\\
-&=p \times \big( p \times (p^3+p^2+p^1+1)+1 \big) \\
-&=p \times \Big( p \times \big(p \times (p^2+p^1+1)+1\big)+1 \Big)\\
+p^5+p^4+p^3+p^2+p &= p \times(p^4+p^3+p^2+p+1)\\\\
+&=p \times \big( p \times (p^3+p^2+p^1+1)+1 \big) \\\\
+&=p \times \Big( p \times \big(p \times (p^2+p^1+1)+1\big)+1 \Big)\\\\
 &=p \times \Bigg( p \times \bigg(p \times \big( p \times (p+1) +1 \big)+1\bigg)+1 \Bigg)
 \end{align}
 $$
@@ -133,7 +133,7 @@ $$
 
 |计算式                              |乘法运算（次数）                    |加法运算（次数）|
 |:--------------------------------- |:--------------------------------|:------------|
-| $p^{1000}+p^{999}+ \cdots +p^{2}+p$ |$=999+998+997+\cdots +1= \Large \frac{(999+1)\times999}2\normalsize = 499500$   | $1000$         |
+| $p^{1000}+p^{999}+ \cdots +p^{2}+p$ |$$\begin{align} & =999+998+997+\cdots +1 \\ &= \Large \frac{(999+1)\times999}2\normalsize \\ &= 499500\end{align}$$   | $1000$         |
 | $p \times \Bigg( p \times \bigg(p \times \big( p \times \cdots \times (p+1) + \cdots +1 \big)+1\bigg)+1 \Bigg)$  | $1000$ | $1000$ |
 
 ##### 时间复杂度
