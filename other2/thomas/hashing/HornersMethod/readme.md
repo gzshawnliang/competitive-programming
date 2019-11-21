@@ -36,10 +36,7 @@ $$
 | $p \times \Bigg( p \times \bigg(p \times \big( p \times \cdots \times (p+1) + \cdots +1 \big)+1\bigg)+1 \Bigg)$  | $O(n)$ | $O(n)$ |
 
 ## MATLAB的Horner's method 函数为 horner 测试
-
-$$
-hash[i] =s[0] \times p^{i} + s[1] \times p^{i-1} + s[2] \times p^{i-2}+ s[3] \times p^{i-3} + \cdots +s[i]
-$$
+![](HornersMethod_1.png)
 
 ## 代码示例
 ***
