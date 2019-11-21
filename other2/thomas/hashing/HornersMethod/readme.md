@@ -35,7 +35,7 @@ $$
 | $p^{1000}+p^{999}+ \cdots +p^{2}+p$ |$\Large \frac{n \times(n-1)}2$ <br> 时间复杂度：$O(n^2)$   | $O(n)$         |
 | $p \times \Bigg( p \times \bigg(p \times \big( p \times \cdots \times (p+1) + \cdots +1 \big)+1\bigg)+1 \Bigg)$  | $O(n)$ | $O(n)$ |
 
-## MATLAB的Horner's method 函数为 horner 测试
+## MATLAB的horner函数测试
 ![](HornersMethod_1.png)
 
 ## 代码示例
