@@ -31,8 +31,11 @@ int main()
     int sizeT = t.size(), sizeB = sbegin.size(), sizeE = send.size(), minSize = max(sizeB, sizeE);
     unordered_set<ll> ans;
 
-
-    ll nowBase = pow(base, sizeE - 1);
+    ll nowBase = 1;
+    for (int c = 1; c <= sizeE - 1; ++c)
+    {
+        nowBase *= base;
+    }
 
     for (int i = 0; i <= sizeT - minSize; ++i)
     {
