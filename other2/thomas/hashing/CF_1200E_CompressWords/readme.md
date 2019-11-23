@@ -1,4 +1,4 @@
-# 1200E. Compress Words 
+    # 1200E. Compress Words 
 
 ## 来源
 

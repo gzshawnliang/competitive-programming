@@ -28,7 +28,7 @@ bool isEqual(const set<int> & set1, const set<int> & set2)
         ++it1;
         ++it2;
     }
-    
+    \
     return true;
 }
 
