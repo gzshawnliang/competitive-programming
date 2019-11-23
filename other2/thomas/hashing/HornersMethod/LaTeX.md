@@ -25,6 +25,9 @@ $$
 \ce{ CO2 + C ->[\text{above}][\text{below}] 2CO}
 $$
 
+$$
+k'(x)=\lim_{\Delta x\to 0}\frac{k(x)-k(x-\Delta x)}{\Delta x}
+$$
 
 $$
 \begin{array}{c|lcr}
