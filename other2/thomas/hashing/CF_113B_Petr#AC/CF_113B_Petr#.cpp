@@ -93,7 +93,7 @@ int main()
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
     freopen("CF_113B_Petr#.in", "r", stdin);
-    //freopen("CF_113B_Petr#.out", "w", stdout);
+    freopen("CF_113B_Petr#.out", "w", stdout);
 #endif
 
     solve();

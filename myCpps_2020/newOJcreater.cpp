@@ -23,7 +23,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "CF_1200E_CompressWords"; //*
+const string CPPfile = "CF_113B_Petr#2"; //*
 //***************************************
 
 ifstream fin;

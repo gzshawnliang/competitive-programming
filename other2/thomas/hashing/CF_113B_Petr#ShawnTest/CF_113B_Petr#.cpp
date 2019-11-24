@@ -2,11 +2,12 @@
 
 using namespace std;
 
+ifstream fin("CF_113B_Petr#.in");
+ofstream fout("CF_113B_Petr#.out");
 
 using ll = unsigned long long;
 
-//const ll base = 137;
-const ll base = 2267;
+const ll base = 137;
 
 ll _hash2(string & s)
 {
@@ -23,9 +24,7 @@ ll _hash2(string & s)
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	std::cin.tie(NULL);
-    string t, sbegin, send; cin >> t >> sbegin >> send;
+    string t, sbegin, send; fin >> t >> sbegin >> send;
 
     ll hb = _hash2(sbegin), he = _hash2(send);
 
@@ -55,8 +54,6 @@ int main()
         }
     }
 
-    cout << ans.size() << '\n';
-   	cout.flush();
-   	return 0;
+    fout << ans.size() << '\n';
+    return 0;
 }
-
