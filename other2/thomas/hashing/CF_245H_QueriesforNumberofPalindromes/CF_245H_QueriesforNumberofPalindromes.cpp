@@ -15,7 +15,15 @@ using ll = long long;
 
 void solve()
 {
-    
+    string s;
+    cin >> s;
+    int q;
+    cin >> q;
+    while (q--)
+    {
+        int l,r;
+        cin >> l >> r;
+    }
 }
 
 int main()
