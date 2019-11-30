@@ -3,7 +3,7 @@
 * @Name:           113B Petr#
 * @Author:         Shawn
 * @create Time:    2019/11/16 21:40:48
-* @url:            https://codeforces.com/contest/113/problem/bp
+* @url:            https://codeforces.com/contest/113/problem/b
 * @Description:    
 ===========================================================
 */
