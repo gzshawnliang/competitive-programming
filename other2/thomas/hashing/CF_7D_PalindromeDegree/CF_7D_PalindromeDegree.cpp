@@ -37,15 +37,16 @@ ll subStrHash2(int l, int r)
         return ((hashArray2[r] - hashArray2[l - 1] * powArray[r - l + 1]) % PRIME + PRIME) % PRIME;
 }
 
+
 void solve()
 {
     string s;
-    cin>>s;
-    int sLen=s.length();
+    cin >> s;
+    int sLen = s.length();
 
     hashArray1.assign(sLen, 0);
     hashArray2.assign(sLen, 0);
-    
+
     powArray.assign(sLen, 0);
     powArray[0] = 1;
     for (int i = 1; i <= sLen - 1; ++i)
@@ -55,7 +56,7 @@ void solve()
 
     ll hashValue1 = 0;
     ll hashValue2 = 0;
-    int j = sLen - 1;    
+    int j = sLen - 1;
     for (int i = 0; i <= sLen - 1; ++i)
     {
         //计算哈希
@@ -66,16 +67,31 @@ void solve()
         hashArray2[i] = hashValue2;
         --j;
     }
-    int ans=0;
 
-    // int len=1;
-    for (int len = 0; i <= n - 1; ++i)
+    //检查长度是len的前缀是否回文
+    auto checkIsPalindrome = [=](int len) {
+        ll has1 = subStrHash1(0, len - 1);
+        ll has2 = subStrHash2(sLen - len, sLen - 1);
+        if (has1 == has2)
+        {
+            return true;
+        }
+
+        return false;
+    };
+
+    int ans = 0;
+    vector<int> degree(sLen + 1, 0);
+    for (int len = 1; len <= sLen; ++len)
     {
-        
+        if (checkIsPalindrome(len))
+        {
+            degree[len] = degree[len / 2] + 1;
+            ans += degree[len];
+        }
     }
 
     cout << ans << "\n";
-    
 }
 
 int main()
@@ -83,13 +99,12 @@ int main()
     ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
-    #ifndef ONLINE_JUDGE
-        freopen("CF_7D_PalindromeDegree.in", "r", stdin);
-        //freopen("CF_7D_PalindromeDegree.out", "w", stdout);
-    #endif    
+#ifndef ONLINE_JUDGE
+    freopen("CF_7D_PalindromeDegree.in", "r", stdin);
+    //freopen("CF_7D_PalindromeDegree.out", "w", stdout);
+#endif
 
     solve();
-
 
     cout.flush();
     return 0;
