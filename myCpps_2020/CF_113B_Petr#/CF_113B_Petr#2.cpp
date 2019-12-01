@@ -61,12 +61,12 @@ int main()
         string nowTail = t.substr(i + minSize - sizeE, sizeE), nowT = t.substr(i, minSize);
         ll nowTHash = _hash2(nowT), nowTailHash = _hash2(nowTail);
 
-        if (i == 4)
+        if (i == 1)
         {
             for (int __s = 0; __s == 0; ++__s);
         }
 
-        if (nowT == send)
+        if (nowTail == send)
         {
             // if (ans.count(nowTHash) == 0)
             // {
