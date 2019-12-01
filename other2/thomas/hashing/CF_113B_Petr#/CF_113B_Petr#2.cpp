@@ -2,12 +2,13 @@
 
 using namespace std;
 
-ifstream fin("CF_113B_Petr#.in");
-ofstream fout("CF_113B_Petr#.out");
+ifstream fin("CF_113B_Petr#2.in");
+ofstream fout("CF_113B_Petr#2.out");
 
 using ll = unsigned long long;
 
-const ll base = 137;
+//const ll base = 137;
+const ll base = 257;
 
 //int sumCount=0;
 
@@ -42,7 +43,7 @@ int main()
 {
     string t, sbegin, send; fin >> t >> sbegin >> send;
 
-    ll hb = _hash2(sbegin), he = _hash2(send);
+    ll he = _hash2(send);
 
     int sizeT = t.size(), sizeB = sbegin.size(), sizeE = send.size(), minSize = max(sizeB, sizeE);
     unordered_set<ll> ans;
@@ -55,19 +56,45 @@ int main()
     
     for (int i = 0; i <= sizeT - minSize; ++i)
     {
-        string nowH = t.substr(i, sizeB); if (nowH != sbegin) continue;
+        string nowHead = t.substr(i, sizeB); if (nowHead != sbegin) continue;
         
-        string nowT = t.substr(i + minSize - sizeE, sizeE);
-        ll nowHash = _hash2(nowH), nowTH = _hash2(nowT);
+        string nowTail = t.substr(i + minSize - sizeE, sizeE), nowT = t.substr(i, minSize);
+        ll nowTHash = _hash2(nowT), nowTailHash = _hash2(nowTail);
 
-        if (nowT == send) ans.insert(nowHash);
+        if (i == 4)
+        {
+            for (int __s = 0; __s == 0; ++__s);
+        }
+
+        if (nowT == send)
+        {
+            // if (ans.count(nowTHash) == 0)
+            // {
+            //     fout << t.substr(i, minSize) << '\n';
+            // }
+
+            //fout << i << ' ' << i + minSize - 1 << ": " << t.substr(i, minSize) << '\n';
+
+            ans.insert(nowTHash);
+        }
 
         for (int j = i + minSize; j <= sizeT - 1; ++j)
         {
-            nowHash = nowHash * base + t[j];
-            nowTH = (nowTH - nowBase * t[j - sizeE]) * base + t[j];
+            nowTHash = nowTHash * base + t[j];
+            nowTailHash = (nowTailHash - nowBase * t[j - sizeE]) * base + t[j];
+            nowT += t[j];
             //++sumCount;
-            if (nowTH == he) ans.insert(nowHash);
+            if (nowTailHash == he)
+            {
+                // if (ans.count(nowTHash) == 0)
+                // {
+                //     fout << t.substr(i, j - i + 1) << '\n';
+                // }
+
+                //fout << i << ' ' << j << ": " << t.substr(i, j - i + 1) << ": " << nowTHash << '\n';
+
+                ans.insert(nowTHash);
+            }
         }
     }
 

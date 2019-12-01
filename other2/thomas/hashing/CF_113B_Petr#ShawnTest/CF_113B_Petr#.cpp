@@ -1,3 +1,13 @@
+/*
+===========================================================
+* @Name:           113B Petr#
+* @Author:         Shawn
+* @create Time:    2019/11/16 21:40:48
+* @url:            https://codeforces.com/contest/113/problem/b
+* @Description:    
+===========================================================
+*/
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -9,7 +19,7 @@ using ll = unsigned long long;
 
 const ll base = 137;
 
-ll _hash2(string & s)
+ll _hash(string & s)
 {
     ll ans = 0;
 
@@ -26,34 +36,52 @@ int main()
 {
     string t, sbegin, send; fin >> t >> sbegin >> send;
 
-    ll hb = _hash2(sbegin), he = _hash2(send);
+    ll hb = _hash(sbegin), he = _hash(send);
 
-    int sizeT = t.size(), sizeB = sbegin.size(), sizeE = send.size(), minSize = max(sizeB, sizeE);
-    unordered_set<ll> ans;
-
-    ll nowBase = 1;
-    for (int c = 1; c <= sizeE - 1; ++c)
-    {
-        nowBase *= base;
-    }
+    int sizeT = t.size(), sizeB = sbegin.size(), sizeE = send.size();
+    ll nowH, nowB;
     
-    for (int i = 0; i <= sizeT - minSize; ++i)
+    string temp;
+    vector<int> bp, ep;
+
+    temp = t.substr(0, sizeB);
+    nowH = _hash(temp);
+    nowB = pow(base, sizeB - 1);
+    for (int i = 0; i <= sizeT - sizeB; ++i)
     {
-        string nowH = t.substr(i, sizeB); if (nowH != sbegin) continue;
+        if (nowH == hb) bp.push_back(i);
         
-        string nowT = t.substr(i + minSize - sizeE, sizeE);
-        ll nowHash = _hash2(nowH), nowTH = _hash2(nowT);
+        nowH = (nowH - nowB * t[i]) * base + t[i + sizeB];
+    }
 
-        if (nowT == send) ans.insert(nowHash);
+    temp = t.substr(0, sizeE);
+    nowH = _hash(temp);
+    nowB = pow(base, sizeE - 1);
+    for (int i = 0; i <= sizeT - sizeE; ++i)
+    {
+        if (nowH == he) ep.push_back(i);
+        
+        nowH = (nowH - nowB * t[i]) * base + t[i + sizeE];
+    }
 
-        for (int j = i + minSize; j <= sizeT - 1; ++j)
+    int sizeBP = bp.size(), sizeEP = ep.size();
+    unordered_set<ll> ans;
+    for (int i = 0; i <= sizeBP - 1; ++i)
+    {
+        //int start = lower_bound(ep.begin(), ep.end(), bp[i]) - ep.begin();
+
+        for (int j = 0; j <= sizeEP - 1; ++j)
         {
-            nowHash = nowHash * base + t[j];
-            nowTH = (nowTH - nowBase * t[j - sizeE]) * base + t[j];
-            if (nowTH == he) ans.insert(nowHash);
+            if (bp[i] > ep[j]) continue;
+
+            int nowSize = ep[j] - bp[i] + sizeE;
+
+            temp = t.substr(bp[i], nowSize);
+            ans.insert(_hash(temp));
         }
     }
 
     fout << ans.size() << '\n';
+
     return 0;
 }

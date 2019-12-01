@@ -1,103 +1,87 @@
 /*
 ===========================================================
 * @Name:           113B Petr#
-* @Author:         Thomas
-* @create Time:    2019/11/12 15:20:50
-* @url:            https://codeforces.com/contest/113/problem/B
+* @Author:         Shawn
+* @create Time:    2019/11/16 21:40:48
+* @url:            https://codeforces.com/contest/113/problem/b
 * @Description:    
 ===========================================================
 */
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
-using ll = long long;
-using ull = unsigned long long;
+ifstream fin("CF_113B_Petr#.in");
+ofstream fout("CF_113B_Petr#.out");
 
-const ull R1 = 131; //质数
+using ll = unsigned long long;
 
-ull hashcode(const string & x)
+const ll base = 137;
+
+ll _hash(string & s)
 {
-    int len = x.length();
-    ull hashValue1 = 0;
-    for (int i = 0; i <= len - 1; ++i)
-        //计算哈希
-        hashValue1 = R1 * hashValue1 + x[i];
-    return hashValue1;
-}
+    ll ans = 0;
 
-void solve()
-{
-    string t, s1, s2;
-    cin >> t >> s1 >> s2;
-    ull h1 = hashcode(s1);
-    //int len1 = s1.length();
-
-    ull h2 = hashcode(s2);
-    int len2 = s2.length();
-
-    unordered_set<ull> ans;
-
-    int n = t.length();
-
-    pair<int, int> sub;
-    sub.first = -1;
-    sub.second = -1;
-    
-    for (int i = 0; i <= n - 1; ++i)
+    int size = s.size();
+    for (int i = 0; i <= size - 1; ++i)
     {
-        sub.first = -1;
-        sub.second = -1;        
-        ull hashValue1 = 0;
-        ull hashTotal = 0;
-        for (int j = i; j <= n - 1; ++j) //查找SubString
-        {
-            hashTotal = R1 * hashTotal + t[j];
-
-            if (sub.first == -1)
-            {
-                hashValue1 = R1 * hashValue1 + t[j];
-
-                if (hashValue1 == h1) //SubString:begin
-                {
-                    sub.first = i;
-                }
-            }
-
-            if(sub.first>=0 && j-i+1>=len2)
-            {
-                ull hashValue2 = 0;
-                for (int k = j-len2+1; k <= j; ++k)
-                {
-                    hashValue2 = R1 * hashValue2 + t[k];
-                    if(hashValue2 == h2)
-                    {
-                        sub.second = j;
-
-                        if(ans.count(hashTotal)==0)
-                            ans.insert(hashTotal);
-                        
-                        break;
-                    }
-                }                
-            }
-        }
+        ans = ans * base + s[i];
     }
-    cout << ans.size()<<"\n";
+
+    return ans;
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
-    std::cout.tie(NULL);
-#ifndef ONLINE_JUDGE
-    freopen("CF_113B_Petr#.in", "r", stdin);
-    //freopen("CF_113B_Petr#.out", "w", stdout);
-#endif
+    string t, sbegin, send; fin >> t >> sbegin >> send;
 
-    solve();
+    ll hb = _hash(sbegin), he = _hash(send);
 
-    cout.flush();
+    int sizeT = t.size(), sizeB = sbegin.size(), sizeE = send.size();
+    ll nowH, nowB;
+    
+    string temp;
+    vector<int> bp, ep;
+
+    temp = t.substr(0, sizeB);
+    nowH = _hash(temp);
+    nowB = pow(base, sizeB - 1);
+    for (int i = 0; i <= sizeT - sizeB; ++i)
+    {
+        if (nowH == hb) bp.push_back(i);
+        
+        nowH = (nowH - nowB * t[i]) * base + t[i + sizeB];
+    }
+
+    temp = t.substr(0, sizeE);
+    nowH = _hash(temp);
+    nowB = pow(base, sizeE - 1);
+    for (int i = 0; i <= sizeT - sizeE; ++i)
+    {
+        if (nowH == he) ep.push_back(i);
+        
+        nowH = (nowH - nowB * t[i]) * base + t[i + sizeE];
+    }
+
+    int sizeBP = bp.size(), sizeEP = ep.size();
+    unordered_set<ll> ans;
+    for (int i = 0; i <= sizeBP - 1; ++i)
+    {
+        //int start = lower_bound(ep.begin(), ep.end(), bp[i]) - ep.begin();
+
+        for (int j = 0; j <= sizeEP - 1; ++j)
+        {
+            if (bp[i] > ep[j]) continue;
+
+            int nowSize = ep[j] - bp[i] + sizeE;
+
+            temp = t.substr(bp[i], nowSize);
+            ans.insert(_hash(temp));
+        }
+    }
+
+    fout << ans.size() << '\n';
+
     return 0;
 }

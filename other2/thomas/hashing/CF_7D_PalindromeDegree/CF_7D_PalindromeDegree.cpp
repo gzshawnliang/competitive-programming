@@ -66,22 +66,12 @@ void solve()
         hashArray2[i] = hashValue2;
         --j;
     }
-    int k=0;
-    if(sLen>0)
-        k=1;
-    int curr=sLen-1;
     int ans=0;
-    ans +=k;
-    while (curr>0)
-    {
-        if(hashArray1[curr]==hashArray2[curr])
-        {
-            ++k;
-            ans +=k;
-        }
-        
 
-        curr = ((curr+1) / 2) -1;
+    // int len=1;
+    for (int len = 0; i <= n - 1; ++i)
+    {
+        
     }
 
     cout << ans << "\n";

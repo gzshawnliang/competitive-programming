@@ -5,8 +5,11 @@ using namespace std;
 
 using ll = unsigned long long;
 
-//const ll base = 137;
-const ll base = 2267;
+const ll base = 137;
+
+
+
+
 
 ll _hash2(string & s)
 {
@@ -27,7 +30,7 @@ int main()
 	std::cin.tie(NULL);
     string t, sbegin, send; cin >> t >> sbegin >> send;
 
-    ll hb = _hash2(sbegin), he = _hash2(send);
+    ll he = _hash2(send);
 
     int sizeT = t.size(), sizeB = sbegin.size(), sizeE = send.size(), minSize = max(sizeB, sizeE);
     unordered_set<ll> ans;
@@ -40,18 +43,34 @@ int main()
     
     for (int i = 0; i <= sizeT - minSize; ++i)
     {
-        string nowH = t.substr(i, sizeB); if (nowH != sbegin) continue;
+        string nowHead = t.substr(i, sizeB); if (nowHead != sbegin) continue;
         
-        string nowT = t.substr(i + minSize - sizeE, sizeE);
-        ll nowHash = _hash2(nowH), nowTH = _hash2(nowT);
+        string nowTail = t.substr(i + minSize - sizeE, sizeE), nowT = t.substr(i, minSize);
+        ll nowTHash = _hash2(nowT), nowTailHash = _hash2(nowTail);
 
-        if (nowT == send) ans.insert(nowHash);
+        if (i == 4)
+        {
+            for (int __s = 0; __s == 0; ++__s);
+        }
+
+        if (nowT == send)
+        {
+
+
+            ans.insert(nowTHash);
+        }
 
         for (int j = i + minSize; j <= sizeT - 1; ++j)
         {
-            nowHash = nowHash * base + t[j];
-            nowTH = (nowTH - nowBase * t[j - sizeE]) * base + t[j];
-            if (nowTH == he) ans.insert(nowHash);
+            nowTHash = nowTHash * base + t[j];
+            nowTailHash = (nowTailHash - nowBase * t[j - sizeE]) * base + t[j];
+            nowT += t[j];
+            if (nowTailHash == he)
+            {
+
+
+                ans.insert(nowTHash);
+            }
         }
     }
 
