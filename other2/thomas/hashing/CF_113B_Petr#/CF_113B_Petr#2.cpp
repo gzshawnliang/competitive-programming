@@ -2,13 +2,13 @@
 
 using namespace std;
 
-ifstream fin("CF_113B_Petr#2.in");
-ofstream fout("CF_113B_Petr#2.out");
+ifstream fin("CF_113B_Petr#.in");
+ofstream fout("CF_113B_Petr#.out");
 
 using ll = unsigned long long;
 
 //const ll base = 137;
-const ll base = 257;
+const ll base = 137;
 
 //int sumCount=0;
 
