@@ -29,6 +29,7 @@ ll subStrHash1(int l, int r)
         return ((hashArray1[r] - hashArray1[l - 1] * powArray[r - l + 1]) % PRIME + PRIME) % PRIME;
 }
 
+//O(1)取出反向子串的哈希值，使用之前注意测试
 ll subStrHash2(int l, int r)
 {
     if (l == 0)
@@ -44,8 +45,8 @@ void solve()
     cin >> s;
     int sLen = s.length();
 
-    hashArray1.assign(sLen, 0);
-    hashArray2.assign(sLen, 0);
+    hashArray1.assign(sLen, 0);     //存储s的哈希
+    hashArray2.assign(sLen, 0);     //存储s的反向哈希
 
     powArray.assign(sLen, 0);
     powArray[0] = 1;
@@ -82,6 +83,8 @@ void solve()
 
     int ans = 0;
     vector<int> degree(sLen + 1, 0);
+
+    //从长度1开始查找回文数
     for (int len = 1; len <= sLen; ++len)
     {
         if (checkIsPalindrome(len))
@@ -99,6 +102,7 @@ int main()
     ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
+
 #ifndef ONLINE_JUDGE
     freopen("CF_7D_PalindromeDegree.in", "r", stdin);
     //freopen("CF_7D_PalindromeDegree.out", "w", stdout);
