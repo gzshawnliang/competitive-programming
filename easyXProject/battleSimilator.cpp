@@ -384,12 +384,12 @@ int main()
         if (GetAsyncKeyState((int)'Z'))
         {
             temp.isAttacked = false;
-            temp.healthMax = 100;
+            temp.healthMax = 400;
             temp.health = temp.healthMax;
             temp.attackCount = 0;
             temp.attackCountMax = 10;
-            temp.attackDamage = 20;
-            temp.movementSpeed = 4;
+            temp.attackDamage = 50;
+            temp.movementSpeed = 3;
             temp.range = 15;
             temp.minRange = 0;
             temp.troupType = type::worrior;
@@ -401,7 +401,7 @@ int main()
             temp.health = temp.healthMax;
             temp.attackCount = 0;
             temp.attackCountMax = 20;
-            temp.attackDamage = 50;
+            temp.attackDamage = 60;
             temp.movementSpeed = 2;
             temp.range = 20;
             temp.minRange = 0;
@@ -414,9 +414,9 @@ int main()
             temp.health = temp.healthMax;
             temp.attackCount = 0;
             temp.attackCountMax = 30;
-            temp.attackDamage = 20;
+            temp.attackDamage = 15;
             temp.movementSpeed = 2;
-            temp.range = 300;
+            temp.range = 200;
             temp.minRange = 50;
             temp.troupType = type::archer;
         }
