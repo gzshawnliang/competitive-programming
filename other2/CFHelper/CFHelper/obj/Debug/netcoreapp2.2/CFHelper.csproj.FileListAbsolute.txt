@@ -4,7 +4,6 @@ D:\codes\shawnGitHub\other2\CFHelper\CFHelper\bin\Debug\netcoreapp2.2\CFHelper.r
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\bin\Debug\netcoreapp2.2\CFHelper.dll
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\bin\Debug\netcoreapp2.2\CFHelper.pdb
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Debug\netcoreapp2.2\CFHelper.csprojAssemblyReference.cache
-D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Debug\netcoreapp2.2\CFHelper.csproj.CoreCompileInputs.cache
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Debug\netcoreapp2.2\CFHelper.AssemblyInfoInputs.cache
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Debug\netcoreapp2.2\CFHelper.AssemblyInfo.cs
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Debug\netcoreapp2.2\CFHelper.dll
