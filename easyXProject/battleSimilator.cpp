@@ -1,5 +1,5 @@
-#include <conio.h>
 #include <bits/stdc++.h>
+#include <conio.h>
 #include <graphics.h>
 
 using namespace std;
