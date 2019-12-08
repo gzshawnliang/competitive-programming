@@ -11,7 +11,8 @@ int main(){
 
     clock_t start = clock();
 
-    for (int i = 0; i < 1000000; i++){
+    for (int i = 0; i < 1000000; i++)
+    {
 #ifdef TOGETHER
         //10.114s
         for (int c = 0; c < size; c++){
