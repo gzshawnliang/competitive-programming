@@ -1,3 +1,14 @@
+/*
+===========================================================
+ * @名称:		c++循环拆分合并性能问题
+ * @作者:		Thomas 
+ * @创建时间: 2019-12-08 12:17:50 
+ * @修改人:   Shawn 
+ * @修改时间: 2019-12-08 12:17:50 
+ * @备注:		
+ * @题目来源： https://stackoverflow.com/questions/13866962/what-is-the-overhead-in-splitting-a-for-loop-into-multiple-for-loops-if-the-tot
+===========================================================
+*/
 #include <time.h>
 #include <iostream>
 using namespace std;

@@ -23,14 +23,15 @@ int main()
     map<string, int> m;
     for (int i = 0; i <= n - 1; ++i)
     {
-        string a, b; 
-        fin >> a >> b;
-
-        string c=a.substr(0,2);     //取出前两个字符，MIAMI->MI
+        string a, b; fin >> a >> b;
+        string c;
+        c.push_back(a[0]);
+        c.push_back(a[1]);
         if(c!=b)
         {
             ++m[c + b];
         }
+        
     }
 
     int total = 0;
@@ -39,19 +40,15 @@ int main()
     {
         string now = it->first;
 
-        /*后面两个字符和前面两个字符交换
-         例如：MIFL->FLMI   
-        */
+        if (m[now] == 0) continue;
 
-        string swap;
-        swap.push_back(now[2]);
-        swap.push_back(now[3]);
-        swap.push_back(now[0]);
-        swap.push_back(now[1]);
+        string temp;
+        temp.push_back(now[2]);
+        temp.push_back(now[3]);
+        temp.push_back(now[0]);
+        temp.push_back(now[1]);
 
-        //查找交换之后是否存在
-        if(m.count(swap)==1)
-            total += m[swap] * m[now];
+        total += m[temp] * m[now];
     }
 
     fout << total / 2 << '\n';
