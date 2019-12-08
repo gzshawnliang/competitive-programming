@@ -13,12 +13,10 @@
 #include <iostream>
 using namespace std;
 #define TOGETHER 1;
-
 int main(){
 
     int size = 10000;
     int *data = new int[size];
-
 
     clock_t start = clock();
 
@@ -47,6 +45,4 @@ int main(){
 
     clock_t end = clock();
     cout << (double)(end - start) / CLOCKS_PER_SEC << endl;
-
-    //system("pause");
 }
