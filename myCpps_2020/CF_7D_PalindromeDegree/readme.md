@@ -82,8 +82,8 @@ int main(){
 |编译参数|-std=gnu++11 -O2 -Wall -lstdc++fs -lm ||
 
 以上代码执行测试结果如下
->1个循环9.671s
->3个循环20.062s
+- 1个循环9.671s
+- 3个循环20.062s
 
 参考
-https://stackoverflow.com/questions/13866962/what-is-the-overhead-in-splitting-a-for-loop-into-multiple-for-loops-if-the-tot
+<https://stackoverflow.com/questions/13866962/what-is-the-overhead-in-splitting-a-for-loop-into-multiple-for-loops-if-the-tot>
