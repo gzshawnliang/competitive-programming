@@ -13,25 +13,25 @@ int main(){
 
     for (int i = 0; i < 1000000; i++)
     {
-#ifdef TOGETHER
-        //10.114s
-        for (int c = 0; c < size; c++){
-            data[c] *= 10;
-            data[c] += 7;
-            data[c] &= 15;
-        }
-#else
-        //20.695s
-        for (int c = 0; c < size; c++){
-            data[c] *= 10;
-        }
-        for (int c = 0; c < size; c++){
-            data[c] += 7;
-        }
-        for (int c = 0; c < size; c++){
-            data[c] &= 15;
-        }
-#endif
+        #ifdef TOGETHER
+                //10.114s
+                for (int c = 0; c < size; c++){
+                    data[c] *= 10;
+                    data[c] += 7;
+                    data[c] &= 15;
+                }
+        #else
+                //20.695s
+                for (int c = 0; c < size; c++){
+                    data[c] *= 10;
+                }
+                for (int c = 0; c < size; c++){
+                    data[c] += 7;
+                }
+                for (int c = 0; c < size; c++){
+                    data[c] &= 15;
+                }
+        #endif
     }
 
     clock_t end = clock();
