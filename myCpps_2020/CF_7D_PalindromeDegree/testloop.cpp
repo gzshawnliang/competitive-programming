@@ -13,6 +13,7 @@
 #include <iostream>
 using namespace std;
 #define TOGETHER 1;
+
 int main(){
 
     int size = 10000;
