@@ -53,6 +53,10 @@ int main()
 
     // vector<int> vec = {1, 2, 3, 4, 5, 6, 7};
     // vec[10000]=10;
+    bitset<50005> p;
+    p |=4;
+    //p |=5;
+    //p |=100;
     cerr <<"sdfjsdklfj\n";
     return 0;
 }
