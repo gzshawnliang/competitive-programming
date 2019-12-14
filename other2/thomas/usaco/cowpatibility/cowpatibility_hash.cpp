@@ -24,9 +24,10 @@ int main()
             
         sort(a[i].begin()+1,a[i].end());
 
-        ll hashValue1=0;
+        
         for (int j = 1; j <= 5; ++j)
         {
+            ll hashValue1=0;
             for (int len = 1; j+len-1 <= 5; ++len)
             {
                 hashValue1 = (BASE * hashValue1 + a[i][j+len-1]) % PRIME;
@@ -35,7 +36,11 @@ int main()
                     ++c[len];
             }
         }
+
     }
+
+    for(auto it=c.begin();it!=c.end();++it)
+        ++(it->second);
 
     int ans=0;
 
