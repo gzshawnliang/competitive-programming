@@ -13,43 +13,32 @@ int main()
 {
     int N;
     fin >>N;
-    vector<unordered_set<int>> a(N+1);
-    unordered_map<int,set<int>> b;
+    vector<vector<int>> a(N+1,vector<int>(5+1,0));
+    unordered_map<ll,int> b;
+    unordered_map<int,int> c;
 
     for (int i = 1; i <= N; ++i)
     {
-        int c=5;
-        while (c--)
+        for (int j = 1; j <= 5; ++j)
+            fin >> a[i][j];
+            
+        sort(a[i].begin()+1,a[i].end());
+
+        ll hashValue1=0;
+        for (int j = 1; j <= 5; ++j)
         {
-            int temp;
-            fin >> temp;
-            a[i].insert(temp);
-            b[temp].insert(i);
-        }
-    }
-    set<ll> c;
-    int ans=0;
-    for (auto it = b.begin(); it !=b.end(); ++it)
-    {
-        for (auto it2 = it->second.begin(); it2 !=it->second.end(); ++it2)
-        {
-            auto it3=it2;
-            ++it3;
-            ll hashValue1=0;
-            for (; it3 !=it->second.end(); ++it3)
+            for (int len = 1; j+len-1 <= 5; ++len)
             {
-                hashValue1 = (BASE * hashValue1 + *it2) % PRIME;
-                hashValue1 = (BASE * hashValue1 + *it3) % PRIME;
-                if(c.count(hashValue1)==0)
-                {
-                    c.insert(hashValue1);
-                    ++ans;
-                }
-                
-                hashValue1=0;
+                hashValue1 = (BASE * hashValue1 + a[i][j+len-1]) % PRIME;
+                ++b[hashValue1];
+                if(b[hashValue1]>1)
+                    ++c[len];
             }
         }
     }
+
+    int ans=0;
+
     fout << N*(N-1)/2 - ans << "\n";
     return 0;
 }
