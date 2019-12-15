@@ -42,18 +42,7 @@ int main()
         for (int j = 1; j <= 5; ++j)
         {
             int f = a[i][j];   //当前口味：f
-            string s=p.to_string();
-             auto first_digit = s.find('1') ;
-             if( first_digit != std::string::npos )
-                std::cout << s.substr(first_digit) << "->" ; 
-
-            //cout <<dp[f].to_string() <<"\n";
             p |= dp[f];        //统计有哪些牛有f口味
-
-            s=p.to_string();
-            first_digit = s.find('1') ;
-             if( first_digit != std::string::npos )
-                std::cout << s.substr(first_digit) << '\n' ; 
 
         }
         ans += (n - p.count());         //不成对的数量，count计算bitset1个数量，n-count，代表0的数量

@@ -41,14 +41,14 @@ int main()
         bitset<maxN> p;
         for (int j = 1; j <= 5; ++j)
         {
-            int currFlavor = a[i][j];       //当前口味：currFlavor
-            p |= dp[currFlavor];            //统计有哪些奶牛有currFlavor口味
+            int currFlavor = a[i][j]; //当前口味：currFlavor
+            p |= dp[currFlavor];      //统计有哪些奶牛有currFlavor口味
         }
         //ans += (n - p.count());
         ans += p.count();
     }
-    ans /=2;
-    //fout << ans / 2 << "\n";
-    fout << (n*(n-1) / 2) - ans << "\n";
+    ans /= 2;
+    fout << ans / 2 << "\n";
+    //fout << (n * (n - 1) / 2) - ans << "\n";
     return 0;
 }

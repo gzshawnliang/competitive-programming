@@ -24,7 +24,6 @@ int main()
             
         sort(a[i].begin()+1,a[i].end());
 
-        
         for (int j = 1; j <= 5; ++j)
         {
             ll hashValue1=0;
