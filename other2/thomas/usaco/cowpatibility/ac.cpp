@@ -1,41 +1,57 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll unsigned long long
-
-const ll base = 1e6 + 3;
+using ull = unsigned long long;
+const ull PRIME = 998244353;
 
 int main()
 {
-    ifstream cin("cowpatibility.in");
-    ofstream cout("cowpatibility.out");
+#ifndef ONLINE_JUDGE
+    freopen("cowpatibility.in", "r", stdin);
+    freopen("cowpatibility.out", "w", stdout);
+#endif
 
-    vector<unordered_map<ll, int>> cnt(6);
+    map<ull, int> cnt[2];
+
     int n;
-    int ans=0;
     cin >> n;
-    for (int i = 0; i < n; ++i)
+    for (int i = 1; i <= n; i++)
     {
-        vector<int> b(5);
-        for (int j = 0; j < 5; ++j)
-            cin >> b[j];
-
-        sort(b.begin(), b.end());
-
-        //Iterate over all subsets
-        for (int j = 1; j < 32; ++j)
+        vector<int> a(5);
+        for (int j = 0; j < 5; j++)
         {
-            int c = __builtin_popcount(j);
-            //pray to cow gods for no collisions
-            ll hash = 0;
-            for (int k = 0; k < 5; ++k)
-                if (j >> k & 1)
-                    hash = hash * base + b[k];
-            //add for odd-sized subsets and subtract for even-sized
-            ans += cnt[c][hash] * (c & 1 ? 1 : -1);
-            ++cnt[c][hash];
+            cin >> a[j];
+        }
+        sort(a.begin(), a.end());
+
+        for (int i = 1; i < 32; ++i)
+        {
+            ull s = 0;
+            int c = 0;
+            for (int j = 0; j < 5; j++)
+            {
+                if ((i >> j ) % 2)
+                {
+                    s = s * PRIME + a[j];
+                    ++c;
+                }
+            }
+
+            ++cnt[c % 2][s];
         }
     }
-    //we found number of compatible, now take the complement
-    cout << n * (n - 1) / 2 - ans;
+    int ans = 0;
+    for (auto p : cnt[1])
+    {
+        int i = p.second;
+        ans += i * (i - 1) / 2;
+    }
+    for (auto p : cnt[0])
+    {
+        int i = p.second;
+        ans -= i * (i - 1) / 2;
+    }
+
+    cout << n * (n - 1) / 2 - ans << "\n";
+    return 0;
 }
