@@ -8,12 +8,12 @@ int main()
         freopen("cowpatibility.out", "w", stdout);
     #endif
 
-    map<string, long long> f;
-    long long n, Ans, ans;
+    map<string, int> f;
+    int n;
     string s;
 
     cin >>n;
-    Ans = n * (n - 1) / 2; //总共对数
+    int totalAns = n * (n - 1) / 2; //总共对数
 
     for (int i = 1; i <= n; i++)
     {
@@ -22,9 +22,10 @@ int main()
             cin >> a[j];
 
         sort(a.begin() + 1, a.end()); //从小到大排序
+        
         int len = 32;
-        ans = 0;
-        for (int i = 1; i < len; i++)
+        int ans = 0;
+        for (int i = 1; i < len; ++i)
         { 
             //二进制枚举出所有情况
             int cnt = 0;
@@ -33,17 +34,20 @@ int main()
             {
                 if (i & (1 << (j - 1)))
                 {
-                    cnt++;
+                    ++cnt;
                     s += "?" + a[j];
                 } //将选出的口味用“？”连接出来
             }
-            if (cnt %2 ==1)
-                ans += f[s]++; //奇数个则累加
+
+            if (cnt % 2 == 0)
+                ans -= f[s]; //偶数个则减去
             else
-                ans -= f[s]++; //否则减去
+                ans += f[s]; //奇数个则累加
+            
+            ++f[s];
         }
-        Ans -= ans; //减去和谐的，容斥
+        totalAns -= ans; //减去和谐的，容斥
     }
-    cout << Ans;
+    cout << totalAns;
     return 0;
 }
