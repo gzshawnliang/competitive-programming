@@ -100,3 +100,66 @@ int main()
     
     return 0;
 }
+
+
+
+int main33()
+{
+    vector<int> a = {1, 2, 3, 4, 5};
+
+    for (int i = 0; i <= 5-1; ++i)
+    {
+        cout << a[i] << "-\n";
+
+        for (int k = 0; k <= 5-1; ++k)
+        {
+            if(k!=i)
+            {
+                cout << a[k] << "-";                    
+            }
+        }            
+        cout << "\n";
+                
+    }
+
+    for (int i = 0; i <= 5-1; ++i)
+    {
+        for (int j = i+1; j <= 5-1; ++j)
+        {
+            cout << a[i] << "-" << a[j]<< "-\n";
+            for (int k = 0; k <= 5-1; ++k)
+            {
+                if(k!=i && k!=j)
+                {
+                    cout << a[k] << "-";                    
+                }
+            }            
+            cout << "\n";
+        }
+    }    
+
+    for (int k = 0; k <= 5-1; ++k)
+    {
+        cout << a[k] << "-";                    
+    }   
+    cout << "\n";
+   
+    cout << "-----------------\n";
+
+    for (int i = 1; i < 32; ++i)
+    { 
+        //二进制枚举出所有情况
+        string s = "";
+        for (int k = 1; k <= 5; ++k)
+        {
+            if (i & (1 << (k - 1)))
+            {
+                cout << a[k-1] << "-";
+            }
+        }
+        cout << "\n";
+
+    }
+
+    return 0;
+}
