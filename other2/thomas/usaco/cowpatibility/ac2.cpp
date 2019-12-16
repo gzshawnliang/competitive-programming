@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
+int main2()
 {
     #ifndef ONLINE_JUDGE
         freopen("cowpatibility.in", "r", stdin);
@@ -23,9 +23,8 @@ int main()
 
         sort(a.begin() + 1, a.end()); //从小到大排序
         
-        int len = 32;
         int ans = 0;
-        for (int i = 1; i < len; ++i)
+        for (int i = 1; i < 32; ++i)
         { 
             //二进制枚举出所有情况
             int cnt = 0;
@@ -48,6 +47,56 @@ int main()
         }
         totalAns -= ans; //减去和谐的，容斥
     }
+
+    for(auto it:f)
+    {
+        cout << std::left << setw(15) << it.first << " " << it.second << "\n";
+    }
+
     cout << totalAns;
+    return 0;
+}
+
+// int main3()
+// {
+
+//     for (int j = 1; j <= 5 ; ++j)
+//     {
+//         int r=(1<<(j-1));
+//         cout << "1<<("<< j <<"-1)=1<<("<< j-1 <<") "  << r << "\n";
+//     }
+//     cout << "\n";
+//     for (int i = 1; i <= 32-1 ; ++i)
+//     {
+//         for (int j = 1; j <= 5 ; ++j)
+//         {
+//             int r=(1<<(j-1));
+//             //cout << "1<<(j-1) " << r << 
+//             cout << setw(2) << i << " & "<< setw(2) << r << setw(8) << (i & r) <<  "\n";
+//         }
+//     }
+    
+//     return 0;
+// }
+
+
+int main()
+{
+    
+    for (int i = 1; i <= 32 - 1; ++i)
+    {
+        bitset<5> b(i);    
+        cout << setw(2) << i << setw(6) << b.to_string() << "\n";
+        cout << "---------" << "\n";
+        for (int j = 1; j <= 5 ; ++j)
+        {
+            int r=(1<<(j-1));
+            bitset<5> c(r);    
+            cout <<setw(2) <<j << setw(6) << c.to_string() << "\n";            
+        }
+        cout << "\n";            
+    }
+    
+    
     return 0;
 }
