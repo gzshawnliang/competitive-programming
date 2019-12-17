@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-using ll=long long ;
+
+using ll = long long;
+
 int main()
 {
 
@@ -59,6 +61,7 @@ int main()
     //     cout << std::left << setw(15) << it.first << " " << it.second << "\n";
 
     cout << totalAns;
+    
     cout.flush();
     return 0;
 }
