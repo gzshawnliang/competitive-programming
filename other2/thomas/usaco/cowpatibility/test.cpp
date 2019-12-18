@@ -53,7 +53,10 @@ void test()
 
 int main()
 {
-    test();
+    //test();
+
+     bitset<7> b(63);
+     cout << b.to_string() << "\n";
 
     return 0;
 }

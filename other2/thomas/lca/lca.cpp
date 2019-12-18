@@ -87,12 +87,9 @@ class LCA
                 v = father[v][b];
             }
         }
-
         return father[u][0];   
     }
-
 };
-
 
 
 int main()
@@ -117,6 +114,6 @@ int main()
     }
     lca.dfsDepth(root);
     lca.setFather();
-    cout << lca.lca(13,1) << "\n";
+    cout << lca.lca(13,12) << "\n";
     return 0;
 }
