@@ -11,6 +11,7 @@ class LCA
     private:
     int n;                          //节点的数量
     int root;                       //根节点
+    int maxUpStep;                  //最大跳跃的步数=log2(n)
     vector<int> depth;              //每个节点的深度depth[2]=1,表示节点2的深度是1
     vector<int> visited;            //深度搜索访问过的节点
     vector<vector<int>> father;     //father[i][j]表示i节点往上2^j个祖先
@@ -18,14 +19,15 @@ class LCA
     public:    
 
     vector<vector<int>> tree;
-    
 
     LCA(int p_n,int p_root)
     {
         this->n=p_n;
         this->root=p_root;
+        maxUpStep = log2(n);
+
         tree.assign(n + 1, vector<int>());
-        father.assign(n + 1, vector<int>(n + 1, 0));
+        father.assign(n + 1, vector<int>(maxUpStep+1, 0));
 
         depth.assign(n + 1, 0);
         visited.assign(n + 1, 0);
@@ -52,9 +54,9 @@ class LCA
 
     void setFather()
     {
-        for (int i = 1; i <= n - 1; ++i)
+        for (int i = 1; i <= n ; ++i)
         {
-            for (int j = 1; j <= n - 1; ++j)
+            for (int j = 1; j <= maxUpStep ; ++j)
             {
                 father[i][j] = father[father[i][j-1]][j-1];
                 if (father[i][j]==0)
@@ -69,7 +71,7 @@ class LCA
             swap(u,v);
 
         //设置同等深度
-        for (int b = n-1;b >= 0;--b)
+        for (int b = maxUpStep;b >= 0;--b)
             if (depth[father[u][b]] >= depth[v])
                 u = father[u][b];        
         
@@ -79,7 +81,7 @@ class LCA
             return u;
         
         //往上跳跃
-        for (int b = n-1;b >= 0;--b)
+        for (int b = maxUpStep;b >= 0;--b)
         {
             if (father[u][b] != father[v][b])
             {
@@ -110,10 +112,13 @@ int main()
         int a, b;
         cin >> a >> b;
         lca.tree[a].push_back(b);
-//        lca.father[b][0] = a;
     }
     lca.dfsDepth(root);
     lca.setFather();
-    cout << lca.lca(13,12) << "\n";
+
+    for (int i = 1; i <= n ; ++i)
+        for (int j = i + 1; j <= n ; ++j)
+            cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
+
     return 0;
 }

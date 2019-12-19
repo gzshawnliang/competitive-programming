@@ -1,1 +1,18 @@
-<Graph indexType="custom" height="400" width="400" nodes={[{options:{fixed:true},label:1,center:{x:157.5,y:31.9}},{options:{fixed:true},label:"2",center:{x:44.6,y:90.6}},{options:{fixed:true},label:"3",center:{x:158.2,y:85.5}},{options:{fixed:true},label:"4",center:{x:290.3,y:79.4}},{options:{fixed:true},label:"5",center:{x:46.9,y:148.1}},{options:{fixed:true},label:"6",center:{x:160.4,y:144.3}},{options:{fixed:true},label:"10",center:{x:115.5,y:197.1}},{options:{fixed:true},label:"11",center:{x:197.7,y:209.6}},{options:{fixed:true},label:"13",center:{x:112.3,y:280.5}},{options:{fixed:true},label:"7",center:{x:333.1,y:142.9}},{options:{fixed:true},label:"8",center:{x:263,y:142.9}},{options:{fixed:true},label:"9",center:{x:400.8,y:140.1}},{options:{fixed:true},label:"12",center:{x:265.5,y:212.7}}]} edges={[{source:0,target:1},{source:0,target:2},{source:0,target:3},{source:1,target:4},{source:2,target:5},{source:5,target:6},{source:5,target:7},{source:6,target:8},{source:3,target:9},{source:3,target:10},{source:3,target:11},{source:10,target:12}]} />
+
+
+``` dot
+graph g{
+1--2
+1--3
+1--4
+2--5
+3--6
+6--10
+6--11
+10--13
+4--7
+4--8
+4--9
+8--12
+}
+```
