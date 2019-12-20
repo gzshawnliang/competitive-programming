@@ -6,6 +6,17 @@ using namespace std;
 //ofstream fout("lca.out");
 
 //Least Common Ancestors (最近公共祖先)
+
+
+int lg2(int n)
+{
+    int i = 0;
+    while ((1<<i) <= n)             //(1<<i) = 2^i
+        ++i;
+
+    return i-1;
+}
+
 class LCA
 {
     private:
@@ -24,7 +35,7 @@ class LCA
     {
         this->n=p_n;
         this->root=p_root;
-        maxUpStep = log2(n);
+        maxUpStep = lg2(n);
 
         tree.assign(n + 1, vector<int>());
         father.assign(n + 1, vector<int>(maxUpStep+1, 0));
@@ -37,14 +48,9 @@ class LCA
     void dfsDepth(int curr)
     {
         visited[curr] = 1;
-        if (tree[curr].size() == 0)
-            return;
-
-        int size1 = tree[curr].size();
         //遍历curr的子节点
-        for (int i = 0; i <= size1 - 1; ++i)
+        for(auto next:tree[curr])
         {
-            int next = tree[curr][i];
             father[next][0] = curr;
             depth[next] = depth[curr] + 1;
             if (visited[next] == 0)
@@ -116,9 +122,18 @@ int main()
     lca.dfsDepth(root);
     lca.setFather();
 
-    for (int i = 1; i <= n ; ++i)
-        for (int j = i + 1; j <= n ; ++j)
-            cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
+    int i=13,j=12;
+    cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
+    // for (int i = 1; i <= n ; ++i)
+    //     for (int j = i + 1; j <= n ; ++j)
+    //         cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
 
+    return 0;
+}
+
+
+int main2()
+{
+    cout << lg2(15) << "\n";
     return 0;
 }
