@@ -71,36 +71,36 @@ class LCA
         }
     }
 
-    int lca(int u,int v)
+    int lca(int u, int v)
     {
-        if(depth[u]<depth[v])
-            swap(u,v);
+        if (depth[u] < depth[v])
+            swap(u, v);
 
         //设置同等深度
-        for (int b = maxUpStep;b >= 0;--b)
+        for (int b = maxUpStep; b >= 0; --b)
             if (depth[father[u][b]] >= depth[v])
-                u = father[u][b];        
-        
-        if (u == 0) 
+                u = father[u][b];
+
+        if (u == 0)
             return root;
-        else if(u == v) 
+        else if (u == v)
             return u;
-        
+
         //往上跳跃
-        for (int b = maxUpStep;b >= 0;--b)
+        for (int b = maxUpStep; b >= 0; --b)
         {
             if (father[u][b] != father[v][b])
             {
-                u = father[u][b];   
+                u = father[u][b];
                 v = father[v][b];
             }
         }
-        return father[u][0];   
+        return father[u][0];
     }
 };
 
 
-int main3()
+int main()
 {
 #ifndef ONLINE_JUDGE
     freopen("lca.in", "r", stdin);
@@ -152,7 +152,7 @@ void check2Pow(int i)
     
 }
 
-int main()
+int main33()
 {
     for (int i = 1; i <= 100 ; ++i)
         check2Pow(i);
