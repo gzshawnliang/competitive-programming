@@ -133,6 +133,7 @@ hash[l,r]+hash[l-1] \times p^{r-l+1} & = hash[l,r]+ p^{r-l+1} \times (s[0] \time
 \end{align}
 $$
 
+
 所以
 $hash[l,r]=hash[r]-hash[l-1] \times p^{r-l+1}$
 

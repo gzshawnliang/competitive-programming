@@ -100,7 +100,7 @@ class LCA
 };
 
 
-int main()
+int main3()
 {
 #ifndef ONLINE_JUDGE
     freopen("lca.in", "r", stdin);
@@ -131,9 +131,31 @@ int main()
     return 0;
 }
 
-
-int main2()
+void check2Pow(int i)
 {
-    cout << lg2(15) << "\n";
+    int maxUpStep = lg2(i);
+    int sumTotal = 0;
+    bitset<8> b(i);
+    cout << setw(10) << b.to_string() << " " << i << "=";
+    for (int b = maxUpStep; b >= 0; --b)
+    {
+        int tmp = pow(2, b);
+        if (sumTotal + tmp > i)
+            continue;
+        else if (b < maxUpStep)             
+            cout << "+";
+
+        sumTotal += tmp;
+        cout << 2 << "^" << b;
+    }
+    cout << "\n";
+    
+}
+
+int main()
+{
+    for (int i = 1; i <= 100 ; ++i)
+        check2Pow(i);
+    
     return 0;
 }

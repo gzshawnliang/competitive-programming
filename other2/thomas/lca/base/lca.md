@@ -75,9 +75,28 @@ $u=13,v=12,LCA(u,v)=?$
 #### **<font color=DarkRed>说明</font>**
 
 1. 寻找u,v的LCA
-![](lca6.jpg)
+
+<img src="lca6.jpg" width = "1000px" />
 
 2. 移动v，使得u、v深度相同
+3. 开始跳跃
+3.1 跳跃最大处
+<img src="lca7.jpg" width = "1000px" />
+3.2 太多，缩减一半
+<img src="lca8.jpg" width = "1000px" />
+3.3 还是太多，重复缩减一半。
+<img src="lca9.jpg" width = "1000px" />
+<img src="lca10.jpg" width = "1000px" />
+3.4 缩减到还是u,v两个点，停止缩减。
+<img src="lca11.jpg" width = "1000px" />
+3.5 移动u,v到这个位置，重复跳跃。开始跳跃的最大值是上次的值$2^{k-1}$
+<img src="lca12.jpg" width = "1000px" />
+3.6不断重复跳跃，可以跳跃到LCA下的节点，此刻的节点父亲就是LCA
+<img src="lca13.jpg" width = "1000px" />
+
+
+$  01000101 (69)=2^6+2^2+2^0$
+$  01001111 (79)=2^6+2^3+2^2+2^1+2^0$
 
 ```c++
 void dfsDepth(int curr)
