@@ -55,6 +55,7 @@ $u=13,v=12,LCA(u,v)=?$
 把$u=13$ 这个点往上移动(往父节)，使得$u=10$。此时$depth[12] = 4,depth[12] = 4$。
 
 3. **<font color=DarkRed>同时移动两点，直到相同：</font>** $u$,$v$每次同时往上移动一步，直到$u=v$,这时候就是LCA的答案，时间复杂度：$O(n)$ 如下图：
+
 <img src="lca3.jpg" width = "320px" /> <img src="lca4.jpg" width = "320px" /> <img src="lca5.jpg" width = "320px" />
 
 ## 倍增算法
