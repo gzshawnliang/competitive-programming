@@ -171,9 +171,9 @@ $ancestors[v,2] = ancestors[ancestors[v,1][1]$
 $ancestors[v,3] = ancestors[ancestors[v,2][2]$
 $ancestors[v,j] = ancestors[ancestors[v,j-1][j-1]$
 
-<img src="lca15_1.jpg" />
+<img src="lca15_1.jpg" width = "600px"/>
 
-<img src="lca15.jpg" width = "600px" />
+
 ```c++
 void setAncestors()
 {
@@ -182,6 +182,8 @@ void setAncestors()
             ancestors[i][j] = ancestors[ancestors[i][j - 1]][j - 1];
 }
 ```
+
+
 4. 查找u,v的LCA
 ```c++
 int lca(int u, int v)
@@ -211,6 +213,8 @@ int lca(int u, int v)
     return ancestors[u][0];
 }
 ```
+
+
 5.快速计算$log_2(n)$,位运算：$(1<<i) = 2^i$
 ```c++
 int lg2(int n)
