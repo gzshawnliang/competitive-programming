@@ -121,28 +121,30 @@ $  01001111 (79)=2^6+2^3+2^2+2^1+2^0$
 
 #### **<font color=DarkRed>代码</font>**
 
-1. 变量声明
+1. 变量声明和初始化
 ```c++
-    int n;                          //节点的数量
-    int root;                       //根节点
-    int maxUpStep;                  //最大跳跃的步数=log2(n)
-    vector<int> depth;              //每个节点的深度depth[2]=1,表示节点2的深度是1
-    vector<int> visited;            //深度搜索访问过的节点
-    vector<vector<int>> father;     //father[i][j]表示i节点往上2^j个祖先
+private:
+int n;                              //节点的数量
+int root;                           //根节点
+int maxUpStep;                      //最大跳跃的步数=log2(n)
+vector<int> depth;                  //每个节点的深度depth[2]=1,表示节点2的深度是1
+vector<int> visited;                //深度搜索访问过的节点
+vector<vector<int>> ancestors;      //ancestors[i][j]表示i节点往上2^j个祖先
 
-    LCA(int p_n,int p_root)
-    {
-        this->n=p_n;
-        this->root=p_root;
-        maxUpStep = lg2(n);
+public:    
+vector<vector<int>> tree;
 
-        tree.assign(n + 1, vector<int>());
-        father.assign(n + 1, vector<int>(maxUpStep+1, 0));
+LCA(int p_n)
+{
+    this->n=p_n;
+    maxUpStep = lg2(n);
 
-        depth.assign(n + 1, 0);
-        visited.assign(n + 1, 0);
-        depth[root] = 0;        
-    }
+    tree.assign(n + 1, vector<int>());
+    ancestors.assign(n + 1, vector<int>(maxUpStep+1, 0));
+
+    depth.assign(n + 1, 0);
+    visited.assign(n + 1, 0);
+}
 
 ```
 2. 记录各节点i的深度depth[i]。dfs一遍即可O(N)。
@@ -153,30 +155,31 @@ void dfsDepth(int curr)
     //遍历curr的子节点
     for(auto next:tree[curr])
     {
+        ancestors[next][0] = curr;
         depth[next] = depth[curr] + 1;
         if (visited[next] == 0)
             dfsDepth(next);
     }
 }
 ```
-3. 预处理出倍增数组，$father[i][j]$表示节点i往上(往根的方向)跳$2^j$步的祖先标号。0表示不存在，也就是跳过根了。$father[i][0]$是节点$i$的父节点标号。
+3. 预处理出倍增数组，$ancestors[i][j]$表示节点i往上(往根的方向)跳$2^j$步的祖先标号。0表示不存在，也就是跳过根了。$ancestors[i][0]$是节点$i$的父节点标号。
 因为：$2^j=2^{j-1}+2^{j-1}$
 所以：
-$father[v,0] = father[v]$
-$father[v,1] = father[father[v,0][0]$
-$father[v,2] = father[father[v,1][1]$
-$father[v,3] = father[father[v,2][2]$
-$father[v,j] = father[father[v,j-1][j-1]$
+$ancestors[v,0] = ancestors[v]$
+$ancestors[v,1] = ancestors[ancestors[v,0][0]$
+$ancestors[v,2] = ancestors[ancestors[v,1][1]$
+$ancestors[v,3] = ancestors[ancestors[v,2][2]$
+$ancestors[v,j] = ancestors[ancestors[v,j-1][j-1]$
 
 
 
 <img src="lca15.jpg" width = "600px" />
 ```c++
-void setFather()
+void setAncestors()
 {
     for (int j = 1; j <= maxUpStep; ++j)
         for (int i = 1; i <= n; ++i)
-            father[i][j] = father[father[i][j - 1]][j - 1];
+            ancestors[i][j] = ancestors[ancestors[i][j - 1]][j - 1];
 }
 ```
 4. 查找u,v的LCA
@@ -188,9 +191,9 @@ int lca(int u, int v)
 
     //设置同等深度
     for (int b = maxUpStep; b >= 0; --b)
-        if (depth[father[u][b]] >= depth[v])
-            u = father[u][b];
-
+        if (depth[ancestors[u][b]] >= depth[v])
+            u = ancestors[u][b];
+    
     if (u == 0)
         return root;
     else if (u == v)
@@ -199,13 +202,13 @@ int lca(int u, int v)
     //往上跳跃
     for (int b = maxUpStep; b >= 0; --b)
     {
-        if (father[u][b] != father[v][b])
+        if (ancestors[u][b] != ancestors[v][b])
         {
-            u = father[u][b];
-            v = father[v][b];
+            u = ancestors[u][b];
+            v = ancestors[v][b];
         }
     }
-    return father[u][0];
+    return ancestors[u][0];
 }
 ```
 5.快速计算$log_2(n)$,位运算：$(1<<i) = 2^i$
@@ -222,7 +225,6 @@ int lg2(int n)
 
 #### **<font color=DarkRed>总结</font>**
 - 倍增算法（英文名：Binary Lifting）是在线算法，适合查询数量比较少的情况。时间复杂度在$O(log(n))$ ~ $O(n*log(n))$之间。
-
 - 还有一种离线算法Tarjan，适合查询数量比较多的情况。
 
 参考

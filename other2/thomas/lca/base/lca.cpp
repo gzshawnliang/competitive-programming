@@ -20,12 +20,12 @@ int lg2(int n)
 class LCA
 {
     private:
-    int n;                          //节点的数量
-    int root;                       //根节点
-    int maxUpStep;                  //最大跳跃的步数=log2(n)
-    vector<int> depth;              //每个节点的深度depth[2]=1,表示节点2的深度是1
-    vector<int> visited;            //深度搜索访问过的节点
-    vector<vector<int>> father;     //father[i][j]表示i节点往上2^j个祖先
+    int n;                              //节点的数量
+    int root;                           //根节点
+    int maxUpStep;                      //最大跳跃的步数=log2(n)
+    vector<int> depth;                  //每个节点的深度depth[2]=1,表示节点2的深度是1
+    vector<int> visited;                //深度搜索访问过的节点
+    vector<vector<int>> ancestors;      //ancestors[i][j]表示i节点往上2^j个祖先
 
     public:    
 
@@ -37,7 +37,7 @@ class LCA
         maxUpStep = lg2(n);
 
         tree.assign(n + 1, vector<int>());
-        father.assign(n + 1, vector<int>(maxUpStep+1, 0));
+        ancestors.assign(n + 1, vector<int>(maxUpStep+1, 0));
 
         depth.assign(n + 1, 0);
         visited.assign(n + 1, 0);
@@ -55,18 +55,18 @@ class LCA
         //遍历curr的子节点
         for(auto next:tree[curr])
         {
-            father[next][0] = curr;
+            ancestors[next][0] = curr;
             depth[next] = depth[curr] + 1;
             if (visited[next] == 0)
                 dfsDepth(next);
         }
     }
 
-    void setFather()
+    void setAncestors()
     {
         for (int j = 1; j <= maxUpStep; ++j)
             for (int i = 1; i <= n; ++i)
-                father[i][j] = father[father[i][j - 1]][j - 1];
+                ancestors[i][j] = ancestors[ancestors[i][j - 1]][j - 1];
     }
 
     int lca(int u, int v)
@@ -76,9 +76,9 @@ class LCA
 
         //设置同等深度
         for (int b = maxUpStep; b >= 0; --b)
-            if (depth[father[u][b]] >= depth[v])
-                u = father[u][b];
-
+            if (depth[ancestors[u][b]] >= depth[v])
+                u = ancestors[u][b];
+        
         if (u == 0)
             return root;
         else if (u == v)
@@ -87,13 +87,13 @@ class LCA
         //往上跳跃
         for (int b = maxUpStep; b >= 0; --b)
         {
-            if (father[u][b] != father[v][b])
+            if (ancestors[u][b] != ancestors[v][b])
             {
-                u = father[u][b];
-                v = father[v][b];
+                u = ancestors[u][b];
+                v = ancestors[v][b];
             }
         }
-        return father[u][0];
+        return ancestors[u][0];
     }
 };
 
@@ -109,7 +109,7 @@ int main()
     int root;
     cin >> n >> root;
 
-    LCA lca(n,root);
+    LCA lca(n);
 
     for (int i = 1; i <= n - 1; ++i)
     {
@@ -119,7 +119,7 @@ int main()
     }
     lca.setRoot(root);
     lca.dfsDepth(root);
-    lca.setFather();
+    lca.setAncestors();
 
     // int i=13,j=12;
     // cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
