@@ -19,7 +19,8 @@
 以下图：
 
 ``` dot
-graph g{
+graph g
+{
 1--2
 1--3
 1--4
@@ -40,7 +41,6 @@ $LCA(13,11)=6$
 $LCA(10,11)=6$
 $LCA(5,11)=1$
 $LCA(7,4)=4$  （**<font color=DarkRed>注意：节点也是自己的祖先</font>**）
-
 
 
 ## 朴素算法
@@ -124,9 +124,7 @@ $  69 二进制： 01000101 = 2^6+2^2+2^0$
 7. $  \color{blue}{2^6+2^2 + 2^0 = 69}$
 <img src="lca14_1.jpg"/>
 
-
 $  01001111 (79)=2^6+2^3+2^2+2^1+2^0$
-
 
 #### **<font color=DarkRed>代码</font>**
 
@@ -174,8 +172,11 @@ void dfsDepth(int curr)
 }
 ```
 
-3. 预处理出倍增数组，$ancestors[i][j]$表示节点i往上(往根的方向)跳$2^j$步的祖先标号。0表示不存在，也就是跳过根了。$ancestors[i][0]$是节点$i$的父节点标号。
+3. <font color=DarkRed>预处理倍增数组</font>，$ancestors[i][j]$表示节点$i$往上(往根的方向)跳$2^j$步的祖先节点编号。0表示不存在节点，也就是跳过根了。$ancestors[i][0]$是节点$i$的父节点标号。
+递推关系：$ancestors[i][j] = ancestors[ancestors[i][j-1]][j-1]$
+
 因为：$2^j=2^{j-1}+2^{j-1}$
+
 所以：
 $ancestors[i][0] = parent[v]$
 $ancestors[i][1] = ancestors[ancestors[i][0]][0]$

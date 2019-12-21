@@ -466,8 +466,9 @@ pre[data-line] .line-highlight[data-end]:after {
 <ol>
 <li>&#x9884;&#x5148;&#x8BA1;&#x7B97;&#x597D;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x4E0A;&#x4E00;&#x8F88;&#x7956;&#x5148;&#xFF0C;&#x4E0A;&#x4E24;&#x8F88;&#x7956;&#x5148;&#xFF0C;&#x4E0A;&#x56DB;&#x8F88;&#x7956;&#x5148;&#xFF0C;&#x4E0A;&#x516B;&#x8F88;&#x7956;&#x5148;&#xFF0C;....&#xFF0C;&#x4E0A;<span class="mathjax-exps">$2^k$</span>&#x8F88;&#x7956;&#x5148;&#xFF0C;<span class="mathjax-exps">$k=\log_2(n)$</span>;</li>
 <li>&#x4E8C;&#x5206;&#x67E5;&#x627E;LCA;<br>
-2.1 &#x8F88;&#x5206;&#x592A;&#x9AD8;&#xFF0C;&#x8D85;&#x51FA;&#x6839;&#x8282;&#x70B9;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x7956;&#x5148;&#x4E3A;&#x6839;&#x8282;&#x70B9;&#x3002;<br>
-2.2 &#x8F88;&#x5206;&#x592A;&#x4F4E;&#xFF0C;&#x8FD8;&#x662F;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x8282;&#x70B9;&#xFF0C;&#x672A;&#x5230;&#x8FBE;&#x5171;&#x540C;&#x7956;&#x5148;&#xFF0C;&#x79FB;&#x52A8;&#x8282;&#x70B9;&#x3002;</li>
+2.1 &#x8F88;&#x5206;&#x592A;&#x9AD8;&#xFF0C;&#x7956;&#x5148;&#x76F8;&#x7B49;&#x6216;&#x8D85;&#x51FA;&#x6839;&#x8282;&#x70B9;&#xFF0C;&#x7F29;&#x51CF;&#x4E00;&#x534A;&#x3002;<br>
+2.2 &#x8F88;&#x5206;&#x592A;&#x4F4E;&#xFF0C;&#x7956;&#x5148;&#x662F;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x8282;&#x70B9;&#xFF0C;&#x672A;&#x5230;&#x8FBE;&#x5171;&#x540C;&#x7956;&#x5148;&#xFF0C;&#x79FB;&#x52A8;&#x8282;&#x70B9;&#x3002;<br>
+2.2 &#x76F4;&#x5230;&#x627E;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x7956;&#x5148;&#x4E0D;&#x91CD;&#x53E0;&#x7684;&#x7684;&#x8282;&#x70B9;</li>
 </ol>
 <h4 class="mume-header" id="font-colordarkred%E8%AF%B4%E6%98%8Efont"><strong><font color="DarkRed">&#x8BF4;&#x660E;</font></strong></h4>
 
@@ -478,20 +479,20 @@ pre[data-line] .line-highlight[data-end]:after {
 <ol start="2">
 <li>&#x79FB;&#x52A8;v&#xFF0C;&#x4F7F;&#x5F97;u&#x3001;v&#x6DF1;&#x5EA6;&#x76F8;&#x540C;</li>
 <li>&#x5F00;&#x59CB;&#x8DF3;&#x8DC3;<br>
-3.1 &#x8DF3;&#x8DC3;&#x6700;&#x5927;&#x5904;<br>
+3.1 &#x8DF3;&#x8DC3;&#x6700;&#x5927;&#x5904;&#xFF1A;<span class="mathjax-exps">$2^{k+1}$</span><br>
 <img src="lca7.jpg" width="1000px"><br>
-3.2 &#x53D1;&#x73B0;&#x7956;&#x5148;&#x76F8;&#x540C;&#xFF0C;&#x592A;&#x591A;&#xFF0C;&#x7F29;&#x51CF;&#x4E00;&#x534A;&#xFF0C;<br>
+3.2 &#x53D1;&#x73B0;&#x7956;&#x5148;&#x76F8;&#x540C;&#xFF0C;&#x592A;&#x591A;&#xFF0C;&#x7F29;&#x51CF;&#x4E00;&#x534A;&#x3002;<span class="mathjax-exps">$2^{k}$</span><br>
 <img src="lca8.jpg" width="1000px"><br>
-3.3 &#x7956;&#x5148;&#x76F8;&#x540C;&#xFF0C;&#x8FD8;&#x662F;&#x592A;&#x591A;&#xFF0C;&#x91CD;&#x590D;&#x7F29;&#x51CF;&#x4E00;&#x534A;&#x3002;<br>
+3.3 &#x7956;&#x5148;&#x76F8;&#x540C;&#xFF0C;&#x8FD8;&#x662F;&#x592A;&#x591A;&#xFF0C;&#x91CD;&#x590D;&#x7F29;&#x51CF;&#x4E00;&#x534A;&#x3002;<span class="mathjax-exps">$2^{k-1}...$</span><br>
 <img src="lca9.jpg" width="1000px"><br>
 <img src="lca10.jpg" width="1000px"><br>
-3.4 &#x53D1;&#x73B0;&#x7956;&#x5148;&#x4E0D;&#x540C;&#xFF0C;&#x505C;&#x6B62;&#x7F29;&#x51CF;&#x3002;<br>
+3.4 &#x53D1;&#x73B0;&#x7956;&#x5148;&#x4E0D;&#x540C;&#xFF0C;&#x505C;&#x6B62;&#x7F29;&#x51CF;&#x3002;<span class="mathjax-exps">$2^{k-3}$</span><br>
 <img src="lca11.jpg" width="1000px"><br>
-3.5 &#x79FB;&#x52A8;u,v&#x5230;&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;&#x91CD;&#x590D;&#x8DF3;&#x8DC3;&#x3002;&#x5F00;&#x59CB;&#x8DF3;&#x8DC3;&#x7684;&#x6700;&#x5927;&#x503C;&#x662F;&#x4E0A;&#x6B21;&#x7684;&#x503C;<span class="mathjax-exps">$2^{k-1}$</span><br>
+3.5 &#x79FB;&#x52A8;u,v&#x5230;&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;&#x91CD;&#x590D;&#x8DF3;&#x8DC3;&#x3002;&#x524D;&#x9762;&#x5DF2;&#x7ECF;&#x8DF3;&#x4E86;<span class="mathjax-exps">$3$</span>&#x6B21;&#x3002;&#x6B64;&#x523B;&#x4ECE;<span class="mathjax-exps">$2^{k-3}$</span>&#x5F00;&#x59CB;&#x8DF3;&#x8DC3;<br>
 <img src="lca12.jpg" width="1000px"><br>
-3.6&#x4E0D;&#x65AD;&#x91CD;&#x590D;&#x8DF3;&#x8DC3;&#xFF0C;&#x53EF;&#x4EE5;&#x8DF3;&#x5230;&#x79BB;u&#xFF0C;v&#x6700;&#x8FDC;&#x4E14;&#x4E0D;&#x540C;&#x7684;&#x7956;&#x5148;<br>
+3.6&#x4E0D;&#x65AD;&#x91CD;&#x590D;&#x8DF3;&#x8DC3;&#xFF0C;&#x53EF;&#x4EE5;&#x8DF3;&#x5230;&#x79BB;u&#xFF0C;v&#x6700;&#x8FDC;&#xFF0C;&#x4E14;&#x4E0D;&#x540C;&#x7684;&#x7956;&#x5148;<br>
 <img src="lca13.jpg" width="1000px"><br>
-3.7&#x8FD4;&#x56DE;&#x4E0A;&#x4E00;&#x6B65;(3.6)&#x7684;&#x7236;&#x4EB2;&#x5C31;&#x662F;LCA</li>
+3.7&#x4E0A;&#x4E00;&#x6B65;(3.6)&#x7684;&#x7236;&#x4EB2;&#x5C31;&#x662F;LCA</li>
 </ol>
 <h4 class="mume-header" id="font-colordarkred%E5%8E%9F%E7%90%86font"><strong><font color="DarkRed">&#x539F;&#x7406;</font></strong></h4>
 
@@ -555,15 +556,16 @@ vector<span class="token operator">&lt;</span>vector<span class="token operator"
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><ol start="3">
-<li>&#x9884;&#x5904;&#x7406;&#x51FA;&#x500D;&#x589E;&#x6570;&#x7EC4;&#xFF0C;<span class="mathjax-exps">$ancestors[i][j]$</span>&#x8868;&#x793A;&#x8282;&#x70B9;i&#x5F80;&#x4E0A;(&#x5F80;&#x6839;&#x7684;&#x65B9;&#x5411;)&#x8DF3;<span class="mathjax-exps">$2^j$</span>&#x6B65;&#x7684;&#x7956;&#x5148;&#x6807;&#x53F7;&#x3002;0&#x8868;&#x793A;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8DF3;&#x8FC7;&#x6839;&#x4E86;&#x3002;<span class="mathjax-exps">$ancestors[i][0]$</span>&#x662F;&#x8282;&#x70B9;<span class="mathjax-exps">$i$</span>&#x7684;&#x7236;&#x8282;&#x70B9;&#x6807;&#x53F7;&#x3002;<br>
-&#x56E0;&#x4E3A;&#xFF1A;<span class="mathjax-exps">$2^j=2^{j-1}+2^{j-1}$</span><br>
-&#x6240;&#x4EE5;&#xFF1A;<br>
+<li><font color="DarkRed">&#x9884;&#x5904;&#x7406;&#x500D;&#x589E;&#x6570;&#x7EC4;</font>&#xFF0C;<span class="mathjax-exps">$ancestors[i][j]$</span>&#x8868;&#x793A;&#x8282;&#x70B9;<span class="mathjax-exps">$i$</span>&#x5F80;&#x4E0A;(&#x5F80;&#x6839;&#x7684;&#x65B9;&#x5411;)&#x8DF3;<span class="mathjax-exps">$2^j$</span>&#x6B65;&#x7684;&#x7956;&#x5148;&#x8282;&#x70B9;&#x7F16;&#x53F7;&#x3002;0&#x8868;&#x793A;&#x4E0D;&#x5B58;&#x5728;&#x8282;&#x70B9;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8DF3;&#x8FC7;&#x6839;&#x4E86;&#x3002;<span class="mathjax-exps">$ancestors[i][0]$</span>&#x662F;&#x8282;&#x70B9;<span class="mathjax-exps">$i$</span>&#x7684;&#x7236;&#x8282;&#x70B9;&#x6807;&#x53F7;&#x3002;<br>
+&#x9012;&#x63A8;&#x5173;&#x7CFB;&#xFF1A;<span class="mathjax-exps">$ancestors[i][j] = ancestors[ancestors[i][j-1]][j-1]$</span></li>
+</ol>
+<p>&#x56E0;&#x4E3A;&#xFF1A;<span class="mathjax-exps">$2^j=2^{j-1}+2^{j-1}$</span></p>
+<p>&#x6240;&#x4EE5;&#xFF1A;<br>
 <span class="mathjax-exps">$ancestors[i][0] = parent[v]$</span><br>
 <span class="mathjax-exps">$ancestors[i][1] = ancestors[ancestors[i][0]][0]$</span><br>
 <span class="mathjax-exps">$ancestors[i][2] = ancestors[ancestors[i][1]][1]$</span><br>
 <span class="mathjax-exps">$ancestors[i][3] = ancestors[ancestors[i][2]][2]$</span><br>
-<span class="mathjax-exps">$ancestors[i][j] = ancestors[ancestors[i][j-1]][j-1]$</span></li>
-</ol>
+<span class="mathjax-exps">$ancestors[i][j] = ancestors[ancestors[i][j-1]][j-1]$</span></p>
 <img src="lca15_1.jpg" width="800px">
 <p>&#x539F;&#x7406;&#xFF1A;<span class="mathjax-exps">$2^j=2^{j-1}+2^{j-1}$</span></p>
 <pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword">void</span> <span class="token function">setAncestors</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
