@@ -31,10 +31,9 @@ class LCA
 
     vector<vector<int>> tree;
 
-    LCA(int p_n,int p_root)
+    LCA(int p_n)
     {
         this->n=p_n;
-        this->root=p_root;
         maxUpStep = lg2(n);
 
         tree.assign(n + 1, vector<int>());
@@ -42,7 +41,12 @@ class LCA
 
         depth.assign(n + 1, 0);
         visited.assign(n + 1, 0);
-        depth[root] = 0;        
+    }
+
+    void setRoot(int p_root)
+    {
+        this->root = p_root;
+        depth[root] = 0;
     }
 
     void dfsDepth(int curr)
@@ -60,15 +64,9 @@ class LCA
 
     void setFather()
     {
-        for (int i = 1; i <= n ; ++i)
-        {
-            for (int j = 1; j <= maxUpStep ; ++j)
-            {
-                father[i][j] = father[father[i][j-1]][j-1];
-                if (father[i][j]==0)
-                    break;
-            }
-        }
+        for (int j = 1; j <= maxUpStep; ++j)
+            for (int i = 1; i <= n; ++i)
+                father[i][j] = father[father[i][j - 1]][j - 1];
     }
 
     int lca(int u, int v)
@@ -119,14 +117,15 @@ int main()
         cin >> a >> b;
         lca.tree[a].push_back(b);
     }
+    lca.setRoot(root);
     lca.dfsDepth(root);
     lca.setFather();
 
-    int i=13,j=12;
-    cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
-    // for (int i = 1; i <= n ; ++i)
-    //     for (int j = i + 1; j <= n ; ++j)
-    //         cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
+    // int i=13,j=12;
+    // cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
+    for (int i = 1; i <= n ; ++i)
+        for (int j = i + 1; j <= n ; ++j)
+            cout << i << "," << j << ":" << lca.lca(i, j) << "\n";
 
     return 0;
 }

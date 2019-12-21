@@ -5,6 +5,11 @@
 一个有$n$($n=13$)个节点的树,求任意两点的最近公共祖先（Lowest common ancestor）
 
 ## 最近公共祖先定义
+在一棵没有环的树上，每个节点肯定有其父亲节点和祖先节点，而最近公共祖先，就是两个节点在这棵树上**深度最大**的**公共**的**祖先**节点。
+
+换句话说，就是两个点在这棵树上距离最近的公共祖先节点。
+
+所以LCA主要是用来处理当两个点仅有唯一一条确定的最短路径时的路径。
 
 <https://en.wikipedia.org/wiki/Lowest_common_ancestor>
 <https://zh.wikipedia.org/wiki/最近公共祖先_(图论)>
@@ -165,15 +170,9 @@ $father[v,1] = father[father[v,0][0]$
 ```c++
 void setFather()
 {
-    for (int i = 1; i <= n ; ++i)
-    {
-        for (int j = 1; j <= maxUpStep ; ++j)
-        {
-            father[i][j] = father[father[i][j-1]][j-1];
-            if (father[i][j]==0)
-                break;
-        }
-    }
+    for (int j = 1; j <= maxUpStep; ++j)
+        for (int i = 1; i <= n; ++i)
+            father[i][j] = father[father[i][j - 1]][j - 1];
 }
 ```
 4. 查找u,v的LCA
@@ -217,5 +216,20 @@ int lg2(int n)
 }
 ```
 
+#### **<font color=DarkRed>总结</font>**
+倍增算法是在线算法，适合查询数量比较少的情况。时间复杂度在$O(log(n))$ ~ $O(n*log(n))$之间。
+
+还有一种离线算法Tarjan，适合查询数量比较多的情况。
+
 参考
-http://www.csie.ntnu.edu.tw/~u91029/Tree.html#5
+<http://www.csie.ntnu.edu.tw/~u91029/Tree.html#5>
+
+
+题目
+
+Nearest Common Ancestors
+<http://poj.org/problem?id=1330>
+
+LCA - Lowest Common Ancestor
+<https://www.spoj.com/problems/LCA/>
+
