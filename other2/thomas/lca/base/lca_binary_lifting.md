@@ -1,12 +1,12 @@
 # LCA算法之倍增法
 
 ***
-
-一个有$n$($n=13$)个节点的树,求任意两点的最近公共祖先（Lowest common ancestor）
+## 问题
+一个有$n$个节点的树,求任意两点$u,v$的最近公共祖先$lca$（Lowest common ancestor）
 
 ## 最近公共祖先定义
-在一棵没有环的树上，每个节点肯定有其父亲节点和祖先节点，而最近公共祖先，就是两个节点在这棵树上**深度最大**的**公共**的**祖先**节点。
 
+在一棵没有环的树上，每个节点肯定有其父亲节点和祖先节点，而最近公共祖先，就是两个节点在这棵树上**深度最大**的**公共**的**祖先**节点。
 换句话说，就是两个点在这棵树上距离最近的公共祖先节点。
 
 所以LCA主要是用来处理当两个点仅有唯一一条确定的最短路径时的路径。
@@ -85,27 +85,33 @@ $u=13,v=12,LCA(u,v)=?$
 
 2. 移动v，使得u、v深度相同
 3. 开始跳跃
-3.1 跳跃最大处
+3.1 跳跃最大处：$2^{k+1}$
 <img src="lca7.jpg" width = "1000px" />
-3.2 太多，缩减一半
+3.2 发现祖先相同，太多，缩减一半。$2^{k}$
 <img src="lca8.jpg" width = "1000px" />
-3.3 还是太多，重复缩减一半。
+3.3 祖先相同，还是太多，重复缩减一半。$2^{k-1}...$
 <img src="lca9.jpg" width = "1000px" />
 <img src="lca10.jpg" width = "1000px" />
-3.4 缩减到还是u,v两个点，停止缩减。
+3.4 发现祖先不同，停止缩减。$2^{k-3}$
 <img src="lca11.jpg" width = "1000px" />
-3.5 移动u,v到这个位置，重复跳跃。开始跳跃的最大值是上次的值$2^{k-1}$
+3.5 移动u,v到这个位置，重复跳跃。前面已经跳了$3$次。此刻从$2^{k-3}$开始跳跃
 <img src="lca12.jpg" width = "1000px" />
-3.6不断重复跳跃，可以跳跃到LCA下的节点，此刻的节点父亲就是LCA
+3.6不断重复跳跃，可以跳到离u，v最远，且不同的祖先
 <img src="lca13.jpg" width = "1000px" />
+3.7上一步(3.6)的父亲就是LCA
 
 #### **<font color=DarkRed>原理</font>**
+
+理论上 u 的所有祖先都可以根据ancestors数组多次跳转得到，因为理论上任意证整数都可以由$2^n$累加构成，例如：
 
 $log_2(69)=6.10852$
 
 $  69 二进制： 01000101 = 2^6+2^2+2^0$
 
 <img src="lca14.jpg" width = "400px" />
+
+
+贪心法：
 
 1. $  \color{Red}{2^7} > 69$
 1. $  {2^6} < 69$ 
@@ -115,6 +121,8 @@ $  69 二进制： 01000101 = 2^6+2^2+2^0$
 5. $  2^6+\color{Red}{2^2} < 69$
 6. $  2^6+2^2 + \color{Red}{2^1} > 69$
 7. $  \color{blue}{2^6+2^2 + 2^0 = 69}$
+<img src="lca14_1.jpg"/>
+
 
 $  01001111 (79)=2^6+2^3+2^2+2^1+2^0$
 
@@ -122,6 +130,7 @@ $  01001111 (79)=2^6+2^3+2^2+2^1+2^0$
 #### **<font color=DarkRed>代码</font>**
 
 1. 变量声明和初始化
+
 ```c++
 private:
 int n;                              //节点的数量
@@ -145,9 +154,10 @@ LCA(int p_n)
     depth.assign(n + 1, 0);
     visited.assign(n + 1, 0);
 }
-
 ```
+
 2. 记录各节点i的深度depth[i]。dfs一遍即可O(N)。
+
 ```c++
 void dfsDepth(int curr)
 {
@@ -162,17 +172,19 @@ void dfsDepth(int curr)
     }
 }
 ```
+
 3. 预处理出倍增数组，$ancestors[i][j]$表示节点i往上(往根的方向)跳$2^j$步的祖先标号。0表示不存在，也就是跳过根了。$ancestors[i][0]$是节点$i$的父节点标号。
 因为：$2^j=2^{j-1}+2^{j-1}$
 所以：
-$ancestors[v,0] = parent[v]$
-$ancestors[v,1] = ancestors[ancestors[v,0][0]$
-$ancestors[v,2] = ancestors[ancestors[v,1][1]$
-$ancestors[v,3] = ancestors[ancestors[v,2][2]$
-$ancestors[v,j] = ancestors[ancestors[v,j-1][j-1]$
+$ancestors[i][0] = parent[v]$
+$ancestors[i][1] = ancestors[ancestors[i][0]][0]$
+$ancestors[i][2] = ancestors[ancestors[i][1]][1]$
+$ancestors[i][3] = ancestors[ancestors[i][2]][2]$
+$ancestors[i][j] = ancestors[ancestors[i][j-1]][j-1]$
 
-<img src="lca15_1.jpg" width = "600px"/>
+<img src="lca15_1.jpg" width = "800px"/>
 
+原理：$2^j=2^{j-1}+2^{j-1}$
 
 ```c++
 void setAncestors()
@@ -182,7 +194,6 @@ void setAncestors()
             ancestors[i][j] = ancestors[ancestors[i][j - 1]][j - 1];
 }
 ```
-
 
 4. 查找u,v的LCA
 ```c++
@@ -213,7 +224,6 @@ int lca(int u, int v)
     return ancestors[u][0];
 }
 ```
-
 
 5.快速计算$log_2(n)$,位运算：$(1<<i) = 2^i$
 ```c++
