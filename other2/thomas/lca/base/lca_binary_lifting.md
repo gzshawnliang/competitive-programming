@@ -244,6 +244,9 @@ Nearest Common Ancestors
 LCA - Lowest Common Ancestor
 <https://www.spoj.com/problems/LCA/>
 
+DISQUERY - Distance Query
+<https://www.spoj.com/problems/DISQUERY/>
+
 Tourists
 <https://open.kattis.com/problems/tourists>
 
