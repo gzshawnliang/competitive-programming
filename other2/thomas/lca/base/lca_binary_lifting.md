@@ -244,6 +244,8 @@ int lg2(int n)
 - 还有一种离线算法Tarjan，适合查询数量比较多的情况。
 
 参考
+
+<https://zhyack.github.io/posts/2015_12_22_LCA-Binary-Lifting-Note.html>
 <http://www.csie.ntnu.edu.tw/~u91029/Tree.html#5>
 <https://www.geeksforgeeks.org/lca-in-a-tree-using-binary-lifting-technique/>
 <https://cp-algorithms.com/graph/lca_binary_lifting.html>
