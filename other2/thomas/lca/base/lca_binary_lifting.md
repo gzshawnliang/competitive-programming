@@ -165,13 +165,13 @@ void dfsDepth(int curr)
 3. 预处理出倍增数组，$ancestors[i][j]$表示节点i往上(往根的方向)跳$2^j$步的祖先标号。0表示不存在，也就是跳过根了。$ancestors[i][0]$是节点$i$的父节点标号。
 因为：$2^j=2^{j-1}+2^{j-1}$
 所以：
-$ancestors[v,0] = ancestors[v]$
+$ancestors[v,0] = parent[v]$
 $ancestors[v,1] = ancestors[ancestors[v,0][0]$
 $ancestors[v,2] = ancestors[ancestors[v,1][1]$
 $ancestors[v,3] = ancestors[ancestors[v,2][2]$
 $ancestors[v,j] = ancestors[ancestors[v,j-1][j-1]$
 
-
+<img src="lca15_1.jpg" />
 
 <img src="lca15.jpg" width = "600px" />
 ```c++
