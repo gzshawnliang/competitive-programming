@@ -15,32 +15,36 @@
 #include <utility>
 #include <vector>
 
-
 using namespace std;
 
-vector<int> g[10005];
+vector<int> g[100005];
 
 int _log2(int n)
 {
     int i = 0;
-    while ((1<<i) <= n)             //(1<<i) = 2^i
+    while ((1 << i) <= n) //(1<<i) = 2^i
         ++i;
 
-    return i-1;
+    return i - 1;
 }
 
-void dfs(int u, vector<int> &depth, vector<vector<int>> & up)
+void dfs(int u, vector<int> &visited, vector<int> &depth, vector<vector<int>> & up)
 {
     int size = g[u].size();
     for (int i = 0; i <= size - 1; ++i)
     {
         int v = g[u][i];
 
-        depth[v] = depth[u] + 1;
+        if (visited[v] == 0)
+        {
+            visited[v] = 1;
 
-        up[v][0] = u;
+            depth[v] = depth[u] + 1;
+            up[v][0] = u;
 
-        dfs(v, depth, up);
+
+            dfs(v, visited, depth, up);
+        }
     }
 }
 
@@ -70,22 +74,22 @@ void solve()
         }
 
         int root = 0;
-        for (int i = 1; i <= n; ++i)
+        for (int u = 1; u <= n; ++u)
         {
-            if (isRoot[i] == 1)
+            if (isRoot[u] == 1)
             {
-                root = i;
+                root = u;
                 break;
             }
         }
-
-        vector<int> depth(n + 1, 0),
+        
+        vector<int> depth  (n + 1, 0),
                     visited(n + 1, 0);
         depth[root] = 1; visited[root] = 1;
 
-        vector<vector<int>> up(n + 1, vector<int>(maxP + 1, 0));
+        vector<vector<int>> up (n + 1, vector<int>(maxP + 1, 0));
 
-        dfs(root, depth, up);
+        dfs(root, visited, depth, up);
 
         for (int j = 1; j <= maxP; ++j)
         {
@@ -99,12 +103,16 @@ void solve()
 
         if (depth[qu] < depth[qv]) swap(qu, qv);
 
-        while (depth[qu] > depth[qv])
+        int ans = 0;
+
+        for (int b = maxP; b >= 0; --b)
         {
-            qu = up[qu][0];
+            if (depth[up[qu][b]] >= depth[qv])
+            {
+                qu = up[qu][b];
+            }
         }
 
-        int ans = 0;
         if (qu == qv)
         {
             ans = qu;
