@@ -29,13 +29,22 @@ class fraction
             c[i] = (double)a[i] - mid * (double)b[i];
 
         //从大到小排序
-        sort(c.begin() + 1, c.end(), [](const double x, const double y) {
-            return x > y;
-        });
+        auto compareFunc = [](const double x, const double y) { return x > y; };
+        sort(c.begin() + 1, c.end(),compareFunc);
 
-        //取出前k个
+        //取出最大的前k个
         for (int i = 1; i <= k ; ++i)
             s += c[i];
+
+        //if (s > 0)
+        //{
+            cout << "m:" << setw(12) << mid << ": ";
+            for (int i = 1; i <= k; ++i)
+            {
+                cout << setw(15) << c[i] << " ";
+            }
+            cout << "f(m): " << setw(12) << s << " \n";
+        //}
 
         return s > 0;
     }    
@@ -46,11 +55,12 @@ class fraction
         double L = 0, R = 1e9;
         while (R - L > eps)
         {
-            double mid = (L + R) / 2.0;
-            if (check(mid)) 
-                L = mid;    //mid 可行，答案比 mid 大
+            double m = (L + R) / 2.0;
+            cout << "L:" << setw(12) <<  L << " R:" << setw(12) << R << ",";
+            if (check(m)) 
+                L = m;    //mid 可行，答案比 mid 大
             else 
-                R = mid;    //mid 不可行，答案比 mid 小
+                R = m;    //mid 太大，不可行，答案比 mid 小
         }
         return L;
     }
