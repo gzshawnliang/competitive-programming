@@ -33,7 +33,7 @@ class fraction
             return x > y;
         });
 
-        //取出前k个
+        //取出前n-k个=删除k个
         for (int i = 1; i <= n-k ; ++i)
             s += c[i];
 
