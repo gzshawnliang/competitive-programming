@@ -153,6 +153,7 @@ void check2Pow(int i)
 
 int main33()
 {
+    cout << log2(69.0)<< "\n";
     for (int i = 1; i <= 100 ; ++i)
         check2Pow(i);
     
