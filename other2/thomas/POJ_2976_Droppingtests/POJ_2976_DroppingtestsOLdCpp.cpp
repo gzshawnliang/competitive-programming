@@ -1,8 +1,28 @@
-#include <bits/stdc++.h>
+#include <iostream>
+//#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
+#include <iomanip>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <numeric>
+#include <queue>
+#include <sstream>
+#include <string>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 const double eps = 1e-7;
+
+bool compare(const int & a,const int & b)
+{
+	return a>b;
+}
 
 class fraction
 {
@@ -29,11 +49,9 @@ class fraction
             c[i] = (double)a[i] - mid * (double)b[i];
 
         //从大到小排序
-        sort(c.begin() + 1, c.end(), [](const double x, const double y) {
-            return x > y;
-        });
+        sort(c.begin() + 1, c.end(), compare);
 
-        //取出前k个
+        //取出前n-k个
         for (int i = 1; i <= n-k ; ++i)
             s += c[i];
 
