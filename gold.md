@@ -13,10 +13,10 @@
 | Contest   | #                                                              | Name          | Topic                            | Result |
 | --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
 | 2015 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=573) | cardgame      | Binary Search                    |    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=574) | feast         | DP                               |    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=574) | feast         | DP                               |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=575) | dream         | BFS                              |    |
 | 2016 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=597) | angry         | Binary Search                    |    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=598) | radio         | DP                               |    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=598) | radio         | DP                               |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=599) | lightsout     |                                  |    |
 | 2016 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=621) | cbarn         |                                  |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=622) | cbarn2        | DP                               |    |
