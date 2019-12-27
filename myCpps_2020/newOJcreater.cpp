@@ -23,7 +23,7 @@
 using namespace std;
 
 //***************************************
-const string CPPfile = "POJ_2976"; //*
+const string CPPfile = "anotherCrisis_UVA12186"; //*
 //***************************************
 
 ifstream fin;
