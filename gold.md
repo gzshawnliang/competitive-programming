@@ -33,7 +33,7 @@
 | 2017 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=693) | bphoto        | 1DRQ                             |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=694) | hps           | DP                               |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=695) | cownav        | BFS                              |    |
-| 2017 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=717) | visitfj       | Shortest Path                    |    |
+| 2017 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=717) | visitfj       | Shortest Path                    |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=718) | nocross       | DP                               |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=719) | circlecross   | 1DRQ                             |    |
 | 2017 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=741) | cownomics     | Two Pointers / Hashing           |    |
@@ -42,7 +42,7 @@
 | Contest   | #                                                              | Name          | Topic                            | Result |
 | --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
 | 2017 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=765) | piepie        | BFS                              |    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=766) | barnpainting  | DP / Tree                        |    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=766) | barnpainting  | DP / Tree                        |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=767) | hayfeast      | Deque                            |    |
 | 2018 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=789) | mootube       | DSU                              |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=790) | atlarge       | DFS                              |    |
