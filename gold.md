@@ -63,7 +63,7 @@
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=898) | sleepy        | 1DRQ                             |        |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=899) | shortcut      | Shortest Path                    |Done    |
 | 2019 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=921) | cowland       | LCA / 1DRQ                       |    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=922) | dishes        | Map / Binary Search              |    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=922) | dishes        | Map / Binary Search              |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=923) | paintbarn     | DP / Line Sweep                  |    |
 | 2019 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=945) | snakes        | DP                               |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=946) | walk          | MST / Math                       |    |
