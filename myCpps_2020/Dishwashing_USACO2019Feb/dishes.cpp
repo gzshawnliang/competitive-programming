@@ -43,7 +43,7 @@ bool check(int size, vector<int> & a)
         }
 
         while (top[0] == b[smallestPos])
-        {
+           {
             ++smallestPos;
             desk[0].erase(desk[0].begin() + desk[0].size() - 1);
 
