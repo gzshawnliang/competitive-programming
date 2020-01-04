@@ -28,6 +28,9 @@ class solution
         //移动到counter
         buttom[1] = a[1];
         counter[1].push(a[1]);
+        int ans=0;
+        int lastPop=0;
+        
         for (int i = 2; i <= N ; ++i)
         {
             int j = 1;
@@ -44,24 +47,50 @@ class solution
                     break;
                 }
             }
+
             if(counter[j].empty())
             {
                 counter[j].push(a[i]);
             }
-            else if(a[i] < counter[j].top())
+            else if(a[i] < counter[j].top() && a[i] > lastPop)
             {
                 counter[j].push(a[i]);
             }
-            else
+            else if(a[i] > lastPop)
             {
-                /* code */
+                lastPop= counter[j].top();
+                if (j > 1)
+                {
+                    for (int k = 1; k <= j-1; ++k)
+                    {
+                        while(!counter[k].empty())
+                        {
+                            counter[k].pop();
+                            ++ans;
+                        }
+                        buttom[k]=0;
+                    }
+                }
+
+                //j=1;
+                counter[j].pop();
+                counter[j].push(a[i]);
+                ++ans;
             }
             
+        }
 
-            
-        }        
+        for (int i = 1; i <= N; ++i)
+        {
+            while(!counter[i].empty())
+            {
+                counter[i].pop();
+                ++ans;
+            }
+        }
 
-        assert(1==2);
+        cout << ans ;
+        //assert(1==2);
     }
 };
 
@@ -74,7 +103,7 @@ int main()
     std::cout.tie(NULL);
     #ifndef ONLINE_JUDGE
         freopen("dishes.in", "r", stdin);
-        //freopen("dishes.out", "w", stdout);
+        freopen("dishes.out", "w", stdout);
     #endif    
     solution sol1;
     sol1.solve();
