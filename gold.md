@@ -44,7 +44,7 @@
 | 2017 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=765) | piepie        | BFS                              |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=766) | barnpainting  | DP / Tree                        |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=767) | hayfeast      | Deque                            |    |
-| 2018 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=789) | mootube       | DSU                              |    |
+| 2018 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=789) | mootube       | DSU                              |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=790) | atlarge       | DFS                              |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=791) | spainting     | DP                               |Done    |
 | 2018 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=801)  | snowboots     | Set                              |    |
@@ -60,7 +60,7 @@
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=862) | cowpatibility | Hashing / PIE / Bitset           |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=863) | teamwork      | DP                               |Done    |
 | 2019 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=897) | poetry        | DP / Math                        |Done    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=898) | sleepy        | 1DRQ                             |        |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=898) | sleepy        | 1DRQ                             |Done        |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=899) | shortcut      | Shortest Path                    |Done    |
 | 2019 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=921) | cowland       | LCA / 1DRQ                       |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=922) | dishes        | Map / Binary Search              |Done    |
@@ -70,10 +70,10 @@
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=947) | balance       | Two Pointers / Math              |    |
 
 todo:
-- [ ] 1DRQ  (2019 Jan sleepy) 
+- [x] 1DRQ  (2019 Jan sleepy) 
     - [ ] 2018 Open sort
 - [ ] MST算法 Kruskal (2019 Open walk), Kruskal 算法也用到并查集
-    - [ ] DSU并查集(2018 Jan mootube)
+    - [x] DSU并查集(2018 Jan mootube)
 - [ ] Topological Sort (2018 Open milkorder)
 - [x] DP (2019 Open snakes)
 
