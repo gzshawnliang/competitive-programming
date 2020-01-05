@@ -69,6 +69,12 @@
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=946) | walk          | MST / Math                       |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=947) | balance       | Two Pointers / Math              |    |
 
+| Contest   | #                                                              | Name          | Topic                            | Result |
+| --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
+| 2019 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=969) | pump          | Shortest Path                    |Done    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=970) | milkvisits    | LCA                              |        |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=971) | cowmbat       | DP                               |        |
+
 todo:
 - [x] 1DRQ  (2019 Jan sleepy) 
     - [ ] 2018 Open sort
