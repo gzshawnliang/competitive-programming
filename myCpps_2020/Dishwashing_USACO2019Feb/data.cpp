@@ -19,7 +19,7 @@ int main()
         int N = rdNum.GetRand(10,20);
         fout << N << "\n";
         vector<int> a=rdNum.GetUniqueRand(1,N);
-        for (int i = 1; i <= N-1 ; ++i)
+        for (int i = 0; i <= N-1 ; ++i)
         {
             fout <<a[i] << "\n";
         }
