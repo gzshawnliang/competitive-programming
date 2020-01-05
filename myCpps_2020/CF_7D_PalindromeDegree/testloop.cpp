@@ -12,7 +12,8 @@
 #include <time.h>
 #include <iostream>
 using namespace std;
-#define TOGETHER 1;
+
+//#define TOGETHER 1;
 
 int main(){
 
