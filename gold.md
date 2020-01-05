@@ -65,14 +65,15 @@
 | 2019 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=921) | cowland       | LCA / 1DRQ                       |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=922) | dishes        | Map / Binary Search              |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=923) | paintbarn     | DP / Line Sweep                  |    |
-| 2019 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=945) | snakes        | DP                               |    |
+| 2019 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=945) | snakes        | DP                               |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=946) | walk          | MST / Math                       |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=947) | balance       | Two Pointers / Math              |    |
 
 todo:
-1.1DRQ  (2019 Jan sleepy)
-2.MST算法 Kruskal (2019 Open walk), Kruskal 算法也用到并查集
-2.1.DSU并查集(2018 Jan mootube)
-3.Topological Sort (2018 Open milkorder)
-4.DP (2019 Open snakes)
+- [ ] 1DRQ  (2019 Jan sleepy) 
+    - [ ] 2018 Open sort
+- [ ] MST算法 Kruskal (2019 Open walk), Kruskal 算法也用到并查集
+    - [ ] DSU并查集(2018 Jan mootube)
+- [ ] Topological Sort (2018 Open milkorder)
+- [x] DP (2019 Open snakes)
 
