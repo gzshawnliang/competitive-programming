@@ -401,6 +401,10 @@ namespace CFHelperUI
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
 
                     CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
+
+                    string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.cpp";
+                    System.Diagnostics.Process.Start("cmd.exe",$"/c code \"{cppfileName}\"");
+
                     //string result = CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
                     //createResult.Add(problemId.ToUpper(), result);
                 }
@@ -461,6 +465,9 @@ namespace CFHelperUI
                 //    System.Diagnostics.Process.Start(rootDir);
                 //}
 
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+
                 Application.Exit();
             }
         }
@@ -502,7 +509,8 @@ namespace CFHelperUI
                 //{
                 //    System.Diagnostics.Process.Start(rootDir);
                 //}
-
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
                 Application.Exit();
             }
         }
