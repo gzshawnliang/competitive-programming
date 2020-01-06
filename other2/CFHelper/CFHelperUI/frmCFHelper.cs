@@ -173,9 +173,16 @@ namespace CFHelperUI
             var url = input;
             var web = new HtmlWeb();
             var doc = web.Load(url);
-            HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//h2");
-            HtmlNode titleNode2 = doc.DocumentNode.SelectSingleNode("//h2[2]");
-            HtmlNode titleNode3 = doc.DocumentNode.SelectSingleNode("//h4");
+
+            HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//div[@class='panel']//h2");
+            HtmlNode titleNode2 = doc.DocumentNode.SelectSingleNode("//div[@class='panel']//h2[2]");
+            HtmlNode inputFileNode1 = doc.DocumentNode.SelectSingleNode("//div[@class='prob-in-spec']//h4");
+
+            if (titleNode1 == null || titleNode2 == null || inputFileNode1 == null)
+            {
+                MessageBox.Show(this, "USACO网页解析错误。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
             string s = titleNode2.InnerText + "_" + titleNode1.InnerText;
             s = s.Replace(" ", "");
@@ -204,7 +211,7 @@ namespace CFHelperUI
             this.listView1.BeginUpdate();
 
             Debug.WriteLine(s);
-            Debug.WriteLine(titleNode3.InnerText);
+            Debug.WriteLine(inputFileNode1.InnerText);
 
             string cppFileName = string.Empty;
             /*
@@ -212,7 +219,7 @@ namespace CFHelperUI
              INPUT FORMAT (file paintbarn.in):
             */
             Regex reg = new Regex(@"\w*\.\w*");
-            Match result = reg.Match(titleNode3.InnerText);
+            Match result = reg.Match(inputFileNode1.InnerText);
             if (result.Success)
             {
                 Debug.WriteLine( result.Value);
