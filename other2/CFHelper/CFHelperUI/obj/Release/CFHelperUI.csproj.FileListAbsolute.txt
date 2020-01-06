@@ -16,3 +16,4 @@ D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.applicati
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\HtmlAgilityPack.dll
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\HtmlAgilityPack.pdb
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\HtmlAgilityPack.xml
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.csprojAssemblyReference.cache
