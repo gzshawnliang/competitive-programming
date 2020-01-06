@@ -26,6 +26,9 @@ namespace CFHelperUI
         private int contestId=0;
         private Dictionary<string, string> problemDict;
         private readonly string _defaultDir;
+
+        private string inputFileContent;    //USACO SAMPLE INPUT数据
+
         private string rootDir
         {
             get { return this.txtWorkingDir.Text; }
@@ -72,6 +75,7 @@ namespace CFHelperUI
                 MessageBox.Show(this, "输入 problemId 无效.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            inputFileContent = string.Empty;
             lblContest.Text = "";
             listView1.Columns.Clear();
             listView1.Items.Clear();
@@ -164,6 +168,7 @@ namespace CFHelperUI
         {
             contestType = ContestType.usaco;
 
+            inputFileContent = string.Empty;
             lblContest.Text = "";
             listView1.Columns.Clear();
             listView1.Items.Clear();
@@ -177,11 +182,17 @@ namespace CFHelperUI
             HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//div[@class='panel']//h2");
             HtmlNode titleNode2 = doc.DocumentNode.SelectSingleNode("//div[@class='panel']//h2[2]");
             HtmlNode inputFileNode1 = doc.DocumentNode.SelectSingleNode("//div[@class='prob-in-spec']//h4");
+            HtmlNode inputDataNode1 = doc.DocumentNode.SelectSingleNode("//pre[@class='in']");
 
             if (titleNode1 == null || titleNode2 == null || inputFileNode1 == null)
             {
                 MessageBox.Show(this, "USACO网页解析错误。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
+            }
+
+            if (inputDataNode1 != null)
+            {
+                this.inputFileContent = inputDataNode1.InnerText.TrimStart("\n".ToCharArray());
             }
 
             string s = titleNode2.InnerText + "_" + titleNode1.InnerText;
@@ -417,7 +428,8 @@ namespace CFHelperUI
             {
                 using (StreamWriter sw = File.CreateText(infileName))
                 {
-
+                    if(!string.IsNullOrEmpty(inputFileContent))
+                        sw.Write(inputFileContent);
                 }
             }
             else
