@@ -15,6 +15,7 @@ using System.Net.Http.Headers;
 using System.Security.AccessControl;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -25,11 +26,17 @@ namespace CFHelperUI
         private int contestId=0;
         private Dictionary<string, string> problemDict;
         private readonly string _defaultDir;
-
         private string rootDir
         {
             get { return this.txtWorkingDir.Text; }
         }
+        private enum ContestType
+        {
+            codeforces,
+            usaco
+        }
+
+        private ContestType contestType;
 
         public frmCFHelper()
         {
@@ -48,12 +55,18 @@ namespace CFHelperUI
 
         private void butGo_Click(object sender, EventArgs e)
         {
-            GetData();
+            string input = this.txtProblemId.Text.Trim();
+            bool isUsaco = Regex.IsMatch(input, @"usaco.org", RegexOptions.IgnoreCase);
+            if(isUsaco)
+                GetDataUSACO(input);
+            else
+                GetDataCF(input);
         }
 
-        private void GetData()
+        private void GetDataCF(string input)
         {
-            string input = this.txtProblemId.Text;
+            contestType = ContestType.codeforces;
+
             if (int.TryParse(Regex.Replace(input, @"[^0-9]+", ""), out contestId) == false)
             {
                 MessageBox.Show(this, "输入 problemId 无效.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -81,7 +94,6 @@ namespace CFHelperUI
             {
                 dynamic o = GetResponse(url);
                 string ids = string.Empty;
-
 
                 if (o.status == "OK")
                 {
@@ -124,62 +136,6 @@ namespace CFHelperUI
                     }
                     this.listView1.EndUpdate();
                     this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                    //Console.WriteLine("----------------------------------");
-
-                    //string pathName = string.Empty;
-                    //while (true)
-                    //{
-                    //    if (string.IsNullOrEmpty(problemId))
-                    //    {
-                    //        Console.Write($"请输入字母({ids.Trim()})选择problem：");
-                    //        problemId = Console.ReadLine();
-                    //        if (!problemDict.ContainsKey(problemId.ToUpper()))
-                    //        {
-                    //            problemId = string.Empty;
-                    //            continue;
-                    //        }
-
-                    //    }
-                    //    string choose = "N";
-
-                    //    Console.WriteLine(
-                    //        $"您已经选择：({problemId.ToUpper()}){problemDict[problemId.ToUpper()]}，是否继续？");
-                    //    Console.Write(
-                    //        $"输入 N 重新选择，输入任何键继续：");
-
-                    //    choose = Console.ReadLine().ToUpper();
-                    //    if (choose == "N")
-                    //    {
-                    //        problemId = string.Empty;
-                    //        continue;
-                    //    }
-
-
-                    //    pathName = FormatPathName($"CF_{contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-                    //    Console.Write($"即将创建C++文件夹：{pathName}，是否继续？输入N重新选择，输入任何键继续：");
-                    //    choose = Console.ReadLine().ToUpper();
-                    //    if (choose == "N")
-                    //    {
-                    //        problemId = string.Empty;
-                    //        continue;
-                    //    }
-
-                    //    break;
-                    //}
-
-                    //string cppCode = "";
-                    //cppCode += $"/*\n";
-                    //cppCode += $"===========================================================\n";
-                    //cppCode += $"* @Name:           {contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}\n";
-                    //cppCode += $"* @Author:         \n";
-                    //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                    //cppCode += $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
-                    //cppCode += $"* @Description:    \n";
-                    //cppCode += $"===========================================================\n";
-                    //cppCode += $"*/";
-                    //CreateDirAndCppFile($"{currDir}\\{pathName}", $"{pathName}", cppCode);
-                    //Console.WriteLine($"创建C++文件夹：\n{currDir}\\{pathName}\n完毕!输入任何键退出。");
                 }
                 else if (o.status == "FAILED")
                 {
@@ -204,6 +160,75 @@ namespace CFHelperUI
 
         }
 
+        private void GetDataUSACO(string input)
+        {
+            contestType = ContestType.usaco;
+
+            lblContest.Text = "";
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            txtError.Visible = false;
+            txtError.Clear();
+
+            var url = input;
+            var web = new HtmlWeb();
+            var doc = web.Load(url);
+            HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//h2");
+            HtmlNode titleNode2 = doc.DocumentNode.SelectSingleNode("//h2[2]");
+            HtmlNode titleNode3 = doc.DocumentNode.SelectSingleNode("//h4");
+
+            string s = titleNode2.InnerText + "_" + titleNode1.InnerText;
+            s = s.Replace(" ", "");
+            s = s.Replace(".", "_");
+            s = s.Replace(",", "");
+            s = s.Replace("Contest", "");
+
+            s = s.Replace("January", "Jan");
+            s = s.Replace("February", "Feb");
+            s = s.Replace("March", "Mar");
+            s = s.Replace("April", "Apr");
+            s = s.Replace("May", "May");
+            s = s.Replace("June", "Jun");
+            s = s.Replace("July", "Jul");
+            s = s.Replace("Septemper", "Sep");
+            s = s.Replace("October", "Oct");
+            s = s.Replace("November", "Nov");
+            s = s.Replace("December", "Dec");
+            s = s.Replace("Problem", "Prob");
+
+            lblContest.Text = titleNode1.InnerText;
+
+            this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("file", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("contests", 364, HorizontalAlignment.Left);
+            this.listView1.BeginUpdate();
+
+            Debug.WriteLine(s);
+            Debug.WriteLine(titleNode3.InnerText);
+
+            string cppFileName = string.Empty;
+            /*
+             从以下字符串查找paintbarn.in
+             INPUT FORMAT (file paintbarn.in):
+            */
+            Regex reg = new Regex(@"\w*\.\w*");
+            Match result = reg.Match(titleNode3.InnerText);
+            if (result.Success)
+            {
+                Debug.WriteLine( result.Value);
+                cppFileName = result.Value.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0]+".cpp";
+            }
+
+
+            ListViewItem lvi = new ListViewItem(titleNode2.InnerText.Trim());
+            lvi.SubItems.Add(cppFileName);
+            lvi.SubItems.Add(titleNode1.InnerText.Trim());
+            lvi.Tag = s;
+            this.listView1.Items.Add(lvi);
+            this.listView1.EndUpdate();
+            this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         private JObject GetResponse(string url)
         {
 
@@ -226,7 +251,7 @@ namespace CFHelperUI
         {
             if (e.KeyCode == Keys.Return)
             {
-                GetData();
+                butGo_Click(sender, e);
             }
         }
 
@@ -243,7 +268,19 @@ namespace CFHelperUI
 
         private void butOK_Click(object sender, EventArgs e)
         {
-            if(listView1.CheckedItems.Count==0)
+            if (contestType == ContestType.codeforces)
+            {
+                CreateFileCF();
+            }
+            else if (contestType == ContestType.usaco)
+            {
+                CreateFileUsaco();
+            }
+        }
+
+        private void CreateFileCF()
+        {
+            if (listView1.CheckedItems.Count == 0)
                 return;
 
             List<string> problemIdList = new List<string>();
@@ -254,34 +291,39 @@ namespace CFHelperUI
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
             string msg = "";
+
             foreach (var item in problemIdList)
             {
                 msg += FormatPathName($"CF_{this.contestId}{item.ToUpper()}_{problemDict[item.ToUpper()]}") + Environment.NewLine;
             }
 
             msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{msg}\n是否继续？";
-            
-            Dictionary<string, string> createResult=new Dictionary<string, string>(); 
+
+            Dictionary<string, string> createResult = new Dictionary<string, string>();
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 foreach (var problemId in problemIdList)
                 {
-                    
+
                     string cppCode = "";
+
                     cppCode += $"/*\n";
                     cppCode += $"===========================================================\n";
-                    cppCode += $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
+                    cppCode +=
+                        $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
                     cppCode += $"* @Author:         {txtAuthor.Text}\n";
                     cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                    cppCode += $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    cppCode +=
+                        $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
                     cppCode += $"* @Description:    \n";
                     cppCode += $"===========================================================\n";
                     cppCode += $"*/";
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
+
                     string result = CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
-                    createResult.Add(problemId.ToUpper(),result);
+                    createResult.Add(problemId.ToUpper(), result);
                 }
 
                 msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
@@ -292,7 +334,49 @@ namespace CFHelperUI
                 }
 
                 msg += "\n是否打开文件夹查看？";
-                if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information) ==
+                if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
+                    DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(rootDir);
+                }
+
+                Application.Exit();
+            }
+        }
+
+        private void CreateFileUsaco()
+        {
+            if (listView1.CheckedItems.Count == 0)
+                return;
+
+            var item = listView1.CheckedItems[0];
+            string fileName = FormatPathName(item.SubItems[1].Text.Split(".".ToCharArray())[0]);
+            string subDirName = item.Tag.ToString();
+
+            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
+            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+
+            if (MessageBox.Show(this, msg, this.Text,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string cppCode = "";
+
+                cppCode += $"/*\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"* @Name:           {item.Text.Trim()} \n";
+                cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                cppCode += $"* @url:            {this.txtProblemId.Text}\n";
+                cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"*/";
+
+                string result = CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+
+                msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
+                msg += "\n是否打开文件夹查看？";
+
+                if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
                     DialogResult.Yes)
                 {
                     System.Diagnostics.Process.Start(rootDir);
@@ -373,8 +457,16 @@ namespace CFHelperUI
         {
             if (listView1.FocusedItem != null)
             {
-                var id = listView1.FocusedItem.Text;
-                string url = $"https://codeforces.com/problemset/problem/{this.contestId}/{id}";
+                string url = string.Empty;
+                if (contestType == ContestType.codeforces)
+                {
+                    var id = listView1.FocusedItem.Text;
+                    url = $"https://codeforces.com/problemset/problem/{this.contestId}/{id}";
+                }
+                else if (contestType == ContestType.codeforces)
+                {
+                    url = this.txtProblemId.Text;
+                }
                 System.Diagnostics.Process.Start(url);
             }
         }
