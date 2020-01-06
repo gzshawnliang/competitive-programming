@@ -6,7 +6,6 @@ D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\Newtonsoft.Json.xml
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.frmCFHelper.resources
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.Properties.Resources.resources
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.csproj.GenerateResource.cache
-D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.csproj.CoreCompileInputs.cache
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.csproj.CopyComplete
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.exe
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.pdb
@@ -14,4 +13,6 @@ D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\CFHelperUI.exe.manif
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\CFHelperUI.application
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.exe.manifest
 D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.application
-D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.csprojAssemblyReference.cache
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\HtmlAgilityPack.dll
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\HtmlAgilityPack.pdb
+D:\codes\shawnGitHub\other2\CFHelper\CFHelperUI\bin\Release\HtmlAgilityPack.xml
