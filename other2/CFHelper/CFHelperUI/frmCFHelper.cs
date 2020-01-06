@@ -199,9 +199,10 @@ namespace CFHelperUI
 
             string s = titleNode2.InnerText + "_" + titleNode1.InnerText;
             s = s.Replace(" ", "");
-            s = s.Replace(".", "_");
+            //s = s.Replace(".", "_");
             s = s.Replace(",", "");
             s = s.Replace("Contest", "");
+            s = s.Replace("USACO", "");
 
             s = s.Replace("January", "Jan");
             s = s.Replace("February", "Feb");
@@ -215,6 +216,9 @@ namespace CFHelperUI
             s = s.Replace("November", "Nov");
             s = s.Replace("December", "Dec");
             s = s.Replace("Problem", "Prob");
+
+            var arr = s.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            s = "USACO_" + arr[1] + "_" + arr[0];
 
             lblContest.Text = titleNode1.InnerText;
 
@@ -373,7 +377,7 @@ namespace CFHelperUI
 
             msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{msg}\n是否继续？";
 
-            Dictionary<string, string> createResult = new Dictionary<string, string>();
+            //Dictionary<string, string> createResult = new Dictionary<string, string>();
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -396,23 +400,24 @@ namespace CFHelperUI
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
 
-                    string result = CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
-                    createResult.Add(problemId.ToUpper(), result);
+                    CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
+                    //string result = CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
+                    //createResult.Add(problemId.ToUpper(), result);
                 }
 
-                msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
-                foreach (var problemId in problemIdList)
-                {
-                    string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-                    msg += $"{fileName}:{(string.IsNullOrEmpty(createResult[problemId]) ? "成功" : createResult[problemId])}\n";
-                }
+                //msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
+                //foreach (var problemId in problemIdList)
+                //{
+                //    string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
+                //    msg += $"{fileName}:{(string.IsNullOrEmpty(createResult[problemId]) ? "成功" : createResult[problemId])}\n";
+                //}
 
-                msg += "\n是否打开文件夹查看？";
-                if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
-                    DialogResult.Yes)
-                {
-                    System.Diagnostics.Process.Start(rootDir);
-                }
+                //msg += "\n是否打开文件夹查看？";
+                //if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
+                //    DialogResult.Yes)
+                //{
+                //    System.Diagnostics.Process.Start(rootDir);
+                //}
 
                 Application.Exit();
             }
@@ -425,7 +430,7 @@ namespace CFHelperUI
 
             var item = listView1.CheckedItems[0];
             string fileName = FormatPathName(item.SubItems[1].Text.Split(".".ToCharArray())[0]);
-            string subDirName = item.Tag.ToString();
+            string subDirName = FormatPathName(item.Tag.ToString());
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
             string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
@@ -445,16 +450,16 @@ namespace CFHelperUI
                 cppCode += $"===========================================================\n";
                 cppCode += $"*/";
 
-                string result = CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
-                msg += "\n是否打开文件夹查看？";
+                //msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
+                //msg += "\n是否打开文件夹查看？";
 
-                if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
-                    DialogResult.Yes)
-                {
-                    System.Diagnostics.Process.Start(rootDir);
-                }
+                //if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
+                //    DialogResult.Yes)
+                //{
+                //    System.Diagnostics.Process.Start(rootDir);
+                //}
 
                 Application.Exit();
             }
@@ -466,7 +471,7 @@ namespace CFHelperUI
                 return;
 
             var item = listView1.CheckedItems[0];
-            string subDirName = "SPOJ_" + item.Tag.ToString();
+            string subDirName = FormatPathName("SPOJ_" + item.Tag.ToString());
             string fileName = item.Tag.ToString() ;
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
@@ -487,16 +492,16 @@ namespace CFHelperUI
                 cppCode += $"===========================================================\n";
                 cppCode += $"*/";
 
-                string result = CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
-                msg += "\n是否打开文件夹查看？";
+                //msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
+                //msg += "\n是否打开文件夹查看？";
 
-                if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
-                    DialogResult.Yes)
-                {
-                    System.Diagnostics.Process.Start(rootDir);
-                }
+                //if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
+                //    DialogResult.Yes)
+                //{
+                //    System.Diagnostics.Process.Start(rootDir);
+                //}
 
                 Application.Exit();
             }
@@ -548,6 +553,7 @@ namespace CFHelperUI
             }
             pathName = pathName.Replace("-", "_");
             pathName = pathName.Replace(" ", "");
+            pathName = pathName.Replace("'", "");
 
             return pathName;
         }
