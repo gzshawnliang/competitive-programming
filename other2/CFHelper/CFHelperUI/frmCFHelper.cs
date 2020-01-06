@@ -36,7 +36,8 @@ namespace CFHelperUI
         private enum ContestType
         {
             codeforces,
-            usaco
+            usaco,
+            spoj
         }
 
         private ContestType contestType;
@@ -59,11 +60,12 @@ namespace CFHelperUI
         private void butGo_Click(object sender, EventArgs e)
         {
             string input = this.txtProblemId.Text.Trim();
-            bool isUsaco = Regex.IsMatch(input, @"usaco.org", RegexOptions.IgnoreCase);
-            if(isUsaco)
+            if(Regex.IsMatch(input, @"usaco.org", RegexOptions.IgnoreCase))
                 GetDataUSACO(input);
-            else
+            else if (Regex.IsMatch(input, @"^\d{1,}[0-9]([A-Za-z])?$", RegexOptions.IgnoreCase))        //一定是201A或201的格式：数字+单个字母或者数字
                 GetDataCF(input);
+            else if (Regex.IsMatch(input, @"spoj.com", RegexOptions.IgnoreCase))
+                GetDataSPOJ(input);
         }
 
         private void GetDataCF(string input)
@@ -247,6 +249,56 @@ namespace CFHelperUI
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
+        private void GetDataSPOJ(string input)
+        {
+            contestType = ContestType.spoj;
+
+            inputFileContent = string.Empty;
+            lblContest.Text = "";
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            txtError.Visible = false;
+            txtError.Clear();
+
+            var url = input;
+            var web = new HtmlWeb();
+            var doc = web.Load(url);
+
+            HtmlNode titleNode1 = doc.GetElementbyId("problem-name");
+
+            if (titleNode1 == null )
+            {
+                MessageBox.Show(this, "SPOJ网页解析错误。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            string s = titleNode1.InnerText.Split("-".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0];
+
+            s = s.Replace(" ", "");
+            s = s.Replace(".", "_");
+            s = s.Replace(",", "");
+            
+            lblContest.Text = titleNode1.InnerText;
+
+            this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("file", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("contests", 364, HorizontalAlignment.Left);
+            this.listView1.BeginUpdate();
+
+            Debug.WriteLine(s);
+            Debug.WriteLine(titleNode1.InnerText);
+
+            string cppFileName = s + ".cpp";
+
+            ListViewItem lvi = new ListViewItem(s);
+            lvi.SubItems.Add(cppFileName);
+            lvi.SubItems.Add(titleNode1.InnerText.Trim());
+            lvi.Tag = s;
+            this.listView1.Items.Add(lvi);
+            this.listView1.EndUpdate();
+            this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         private JObject GetResponse(string url)
         {
 
@@ -286,13 +338,17 @@ namespace CFHelperUI
 
         private void butOK_Click(object sender, EventArgs e)
         {
-            if (contestType == ContestType.codeforces)
+            switch (contestType)
             {
-                CreateFileCF();
-            }
-            else if (contestType == ContestType.usaco)
-            {
-                CreateFileUsaco();
+                case ContestType.codeforces:
+                    CreateFileCF();
+                    break;
+                case ContestType.usaco:
+                    CreateFileUSACO();
+                    break;
+                case ContestType.spoj:
+                    CreateFileSPOJ();
+                    break;
             }
         }
 
@@ -362,7 +418,7 @@ namespace CFHelperUI
             }
         }
 
-        private void CreateFileUsaco()
+        private void CreateFileUSACO()
         {
             if (listView1.CheckedItems.Count == 0)
                 return;
@@ -370,6 +426,48 @@ namespace CFHelperUI
             var item = listView1.CheckedItems[0];
             string fileName = FormatPathName(item.SubItems[1].Text.Split(".".ToCharArray())[0]);
             string subDirName = item.Tag.ToString();
+
+            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
+            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+
+            if (MessageBox.Show(this, msg, this.Text,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string cppCode = "";
+
+                cppCode += $"/*\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"* @Name:           {item.Text.Trim()} \n";
+                cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                cppCode += $"* @url:            {this.txtProblemId.Text}\n";
+                cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"*/";
+
+                string result = CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+
+                msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
+                msg += "\n是否打开文件夹查看？";
+
+                if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
+                    DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(rootDir);
+                }
+
+                Application.Exit();
+            }
+        }
+
+        private void CreateFileSPOJ()
+        {
+            if (listView1.CheckedItems.Count == 0)
+                return;
+
+            var item = listView1.CheckedItems[0];
+            string subDirName = "SPOJ_" + item.Tag.ToString();
+            string fileName = item.Tag.ToString() ;
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
             string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";

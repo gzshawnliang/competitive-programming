@@ -7,3 +7,4 @@ D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Release\netcoreapp2.2\CFHelper
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Release\netcoreapp2.2\CFHelper.AssemblyInfo.cs
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Release\netcoreapp2.2\CFHelper.dll
 D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Release\netcoreapp2.2\CFHelper.pdb
+D:\codes\shawnGitHub\other2\CFHelper\CFHelper\obj\Release\netcoreapp2.2\CFHelper.csprojAssemblyReference.cache

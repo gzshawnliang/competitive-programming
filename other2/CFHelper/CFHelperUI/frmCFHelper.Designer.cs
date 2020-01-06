@@ -148,9 +148,9 @@
             this.lblContest.Location = new System.Drawing.Point(16, 9);
             this.lblContest.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContest.Name = "lblContest";
-            this.lblContest.Size = new System.Drawing.Size(476, 16);
+            this.lblContest.Size = new System.Drawing.Size(584, 16);
             this.lblContest.TabIndex = 7;
-            this.lblContest.Text = "Input the Codeforces problemId or USACO URL, please ";
+            this.lblContest.Text = "Input the Codeforces problemId or USACO URL or SPOJ URL, please ";
             // 
             // label3
             // 
