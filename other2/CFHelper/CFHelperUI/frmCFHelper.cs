@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Security.AccessControl;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
@@ -659,6 +660,10 @@ namespace CFHelperUI
 
             GetWindowsState();
             this.txtAuthor.Text = RegRead("Author");
+
+            string currFilePath = Assembly.GetExecutingAssembly().Location;
+            DateTime dt = new FileInfo(currFilePath).LastWriteTime;
+            this.Text += $" {dt.ToString("yyyyMMddHHmm")}";
         }
 
         private string RegRead(string keyName)
