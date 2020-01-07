@@ -556,12 +556,37 @@ namespace CFHelperUI
         private void RunVSCode(string cppFile)
         {
             //string exe = "\"%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe\"";
-            string exe = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Programs\Microsoft VS Code\Code.exe";
-            if (!System.IO.File.Exists(exe))
+
+            string vsCodeExe = string.Empty;
+            //从进程中获取vscode路径
+            Process[] ps = Process.GetProcessesByName("Code");
+            foreach (Process p in ps)
             {
-                exe = "code";
+                //输出进程路径
+                if (p.MainModule.FileVersionInfo.FileDescription == "Visual Studio Code")
+                {
+                    Debug.WriteLine(p.MainModule.FileName);
+                    vsCodeExe = p.MainModule.FileName;
+                    break;
+                }
             }
-            System.Diagnostics.Process.Start(exe, $"\"{cppFile}\"");
+
+            //获取不到,缺省路径启动一个进程
+            if(string.IsNullOrEmpty(vsCodeExe))
+                vsCodeExe = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Programs\Microsoft VS Code\Code.exe";
+
+            //缺省路径找不到Code.exe，使用环境变量
+            if (!System.IO.File.Exists(vsCodeExe))
+                vsCodeExe = "code";
+
+            System.Diagnostics.Process.Start(vsCodeExe, $"\"{cppFile}\"");
+
+            //string vsCodeExe = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Programs\Microsoft VS Code\Code.exe";
+            //if (!System.IO.File.Exists(vsCodeExe))
+            //{
+            //    vsCodeExe = "code";
+            //}
+            //System.Diagnostics.Process.Start(vsCodeExe, $"\"{cppFile}\"");
         }
 
         private string FormatPathName(string name)
