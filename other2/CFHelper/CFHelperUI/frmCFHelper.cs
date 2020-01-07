@@ -38,7 +38,8 @@ namespace CFHelperUI
         {
             codeforces,
             usaco,
-            spoj
+            spoj,
+            uva
         }
 
         private ContestType contestType;
@@ -61,12 +62,25 @@ namespace CFHelperUI
         private void butGo_Click(object sender, EventArgs e)
         {
             string input = this.txtProblemId.Text.Trim();
-            if(Regex.IsMatch(input, @"usaco.org", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(input, @"usaco.org", RegexOptions.IgnoreCase))
+            {
+                usaco.Checked = true;
                 GetDataUSACO(input);
-            else if (Regex.IsMatch(input, @"^\d{1,}[0-9]([A-Za-z])?$", RegexOptions.IgnoreCase))        //一定是201A或201的格式：数字+单个字母或者数字
-                GetDataCF(input);
+            }
             else if (Regex.IsMatch(input, @"spoj.com", RegexOptions.IgnoreCase))
+            {
+                spoj.Checked = true;
                 GetDataSPOJ(input);
+            }
+            else if (uva.Checked)
+            {
+                GetDataUVa(input);
+            }
+            else if (Regex.IsMatch(input, @"^\d{1,}[0-9]([A-Za-z])?$", RegexOptions.IgnoreCase)
+            ) //一定是201A或201的格式：数字+单个字母或者数字
+            {
+                GetDataCF(input);
+            }
         }
 
         private void GetDataCF(string input)
@@ -165,6 +179,67 @@ namespace CFHelperUI
 
 
 
+        }
+
+        private void GetDataUVa(string input)
+        {
+            contestType = ContestType.uva;
+
+            if (int.TryParse(input, out int problemId) == false)
+            {
+                MessageBox.Show(this, "输入 problemId 无效.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            inputFileContent = string.Empty;
+            lblContest.Text = "";
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            txtError.Visible = false;
+            txtError.Clear();
+
+            //HttpClient client = new HttpClient();
+            string url = $"https://uhunt.onlinejudge.org/api/p/num/{problemId}";
+
+            try
+            {
+                dynamic o = GetResponse(url);
+
+                if (o !=null)
+                {
+                    lblContest.Text = o.title.ToString();
+
+                    this.listView1.Columns.Add("id", 36, HorizontalAlignment.Left);
+                    this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+                    this.listView1.Columns.Add("file", 300, HorizontalAlignment.Left);
+                    this.listView1.BeginUpdate();
+                    string s = $"UVa{problemId}_{o.title.ToString()}";
+                    s = FormatPathName(s);
+                    ListViewItem lvi = new ListViewItem(problemId.ToString());
+                    lvi.Tag = s;
+                    lvi.SubItems.Add(o.title.ToString());
+                    lvi.SubItems.Add(s + ".cpp");
+                    this.listView1.Items.Add(lvi);
+
+                    this.listView1.EndUpdate();
+                    this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                }
+                else if (o.status == "FAILED")
+                {
+                    lblContest.Text = o.comment;
+                }
+                else
+                {
+                    Console.WriteLine(o);
+                }
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine(e);
+                txtError.Text = e.ToString();
+                txtError.Visible = true;
+                lblContest.Text = e.Message;
+                //throw;
+            }
         }
 
         private void GetDataUSACO(string input)
@@ -348,11 +423,14 @@ namespace CFHelperUI
                 case ContestType.codeforces:
                     CreateFileCF();
                     break;
+                case ContestType.spoj:
+                    CreateFileSPOJ();
+                    break;
                 case ContestType.usaco:
                     CreateFileUSACO();
                     break;
-                case ContestType.spoj:
-                    CreateFileSPOJ();
+                case ContestType.uva:
+                    CreateFileUVa();
                     break;
             }
         }
@@ -519,6 +597,41 @@ namespace CFHelperUI
             }
         }
 
+        private void CreateFileUVa()
+        {
+            if (listView1.CheckedItems.Count == 0)
+                return;
+
+            var item = listView1.CheckedItems[0];
+            string subDirName = item.Tag.ToString();
+
+            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
+            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+
+            if (MessageBox.Show(this, msg, this.Text,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string cppCode = "";
+
+                cppCode += $"/*\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"* @Name:           UVa-{item.Text} {item.SubItems[1].Text}\n";
+                cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                cppCode += $"* @url:            \n";
+                cppCode += $"* @Description:    \n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"*/";
+
+                CreateDirAndCppFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
+                
+                string cppfileName = $"{rootDir}\\{subDirName}\\{subDirName}.cpp";
+                RunVSCode(cppfileName);
+
+                Application.Exit();
+            }
+        }
+
         private string CreateDirAndCppFile(string path, string fileName, string cppCode)
         {
             string result = string.Empty;
@@ -664,6 +777,26 @@ namespace CFHelperUI
             string currFilePath = Assembly.GetExecutingAssembly().Location;
             DateTime dt = new FileInfo(currFilePath).LastWriteTime;
             this.Text += $" {dt.ToString("yyyyMMddHHmm")}";
+
+            var ojType = RegRead("OJType");
+            if (!string.IsNullOrEmpty(ojType))
+            {
+                switch (ojType)
+                {
+                    case "codeforces":
+                        codeforces.Checked = true;
+                        break;
+                    case "uva":
+                        uva.Checked = true;
+                        break;
+                    case "usaco":
+                        usaco.Checked = true;
+                        break;
+                    case "spoj":
+                        spoj.Checked = true;
+                        break;
+                }
+            }
         }
 
         private string RegRead(string keyName)
@@ -722,6 +855,19 @@ namespace CFHelperUI
                 RegWrite("Form.WindowState", "2");
             else
                 RegWrite("Form.WindowState", "0");
+        }
+
+        private void frmCFHelper_Activated(object sender, EventArgs e)
+        {
+            this.txtProblemId.Focus();
+        }
+
+        private void CheckedChanged(object sender, EventArgs e)
+        {
+            var objRadioButton =  sender as RadioButton;
+            if (objRadioButton != null)
+                if(objRadioButton.Checked)
+                    RegWrite("OJType", objRadioButton.Name);
         }
     }
 }
