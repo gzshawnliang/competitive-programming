@@ -403,7 +403,8 @@ namespace CFHelperUI
                     CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
 
                     string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.cpp";
-                    System.Diagnostics.Process.Start("cmd.exe",$"/c code \"{cppfileName}\"");
+                    RunVSCode(cppfileName);
+                    //System.Diagnostics.Process.Start("cmd.exe",$"/c code \"{cppfileName}\"");
 
                     //string result = CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
                     //createResult.Add(problemId.ToUpper(), result);
@@ -466,7 +467,8 @@ namespace CFHelperUI
                 //}
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
-                System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+                RunVSCode(cppfileName);
 
                 Application.Exit();
             }
@@ -510,7 +512,8 @@ namespace CFHelperUI
                 //    System.Diagnostics.Process.Start(rootDir);
                 //}
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
-                System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+                RunVSCode(cppfileName);
+                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
                 Application.Exit();
             }
         }
@@ -548,6 +551,17 @@ namespace CFHelperUI
                 result += $",in文件已存在";
             }
             return result.TrimStart(",".ToCharArray());
+        }
+
+        private void RunVSCode(string cppFile)
+        {
+            //string exe = "\"%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe\"";
+            string exe = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Programs\Microsoft VS Code\Code.exe";
+            if (!System.IO.File.Exists(exe))
+            {
+                exe = "code";
+            }
+            System.Diagnostics.Process.Start(exe, $"\"{cppFile}\"");
         }
 
         private string FormatPathName(string name)
