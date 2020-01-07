@@ -50,10 +50,10 @@
             // 
             this.txtProblemId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtProblemId.Location = new System.Drawing.Point(133, 38);
+            this.txtProblemId.Location = new System.Drawing.Point(133, 61);
             this.txtProblemId.Margin = new System.Windows.Forms.Padding(4);
             this.txtProblemId.Name = "txtProblemId";
-            this.txtProblemId.Size = new System.Drawing.Size(149, 26);
+            this.txtProblemId.Size = new System.Drawing.Size(530, 26);
             this.txtProblemId.TabIndex = 0;
             this.txtProblemId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProblemId_KeyDown);
             this.txtProblemId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProblemId_KeyPress);
@@ -62,11 +62,11 @@
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butGo.Location = new System.Drawing.Point(511, 38);
+            this.butGo.Location = new System.Drawing.Point(671, 60);
             this.butGo.Margin = new System.Windows.Forms.Padding(4);
             this.butGo.Name = "butGo";
             this.butGo.Size = new System.Drawing.Size(100, 28);
-            this.butGo.TabIndex = 2;
+            this.butGo.TabIndex = 1;
             this.butGo.Text = "Go";
             this.butGo.UseVisualStyleBackColor = true;
             this.butGo.Click += new System.EventHandler(this.butGo_Click);
@@ -83,10 +83,10 @@
             this.listView1.HideSelection = false;
             this.listView1.HotTracking = true;
             this.listView1.HoverSelection = true;
-            this.listView1.Location = new System.Drawing.Point(133, 72);
+            this.listView1.Location = new System.Drawing.Point(133, 95);
             this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(370, 261);
+            this.listView1.Size = new System.Drawing.Size(530, 344);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -95,7 +95,7 @@
             // butOK
             // 
             this.butOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butOK.Location = new System.Drawing.Point(403, 399);
+            this.butOK.Location = new System.Drawing.Point(563, 519);
             this.butOK.Margin = new System.Windows.Forms.Padding(4);
             this.butOK.Name = "butOK";
             this.butOK.Size = new System.Drawing.Size(100, 31);
@@ -108,7 +108,7 @@
             // 
             this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butCancel.Location = new System.Drawing.Point(511, 399);
+            this.butCancel.Location = new System.Drawing.Point(671, 519);
             this.butCancel.Margin = new System.Windows.Forms.Padding(4);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(100, 31);
@@ -121,7 +121,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(16, 41);
+            this.label1.Location = new System.Drawing.Point(16, 65);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 16);
@@ -132,7 +132,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(16, 72);
+            this.label2.Location = new System.Drawing.Point(16, 94);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 16);
@@ -145,7 +145,7 @@
             this.lblContest.BackColor = System.Drawing.Color.Transparent;
             this.lblContest.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblContest.ForeColor = System.Drawing.Color.Maroon;
-            this.lblContest.Location = new System.Drawing.Point(16, 9);
+            this.lblContest.Location = new System.Drawing.Point(16, 19);
             this.lblContest.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContest.Name = "lblContest";
             this.lblContest.Size = new System.Drawing.Size(584, 16);
@@ -157,7 +157,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(16, 341);
+            this.label3.Location = new System.Drawing.Point(16, 450);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 16);
@@ -170,18 +170,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWorkingDir.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtWorkingDir.ForeColor = System.Drawing.Color.Maroon;
-            this.txtWorkingDir.Location = new System.Drawing.Point(133, 341);
+            this.txtWorkingDir.Location = new System.Drawing.Point(133, 447);
             this.txtWorkingDir.Margin = new System.Windows.Forms.Padding(4);
             this.txtWorkingDir.Name = "txtWorkingDir";
             this.txtWorkingDir.ReadOnly = true;
-            this.txtWorkingDir.Size = new System.Drawing.Size(370, 21);
+            this.txtWorkingDir.Size = new System.Drawing.Size(530, 21);
             this.txtWorkingDir.TabIndex = 4;
             // 
             // butBrowse
             // 
             this.butBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butBrowse.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butBrowse.Location = new System.Drawing.Point(511, 335);
+            this.butBrowse.Location = new System.Drawing.Point(671, 443);
             this.butBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.butBrowse.Name = "butBrowse";
             this.butBrowse.Size = new System.Drawing.Size(100, 29);
@@ -192,10 +192,10 @@
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(290, 41);
+            this.label4.Location = new System.Drawing.Point(16, 481);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 16);
@@ -204,12 +204,13 @@
             // 
             // txtAuthor
             // 
-            this.txtAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAuthor.Location = new System.Drawing.Point(354, 38);
+            this.txtAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAuthor.Location = new System.Drawing.Point(133, 476);
             this.txtAuthor.Margin = new System.Windows.Forms.Padding(4);
             this.txtAuthor.Name = "txtAuthor";
-            this.txtAuthor.Size = new System.Drawing.Size(149, 26);
-            this.txtAuthor.TabIndex = 1;
+            this.txtAuthor.Size = new System.Drawing.Size(530, 26);
+            this.txtAuthor.TabIndex = 2;
             // 
             // txtError
             // 
@@ -218,12 +219,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtError.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtError.ForeColor = System.Drawing.Color.Maroon;
-            this.txtError.Location = new System.Drawing.Point(133, 73);
+            this.txtError.Location = new System.Drawing.Point(133, 95);
             this.txtError.Margin = new System.Windows.Forms.Padding(4);
             this.txtError.Multiline = true;
             this.txtError.Name = "txtError";
             this.txtError.ReadOnly = true;
-            this.txtError.Size = new System.Drawing.Size(370, 261);
+            this.txtError.Size = new System.Drawing.Size(530, 344);
             this.txtError.TabIndex = 13;
             this.txtError.Visible = false;
             // 
@@ -232,7 +233,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
-            this.ClientSize = new System.Drawing.Size(624, 441);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.txtError);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtAuthor);
