@@ -24,6 +24,7 @@
 #  * @更新:     2019-09-19 12:10 增加开关$NotRun (F8)仅编译，不运行编译后的exe程序，适合快速使用编译器进行语法检查
 #  * @更新:     2019-10-18 17:02 使用 GetProcessMemoryInfo 测量程序运行内存，暂时只有CPP生效
 #  * @更新:     2019-10-18 19:26 取消ctl+f11重新定向到功能，大型input文件非常慢，不好测量程序运行时间
+#  * @更新:     2020-01-11 19:17 增加文件/文件夹允许带空格(未测试in，out文件),调试BuildDebug.bat所在文件夹不能有空格
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -373,10 +374,10 @@ function BuildCppAndRun($SourceFileName) {
         # 如果进程在运行则先停止
         $processName = $SourFile.BaseName
         if ($null -eq (Get-Process $processName  -ErrorAction SilentlyContinue)) {
-            Write-Host "$processName.exe is not running"
+            Write-Host "`"$processName.exe`" is not running"
         } 
         else {
-            Write-Host "$processName.exe is running,try to stop the process."
+            Write-Host "`"$processName.exe`" is running,try to stop the process."
             # Stop-Process -Name $processName
             # $procs = Get-Process -Name $processName | Stop-Process -Force
             $procs = Get-Process -Name $processName 
@@ -388,23 +389,23 @@ function BuildCppAndRun($SourceFileName) {
             Get-Process | Where-Object {$_.HasExited}
             Start-Sleep -s 1
             
-            Write-Host "$processName.exe is stoped."
+            Write-Host "`"$processName.exe`" is stoped."
         }
 
         # 删除exe文件
-        Write-Host  "delete the old executable file $exeFileName"
+        Write-Host  "delete the old executable file `"$exeFileName`""
         Remove-Item $exeFileName -Force
     }
     
-    #编译参数
-    $arguments = "$SourceFileName -o $exeFileName"
+    #编译参数`"
+    $arguments = "`"$SourceFileName`" -o `"$exeFileName`""
     if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
         $arguments += " " + $CompilerArgs
     }
 
     #开始编译
     Write-Host
-    Write-Host $cppCompilerCmd $arguments 
+    Write-Host "`"$cppCompilerCmd`"" $arguments 
     start-process $cppCompilerCmd $arguments -wait -NoNewWindow
 
     #是否成功生成exe文件
@@ -464,7 +465,7 @@ function BuildCppAndRun($SourceFileName) {
             #     Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
             # }
 
-            Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
+            Write-Host "now run `"$($ExeFile.BaseName + $ExeFile.Extension)`""
             
             New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
@@ -513,7 +514,7 @@ function BuildCppAndRun($SourceFileName) {
                 $peakPagedMemorySize64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakPagefileUsage($ps.Handle)
 
 
-                $msg = "$($ExeFile.BaseName + $ExeFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
+                $msg = "`"$($ExeFile.BaseName + $ExeFile.Extension)`" program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
                 if($peakPagedMemorySize64 -gt 0)
                 {
                     $msg= $msg + "Memory: {0:n0} KB." -f ($peakPagedMemorySize64/1024)                    
