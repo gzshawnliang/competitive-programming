@@ -32,15 +32,15 @@
             "command": "${workspaceFolder}\\.vscode\\BuildDebug.bat",
             "args": [
                 "-g",
-                "${fileDirname}\\${fileBasenameNoExtension}.cpp",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.exe\"",
                 "-lpsapi",
                 "-lstdc++fs",
                 "-std=gnu++11",
                 "-DDEBUG",
                 "-I",
-                "${workspaceFolder}\\include"
+                "\"${workspaceFolder}\\include\""
             ], // 编译命令参数
             "problemMatcher": {
                 "owner": "cpp",
@@ -141,7 +141,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-std=gnu++11 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&'${workspaceFolder}\\.vscode\\BuildAndTest.ps1' -SourceFileName '\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"' -CompilerArgs '-std=gnu++11 -O2 -Wall -lstdc++fs -lm -I \"\"\"${workspaceFolder}\\include\"\"\"' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "echoCommand": true,

@@ -102,11 +102,10 @@ int main()
     std::cout.tie(NULL);
     //#ifndef ONLINE_JUDGE
     freopen("meetings.in", "r", stdin);
-    freopen("meetings.out", "w", stdout);
+    //freopen("meetings.out", "w", stdout);
     //#endif
 
     solve();
-
     cout.flush();
     return 0;
 }
