@@ -81,6 +81,7 @@ todo:
 - [ ] MST算法 Kruskal (2019 Open walk), Kruskal 算法也用到并查集
     - [x] DSU并查集(2018 Jan mootube)
     - [ ] 2018 Feb snowboots
+    - [ ] 2016 Feb fencedin (MST)
 - [ ] Topological Sort (2018 Open milkorder)
 - [x] DP (2019 Open snakes)
 - [ ] DP (2019 Dec cowmbat)
