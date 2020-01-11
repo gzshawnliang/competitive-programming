@@ -47,7 +47,7 @@
 | 2018 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=789) | mootube       | DSU                              |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=790) | atlarge       | DFS                              |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=791) | spainting     | DP                               |Done    |
-| 2018 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=801)  | snowboots     | Set                              |    |
+| 2018 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=801)  | snowboots     | Set /DSU                              |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem&cpid=802)  | dirtraverse   | DFS                              |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=815) | taming        | DP                               |Done    |
 | 2018 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=837) | sort          | 1DRQ / Binary Search             |    |
@@ -80,6 +80,7 @@ todo:
     - [ ] 2018 Open sort
 - [ ] MST算法 Kruskal (2019 Open walk), Kruskal 算法也用到并查集
     - [x] DSU并查集(2018 Jan mootube)
+    - [ ] 2018 Feb snowboots
 - [ ] Topological Sort (2018 Open milkorder)
 - [x] DP (2019 Open snakes)
 - [ ] DP (2019 Dec cowmbat)
