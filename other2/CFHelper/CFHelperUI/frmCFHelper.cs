@@ -65,12 +65,12 @@ namespace CFHelperUI
             if (Regex.IsMatch(input, @"usaco.org", RegexOptions.IgnoreCase))
             {
                 usaco.Checked = true;
-                GetDataUSACO(input);
+                GetDataUSACO((new UriBuilder(input)).ToString());
             }
             else if (Regex.IsMatch(input, @"spoj.com", RegexOptions.IgnoreCase))
             {
                 spoj.Checked = true;
-                GetDataSPOJ(input);
+                GetDataSPOJ((new UriBuilder(input)).ToString());
             }
             else if (uva.Checked)
             {
