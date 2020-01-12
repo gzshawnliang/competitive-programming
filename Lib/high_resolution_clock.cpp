@@ -84,7 +84,8 @@ int main()
     Timer t; //开始计时
     testData((int)1e7); //一千万
     cout << "seconds:" << t.elapsed() << endl; //打印秒
-    // cout << "milliseconds:" << t.elapsed() << endl;                  //打印fun函数耗时多少毫秒
+    // cout << "milliseconds:" << t.elapsed() << endl;                  //打印fun函数耗时多少秒（浮点）
+    // cout << "microseconds:" << t.elapsed_milli() << endl;            //打印毫秒
     // cout << "microseconds:" << t.elapsed_micro() << endl;            //打印微秒
     // cout << "nanoseconds:" << t.elapsed_nano() << endl;              //打印纳秒
     // cout << "seconds:" << t.elapsed_seconds() << endl;               //打印秒
