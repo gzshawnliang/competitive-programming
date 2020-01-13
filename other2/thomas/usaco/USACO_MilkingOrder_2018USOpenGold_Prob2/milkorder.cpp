@@ -29,6 +29,7 @@ class solution
         this->obs = obs;
     }
 
+    //创建边
     vector<set<int>> createEdge(int x)
     {
         vector<set<int>> edge(N + 1);
@@ -41,6 +42,7 @@ class solution
         return edge;
     }
 
+    //检查是否存在环
     bool checkCircle(int x)
     {
         queue<int> q;
@@ -99,6 +101,7 @@ class solution
         return true;
     }
 
+    //拓扑排序
     vector<int> topoSorting(int x)
     {
         vector<int> ans;
