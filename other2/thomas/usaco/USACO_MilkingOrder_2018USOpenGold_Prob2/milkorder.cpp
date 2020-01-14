@@ -19,17 +19,9 @@ class solution
 
   private:
     int N, M;
-    vector<vector<int>> obs;
+    vector<vector<int>> obs; //观察数据
 
-    void init(int n, int m)
-    {
-        this->N = n;
-        this->M = m;
-        vector<vector<int>> obs(M + 1, vector<int>());
-        this->obs = obs;
-    }
-
-    //创建边
+    //从观察数据创建边
     vector<set<int>> createEdge(int x)
     {
         vector<set<int>> edge(N + 1);
@@ -48,28 +40,24 @@ class solution
         queue<int> q;
         vector<set<int>> edge = createEdge(x);
         vector<int> visit(N + 1, 0);
-        vector<int> in(N + 1, 0);
+        vector<int> inDegree(N + 1, 0);
 
         for (int i = 1; i <= N; ++i)
-        {
             for (auto it = edge[i].begin(); it != edge[i].end(); ++it)
-            {
-                ++in[*it];
-            }
-        }
+                ++inDegree[*it];
 
-        vector<int> noEmptyCount;
+        vector<int> connectedCow;       //入度为0并且有出度(有连接)的牛，有些是无入度和出度的牛
         for (int i = 1; i <= N; ++i)
-            if (in[i] == 0)
+            if (inDegree[i] == 0)
             {
                 q.push(i);
                 visit[i] = 1;
 
                 if (!edge[i].empty())
-                    noEmptyCount.push_back(i);
+                    connectedCow.push_back(i);
             }
-
-        if (noEmptyCount.empty())
+        
+        if (connectedCow.empty())       //存在环的情况
             return false;
 
         while (!q.empty())
@@ -81,8 +69,8 @@ class solution
             {
                 if (visit[j] == 0)
                 {
-                    --in[j];
-                    if (in[j] == 0)
+                    --inDegree[j];
+                    if (inDegree[j] == 0)
                     {
                         q.push(j);
                         visit[j] = 1;
@@ -95,7 +83,7 @@ class solution
             }
         }
         for (int i = 1; i <= N; ++i)
-            if (in[i] > 0)
+            if (inDegree[i] > 0)        //存在环的情况
                 return false;
         //assert(1 == 1);
         return true;
@@ -108,17 +96,14 @@ class solution
 
         priority_queue<int, vector<int>, greater<int>> q;
         vector<set<int>> edge = createEdge(x);
-        vector<int> in(N + 1, 0);
-        for (int i = 1; i <= N; ++i)
-        {
-            for (auto it = edge[i].begin(); it != edge[i].end(); ++it)
-            {
-                ++in[*it];
-            }
-        }
+        vector<int> inDegree(N + 1, 0);
 
         for (int i = 1; i <= N; ++i)
-            if (in[i] == 0)
+            for (auto it = edge[i].begin(); it != edge[i].end(); ++it)
+                ++inDegree[*it];
+
+        for (int i = 1; i <= N; ++i)
+            if (inDegree[i] == 0)
                 q.push(i);
 
         while (!q.empty())
@@ -129,8 +114,8 @@ class solution
 
             for (auto it = edge[curr].begin(); it != edge[curr].end(); ++it)
             {
-                --in[*it];
-                if (in[*it] == 0)
+                --inDegree[*it];
+                if (inDegree[*it] == 0)
                     q.push(*it);
             }
         }
@@ -139,12 +124,16 @@ class solution
         return ans;
     }
 
-    public:
+  public:
     void solve()
     {
         int n, m;
         fin >> n >> m;
-        init(n,m);
+
+        this->N = n;
+        this->M = m;
+        vector<vector<int>> observationData(M + 1, vector<int>());
+        this->obs = observationData;
 
         for (int i = 1; i <= M; ++i)
         {
@@ -158,35 +147,25 @@ class solution
             }
         }
 
-        int l = 1;
-        int r = M;
-        int x = 1;
-        while (l < r)
+        int l = 0;
+        int r = M+1;
+        int maxX = 1;
+        while (l < r - 1)
         {
             int m = (r + l) / 2;
             bool ret = checkCircle(m);
             if (ret)
             {
-                x = m;
+                maxX = m;
                 l = m;
             }
             else
             {
                 r = m;
             }
-
-            if (r - l == 1)
-            {
-                if (checkCircle(r))
-                    x = r;
-                else if (checkCircle(l))
-                    x = l;
-
-                break;
-            }
         }
 
-        vector<int> ans = topoSorting(x);
+        vector<int> ans = topoSorting(maxX);
         int id = 0;
         int size4 = ans.size();
         for (auto i : ans)
