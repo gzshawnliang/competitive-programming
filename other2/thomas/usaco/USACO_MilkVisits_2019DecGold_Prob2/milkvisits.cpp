@@ -46,7 +46,8 @@ class solution
     vector<Q> query;
     vector<set<int>> typeofCow;
     int root = 1;
-    solution(int n, int m)
+    
+    void init(int n, int m)
     {
         maxUpStep = lg2(n);
         N = n;
@@ -123,7 +124,6 @@ class solution
             return true;
         else
             return false;
-            
     }
 
     void solve()
@@ -159,11 +159,15 @@ class solution
     }
 };
 
+//solution slv;
+
 int main()
 {
+    solution slv;
     int n, m;
     fin >> n >> m;
-    solution slv(n, m);
+    slv.init(n,m);
+    //solution slv(n, m);
 
     for (int i = 1; i <= n; ++i)
     {

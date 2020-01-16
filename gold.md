@@ -73,7 +73,7 @@
 | --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
 | 2019 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=969) | pump          | Shortest Path                    |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=970) | milkvisits    | LCA                              |        |
-|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=971) | cowmbat       | DP                               |        |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=971) | cowmbat       | DP                               |Done    |
 
 todo:
 - [x] 1DRQ  (2019 Jan sleepy) 
@@ -81,8 +81,8 @@ todo:
 - [ ] MST算法 Kruskal (2019 Open walk), Kruskal 算法也用到并查集
     - [x] DSU并查集(2018 Jan mootube)
     - [ ] 2018 Feb snowboots
-    - [ ] 2016 Feb fencedin (MST)
+    - [x] 2016 Feb fencedin (MST) 有一个数据点超时
 - [ ] Topological Sort (2018 Open milkorder)
 - [x] DP (2019 Open snakes)
-- [ ] DP (2019 Dec cowmbat)
+- [x] DP (2019 Dec cowmbat)
 
