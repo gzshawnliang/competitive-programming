@@ -110,6 +110,10 @@ class solution
         return ancestor[u][0];
     }
 
+    //todo 需要改成O(1)算法
+    //https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.03.md
+    //https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
+    //https://www.geeksforgeeks.org/lca-n-ary-tree-constant-query-o1/
     bool isAncestor(int u,int v)
     {
         if(v==root)
