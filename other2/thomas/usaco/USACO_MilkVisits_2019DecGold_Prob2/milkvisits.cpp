@@ -143,7 +143,7 @@ class solution
                 int result = 0;
                 for (auto i : typeofCow[c])
                 {
-                    if (depth[i]>a && depth[i]>b)
+                    if (depth[i]> depth[a] && depth[i]> depth[b])
                         continue;
                     else if (depth[i]< depth[lca])
                         continue;
