@@ -3,7 +3,7 @@
 * @Name:           Problem 2. Milking Order 
 * @Author:         Thomas
 * @create Time:    2020/1/12 22:44:18
-* @url:            http://www.usaco.org/index.php?page=viewproblem2&cpid=838&lang=zh
+* @url:            http://www.usaco .org/index.php?page=viewproblem2&cpid=838&lang=zh
 * @Description:    USACO 2018 US Open Contest, Gold
 ===========================================================
 */

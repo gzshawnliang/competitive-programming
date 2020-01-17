@@ -111,6 +111,7 @@ class solution
         ++posNodeOrder;
         posOrder[curr] = posNodeOrder;                    
     }
+    
     //todo 需要改成O(1)算法
     //https://www.geeksforgeeks.org/lca-n-ary-tree-constant-query-o1/
     int getLCA(int u,int v)
