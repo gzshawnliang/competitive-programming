@@ -36,9 +36,9 @@ class solution
     int N, M;
     vector<int> visited;
     vector<int> depth;
-    int maxUpStep;              //最大跳跃的步数=log2(n)
-    vector<int> father;
-    vector<vector<int>> ancestor ; //ancestor[i][j]表示i节点往上2^j个祖先
+    int maxUpStep;                  //最大跳跃的步数=log2(n)
+    vector<int> father;             //father[i]第i个节点的父节点
+    vector<vector<int>> ancestor;   //ancestor[i][j]表示i节点往上2^j个祖先
 
   public:
     vector<int> C;
