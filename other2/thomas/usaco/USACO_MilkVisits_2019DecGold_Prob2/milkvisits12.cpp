@@ -168,6 +168,8 @@ class solution
         return false;
     }
 
+
+
     void solve()
     {
         for (int i = 0; i <= M - 1; ++i)

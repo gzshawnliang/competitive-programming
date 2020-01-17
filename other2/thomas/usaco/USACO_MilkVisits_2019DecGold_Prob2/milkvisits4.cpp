@@ -34,18 +34,11 @@ class solution
 {
   private:
     int N, M;
-    
+    vector<int> visited;
     vector<int> depth;
     int maxUpStep;                  //最大跳跃的步数=log2(n)
     vector<int> father;             //father[i]第i个节点的父节点
     vector<vector<int>> ancestor;   //ancestor[i][j]表示i节点往上2^j个祖先
-    
-    vector<int> visitedPreOrder;
-    vector<int> visitedPosOrder;
-    vector<int> preOrder;           //前序遍历第i个节点的顺序
-    vector<int> posOrder;           //前序遍历第i个节点的顺序
-    int preNodeOrder;
-    int posNodeOrder;
 
   public:
     vector<int> C;
@@ -61,58 +54,35 @@ class solution
         M = m;
         C.assign(N + 1, 0);
         depth.assign(N + 1, 0);
-        visitedPreOrder.assign(N + 1, 0);
-        visitedPosOrder.assign(N + 1, 0);
+        visited.assign(N + 1, 0);
         father.assign(N + 1, 0);
         tree.assign(N + 1, vector<int>());
         typeofCow.assign(N + 1, set<int>());
         ancestor.assign(N + 1, vector<int>(maxUpStep + 1, 0));
-
-        preNodeOrder=0;
-        posNodeOrder=0;
-        preOrder.assign(N + 1, 0);
-        posOrder.assign(N + 1, 0);
     }
 
-    // void setAncestor()
-    // {
-    //     for (int j = 1; j <= maxUpStep; ++j)
-    //         for (int i = 1; i <= N; ++i)
-    //             ancestor[i][j] = ancestor[ancestor[i][j - 1]][j - 1];        
-    // }    
-
-    void dfs_preOrder(int curr)
+    void setAncestor()
     {
-        visitedPreOrder[curr] = 1;
-        ++preNodeOrder;
-        preOrder[curr] = preNodeOrder;
-        for (auto child : tree[curr])
+        for (int j = 1; j <= maxUpStep; ++j)
+            for (int i = 1; i <= N; ++i)
+                ancestor[i][j] = ancestor[ancestor[i][j - 1]][j - 1];        
+    }    
+
+    void dfs(int curr)
+    {
+        visited[curr] = 1;
+        for (auto i : tree[curr])
         {
-            if (visitedPreOrder[child] == 0)
+            if (visited[i] == 0)
             {
-                father[child] = curr;
-                ancestor[child][0] = curr;
-                depth[child] = depth[curr] + 1;
-                dfs_preOrder(child);
+                father[i] = curr;
+                ancestor[i][0] = curr;
+                depth[i] = depth[curr] + 1;
+                dfs(i);
             }
         }
     }
 
-    void dfs_posOrder(int curr)
-    {
-        visitedPosOrder[curr] = 1;
-        for (auto child : tree[curr])
-        {
-            if (visitedPosOrder[child] == 0)
-            {
-                dfs_posOrder(child);
-            }
-        }
-        ++posNodeOrder;
-        posOrder[curr] = posNodeOrder;                    
-    }
-    //todo 需要改成O(1)算法
-    //https://www.geeksforgeeks.org/lca-n-ary-tree-constant-query-o1/
     int getLCA(int u,int v)
     {
         if (depth[u] < depth[v])
@@ -140,32 +110,24 @@ class solution
         return ancestor[u][0];
     }
 
-    void setAncestor()
+    //todo 需要改成O(1)算法
+    //https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.03.md
+    //https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
+    //https://www.geeksforgeeks.org/lca-n-ary-tree-constant-query-o1/
+    bool isAncestor(int u,int v)
     {
-        for (int j = 1; j <= maxUpStep; ++j)
-            for (int i = 1; i <= N; ++i)
-                ancestor[i][j] = ancestor[ancestor[i][j - 1]][j - 1];        
-    }
-
-    /*
-    需O(1)算法求x是不是y的祖先？
-    https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.03.md
-    https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
-    For two given nodes x and y of a tree T, x is an ancestor of y if and only if x occurs 
-    before y in the preorder traversal of T and after y in the post-order traversal.
-    */
-    bool isAncestor(int y,int x)
-    {
-        if(x==root)
+        if(v==root)
             return true;
 
-        if(y==x)
-            return true;
+        //往上跳跃
+        for (int b = maxUpStep; b >= 0; --b)
+            if (depth[ancestor[u][b]] >= depth[v])
+                u = ancestor[u][b];
 
-        if(preOrder[x]<preOrder[y] && posOrder[x]>posOrder[y])
+        if(u==v)
             return true;
-
-        return false;
+        else
+            return false;
     }
 
     void solve()
@@ -226,8 +188,7 @@ int main()
     }
 
 
-    slv.dfs_preOrder(slv.root);
-    slv.dfs_posOrder(slv.root);
+    slv.dfs(slv.root);
     slv.setAncestor();
 
     //cout << slv.lca(7,3) << "\n";
