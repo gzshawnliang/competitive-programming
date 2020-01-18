@@ -50,20 +50,18 @@ vector<int> check(int mid, int n, vector<vector<int>> & a)
         }
     }
 
-    vector<int> lef, res;
+    if (mid == 262)
+    {
+        for (int __s = 0; __s == 0; ++__s);
+    }
+
+    vector<int> res;
     priority_queue<int, vector<int>, greater<int>> q;
     for (int u = 1; u <= n; ++u)
     {
         if (ind[u] == 0)
         {
-            if (g[u].size() == 0)
-            {
-                lef.push_back(u);
-            }
-            else
-            {
-                q.push(u);
-            }
+            q.push(u);
         }
     }
 
@@ -82,38 +80,14 @@ vector<int> check(int mid, int n, vector<vector<int>> & a)
             if (ind[v] == 0) q.push(v);
         }
     }
-
-    if (mid == 3)
+    
+    int DBtmp = res.size();
+    if (res.size() < n)
     {
-        for (int __s = 0; __s == 0; ++__s);
+        vector<int> _null = {}; return _null;
     }
 
-    int sizRes = res.size(), sizLef = lef.size();
-    vector<int> final = {};
-    if (sizRes + sizLef < n) return final;
-
-    vector<sorItm> final_sor(n);
-
-    for (int i = 0; i <= sizLef - 1; ++i)
-    {
-        final_sor[i].v = lef[i];
-        final_sor[i].idx = 0;
-    }
-
-    for (int i = 0; i <= sizRes - 1; ++i)
-    {
-        final_sor[i + sizLef].v = res[i];
-        final_sor[i + sizLef].idx = i + 1;
-    }
-
-    sort(final_sor.begin(), final_sor.end());
-
-    for (int i = 0; i <= n - 1; ++i)
-    {
-        final.push_back(final_sor[i].v);
-    }
-
-    return final;
+    return res;
 }
 
 int main()
@@ -142,6 +116,16 @@ int main()
 
         vector<int> tmp = check(mid, n, a);
 
+        if (r - l <= 1)
+        {
+            vector<int> tmp1 = check(r, n, a);
+
+            if (tmp1.size() == 0) ans = check(l, n, a);
+            else                  ans = tmp1;
+
+            break;
+        }
+
         if (tmp.size() == 0)
         {
             r = mid - 1;
@@ -149,8 +133,6 @@ int main()
         else
         {
             ans = tmp;
-
-            if (l == mid) break;
             l = mid;
         }
     }
