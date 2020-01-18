@@ -82,7 +82,7 @@ todo:
     - [x] DSU并查集(2018 Jan mootube)
     - [ ] 2018 Feb snowboots
     - [x] 2016 Feb fencedin (MST) 有一个数据点超时
-- [ ] Topological Sort (2018 Open milkorder)
+- [x] Topological Sort (2018 Open milkorder)
 - [x] DP (2019 Open snakes)
 - [x] DP (2019 Dec cowmbat)
 
