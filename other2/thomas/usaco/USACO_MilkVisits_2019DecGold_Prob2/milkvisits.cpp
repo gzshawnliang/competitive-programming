@@ -47,6 +47,9 @@ class solution
     int preNodeOrder;
     int posNodeOrder;
 
+    vector<int> eulerWalk;          //欧拉序列
+    vector<int> eulerDepth;         //欧拉序列每个节点的深度
+
   public:
     vector<int> C;
     vector<vector<int>> tree;
@@ -72,6 +75,7 @@ class solution
         posNodeOrder=0;
         preOrder.assign(N + 1, 0);
         posOrder.assign(N + 1, 0);
+        //eulerWalk.assign(2*N,0);
     }
 
     // void setAncestor()
@@ -83,20 +87,32 @@ class solution
 
     void dfs_preOrder(int curr)
     {
+        eulerWalk.push_back(curr);
         visitedPreOrder[curr] = 1;
         ++preNodeOrder;
         preOrder[curr] = preNodeOrder;
         for (auto child : tree[curr])
         {
+            
             if (visitedPreOrder[child] == 0)
             {
                 father[child] = curr;
                 ancestor[child][0] = curr;
                 depth[child] = depth[curr] + 1;
+                
                 dfs_preOrder(child);
+
+                eulerWalk.push_back(curr);
             }
         }
     }
+
+    void makeEulerDepth()
+    {
+        for(auto i:eulerWalk)
+            eulerDepth.push_back(depth[i]);
+    }
+
 
     void dfs_posOrder(int curr)
     {
@@ -149,7 +165,7 @@ class solution
     }
 
     /*
-    需O(1)算法求x是不是y的祖先？
+    O(1)算法求x是不是y的祖先？
     https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.03.md
     https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
     For two given nodes x and y of a tree T, x is an ancestor of y if and only if x occurs 
@@ -229,6 +245,7 @@ int main()
 
     slv.dfs_preOrder(slv.root);
     slv.dfs_posOrder(slv.root);
+    slv.makeEulerDepth();
     slv.setAncestor();
 
     //cout << slv.lca(7,3) << "\n";

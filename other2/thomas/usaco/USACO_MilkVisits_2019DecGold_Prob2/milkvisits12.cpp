@@ -148,7 +148,7 @@ class solution
     }
 
     /*
-    需O(1)算法求x是不是y的祖先？
+    O(1)算法求x是不是y的祖先？
     https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.03.md
     https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
     For two given nodes x and y of a tree T, x is an ancestor of y if and only if x occurs 
