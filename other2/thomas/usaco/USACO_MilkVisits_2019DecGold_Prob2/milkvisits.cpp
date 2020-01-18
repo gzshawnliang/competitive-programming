@@ -19,7 +19,7 @@ const int maxM = 1e5 + 1;
 int lg2(int n)
 {
     int i = 0;
-    while ((1 << i) <= n) //(1<<i) = 2^i
+    while ((1 << i) <= n)           //(1<<i) = 2^i
         ++i;
 
     return i - 1;
@@ -34,12 +34,12 @@ class solution
 {
   private:
     int N, M;
-    
+
     vector<int> depth;
     int maxUpStep;                  //最大跳跃的步数=log2(n)
     vector<int> father;             //father[i]第i个节点的父节点
     vector<vector<int>> ancestor;   //ancestor[i][j]表示i节点往上2^j个祖先
-    
+
     vector<int> visitedPreOrder;
     vector<int> visitedPosOrder;
     vector<int> preOrder;           //前序遍历第i个节点的顺序
@@ -49,6 +49,19 @@ class solution
 
     vector<int> eulerWalk;          //欧拉序列
     vector<int> eulerDepth;         //欧拉序列每个节点的深度
+    vector<int> FAI;                //First appearance of ith node in Euler Walk array
+    int maxJ;
+    vector<vector<int>> ST;          //Sparse Table (ST表)
+    vector<int> P2;                  //stores power of 2
+
+    int lg2(int n)
+    {
+        int i = 0;
+        while ((1 << i) <= n) //(1<<i) = 2^i
+            ++i;
+
+        return i - 1;
+    }
 
   public:
     vector<int> C;
@@ -56,7 +69,7 @@ class solution
     vector<Q> query;
     vector<set<int>> typeofCow;
     int root = 1;
-    
+
     void init(int n, int m)
     {
         maxUpStep = lg2(n);
@@ -71,10 +84,20 @@ class solution
         typeofCow.assign(N + 1, set<int>());
         ancestor.assign(N + 1, vector<int>(maxUpStep + 1, 0));
 
-        preNodeOrder=0;
-        posNodeOrder=0;
+        preNodeOrder = 0;
+        posNodeOrder = 0;
         preOrder.assign(N + 1, 0);
         posOrder.assign(N + 1, 0);
+        FAI.assign(N + 1, -1);
+
+        maxJ = lg2(N)+1;
+        P2.assign(maxJ , 0);
+        P2[0] = 1; 
+        for (int i=1; i<=maxJ; ++i) 
+            P2[i] = P2[i-1]*2; 
+
+        ST.assign(maxM, vector<int>(maxJ+1, -1));      //Sparse Table (ST表)
+
         //eulerWalk.assign(2*N,0);
     }
 
@@ -82,37 +105,39 @@ class solution
     // {
     //     for (int j = 1; j <= maxUpStep; ++j)
     //         for (int i = 1; i <= N; ++i)
-    //             ancestor[i][j] = ancestor[ancestor[i][j - 1]][j - 1];        
-    // }    
+    //             ancestor[i][j] = ancestor[ancestor[i][j - 1]][j - 1];
+    // }
 
     void dfs_preOrder(int curr)
     {
+        if(FAI[curr]==-1)
+            FAI[curr] =preNodeOrder;
+
         eulerWalk.push_back(curr);
         visitedPreOrder[curr] = 1;
         ++preNodeOrder;
         preOrder[curr] = preNodeOrder;
         for (auto child : tree[curr])
         {
-            
             if (visitedPreOrder[child] == 0)
             {
                 father[child] = curr;
                 ancestor[child][0] = curr;
                 depth[child] = depth[curr] + 1;
-                
+
                 dfs_preOrder(child);
 
                 eulerWalk.push_back(curr);
+                ++preNodeOrder;
             }
         }
     }
 
     void makeEulerDepth()
     {
-        for(auto i:eulerWalk)
+        for (auto i : eulerWalk)
             eulerDepth.push_back(depth[i]);
     }
-
 
     void dfs_posOrder(int curr)
     {
@@ -125,43 +150,81 @@ class solution
             }
         }
         ++posNodeOrder;
-        posOrder[curr] = posNodeOrder;                    
+        posOrder[curr] = posNodeOrder;
     }
-    
-    //todo 需要改成O(1)算法
-    //https://www.geeksforgeeks.org/lca-n-ary-tree-constant-query-o1/
-    int getLCA(int u,int v)
+
+    void buitST()
     {
-        if (depth[u] < depth[v])
-            swap(u, v);
+        //int len = a.size();
 
-        //设置同等深度
-        for (int b = maxUpStep; b >= 0; --b)
-            if (depth[ancestor[u][b]] >= depth[v])
-                u = ancestor[u][b];
+        //vector<vector<int>> M(N, vector<int>(maxJ, -1));      //Sparse Table (ST表)
 
-        if (u == 0)
-            return root;
-        else if (u == v)
-            return u;
-
-        //往上跳跃
-        for (int b = maxUpStep; b >= 0; --b)
+        for (int i = 0; i <= N-1 ; ++i)
         {
-            if (ancestor[u][b] != ancestor[v][b])
+            ST[i][0] = i;
+        }
+
+        for (int j = 1; j <= maxJ+1 ; ++j)
+        {
+            for (int i = 0; i <= N-1 ; ++i)
             {
-                u = ancestor[u][b];
-                v = ancestor[v][b];
+                int front=j-1;
+                int back= i + (1<<(j-1));
+                if(back>N*2)
+                    continue;
+
+                if (eulerWalk[ST[i][front]] <= eulerWalk[ST[back][front]])
+                    ST[i][j] = ST[i][front];
+                else                 
+                    ST[i][j] = ST[back][front];
             }
         }
-        return ancestor[u][0];
+        for (int __s = 0; __s == 0; ++__s);
+    }
+
+    int queryST(int i,int j) 
+    { 
+        if(i==j)
+            return ST[i][0];
+
+        if(i>j)
+            swap(i,j);
+
+        int d = j-i; 
+        int k=lg2(d+1);               //长度
+
+        int front=ST[i][k];              //前段
+        int i2=j-(1<<k)+1;          //后段j-2^k+1;
+        int back=ST[i2][k];
+        
+        if(front==-1 || back==-1)
+            return root;
+
+        if(eulerWalk[front]<=eulerWalk[back])
+            return front;
+        else 
+            return back;
+
+    }
+
+    //todo O(1)算法,未完成
+    int getLCA(int u, int v)
+    {
+        if (u==v) 
+            return u; 
+        int i=FAI[u];
+        int j=FAI[v];
+        if (i > j) 
+            swap(u, v); 
+
+        return eulerWalk[queryST(i, j)];                        
     }
 
     void setAncestor()
     {
         for (int j = 1; j <= maxUpStep; ++j)
             for (int i = 1; i <= N; ++i)
-                ancestor[i][j] = ancestor[ancestor[i][j - 1]][j - 1];        
+                ancestor[i][j] = ancestor[ancestor[i][j - 1]][j - 1];
     }
 
     /*
@@ -171,15 +234,15 @@ class solution
     For two given nodes x and y of a tree T, x is an ancestor of y if and only if x occurs 
     before y in the preorder traversal of T and after y in the post-order traversal.
     */
-    bool isAncestor(int y,int x)
+    bool isAncestor(int y, int x)
     {
-        if(x==root)
+        if (x == root)
             return true;
 
-        if(y==x)
+        if (y == x)
             return true;
 
-        if(preOrder[x]<preOrder[y] && posOrder[x]>posOrder[y])
+        if (preOrder[x] < preOrder[y] && posOrder[x] > posOrder[y])
             return true;
 
         return false;
@@ -202,13 +265,13 @@ class solution
                 int result = 0;
                 for (auto i : typeofCow[c])
                 {
-                    if (depth[i]> depth[a] && depth[i]> depth[b])
+                    if (depth[i] > depth[a] && depth[i] > depth[b])
                         continue;
-                    else if (depth[i]< depth[lca])
+                    else if (depth[i] < depth[lca])
                         continue;
-                    else if(isAncestor(a,i) || isAncestor(b,i))
+                    else if (isAncestor(a, i) || isAncestor(b, i))
                     {
-                        result=1;
+                        result = 1;
                         break;
                     }
                 }
@@ -225,7 +288,7 @@ int main()
     solution slv;
     int n, m;
     fin >> n >> m;
-    slv.init(n,m);
+    slv.init(n, m);
     //solution slv(n, m);
 
     for (int i = 1; i <= n; ++i)
@@ -242,15 +305,14 @@ int main()
         slv.tree[b].push_back(a);
     }
 
-
     slv.dfs_preOrder(slv.root);
     slv.dfs_posOrder(slv.root);
     slv.makeEulerDepth();
     slv.setAncestor();
+    slv.buitST();
 
     //cout << slv.lca(7,3) << "\n";
     //cout << slv.isAncestor(8,3) << "\n";
-
 
     for (int i = 1; i <= m; ++i)
     {
@@ -261,9 +323,6 @@ int main()
 
     slv.solve();
 
-
-    bitset<maxM> ans;
-    //cout << ans.to_string().substr(maxM-M,M) << "\n";
 
     return 0;
 }
