@@ -12,7 +12,7 @@ int main()
 {
 
 #ifndef ONLINE_JUDGE
-    freopen("randomTreeGenerator.in", "r", stdin);
+    //freopen("randomTreeGenerator.in", "r", stdin);
     freopen("randomTreeGenerator.out", "w", stdout);
 #endif
 
