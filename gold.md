@@ -72,7 +72,7 @@
 | Contest   | #                                                              | Name          | Topic                            | Result |
 | --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
 | 2019 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=969) | pump          | Shortest Path                    |Done    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=970) | milkvisits    | LCA                              |        |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=970) | milkvisits    | LCA                              |Done        |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=971) | cowmbat       | DP                               |Done    |
 
 todo:
