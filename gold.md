@@ -20,7 +20,7 @@
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=599) | lightsout     |                                  |    |
 | 2016 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=621) | cbarn         |                                  |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=622) | cbarn2        | DP                               |    |
-|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=623) | fencedin      | MST                              |Done almost AC    |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=623) | fencedin      | MST                              |    |
 | 2016 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=645) | split         | Two Pointers                     |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=646) | closing       | DSU                              |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=647) | 248           | DP                               |    |
@@ -51,7 +51,7 @@
 |           | [2](http://www.usaco.org/index.php?page=viewproblem&cpid=802)  | dirtraverse   | DFS                              |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=815) | taming        | DP                               |Done    |
 | 2018 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=837) | sort          | 1DRQ / Binary Search             |    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=838) | milkorder     | Topological Sort / Binary Search |Done|
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=838) | milkorder     | Topological Sort / Binary Search |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=839) | talent        | DP                               |Done    |
 
 | Contest   | #                                                              | Name          | Topic                            | Result |
@@ -64,7 +64,7 @@
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=899) | shortcut      | Shortest Path                    |Done    |
 | 2019 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=921) | cowland       | LCA / 1DRQ                       |    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=922) | dishes        | Map / Binary Search              |Done    |
-|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=923) | paintbarn     | DP / Line Sweep                  |Done    |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=923) | paintbarn     | DP / Line Sweep                  |    |
 | 2019 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=945) | snakes        | DP                               |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=946) | walk          | MST / Math                       |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=947) | balance       | Two Pointers / Math              |    |
