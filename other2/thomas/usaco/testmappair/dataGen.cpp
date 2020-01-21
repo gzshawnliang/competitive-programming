@@ -18,10 +18,9 @@ int main()
     // int N = rdNum.GetRand(1, 5000);
     // int Q = (int)1e5;
 
-    int N = 20;
-    int Q = 5;
-    int minV=0;
-    int maxV=20;
+    int N = 1000;
+    int Q = (int)1e5;
+    int maxV=1e6;
 
     fout << N << " " << Q << "\n";
 
@@ -31,7 +30,7 @@ int main()
         int b=0;
         while (abs(a-b)<3)
         {
-            a=(int)rdNum.GetRand(0, maxV);
+            a=(int)rdNum.GetRand(0, maxV)-maxV;
             b=(int)rdNum.GetRand(0, maxV);
         }
         if(a>b)
@@ -41,7 +40,7 @@ int main()
 
     for (int i = 1; i <= Q; ++i)
     {
-        int a=rdNum.GetRand(0, maxV);
+        int a=(int)rdNum.GetRand(0, maxV)-maxV;
         int b=(int)rdNum.GetRand(0, maxV);
         if(a>b)
             swap(a,b);
