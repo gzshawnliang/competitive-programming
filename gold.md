@@ -47,7 +47,7 @@
 | 2018 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=789) | mootube       | DSU                              |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=790) | atlarge       | DFS                              |    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=791) | spainting     | DP                               |Done    |
-| 2018 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=801)  | snowboots     | Set /DSU                              |    |
+| 2018 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=801)  | snowboots     | Set /DSU                         |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem&cpid=802)  | dirtraverse   | DFS                              |Done Thomas账号提交    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=815) | taming        | DP                               |Done    |
 | 2018 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=837) | sort          | 1DRQ / Binary Search             |    |
