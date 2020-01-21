@@ -79,6 +79,7 @@ namespace CFHelperUI
             else if (Regex.IsMatch(input, @"^\d{1,}[0-9]([A-Za-z])?$", RegexOptions.IgnoreCase)
             ) //一定是201A或201的格式：数字+单个字母或者数字
             {
+                codeforces.Checked = true;
                 GetDataCF(input);
             }
         }
