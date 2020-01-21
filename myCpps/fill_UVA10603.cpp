@@ -2,7 +2,7 @@
 
 using namespace std;
 
-ifstream fin("fill_UVA10603.in");
+ifstream fin("fill_UVA.in");
 ofstream fout("fill_UVA10603.out");
 
 const int inf = INT_MAX / 2;
