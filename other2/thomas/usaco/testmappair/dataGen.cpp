@@ -15,15 +15,25 @@ int main()
     //***************************
     //在此处写入测试数据
     //***************************
-    int N = rdNum.GetRand(1, 5000);
-    int Q = (int)1e5;
+    // int N = rdNum.GetRand(1, 5000);
+    // int Q = (int)1e5;
+
+    int N = 20;
+    int Q = 5;
+    int minV=0;
+    int maxV=20;
+
     fout << N << " " << Q << "\n";
-    int minV=-(int)1e5;
-    int maxV=(int)1e5;
+
     for (int i = 1; i <= N; ++i)
     {
-        int a=(int)rdNum.GetRand(0, maxV)-2*(int)rdNum.GetRand(0, maxV);
-        int b=2*(int)rdNum.GetRand(0, maxV)-(int)rdNum.GetRand(0, maxV);
+        int a=0;
+        int b=0;
+        while (abs(a-b)<3)
+        {
+            a=(int)rdNum.GetRand(0, maxV);
+            b=(int)rdNum.GetRand(0, maxV);
+        }
         if(a>b)
             swap(a,b);
         fout << a << " " << b << "\n";
@@ -31,8 +41,8 @@ int main()
 
     for (int i = 1; i <= Q; ++i)
     {
-        int a=(int)rdNum.GetRand(0, maxV)-2*(int)rdNum.GetRand(0, maxV);
-        int b=2*(int)rdNum.GetRand(0, maxV)-(int)rdNum.GetRand(0, maxV);
+        int a=rdNum.GetRand(0, maxV);
+        int b=(int)rdNum.GetRand(0, maxV);
         if(a>b)
             swap(a,b);
         fout << a << " " << b << "\n";
