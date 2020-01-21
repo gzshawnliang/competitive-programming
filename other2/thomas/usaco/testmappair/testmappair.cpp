@@ -83,7 +83,7 @@ int main()
 
         cout << ans << "\n";
     }
-
+    
     cout.flush();
     return 0;
 }
