@@ -44,11 +44,14 @@ using namespace std;
 
 int main()
 {
-    int n;
-    cout << "Enter a line of integers and eof at the end: " << endl;
-    while (cin >> n)
-    {
-        cout << n * 2 << " ";
-    }
+    // int n;
+    // cout << "Enter a line of integers and eof at the end: " << endl;
+    // while (cin >> n)
+    // {
+    //     cout << n * 2 << " ";
+    // }
+    int a=13,b=25;
+    int c=a^b;
+    cout << c << "\n";
     return 0;
 }
