@@ -1,4 +1,6 @@
-#define NDEBUG
+#ifdef ONLINE_JUDGE
+    #define NDEBUG
+#endif    
 // #include <assert>
 #include <bits/stdc++.h>
 

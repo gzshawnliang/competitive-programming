@@ -7,6 +7,9 @@
 * @Description:    
 ===========================================================
 */
+#ifdef ONLINE_JUDGE
+    #define NDEBUG
+#endif
 #include <bits/stdc++.h>
 
 using namespace std;
