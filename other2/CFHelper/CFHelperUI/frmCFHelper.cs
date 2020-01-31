@@ -748,11 +748,13 @@ namespace CFHelperUI
                     var id = listView1.FocusedItem.Text;
                     url = $"https://codeforces.com/problemset/problem/{this.contestId}/{id}";
                 }
-                else if (contestType == ContestType.codeforces)
+                else if (contestType == ContestType.usaco || contestType == ContestType.spoj)
                 {
                     url = this.txtProblemId.Text;
                 }
-                System.Diagnostics.Process.Start(url);
+
+                if(!string.IsNullOrEmpty(url))
+                    Process.Start(url);
             }
         }
 
