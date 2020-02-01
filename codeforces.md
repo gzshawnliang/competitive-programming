@@ -33,6 +33,8 @@
 | [1131D](https://codeforces.com/problemset/problem/1131/D)     | Gourmet choice                        | 2000 |    |并查集缩点   |
 | [659F](https://codeforces.com/contest/659/problem/F)          | Polycarp and Hay                      | 2100 |    |并查集 bfs  |
 | [1131F](https://codeforces.com/contest/1131/problem/F)        | Asya And Kittens                      | 1700 |    |并查集+邻接表 DFS|
+| [1215F](https://codeforces.com/problemset/problem/1215/F)     | Radio Stations                        | 2800 |    |2-sat  |
+| [uva-11930](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3081) | Rectangles                            | uva:6|    |2-sat  |
 
 # 其他
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
@@ -49,3 +51,6 @@ https://cp-algorithms.com/data_structures/sparse-table.html
 
 ### Sparse table
 http://adilet.org/blog/sparse-table/
+
+### CP-Algorithms:2-SAT
+https://cp-algorithms.com/graph/2SAT.html
