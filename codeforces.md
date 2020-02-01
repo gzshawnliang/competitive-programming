@@ -57,3 +57,7 @@ http://adilet.org/blog/sparse-table/
 https://codeforces.com/blog/entry/16205
 #### CP-Algorithms
 https://cp-algorithms.com/graph/2SAT.html
+#### 定义
+Boolean Satisfiability Problem
+https://www.youtube.com/watch?v=sBTTRwpJWi0
+https://www.youtube.com/watch?v=SAXGKCnOuP8
