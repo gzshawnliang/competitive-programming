@@ -52,5 +52,8 @@ https://cp-algorithms.com/data_structures/sparse-table.html
 ### Sparse table
 http://adilet.org/blog/sparse-table/
 
-### CP-Algorithms:2-SAT
+### 2-SAT
+#### codeforces
+https://codeforces.com/blog/entry/16205
+#### CP-Algorithms
 https://cp-algorithms.com/graph/2SAT.html
