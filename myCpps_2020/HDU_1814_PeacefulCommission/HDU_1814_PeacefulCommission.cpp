@@ -1,3 +1,13 @@
+/*
+===========================================================
+* @Name:           Peaceful Commission
+* @Author:         Shawn
+* @create Time:    2019/02/02 21:30:30
+* @url:            http://acm.hdu.edu.cn/showproblem.php?pid=1814
+* @Description:    2-SAT模板，DFS方案
+===========================================================
+*/
+
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
