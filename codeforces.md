@@ -61,3 +61,9 @@ https://cp-algorithms.com/graph/2SAT.html
 Boolean Satisfiability Problem
 https://www.youtube.com/watch?v=sBTTRwpJWi0
 https://www.youtube.com/watch?v=SAXGKCnOuP8
+
+#### 其他
+https://blog.csdn.net/qq_24451605/article/details/47126143
+https://oi-wiki.org/graph/2-sat/
+https://blog.csdn.net/airen6935/article/details/102315245
+https://www.cnblogs.com/DWVictor/p/11347316.html
