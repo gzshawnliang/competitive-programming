@@ -37,7 +37,7 @@
                 "\"${fileDirname}\\${fileBasenameNoExtension}.exe\"",
                 "-Wl,--stack=268435456",
                 "-lpsapi",
-                "-lstdc++fs",
+                // "-lstdc++fs",
                 "-std=gnu++11",
                 "-DDEBUG",
                 "-I",
