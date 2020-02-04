@@ -41,7 +41,7 @@ param(
 
 Set-Variable TLEWarningMsec -option Constant -value 3000        #Time Limit Exceeded 超时警告（毫秒）
 Set-Variable TLEErrorMsec -option Constant -value 5000          #Time Limit Exceeded 超时错误（毫秒）
-Set-Variable TLETerminateMsec -option Constant -value 60000      #Time Limit Exceeded 超时终止（毫秒）
+Set-Variable TLETerminateMsec -option Constant -value 60000     #Time Limit Exceeded 超时终止（毫秒）
 $JavaMainClassName = "Main" #Java Main Class Name
 
 function getGCCVersion()
@@ -449,8 +449,9 @@ function BuildCppAndRun($SourceFileName) {
     if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
         if(getGCCVersion -lt 8)
         {
-            # GCC版本小于8不使用-lstdc++fs编译参数
+            # GCC版本小于8不使用-lstdc++fs,-O2编译参数
             $CompilerArgs = $CompilerArgs.Replace("-lstdc++fs","")
+            $CompilerArgs = $CompilerArgs.Replace("-O2","")
         }
         $arguments += " " + $CompilerArgs
     }
