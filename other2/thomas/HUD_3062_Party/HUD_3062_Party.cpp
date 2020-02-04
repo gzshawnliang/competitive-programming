@@ -113,7 +113,7 @@ void solve()
             g[u].insert(ano(v));
             g[v].insert(ano(u));
         }
-        cerr << "input:" << setw(6) << t.elapsed() ; //打印秒
+        cerr << "input:" << setw(6) << t.elapsed_milli() <<"ms"; //打印秒
 
         t.reset();
         int cnt = 0;
@@ -138,7 +138,7 @@ void solve()
         if (flg == true) cout << "YES\n";
         else             cout << "NO\n";
 
-        cerr <<  " , dfs:" << setw(6) << t.elapsed() << "\n"; //打印秒
+        cerr <<  " , dfs:" << setw(6) << t.elapsed_milli() << "ms\n"; //打印秒
     }
 }
 
@@ -153,7 +153,6 @@ int main()
     #endif    
 
     solve();
-
 
     cout.flush();
     return 0;
