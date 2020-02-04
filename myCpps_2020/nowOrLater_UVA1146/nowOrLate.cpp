@@ -1,3 +1,14 @@
+/*
+===========================================================
+ * @名称:		1146 Now or later
+ * @作者:		Shawn 
+ * @创建时间: 2020-02-04 23:04:56 
+ * @修改人:   Shawn 
+ * @修改时间: 2020-02-04 23:04:56 
+ * @备注:	2-sat,Tarjan SCC + 二分
+ * @题目来源： https://onlinejudge.org/external/11/1146.pdf
+===========================================================
+*/
 #ifdef ONLINE_JUDGE
     #define NDEBUG      //ban assert when submit to online judge
 #endif
