@@ -4,7 +4,7 @@
 * @Author:         Shawn
 * @create Time:    2020/02/03 18:49:00
 * @url:            http://acm.hdu.edu.cn/showproblem.php?pid=3062
-* @Description:    2-SAT模板
+* @Description:    2-SAT模板,Tarjan SCC
 ===========================================================
 */
 #include <cmath>
@@ -54,7 +54,7 @@ int ano(int x)
     else            return x - 1;
 }
 
-void dfs(int u, int &cnt, vector<int> &ids, vector<int> &low, vector<int> &inStack, stack<int> &stk, vector<set<int>> &g)
+void dfs(int u, int &cnt, vector<int> &ids, vector<int> &low, vector<int> &inStack, stack<int> &stk, vector<vector<int>> &g)
 {
     stk.push(u); inStack[u] = 1;
     
@@ -87,41 +87,45 @@ void dfs(int u, int &cnt, vector<int> &ids, vector<int> &low, vector<int> &inSta
 
 void solve()
 {
-    int n; cin >> n;
-
-    vector<set<int>> g(n * 2);
-
-    int m; cin >> m;
-    for (int c = 1; c <= m; ++c)
+    while (true)
     {
-        int a1, a2, c1, c2; cin >> a1 >> a2 >> c1 >> c2;
+        int n = 0; cin >> n;
+        if (n == 0) break;
 
-        int u = a1 * 2 + c1, v = a2 * 2 + c2;
-        g[u].insert(ano(v));
-        g[v].insert(ano(u));
-    }
+        vector<vector<int>> g(n * 2);
 
-    int cnt = 0;
-    vector<int> ids(n * 2, -1), low(n * 2, 0), inStack(n * 2, 0);
-    stack<int> stk;
-
-    for (int u = 0; u <= 2 * n - 1; ++u)
-    {
-        if (ids[u] == -1) dfs(u, cnt, ids, low, inStack, stk, g);
-    }
-
-    bool flg = true;
-    for (int u = 0; u <= 2 * n - 2; u += 2)
-    {
-        if (low[u] == low[u + 1])
+        int m; cin >> m;
+        for (int c = 1; c <= m; ++c)
         {
-            flg = false;
-            break;
-        }
-    }
+            int a1, a2, c1, c2; cin >> a1 >> a2 >> c1 >> c2;
 
-    if (flg == true) cout << "YES\n";
-    else             cout << "NO\n";
+            int u = a1 * 2 + c1, v = a2 * 2 + c2;
+            g[u].push_back(ano(v));
+            g[v].push_back(ano(u));
+        }
+
+        int cnt = 0;
+        vector<int> ids(n * 2, -1), low(n * 2, 0), inStack(n * 2, 0);
+        stack<int> stk;
+
+        for (int u = 0; u <= 2 * n - 1; ++u)
+        {
+            if (ids[u] == -1) dfs(u, cnt, ids, low, inStack, stk, g);
+        }
+
+        bool flg = true;
+        for (int u = 0; u <= 2 * n - 2; u += 2)
+        {
+            if (low[u] == low[u + 1])
+            {
+                flg = false;
+                break;
+            }
+        }
+
+        if (flg == true) cout << "YES\n";
+        else             cout << "NO\n";
+    }
 }
 
 int main()
