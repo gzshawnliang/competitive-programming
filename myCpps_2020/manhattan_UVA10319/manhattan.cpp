@@ -6,15 +6,13 @@
 using namespace std;
 using ll = long long;
 
-const int maxN = 1000;
-
-int trans(int i, bool isUoD, bool isUoR, int m)
+int trans(int x, bool isS, bool isI, int ns)
 {
-    if (isUoD == true) return i * 2 - isUoR;
-    else               return m * 2 + i * 2 - isUoR;
+    if (isS == 1) return (x - 1) * 2 + isI;
+    else          return (x - 1) * 2 + isI + ns * 2;
 }
 
-void dfs(int u, int &cnt, vector<int> &ids, vector<int> &low, vector<int> &inStack, stack<int> &stk, vector<set<int>> &g)
+void dfs(int u, int &cnt, vector<int> &ids, vector<int> &low, vector<int> &inStack, stack<int> &stk, vector<unordered_set<int>> &g)
 {
     stk.push(u); inStack[u] = 1;
     
@@ -50,82 +48,75 @@ void solve()
     int tcc; cin >> tcc;
     for (int t = 1; t <= tcc; ++t)
     {
-        int n = 0, m = 0; cin >> n >> m;
+        int ns = 0, na = 0; cin >> ns >> na;
+        int n = ns * 2 + na * 2;
 
-        if (t == 134)
-        {
-            for (int __s = 0; __s == 0; ++__s);
-        }
-
-        vector<set<int>> g(maxN);
+        vector<unordered_set<int>> g(n);
 
         int tfq; cin >> tfq;
         for (int q = 1; q <= tfq; ++q)
         {
-            int y1, x1, y2, x2; cin >> y1 >> x1 >> y2 >> x2;
-            if (x1 == x2 && y1 == y2) continue;
+            int s1, a1, s2, a2; cin >> s1 >> a1 >> s2 >> a2;
+            if (s1 == s2 && a1 == a2) continue;
 
-            bool dirX = (x1 < x2), dirY = (y1 < y2);
-
-            if (x1 == x2)
+            bool isSInc = (a1 < a2), isAInc = (s1 < s2);
+            
+            if (s1 == s2)
             {
-                g[trans(x1, 1, !dirY, m)].insert(trans(x1, 1, dirY, m));
+                g[trans(s1, 1, !isSInc, ns)].insert(trans(s1, 1, isSInc, ns));
             }
-            else if (y1 == y2)
+            else if (a1 == a2)
             {
-                g[trans(y1, 0, !dirX, m)].insert(trans(y1, 0, dirX, m));
+                g[trans(a1, 0, !isAInc, ns)].insert(trans(a1, 0, isAInc, ns));
             }
             else
             {
-                g[trans(x1, 1, !dirY, m)].insert(trans(y1, 0, dirX, m));
-                g[trans(y1, 0, !dirX, m)].insert(trans(x1, 1, dirY, m));
+                g[trans(s1, 1, !isSInc, ns)].insert(trans(a1, 0, isAInc, ns));
+                g[trans(a1, 0, !isAInc, ns)].insert(trans(s1, 1, isSInc, ns));
 
-                g[trans(x2, 1, !dirY, m)].insert(trans(y2, 0, dirX, m));
-                g[trans(y2, 0, !dirX, m)].insert(trans(x2, 1, dirY, m));
+                g[trans(s2, 1, !isSInc, ns)].insert(trans(a2, 0, isAInc, ns));
+                g[trans(a2, 0, !isAInc, ns)].insert(trans(s2, 1, isSInc, ns));
+
+                g[trans(s1, 1, !isSInc, ns)].insert(trans(s2, 1, isSInc, ns));
+                g[trans(s2, 1, !isSInc, ns)].insert(trans(s1, 1, isSInc, ns));
+
+                g[trans(a1, 0, !isAInc, ns)].insert(trans(a2, 0, isAInc, ns));
+                g[trans(a2, 0, !isAInc, ns)].insert(trans(a1, 0, isAInc, ns));
             }
         }
 
         int cnt = 0;
-        vector<int> ids(maxN, -1), low(maxN, 0), inStack(maxN, 0);
+        vector<int> ids(n * 2, -1), low(n * 2, 0), inStack(n * 2, 0);
         stack<int> stk;
-
-        for (int i = 1; i <= n; ++i)
+        for (int s = 1; s <= ns; ++s)
         {
-            if (ids[trans(i, 0, 0, m)] == -1) dfs(trans(i, 0, 0, m), cnt, ids, low, inStack, stk, g);
-            if (ids[trans(i, 0, 1, m)] == -1) dfs(trans(i, 0, 1, m), cnt, ids, low, inStack, stk, g);
+            if (ids[trans(s, 1, 0, ns)] == -1) dfs(trans(s, 1, 0, ns), cnt, ids, low, inStack, stk, g);
+            if (ids[trans(s, 1, 1, ns)] == -1) dfs(trans(s, 1, 1, ns), cnt, ids, low, inStack, stk, g);
         }
-
-        for (int i = 1; i <= m; ++i)
+        for (int a = 1; a <= na; ++a)
         {
-            if (ids[trans(i, 1, 0, m)] == -1) dfs(trans(i, 1, 0, m), cnt, ids, low, inStack, stk, g);
-            if (ids[trans(i, 1, 1, m)] == -1) dfs(trans(i, 1, 1, m), cnt, ids, low, inStack, stk, g);
+            if (ids[trans(a, 0, 0, ns)] == -1) dfs(trans(a, 0, 0, ns), cnt, ids, low, inStack, stk, g);
+            if (ids[trans(a, 0, 1, ns)] == -1) dfs(trans(a, 0, 1, ns), cnt, ids, low, inStack, stk, g);
         }
 
         bool flg = true;
-        for (int i = 1; i <= n && flg == true; ++i)
+        for (int s = 1; s <= ns && flg == true; ++s)
         {
-            if (low[trans(i, 0, 0, m)] == low[trans(i, 0, 1, m)]) flg = false;
+            if (low[trans(s, 1, 0, ns)] == low[trans(s, 1, 1, ns)])
+            {
+                flg = false;
+            }
         }
-
-        for (int i = 1; i <= m && flg == true; ++i)
+        for (int a = 1; a <= na && flg == true; ++a)
         {
-            if (low[trans(i, 1, 0, m)] == low[trans(i, 1, 1, m)]) flg = false;
+            if (low[trans(a, 0, 0, ns)] == low[trans(a, 0, 1, ns)])
+            {
+                flg = false;
+            }
         }
 
         if (flg == true) cout << "Yes\n";
         else             cout << "No\n";
-
-
-        // cout << '\n';
-        // for (int i = 1; i <= n && flg == true; ++i)
-        // {
-        //     cout << i << ": " << trans(i, 0, 1, m) << ", " << trans(i, 0, 0, m) << '\n';
-        // }
-
-        // for (int i = 1; i <= m && flg == true; ++i)
-        // {
-        //     cout << i << ": " << trans(i, 1, 1, m) << ", " << trans(i, 1, 0, m) << '\n';
-        // }
     }
 }
 
