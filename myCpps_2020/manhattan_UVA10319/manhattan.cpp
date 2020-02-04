@@ -1,3 +1,12 @@
+/*
+===========================================================
+* @Name:           10319 - Manhattan
+* @Author:         Shawn
+* @create Time:    2020/02/03 18:49:00
+* @url:            https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1260
+* @Description:    2-SAT,Tarjan SCC
+===========================================================
+*/
 #ifdef ONLINE_JUDGE
     #define NDEBUG      //ban assert when submit to online judge
 #endif
