@@ -11,12 +11,9 @@ g++ --version
 echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo g++.exe %*
 g++.exe %*
-if %ERRORLEVEl% == 0 
-(
+if %ERRORLEVEl% == 0 (
     echo g++ compile successfully and launching debuger...
-)
-else 
-(
+)else (
     echo build fail %ERRORLEVEl%
 )
 echo.
