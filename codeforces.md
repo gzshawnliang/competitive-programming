@@ -80,5 +80,5 @@ https://oi-wiki.org/graph/2-sat/
 https://blog.csdn.net/airen6935/article/details/102315245
 https://www.cnblogs.com/DWVictor/p/11347316.html
 https://li-fish.github.io/2017/10/18/cjtk4crrq000404c2fzbgw8a7/
-https://blog.csdn.net/JarjingX/article/details/8521690
+https://blog.csdn.net/JarjingX/article/details/8521690 （4种建图模型）
 https://www.geek-share.com/detail/2569652192.html
