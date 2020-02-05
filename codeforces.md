@@ -41,12 +41,12 @@
 | [uva-11930](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3081) | Rectangles | uva:6|    |2-sat,几何  |
 | [1215F](https://codeforces.com/problemset/problem/1215/F)     | Radio Stations                        | 2800 |    |2-sat  |
 | [228E](https://codeforces.com/problemset/problem/228/E)       | The Road to Berland is Paved With Good Intentions                        | 2000 |    |2-sat  |
-| [27D](https://codeforces.com/problemset/problem/27/D)         | Ring Road 2                           | 2000 |    |2-sat  |
+| [27D](https://codeforces.com/problemset/problem/27/D)         | Ring Road 2                           | 2300 |    |2-sat  |
 | [100570D](https://codeforces.com/gym/100570/problem/D)        | TROY Query                            |      |    |2-sat  |
 | [uva-10319](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1260) | Manhattan | uva:4| AC   |2-sat,tarjan SCC|
 | [hdu-1814](http://acm.hdu.edu.cn/showproblem.php?pid=1814)    | Peaceful Commission                   |      | AC |2-sat模板题，普通DFS|
 | [hdu-3062](http://acm.hdu.edu.cn/showproblem.php?pid=3062)    | Party                                 |      | AC |2-sat模板题，tarjan SCC|
-| [uva-1146](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=3587) | Now or later | uva:5|    |2-sat+二分|
+| [uva-1146](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=3587) | Now or later | uva:5|AC   |2-sat+二分|
 
 # 其他
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
