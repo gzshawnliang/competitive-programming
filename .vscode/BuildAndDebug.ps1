@@ -114,25 +114,16 @@ if (Test-Path $SourceFileName) {
             $cppVersion2 = $cppVersion2.Split('.')[0]
 
             Write-Host $stdout
-
-            # Write-Host $cppVersion2
-            # if([int]$cppVersion2 -ge 8)
-            # {
-            #     Write-Host "Large"
-            # }
-            # else {
-            #     Write-Host "smart"
-            # }
             $exeFileName = $SrcFile.DirectoryName + "\" + $SrcFile.BaseName + ".exe"
 
-            $argument = " " + "`"$SourceFileName`" -o `"$exeFileName`""
+            $argument = "-g " + "`"$SourceFileName`" -o `"$exeFileName`""
             if (-not [string]::IsNullOrEmpty($CompilerArgs)) 
             {
                 if([int]$cppVersion2 -lt 8)
                 {
                     # GCC版本小于8不使用-lstdc++fs,-O2编译参数
                     $CompilerArgs = $CompilerArgs.Replace("-lstdc++fs","")
-                    $CompilerArgs = $CompilerArgs.Replace("-O2","")
+                    # $CompilerArgs = $CompilerArgs.Replace("-O2","")
                 }
                 $argument += " " + $CompilerArgs
             }
@@ -143,20 +134,14 @@ if (Test-Path $SourceFileName) {
             if([int]$x.ExitCode -eq 0)
             {
                 Write-Host "g++ compile successfully and launching debuger..."
-                exit 0
             }
-            else {
-                # Write-Warning -Message "Exit Code: $($x.ExitCode).($LASTEXITCODE)"  
-                exit $x.ExitCode
-            }
-            # & $cppCompilerCmd $argument
+            Write-Host
+            exit $x.ExitCode
         }
-        # & $cppCompilerCmd $argument
+        
     }
 }
 else {
     Write-Host  "source file $SourceFileName does not exist" -ForegroundColor Red
     exit 1
 }
-
-exit 0
