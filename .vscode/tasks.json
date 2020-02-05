@@ -29,6 +29,55 @@
         },             
         {
             "taskName": "g++",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "@chcp 65001",
+                "&&",
+                "powershell",
+                "-Command",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndDebug.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-Wl,--stack=268435456 -std=gnu++11 -lpsapi -DDEBUG -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\""
+            ], // 编译命令参数
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${fileDirname}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "isShellCommand": true,
+            "showOutput": "always"
+        },        
+        {
+            "taskName": "rebuild and run(onlinejudge)",
+            "suppressTaskName": true,
+            "command": "powershell",
+            "args": [
+                "-executionpolicy",
+                "bypass",
+                "-File",
+                "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
+                "-SourceFileName",
+                "${fileDirname}\\${fileBasenameNoExtension}.cpp",
+                "-CompilerArgs",
+                "\"-Wl,--stack=268435456 -std=gnu++11 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
+                "-WorkspaceFolder",
+                "\"${workspaceFolder}\""
+            ],
+            "isShellCommand": true,
+            "echoCommand": true,
+            "showOutput": "always"
+        },        
+        {
+            "taskName": "g++_bat_old",
             "command": "${workspaceFolder}\\.vscode\\BuildDebug.bat",
             "args": [
                 "-g",
@@ -161,26 +210,6 @@
             "echoCommand": true,
             "showOutput": "always",
         },            
-        {
-            "taskName": "rebuild and run(onlinejudge)",
-            "suppressTaskName": true,
-            "command": "powershell",
-            "args": [
-                "-executionpolicy",
-                "bypass",
-                "-File",
-                "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
-                "-SourceFileName",
-                "${fileDirname}\\${fileBasenameNoExtension}.cpp",
-                "-CompilerArgs",
-                "\"-Wl,--stack=268435456 -std=gnu++11 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include\"",
-                "-WorkspaceFolder",
-                "\"${workspaceFolder}\""
-            ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
-        },
         {
             // vscode输出窗口强制显示英文提示，否则出现乱码
             "taskName": "rebuild and run(java)",
