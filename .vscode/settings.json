@@ -158,6 +158,7 @@
     "java.format.settings.profile": "MyJavaVSStyple",
     //"editor.formatOnPaste": true,
     "editor.formatOnType": false,
-    "C_Cpp.default.cppStandard": "c++11"
+    "C_Cpp.default.cppStandard": "c++11",
+    "telemetry.enableTelemetry": false
 
 }
