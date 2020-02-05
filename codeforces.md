@@ -40,7 +40,7 @@
 | [468B](https://codeforces.com/contest/468/problem/B)          | Two Sets                              | 2000 | AC |2-sat      |
 | [uva-11930](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3081) | Rectangles | uva:6|    |2-sat,几何  |
 | [1215F](https://codeforces.com/problemset/problem/1215/F)     | Radio Stations                        | 2800 |    |2-sat  |
-| [228E](https://codeforces.com/problemset/problem/228/E)       | The Road to Berland is Paved With Good Intentions                        | 2000 |    |2-sat  |
+| [228E](https://codeforces.com/problemset/problem/228/E)       | The Road to Berland is Paved With Good Intentions                        | 2000 | AC |2-sat  |
 | [27D](https://codeforces.com/problemset/problem/27/D)         | Ring Road 2                           | 2300 |    |2-sat  |
 | [100570D](https://codeforces.com/gym/100570/problem/D)        | TROY Query                            |      |    |2-sat  |
 | [uva-10319](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1260) | Manhattan | uva:4| AC   |2-sat,tarjan SCC|
