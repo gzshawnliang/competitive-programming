@@ -40,8 +40,9 @@
 | [468B](https://codeforces.com/contest/468/problem/B)          | Two Sets                              | 2000 | AC |2-sat      |
 | [uva-11930](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3081) | Rectangles | uva:6|    |2-sat,几何  |
 | [1215F](https://codeforces.com/problemset/problem/1215/F)     | Radio Stations                        | 2800 |    |2-sat  |
-| [228E](https://codeforces.com/problemset/problem/228/E)       | The Road to Berland is Paved With Good Intentions                        | 2000 | AC |2-sat  |
+| [228E](https://codeforces.com/problemset/problem/228/E)       | The Road to Berland is Paved With Good Intentions                        | 2000 | AC |2-sat,tarjan SCC + 方案输出  |
 | [27D](https://codeforces.com/problemset/problem/27/D)         | Ring Road 2                           | 2300 |    |2-sat  |
+| [568C](https://codeforces.com/problemset/problem/568/C)         | Ring Road 2                           | 2600 |    |2-sat  |
 | [100570D](https://codeforces.com/gym/100570/problem/D)        | TROY Query                            |      |    |2-sat  |
 | [uva-10319](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1260) | Manhattan | uva:4| AC   |2-sat,tarjan SCC|
 | [hdu-1814](http://acm.hdu.edu.cn/showproblem.php?pid=1814)    | Peaceful Commission                   |      | AC |2-sat模板题，普通DFS|
@@ -55,7 +56,7 @@
 | [475D](https://codeforces.com/contest/475/problem/D)          | CGCDSSQ                               | 2000 |    |二分 + ST表 / 滚动数组 |
 | [863E](https://codeforces.com/contest/863/problem/E)          | Turn Off The TV                       | 2000 |    |[sparse-table (ST表)](https://cp-algorithms.com/data_structures/sparse-table.html) |
 | [514D](https://codeforces.com/problemset/problem/514/D)       | R2D2 and Droid Army                   | 2100 |    |[sparse-table (ST表)](https://cp-algorithms.com/data_structures/sparse-table.html) |
-
+| [488D](https://codeforces.com/problemset/problem/488/D)       | Strip                                 | 2300 |    |DP+sparse-table (ST表) |
 
 # 参考
 ### CP-Algorithms:Sparse Table
