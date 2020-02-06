@@ -20,6 +20,33 @@ param(
 # [cultureinfo]::CurrentCulture = 'en-US'
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
+function CheckProcessAndStop {
+    param (
+        $processName
+    )
+
+    if ($null -eq (Get-Process $processName  -ErrorAction SilentlyContinue)) {
+        # Write-Host "`"$processName.exe`" is not running"
+    } 
+    else {
+        Write-Host "`"$processName.exe`" is running,try to stop the process."
+        # Stop-Process -Name $processName
+        # $procs = Get-Process -Name $processName | Stop-Process -Force
+        $procs = Get-Process -Name $processName 
+        Write-Output $procs
+
+        $procs | Stop-Process -Force
+        Get-Process | Where-Object {$_.HasExited}
+        $procs | Wait-Process
+        Get-Process | Where-Object {$_.HasExited}
+        Start-Sleep -s 1
+        
+        Write-Host "`"$processName.exe`" is stoped."
+    }
+
+}
+
+
 #主程序，编译C++并且启动调试
 if (Test-Path $SourceFileName) {
     
@@ -37,7 +64,10 @@ if (Test-Path $SourceFileName) {
             $gdbCompilerCmd = $env:CppCompiler + "\gdb.exe"
         }
         $argument = "--version"
-        #todo 如果调试进程gdb.exe在运行则先停止
+        #如果调试进程gdb.exe在运行则先停止，如果目标文件exe正在运行则停止
+        CheckProcessAndStop("gdb")
+        CheckProcessAndStop($SrcFile.BaseName)
+
         Write-Host ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         & $gdbCompilerCmd $argument
         Write-Host ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
