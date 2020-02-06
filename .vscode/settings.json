@@ -159,6 +159,7 @@
     //"editor.formatOnPaste": true,
     "editor.formatOnType": false,
     "C_Cpp.default.cppStandard": "c++11",
-    "telemetry.enableTelemetry": false
+    "telemetry.enableTelemetry": false,
+    "files.defaultLanguage": "cpp"
 
 }
