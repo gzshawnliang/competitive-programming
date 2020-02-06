@@ -103,12 +103,11 @@ if (Test-Path $SourceFileName) {
                 {
                     # GCC版本小于8不使用-lstdc++fs,-O2编译参数
                     $CompilerArgs = $CompilerArgs.Replace("-lstdc++fs","")
-                    # $CompilerArgs = $CompilerArgs.Replace("-O2","")
+                    $CompilerArgs = $CompilerArgs.Replace("-O2","")
                 }
                 $argument += " " + $CompilerArgs
             }
             #开始编译
-            Write-Host
             Write-Host "`"$cppCompilerCmd`"" $argument 
             $x = start-process $cppCompilerCmd $argument -wait -NoNewWindow -PassThru 
             if([int]$x.ExitCode -eq 0)
