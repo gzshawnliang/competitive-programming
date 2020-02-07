@@ -42,7 +42,7 @@
 | [1215F](https://codeforces.com/problemset/problem/1215/F)     | Radio Stations                        | 2800 |    |2-sat  |
 | [228E](https://codeforces.com/problemset/problem/228/E)       | The Road to Berland is Paved With Good Intentions                        | 2000 | AC |2-sat,tarjan SCC + 方案输出  |
 | [27D](https://codeforces.com/problemset/problem/27/D)         | Ring Road 2                           | 2300 |    |2-sat  |
-| [568C](https://codeforces.com/problemset/problem/568/C)         | Ring Road 2                           | 2600 |    |2-sat  |
+| [568C](https://codeforces.com/problemset/problem/568/C)         | New Language                           | 2600 |    |2-sat  |
 | [100570D](https://codeforces.com/gym/100570/problem/D)        | TROY Query                            |      |    |2-sat  |
 | [uva-10319](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1260) | Manhattan | uva:4| AC   |2-sat,tarjan SCC|
 | [hdu-1814](http://acm.hdu.edu.cn/showproblem.php?pid=1814)    | Peaceful Commission                   |      | AC |2-sat模板题，普通DFS|
