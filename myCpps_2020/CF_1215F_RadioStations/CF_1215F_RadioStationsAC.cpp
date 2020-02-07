@@ -4,7 +4,7 @@
 * @Author:         Shawn
 * @create Time:    2020/2/6 20:51:16
 * @url:            https://codeforces.com/contest/1215/problem/F
-* @Description:    
+* @Description:    2-sat,Tarjan SCC，输出方案
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
