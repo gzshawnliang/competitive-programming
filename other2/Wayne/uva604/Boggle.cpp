@@ -145,20 +145,20 @@ bool cal2(int x,int y,string & t,int num)
     return false;
 }
 
-void cal(int x,int y,string t){
+void cal(int x,int y,string & t){
     if(t.length()==4)
     {
-        if(t=="OGOP")
-        {
-            cout << 'a';
-        }
+        // if(t=="OGOP")
+        // {
+        //     cout << 'a';
+        // }
         int tn=0;
         for (int i = 0; i < 4;++i)
         {
             if (t[i] == 'A' || t[i] == 'E' || t[i] == 'I' || t[i] == 'O' || t[i] == 'U' || t[i] == 'Y')
                 ++tn;
         }
-        if (ans.count(t) == 0 && tn==2)
+        if (tn==2 && ans.count(t) == 0)
         {
             Yes = false;
             for (int i = 0; i < 4; ++i)
@@ -284,8 +284,17 @@ void cal(int x,int y,string t){
 
 int main()
 {
-    ifstream cin("Boggle.in");
-    ofstream cout("Boggle.out");
+    // ifstream cin("Boggle.in");
+    // ofstream cout("Boggle.out");
+    ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    std::cout.tie(NULL);
+
+    #ifndef ONLINE_JUDGE
+        freopen("Boggle.in", "r", stdin);
+        freopen("Boggle.out", "w", stdout);
+    #endif
+
     string empty;
     bool first=true;
     while(true)
@@ -361,5 +370,6 @@ int main()
         }
     }
     //system("pause");
+    cout.flush();
     return 0;
 }
