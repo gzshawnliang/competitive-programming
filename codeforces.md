@@ -56,7 +56,7 @@
 | [475D](https://codeforces.com/contest/475/problem/D)          | CGCDSSQ                               | 2000 |    |二分 + ST表 / 滚动数组 |
 | [863E](https://codeforces.com/contest/863/problem/E)          | Turn Off The TV                       | 2000 |    |[sparse-table (ST表)](https://cp-algorithms.com/data_structures/sparse-table.html) |
 | [514D](https://codeforces.com/problemset/problem/514/D)       | R2D2 and Droid Army                   | 2100 |    |[sparse-table (ST表)](https://cp-algorithms.com/data_structures/sparse-table.html) |
-| [488D](https://codeforces.com/problemset/problem/488/D)       | Strip                                 | 2300 |    |DP+sparse-table (ST表) |
+| [488D](https://codeforces.com/problemset/problem/488/D)       | Strip                                 | 2300 | ...|DP+sparse-table (ST表) |
 | [SPOJ-RMQSQ](https://www.spoj.com/problems/RMQSQ/)            | RMQSQ - Range Minimum Query           |      |AC  |ST表模板| 
 | [713D](https://codeforces.com/contest/713/problem/D)          | Animals and Puzzle                    | 2700 |    |二维ST+二分|
 | [SPOJ-RPLN](https://www.spoj.com/problems/RPLN/)              | RPLN - Negative Score                 |      |    |1D RMQ(ST表模板,同RMQSQ)     | 
