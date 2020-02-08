@@ -57,8 +57,11 @@
 | [863E](https://codeforces.com/contest/863/problem/E)          | Turn Off The TV                       | 2000 |    |[sparse-table (ST表)](https://cp-algorithms.com/data_structures/sparse-table.html) |
 | [514D](https://codeforces.com/problemset/problem/514/D)       | R2D2 and Droid Army                   | 2100 |    |[sparse-table (ST表)](https://cp-algorithms.com/data_structures/sparse-table.html) |
 | [488D](https://codeforces.com/problemset/problem/488/D)       | Strip                                 | 2300 |    |DP+sparse-table (ST表) |
-| [RMQSQ](https://www.spoj.com/problems/RMQSQ/)                 | RMQSQ - Range Minimum Query           |      |AC  |ST表模板| 
+| [SPOJ-RMQSQ](https://www.spoj.com/problems/RMQSQ/)            | RMQSQ - Range Minimum Query           |      |AC  |ST表模板| 
 | [713D](https://codeforces.com/contest/713/problem/D)          | Animals and Puzzle                    | 2700 |    |二维ST+二分|
+| [SPOJ-RPLN](https://www.spoj.com/problems/RPLN/)              | RPLN - Negative Score                 |      |    |1D RMQ(ST表模板,同RMQSQ)     | 
+| [15D](https://codeforces.com/contest/15/problem/D)            | Mape Score                            |2500  |    |2D RMQ           | 
+| [SPOJ-THRBL](https://www.spoj.com/problems/THRBL/)            | THRBL - Catapult that ball            |      |    |1D ST表     |  
 
 # 参考
 ### CP-Algorithms:Sparse Table
@@ -67,7 +70,9 @@ https://cp-algorithms.com/data_structures/sparse-table.html
 ### Sparse table
 http://adilet.org/blog/sparse-table/
 https://codeforces.com/blog/entry/70418
+https://codeforces.com/blog/entry/45485
 http://mehedi6022.blogspot.com/2019/07/e-maxx-training-part-04.html
+https://www.geeksforgeeks.org/sparse-table/
 
 ### 2-SAT
 #### codeforces
