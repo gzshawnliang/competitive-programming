@@ -5,6 +5,7 @@
 * @create Time:    2020/2/6 20:51:16
 * @url:            https://codeforces.com/contest/1215/problem/F
 * @Description:    2-sat,Tarjan SCC，输出方案
+                    https://www.luogu.com.cn/blog/Sooke/solution-cf1215f
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
