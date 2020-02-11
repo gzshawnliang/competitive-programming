@@ -99,6 +99,8 @@ int main()
             cout << "min(" << i << "," << j << "):" << st.QueryMin(i, j) << "\n";
         }
     }
+    
+    return 0;
 
 }
 
