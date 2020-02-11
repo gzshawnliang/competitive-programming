@@ -97,14 +97,14 @@ int main()
     vector<int> a = {2, 4, 3, 1, 6, 7, 8, 9, 1, 7};
     SparseTable st(a);
 
-    for(auto i:st.M)
+    for (auto i : st.M)
     {
-        for(auto j:i)
+        for (auto j : i)
             cout << j << " ";
 
         cout << "\n";
     }
-    
+
     int n = a.size();
     for (int i = 0; i <= n - 1; ++i)
     {
@@ -114,9 +114,6 @@ int main()
         }
     }
 
-    
-    
     return 0;
-
 }
 
