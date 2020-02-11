@@ -32,7 +32,9 @@ class SparseTable
     {
         int len = a.size();
         int maxJ = lg2(len) + 1;
-        M.assign(len, vector<int>(maxJ, -1));
+
+        M.resize(len, vector<int>(maxJ+1,-1)); 
+
         this->a=a;
 
         for (int i = 0; i <= len - 1; ++i)
@@ -64,7 +66,7 @@ class SparseTable
         if (i > j)
             swap(i, j);
 
-        int k = lg2(j - i + 1); //长度
+        int k = lg2(j - i + 1); //长度，用一维数组速度快点
 
         int front = M[i][k];       //前段
         int i2 = j - (1 << k) + 1; //后段j-2^k+1;
