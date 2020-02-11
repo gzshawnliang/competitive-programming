@@ -20,20 +20,31 @@ class SparseTable
     {
         int i = 0;
         while ((1 << i) <= n) //(1<<i) = 2^i
+        {
             ++i;
+        }
 
         return i - 1;
     }
 
   public:
-    vector<vector<int>> M; //Sparse Table (ST表)
+    vector<vector<int>> M;      //Sparse Table (ST表)
     vector<int> a;
+    vector<int> lg2Result;
     SparseTable(vector<int> & a)
     {
         int len = a.size();
+        lg2Result.assign(len+1,0);
+
         int maxJ = lg2(len) + 1;
 
+        for (int i = 1; i <= len ; ++i)
+        {
+            lg2Result[i]=lg2(i);
+        }
+
         M.resize(len, vector<int>(maxJ+1,-1)); 
+        
 
         this->a=a;
 
@@ -66,7 +77,8 @@ class SparseTable
         if (i > j)
             swap(i, j);
 
-        int k = lg2(j - i + 1); //长度，用一维数组速度快点
+        //int k = lg2(j - i + 1);       //计算长度，
+        int k=lg2Result[j - i + 1];     //长度，用一维数组速度快点
 
         int front = M[i][k];       //前段
         int i2 = j - (1 << k) + 1; //后段j-2^k+1;
@@ -90,7 +102,7 @@ int main()
         for(auto j:i)
             cout << j << " ";
 
-        cout << "\n";            
+        cout << "\n";
     }
     
     int n = a.size();
@@ -101,6 +113,8 @@ int main()
             cout << "min(" << i << "," << j << "):" << st.QueryMin(i, j) << "\n";
         }
     }
+
+    
     
     return 0;
 
