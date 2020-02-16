@@ -150,7 +150,7 @@ int main()
 {
 #ifndef ONLINE_JUDGE
     freopen("CF_488D_Strip.in", "r", stdin);
-    freopen("CF_488D_Strip.out", "w", stdout);
+    //freopen("CF_488D_Strip.out", "w", stdout);
 #endif
 
     int n, s, l;
