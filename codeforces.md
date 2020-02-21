@@ -63,6 +63,8 @@
 | [15D](https://codeforces.com/contest/15/problem/D)            | Mape Score                            |2500  |    |2D RMQ           | 
 | [SPOJ-THRBL](https://www.spoj.com/problems/THRBL/)            | THRBL - Catapult that ball            |      |    |1D ST表     |  
 | [1133E](https://codeforces.com/contest/1133/problem/E)        | K Balanced Teams                      |2000  |    |双指针two pointers+DP    |
+| [617E](https://codeforces.com/problemset/problem/617/E)       | XOR and Favorite Number               |2300  |    |Square Root Decomposition  |
+
 # 参考
 ### CP-Algorithms:Sparse Table
 https://cp-algorithms.com/data_structures/sparse-table.html
