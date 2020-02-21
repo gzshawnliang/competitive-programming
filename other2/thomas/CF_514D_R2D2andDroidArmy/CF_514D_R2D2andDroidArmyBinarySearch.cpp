@@ -101,6 +101,16 @@ class SparseTable
     }
 };
 
+
+/**
+ * 
+ * @param  {int} len                : 长度
+ * @param  {vector<SparseTable>} st : 稀疏表对象
+ * @param  {int} n                  : 机器人数量
+ * @param  {int} m                  : 机器人属性数量
+ * @param  {int} k                  : 最大开枪数量
+ * @return {int}                    : 返回开始的索引
+ */
 int checkLen(int len, vector<SparseTable> & st, int n, int m, int k)
 {
     for (int i = 0; i <= n - 1; ++i)
@@ -182,8 +192,8 @@ void solve()
 
     //特殊情况，没进入二分
     /* iput:
-1 1 0
-1    
+    1 1 0
+    1    
     */
     if(maxLen==0)
     {

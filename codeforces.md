@@ -56,14 +56,15 @@
 | [475D](https://codeforces.com/contest/475/problem/D)          | CGCDSSQ                               | 2000 | AC |二分 + ST表 / 滚动数组 |
 | [863E](https://codeforces.com/contest/863/problem/E)          | Turn Off The TV                       | 2000 |    |[sparse-table (ST表)](https://cp-algorithms.com/data_structures/sparse-table.html) |
 | [514D](https://codeforces.com/problemset/problem/514/D)       | R2D2 and Droid Army                   | 2100 |    |[sparse-table (ST表)](https://cp-algorithms.com/data_structures/sparse-table.html) |
-| [488D](https://codeforces.com/problemset/problem/488/D)       | Strip                                 | 2300 | ...|DP+sparse-table (ST表) |
-| [SPOJ-RMQSQ](https://www.spoj.com/problems/RMQSQ/)            | RMQSQ - Range Minimum Query           |      |AC  |ST表模板| 
+| [488D](https://codeforces.com/problemset/problem/488/D)       | Strip                                 | 2300 | AC |DP+sparse-table (ST表) |
+| [SPOJ-RMQSQ](https://www.spoj.com/problems/RMQSQ/)            | RMQSQ - Range Minimum Query           |      | AC |ST表模板| 
 | [713D](https://codeforces.com/contest/713/problem/D)          | Animals and Puzzle                    | 2700 |    |二维ST+二分|
 | [SPOJ-RPLN](https://www.spoj.com/problems/RPLN/)              | RPLN - Negative Score                 |      |    |1D RMQ(ST表模板,同RMQSQ)     | 
-| [15D](https://codeforces.com/contest/15/problem/D)            | Mape Score                            |2500  |    |2D RMQ           | 
+| [15D](https://codeforces.com/contest/15/problem/D)            | Mape Score                            | 2500 |    |2D RMQ           | 
 | [SPOJ-THRBL](https://www.spoj.com/problems/THRBL/)            | THRBL - Catapult that ball            |      |    |1D ST表     |  
-| [1133E](https://codeforces.com/contest/1133/problem/E)        | K Balanced Teams                      |2000  |    |双指针two pointers+DP    |
-| [617E](https://codeforces.com/problemset/problem/617/E)       | XOR and Favorite Number               |2300  |    |Square Root Decomposition  |
+| [1133E](https://codeforces.com/contest/1133/problem/E)        | K Balanced Teams                      | 2000 |    |双指针two pointers+DP    |
+| [617E](https://codeforces.com/problemset/problem/617/E)       | XOR and Favorite Number               | 2300 |    |Square Root Decomposition  |
+| [455D](https://codeforces.com/problemset/problem/455/D)       | Serega and Fun                        | 2600 |    |Square Root Decomposition  |
 
 # 参考
 ### CP-Algorithms:Sparse Table
