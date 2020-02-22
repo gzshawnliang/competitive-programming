@@ -138,6 +138,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xCopy "$(TargetDir)*.*" "D:\codes\shawnGitHub\.vscode\CFHelper" /Y</PostBuildEvent>
+    <PostBuildEvent>xCopy "$(TargetDir)*.*" "..\..\..\..\..\.vscode\CFHelper" /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
