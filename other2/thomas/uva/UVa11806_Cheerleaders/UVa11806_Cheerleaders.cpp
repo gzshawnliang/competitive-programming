@@ -4,7 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2020/2/26 19:23:32
 * @url:            
-* @Description:    
+* @Description:    容斥原理
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
@@ -38,6 +38,7 @@ ull C(ull M,ull N)
 
 /**
  * 从M个数中取N个处理有多少种方案,动态规划
+ * https://zhuanlan.zhihu.com/p/74787475
  */
 void InitData(ull M)
 {
