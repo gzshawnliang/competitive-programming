@@ -49,6 +49,17 @@
 | [hdu-3062](http://acm.hdu.edu.cn/showproblem.php?pid=3062)    | Party                                 |      | AC |2-sat模板题，tarjan SCC|
 | [uva-1146](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=3587) | Now or later | uva:5|AC   |2-sat+二分|
 
+# 容斥原理 Inclusion–exclusion principle
+| #                                                             | 名称                                   | 难度  |状态 |备注      |
+|-------------------------------------------------------------- |---------------------------------------|------|----|----------|
+| [uva-10325](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1266)       | The Lottery            | uva:3 |    | 入门|
+| [uva-11806](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2906)       | Cheerleaders            |uva:4  |    |入门 |
+| [900D](https://codeforces.com/problemset/problem/900/D)       | Unusual Sequences                     | 2100 |    | |
+| [839D](https://codeforces.com/problemset/problem/839/D)       | Winter is here                        | 2200 |    | |
+| [803F](https://codeforces.com/problemset/problem/803/F)       | Coprime Subsequences                  | 2100 |    | |
+| [1228E](https://codeforces.com/problemset/problem/1228/E)       | Another Filling the Grid            | 2300 |    | |
+| [451E](https://codeforces.com/problemset/problem/451/E)       | Devu and Flowers                      | 2400 |    | |
+
 # 其他
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
 |-------------------------------------------------------------- |---------------------------------------|------|----|----------|
@@ -65,6 +76,7 @@
 | [1133E](https://codeforces.com/contest/1133/problem/E)        | K Balanced Teams                      | 2000 |    |双指针two pointers+DP    |
 | [617E](https://codeforces.com/problemset/problem/617/E)       | XOR and Favorite Number               | 2300 |    |Square Root Decomposition  |
 | [455D](https://codeforces.com/problemset/problem/455/D)       | Serega and Fun                        | 2600 |    |Square Root Decomposition  |
+
 
 # 参考
 ### CP-Algorithms:Sparse Table
@@ -87,6 +99,16 @@ https://cp-algorithms.com/graph/2SAT.html
 Boolean Satisfiability Problem
 https://www.youtube.com/watch?v=sBTTRwpJWi0
 https://www.youtube.com/watch?v=SAXGKCnOuP8
+
+#### SQRT decomposition
+https://codeforces.com/blog/entry/23005
+
+#### 容斥原理
+https://zh.wikipedia.org/wiki/排容原理
+http://www2.csie.ntnu.edu.tw/~u91029/Permutation.html#3
+https://cp-algorithms.com/combinatorics/inclusion-exclusion.html
+https://codeforces.com/blog/entry/64625
+https://baike.baidu.com/item/%E9%87%8D%E5%A4%8D%E7%BB%84%E5%90%88/6774375
 
 #### 其他
 https://blog.csdn.net/qq_24451605/article/details/47126143
