@@ -56,6 +56,7 @@ void solve()
     {
         int N,M,K;
         cin >> N >> M >> K;
+        N=100;
         vector<vector<int>> C(N+5,vector<int>(N+5,0));
         vector<int> P(N+5);
         initDataC(N,C);
