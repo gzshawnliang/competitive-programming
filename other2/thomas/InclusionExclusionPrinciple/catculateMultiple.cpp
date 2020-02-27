@@ -83,7 +83,7 @@ int main()
 
     //catculateMultiple(1000);
 
-    vector<string> a={"a","b","c","d","e"};
+    vector<string> a={"2","3","4","6"};
 
     int n=a.size();
     int total = 1<<n;

@@ -1,5 +1,4 @@
 # Old Silver
-
 | Contest   | #                                                              | Name          | Topic                            | Result |
 | --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
 | 2012 Mar  | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=126) | landscape     | DP                               |    |
@@ -9,7 +8,6 @@
 | 2015 Feb  | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=531) | superbull     | MST                              |    |
 
 # Gold
-
 | Contest   | #                                                              | Name          | Topic                            | Result |
 | --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
 | 2015 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=573) | cardgame      | Binary Search                    |    |
