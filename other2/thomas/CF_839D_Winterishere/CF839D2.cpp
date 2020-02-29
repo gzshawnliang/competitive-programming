@@ -2,9 +2,9 @@
 #define mod 1000000007
 using namespace std;
 
-int ans, n, a[1001000], f[1001000], mx, b[200100];
+int ans, n, a[100], f[100], mx, b[200];
 
-int solve()
+void solve()
 {
     cin >> n, b[0] = 1;
     for (int i = 1; i <= n; ++i)
@@ -32,7 +32,7 @@ int solve()
 int main()
 {
 #ifndef ONLINE_JUDGE
-    freopen("1.in", "r", stdin);
+    freopen("CF839D.in", "r", stdin);
     //freopen("UVa11806_Cheerleaders.out", "w", stdout);
 #endif
 
