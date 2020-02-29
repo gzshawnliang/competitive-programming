@@ -57,7 +57,7 @@
 | [900D](https://codeforces.com/problemset/problem/900/D)       | Unusual Sequences                     | 2100 |    | |
 | [839D](https://codeforces.com/problemset/problem/839/D)       | Winter is here                        | 2200 |    |容斥原理+莫比乌斯函数 |
 | [803F](https://codeforces.com/problemset/problem/803/F)       | Coprime Subsequences                  | 2100 |    | |
-| [1228E](https://codeforces.com/problemset/problem/1228/E)     | Another Filling the Grid              | 2300 |    | |
+| [1228E](https://codeforces.com/problemset/problem/1228/E)     | Another Filling the Grid              | 2300 | AC | |
 | [451E](https://codeforces.com/problemset/problem/451/E)       | Devu and Flowers                      | 2400 |    | |
 
 # 其他
