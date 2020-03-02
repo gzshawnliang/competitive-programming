@@ -125,7 +125,7 @@ https://blog.csdn.net/shadandeajian/article/details/82084087?depth_1-utm_source=
 Pascal's Identity
 https://artofproblemsolving.com/wiki/index.php/Pascal%27s_Identity
 
-
-
+Principle of Inclusion-Exclusion
+https://artofproblemsolving.com/wiki/index.php/Principle_of_Inclusion-Exclusion
 
 
