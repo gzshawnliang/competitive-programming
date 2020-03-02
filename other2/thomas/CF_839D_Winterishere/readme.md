@@ -121,11 +121,31 @@ https://artofproblemsolving.com/wiki/index.php/Combination
 常用组合数计算公式
 https://blog.csdn.net/shadandeajian/article/details/82084087?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
 
-### 帕斯卡恒等式
-Pascal's Identity
-https://artofproblemsolving.com/wiki/index.php/Pascal%27s_Identity
-
+### 容斥原理
 Principle of Inclusion-Exclusion
 https://artofproblemsolving.com/wiki/index.php/Principle_of_Inclusion-Exclusion
 
+
+## 常用组合公式证明
+
+### $C_n^m= \cfrac{n!}{m!\times (n-m)!}$
+
+### $C_{n}^{m}=C_{n-1}^{m-1} + C_{n-1}^{m}$  (帕斯卡恒等式)
+https://artofproblemsolving.com/wiki/index.php/Pascal%27s_Identity
+
+
+### $m\times C_n^m=n\times C_{n-1}^{m-1}$
+
+$$\begin{align}
+m\times C_n^m &=m\times \cfrac{n!}{m!\times (n-m)!} \\\\ \nonumber 
+&= \cfrac{n!}{(m-1)!\times (n-m)!} \\\\ \nonumber
+&= n \times \cfrac{(n-1)!}{(m-1)!\times (n-m)!} \\\\ \nonumber
+&= n \times C_{n-1}^{m-1} \\\\ \nonumber
+\end{align}
+$$
+
+### $C_n^0+C_n^1+C_n^2+...+C_n^n=2^n$
+
+
+### $1\times C_n^1+2\times C_n^2+ 3\times C_n^3 + ... + n\times C_n^n = n \times 2^{n-1}$
 
