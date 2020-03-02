@@ -84,7 +84,7 @@ $2\times f(2)=2\times (12-1-1)=20$
 $$f(i)=(\sum_{i}^{n}i\times C_n^i)-f(2\times i) - f(3\times i) ... - f(k\times i)$$
 期中$k\times i <=$ 最大的数
 
-考虑以下公式成立：
+考虑以下组合公式公式成立：
 $$1\times C_n^1 + 2\times C_n^2+3\times C_n^3+...+n\times C_n^n=n\times 2^{n-1}$$
 则：
 $$f(i)=(n\times 2^{n-1})-f(2\times i) - f(3\times i) ... - f(k\times i)$$
