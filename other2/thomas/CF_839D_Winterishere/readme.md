@@ -106,3 +106,26 @@ for (int i = mx; i >= 2; --i)
 }
 cout << (ans*1ll + mod*1ll) % mod << "\n";
 ```
+
+## 参考
+
+What is a Combination?
+https://corporatefinanceinstitute.com/resources/knowledge/other/combination/
+
+Combination
+https://en.wikipedia.org/wiki/Combination
+https://artofproblemsolving.com/wiki/index.php/Combination
+
+
+### 组合公式
+常用组合数计算公式
+https://blog.csdn.net/shadandeajian/article/details/82084087?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+
+### 帕斯卡恒等式
+Pascal's Identity
+https://artofproblemsolving.com/wiki/index.php/Pascal%27s_Identity
+
+
+
+
+
