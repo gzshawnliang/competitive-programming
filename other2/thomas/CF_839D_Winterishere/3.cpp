@@ -94,7 +94,7 @@ int main()
     for(int i = 2; i < maxn; i++)
         fac[i] = fac[i - 1] * 2 % mod;
 
-    vector<int> a = {2, 3, 4, 6};
+    vector<int> a = {1, 3, 5, 15, 3, 105, 35};
 
     int n = a.size();
     int total = 1 << n;
@@ -111,15 +111,15 @@ int main()
             {
                 //cout << a[j] << " ";
                 ++len;
-                s += to_string(a[j]) + " ";
+                s += to_string(a[j]) + ",";
                 r = gcd(a[j], r);
             }
         }
         if(r>1)
         {
-            ans += r*len;
+            //ans += r*len;
 
-            cout << s << ":" << r << ", total:" << ans << "\n";
+            cout << s << ":" << r  << "\n";
         }
     }
 
