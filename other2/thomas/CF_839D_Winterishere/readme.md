@@ -149,3 +149,8 @@ $$
 
 ### $1\times C_n^1+2\times C_n^2+ 3\times C_n^3 + ... + n\times C_n^n = n \times 2^{n-1}$
 
+### $1^{2}\times C_n^1+2^{2}\times C_n^2+ 3^{2}\times C_n^3 + ... + n^{2}\times C_n^n = n\times(n+1)\times 2^{n-2}$
+
+### $\cfrac{C_n^1}{1} - \cfrac{C_n^2}{2} + \cfrac{C_n^3}{3} + ... + (-1)^{n-1}\times \cfrac{C_n^n}{n} = 1 - \cfrac{1}{2} + \cfrac{1}{3} + ... + \cfrac{1}{n} $
+
+### $ (C_n^0)^2 + (C_n^1)^2 +(C_n^2)^2 + ... + (C_n^n)^2 = (C_{2n})^n $
