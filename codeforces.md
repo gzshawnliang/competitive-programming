@@ -54,11 +54,14 @@
 |-------------------------------------------------------------- |---------------------------------------|------|----|----------|
 | [uva-10325](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1266)       | The Lottery            | uva:3 | AC  | 入门|
 | [uva-11806](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2906)       | Cheerleaders            |uva:4  |AC  |入门 |
-| [900D](https://codeforces.com/problemset/problem/900/D)       | Unusual Sequences                     | 2100 |    | |
-| [839D](https://codeforces.com/problemset/problem/839/D)       | Winter is here                        | 2200 | AC |容斥原理+莫比乌斯函数 或 组合公式+容斥原理+dp |
-| [803F](https://codeforces.com/problemset/problem/803/F)       | Coprime Subsequences                  | 2100 | AC(thomas)   |解法同上 |
-| [1228E](https://codeforces.com/problemset/problem/1228/E)     | Another Filling the Grid              | 2300 | AC | |
-| [451E](https://codeforces.com/problemset/problem/451/E)       | Devu and Flowers                      | 2400 |    | |
+| [900D](https://codeforces.com/problemset/problem/900/D)       | Unusual Sequences                     | 2100 | AC     |容斥原理 +DFS |
+| [839D](https://codeforces.com/problemset/problem/839/D)       | Winter is here                        | 2200 | AC     |容斥原理+莫比乌斯函数 或 组合公式+容斥原理+dp |
+| [803F](https://codeforces.com/problemset/problem/803/F)       | Coprime Subsequences                  | 2100 | AC     |解法同上 |
+| [1228E](https://codeforces.com/problemset/problem/1228/E)     | Another Filling the Grid              | 2300 | AC     | |
+| [451E](https://codeforces.com/problemset/problem/451/E)       | Devu and Flowers                      | 2400 |        |卢卡斯(Lucas)定理+逆元 求组合数 |
+| [285E](https://codeforces.com/problemset/problem/285/E)       | Positions in Permutations             | 2600 |        | 容斥原理 + dp |
+| [439E](https://codeforces.com/problemset/problem/439/E)       | Devu and Birthday Celebration         | 2600 |        | 容斥原理 + dp |
+| [1043F](https://codeforces.com/contest/1043/problem/F)        | Make It One                           | 2500 |        | 容斥原理 + dp,最短路 |
 
 # 其他
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
