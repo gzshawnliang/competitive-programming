@@ -124,7 +124,6 @@ class CombinationMMI
     }
 };
 
-
 void solve()
 {
     int n;
