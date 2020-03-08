@@ -147,8 +147,8 @@ void solve()
         mx = max(mx, a[i]);
     }
     vector<vector<int>> f(7 + 1, vector<int>(maxA + 1, 0));
-    for (int i = 0; i <= n - 1; ++i)
-        ++f[1][a[i]];
+    // for (int i = 0; i <= n - 1; ++i)
+    //     ++f[1][a[i]];
 
     for (int i = 1; i <= mx; ++i)
         for (int j = i + i; j <= mx; j += i)
