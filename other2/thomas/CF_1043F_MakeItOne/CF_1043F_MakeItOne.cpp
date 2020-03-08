@@ -134,21 +134,23 @@ void solve()
     //CombinationPascal CPAS(n);
 
     vector<int> a(n, 0);
-    vector<int> m(maxA, 0);
+    
 
     int gcd = 0;
     int mx = 0;
     for (int i = 0; i <= n - 1; ++i)
     {
         cin >> a[i];
-        ++m[a[i]];
+        //++m[a[i]];
         //++f[1][a[i]];
         gcd = __gcd(gcd, a[i]);
         mx = max(mx, a[i]);
     }
-    vector<vector<int>> f(7 + 1, vector<int>(maxA + 1, 0));
-    // for (int i = 0; i <= n - 1; ++i)
-    //     ++f[1][a[i]];
+    vector<vector<int>> f(7 + 1, vector<int>(mx + 1, 0));
+    vector<int> m(mx, 0);
+
+    for (int i = 0; i <= n-1 ; ++i)
+        ++m[a[i]];
 
     for (int i = 1; i <= mx; ++i)
         for (int j = i + i; j <= mx; j += i)
