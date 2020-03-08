@@ -4,7 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2020/3/8 11:49:59
 * @url:            https://codeforces.com/contest/1043/problem/F
-* @Description:    
+* @Description:    容斥原理，组合数比较大，Pascal公式
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
@@ -162,7 +162,6 @@ void solve()
         return;
     }
 
-    //int ans=0;
     for (int i = 1; i <= 7; ++i)
     {
         for (int j = mx; j >= 1; --j)
@@ -170,7 +169,6 @@ void solve()
             f[i][j] = 1ll * CMMI.C(m[j],i) % MOD;
             //f[i][j] = 1ll * CPAS.C(m[j],i) % MOD;
             //cout << m[j] << "->" << i << ":" << CMMI.C(m[j],i) << " " << CPAS.C(m[j],i) <<'\n';
-
             for (int k = j + j; k <= mx; k += j)
             {
                 f[i][j] -= f[i][k];
