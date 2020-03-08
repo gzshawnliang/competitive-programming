@@ -4,7 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2020/3/8 11:49:59
 * @url:            https://codeforces.com/contest/1043/problem/F
-* @Description:    容斥原理，组合数比较大，Pascal公式
+* @Description:    容斥原理，组合数比较大，Pascal公式超内存，需要逆元计算组合数o
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
@@ -132,7 +132,6 @@ void solve()
 
     CombinationMMI CMMI;
     //CombinationPascal CPAS(n);
-
 
     vector<int> a(n, 0);
     vector<int> m(maxA, 0);
