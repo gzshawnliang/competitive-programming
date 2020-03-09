@@ -20,13 +20,14 @@ int myGCD(vector<int> & a)
 
 void solve()
 {
-    // cout << __gcd(0,0) << '\n';
-    // cout << __gcd(0,4) << '\n';
-    // cout << __gcd(4,0) << '\n';
-    // cout << __gcd(4,2) << '\n';
-    // cout << __gcd(4,2) << '\n';
+    cout << __gcd(0,0) << '\n';
+    cout << __gcd(0,4) << '\n';
+    cout << __gcd(4,0) << '\n';
+    cout << __gcd(4,2) << '\n';
+    cout << __gcd(4,2) << '\n';
 
-    int t = 3 * 5 * 7 * 11 * 13 * 17 * 19 ;
+    int t = 3 * 5 * 7 * 11 * 13 * 17 * 19;
+    cout << t << "\n";
     vector<int> a={t/3,t/5,t/7,t/11,t/13,t/17,t/19};
     //vector<int> a={t/3,t/5};
 
