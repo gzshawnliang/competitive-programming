@@ -21,6 +21,8 @@ const ll MOD = 1e6 + 3;
 
 //计算组合数：从M个数中取N个处理有多少种方案（逆元,Modular Multiplicative Inverse）
 //https://www.zybuluo.com/ArrowLLL/note/713749
+//todo 第二种实现办法
+//https://www.lagou.com/lgeduarticle/52320.html
 class CombinationMMI
 {
     private:
