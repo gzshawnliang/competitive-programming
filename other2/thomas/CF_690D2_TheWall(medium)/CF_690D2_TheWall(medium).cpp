@@ -85,10 +85,8 @@ void solve()
     //逆元求大组合数：AC
     cout << CMMI.C(n+C,C) -1 << "\n";
 
-
     //Lucas定理求大组合数：AC
     //cout << CMMI.C(n+C,C) -1 << "\n";
-
 }
 
 int main()
