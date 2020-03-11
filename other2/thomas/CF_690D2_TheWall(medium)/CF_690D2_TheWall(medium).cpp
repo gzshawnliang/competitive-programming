@@ -77,7 +77,7 @@ class CombinationMMI
     
 };
 
-//todo 第二种实现办法
+//卢卡斯第二种实现办法
 //https://www.lagou.com/lgeduarticle/52320.html
 class CombinationMMI2
 {
