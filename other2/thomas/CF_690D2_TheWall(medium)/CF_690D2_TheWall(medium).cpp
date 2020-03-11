@@ -21,8 +21,6 @@ const ll MOD = 1e6 + 3;
 
 //计算组合数：从M个数中取N个处理有多少种方案（逆元,Modular Multiplicative Inverse）
 //https://www.zybuluo.com/ArrowLLL/note/713749
-//todo 第二种实现办法
-//https://www.lagou.com/lgeduarticle/52320.html
 class CombinationMMI
 {
     private:
@@ -71,7 +69,62 @@ class CombinationMMI
 
     ll Lucas(ll a,ll b)     //Lucas定理递归   
     {  
-        if (b == 0)     //递归终止条件   
+        if (b == 0)         //递归终止条件
+            return 1;  
+        else  
+            return C(a % MOD , b % MOD) * Lucas(a / MOD , b / MOD) % MOD;  
+    }  
+    
+};
+
+//todo 第二种实现办法
+//https://www.lagou.com/lgeduarticle/52320.html
+class CombinationMMI2
+{
+    private:
+    vector<ll> factorial;
+
+    //费马小定理求逆元
+    ll pow(ll a, ll n, ll p)    //快速幂 a^n % p
+    {
+        ll ans = 1;
+        while(n)
+        {
+            if(n & 1) ans = ans * a % p;
+            a = a * a % p;
+            n >>= 1;
+        }
+        return ans;
+    }
+
+    ll mmi(ll a, ll b)   //费马小定理求逆元
+    {
+        return pow(a, b - 2, b);
+    }
+    
+    public:
+    CombinationMMI2()
+    {
+    }
+
+    ll C(ll a, ll b)    //计算C(a, b)
+    {
+
+        if (b > a)
+            return 0;
+
+        ll up = 1, down = 1;        //分子分母;
+        for (int i = a - b + 1; i <= a; ++i)
+            up = up * i % MOD;
+        for (int i = 1; i <= b; i++)
+            down = down * i % MOD;
+        return up * mmi(down,MOD) % MOD;
+
+    }
+
+    ll Lucas(ll a,ll b)     //Lucas定理递归   
+    {  
+        if (b == 0)         //递归终止条件
             return 1;  
         else  
             return C(a % MOD , b % MOD) * Lucas(a / MOD , b / MOD) % MOD;  
@@ -84,11 +137,14 @@ void solve()
     int n,C;
     cin >> n >> C;
     CombinationMMI CMMI;
-    //逆元求大组合数：AC
-    cout << CMMI.C(n+C,C) -1 << "\n";
+    // //逆元求大组合数：AC
+    // cout << CMMI.C(n+C,C) -1 << "\n";
 
-    //Lucas定理求大组合数：AC
-    //cout << CMMI.C(n+C,C) -1 << "\n";
+    // //Lucas定理求大组合数：AC
+    // cout << CMMI.Lucas(n+C,C) -1 << "\n";
+
+    CombinationMMI2 CMMI2;
+    cout << CMMI2.Lucas(n+C,C) -1 << "\n";
 }
 
 int main()
