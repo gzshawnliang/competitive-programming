@@ -76,8 +76,12 @@ namespace CFHelperUI
             {
                 GetDataUVa(input);
             }
-            else if (Regex.IsMatch(input, @"^\d{1,}[0-9]([A-Za-z])?$", RegexOptions.IgnoreCase)
-            ) //一定是201A或201的格式：数字+单个字母或者数字
+            else if (Regex.IsMatch(input, @"^\d{1,}[0-9]([A-Za-z])?[0-9]$", RegexOptions.IgnoreCase)) //一定是201A,201A2的格式：数字+单个字母或者数字
+            {
+                codeforces.Checked = true;
+                GetDataCF(input);
+            }
+            else if (Regex.IsMatch(input, @"^\d{1,}[0-9]([A-Za-z])$", RegexOptions.IgnoreCase)) //一定是201A的格式：数字+单个字母或者数字
             {
                 codeforces.Checked = true;
                 GetDataCF(input);
@@ -88,7 +92,21 @@ namespace CFHelperUI
         {
             contestType = ContestType.codeforces;
 
-            if (int.TryParse(Regex.Replace(input, @"[^0-9]+", ""), out contestId) == false)
+            string s1 = string.Empty;
+            string problemId = string.Empty;
+            bool isBeginProblemId = false;
+            foreach (char c in input)
+            {
+                if (Char.IsDigit(c) && !isBeginProblemId)
+                    s1 += c;
+                else
+                {
+                    isBeginProblemId = true;
+                    problemId += c;
+                }
+            }
+
+            if (int.TryParse(s1, out contestId) == false)
             {
                 MessageBox.Show(this, "输入 problemId 无效.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -100,16 +118,16 @@ namespace CFHelperUI
             txtError.Visible = false;
             txtError.Clear();
 
-            string problemId = string.Empty;
+            
 
             //HttpClient client = new HttpClient();
             string url =
                 $"https://codeforces.com/api/contest.standings?contestId={contestId}&from=1&count=1&showUnofficial=true";
 
-            if (Regex.Matches(input, "[a-zA-Z]").Count > 0)
-            {
-                problemId = Regex.Replace(input, "[0-9]", "", RegexOptions.IgnoreCase);
-            }
+            //if (Regex.Matches(input, "[a-zA-Z]").Count > 0)
+            //{
+            //    problemId = Regex.Replace(input, "[0-9]", "", RegexOptions.IgnoreCase);
+            //}
 
             //Task<string> problems = GetProblemInfo(url);
             try

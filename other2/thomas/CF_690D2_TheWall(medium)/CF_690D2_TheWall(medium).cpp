@@ -109,7 +109,6 @@ class CombinationMMI2
 
     ll C(ll a, ll b)    //计算C(a, b)
     {
-
         if (b > a)
             return 0;
 
