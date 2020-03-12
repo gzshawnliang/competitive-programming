@@ -127,8 +127,7 @@ class CombinationMMI2
             return 1;  
         else  
             return C(a % MOD , b % MOD) * Lucas(a / MOD , b / MOD) % MOD;  
-    }  
-    
+    }
 };
 
 void solve()
