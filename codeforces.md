@@ -62,6 +62,7 @@
 | [285E](https://codeforces.com/problemset/problem/285/E)       | Positions in Permutations             | 2600 |        | 容斥原理 + dp |
 | [439E](https://codeforces.com/problemset/problem/439/E)       | Devu and Birthday Celebration         | 2600 |        | 容斥原理 + dp |
 | [1043F](https://codeforces.com/contest/1043/problem/F)        | Make It One                           | 2500 | AC     | 容斥原理 + dp,最短路 |
+| [997C](https://codeforces.com/problemset/problem/997/C)       | Sky Full of Stars                     | 2600 |        | 容斥原理  |
 
 # 其他
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
