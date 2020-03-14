@@ -4,7 +4,7 @@
 * @Author:         Shawn
 * @create Time:    2020/3/14 21:10:20
 * @url:            https://codeforces.com/contest/451/problem/E
-* @Description:    
+* @Description:    卢卡斯(Lucas)定理,容斥原理
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
