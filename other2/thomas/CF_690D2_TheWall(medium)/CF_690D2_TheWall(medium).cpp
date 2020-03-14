@@ -115,10 +115,11 @@ class CombinationMMI2
         ll up = 1, down = 1;        //分子分母;
         for (int i = a - b + 1; i <= a; ++i)
             up = up * i % MOD;
-        for (int i = 1; i <= b; i++)
-            down = down * i % MOD;
-        return up * mmi(down,MOD) % MOD;
 
+        for (int i = 1; i <= b; ++i)
+            down = down * i % MOD;
+            
+        return up * mmi(down,MOD) % MOD;
     }
 
     ll Lucas(ll a,ll b)     //Lucas定理递归   
@@ -156,7 +157,6 @@ int main()
     #endif    
 
     solve();
-
 
     cout.flush();
     return 0;
