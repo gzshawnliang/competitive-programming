@@ -39,7 +39,8 @@ namespace CFHelperUI
             codeforces,
             usaco,
             spoj,
-            uva
+            uva,
+            ural
         }
 
         private ContestType contestType;
@@ -71,6 +72,11 @@ namespace CFHelperUI
             {
                 spoj.Checked = true;
                 GetDataSPOJ((new UriBuilder(input)).ToString());
+            }
+            else if (Regex.IsMatch(input, @"timus.ru", RegexOptions.IgnoreCase))
+            {
+                ural.Checked = true;
+                GetDataUral((new UriBuilder(input)).ToString());
             }
             else if (uva.Checked)
             {
@@ -398,6 +404,70 @@ namespace CFHelperUI
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
+        private void GetDataUral(string input)
+        {
+            contestType = ContestType.ural;
+
+            inputFileContent = string.Empty;
+            lblContest.Text = "";
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            txtError.Visible = false;
+            txtError.Clear();
+
+            var url = input;
+            var web = new HtmlWeb();
+            var doc = web.Load(url);
+
+            HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//div[@class='problem_content']//*[@class='problem_title']");
+            HtmlNode titleNode2 = doc.DocumentNode.SelectSingleNode("//div[@class='problem_source']");
+
+            //HtmlNode titleNode1 = doc.GetElementbyId("problem-name");
+
+            if (titleNode1 == null)
+            {
+                MessageBox.Show(this, "Timus Online Judge网页解析错误。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            string s = titleNode1.InnerText.Split("-".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0];
+
+            s = s.Replace(" ", "");
+            s = s.Replace(".", "_");
+            s = s.Replace(",", "");
+
+            lblContest.Text = titleNode1.InnerText;
+
+            this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("file", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("contests", 364, HorizontalAlignment.Left);
+            this.listView1.BeginUpdate();
+
+            Debug.WriteLine(s);
+            Debug.WriteLine(titleNode1.InnerText);
+
+            string cppFileName = "URAL_" + s + ".cpp";
+
+            ListViewItem lvi = new ListViewItem(titleNode1.InnerText);
+            lvi.SubItems.Add(cppFileName);
+            string desc = titleNode1.InnerText.Trim();
+            if (titleNode2 != null)
+            {
+                desc = titleNode2.InnerText.Trim();
+                int idx= desc.IndexOf("Problem Source:");
+                if (idx > 0)
+                    desc = desc.Substring(idx);
+            }
+            lvi.SubItems.Add(desc);
+
+
+            lvi.Tag = s;
+            this.listView1.Items.Add(lvi);
+            this.listView1.EndUpdate();
+            this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+
         private JObject GetResponse(string url)
         {
 
@@ -450,6 +520,9 @@ namespace CFHelperUI
                     break;
                 case ContestType.uva:
                     CreateFileUVa();
+                    break;
+                case ContestType.ural:
+                    CreateFileUral();
                     break;
             }
         }
@@ -580,6 +653,51 @@ namespace CFHelperUI
             var item = listView1.CheckedItems[0];
             string subDirName = FormatPathName("SPOJ_" + item.Tag.ToString());
             string fileName = item.Tag.ToString() ;
+
+            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
+            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+
+            if (MessageBox.Show(this, msg, this.Text,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string cppCode = "";
+
+                cppCode += $"/*\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"* @Name:           {item.Text.Trim()} \n";
+                cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                cppCode += $"* @url:            {this.txtProblemId.Text}\n";
+                cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"*/";
+
+                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+
+                //msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
+                //msg += "\n是否打开文件夹查看？";
+
+                //if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
+                //    DialogResult.Yes)
+                //{
+                //    System.Diagnostics.Process.Start(rootDir);
+                //}
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                RunVSCode(cppfileName);
+                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+                Application.Exit();
+            }
+        }
+
+        //CreateFileUral
+        private void CreateFileUral()
+        {
+            if (listView1.CheckedItems.Count == 0)
+                return;
+
+            var item = listView1.CheckedItems[0];
+            string subDirName = FormatPathName("URAL_" + item.Tag.ToString());
+            string fileName = "URAL_" + item.Tag.ToString();
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
             string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
@@ -751,11 +869,6 @@ namespace CFHelperUI
             }
         }
 
-        private void txtProblemId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
             if (listView1.FocusedItem != null)
@@ -766,7 +879,7 @@ namespace CFHelperUI
                     var id = listView1.FocusedItem.Text;
                     url = $"https://codeforces.com/problemset/problem/{this.contestId}/{id}";
                 }
-                else if (contestType == ContestType.usaco || contestType == ContestType.spoj)
+                else if (contestType == ContestType.usaco || contestType == ContestType.spoj || contestType == ContestType.ural)
                 {
                     url = this.txtProblemId.Text;
                 }

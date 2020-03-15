@@ -48,6 +48,7 @@
             this.uva = new System.Windows.Forms.RadioButton();
             this.usaco = new System.Windows.Forms.RadioButton();
             this.spoj = new System.Windows.Forms.RadioButton();
+            this.ural = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // txtProblemId
@@ -60,7 +61,6 @@
             this.txtProblemId.Size = new System.Drawing.Size(530, 26);
             this.txtProblemId.TabIndex = 4;
             this.txtProblemId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProblemId_KeyDown);
-            this.txtProblemId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProblemId_KeyPress);
             // 
             // butGo
             // 
@@ -252,7 +252,7 @@
             this.uva.Name = "uva";
             this.uva.Size = new System.Drawing.Size(154, 20);
             this.uva.TabIndex = 1;
-            this.uva.Text = "UVa online-judge";
+            this.uva.Text = "UVa Online Judge";
             this.uva.UseVisualStyleBackColor = true;
             this.uva.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
@@ -278,12 +278,23 @@
             this.spoj.UseVisualStyleBackColor = true;
             this.spoj.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
+            // ural
+            // 
+            this.ural.AutoSize = true;
+            this.ural.Location = new System.Drawing.Point(548, 55);
+            this.ural.Name = "ural";
+            this.ural.Size = new System.Drawing.Size(218, 20);
+            this.ural.TabIndex = 13;
+            this.ural.Text = "Timus Online Judge(Ural)";
+            this.ural.UseVisualStyleBackColor = true;
+            // 
             // frmCFHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.ural);
             this.Controls.Add(this.spoj);
             this.Controls.Add(this.usaco);
             this.Controls.Add(this.uva);
@@ -337,6 +348,7 @@
         private System.Windows.Forms.RadioButton uva;
         private System.Windows.Forms.RadioButton usaco;
         private System.Windows.Forms.RadioButton spoj;
+        private System.Windows.Forms.RadioButton ural;
     }
 }
 
