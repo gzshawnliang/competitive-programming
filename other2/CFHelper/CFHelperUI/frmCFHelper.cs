@@ -493,15 +493,16 @@ namespace CFHelperUI
                 if (idx > 0)
                 {
                     desc = desc.Substring(idx);
-                    string s1 = desc.Split(":".ToCharArray())[0];
-                    string s2 = desc.Split(":".ToCharArray())[1];
-                    oProperty.Add(s1,s2);
+                    string s1 = desc.Split(":".ToCharArray()).First();
+                    string s2 = desc.Substring(s1.Length+1);
+                    oProperty.Add(s1, s2);
                 }
 
                 descNode = doc.DocumentNode.SelectSingleNode("//div[@class='problem_limits']");
                 if (descNode != null)
                 {
-                    foreach (string s0 in descNode.InnerText.Split("<br>".ToCharArray()))
+                    var sArr = descNode.InnerHtml.Split(new string[] { "<br>" }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string s0 in sArr)
                     {
                         if (!string.IsNullOrEmpty(s0.Trim()))
                         {
@@ -785,12 +786,15 @@ namespace CFHelperUI
                 cppCode += $"* @Author:          {txtAuthor.Text}\n";
                 cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
                 cppCode += $"* @url:             {this.txtProblemId.Text}\n";
-                cppCode += $"* @Description:     {item.SubItems[2].Text.Trim().Replace("|","\n")}\n";
+                cppCode += $"* @Description:     \n";
 
                 foreach (string s in oProperty.Keys)
-                    if(s != "filename")
-                        cppCode += $"* @{s}:     {oProperty[s]}\n";
-                
+                    if (s != "filename")
+                    {
+                        string temp = $"* @{s}:".PadRight(19);
+                        cppCode += $"{temp}{oProperty[s]}\n";
+                    }
+
 
                 cppCode += $"===========================================================\n";
                 cppCode += $"*/";
