@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Configuration;
 using System.Text;
+using System.Dynamic;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Net.Http;
@@ -19,6 +20,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace CFHelperUI
 {
@@ -280,7 +282,17 @@ namespace CFHelperUI
 
             var url = input;
             var web = new HtmlWeb();
-            var doc = web.Load(url);
+            HtmlDocument doc = null;
+            try
+            {
+                doc = web.Load(url);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBox.Show(e.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//div[@class='panel']//h2");
             HtmlNode titleNode2 = doc.DocumentNode.SelectSingleNode("//div[@class='panel']//h2[2]");
@@ -367,7 +379,17 @@ namespace CFHelperUI
 
             var url = input;
             var web = new HtmlWeb();
-            var doc = web.Load(url);
+            HtmlDocument doc = null;
+            try
+            {
+                doc = web.Load(url);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBox.Show(e.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             HtmlNode titleNode1 = doc.GetElementbyId("problem-name");
 
@@ -417,10 +439,20 @@ namespace CFHelperUI
 
             var url = input;
             var web = new HtmlWeb();
-            var doc = web.Load(url);
+            HtmlDocument doc = null;
+            try
+            {
+                doc = web.Load(url);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBox.Show(e.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//div[@class='problem_content']//*[@class='problem_title']");
-            HtmlNode titleNode2 = doc.DocumentNode.SelectSingleNode("//div[@class='problem_source']");
+            
 
             //HtmlNode titleNode1 = doc.GetElementbyId("problem-name");
 
@@ -451,17 +483,51 @@ namespace CFHelperUI
             ListViewItem lvi = new ListViewItem(titleNode1.InnerText);
             lvi.SubItems.Add(cppFileName);
             string desc = titleNode1.InnerText.Trim();
-            if (titleNode2 != null)
+            HtmlNode descNode = doc.DocumentNode.SelectSingleNode("//div[@class='problem_source']");
+            Dictionary<string,string> oProperty= new Dictionary<string, string>();
+            oProperty.Add("filename", s);
+            if (descNode != null)
             {
-                desc = titleNode2.InnerText.Trim();
+                desc = descNode.InnerText.Trim();
                 int idx= desc.IndexOf("Problem Source:");
                 if (idx > 0)
+                {
                     desc = desc.Substring(idx);
+                    string s1 = desc.Split(":".ToCharArray())[0];
+                    string s2 = desc.Split(":".ToCharArray())[1];
+                    oProperty.Add(s1,s2);
+                }
+
+                descNode = doc.DocumentNode.SelectSingleNode("//div[@class='problem_limits']");
+                if (descNode != null)
+                {
+                    foreach (string s0 in descNode.InnerText.Split("<br>".ToCharArray()))
+                    {
+                        if (!string.IsNullOrEmpty(s0.Trim()))
+                        {
+                            string s1 = s0.Split(":".ToCharArray()).First();
+                            string s2 = s0.Split(":".ToCharArray()).Last();
+                            oProperty.Add(s1, s2);
+                        }
+                    }
+                }
+                //desc += $"|{descNode.InnerHtml.Trim().Replace("<br>","|")}";
+
+                descNode = doc.DocumentNode.SelectSingleNode("//div[@class='problem_links']//span");
+                if (descNode != null)
+                {
+                    string s1 = descNode.InnerText.Split(":".ToCharArray()).First();
+                    string s2 = descNode.InnerText.Split(":".ToCharArray()).Last();
+                    oProperty.Add(s1, s2);
+                }
+                //desc += $"|{descNode.InnerText.Trim()}";
+
             }
             lvi.SubItems.Add(desc);
+            
 
 
-            lvi.Tag = s;
+            lvi.Tag = oProperty;
             this.listView1.Items.Add(lvi);
             this.listView1.EndUpdate();
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -696,8 +762,14 @@ namespace CFHelperUI
                 return;
 
             var item = listView1.CheckedItems[0];
-            string subDirName = FormatPathName("URAL_" + item.Tag.ToString());
-            string fileName = "URAL_" + item.Tag.ToString();
+
+            Dictionary<string, string> oProperty = item.Tag as Dictionary<string, string>;
+
+            if(oProperty==null)
+                return;
+
+            string subDirName = FormatPathName("URAL_" + oProperty["filename"]);
+            string fileName = "URAL_" + oProperty["filename"];
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
             string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
@@ -709,11 +781,17 @@ namespace CFHelperUI
 
                 cppCode += $"/*\n";
                 cppCode += $"===========================================================\n";
-                cppCode += $"* @Name:           {item.Text.Trim()} \n";
-                cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                cppCode += $"* @url:            {this.txtProblemId.Text}\n";
-                cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
+                cppCode += $"* @Name:            {item.Text.Trim()} \n";
+                cppCode += $"* @Author:          {txtAuthor.Text}\n";
+                cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
+                cppCode += $"* @url:             {this.txtProblemId.Text}\n";
+                cppCode += $"* @Description:     {item.SubItems[2].Text.Trim().Replace("|","\n")}\n";
+
+                foreach (string s in oProperty.Keys)
+                    if(s != "filename")
+                        cppCode += $"* @{s}:     {oProperty[s]}\n";
+                
+
                 cppCode += $"===========================================================\n";
                 cppCode += $"*/";
 
