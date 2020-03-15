@@ -992,7 +992,7 @@ namespace CFHelperUI
 
             string currFilePath = Assembly.GetExecutingAssembly().Location;
             DateTime dt = new FileInfo(currFilePath).LastWriteTime;
-            this.Text += $" {dt.ToString("yyyyMMddHHmm")}";
+            this.Text += $" {dt.ToString("yy.MMdd.HHmm")}";
 
             var ojType = RegRead("OJType");
             if (!string.IsNullOrEmpty(ojType))
