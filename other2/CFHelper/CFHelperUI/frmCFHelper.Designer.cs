@@ -49,6 +49,7 @@
             this.usaco = new System.Windows.Forms.RadioButton();
             this.spoj = new System.Windows.Forms.RadioButton();
             this.ural = new System.Windows.Forms.RadioButton();
+            this.poj = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // txtProblemId
@@ -58,7 +59,7 @@
             this.txtProblemId.Location = new System.Drawing.Point(138, 82);
             this.txtProblemId.Margin = new System.Windows.Forms.Padding(4);
             this.txtProblemId.Name = "txtProblemId";
-            this.txtProblemId.Size = new System.Drawing.Size(530, 26);
+            this.txtProblemId.Size = new System.Drawing.Size(754, 26);
             this.txtProblemId.TabIndex = 4;
             this.txtProblemId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProblemId_KeyDown);
             // 
@@ -66,7 +67,7 @@
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butGo.Location = new System.Drawing.Point(676, 80);
+            this.butGo.Location = new System.Drawing.Point(900, 80);
             this.butGo.Margin = new System.Windows.Forms.Padding(4);
             this.butGo.Name = "butGo";
             this.butGo.Size = new System.Drawing.Size(100, 28);
@@ -90,7 +91,7 @@
             this.listView1.Location = new System.Drawing.Point(138, 116);
             this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(530, 313);
+            this.listView1.Size = new System.Drawing.Size(754, 481);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -99,7 +100,7 @@
             // butOK
             // 
             this.butOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butOK.Location = new System.Drawing.Point(568, 509);
+            this.butOK.Location = new System.Drawing.Point(792, 677);
             this.butOK.Margin = new System.Windows.Forms.Padding(4);
             this.butOK.Name = "butOK";
             this.butOK.Size = new System.Drawing.Size(100, 31);
@@ -112,7 +113,7 @@
             // 
             this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butCancel.Location = new System.Drawing.Point(676, 509);
+            this.butCancel.Location = new System.Drawing.Point(900, 677);
             this.butCancel.Margin = new System.Windows.Forms.Padding(4);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(100, 31);
@@ -161,7 +162,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(21, 440);
+            this.label3.Location = new System.Drawing.Point(21, 608);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 16);
@@ -174,18 +175,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWorkingDir.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtWorkingDir.ForeColor = System.Drawing.Color.Maroon;
-            this.txtWorkingDir.Location = new System.Drawing.Point(138, 437);
+            this.txtWorkingDir.Location = new System.Drawing.Point(138, 605);
             this.txtWorkingDir.Margin = new System.Windows.Forms.Padding(4);
             this.txtWorkingDir.Name = "txtWorkingDir";
             this.txtWorkingDir.ReadOnly = true;
-            this.txtWorkingDir.Size = new System.Drawing.Size(530, 21);
+            this.txtWorkingDir.Size = new System.Drawing.Size(754, 21);
             this.txtWorkingDir.TabIndex = 8;
             // 
             // butBrowse
             // 
             this.butBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butBrowse.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butBrowse.Location = new System.Drawing.Point(676, 433);
+            this.butBrowse.Location = new System.Drawing.Point(900, 601);
             this.butBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.butBrowse.Name = "butBrowse";
             this.butBrowse.Size = new System.Drawing.Size(100, 29);
@@ -199,7 +200,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(21, 471);
+            this.label4.Location = new System.Drawing.Point(21, 639);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 16);
@@ -210,10 +211,10 @@
             // 
             this.txtAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAuthor.Location = new System.Drawing.Point(138, 466);
+            this.txtAuthor.Location = new System.Drawing.Point(138, 634);
             this.txtAuthor.Margin = new System.Windows.Forms.Padding(4);
             this.txtAuthor.Name = "txtAuthor";
-            this.txtAuthor.Size = new System.Drawing.Size(530, 26);
+            this.txtAuthor.Size = new System.Drawing.Size(754, 26);
             this.txtAuthor.TabIndex = 10;
             // 
             // txtError
@@ -228,7 +229,7 @@
             this.txtError.Multiline = true;
             this.txtError.Name = "txtError";
             this.txtError.ReadOnly = true;
-            this.txtError.Size = new System.Drawing.Size(530, 313);
+            this.txtError.Size = new System.Drawing.Size(754, 481);
             this.txtError.TabIndex = 7;
             this.txtError.Visible = false;
             // 
@@ -284,16 +285,29 @@
             this.ural.Location = new System.Drawing.Point(548, 55);
             this.ural.Name = "ural";
             this.ural.Size = new System.Drawing.Size(218, 20);
-            this.ural.TabIndex = 13;
+            this.ural.TabIndex = 4;
             this.ural.Text = "Timus Online Judge(Ural)";
             this.ural.UseVisualStyleBackColor = true;
+            this.ural.CheckedChanged += new System.EventHandler(this.CheckedChanged);
+            // 
+            // poj
+            // 
+            this.poj.AutoSize = true;
+            this.poj.Location = new System.Drawing.Point(763, 55);
+            this.poj.Name = "poj";
+            this.poj.Size = new System.Drawing.Size(50, 20);
+            this.poj.TabIndex = 5;
+            this.poj.Text = "POJ";
+            this.poj.UseVisualStyleBackColor = true;
+            this.poj.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
             // frmCFHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.poj);
             this.Controls.Add(this.ural);
             this.Controls.Add(this.spoj);
             this.Controls.Add(this.usaco);
@@ -349,6 +363,7 @@
         private System.Windows.Forms.RadioButton usaco;
         private System.Windows.Forms.RadioButton spoj;
         private System.Windows.Forms.RadioButton ural;
+        private System.Windows.Forms.RadioButton poj;
     }
 }
 

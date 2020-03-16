@@ -42,7 +42,8 @@ namespace CFHelperUI
             usaco,
             spoj,
             uva,
-            ural
+            ural,
+            poj
         }
 
         private ContestType contestType;
@@ -79,6 +80,11 @@ namespace CFHelperUI
             {
                 ural.Checked = true;
                 GetDataUral((new UriBuilder(input)).ToString());
+            }
+            else if (Regex.IsMatch(input, @"poj.org", RegexOptions.IgnoreCase))
+            {
+                poj.Checked = true;
+                GetDataPOJ((new UriBuilder(input)).ToString());
             }
             else if (uva.Checked)
             {
@@ -534,6 +540,67 @@ namespace CFHelperUI
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
+        //GetDataPOJ
+        private void GetDataPOJ(string input)
+        {
+            contestType = ContestType.poj;
+
+            inputFileContent = string.Empty;
+            lblContest.Text = "";
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            txtError.Visible = false;
+            txtError.Clear();
+
+            var url = input;
+            var web = new HtmlWeb();
+            HtmlDocument doc = null;
+            try
+            {
+                doc = web.Load(url);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBox.Show(e.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//head/title");
+
+            //HtmlNode titleNode1 = doc.GetElementbyId("problem-name");
+
+            if (titleNode1 == null)
+            {
+                MessageBox.Show(this, "POJ网页解析错误。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            string s = titleNode1.InnerText.Split("--".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0];
+
+
+            s = s.Trim();
+
+            lblContest.Text = titleNode1.InnerText;
+
+            this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("file", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("contests", 364, HorizontalAlignment.Left);
+            this.listView1.BeginUpdate();
+
+            Debug.WriteLine(s);
+            Debug.WriteLine(titleNode1.InnerText);
+
+            string cppFileName = "POJ_" + s + ".cpp";
+
+            ListViewItem lvi = new ListViewItem(titleNode1.InnerText);
+            lvi.SubItems.Add(cppFileName);
+            string desc = titleNode1.InnerText.Trim();
+            lvi.SubItems.Add(desc);
+            lvi.Tag = s;
+            this.listView1.Items.Add(lvi);
+            this.listView1.EndUpdate();
+            this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
 
         private JObject GetResponse(string url)
         {
@@ -590,6 +657,9 @@ namespace CFHelperUI
                     break;
                 case ContestType.ural:
                     CreateFileUral();
+                    break;
+                case ContestType.poj:
+                    CreateFilePOJ();
                     break;
             }
         }
@@ -756,7 +826,7 @@ namespace CFHelperUI
             }
         }
 
-        //CreateFileUral
+        
         private void CreateFileUral()
         {
             if (listView1.CheckedItems.Count == 0)
@@ -812,6 +882,50 @@ namespace CFHelperUI
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
                 RunVSCode(cppfileName);
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+                Application.Exit();
+            }
+        }
+
+        //CreateFilePOJ
+        private void CreateFilePOJ()
+        {
+            if (listView1.CheckedItems.Count == 0)
+                return;
+
+            var item = listView1.CheckedItems[0];
+
+            string  tag = item.Tag as string;
+
+            if (tag == null)
+                return;
+
+            string subDirName = FormatPathName($"POJ_{tag}");
+            string fileName = $"POJ_{tag}";
+
+            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
+            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+
+            if (MessageBox.Show(this, msg, this.Text,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string cppCode = "";
+
+                cppCode += $"/*\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"* @Name:            {item.Text.Trim()} \n";
+                cppCode += $"* @Author:          {txtAuthor.Text}\n";
+                cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
+                cppCode += $"* @url:             {this.txtProblemId.Text}\n";
+                cppCode += $"* @Description:     \n";
+
+
+                cppCode += $"===========================================================\n";
+                cppCode += $"*/";
+
+                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                RunVSCode(cppfileName);
                 Application.Exit();
             }
         }
@@ -1010,6 +1124,12 @@ namespace CFHelperUI
                         break;
                     case "spoj":
                         spoj.Checked = true;
+                        break;
+                    case "ural":
+                        ural.Checked = true;
+                        break;
+                    case "poj":
+                        poj.Checked = true;
                         break;
                 }
             }
