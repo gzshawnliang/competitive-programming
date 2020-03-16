@@ -16,6 +16,17 @@
 | [337D](https://codeforces.com/contest/337/problem/D)          | Book of Evil                   | 2100 | AC |     |
 | [519E](https://codeforces.com/contest/519/problem/E)          | A and B and Lecture Rooms      | 2300 | AC | LCA |
 
+# 插头DP
+| #                                                             | 名称                            | 难度 |状态 |备注  |
+|-------------------------------------------------------------- |--------------------------------|------|----|-----|
+| [HDU-1693](http://acm.hdu.edu.cn/showproblem.php?pid=1693)    | Eat the Trees                   |入门  |    |     |
+| [Ural1519](https://acm.timus.ru/problem.aspx?space=1&num=1519)| Formula 1                      | 429  |    |     |
+| [uva-11270](https://onlinejudge.org/external/112/11270.pdf)   | Tiling Dominoes                |uva:4 |    |     |
+| [uva-10572](https://onlinejudge.org/external/105/10572.pdf)   | Black & White                  |uva:6 |    |     |
+| [845F](https://codeforces.com/problemset/problem/845/F)       | Guards In The Storehouse       |2600  |    |     |
+| [762D](https://codeforces.com/problemset/problem/762/D)       | Maximum path                   |2400  |    |可能普通DP也可     |
+
+
 # 并查集DSU
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
 |-------------------------------------------------------------- |---------------------------------------|------|----|----------|
