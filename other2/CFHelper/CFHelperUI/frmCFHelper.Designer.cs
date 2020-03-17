@@ -50,6 +50,7 @@
             this.spoj = new System.Windows.Forms.RadioButton();
             this.ural = new System.Windows.Forms.RadioButton();
             this.poj = new System.Windows.Forms.RadioButton();
+            this.hdu = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // txtProblemId
@@ -251,16 +252,16 @@
             this.uva.AutoSize = true;
             this.uva.Location = new System.Drawing.Point(252, 55);
             this.uva.Name = "uva";
-            this.uva.Size = new System.Drawing.Size(154, 20);
+            this.uva.Size = new System.Drawing.Size(50, 20);
             this.uva.TabIndex = 1;
-            this.uva.Text = "UVa Online Judge";
+            this.uva.Text = "UVa";
             this.uva.UseVisualStyleBackColor = true;
             this.uva.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
             // usaco
             // 
             this.usaco.AutoSize = true;
-            this.usaco.Location = new System.Drawing.Point(412, 55);
+            this.usaco.Location = new System.Drawing.Point(308, 55);
             this.usaco.Name = "usaco";
             this.usaco.Size = new System.Drawing.Size(66, 20);
             this.usaco.TabIndex = 2;
@@ -271,7 +272,7 @@
             // spoj
             // 
             this.spoj.AutoSize = true;
-            this.spoj.Location = new System.Drawing.Point(484, 55);
+            this.spoj.Location = new System.Drawing.Point(380, 55);
             this.spoj.Name = "spoj";
             this.spoj.Size = new System.Drawing.Size(58, 20);
             this.spoj.TabIndex = 3;
@@ -282,7 +283,7 @@
             // ural
             // 
             this.ural.AutoSize = true;
-            this.ural.Location = new System.Drawing.Point(548, 55);
+            this.ural.Location = new System.Drawing.Point(444, 55);
             this.ural.Name = "ural";
             this.ural.Size = new System.Drawing.Size(218, 20);
             this.ural.TabIndex = 4;
@@ -293,7 +294,7 @@
             // poj
             // 
             this.poj.AutoSize = true;
-            this.poj.Location = new System.Drawing.Point(763, 55);
+            this.poj.Location = new System.Drawing.Point(668, 55);
             this.poj.Name = "poj";
             this.poj.Size = new System.Drawing.Size(50, 20);
             this.poj.TabIndex = 5;
@@ -301,12 +302,24 @@
             this.poj.UseVisualStyleBackColor = true;
             this.poj.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
+            // hdu
+            // 
+            this.hdu.AutoSize = true;
+            this.hdu.Location = new System.Drawing.Point(724, 55);
+            this.hdu.Name = "hdu";
+            this.hdu.Size = new System.Drawing.Size(50, 20);
+            this.hdu.TabIndex = 6;
+            this.hdu.Text = "HDU";
+            this.hdu.UseVisualStyleBackColor = true;
+            this.hdu.CheckedChanged += new System.EventHandler(this.CheckedChanged);
+            // 
             // frmCFHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.hdu);
             this.Controls.Add(this.poj);
             this.Controls.Add(this.ural);
             this.Controls.Add(this.spoj);
@@ -364,6 +377,7 @@
         private System.Windows.Forms.RadioButton spoj;
         private System.Windows.Forms.RadioButton ural;
         private System.Windows.Forms.RadioButton poj;
+        private System.Windows.Forms.RadioButton hdu;
     }
 }
 

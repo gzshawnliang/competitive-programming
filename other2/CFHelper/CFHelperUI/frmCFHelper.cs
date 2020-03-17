@@ -43,7 +43,8 @@ namespace CFHelperUI
             spoj,
             uva,
             ural,
-            poj
+            poj,
+            hdu
         }
 
         private ContestType contestType;
@@ -85,6 +86,11 @@ namespace CFHelperUI
             {
                 poj.Checked = true;
                 GetDataPOJ((new UriBuilder(input)).ToString());
+            }
+            else if (Regex.IsMatch(input, @"hdu.edu.cn", RegexOptions.IgnoreCase))
+            {
+                hdu.Checked = true;
+                GetDataHDU((new UriBuilder(input)).ToString());
             }
             else if (uva.Checked)
             {
@@ -602,6 +608,69 @@ namespace CFHelperUI
             this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
+        //GetDataHDU
+        private void GetDataHDU(string input)
+        {
+            contestType = ContestType.hdu;
+
+            inputFileContent = string.Empty;
+            lblContest.Text = "";
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            txtError.Visible = false;
+            txtError.Clear();
+
+            var url = input;
+            var web = new HtmlWeb();
+            HtmlDocument doc = null;
+            try
+            {
+                doc = web.Load(url);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBox.Show(e.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            HtmlNode titleNode1 = doc.DocumentNode.SelectSingleNode("//head/title");
+            HtmlNode titleNode2 = doc.DocumentNode.SelectSingleNode("//h1");
+
+            //HtmlNode titleNode1 = doc.GetElementbyId("problem-name");
+
+            if (titleNode1 == null)
+            {
+                MessageBox.Show(this, "HDU Online Judge网页解析错误。", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            string s = titleNode1.InnerText.Split("-".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Last();
+
+            s = s.Trim();
+
+            string sTitle = titleNode2 == null ? titleNode1.InnerText : titleNode2.InnerText;
+
+            lblContest.Text = sTitle;
+
+            this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("file", 300, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("contests", 364, HorizontalAlignment.Left);
+            this.listView1.BeginUpdate();
+
+            Debug.WriteLine(s);
+            Debug.WriteLine(titleNode1.InnerText);
+
+            string cppFileName = "HDU_" + s + ".cpp";
+
+            ListViewItem lvi = new ListViewItem(sTitle);
+            lvi.SubItems.Add(cppFileName);
+            lvi.SubItems.Add(sTitle);
+            lvi.Tag = s;
+            this.listView1.Items.Add(lvi);
+            this.listView1.EndUpdate();
+            this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         private JObject GetResponse(string url)
         {
 
@@ -660,6 +729,9 @@ namespace CFHelperUI
                     break;
                 case ContestType.poj:
                     CreateFilePOJ();
+                    break;
+                case ContestType.hdu:
+                    CreateFileHDU();
                     break;
             }
         }
@@ -930,6 +1002,50 @@ namespace CFHelperUI
             }
         }
 
+        //CreateFileHDU
+        private void CreateFileHDU()
+        {
+            if (listView1.CheckedItems.Count == 0)
+                return;
+
+            var item = listView1.CheckedItems[0];
+
+            string tag = item.Tag as string;
+
+            if (tag == null)
+                return;
+
+            string subDirName = FormatPathName($"HDU_{tag}");
+            string fileName = $"HDU_{tag}";
+
+            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
+            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+
+            if (MessageBox.Show(this, msg, this.Text,
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string cppCode = "";
+
+                cppCode += $"/*\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"* @Name:            {item.Text.Trim()} \n";
+                cppCode += $"* @Author:          {txtAuthor.Text}\n";
+                cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
+                cppCode += $"* @url:             {this.txtProblemId.Text}\n";
+                cppCode += $"* @Description:     \n";
+
+
+                cppCode += $"===========================================================\n";
+                cppCode += $"*/";
+
+                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                RunVSCode(cppfileName);
+                Application.Exit();
+            }
+        }
+
         private void CreateFileUVa()
         {
             if (listView1.CheckedItems.Count == 0)
@@ -1111,27 +1227,13 @@ namespace CFHelperUI
             var ojType = RegRead("OJType");
             if (!string.IsNullOrEmpty(ojType))
             {
-                switch (ojType)
-                {
-                    case "codeforces":
-                        codeforces.Checked = true;
-                        break;
-                    case "uva":
-                        uva.Checked = true;
-                        break;
-                    case "usaco":
-                        usaco.Checked = true;
-                        break;
-                    case "spoj":
-                        spoj.Checked = true;
-                        break;
-                    case "ural":
-                        ural.Checked = true;
-                        break;
-                    case "poj":
-                        poj.Checked = true;
-                        break;
-                }
+                foreach (Control ctl in this.Controls)
+                    if (ctl is RadioButton)
+                        if (ctl.Name == ojType)
+                        {
+                            ((RadioButton) ctl).Checked = true;
+                            break;
+                        }
             }
         }
 

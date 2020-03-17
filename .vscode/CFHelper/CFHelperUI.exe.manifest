@@ -4,7 +4,7 @@
   <description asmv2:iconFile="App.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="CFHelperUI" version="20.76.5.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="CFHelperUI" version="20.77.7.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="CFHelperUI.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CFHelperUI.exe" size="90032">
-      <assemblyIdentity name="CFHelperUI" version="20.76.5.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CFHelperUI.exe" size="93104">
+      <assemblyIdentity name="CFHelperUI" version="20.77.7.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xOTCmUKuVznOKLTaqSoh6NsMwSh2L9x/ZDFebTKNTV8=</dsig:DigestValue>
+        <dsig:DigestValue>v8TXX3culkQqSvEELI/WBP/GR0SflkOSri8boUD+J7c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
