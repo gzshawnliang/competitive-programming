@@ -6,7 +6,7 @@
 | [633F](https://codeforces.com/problemset/problem/633/F)       | The Chocolate Spree            | 2500 |    |     |
 | [431C](https://codeforces.com/problemset/problem/431/C)       | k-Tree                         | 1600 |    |     |
 | [486D](https://codeforces.com/problemset/problem/486/D)       | Valid Sets                     | 2300 |    |     |
-| [1065F](https://codeforces.com/problemset/problem/1065/F)     | Up and Down the Tree           | 2500 |    |[题解](https://www.cnblogs.com/uid001/p/10362729.html)     |
+| [1065F](https://codeforces.com/problemset/problem/1065/F)     | Up and Down the Tree           | 2500 |    |[题解](https://www.cnblogs.com/uid001/p/10362729.html) |
 | [855C](https://codeforces.com/problemset/problem/855/C)       | Helga Hufflepuff's Cup         | 2000 |    |     |
 | [633F](https://codeforces.com/problemset/problem/633/F)       | The Chocolate Spree            | 2500 |    |     |
 | [815C](https://codeforces.com/contest/815/problem/C)          | Karen and Supermarket          | 2500 |    |     |
@@ -15,6 +15,17 @@
 | [461B](https://codeforces.com/contest/461/problem/B)          | Appleman and Tree              | 2200 | AC |     |
 | [337D](https://codeforces.com/contest/337/problem/D)          | Book of Evil                   | 2100 | AC |     |
 | [519E](https://codeforces.com/contest/519/problem/E)          | A and B and Lecture Rooms      | 2300 | AC | LCA |
+
+# 状态压缩DP
+| #                                                             | 名称                            | 难度 |状态 |备注  |
+|-------------------------------------------------------------- |--------------------------------|------|----|-----|
+| [11D](https://codeforces.com/problemset/problem/11/D)         | A Simple Task                  |2200  |    |     |
+| [543C](https://codeforces.com/problemset/problem/543/C)       | Remembering Strings            |2600  |    |     |
+| [1243E](https://codeforces.com/problemset/problem/1243/E)     | Sum Balance                    |2400  |    |     |
+| [152E](https://codeforces.com/problemset/problem/152/E)       | Garden                         |2400  |    |状压dp+最短路 |
+| [1073E](https://codeforces.com/problemset/problem/1073/E)     | Segment Sum                    |2300  |    |     |
+| [1238E](https://codeforces.com/problemset/problem/1238/E)     | Keyboard Purchase              |2200  |    |     |
+
 
 # 插头DP
 | #                                                             | 名称                            | 难度 |状态 |备注  |
