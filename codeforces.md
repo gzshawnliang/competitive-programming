@@ -1,12 +1,12 @@
 # 树形DP
 | #                                                             | 名称                            | 难度 |状态 |备注  |
 |-------------------------------------------------------------- |--------------------------------|------|----|-----|
-| [1084D](https://codeforces.com/problemset/problem/1084/D)     | The Fair Nut and the Best Path | 1800 |    |     |
+| [1084D](https://codeforces.com/problemset/problem/1084/D)     | The Fair Nut and the Best Path | 1800 | AC |     |
 | [1153D](https://codeforces.com/problemset/problem/1153/D)     | Serval and Rooted Tree         | 1800 | AC |     |
 | [633F](https://codeforces.com/problemset/problem/633/F)       | The Chocolate Spree            | 2500 |    |     |
 | [431C](https://codeforces.com/problemset/problem/431/C)       | k-Tree                         | 1600 |    |     |
 | [486D](https://codeforces.com/problemset/problem/486/D)       | Valid Sets                     | 2300 |    |     |
-| [1065F](https://codeforces.com/problemset/problem/1065/F)     | Up and Down the Tree           | 2500 |    |[题解](https://www.cnblogs.com/uid001/p/10362729.html) |
+| [1065F](https://codeforces.com/problemset/problem/1065/F)     | Up and Down the Tree           | 2500 | AC |[题解](https://www.cnblogs.com/uid001/p/10362729.html) |
 | [855C](https://codeforces.com/problemset/problem/855/C)       | Helga Hufflepuff's Cup         | 2000 |    |     |
 | [633F](https://codeforces.com/problemset/problem/633/F)       | The Chocolate Spree            | 2500 |    |     |
 | [815C](https://codeforces.com/contest/815/problem/C)          | Karen and Supermarket          | 2500 |    |     |
