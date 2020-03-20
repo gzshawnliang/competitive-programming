@@ -16,6 +16,12 @@
 | [337D](https://codeforces.com/contest/337/problem/D)          | Book of Evil                   | 2100 | AC |     |
 | [519E](https://codeforces.com/contest/519/problem/E)          | A and B and Lecture Rooms      | 2300 | AC | LCA |
 
+# 位运算相关
+| #                                                             | 名称                            | 难度 |状态 |备注  |
+|-------------------------------------------------------------- |--------------------------------|------|----|-----|
+| [1288D](https://codeforces.com/problemset/problem/1288/D)     | Minimax Problem                |2000  |    |[题解](https://www.cnblogs.com/AaronChang/p/12210870.html)     |
+| [1206D](https://codeforces.com/problemset/problem/1206/D)     | Shortest Cycle                 |1900  |    |     |
+
 # 状态压缩DP
 | #                                                             | 名称                            | 难度 |状态 |备注  |
 |-------------------------------------------------------------- |--------------------------------|------|----|-----|
