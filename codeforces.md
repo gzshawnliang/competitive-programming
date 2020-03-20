@@ -4,7 +4,7 @@
 | [1084D](https://codeforces.com/problemset/problem/1084/D)     | The Fair Nut and the Best Path | 1800 | AC |     |
 | [1153D](https://codeforces.com/problemset/problem/1153/D)     | Serval and Rooted Tree         | 1800 | AC |     |
 | [633F](https://codeforces.com/problemset/problem/633/F)       | The Chocolate Spree            | 2500 |    |     |
-| [431C](https://codeforces.com/problemset/problem/431/C)       | k-Tree                         | 1600 |    |     |
+| [431C](https://codeforces.com/problemset/problem/431/C)       | k-Tree                         | 1600 | AC |     |
 | [486D](https://codeforces.com/problemset/problem/486/D)       | Valid Sets                     | 2300 |    |     |
 | [1065F](https://codeforces.com/problemset/problem/1065/F)     | Up and Down the Tree           | 2500 | AC |[题解](https://www.cnblogs.com/uid001/p/10362729.html) |
 | [855C](https://codeforces.com/problemset/problem/855/C)       | Helga Hufflepuff's Cup         | 2000 |    |     |
@@ -15,7 +15,12 @@
 | [461B](https://codeforces.com/contest/461/problem/B)          | Appleman and Tree              | 2200 | AC |     |
 | [337D](https://codeforces.com/contest/337/problem/D)          | Book of Evil                   | 2100 | AC |     |
 | [519E](https://codeforces.com/contest/519/problem/E)          | A and B and Lecture Rooms      | 2300 | AC | LCA |
-
+| [1101D](https://codeforces.com/contest/1101/problem/D)        | GCD Counting                   | 2000 |    | 树形DP+GCD|
+| [1146F](https://codeforces.com/problemset/problem/1146/F)     | Leaf Partition                 | 2400 |    | |
+| [294E](https://codeforces.com/problemset/problem/294/E)       | Shaass the Great               | 2700 |    | 数上的操作弄到了极致|
+| [791D](https://codeforces.com/contest/791/problem/D)          | Bear and Tree Jumps            | 2100 |    |     |
+| [591E](https://codeforces.com/problemset/problem/591/E)       | Three States                   | 2200 |    | 不一定用DP    |
+| [14D](https://codeforces.com/problemset/problem/14/D)         | Two Paths                      | 2100 |    | DFS+树的直径理论    |
 # 位运算相关
 | #                                                             | 名称                            | 难度 |状态 |备注  |
 |-------------------------------------------------------------- |--------------------------------|------|----|-----|
