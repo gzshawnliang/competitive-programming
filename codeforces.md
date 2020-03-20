@@ -7,7 +7,7 @@
 | [431C](https://codeforces.com/problemset/problem/431/C)       | k-Tree                         | 1600 | AC |     |
 | [486D](https://codeforces.com/problemset/problem/486/D)       | Valid Sets                     | 2300 |    |     |
 | [1065F](https://codeforces.com/problemset/problem/1065/F)     | Up and Down the Tree           | 2500 | AC |[题解](https://www.cnblogs.com/uid001/p/10362729.html) |
-| [855C](https://codeforces.com/problemset/problem/855/C)       | Helga Hufflepuff's Cup         | 2000 |    |     |
+| [855C](https://codeforces.com/problemset/problem/855/C)       | Helga Hufflepuff's Cup         | 2000 | AC |[题解](https://www.dreamwings.cn/codeforces855c/5010.html) |
 | [633F](https://codeforces.com/problemset/problem/633/F)       | The Chocolate Spree            | 2500 |    |     |
 | [815C](https://codeforces.com/contest/815/problem/C)          | Karen and Supermarket          | 2500 |    |     |
 | [85C](https://codeforces.com/contest/85/problem/C)            | Petya and Tree                 | 2200 | AC |     |
