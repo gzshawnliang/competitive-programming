@@ -78,7 +78,7 @@ todo:
     - [ ] 2018 Open sort
 - [ ] MST算法 Kruskal (2019 Open walk), Kruskal 算法也用到并查集
     - [x] DSU并查集(2018 Jan mootube)
-    - [ ] 2018 Feb snowboots
+    - [x] 2018 Feb snowboots
     - [x] 2016 Feb fencedin (MST) 有一个数据点超时
 - [x] Topological Sort (2018 Open milkorder)
 - [x] DP (2019 Open snakes)

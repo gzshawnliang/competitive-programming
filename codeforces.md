@@ -21,6 +21,7 @@
 | [791D](https://codeforces.com/contest/791/problem/D)          | Bear and Tree Jumps            | 2100 |    |     |
 | [591E](https://codeforces.com/problemset/problem/591/E)       | Three States                   | 2200 |    | 不一定用DP    |
 | [14D](https://codeforces.com/problemset/problem/14/D)         | Two Paths                      | 2100 |    | DFS+树的直径理论    |
+
 # 位运算相关
 | #                                                             | 名称                            | 难度 |状态 |备注  |
 |-------------------------------------------------------------- |--------------------------------|------|----|-----|
@@ -36,7 +37,7 @@
 | [152E](https://codeforces.com/problemset/problem/152/E)       | Garden                         |2400  |    |状压dp+最短路 |
 | [1073E](https://codeforces.com/problemset/problem/1073/E)     | Segment Sum                    |2300  |    |     |
 | [1238E](https://codeforces.com/problemset/problem/1238/E)     | Keyboard Purchase              |2200  |    |     |
-
+| [UVa-12030](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=3181) | Help the Winners |5  |    |     |
 
 # 插头DP
 | #                                                             | 名称                            | 难度 |状态 |备注  |
@@ -97,6 +98,19 @@
 | [1043F](https://codeforces.com/contest/1043/problem/F)        | Make It One                           | 2500 | AC     | 容斥原理 + dp,最短路 |
 | [997C](https://codeforces.com/problemset/problem/997/C)       | Sky Full of Stars                     | 2600 |        | 容斥原理  |
 
+# 树状数组
+| #                                                             | 名称                            | 难度 |状态 |备注  |
+|-------------------------------------------------------------- |--------------------------------|------|----|-----|
+| [459D](https://codeforces.com/problemset/problem/459/D)       | Pashmak and Parmida's problem  |1800  |    |     |
+| [383C](https://codeforces.com/problemset/problem/383/C)       | Propagating tree               |2400  |    |数组数组+dfs |
+| [USACO](http://www.usaco.org/index.php?page=viewproblem2&cpid=837)      | Out of Sorts         |Gold  |    |     |
+| [UVA-11297](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2272) | Census|4  |    |二维线段树 |
+| [UVA-1428](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=4174) | Ping pong| 4  | AC   | |
+| [1269E](https://codeforces.com/contest/1269/problem/E)        | K Integers                     |2300  |     |二分+树状数组     |
+| [1181D](https://codeforces.com/contest/1181/problem/D)        | Irrigation |                   |2100  |       ||
+| [220E](https://codeforces.com/problemset/problem/220/E)       | Little Elephant and Inversions |2400  |       |双指针+数组数组|
+| [835C](https://codeforces.com/problemset/problem/835/C)       | Star sky                       |1600  |       |树状数组或dp前缀和+容斥思想| 
+
 # 其他
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
 |-------------------------------------------------------------- |---------------------------------------|------|----|----------|
@@ -119,6 +133,13 @@
 ### CP-Algorithms:Sparse Table
 https://cp-algorithms.com/data_structures/sparse-table.html
 
+### 树状数组
+https://www.acwing.com/blog/content/80/
+https://www.lizhechen.com/2017/02/21/数据结构——树状数组 Binary Indexed Tree/
+https://blog.csdn.net/Yaokai_AssultMaster/article/details/79492190
+https://www.youtube.com/watch?v=WbafSgetDDk
+https://math-porn.tumblr.com/post/93129714459/range-queries-and-fenwick-trees
+http://www.cppblog.com/menjitianya/archive/2015/11/02/212171.html
 
 ### Sparse table
 http://adilet.org/blog/sparse-table/
