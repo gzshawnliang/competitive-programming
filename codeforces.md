@@ -101,7 +101,7 @@
 # 树状数组
 | #                                                             | 名称                            | 难度 |状态 |备注  |
 |-------------------------------------------------------------- |--------------------------------|------|----|-----|
-| [459D](https://codeforces.com/problemset/problem/459/D)       | Pashmak and Parmida's problem  |1800  |    |     |
+| [459D](https://codeforces.com/problemset/problem/459/D)       | Pashmak and Parmida's problem  |1800  | AC |     |
 | [383C](https://codeforces.com/problemset/problem/383/C)       | Propagating tree               |2400  |    |数组数组+dfs |
 | [USACO](http://www.usaco.org/index.php?page=viewproblem2&cpid=837)      | Out of Sorts         |Gold  |    |     |
 | [UVA-11297](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2272) | Census|4  |    |二维线段树 |
@@ -110,6 +110,7 @@
 | [1181D](https://codeforces.com/contest/1181/problem/D)        | Irrigation |                   |2100  |       ||
 | [220E](https://codeforces.com/problemset/problem/220/E)       | Little Elephant and Inversions |2400  |       |双指针+数组数组|
 | [835C](https://codeforces.com/problemset/problem/835/C)       | Star sky                       |1600  |       |树状数组或dp前缀和+容斥思想| 
+
 
 # 其他
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
