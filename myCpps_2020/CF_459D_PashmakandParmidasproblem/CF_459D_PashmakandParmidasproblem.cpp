@@ -4,7 +4,7 @@
 * @Author:         Shawn
 * @create Time:    2020/3/22 15:20:19
 * @url:            https://codeforces.com/contest/459/problem/D
-* @Description:    树状数组
+* @Description:    树状数组,Fenwick Tree—also,Binary Indexed Tree (BIT)
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
