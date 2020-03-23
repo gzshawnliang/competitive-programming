@@ -3,8 +3,8 @@
 * @Name:           Problem 1. Out of Sorts 
 * @Author:         Shawn
 * @create Time:    2020/3/23 20:41:17
-* @url:            http://www.usaco.org/index.php?page=viewproblem2&cpid=840&lang=en
-* @Description:    USACO 2018 US Open Contest, Platinum
+* @url:            http://www.usaco.org/index.php?page=viewproblem2&cpid=837
+* @Description:    USACO 2018 US Open Contest, Gold
 ===========================================================
 */
 #include <bits/stdc++.h>
