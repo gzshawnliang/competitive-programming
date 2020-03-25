@@ -102,8 +102,10 @@
 | #                                                             | 名称                            | 难度 |状态 |备注  |
 |-------------------------------------------------------------- |--------------------------------|------|----|-----|
 | [459D](https://codeforces.com/problemset/problem/459/D)       | Pashmak and Parmida's problem  |1800  | AC |     |
+| [1076E](https://codeforces.com/problemset/problem/1076/E)     | Vasya and a Tree               |1900  |    |数组数组+dfs |   
 | [383C](https://codeforces.com/problemset/problem/383/C)       | Propagating tree               |2400  |    |数组数组+dfs |
-| [USACO](http://www.usaco.org/index.php?page=viewproblem2&cpid=837)      | Out of Sorts         |Gold  |    |     |
+| [301D](https://codeforces.com/problemset/problem/301/D)       | Yaroslav and Divisors          |2200  |    |数组数组+数论 |
+| [USACO](http://www.usaco.org/index.php?page=viewproblem2&cpid=837)      | Out of Sorts         |Gold  | AC |     |
 | [UVA-11297](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2272) | Census|4  |    |二维线段树 |
 | [UVA-1428](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=4174) | Ping pong| 4  | AC   | |
 | [1269E](https://codeforces.com/contest/1269/problem/E)        | K Integers                     |2300  |     |二分+树状数组     |
