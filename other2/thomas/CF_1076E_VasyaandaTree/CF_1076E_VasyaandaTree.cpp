@@ -89,39 +89,42 @@ class solution
     vector<vector<int>> edge;
     vector<vector<pair<int, ll>>> query;
 
-    vector<int> level;             //节点i的层次
-    vector<int> vist;              //是否访问过节点i
+    vector<int> level;             //level[i]:节点i的层次
+    vector<int> vist;              //vist[i]:是否访问过节点i
 
-    vector<ll> ans; //每个节点的最终答案
-    int maxLevel = 0; //最大的层数
+    vector<ll> ans;                 //每个节点的最终答案
+    int maxLevel = 0;               //最大的层数
+
+    //第一次深度，求出level数组和maxLevel
     void dfs(int curr, int pre)
     {
         vist[curr] = 1;
         for (auto u : edge[curr])
-        {
             if (vist[u] == 0)
             {
                 level[u] = level[curr] + 1;
                 maxLevel = max(maxLevel, level[u]);
                 dfs(u, curr);
             }
-        }
     }
 
+    //第二次深度，计算ans
     void dfs2(int curr, int pre)
     {
         vist[curr] = 1;
 
+        //当前层~当前层+d，增加x，超出减
         for (auto pair : query[curr])
         {
             bit.update(level[curr], pair.second);
             bit.update(pair.first + 1, 0 - pair.second);
         }
 
+#ifndef ONLINE_JUDGE
         for (int i = 0; i <= maxLevel; ++i)
             cout << bit.query(i) << " ";
         cout << "\n";
-        
+#endif        
 
         ans[curr] = bit.query(level[curr]);
 
@@ -129,6 +132,7 @@ class solution
             if (vist[u] == 0)
                 dfs2(u, curr);
 
+        //回溯回来的时候，当前层~当前层+d，减x，超出增x，恢复原样
         for (auto pair : query[curr])
         {
             bit.update(level[curr], 0 - pair.second);
@@ -175,7 +179,10 @@ class solution
         bit.build(dep);
 
         dfs2(1, 0);
+
+#ifndef ONLINE_JUDGE        
         cout << "---\n";
+#endif        
 
         for (int i = 1; i <= n; ++i)
             cout << ans[i] << " ";
