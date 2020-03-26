@@ -4,7 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2020/3/26 17:15:00
 * @url:            https://codeforces.com/contest/1076/problem/E
-* @Description:    
+* @Description:    树状数组+DFS
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
@@ -117,14 +117,16 @@ class solution
         for (auto pair : query[curr])
         {
             bit.update(level[curr], pair.second);
-            bit.update(pair.first + 1, 0 - pair.second);
+            int vlevel = min(level[curr] + pair.first , maxLevel)+1;   //vlevel：当前节点v影响到第几层，不能超过maxLevel
+            bit.update(vlevel, 0 - pair.second);
+            //bit.update(pair.first + 1, 0 - pair.second);
         }
 
-#ifndef ONLINE_JUDGE
-        for (int i = 0; i <= maxLevel; ++i)
-            cout << bit.query(i) << " ";
-        cout << "\n";
-#endif        
+// #ifndef ONLINE_JUDGE
+//         for (int i = 0; i <= maxLevel; ++i)
+//             cout << bit.query(i) << " ";
+//         cout << "\n";
+// #endif        
 
         ans[curr] = bit.query(level[curr]);
 
@@ -136,7 +138,9 @@ class solution
         for (auto pair : query[curr])
         {
             bit.update(level[curr], 0 - pair.second);
-            bit.update(pair.first + 1, pair.second);
+            int vlevel = min(level[curr] + pair.first , maxLevel)+1;   //vlevel：当前节点v影响到第几层，不能超过maxLevel
+            bit.update(vlevel, pair.second);
+            //bit.update(pair.first + 1, pair.second);
         }
     }
 
@@ -170,19 +174,20 @@ class solution
             int v, d;
             ll x;
             cin >> v >> d >> x;
-            int vlevel = min(level[v] + d, maxLevel);   //vlevel：当前节点v影响到第几层，不能超过maxLevel
-            query[v].push_back({vlevel, x});
+            //int vlevel = min(level[v] + d, maxLevel);   //vlevel：当前节点v影响到第几层，不能超过maxLevel
+            query[v].push_back({d, x});
         }
         
+
         vist.assign(n + 1, 0);
         vector<ll> dep(maxLevel + 5, 0);
         bit.build(dep);
 
         dfs2(1, 0);
 
-#ifndef ONLINE_JUDGE        
-        cout << "---\n";
-#endif        
+// #ifndef ONLINE_JUDGE        
+//         cout << "---\n";
+// #endif        
 
         for (int i = 1; i <= n; ++i)
             cout << ans[i] << " ";
