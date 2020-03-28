@@ -110,7 +110,7 @@
 | [UVA-11297](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2272) | Census|4  |    |二维线段树 |
 | [UVA-1428](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=4174) | Ping pong| 4  | AC   | |
 | [1269E](https://codeforces.com/contest/1269/problem/E)        | K Integers                     |2300  |     |二分+树状数组     |
-| [1181D](https://codeforces.com/contest/1181/problem/D)        | Irrigation |                   |2100  |       ||
+| [1181D](https://codeforces.com/contest/1181/problem/D)        | Irrigation                     |2100  |     |名次树 or 树状数组  |
 | [220E](https://codeforces.com/problemset/problem/220/E)       | Little Elephant and Inversions |2400  |       |双指针+数组数组|
 | [835C](https://codeforces.com/problemset/problem/835/C)       | Star sky                       |1600  |       |树状数组或dp前缀和+容斥思想| 
 
