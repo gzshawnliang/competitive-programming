@@ -5,69 +5,73 @@ using namespace std;
 ifstream fin("fcolor.in");
 ofstream fout("fcolor.out");
 
-int fnd(vector<int> &f, int x)
+int fnd(vector<int> & f, int x)
 {
-    if (f[x] == x) return x;
-    else           return f[x] = fnd(f, f[x]);
+    if (f[x] == x)
+        return x;
+    else
+        return f[x] = fnd(f, f[x]);
 }
 
-bool _merge(vector<int> &f, vector<set<int>> &inn, int x, int y)
+void dfs(int las, int u, int depth, vector<int> &depFirst, vector<int> &visited, vector<vector<int>> &g, vector<int> &f)
 {
-    x = fnd(f, x), y = fnd(f, y);
-    if (x == y) return false;
-    
-    f[x] = y;
-    inn[y].insert(inn[x].begin(), inn[x].end());
+    visited[u] = 1;
 
-    return true;
+    if (u == 3)
+    {
+        for (int __s = 0; __s == 0; ++__s);
+    }
+
+    for (auto v:g[u])
+    {
+        if (v == las) continue;
+
+        if ((int)depFirst.size() - 1 < depth + 1)
+        {
+            depFirst.push_back(fnd(f, v));
+        }
+
+        f[fnd(f, v)] = fnd(f, depFirst[depth + 1]);
+
+        if (g[v].size() > 0 && visited[v] == 0)
+        {
+            dfs(u, v, depth + 1, depFirst, visited, g, f);
+        }
+    }
 }
 
 int main()
 {
-        int n, m; fin >> n >> m;
-        vector<set<int>> g(n + 1);
+    int n, m;
+    fin >> n >> m;
+    vector<vector<int>> g(n + 1);
     for (int c = 1; c <= m; ++c)
     {
-        int u, v; fin >> u >> v;
+        int u, v;
+        fin >> u >> v;
         //if (u == v) continue;
 
-        g[v].insert(u);
+        g[u].push_back(v);
     }
 
-        vector<int> f(n + 1, 0);
-            for (int u = 1; u <= n; ++u) f[u] = u;
-        vector<set<int>> inn = g;
-
-    while (true)
+    vector<int> f(n + 1, 0);
+    for (int u = 1; u <= n; ++u)
+        f[u] = u;
+   
+    
+        
+    for (int u = 1; u <= n; ++u)
     {
-            bool flg = false;
-            vector<int> visit(n + 1, 0);
-            vector<int> tmpF = f;
-            vector<set<int>> Tmpinn = inn;
-        for (int u = 1; u <= n; ++u)
+        if (g[u].size() > 0)
         {
-            if (visit[fnd(tmpF, u)] == 1) continue;
-            visit[fnd(tmpF, u)] = 1;
-
-            set<int> nowInn = Tmpinn[fnd(tmpF, u)];
-            if (nowInn.size() > 1)
-            {
-                int first = *nowInn.begin();
-                for (auto ite = nowInn.begin(); ite != nowInn.end(); ++ite)
-                {
-                    //if (fnd(tmpF, *ite) == fnd(tmpF, u)) continue;
-
-                    bool tmp = _merge(f, inn, *ite, first);
-                    if (tmp == true) flg = true;
-                }
-            }
+                vector<int> depFirst;
+                vector<int> visited(n + 1, 0);
+            dfs(-1, u, -1, depFirst, visited, g, f);
         }
-
-        if (flg == false) break;
     }
 
-        int nowC = 0;
-        vector<int> colors(n + 1, -1);
+    int nowC = 0;
+    vector<int> colors(n + 1, -1);
     for (int u = 1; u <= n; ++u)
     {
         if (colors[fnd(f, u)] == -1)
