@@ -26,7 +26,9 @@ void solve()
     int n=a.size();
     
     std::sort(a.begin(), a.end());
+
     a.erase(std::unique(a.begin(), a.end()), a.end());
+    
     for (int i = 0; i <= n-1; ++i)
         b[i] = lower_bound(a.begin(), a.end(), b[i]) - a.begin();
 
