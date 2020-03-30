@@ -8,7 +8,7 @@ using namespace std;
 class fenwickTree1index
 {
     private:
-
+    int n;
     int lowbit(int x)
     {
         return (x & (-x));
@@ -16,46 +16,40 @@ class fenwickTree1index
 
     public:
 
-    vector<int> a;
     vector<int> s;
 
     fenwickTree1index(vector<int> & in)
     {
-        int n = in.size();
-
-        a.assign(n+5, 0);
-        s.assign(n+5, 0);
-
-        for (int i = 1; i <= n; ++i)
-        {
-            update(i, in[i-1]);
-        }
+        n = in.size();
+        s.assign(n+1, 0);
     }
-
-    void update(int k, int delta)
+    void print()
     {
-        int n = s.size();
+        for (int i = 1; i <= n; ++i)
+            cout << s[i] << " ";
 
-        a[k] += delta;
-
-        for (int i = k; i <= n; i += lowbit(i))
-        {
-            s[i] += delta;
-        }
+        cout << "\n";
     }
 
-    int query(int k)
+    //更新操作，将第pos个位置的值加上delta
+    void update(int pos, int delta)
+    {
+        for (int i = pos; i <= n; i += lowbit(i))
+            s[i] += delta;
+    }
+
+    //查询操作，查询[1,pos]的和
+    int query(int pos)
     {
         int ans = 0;
 
-        for (int i = k; i >= 1; i -= lowbit(i))
-        {
+        for (int i = pos; i >= 1; i -= lowbit(i))
             ans += s[i];
-        }
 
         return ans;
     }
 
+    //查询区间[i,j]的和
     int sum(int i, int j)
     {
         return query(j) - query(i - 1);
@@ -125,8 +119,10 @@ class fenwickTree
 
 int main()
 {
-    vector<int> b = {5, 3, 4, 2, 1};
-    vector<int> a = {0, 0, 0, 0, 0};
+    //vector<int> b = {5, 3, 4, 2, 1};
+
+    vector<int> b = {4, 2 ,1 ,5 ,3};
+    vector<int> a(b.size(),0);
 
     fenwickTree1index tree(a);
     
@@ -134,10 +130,14 @@ int main()
     for (int i = 1; i <= (int)b.size() ; ++i)
     {
         tree.update(b[i-1],1);
+        tree.print();
+        cout << setw(10) << "query(" << b[i-1] << ")=" << tree.query(b[i-1]) << "\n";
         ans += i- tree.query(b[i-1]) ;
     }
     
     cout << ans << "\n";
+    int i=(2 & (-2));
+    cout << i << "\n";
 
     // tree.update(5,1);
     // cout << 1- tree.query(5) << '\n';
