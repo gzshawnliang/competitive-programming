@@ -103,7 +103,7 @@
 |-------------------------------------------------------------- |--------------------------------|------|----|-----|
 | [459D](https://codeforces.com/problemset/problem/459/D)       | Pashmak and Parmida's problem  |1800  | AC |     |
 | [1076E](https://codeforces.com/problemset/problem/1076/E)     | Vasya and a Tree               |1900  | AC |数组数组+dfs |   
-| [61E](https://codeforces.com/problemset/problem/61/E)         | Enemy is weak                  |2100  |    |数组数组+逆序对数 |   
+| [61E](https://codeforces.com/problemset/problem/61/E)         | Enemy is weak                  |2100  | AC |数组数组+逆序对数 |   
 | [383C](https://codeforces.com/problemset/problem/383/C)       | Propagating tree               |2400  |    |数组数组+dfs |
 | [301D](https://codeforces.com/problemset/problem/301/D)       | Yaroslav and Divisors          |2200  |    |数组数组+数论 |
 | [USACO](http://www.usaco.org/index.php?page=viewproblem2&cpid=837)      | Out of Sorts         |Gold  | AC |     |
