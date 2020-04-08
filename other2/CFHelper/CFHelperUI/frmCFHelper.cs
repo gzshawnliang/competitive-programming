@@ -67,6 +67,10 @@ namespace CFHelperUI
         private void butGo_Click(object sender, EventArgs e)
         {
             string input = this.txtProblemId.Text.Trim();
+
+            bool isInt = int.TryParse(input, out int inputNumber);
+            Debug.WriteLine(inputNumber);
+
             if (Regex.IsMatch(input, @"usaco.org", RegexOptions.IgnoreCase))
             {
                 usaco.Checked = true;
@@ -95,6 +99,15 @@ namespace CFHelperUI
             else if (uva.Checked)
             {
                 GetDataUVa(input);
+            }
+            else if (codeforces.Checked)
+            {
+                GetDataCF(input);
+            }
+            else if (isInt)
+            {
+                codeforces.Checked = true;
+                GetDataCF(input);
             }
             else if (Regex.IsMatch(input, @"^\d{1,}[0-9]([A-Za-z])?[0-9]$", RegexOptions.IgnoreCase)) //一定是201A,201A2的格式：数字+单个字母或者数字
             {
