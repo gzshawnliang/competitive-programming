@@ -4,7 +4,7 @@
 * @Author:         Shawn
 * @create Time:    2020/4/12 18:13:13
 * @url:            https://codeforces.com/contest/1328/problem/E
-* @Description:    
+* @Description:    LCA O(1)
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
