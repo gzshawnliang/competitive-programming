@@ -2,6 +2,8 @@ param(
     [string]$InitialDirectory
 )
 
+Write-Host $InitialDirectory
+
 #获取父目录
 $parentDirectory = [System.IO.Directory]::GetParent($InitialDirectory)
 
