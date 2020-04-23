@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Security.AccessControl;
+using System.Threading;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using CFHelperUI.Properties;
@@ -1381,7 +1382,7 @@ namespace CFHelperUI
             Registry.RegWrite("Author", this.txtAuthor.Text); 
         }
 
-        private bool CheckCFAuth()
+        private void CheckCFAuth()
         {
             PicCFAuth.Visible = false;
             string apiKey = Registry.RegRead("CFKey");
@@ -1389,7 +1390,7 @@ namespace CFHelperUI
 
             if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
             {
-
+                contestId = 556;
                 dynamic o = GetCfContest(contestId.ToString(), out Exception ex);
 
                 if (o != null)
@@ -1398,19 +1399,14 @@ namespace CFHelperUI
                     if (o.status == "OK")
                     {
                         PicCFAuth.Image = Resources.user_ok;
-                        return true;
                     }
                     else
                     {
                         PicCFAuth.Image = Resources.user_error;
                     }
-                    
-                    
                 }
 
             }
-            
-            return false;
         }
 
         private void frmCFHelper_Load(object sender, EventArgs e)
@@ -1423,6 +1419,7 @@ namespace CFHelperUI
                 else
                     txtWorkingDir.Text = GetApplicationRoot();
             CheckCFAuth();
+
             GetWindowsState();
             this.txtAuthor.Text = Registry.RegRead("Author");
 
