@@ -330,7 +330,7 @@
             // PicCFAuth
             // 
             this.PicCFAuth.Image = global::CFHelperUI.Properties.Resources.user_ok;
-            this.PicCFAuth.Location = new System.Drawing.Point(114, 54);
+            this.PicCFAuth.Location = new System.Drawing.Point(114, 55);
             this.PicCFAuth.Name = "PicCFAuth";
             this.PicCFAuth.Size = new System.Drawing.Size(20, 20);
             this.PicCFAuth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
