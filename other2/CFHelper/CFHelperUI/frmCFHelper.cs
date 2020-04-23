@@ -17,6 +17,7 @@ using System.Reflection;
 using System.Security.AccessControl;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using CFHelperUI.Properties;
 using HtmlAgilityPack;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -122,6 +123,42 @@ namespace CFHelperUI
             }
         }
 
+        private dynamic GetCfContest(string contestId,out Exception ex)
+        {
+            ex = null;
+            string url =
+                $"https://codeforces.com/api/contest.standings?contestId={contestId}&from=1&count=1&showUnofficial=true";
+
+
+            string apiKey = Registry.RegRead("CFKey");
+            string apiSecret = Registry.RegRead("CFSecret");
+
+            //CF认证
+            //https://codeforces.com/apiHelp
+            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+            {
+                apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
+                string random6 = new Random().Next(100000, 999999).ToString();
+                string unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+                string apiSig = $"{random6}/contest.standings?apiKey={apiKey}&contestId={contestId}&count=1&from=1&showUnofficial=true&time={unixTimestamp}#{apiSecret}";
+                apiSig = SHA.GenerateSHA512String(apiSig).ToLower();
+
+                url += $"&apiKey={apiKey}&time={unixTimestamp}&apiSig={random6}{apiSig}";
+            }
+
+            try
+            {
+                dynamic o = GetResponse(url);
+                return o;
+            }
+            catch (Exception e)
+            {
+                ex = e;
+            }
+
+            return null;
+        }
+
         private void GetDataCF(string input)
         {
             contestType = ContestType.codeforces;
@@ -152,34 +189,97 @@ namespace CFHelperUI
             txtError.Visible = false;
             txtError.Clear();
 
-            string url =
-                $"https://codeforces.com/api/contest.standings?contestId={contestId}&from=1&count=1&showUnofficial=true";
+            //string url =
+            //    $"https://codeforces.com/api/contest.standings?contestId={contestId}&from=1&count=1&showUnofficial=true";
 
 
-            string apiKey = Registry.RegRead("CFKey");
-            string apiSecret= Registry.RegRead("CFSecret");
+            //string apiKey = Registry.RegRead("CFKey");
+            //string apiSecret= Registry.RegRead("CFSecret");
 
-            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+            //if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+            //{
+            //    apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
+            //}
+
+            ////https://codeforces.com/apiHelp
+
+
+            //if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+            //{
+            //    string random6 = new Random().Next(100000, 999999).ToString();
+            //    string unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+            //    string apiSig = $"{random6}/contest.standings?apiKey={apiKey}&contestId={contestId}&count=1&from=1&showUnofficial=true&time={unixTimestamp}#{apiSecret}";
+            //    apiSig = SHA.GenerateSHA512String(apiSig).ToLower();
+
+            //    url += $"&apiKey={apiKey}&time={unixTimestamp}&apiSig={random6}{apiSig}";
+            //}
+
+            //try
+            //{
+            //    dynamic o = GetResponse(url);
+            //    string ids = string.Empty;
+
+            //    if (o.status == "OK")
+            //    {
+            //        problemDict = new Dictionary<string, string>();
+
+            //        lblContest.Text = o.result.contest.name;
+
+            //        this.listView1.Columns.Add("id", 36, HorizontalAlignment.Left);
+            //        this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
+            //        this.listView1.Columns.Add("rating", 64, HorizontalAlignment.Left);
+            //        this.listView1.Columns.Add("tag", 300, HorizontalAlignment.Left);
+            //        this.listView1.BeginUpdate();
+            //        dynamic problemsList = o.result.problems;
+            //        foreach (dynamic problem in problemsList)
+            //        {
+            //            string problemindex = problem.index.ToString();
+
+            //            if (!string.IsNullOrEmpty(problemId))
+            //                if (problemId.ToUpper() != problemindex.ToUpper())
+            //                    continue;
+
+            //            problemDict.Add(problemindex.ToUpper(), problem.name.ToString());
+            //            string s = $"({problemindex.ToUpper()}){problem.name}";
+            //            ids += $"{problem.index} ";
+
+            //            ListViewItem lvi = new ListViewItem(problemindex.ToUpper());
+            //            lvi.SubItems.Add(problem.name.ToString());
+            //            if (problem.rating != null)
+            //                lvi.SubItems.Add(problem.rating.ToString());
+            //            else
+            //                lvi.SubItems.Add("");
+            //            string tags = "";
+            //            foreach (var tag in problem.tags)
+            //            {
+            //                tags += tag.ToString() + ",";
+            //            }
+            //            lvi.SubItems.Add(tags);
+            //            this.listView1.Items.Add(lvi);
+            //            //Console.WriteLine(s);
+            //        }
+            //        this.listView1.EndUpdate();
+            //        this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            //    }
+            //    else if (o.status == "FAILED")
+            //    {
+            //        lblContest.Text = o.comment;
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine(o);
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    txtError.Text = e.ToString();
+            //    txtError.Visible = true;
+            //    lblContest.Text = e.Message;
+            //}
+
+            dynamic o = GetCfContest(contestId.ToString(), out Exception ex);
+            if (o != null)
             {
-                apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
-            }
-
-            //https://codeforces.com/apiHelp
-
-
-            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
-            {
-                string random6 = new Random().Next(100000, 999999).ToString();
-                string unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
-                string apiSig = $"{random6}/contest.standings?apiKey={apiKey}&contestId={contestId}&count=1&from=1&showUnofficial=true&time={unixTimestamp}#{apiSecret}";
-                apiSig = SHA.GenerateSHA512String(apiSig).ToLower();
-
-                url += $"&apiKey={apiKey}&time={unixTimestamp}&apiSig={random6}{apiSig}";
-            }
-
-            try
-            {
-                dynamic o = GetResponse(url);
                 string ids = string.Empty;
 
                 if (o.status == "OK")
@@ -233,13 +333,11 @@ namespace CFHelperUI
                     Console.WriteLine(o);
                 }
             }
-            catch (Exception e)
+            else if(ex !=null)
             {
-                //Console.WriteLine(e);
-                txtError.Text = e.ToString();
+                txtError.Text = ex.ToString();
                 txtError.Visible = true;
-                lblContest.Text = e.Message;
-                //throw;
+                lblContest.Text = ex.Message;
             }
         }
 
@@ -1285,18 +1383,31 @@ namespace CFHelperUI
 
         private bool CheckCFAuth()
         {
+            PicCFAuth.Visible = false;
             string apiKey = Registry.RegRead("CFKey");
             string apiSecret = Registry.RegRead("CFSecret");
 
             if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
             {
-                PicCFAuth.Visible = true;
 
-                return true;
-            }
-            else
-            {
-                PicCFAuth.Visible = false;
+                dynamic o = GetCfContest(contestId.ToString(), out Exception ex);
+
+                if (o != null)
+                {
+                    PicCFAuth.Visible = true;
+                    if (o.status == "OK")
+                    {
+                        PicCFAuth.Image = Resources.user_ok;
+                        return true;
+                    }
+                    else
+                    {
+                        PicCFAuth.Image = Resources.user_error;
+                    }
+                    
+                    
+                }
+
             }
             
             return false;
