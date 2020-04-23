@@ -329,10 +329,11 @@
             // 
             // PicCFAuth
             // 
-            this.PicCFAuth.Image = global::CFHelperUI.Properties.Resources.Lock12x12;
-            this.PicCFAuth.Location = new System.Drawing.Point(115, 57);
+            this.PicCFAuth.Image = global::CFHelperUI.Properties.Resources.user_ok;
+            this.PicCFAuth.Location = new System.Drawing.Point(114, 54);
             this.PicCFAuth.Name = "PicCFAuth";
-            this.PicCFAuth.Size = new System.Drawing.Size(19, 23);
+            this.PicCFAuth.Size = new System.Drawing.Size(20, 20);
+            this.PicCFAuth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PicCFAuth.TabIndex = 14;
             this.PicCFAuth.TabStop = false;
             this.PicCFAuth.Visible = false;

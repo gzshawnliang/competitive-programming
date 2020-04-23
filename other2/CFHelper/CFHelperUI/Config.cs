@@ -8,6 +8,6 @@ namespace CFHelperUI
 {
     public static class Config
     {
-        public const string EncryptKey = "DCE5A60Ac47B4cfca30595C1F90093F7";
+        public static string EncryptKey ;
     }
 }

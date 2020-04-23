@@ -57,6 +57,7 @@ namespace CFHelperUI
         public frmCFHelper(string defaultDir):this()
         {
             _defaultDir = defaultDir;
+            Config.EncryptKey = UHWID.GetID();
         }
 
         private void butCancel_Click(object sender, EventArgs e)
@@ -1290,9 +1291,14 @@ namespace CFHelperUI
             if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
             {
                 PicCFAuth.Visible = true;
+
                 return true;
             }
-            PicCFAuth.Visible = false;
+            else
+            {
+                PicCFAuth.Visible = false;
+            }
+            
             return false;
         }
 

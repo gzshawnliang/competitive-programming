@@ -63,9 +63,19 @@ namespace CFHelperUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lock12x12 {
+        internal static System.Drawing.Bitmap user_error {
             get {
-                object obj = ResourceManager.GetObject("Lock12x12", resourceCulture);
+                object obj = ResourceManager.GetObject("user_error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_ok {
+            get {
+                object obj = ResourceManager.GetObject("user_ok", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

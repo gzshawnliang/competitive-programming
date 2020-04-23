@@ -34,6 +34,8 @@
             this.lbl2 = new System.Windows.Forms.Label();
             this.butOK = new System.Windows.Forms.Button();
             this.butCancel = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.butDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -94,6 +96,28 @@
             this.butCancel.Text = "Cancel";
             this.butCancel.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(23, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(239, 12);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Input Codeforces API key and secret pls";
+            // 
+            // butDelete
+            // 
+            this.butDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.butDelete.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.butDelete.Location = new System.Drawing.Point(75, 122);
+            this.butDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.butDelete.Name = "butDelete";
+            this.butDelete.Size = new System.Drawing.Size(100, 28);
+            this.butDelete.TabIndex = 9;
+            this.butDelete.Text = "Delete";
+            this.butDelete.UseVisualStyleBackColor = true;
+            this.butDelete.Click += new System.EventHandler(this.butDelete_Click);
+            // 
             // frmCFAuthorization
             // 
             this.AcceptButton = this.butOK;
@@ -101,6 +125,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
             this.ClientSize = new System.Drawing.Size(624, 163);
+            this.Controls.Add(this.butDelete);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.butCancel);
             this.Controls.Add(this.butOK);
             this.Controls.Add(this.txtsecret);
@@ -128,5 +154,7 @@
         private System.Windows.Forms.Label lbl2;
         private System.Windows.Forms.Button butOK;
         private System.Windows.Forms.Button butCancel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button butDelete;
     }
 }

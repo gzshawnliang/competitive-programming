@@ -26,12 +26,27 @@ namespace CFHelperUI
 
         private void frmCFAuthorization_Load(object sender, EventArgs e)
         {
-            txtKey.Text = Registry.RegRead("CFKey");
-            string s = Registry.RegRead("CFSecret");
-            if (!string.IsNullOrEmpty(s))
-                s = StringCipher.Decrypt(s, Config.EncryptKey);
+            try
+            {
+                txtKey.Text = Registry.RegRead("CFKey");
+                string s = Registry.RegRead("CFSecret");
+                if (!string.IsNullOrEmpty(s))
+                    s = StringCipher.Decrypt(s, Config.EncryptKey);
 
-            txtsecret.Text = s;
+                txtsecret.Text = s;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        private void butDelete_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            Registry.RegWrite("CFKey", string.Empty);
+            Registry.RegWrite("CFSecret", string.Empty);
+
         }
     }
 }
