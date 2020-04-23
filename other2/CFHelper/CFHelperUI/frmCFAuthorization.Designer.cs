@@ -75,7 +75,7 @@
             // 
             this.butOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butOK.Location = new System.Drawing.Point(511, 36);
+            this.butOK.Location = new System.Drawing.Point(511, 32);
             this.butOK.Margin = new System.Windows.Forms.Padding(4);
             this.butOK.Name = "butOK";
             this.butOK.Size = new System.Drawing.Size(100, 28);
@@ -88,7 +88,7 @@
             // 
             this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butCancel.Location = new System.Drawing.Point(511, 72);
+            this.butCancel.Location = new System.Drawing.Point(511, 60);
             this.butCancel.Margin = new System.Windows.Forms.Padding(4);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(100, 28);
@@ -109,7 +109,7 @@
             // 
             this.butDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butDelete.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butDelete.Location = new System.Drawing.Point(75, 122);
+            this.butDelete.Location = new System.Drawing.Point(511, 122);
             this.butDelete.Margin = new System.Windows.Forms.Padding(4);
             this.butDelete.Name = "butDelete";
             this.butDelete.Size = new System.Drawing.Size(100, 28);
