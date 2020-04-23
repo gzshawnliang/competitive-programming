@@ -151,18 +151,31 @@ namespace CFHelperUI
             txtError.Visible = false;
             txtError.Clear();
 
-            
-
-            //HttpClient client = new HttpClient();
             string url =
                 $"https://codeforces.com/api/contest.standings?contestId={contestId}&from=1&count=1&showUnofficial=true";
 
-            //if (Regex.Matches(input, "[a-zA-Z]").Count > 0)
-            //{
-            //    problemId = Regex.Replace(input, "[0-9]", "", RegexOptions.IgnoreCase);
-            //}
 
-            //Task<string> problems = GetProblemInfo(url);
+            string apiKey = Registry.RegRead("CFKey");
+            string apiSecret= Registry.RegRead("CFSecret");
+
+            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+            {
+                apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
+            }
+
+            //https://codeforces.com/apiHelp
+
+
+            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+            {
+                string random6 = new Random().Next(100000, 999999).ToString();
+                string unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+                string apiSig = $"{random6}/contest.standings?apiKey={apiKey}&contestId={contestId}&count=1&from=1&showUnofficial=true&time={unixTimestamp}#{apiSecret}";
+                apiSig = SHA.GenerateSHA512String(apiSig).ToLower();
+
+                url += $"&apiKey={apiKey}&time={unixTimestamp}&apiSig={random6}{apiSig}";
+            }
+
             try
             {
                 dynamic o = GetResponse(url);
@@ -227,10 +240,6 @@ namespace CFHelperUI
                 lblContest.Text = e.Message;
                 //throw;
             }
-            
-
-
-
         }
 
         private void GetDataUVa(string input)
@@ -753,6 +762,77 @@ namespace CFHelperUI
         {
             if (listView1.CheckedItems.Count == 0)
                 return;
+            else if(listView1.CheckedItems.Count==1)
+                CreateFileCFProblems();
+            else 
+                CreateFileCFContest(lblContest.Text);
+        }
+
+        private void CreateFileCFContest(string contesName)
+        {
+
+            if (listView1.CheckedItems.Count == 0)
+                return;
+
+            //Codeforces Round #634 (Div. 3)
+            contesName = contesName.Replace("Codeforces", "");
+            contesName = contesName.Replace("#", "_");
+            contesName = contesName.Replace(".", "");
+            contesName = contesName.Replace("(", "");
+            contesName = contesName.Replace(")", "");
+            contesName = contesName.Replace(" ", "");
+            const string contestSubDir = "CF_CONTESTS";
+
+            List<KeyValuePair<string,string>> problemIdList = new List<KeyValuePair<string, string>>();
+            string msg = "";
+            foreach (ListViewItem item in listView1.CheckedItems)
+            {
+                problemIdList.Add(new KeyValuePair<string, string>(item.SubItems[0].Text,item.Text));
+                msg += item.SubItems[0].Text + "\n";
+            }
+
+            string rootPath = $"{rootDir}\\{contestSubDir}\\{contesName}";
+
+            msg = $"即将创建以下C++文件夹及相关文件：\n{rootPath}\n\n{msg}\n是否继续？";
+
+            if (MessageBox.Show(this, msg, this.Text,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                foreach (var problem in problemIdList)
+                {
+                    string problemKey = problem.Key;
+                    string problemId = problem.Value;
+
+                    string cppCode = "";
+
+                    cppCode += $"/*\n";
+                    cppCode += $"===========================================================\n";
+                    cppCode +=
+                        $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
+                    cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                    cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                    cppCode +=
+                        $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    cppCode += $"* @Description:    \n";
+                    cppCode += $"===========================================================\n";
+                    cppCode += $"*/";
+
+                    string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
+                    string filePath = $"{rootDir}\\{contestSubDir}\\{contesName}\\{problemKey}";
+                    CreateDirAndCppFile(filePath, fileName, cppCode);
+
+                    string cppfileName = $"{filePath}\\{fileName}.cpp";
+
+                    RunVSCode(cppfileName);
+                }
+                Application.Exit();
+            }
+        }
+
+        private void CreateFileCFProblems()
+        {
+            if (listView1.CheckedItems.Count == 0)
+                return;
 
             List<string> problemIdList = new List<string>();
             foreach (ListViewItem item in listView1.CheckedItems)
@@ -797,25 +877,7 @@ namespace CFHelperUI
 
                     string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.cpp";
                     RunVSCode(cppfileName);
-                    //System.Diagnostics.Process.Start("cmd.exe",$"/c code \"{cppfileName}\"");
-
-                    //string result = CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
-                    //createResult.Add(problemId.ToUpper(), result);
                 }
-
-                //msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
-                //foreach (var problemId in problemIdList)
-                //{
-                //    string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-                //    msg += $"{fileName}:{(string.IsNullOrEmpty(createResult[problemId]) ? "成功" : createResult[problemId])}\n";
-                //}
-
-                //msg += "\n是否打开文件夹查看？";
-                //if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
-                //    DialogResult.Yes)
-                //{
-                //    System.Diagnostics.Process.Start(rootDir);
-                //}
 
                 Application.Exit();
             }
@@ -1189,7 +1251,7 @@ namespace CFHelperUI
             this.folderBrowserDialog1.ShowNewFolderButton = true;
             if (this.folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                RegWrite("WorkingDir", folderBrowserDialog1.SelectedPath);
+                Registry.RegWrite("WorkingDir", folderBrowserDialog1.SelectedPath);
                 this.txtWorkingDir.Text = folderBrowserDialog1.SelectedPath;
             }
         }
@@ -1217,27 +1279,41 @@ namespace CFHelperUI
         private void frmCFHelper_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveWindowsState();
-            RegWrite("Author", this.txtAuthor.Text); 
+            Registry.RegWrite("Author", this.txtAuthor.Text); 
+        }
+
+        private bool CheckCFAuth()
+        {
+            string apiKey = Registry.RegRead("CFKey");
+            string apiSecret = Registry.RegRead("CFSecret");
+
+            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+            {
+                PicCFAuth.Visible = true;
+                return true;
+            }
+            PicCFAuth.Visible = false;
+            return false;
         }
 
         private void frmCFHelper_Load(object sender, EventArgs e)
         {
             //this.Text += "["+_defaultDir;
-            txtWorkingDir.Text = RegRead("WorkingDir");
+            txtWorkingDir.Text = Registry.RegRead("WorkingDir");
             if (string.IsNullOrEmpty(txtWorkingDir.Text.TrimEnd()))
                 if (!string.IsNullOrEmpty(_defaultDir))
                     txtWorkingDir.Text = _defaultDir;
                 else
                     txtWorkingDir.Text = GetApplicationRoot();
-
+            CheckCFAuth();
             GetWindowsState();
-            this.txtAuthor.Text = RegRead("Author");
+            this.txtAuthor.Text = Registry.RegRead("Author");
 
             string currFilePath = Assembly.GetExecutingAssembly().Location;
             DateTime dt = new FileInfo(currFilePath).LastWriteTime;
             this.Text += $" {dt.ToString("yy.MMdd.HHmm")}";
 
-            var ojType = RegRead("OJType");
+            var ojType = Registry.RegRead("OJType");
             if (!string.IsNullOrEmpty(ojType))
             {
                 foreach (Control ctl in this.Controls)
@@ -1250,34 +1326,13 @@ namespace CFHelperUI
             }
         }
 
-        private string RegRead(string keyName)
-        {
-            string subKey = "SOFTWARE\\" + Application.ProductName;
 
-            RegistryKey sk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(subKey);
-            if (sk != null)
-            {
-                var o = sk.GetValue(keyName);
-                if (o != null)
-                    return o.ToString();
-            }
-
-            return null;
-        }
-
-        private void RegWrite(string keyName, string value)
-        {
-            string subKey = "SOFTWARE\\" + Application.ProductName;
-
-            RegistryKey sk1 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(subKey);
-            sk1.SetValue(keyName, value);
-        }
 
         private void GetWindowsState()
         {
-            string sHeight = RegRead("Form.Height");
-            string sWidth = RegRead("Form.Width");
-            string sWindowState = RegRead("Form.WindowState");
+            string sHeight = Registry.RegRead("Form.Height");
+            string sWidth = Registry.RegRead("Form.Width");
+            string sWindowState = Registry.RegRead("Form.WindowState");
             if (sWindowState == "2")
             {
                 this.WindowState = FormWindowState.Maximized;
@@ -1300,12 +1355,12 @@ namespace CFHelperUI
 
         private void SaveWindowsState()
         {
-            RegWrite("Form.Height", this.Size.Height.ToString());
-            RegWrite("Form.Width", this.Size.Width.ToString());
+            Registry.RegWrite("Form.Height", this.Size.Height.ToString());
+            Registry.RegWrite("Form.Width", this.Size.Width.ToString());
             if (this.WindowState == FormWindowState.Maximized)
-                RegWrite("Form.WindowState", "2");
+                Registry.RegWrite("Form.WindowState", "2");
             else
-                RegWrite("Form.WindowState", "0");
+                Registry.RegWrite("Form.WindowState", "0");
         }
 
         private void frmCFHelper_Activated(object sender, EventArgs e)
@@ -1318,7 +1373,15 @@ namespace CFHelperUI
             var objRadioButton =  sender as RadioButton;
             if (objRadioButton != null)
                 if(objRadioButton.Checked)
-                    RegWrite("OJType", objRadioButton.Name);
+                    Registry.RegWrite("OJType", objRadioButton.Name);
+        }
+
+        private void linkCFAuthorization_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if((new frmCFAuthorization().ShowDialog(this)== DialogResult.OK))
+            {
+                CheckCFAuth();
+            }
         }
     }
 }
