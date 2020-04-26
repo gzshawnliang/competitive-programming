@@ -16,12 +16,6 @@ using namespace std;
 
 using ll = long long;
 
-int dif(int col)
-{
-    if (col == 1) return 2;
-    else          return 1;
-}
-
 void solve()
 {
         int ttc; cin >> ttc;
@@ -29,46 +23,73 @@ void solve()
     {
         int n; cin >> n;
 
-            int ans = 1;
-            vector<int> colors(n, 0), typ(n, 0);
+            bool is3 = (n % 2), is1 = true;
+            vector<int> typ(n, 0);
         for (int i = 0; i <= n - 1; ++i)
         {
             cin >> typ[i];
-
-            if      (i == 0)
+            if (i > 0)
             {
-                colors[i] = 1;
+                if (typ[i] == typ[i - 1]) is3 = false;
+                if (typ[i] != typ[i - 1]) is1 = false;
             }
-            else if (i == n - 1)
+        }
+        if (typ[n - 1] == typ[0]) is3 = false;
+
+        if (is1 == true)
+        {
+            cout << "1\n";
+            for (int i = 0; i <= n - 1; ++i)
             {
-                for (int col = 1; col <= 3; ++col)
+                if (i > 0) cout << ' ';
+
+                cout << 1;
+            }
+            cout << '\n';
+        }
+        else if (is3 == true)
+        {
+            cout << "3\n";
+            for (int i = 0; i <= n - 1; ++i)
+            {
+                if (i > 0) cout << ' ';
+
+                if (i == n - 1) cout << 3;
+                else            cout << i % 2 + 1;
+            }
+            cout << '\n';
+        }
+        else
+        {
+            vector<int> colors(n, 0);
+            for (int i = 0; i <= n - 1; ++i)
+            {
+                if (i == 0) colors[i] = 1;
+                else
                 {
-                    if (col == colors[0] && typ[i] != typ[0] && typ[0] != typ[1]) continue;
-                    if (col == colors[i - 1] && typ[i] != typ[i - 1] && typ[i - 1] != typ[i - 2]) continue;
-
-                    colors[i] = col;
-                    if (col == colors[0] && typ[i] != typ[0] && typ[0] == typ[1]) colors[0] = dif(col);
-                    if (col == colors[i - 1] && typ[i] != typ[i - 1] && typ[i - 1] == typ[i - 2]) colors[i - 1] = dif(col);
-
-                    break;
+                    if (typ[i] == typ[i - 1]) colors[i] = colors[i - 1];
+                    if (typ[i] != typ[i - 1]) colors[i] = 3 - colors[i - 1];
                 }
             }
-            else
+
+            if (typ[0] != typ[n - 1] && colors[0] == colors[n - 1])
             {
-                if (typ[i] == typ[i - 1]) colors[i] = colors[i - 1];
-                else                      colors[i] = dif(colors[i - 1]);
+                colors[n - 1] = 3 - colors[0];
+                for (int i = n - 2; i >= 0; --i)
+                {
+                    if (typ[i] != typ[i + 1]) colors[i] = 3 - colors[i + 1];
+                }
             }
 
-            ans = max(ans, colors[i]);
-        }
+            cout << "2\n";
+            for (int i = 0; i <= n - 1; ++i)
+            {
+                if (i > 0) cout << ' ';
 
-        cout << ans << '\n';
-        for (int i = 0; i <= n - 1; ++i)
-        {
-            if (i > 0) cout << ' ';
-            cout << colors[i];
+                cout << colors[i];
+            }
+            cout << '\n';
         }
-        cout << '\n';
     }
 }
 
