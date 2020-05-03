@@ -115,6 +115,14 @@
 | [835C](https://codeforces.com/problemset/problem/835/C)       | Star sky                       |1600  |       |树状数组或dp前缀和+容斥思想| 
 | [627B](https://codeforces.com/problemset/problem/627/B)       | Factory Repairs                |1700  | AC  || 
 
+# 二分图 Bipartite Graph
+| #                                                             | 名称                            | 难度 |状态 |备注  |
+|-------------------------------------------------------------- |--------------------------------|------|----|-----|
+| [489B](https://codeforces.com/problemset/problem/489/B)       | BerSU Ball                     |1200  |    |可贪心或匈牙利    |
+| [166D](https://codeforces.com/problemset/problem/166/D)       | Shoe Store                     |2500  |    |     |
+| [1348F](https://codeforces.com/contest/1348/problem/F)        | Phoenix and Memory             |2600  |    |     |
+| [1139E](https://codeforces.com/problemset/problem/1139/E)     | Maximize Mex                   |2400  |    |     |
+
 
 # 其他
 | #                                                             | 名称                                   | 难度  |状态 |备注      |
@@ -132,6 +140,8 @@
 | [1133E](https://codeforces.com/contest/1133/problem/E)        | K Balanced Teams                      | 2000 | AC |双指针two pointers+DP    |
 | [617E](https://codeforces.com/problemset/problem/617/E)       | XOR and Favorite Number               | 2300 |    |Square Root Decomposition  |
 | [455D](https://codeforces.com/problemset/problem/455/D)       | Serega and Fun                        | 2600 |    |Square Root Decomposition  |
+
+
 
 
 # 参考
