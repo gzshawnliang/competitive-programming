@@ -118,10 +118,12 @@
 # 二分图 Bipartite Graph
 | #                                                             | 名称                            | 难度 |状态 |备注  |
 |-------------------------------------------------------------- |--------------------------------|------|----|-----|
-| [489B](https://codeforces.com/problemset/problem/489/B)       | BerSU Ball                     |1200  |    |可贪心或匈牙利    |
+| [489B](https://codeforces.com/problemset/problem/489/B)       | BerSU Ball                     |1200  |    |可贪心或匈牙利算法    |
 | [166D](https://codeforces.com/problemset/problem/166/D)       | Shoe Store                     |2500  |    |     |
 | [1348F](https://codeforces.com/contest/1348/problem/F)        | Phoenix and Memory             |2600  |    |     |
 | [1139E](https://codeforces.com/problemset/problem/1139/E)     | Maximize Mex                   |2400  |    |     |
+| [100735H](https://codeforces.com/gym/100735/problem/H)        | Words from cubes               |      |    |     |
+| [HDU-2063](http://acm.hdu.edu.cn/showproblem.php?pid=2063)    | 过山车                          |      |AC  | 匈牙利算法模板题    |
 
 
 # 其他
