@@ -49,6 +49,10 @@ namespace CFHelperUI
             hdu
         }
 
+        //Enum: CF, IOI, ICPC. Scoring system used for the contest.
+        //https://codeforces.com/apiHelp/objects#Contest
+        private string CfContestType;
+
         private ContestType contestType;
 
         public frmCFHelper()
@@ -285,9 +289,12 @@ namespace CFHelperUI
 
                 if (o.status == "OK")
                 {
+                    CfContestType = o.result.contest.type.ToString();
+
                     problemDict = new Dictionary<string, string>();
 
                     lblContest.Text = o.result.contest.name;
+                    //Debug.WriteLine(o.result.contest.type.ToString());
 
                     this.listView1.Columns.Add("id", 36, HorizontalAlignment.Left);
                     this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
@@ -911,8 +918,17 @@ namespace CFHelperUI
                         $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
                     cppCode += $"* @Author:         {txtAuthor.Text}\n";
                     cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                    cppCode +=
-                        $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    if (CfContestType == "CF")
+                    {
+                        cppCode +=
+                            $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    }
+                    else
+                    {
+                        cppCode +=
+                            $"* @url:            https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
+
+                    }
                     cppCode += $"* @Description:    \n";
                     cppCode += $"===========================================================\n";
                     cppCode += $"*/";
@@ -965,8 +981,17 @@ namespace CFHelperUI
                         $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
                     cppCode += $"* @Author:         {txtAuthor.Text}\n";
                     cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                    cppCode +=
-                        $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    if (CfContestType == "CF")
+                    {
+                        cppCode +=
+                            $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    }
+                    else
+                    {
+                        cppCode +=
+                            $"* @url:            https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
+                    }
+
                     cppCode += $"* @Description:    \n";
                     cppCode += $"===========================================================\n";
                     cppCode += $"*/";
@@ -1439,7 +1464,6 @@ namespace CFHelperUI
                         }
             }
         }
-
 
 
         private void GetWindowsState()
