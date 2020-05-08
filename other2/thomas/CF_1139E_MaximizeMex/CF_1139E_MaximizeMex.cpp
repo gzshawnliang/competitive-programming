@@ -42,8 +42,6 @@ class solution
         c.assign(n + 1, 0);
         leaveStudent.assign(n + 1, 0);
 
-        
-
         int maxP = 0;
         for (int i = 1; i <= n; ++i)
         {
