@@ -3,7 +3,7 @@
 * @Name:           100735H Words from cubes
 * @Author:         Shawn
 * @create Time:    2020/5/7 22:30:04
-* @url:            https://codeforces.com/problemset/gymProblem/100735/H?mobile=false&locale=en
+* @url:            https://codeforces.com/gym/100735/problem/H
 * @Description:    二分图|匈牙利算法
 ===========================================================
 */
