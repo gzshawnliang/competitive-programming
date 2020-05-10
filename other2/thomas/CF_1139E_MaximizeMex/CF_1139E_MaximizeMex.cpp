@@ -92,7 +92,7 @@ class solution
             int u = n + p[k[i]] + 1;
             int v = c[k[i]];
 
-            //cerr << u << "--" << v << "\n";
+            cerr << "Day" << i << ":"<< u << "--" << v << "\n";
 
             g[u].push_back(v);
             g[v].push_back(u);
