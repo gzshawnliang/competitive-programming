@@ -240,7 +240,24 @@
             "echoCommand": true,
             "showOutput": "always"
         },
-
+        {
+            "taskName": "msvc_build",
+            "command": "${env:VCToolsInstallDir}\\bin\\Hostx64\\x86\\cl.exe",
+            "args": [
+                "/utf-8",
+                "/EHsc",
+                "/Zi", 
+                "/Fe:",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\${fileBasenameNoExtension}.cpp",
+                "/Fo:",
+                "${fileDirname}\\",                
+            ], // 编译命令参数
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile",
+            "isShellCommand": true,
+            "showOutput": "always"
+        },        
         {
             "taskName": "rebuild and test(multi files)",
             "suppressTaskName": true,

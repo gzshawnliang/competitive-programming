@@ -2,6 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "C++ Launch (msvc)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "msvc_build",
+            "externalConsole": true
+        },
+        {
             "name": "C++ Launch (GDB)",
             "type": "cppdbg",
             "request": "launch",
@@ -17,11 +28,11 @@
             "preLaunchTask": "g++",
             "internalConsoleOptions":"neverOpen",
             "setupCommands": [
-                {
-                    "description": "gdbinit",
-                    "text": "python import sys;sys.path.insert(0, 'C:/C++Compiler/MinGW/GCC-9.3.0/mingw64/share/gcc-9.3.0/python');from libstdcxx.v6.printers import register_libstdcxx_printers;register_libstdcxx_printers (None)",
-                    "ignoreFailures": false
-                },
+                // {
+                //     "description": "gdbinit",
+                //     "text": "python import sys;sys.path.insert(0, 'C:/C++Compiler/MinGW/GCC-9.3.0/mingw64/share/gcc-9.3.0/python');from libstdcxx.v6.printers import register_libstdcxx_printers;register_libstdcxx_printers (None)",
+                //     "ignoreFailures": false
+                // },
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",

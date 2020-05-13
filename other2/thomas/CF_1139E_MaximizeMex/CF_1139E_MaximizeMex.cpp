@@ -98,7 +98,7 @@ class solution
             g[v].push_back(u);
         }
 
-        for (int i = 1; i <= d; i++)
+        for (int i = 1; i <= d; ++i)
             cout << ans[i] << "\n";
     }
 };
