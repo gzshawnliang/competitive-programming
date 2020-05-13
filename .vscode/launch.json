@@ -5,7 +5,7 @@
             "name": "C++ Launch (msvc)",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.ex2",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

@@ -248,10 +248,12 @@
                 "/EHsc",
                 "/Zi", 
                 "/Fe:",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\${fileBasenameNoExtension}.ex2",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "/Fo:",
-                "${fileDirname}\\",                
+                "${fileDirname}\\",  
+                "/link",
+                "/INCREMENTAL:NO",
             ], // 编译命令参数
             // Use the standard MS compiler pattern to detect errors, warnings and infos
             "problemMatcher": "$msCompile",

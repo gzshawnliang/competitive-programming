@@ -119,6 +119,7 @@
         "**/.stfolder": true,
         "**/.vscode": true,
         "**/*.exe": true,
+        "**/*.ex2": true,
         "**/*.ilk": true,
         "**/*.obj": true,
         "**/*.pdb": true,
