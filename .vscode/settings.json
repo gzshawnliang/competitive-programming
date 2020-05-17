@@ -108,7 +108,8 @@
         "memory_resource": "cpp",
         "variant": "cpp",
         "charconv": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "ranges": "cpp"
     },
     "files.exclude": {
         "**/.git": true,
