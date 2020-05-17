@@ -14,34 +14,39 @@
 
 using namespace std;
 
-using ll = long long;
+using ill = long long;
 
 void solve()
 {
-    int a, b, c, d; cin >> a >> b >> c >> d;
+    ill a, b, c, d; cin >> a >> b >> c >> d;
 
-    int ans = 0;
-    for (int y = b; y <= c; ++y)
+    ill ans = 0;
+    for (ill y = b; y <= c; ++y)
     {
-        int minX = c - (y - 1), maxX = d - (y - 1);
-        int maxV = d - c + 1;
+        ill minX = c - (y - 1), maxX = d - (y - 1);
+        ill maxV = d - c + 1;
 
         if (b < minX)
         {
             // do nothing
         }
-        else if (a <= minX && minX <= b && maxX >= b)
+        else if (a <= minX && minX <= b && b <= maxX)
         {
             ans += ((1 + (b - minX + 1)) * (b - minX + 1) / 2);
         }
-        else if (minX < a && b < maxX)
+        else if (minX <= a && b <= maxX)
         {
             ans += (((a - minX + 1) + (b - minX + 1)) * (b - a + 1) / 2);
         }
-        else if (minX < a && a <= maxX && maxX <= b)
+        else if (minX <= a && a <= maxX && maxX <= b)
         {
             ans += (((a - minX + 1) + maxV) * (maxV - (a - minX + 1) + 1) / 2);
             ans += maxV * ((b - a + 1) - (maxV - (a - minX + 1) + 1));
+        }
+        else if (a <= minX && maxX <= b)
+        {
+            ans += ((1 + maxV) * maxV / 2);
+            ans += maxV * (b - maxX);
         }
         else
         {

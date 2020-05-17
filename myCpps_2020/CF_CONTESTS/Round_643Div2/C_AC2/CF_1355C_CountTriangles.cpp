@@ -50,7 +50,7 @@ int main()
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
     freopen("CF_1355C_CountTriangles.in", "r", stdin);
-    //freopen("CF_1355C_CountTriangles.out", "w", stdout);
+    freopen("CF_1355C_CountTriangles.out", "w", stdout);
 #endif
 
     solve();
