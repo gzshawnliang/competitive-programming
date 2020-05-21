@@ -32,7 +32,7 @@ void solve()
     for (int i = C; i <= D; ++i)
         ans += sum[i + 1];
 
-    cout << ans << endl;
+    cout << ans << '\n';
 }
 
 int main()
@@ -43,11 +43,10 @@ int main()
 #ifndef ONLINE_JUDGE
     auto start = std::chrono::high_resolution_clock::now();
     freopen("CF_1355C_CountTriangles.in", "r", stdin);
-    //freopen("cf_ac.out", "w", stdout);
+    //freopen("CF_1355C_CountTriangles.out", "w", stdout);
 #endif
 
     solve();
-
     cout.flush();
 
 #ifndef ONLINE_JUDGE
