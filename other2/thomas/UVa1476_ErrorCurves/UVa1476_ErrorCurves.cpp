@@ -36,7 +36,7 @@ double f(double x, vector<coefficient> & coefficients, int n)
 
 //三分搜索
 //https://yuihuang.com/ternary-search/
-https://blog.csdn.net/u011787119/article/details/44598871
+//https://blog.csdn.net/u011787119/article/details/44598871
 double ternary_search(double left, double right, vector<coefficient> & coefficients, int n)
 {
     double midL, midR, ans;
