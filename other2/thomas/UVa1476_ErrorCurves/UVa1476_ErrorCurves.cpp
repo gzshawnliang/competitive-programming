@@ -24,9 +24,9 @@ struct coefficient
 };
 
 
-double f(double x,vector<coefficient> & coefficients)
+double f(double x,vector<coefficient> & coefficients,int n)
 {
-    int n=coefficients.size();
+    //int n=coefficients.size();
     double ret = coefficients[0].a * x * x + coefficients[0].b * x + coefficients[0].c;
     for (int i = 1; i <= n - 1; ++i)
     {
@@ -46,12 +46,14 @@ void solve()
         int n;
         cin >> n;
         vector<coefficient> coefficients;
-        while (n--)
+        int size1=n;
+        while (size1--)
         {
             coefficient coe;
             cin >> coe.a >> coe.b >> coe.c;
             coefficients.push_back(coe);
         }
+        
         double right =1000.0;
         double left =0.0;
         double midl, midr;
@@ -62,11 +64,11 @@ void solve()
             
             //如果是求最大值的话这里判>=即可
             //如果是求最小值的话这里判<=即可
-            if(f(midl,coefficients) <= f(midr,coefficients))
+            if(f(midl,coefficients,n) <= f(midr,coefficients,n))
                 right = midr;
             else left = midl;
         }
-        cout << f(left,coefficients) << "\n";
+        cout << f(left,coefficients,n) << "\n";
 
     }
 }
