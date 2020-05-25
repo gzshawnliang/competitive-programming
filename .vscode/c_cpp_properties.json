@@ -10,7 +10,7 @@
                 "_DEBUG",
                 "UNICODE"
             ],
-            "intelliSenseMode": "gcc-x64",
+            "intelliSenseMode":"msvc-x86",
             "browse": {
                 "path": [
                     "${workspaceRoot}",
