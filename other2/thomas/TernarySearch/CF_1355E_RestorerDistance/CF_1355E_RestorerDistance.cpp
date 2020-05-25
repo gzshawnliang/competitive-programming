@@ -27,7 +27,7 @@ ll f(ll x, vector<ll> & h)
             dn += (h[i] - x);
 
     ll cost = 0;
-
+    
     if (A + R >= M)                 //移动的代价小，优先移动
     {
         ll maxMov = min(up, dn);    //最大移动次数
