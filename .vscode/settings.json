@@ -109,7 +109,12 @@
         "variant": "cpp",
         "charconv": "cpp",
         "bit": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "numbers": "cpp",
+        "span": "cpp",
+        "stop_token": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

@@ -8,9 +8,13 @@
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
-#define NDEBUG //ban assert when submit to online judge
+    #define NDEBUG //ban assert when submit to online judge
 #endif
 #include <bits/stdc++.h>
+
+#ifndef ONLINE_JUDGE
+    #include <chrono>
+#endif
 
 using namespace std;
 
