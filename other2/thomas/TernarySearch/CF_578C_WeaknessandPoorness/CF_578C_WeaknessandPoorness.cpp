@@ -37,8 +37,7 @@ void solve()
 
     //暴力：绝对值最大的子序列和以及其区间
     //超时
-    auto f2 = [&](ldo x) 
-    {
+    auto f2 = [&](ldo x) {
         vector<ldo> s(n + 1, 0);
         for (int i = 1; i <= n; ++i)
             s[i] = a[i] - x;
@@ -59,8 +58,7 @@ void solve()
 
     //动态规划：绝对值最大的子序列和以及其区间
     //https://blog.csdn.net/insistGoGo/article/details/9450979
-    auto f = [&](ldo x) 
-    {
+    auto f = [&](ldo x) {
         vector<ldo> s(n + 1, 0);
         for (int i = 1; i <= n; ++i)
             s[i] = a[i] - x;
@@ -69,11 +67,11 @@ void solve()
         // ldo maxhere = s[1];
         vector<ldo> dpMax(n + 1, 0);
         vector<ldo> dpMin(n + 1, 0);
-        dpMax[1]=s[1];
-        dpMin[1]=s[1];
+        dpMax[1] = s[1];
+        dpMin[1] = s[1];
         for (int i = 2; i <= n; ++i)
         {
-            dpMax[i] = max(dpMax[i - 1] + s[i],s[i]);
+            dpMax[i] = max(dpMax[i - 1] + s[i], s[i]);
             dpMin[i] = min(dpMin[i - 1] + s[i], s[i]);
 
             if (abs(dpMax[i]) > abs(weakness))
@@ -83,16 +81,15 @@ void solve()
                 weakness = dpMin[i];
         }
         return abs(weakness);
-    };    
+    };
 
     //三分法
     ldo right = 10000.0, left = -10000.0;
-    ldo ans=f(left);
-    while (right-left>eps)
+    ldo ans = f(left);
+    while (right - left > eps)
     {
         ldo midL = left + (right - left) / 3.0;
         ldo midR = right - (right - left) / 3.0;
-
 
         ldo fL = f(midL);
         ldo fR = f(midR);
@@ -109,7 +106,6 @@ void solve()
         //cerr << right << " " << left << " " << right - left << " " << ans << endl;
     }
     cout << ans << "\n";
-
 }
 
 int main()
@@ -135,7 +131,3 @@ int main()
 
     return 0;
 }
-
-
-
-
