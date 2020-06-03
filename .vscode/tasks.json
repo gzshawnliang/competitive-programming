@@ -244,6 +244,8 @@
             "taskName": "msvc_build",
             "command": "${env:VCToolsInstallDir}\\bin\\Hostx64\\x86\\cl.exe",
             "args": [
+                "/I",
+                "${workspaceFolder}\\include",
                 "/utf-8",
                 "/std:c++17",
                 "/EHsc",
