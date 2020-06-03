@@ -30,55 +30,54 @@ void solve()
 
     vector<ill> S(Q);
     vector<ill> sum(Q);
-    
-    int lastId=-1;          //S数组最后一个id
-    double miniAvg = 0;     //平均值
-    bool isAdd=false;       //是否有新增值？
-    bool isDiff=true;       //新增的值是否不同？
+
+    int lastId = -1;    //S数组最后一个id
+    double miniAvg = 0; //平均值
+    bool isAdd = false; //是否有新增值？
+    bool isDiff = true; //新增的值是否不同？
     while (Q--)
     {
         int q1;
         ill x;
         cin >> q1;
 
-        auto f = [&](int i) 
-        {
+        auto f = [&](int i) {
             if (lastId == 0)
                 return (double)S[lastId];
 
             ill ret = sum[i];
 
             if (i == lastId)
-                return 1.0 * ret / (1.0 * (i+1));
+                return 1.0 * ret / (1.0 * (i + 1));
             else
-                return 1.0 * (ret + S[lastId] * 1LL) / (1.0 * (i+1 + 1));
-        };        
+                return 1.0 * (ret + S[lastId] * 1LL) / (1.0 * (i + 1 + 1));
+        };
 
         if (q1 == 1)
         {
             ++lastId;
-            isAdd=true;
-            
+            isAdd = true;
+
             cin >> x;
-            if(lastId>0)
+            if (lastId > 0)
             {
-                if(S[lastId-1]!=x)
-                    isDiff =true;
+                if (S[lastId - 1] != x)
+                    isDiff = true;
             }
             else
             {
-                isDiff =true;
+                isDiff = true;
             }
-            
-            S[lastId]=x;
-            if(lastId>0)
+
+            S[lastId] = x;
+            if (lastId > 0)
                 sum[lastId] = sum[lastId - 1] + x;
-            else 
+            else
                 sum[lastId] = x;
         }
         else
         {
-            if(isAdd==true && isDiff==true)
+            if (isAdd == true && isDiff == true)
             {
                 int right = lastId - 1, left = 0;
                 while (right - left > 1)
@@ -98,8 +97,8 @@ void solve()
             }
 
             cout << (double)S[lastId] - miniAvg << "\n";
-            isAdd=false;
-            isDiff=false;
+            isAdd = false;
+            isDiff = false;
         }
     }
 }
