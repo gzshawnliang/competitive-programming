@@ -4,7 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2020/6/3 9:13:19
 * @url:            https://codeforces.com/contest/939/problem/E
-* @Description:    
+* @Description:    三分搜索
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
@@ -31,8 +31,8 @@ void solve()
     vector<ill> S(Q);
     vector<ill> sum(Q);
     
-    int id=-1;
-    double miniAvg = 0;
+    int lastId=-1;          //S数组最后一个id
+    double miniAvg = 0;     //平均值
     bool isAdd=false;       //是否有新增值？
     bool isDiff=true;       //新增的值是否不同？
     while (Q--)
@@ -43,26 +43,26 @@ void solve()
 
         auto f = [&](int i) 
         {
-            if (id == 0)
-                return (double)S[id];
+            if (lastId == 0)
+                return (double)S[lastId];
 
             ill ret = sum[i];
 
-            if (i == id)
+            if (i == lastId)
                 return 1.0 * ret / (1.0 * (i+1));
             else
-                return 1.0 * (ret + S[id] * 1LL) / (1.0 * (i+1 + 1));
+                return 1.0 * (ret + S[lastId] * 1LL) / (1.0 * (i+1 + 1));
         };        
 
         if (q1 == 1)
         {
-            ++id;
+            ++lastId;
             isAdd=true;
             
             cin >> x;
-            if(id>0)
+            if(lastId>0)
             {
-                if(S[id-1]!=x)
+                if(S[lastId-1]!=x)
                     isDiff =true;
             }
             else
@@ -70,17 +70,17 @@ void solve()
                 isDiff =true;
             }
             
-            S[id]=x;
-            if(id>0)
-                sum[id] = sum[id - 1] + x;
+            S[lastId]=x;
+            if(lastId>0)
+                sum[lastId] = sum[lastId - 1] + x;
             else 
-                sum[id] = x;
+                sum[lastId] = x;
         }
         else
         {
             if(isAdd==true && isDiff==true)
             {
-                int right = id - 1, left = 0;
+                int right = lastId - 1, left = 0;
                 while (right - left > 1)
                 {
                     int midL = left + (right - left) / 3.0;
@@ -97,7 +97,7 @@ void solve()
                 miniAvg = min(f(left), f(right));
             }
 
-            cout << (double)S[id] - miniAvg << "\n";
+            cout << (double)S[lastId] - miniAvg << "\n";
             isAdd=false;
             isDiff=false;
         }
