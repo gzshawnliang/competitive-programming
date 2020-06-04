@@ -20,7 +20,7 @@
 using namespace std;
 
 using ill = long long;
-const double eps = 1e-12;
+
 
 void solve()
 {
@@ -28,77 +28,58 @@ void solve()
     int Q;
     cin >> Q;
 
-    vector<ill> S(Q);
-    vector<ill> sum(Q);
+    vector<ill> S;      //S数组
+    vector<ill> sum;    //S数组第i个元素之前的和
 
-    int lastId = -1;    //S数组最后一个id
-    double miniAvg = 0; //平均值
-    bool isAdd = false; //是否有新增值？
-    bool isDiff = true; //新增的值是否不同？
+    auto f = [&](int i) 
+    {
+        int sSize=S.size();
+        if (sSize == 1)
+            return (double)S.back();
+
+        ill ret = sum[i];
+
+        if (i == sSize-1)
+            return 1.0 * ret / (1.0 * (i + 1));
+        else
+            return 1.0 * (ret + S.back() * 1LL) / (1.0 * (i + 1 + 1));
+    };
+
     while (Q--)
     {
         int q1;
         ill x;
         cin >> q1;
 
-        auto f = [&](int i) {
-            if (lastId == 0)
-                return (double)S[lastId];
-
-            ill ret = sum[i];
-
-            if (i == lastId)
-                return 1.0 * ret / (1.0 * (i + 1));
-            else
-                return 1.0 * (ret + S[lastId] * 1LL) / (1.0 * (i + 1 + 1));
-        };
-
         if (q1 == 1)
         {
-            ++lastId;
-            isAdd = true;
-
             cin >> x;
-            if (lastId > 0)
-            {
-                if (S[lastId - 1] != x)
-                    isDiff = true;
-            }
-            else
-            {
-                isDiff = true;
-            }
 
-            S[lastId] = x;
-            if (lastId > 0)
-                sum[lastId] = sum[lastId - 1] + x;
+            if (S.size() > 0)
+                sum.push_back(sum.back()+x);
             else
-                sum[lastId] = x;
+                sum.push_back(x);
+
+            S.push_back(x);
         }
         else
         {
-            if (isAdd == true && isDiff == true)
+
+            int right = S.size() - 1, left = 0;
+            while (right - left > 1)
             {
-                int right = lastId - 1, left = 0;
-                while (right - left > 1)
-                {
-                    int midL = left + (right - left) / 3.0;
-                    int midR = right - (right - left) / 3.0;
+                int midL = left + (right - left) / 3.0;
+                int midR = right - (right - left) / 3.0;
 
-                    //如果是求最大值的话这里判>=即可
-                    //如果是求最小值的话这里判<=即可
-                    if (f(midL) <= f(midR))
-                        right = midR - 1;
-                    else
-                        left = midL + 1;
-                }
-
-                miniAvg = min(f(left), f(right));
+                //如果是求最大值的话这里判>=即可
+                //如果是求最小值的话这里判<=即可
+                if (f(midL) <= f(midR))
+                    right = midR - 1;
+                else
+                    left = midL + 1;
             }
 
-            cout << (double)S[lastId] - miniAvg << "\n";
-            isAdd = false;
-            isDiff = false;
+            cout << (double)S.back() - min(f(left), f(right)) << "\n";
         }
     }
 }
