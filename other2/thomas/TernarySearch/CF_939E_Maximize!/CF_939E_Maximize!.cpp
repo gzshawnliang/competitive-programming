@@ -31,15 +31,14 @@ void solve()
     vector<ill> S;      //S数组
     vector<ill> sum;    //S数组第i个元素之前的和
 
-    auto f = [&](int i) 
-    {
-        int sSize=S.size();
+    auto f = [&](int i) {
+        int sSize = S.size();
         if (sSize == 1)
             return (double)S.back();
 
         ill ret = sum[i];
 
-        if (i == sSize-1)
+        if (i == sSize - 1)
             return 1.0 * ret / (1.0 * (i + 1));
         else
             return 1.0 * (ret + S.back() * 1LL) / (1.0 * (i + 1 + 1));
@@ -47,11 +46,11 @@ void solve()
 
     while (Q--)
     {
-        int q1;
+        int q;
         ill x;
-        cin >> q1;
+        cin >> q;
 
-        if (q1 == 1)
+        if (q == 1)
         {
             cin >> x;
 
