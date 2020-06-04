@@ -4,7 +4,7 @@
 * @Author:         Thomas
 * @create Time:    2020/6/4 15:17:13
 * @url:            https://codeforces.com/contest/782/problem/B
-* @Description:    
+* @Description:    三分法
 ===========================================================
 */
 #ifdef ONLINE_JUDGE
@@ -37,7 +37,9 @@ void solve()
     for (int i = 0; i <= n - 1; ++i)
         cin >> v[i];
 
-    auto f = [&](double y) {
+    //所有人到达y坐标时候的时间
+    auto f = [&](double y) 
+    {
         double t = 0;
         for (int i = 0; i <= n - 1; ++i)
             t = max(t, abs(x[i] * 1.0 - y) / (v[i] * 1.0));
@@ -45,6 +47,7 @@ void solve()
         return t;
     };
 
+    //三分到达y的时间
     double right = 1e9 + 1;
     double left = 0;
     while (right - left > eps)
