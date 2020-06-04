@@ -32,34 +32,33 @@ void solve()
     vector<int> x(n);
     vector<int> v(n);
     for (int i = 0; i <= n - 1; ++i)
-        cin>>x[i];
-
+        cin >> x[i];
 
     for (int i = 0; i <= n - 1; ++i)
-        cin>>v[i];
+        cin >> v[i];
 
-    auto f=[&](double y){
-        double t=0;
+    auto f = [&](double y) {
+        double t = 0;
         for (int i = 0; i <= n - 1; ++i)
-            t= max(t, abs(x[i]*1.0-y) /(v[i]*1.0));
-        
+            t = max(t, abs(x[i] * 1.0 - y) / (v[i] * 1.0));
+
         return t;
     };
 
-    double right = 1e9+1;
+    double right = 1e9 + 1;
     double left = 0;
     while (right - left > eps)
     {
-        double midL = left*1.0 + (right - left) / 3.0;
-        double midR = right*1.0 - (right - left) / 3.0;
+        double midL = left * 1.0 + (right - left) / 3.0;
+        double midR = right * 1.0 - (right - left) / 3.0;
 
         //如果是求最大值的话这里判>=即可
         //如果是求最小值的话这里判<=即可
         if (f(midL) <= f(midR))
-            right = midR ;
+            right = midR;
         else
-            left = midL ;
-    }    
+            left = midL;
+    }
 
     cout << f(left) << "\n";
 }
