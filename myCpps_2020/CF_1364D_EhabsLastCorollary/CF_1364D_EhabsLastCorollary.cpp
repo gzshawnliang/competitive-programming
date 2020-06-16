@@ -22,7 +22,7 @@ using namespace std;
 
 using ill = long long;
 
-bool dfs(int las, int u, stack<int> &stk, vector<int> &col, vector<int> &vis, int k, vector<pair<int, int>> &pth, vector<vector<int>> &g)
+bool dfs(int las, int u, stack<int> &stk, vector<int> &col, vector<int> &vis, int k, vector<pair<int, int>> &pth, vector<deque<int>> &g)
 {
     for (auto v:g[u])
     {
@@ -74,38 +74,35 @@ bool dfs(int las, int u, stack<int> &stk, vector<int> &col, vector<int> &vis, in
 
                 if (nd1 == -1 && nd2 == -1) break;
 
-                while (true)
+                int sizIn = abs(pos[nd1] - pos[nd2]) + 1, sizOut = sizQ - (abs(pos[nd1] - pos[nd2]) + 1);
+                if (sizIn < sizOut || sizOut <= 2)
                 {
-                    if      (q.front() == nd1)
+                    while (q.front() != nd1 && q.front() != nd2)
                     {
-                        nd1 = -1;
-                        break;
-                    }
-                    else if (q.front() == nd2)
-                    {
-                        nd2 = -1;
-                        break;
+                        q.pop_front();
                     }
 
-                    pos[q.front()] = 0;
-                    q.pop_front();
+                    while (q.back() != nd1 && q.back() != nd2)
+                    {
+                        q.pop_back();
+                    }
                 }
-
-                while (true)
+                else
                 {
-                    if      (q.back() == nd1)
+                    deque<int> tmpQ;
+                    while (q.front() != nd1 && q.front() != nd2)
                     {
-                        nd1 = -1;
-                        break;
-                    }
-                    else if (q.back() == nd2)
-                    {
-                        nd2 = -1;
-                        break;
+                        tmpQ.push_front(q.front());
+                        q.pop_front();
                     }
 
-                    pos[q.back()] = 0;
-                    q.pop_back();
+                    while (q.back() != nd1 && q.back() != nd2)
+                    {
+                        tmpQ.push_back(q.back());
+                        q.pop_back();
+                    }
+
+                    q = tmpQ;
                 }
             }
 
@@ -168,11 +165,11 @@ void solve()
     int n, m, k; cin >> n >> m >> k;
 
     vector<pair<int, int>> pth(m);
-    vector<vector<int>> g(n + 1);
+    vector<deque<int>> g(n + 1);
     for (int i = 0; i <= m - 1; ++i)
     {
         cin >> pth[i].first >> pth[i].second;
-        g[pth[i].first].push_back(pth[i].second); g[pth[i].second].push_back(pth[i].first);
+        g[pth[i].first].push_back(pth[i].second); g[pth[i].second].push_front(pth[i].first);
     }
 
     stack<int> stk; stk.push(1);
