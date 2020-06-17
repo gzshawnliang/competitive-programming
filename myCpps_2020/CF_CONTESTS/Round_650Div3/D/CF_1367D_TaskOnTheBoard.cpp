@@ -32,20 +32,49 @@ void solve()
         vector<int> b(m, 0);
         for (int i = 0; i <= m - 1; ++i) cin >> b[i];
 
+        sort(s.begin(), s.end(), greater<char>());
+
         int sizS = s.size();
-        set<char> st;
-        for (int i = 0; i <= sizS - 1; ++i)
+        string dic = ""; dic += s[0];
+        vector<int> cntC('z' + 1, 0); ++cntC[s[0]];
+        for (int i = 1; i <= sizS - 1; ++i)
         {
-            st.insert(s[i]);
+            if (s[i] != s[i - 1]) dic += s[i];
+            ++cntC[s[i]];
         }
 
-        string stm = "";
-        for (auto it = st.begin(); it != st.end(); ++it)
+        int sizD = dic.size();
+        for (int c = 1; c <= sizS - sizD; ++c)
         {
-            stm += *it;
+            dic.push_back(s.back());
         }
 
-        for (int i = 0;)
+        int indD = 0;
+        vector<char> t(m, '-');
+        for (int c = 1; c <= m; ++c)
+        {
+            vector<int> pos;
+            for (int i = 0; i <= m - 1; ++i)
+                if (b[i] == 0 && t[i] == '-')
+                    pos.push_back(i);
+
+            int sizP = pos.size();
+            while (cntC[dic[indD]] < sizP) ++indD;
+
+            for (int k:pos) t[k] = dic[indD];
+            ++indD;
+
+            for (int i = 0; i <= m - 1; ++i)
+            {
+                for (int k:pos)
+                {
+                    b[i] -= abs(k - i);
+                }
+            }
+        }
+
+        for (char ch:t) cout << ch;
+        cout << '\n';
     }
 }
 
@@ -56,7 +85,7 @@ int main()
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
     freopen("CF_1367D_TaskOnTheBoard.in", "r", stdin);
-    //freopen("CF_1367D_TaskOnTheBoard.out", "w", stdout);
+    freopen("CF_1367D_TaskOnTheBoard.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
 
