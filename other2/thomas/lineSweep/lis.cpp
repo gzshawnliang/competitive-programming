@@ -47,6 +47,7 @@ int lengthOfLISLineSweep(vector<int> & nums)
     if (len == 0)
         return 0;
 
+    //result[i]:长度为i的上升子序列的最末元素，若有多个长度为i的上升子序列，则记录最小的那个最末元素。
     vector<int> result(len);
 
     int ans = 0;
