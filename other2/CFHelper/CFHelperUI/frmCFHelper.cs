@@ -194,94 +194,6 @@ namespace CFHelperUI
             txtError.Visible = false;
             txtError.Clear();
 
-            //string url =
-            //    $"https://codeforces.com/api/contest.standings?contestId={contestId}&from=1&count=1&showUnofficial=true";
-
-
-            //string apiKey = Registry.RegRead("CFKey");
-            //string apiSecret= Registry.RegRead("CFSecret");
-
-            //if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
-            //{
-            //    apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
-            //}
-
-            ////https://codeforces.com/apiHelp
-
-
-            //if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
-            //{
-            //    string random6 = new Random().Next(100000, 999999).ToString();
-            //    string unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
-            //    string apiSig = $"{random6}/contest.standings?apiKey={apiKey}&contestId={contestId}&count=1&from=1&showUnofficial=true&time={unixTimestamp}#{apiSecret}";
-            //    apiSig = SHA.GenerateSHA512String(apiSig).ToLower();
-
-            //    url += $"&apiKey={apiKey}&time={unixTimestamp}&apiSig={random6}{apiSig}";
-            //}
-
-            //try
-            //{
-            //    dynamic o = GetResponse(url);
-            //    string ids = string.Empty;
-
-            //    if (o.status == "OK")
-            //    {
-            //        problemDict = new Dictionary<string, string>();
-
-            //        lblContest.Text = o.result.contest.name;
-
-            //        this.listView1.Columns.Add("id", 36, HorizontalAlignment.Left);
-            //        this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
-            //        this.listView1.Columns.Add("rating", 64, HorizontalAlignment.Left);
-            //        this.listView1.Columns.Add("tag", 300, HorizontalAlignment.Left);
-            //        this.listView1.BeginUpdate();
-            //        dynamic problemsList = o.result.problems;
-            //        foreach (dynamic problem in problemsList)
-            //        {
-            //            string problemindex = problem.index.ToString();
-
-            //            if (!string.IsNullOrEmpty(problemId))
-            //                if (problemId.ToUpper() != problemindex.ToUpper())
-            //                    continue;
-
-            //            problemDict.Add(problemindex.ToUpper(), problem.name.ToString());
-            //            string s = $"({problemindex.ToUpper()}){problem.name}";
-            //            ids += $"{problem.index} ";
-
-            //            ListViewItem lvi = new ListViewItem(problemindex.ToUpper());
-            //            lvi.SubItems.Add(problem.name.ToString());
-            //            if (problem.rating != null)
-            //                lvi.SubItems.Add(problem.rating.ToString());
-            //            else
-            //                lvi.SubItems.Add("");
-            //            string tags = "";
-            //            foreach (var tag in problem.tags)
-            //            {
-            //                tags += tag.ToString() + ",";
-            //            }
-            //            lvi.SubItems.Add(tags);
-            //            this.listView1.Items.Add(lvi);
-            //            //Console.WriteLine(s);
-            //        }
-            //        this.listView1.EndUpdate();
-            //        this.listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            //    }
-            //    else if (o.status == "FAILED")
-            //    {
-            //        lblContest.Text = o.comment;
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine(o);
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    txtError.Text = e.ToString();
-            //    txtError.Visible = true;
-            //    lblContest.Text = e.Message;
-            //}
-
             dynamic o = GetCfContest(contestId.ToString(), out Exception ex);
             if (o != null)
             {
@@ -918,7 +830,7 @@ namespace CFHelperUI
                         $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
                     cppCode += $"* @Author:         {txtAuthor.Text}\n";
                     cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                    if (CfContestType == "CF")
+                    if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
                     {
                         cppCode +=
                             $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
@@ -967,6 +879,7 @@ namespace CFHelperUI
             msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{msg}\n是否继续？";
 
             //Dictionary<string, string> createResult = new Dictionary<string, string>();
+            string contesName = lblContest.Text;
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -981,7 +894,7 @@ namespace CFHelperUI
                         $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
                     cppCode += $"* @Author:         {txtAuthor.Text}\n";
                     cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                    if (CfContestType == "CF")
+                    if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
                     {
                         cppCode +=
                             $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";

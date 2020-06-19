@@ -54,3 +54,4 @@ D:\codes\competitive-programming\other2\CFHelper\CFHelperUI\obj\Release\CFHelper
 D:\codes\competitive-programming\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.pdb
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.frmCFAuthorization.resources
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.csproj.CoreCompileInputs.cache
+C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\CFHelperUI\obj\Release\CFHelperUI.csprojAssemblyReference.cache
