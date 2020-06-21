@@ -63,8 +63,8 @@ namespace CFHelperUI
         public frmCFHelper(string defaultDir):this()
         {
             _defaultDir = defaultDir;
-            //Config.EncryptKey = UHWID.GetID();
-            Config.EncryptKey = "123";
+            Config.EncryptKey = UHWID.GetID();
+            //Config.EncryptKey = "123";
         }
 
         private void butCancel_Click(object sender, EventArgs e)
