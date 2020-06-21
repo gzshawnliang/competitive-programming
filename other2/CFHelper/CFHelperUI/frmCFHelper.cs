@@ -63,7 +63,8 @@ namespace CFHelperUI
         public frmCFHelper(string defaultDir):this()
         {
             _defaultDir = defaultDir;
-            Config.EncryptKey = UHWID.GetID();
+            //Config.EncryptKey = UHWID.GetID();
+            Config.EncryptKey = "123";
         }
 
         private void butCancel_Click(object sender, EventArgs e)
@@ -142,7 +143,17 @@ namespace CFHelperUI
             //https://codeforces.com/apiHelp
             if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
             {
-                apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
+                try
+                {
+                    apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
+                }
+                catch (Exception e)
+                {
+                    ex = e;
+                    return null;
+                }
+                //apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
+
                 string random6 = new Random().Next(100000, 999999).ToString();
                 string unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
                 string apiSig = $"{random6}/contest.standings?apiKey={apiKey}&contestId={contestId}&count=1&from=1&showUnofficial=true&time={unixTimestamp}#{apiSecret}";
