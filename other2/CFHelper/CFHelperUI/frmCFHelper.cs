@@ -1372,9 +1372,10 @@ namespace CFHelperUI
             GetWindowsState();
             this.txtAuthor.Text = Registry.RegRead("Author");
 
-            string currFilePath = Assembly.GetExecutingAssembly().Location;
-            DateTime dt = new FileInfo(currFilePath).LastWriteTime;
-            this.Text += $" {dt.ToString("yy.MMdd.HHmm")}";
+            //string currFilePath = Assembly.GetExecutingAssembly().Location;
+            //DateTime dt = new FileInfo(currFilePath).LastWriteTime;
+
+            this.Text += $" {Application.ProductVersion}";
 
             var ojType = Registry.RegRead("OJType");
             if (!string.IsNullOrEmpty(ojType))
