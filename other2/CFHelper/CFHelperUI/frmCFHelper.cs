@@ -185,12 +185,37 @@ namespace CFHelperUI
         private void frmCFHelper_Load(object sender, EventArgs e)
         {
             //this.Text += "["+_defaultDir;
-            txtWorkingDir.Text = Registry.RegRead("WorkingDir");
-            if (string.IsNullOrEmpty(txtWorkingDir.Text.TrimEnd()))
-                if (!string.IsNullOrEmpty(_defaultDir))
-                    txtWorkingDir.Text = _defaultDir;
+            string saveWorkingDir = Registry.RegRead("WorkingDir");
+            saveWorkingDir = saveWorkingDir.TrimEnd();
+            string workspaceFolder = _defaultDir;
+            if (string.IsNullOrEmpty(workspaceFolder))
+                workspaceFolder = GetApplicationRoot();
+
+            if (string.IsNullOrEmpty(saveWorkingDir))
+                    txtWorkingDir.Text = workspaceFolder;
+            else if (Directory.Exists(saveWorkingDir))
+            {
+                DirectoryInfo di1 = new DirectoryInfo(workspaceFolder);
+                DirectoryInfo di2 = new DirectoryInfo(saveWorkingDir);
+                bool isParent = false;
+                while (di2.Parent != null)
+                {
+                    if (di2.Parent.FullName == di1.FullName)
+                    {
+                        isParent = true;
+                        break;
+                    }
+                    else di2 = di2.Parent;
+                }
+
+                if (isParent)
+                    txtWorkingDir.Text = saveWorkingDir;
                 else
-                    txtWorkingDir.Text = GetApplicationRoot();
+                    txtWorkingDir.Text = workspaceFolder;
+            }
+            else
+                txtWorkingDir.Text = workspaceFolder;
+
             CheckCFAuth();
 
             GetWindowsState();
