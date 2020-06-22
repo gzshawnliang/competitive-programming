@@ -1037,14 +1037,14 @@ namespace CFHelperUI
                     //cppCode += $"===========================================================\n";
                     //cppCode += $"*/";
 
+                    string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
                     string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
                         url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
                     else
                         url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
 
-                    string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url,"");
-                    string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
+                    string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
                     string filePath = $"{rootDir}\\{contestSubDir}\\{contesName}\\{problemKey}";
                     CreateDirAndCppFile(filePath, fileName, cppCode);
 
@@ -1108,14 +1108,14 @@ namespace CFHelperUI
                     //cppCode += $"===========================================================\n";
                     //cppCode += $"*/";
 
+                    string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
                     string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
                         url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
                     else
                         url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
-                    string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url,"");
+                    string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
 
-                    string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
                     CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
 
                     string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.cpp";
@@ -1153,7 +1153,7 @@ namespace CFHelperUI
                 //cppCode += $"===========================================================\n";
                 //cppCode += $"*/";
 
-                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text,item.SubItems[2].Text.Trim());
+                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text,item.SubItems[2].Text.Trim(), fileName);
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1201,7 +1201,7 @@ namespace CFHelperUI
                 //cppCode += $"===========================================================\n";
                 //cppCode += $"*/";
 
-                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, item.SubItems[2].Text.Trim());
+                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, item.SubItems[2].Text.Trim(), fileName);
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1271,7 +1271,7 @@ namespace CFHelperUI
                         desc += $"{temp}{oProperty[s]}\n";
                     }
 
-                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, desc);
+                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, desc, fileName);
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1370,7 +1370,7 @@ namespace CFHelperUI
                 //cppCode += $"===========================================================\n";
                 //cppCode += $"*/";
 
-                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, "");
+                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, "", fileName);
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
@@ -1406,7 +1406,7 @@ namespace CFHelperUI
                 //cppCode += $"===========================================================\n";
                 //cppCode += $"*/";
 
-                string cppCode = GetTemplateCpp($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","");
+                string cppCode = GetTemplateCpp($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","", subDirName);
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
                 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{subDirName}.cpp";
@@ -1416,7 +1416,7 @@ namespace CFHelperUI
             }
         }
 
-        private string GetTemplateCpp(string p_Name,string p_Author,string p_CreateTime, string p_Url,string p_Description)
+        private string GetTemplateCpp(string p_Name,string p_Author,string p_CreateTime, string p_Url,string p_Description,string p_fileNameNoExtension)
         {
             string templateFile = $"{System.IO.Path.GetDirectoryName(Application.ExecutablePath)}\\template.cpp";
             string cppCode = "";
@@ -1432,6 +1432,7 @@ namespace CFHelperUI
                 cppCode = cppCode.Replace("{CreateTime}", p_CreateTime);
                 cppCode = cppCode.Replace("{Url}", p_Url);
                 cppCode = cppCode.Replace("{Description}", p_Description);
+                cppCode = cppCode.Replace("{fileNameNoExtension}", p_fileNameNoExtension);
             }
             else
             {
