@@ -4,7 +4,7 @@
   <description asmv2:iconFile="App.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="CFHelperUI" version="20.6.22.1" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="CFHelperUI" version="20.6.22.16" language="neutral" processorArchitecture="msil" />
     <commandLine file="CFHelperUI.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CFHelperUI.exe" size="107440">
-      <assemblyIdentity name="CFHelperUI" version="20.6.22.1" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CFHelperUI.exe" size="121264">
+      <assemblyIdentity name="CFHelperUI" version="20.6.22.16" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WbRwyXdGWaQxiAchIbcdQKHbZrIiGabfS3LwMFW40CU=</dsig:DigestValue>
+        <dsig:DigestValue>G5LCLJuCWnEih43V4flNKe1VCwbwtKHbhP73he4Gp2Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -96,13 +96,22 @@
       <dsig:DigestValue>1SR2HBfPDeqUEJ8/zazS7LZ1UBFf+eAwf3jAUFVBnv4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="template.cpp" size="894">
+  <file name="template.cpp" size="892">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>0UF/BCLJ7M3QQeF+dK+b2NFArYDVzj+RtRk+vzDRZ/w=</dsig:DigestValue>
+      <dsig:DigestValue>pdAdjq0lz94Gh2wc/JgyMC0I5VNPVn6QW+McclKrbmw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="templateSample.cpp" size="3335">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>1g2VhGo6iybniQp8DuWraFVpur1eGjeOdngLZLHgFYc=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

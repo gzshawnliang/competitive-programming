@@ -23,6 +23,7 @@ using HtmlAgilityPack;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
+using System.Globalization;
 
 namespace CFHelperUI
 {
@@ -33,6 +34,120 @@ namespace CFHelperUI
         private readonly string _defaultDir;
 
         private string inputFileContent;    //USACO SAMPLE INPUT数据
+
+        private readonly Dictionary<string, string> _timeZoneDict = new Dictionary<string, string>()
+        {
+        { "Dateline Standard Time"," (UTC-12:00) International Date Line West" },
+        { "UTC-11"," (UTC-11:00) Coordinated Universal Time-11" },
+        { "Hawaiian Standard Time"," (UTC-10:00) Hawaii" },
+        { "Alaskan Standard Time"," (UTC-09:00) Alaska" },
+        { "Pacific Standard Time (Mexico)"," (UTC-08:00) Baja California" },
+        { "Pacific Standard Time"," (UTC-08:00) Pacific Time (US & Canada)" },
+        { "US Mountain Standard Time"," (UTC-07:00) Arizona" },
+        { "Mountain Standard Time (Mexico)"," (UTC-07:00) Chihuahua, La Paz, Mazatlan" },
+        { "Mountain Standard Time"," (UTC-07:00) Mountain Time (US & Canada)" },
+        { "Central America Standard Time"," (UTC-06:00) Central America" },
+        { "Central Standard Time"," (UTC-06:00) Central Time (US & Canada)" },
+        { "Central Standard Time (Mexico)"," (UTC-06:00) Guadalajara, Mexico City, Monterrey" },
+        { "Canada Central Standard Time"," (UTC-06:00) Saskatchewan" },
+        { "SA Pacific Standard Time"," (UTC-05:00) Bogota, Lima, Quito, Rio Branco" },
+        { "Eastern Standard Time (Mexico)"," (UTC-05:00) Chetumal" },
+        { "Eastern Standard Time"," (UTC-05:00) Eastern Time (US & Canada)" },
+        { "US Eastern Standard Time"," (UTC-05:00) Indiana (East)" },
+        { "Venezuela Standard Time"," (UTC-04:30) Caracas" },
+        { "Paraguay Standard Time"," (UTC-04:00) Asuncion" },
+        { "Atlantic Standard Time"," (UTC-04:00) Atlantic Time (Canada)" },
+        { "Central Brazilian Standard Time"," (UTC-04:00) Cuiaba" },
+        { "SA Western Standard Time"," (UTC-04:00) Georgetown, La Paz, Manaus, San Juan" },
+        { "Newfoundland Standard Time"," (UTC-03:30) Newfoundland" },
+        { "E. South America Standard Time"," (UTC-03:00) Brasilia" },
+        { "SA Eastern Standard Time"," (UTC-03:00) Cayenne, Fortaleza" },
+        { "Argentina Standard Time"," (UTC-03:00) City of Buenos Aires" },
+        { "Greenland Standard Time"," (UTC-03:00) Greenland" },
+        { "Montevideo Standard Time"," (UTC-03:00) Montevideo" },
+        { "Bahia Standard Time"," (UTC-03:00) Salvador" },
+        { "Pacific SA Standard Time"," (UTC-03:00) Santiago" },
+        { "UTC-02"," (UTC-02:00) Coordinated Universal Time-02" },
+        { "Mid-Atlantic Standard Time"," (UTC-02:00) Mid-Atlantic - Old" },
+        { "Azores Standard Time"," (UTC-01:00) Azores" },
+        { "Cape Verde Standard Time"," (UTC-01:00) Cabo Verde Is." },
+        { "Morocco Standard Time"," (UTC) Casablanca" },
+        { "UTC"," (UTC) Coordinated Universal Time" },
+        { "GMT Standard Time"," (UTC) Dublin, Edinburgh, Lisbon, London" },
+        { "Greenwich Standard Time"," (UTC) Monrovia, Reykjavik" },
+        { "W. Europe Standard Time"," (UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna" },
+        { "Central Europe Standard Time"," (UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague" },
+        { "Romance Standard Time"," (UTC+01:00) Brussels, Copenhagen, Madrid, Paris" },
+        { "Central European Standard Time"," (UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb" },
+        { "W. Central Africa Standard Time"," (UTC+01:00) West Central Africa" },
+        { "Namibia Standard Time"," (UTC+01:00) Windhoek" },
+        { "Jordan Standard Time"," (UTC+02:00) Amman" },
+        { "GTB Standard Time"," (UTC+02:00) Athens, Bucharest" },
+        { "Middle East Standard Time"," (UTC+02:00) Beirut" },
+        { "Egypt Standard Time"," (UTC+02:00) Cairo" },
+        { "Syria Standard Time"," (UTC+02:00) Damascus" },
+        { "E. Europe Standard Time"," (UTC+02:00) E. Europe" },
+        { "South Africa Standard Time"," (UTC+02:00) Harare, Pretoria" },
+        { "FLE Standard Time"," (UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius" },
+        { "Turkey Standard Time"," (UTC+02:00) Istanbul" },
+        { "Israel Standard Time"," (UTC+02:00) Jerusalem" },
+        { "Kaliningrad Standard Time"," (UTC+02:00) Kaliningrad (RTZ 1)" },
+        { "Libya Standard Time"," (UTC+02:00) Tripoli" },
+        { "Arabic Standard Time"," (UTC+03:00) Baghdad" },
+        { "Arab Standard Time"," (UTC+03:00) Kuwait, Riyadh" },
+        { "Belarus Standard Time"," (UTC+03:00) Minsk" },
+        { "Russian Standard Time"," (UTC+03:00) Moscow, St. Petersburg, Volgograd (RTZ 2)" },
+        { "E. Africa Standard Time"," (UTC+03:00) Nairobi" },
+        { "Iran Standard Time"," (UTC+03:30) Tehran" },
+        { "Arabian Standard Time"," (UTC+04:00) Abu Dhabi, Muscat" },
+        { "Azerbaijan Standard Time"," (UTC+04:00) Baku" },
+        { "Russia Time Zone 3"," (UTC+04:00) Izhevsk, Samara (RTZ 3)" },
+        { "Mauritius Standard Time"," (UTC+04:00) Port Louis" },
+        { "Georgian Standard Time"," (UTC+04:00) Tbilisi" },
+        { "Caucasus Standard Time"," (UTC+04:00) Yerevan" },
+        { "Afghanistan Standard Time"," (UTC+04:30) Kabul" },
+        { "West Asia Standard Time"," (UTC+05:00) Ashgabat, Tashkent" },
+        { "Ekaterinburg Standard Time"," (UTC+05:00) Ekaterinburg (RTZ 4)" },
+        { "Pakistan Standard Time"," (UTC+05:00) Islamabad, Karachi" },
+        { "India Standard Time"," (UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi" },
+        { "Sri Lanka Standard Time"," (UTC+05:30) Sri Jayawardenepura" },
+        { "Nepal Standard Time"," (UTC+05:45) Kathmandu" },
+        { "Central Asia Standard Time"," (UTC+06:00) Astana" },
+        { "Bangladesh Standard Time"," (UTC+06:00) Dhaka" },
+        { "N. Central Asia Standard Time"," (UTC+06:00) Novosibirsk (RTZ 5)" },
+        { "Myanmar Standard Time"," (UTC+06:30) Yangon (Rangoon)" },
+        { "SE Asia Standard Time"," (UTC+07:00) Bangkok, Hanoi, Jakarta" },
+        { "North Asia Standard Time"," (UTC+07:00) Krasnoyarsk (RTZ 6)" },
+        //{ "China Standard Time"," (UTC+08:00) Beijing, Guangzhou, Chongqing, Hong Kong, Urumqi" },
+        { "China Standard Time"," (UTC+08:00)" },
+        { "North Asia East Standard Time"," (UTC+08:00) Irkutsk (RTZ 7)" },
+        { "Singapore Standard Time"," (UTC+08:00) Kuala Lumpur, Singapore" },
+        { "W. Australia Standard Time"," (UTC+08:00) Perth" },
+        { "Taipei Standard Time"," (UTC+08:00) Taipei" },
+        { "Ulaanbaatar Standard Time"," (UTC+08:00) Ulaanbaatar" },
+        { "North Korea Standard Time"," (UTC+08:30) Pyongyang" },
+        { "Tokyo Standard Time"," (UTC+09:00) Osaka, Sapporo, Tokyo" },
+        { "Korea Standard Time"," (UTC+09:00) Seoul" },
+        { "Yakutsk Standard Time"," (UTC+09:00) Yakutsk (RTZ 8)" },
+        { "Cen. Australia Standard Time"," (UTC+09:30) Adelaide" },
+        { "AUS Central Standard Time"," (UTC+09:30) Darwin" },
+        { "E. Australia Standard Time"," (UTC+10:00) Brisbane" },
+        { "AUS Eastern Standard Time"," (UTC+10:00) Canberra, Melbourne, Sydney" },
+        { "West Pacific Standard Time"," (UTC+10:00) Guam, Port Moresby" },
+        { "Tasmania Standard Time"," (UTC+10:00) Hobart" },
+        { "Magadan Standard Time"," (UTC+10:00) Magadan" },
+        { "Vladivostok Standard Time"," (UTC+10:00) Vladivostok, Magadan (RTZ 9)" },
+        { "Russia Time Zone 10"," (UTC+11:00) Chokurdakh (RTZ 10)" },
+        { "Central Pacific Standard Time"," (UTC+11:00) Solomon Is., New Caledonia" },
+        { "Russia Time Zone 11"," (UTC+12:00) Anadyr, Petropavlovsk-Kamchatsky (RTZ 11)" },
+        { "New Zealand Standard Time"," (UTC+12:00) Auckland, Wellington" },
+        { "UTC+12"," (UTC+12:00) Coordinated Universal Time+12" },
+        { "Fiji Standard Time"," (UTC+12:00) Fiji" },
+        { "Kamchatka Standard Time"," (UTC+12:00) Petropavlovsk-Kamchatsky - Old" },
+        { "Tonga Standard Time"," (UTC+13:00) Nuku'alofa" },
+        { "Samoa Standard Time"," (UTC+13:00) Samoa" },
+        { "Line Islands Standard Time"," (UTC+14:00) Kiritimati Island" },
+    };
 
         private string rootDir
         {
@@ -65,6 +180,47 @@ namespace CFHelperUI
             _defaultDir = defaultDir;
             Config.EncryptKey = UHWID.GetID();
             //Config.EncryptKey = "123";
+        }
+
+        private void frmCFHelper_Load(object sender, EventArgs e)
+        {
+            //this.Text += "["+_defaultDir;
+            txtWorkingDir.Text = Registry.RegRead("WorkingDir");
+            if (string.IsNullOrEmpty(txtWorkingDir.Text.TrimEnd()))
+                if (!string.IsNullOrEmpty(_defaultDir))
+                    txtWorkingDir.Text = _defaultDir;
+                else
+                    txtWorkingDir.Text = GetApplicationRoot();
+            CheckCFAuth();
+
+            GetWindowsState();
+            this.txtAuthor.Text = Registry.RegRead("Author");
+
+            //string currFilePath = Assembly.GetExecutingAssembly().Location;
+            //DateTime dt = new FileInfo(currFilePath).LastWriteTime;
+
+            this.Text += $" {Application.ProductVersion}";
+
+            var ojType = Registry.RegRead("OJType");
+            if (!string.IsNullOrEmpty(ojType))
+            {
+                foreach (Control ctl in this.Controls)
+                    if (ctl is RadioButton)
+                        if (ctl.Name == ojType)
+                        {
+                            ((RadioButton)ctl).Checked = true;
+                            break;
+                        }
+            }
+
+            //TimeZoneInfo localZone = TimeZoneInfo.Local;
+            //Console.WriteLine("Local Time Zone ID: {0}", localZone.Id);
+            //Console.WriteLine("   BaseUtcOffset: {0}.", localZone.BaseUtcOffset.TotalHours);
+            //Console.WriteLine("   Display Name is: {0}.", localZone.DisplayName);
+            //Console.WriteLine("   Display Name eng is: {0}.", _timeZoneDict[TimeZoneInfo.Local.Id]);
+            //Console.WriteLine("   Standard name is: {0}.", localZone.StandardName);
+            //Console.WriteLine("   Daylight saving name is: {0}.", localZone.DaylightName);
+
         }
 
         private void butCancel_Click(object sender, EventArgs e)
@@ -858,9 +1014,9 @@ namespace CFHelperUI
 
                     string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
-                        url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                        url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
                     else
-                        url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
+                        url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
 
                     string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url,"");
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
@@ -929,9 +1085,9 @@ namespace CFHelperUI
 
                     string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
-                        url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                        url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
                     else
-                        url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
+                        url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
                     string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url,"");
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
@@ -1237,10 +1393,15 @@ namespace CFHelperUI
 
         private string GetTemplateCpp(string p_Name,string p_Author,string p_CreateTime, string p_Url,string p_Description)
         {
+            string templateFile = $"{System.IO.Path.GetDirectoryName(Application.ExecutablePath)}\\template.cpp";
             string cppCode = "";
-            if (File.Exists("template.cpp"))
+            
+            if(_timeZoneDict.ContainsKey(TimeZoneInfo.Local.Id))
+                p_CreateTime += $" {_timeZoneDict[TimeZoneInfo.Local.Id]}";
+
+            if (File.Exists(templateFile))
             {
-                cppCode = File.ReadAllText("template.cpp");
+                cppCode = File.ReadAllText(templateFile);
                 cppCode = cppCode.Replace("{Name}", p_Name);
                 cppCode = cppCode.Replace("{Author}", p_Author);
                 cppCode = cppCode.Replace("{CreateTime}", p_CreateTime);
@@ -1415,39 +1576,7 @@ namespace CFHelperUI
             }
         }
 
-        private void frmCFHelper_Load(object sender, EventArgs e)
-        {
-            //this.Text += "["+_defaultDir;
-            txtWorkingDir.Text = Registry.RegRead("WorkingDir");
-            if (string.IsNullOrEmpty(txtWorkingDir.Text.TrimEnd()))
-                if (!string.IsNullOrEmpty(_defaultDir))
-                    txtWorkingDir.Text = _defaultDir;
-                else
-                    txtWorkingDir.Text = GetApplicationRoot();
-            CheckCFAuth();
-
-            GetWindowsState();
-            this.txtAuthor.Text = Registry.RegRead("Author");
-
-            //string currFilePath = Assembly.GetExecutingAssembly().Location;
-            //DateTime dt = new FileInfo(currFilePath).LastWriteTime;
-
-            this.Text += $" {Application.ProductVersion}";
-
-            var ojType = Registry.RegRead("OJType");
-            if (!string.IsNullOrEmpty(ojType))
-            {
-                foreach (Control ctl in this.Controls)
-                    if (ctl is RadioButton)
-                        if (ctl.Name == ojType)
-                        {
-                            ((RadioButton) ctl).Checked = true;
-                            break;
-                        }
-            }
-        }
-
-
+        
         private void GetWindowsState()
         {
             string sHeight = Registry.RegRead("Form.Height");

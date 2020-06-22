@@ -150,9 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
-    <Content Include="template.cpp">
+    <Content Include="templateSample.cpp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="template.cpp" />
     <None Include="user-ok.png" />
     <None Include="user-error.png" />
   </ItemGroup>
