@@ -833,29 +833,36 @@ namespace CFHelperUI
                     string problemKey = problem.Key;
                     string problemId = problem.Value;
 
-                    string cppCode = "";
+                    //string cppCode = "";
 
-                    cppCode += $"/*\n";
-                    cppCode += $"===========================================================\n";
-                    cppCode +=
-                        $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
-                    cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                    cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                    //cppCode += $"/*\n";
+                    //cppCode += $"===========================================================\n";
+                    //cppCode +=
+                    //    $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
+                    //cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                    //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                    //if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
+                    //{
+                    //    cppCode +=
+                    //        $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    //}
+                    //else
+                    //{
+                    //    cppCode +=
+                    //        $"* @url:            https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
+
+                    //}
+                    //cppCode += $"* @Description:    \n";
+                    //cppCode += $"===========================================================\n";
+                    //cppCode += $"*/";
+
+                    string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
-                    {
-                        cppCode +=
-                            $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
-                    }
+                        url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
                     else
-                    {
-                        cppCode +=
-                            $"* @url:            https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
+                        url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
 
-                    }
-                    cppCode += $"* @Description:    \n";
-                    cppCode += $"===========================================================\n";
-                    cppCode += $"*/";
-
+                    string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url,"");
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
                     string filePath = $"{rootDir}\\{contestSubDir}\\{contesName}\\{problemKey}";
                     CreateDirAndCppFile(filePath, fileName, cppCode);
@@ -897,31 +904,37 @@ namespace CFHelperUI
                 foreach (var problemId in problemIdList)
                 {
 
-                    string cppCode = "";
+                    //string cppCode = "";
 
-                    cppCode += $"/*\n";
-                    cppCode += $"===========================================================\n";
-                    cppCode +=
-                        $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
-                    cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                    cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                    //cppCode += $"/*\n";
+                    //cppCode += $"===========================================================\n";
+                    //cppCode +=
+                    //    $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
+                    //cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                    //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                    //if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
+                    //{
+                    //    cppCode +=
+                    //        $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
+                    //}
+                    //else
+                    //{
+                    //    cppCode +=
+                    //        $"* @url:            https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
+                    //}
+
+                    //cppCode += $"* @Description:    \n";
+                    //cppCode += $"===========================================================\n";
+                    //cppCode += $"*/";
+
+                    string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
-                    {
-                        cppCode +=
-                            $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
-                    }
+                        url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
                     else
-                    {
-                        cppCode +=
-                            $"* @url:            https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
-                    }
-
-                    cppCode += $"* @Description:    \n";
-                    cppCode += $"===========================================================\n";
-                    cppCode += $"*/";
+                        url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
+                    string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url,"");
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-
                     CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
 
                     string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.cpp";
@@ -947,17 +960,19 @@ namespace CFHelperUI
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string cppCode = "";
+                //string cppCode = "";
 
-                cppCode += $"/*\n";
-                cppCode += $"===========================================================\n";
-                cppCode += $"* @Name:           {item.Text.Trim()} \n";
-                cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                cppCode += $"* @url:            {this.txtProblemId.Text}\n";
-                cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
-                cppCode += $"===========================================================\n";
-                cppCode += $"*/";
+                //cppCode += $"/*\n";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"* @Name:           {item.Text.Trim()} \n";
+                //cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                //cppCode += $"* @url:            {this.txtProblemId.Text}\n";
+                //cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"*/";
+
+                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text,item.SubItems[2].Text.Trim());
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -993,17 +1008,19 @@ namespace CFHelperUI
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string cppCode = "";
+                //string cppCode = "";
 
-                cppCode += $"/*\n";
-                cppCode += $"===========================================================\n";
-                cppCode += $"* @Name:           {item.Text.Trim()} \n";
-                cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                cppCode += $"* @url:            {this.txtProblemId.Text}\n";
-                cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
-                cppCode += $"===========================================================\n";
-                cppCode += $"*/";
+                //cppCode += $"/*\n";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"* @Name:           {item.Text.Trim()} \n";
+                //cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                //cppCode += $"* @url:            {this.txtProblemId.Text}\n";
+                //cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"*/";
+
+                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, item.SubItems[2].Text.Trim());
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1044,26 +1061,36 @@ namespace CFHelperUI
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string cppCode = "";
+                //string cppCode = "";
 
-                cppCode += $"/*\n";
-                cppCode += $"===========================================================\n";
-                cppCode += $"* @Name:            {item.Text.Trim()} \n";
-                cppCode += $"* @Author:          {txtAuthor.Text}\n";
-                cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
-                cppCode += $"* @url:             {this.txtProblemId.Text}\n";
-                cppCode += $"* @Description:     \n";
+                //cppCode += $"/*\n";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"* @Name:            {item.Text.Trim()} \n";
+                //cppCode += $"* @Author:          {txtAuthor.Text}\n";
+                //cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
+                //cppCode += $"* @url:             {this.txtProblemId.Text}\n";
+                //cppCode += $"* @Description:     \n";
 
+                //foreach (string s in oProperty.Keys)
+                //    if (s != "filename")
+                //    {
+                //        string temp = $"* @{s}:".PadRight(19);
+                //        cppCode += $"{temp}{oProperty[s]}\n";
+                //    }
+
+
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"*/";
+
+                string desc = "\n";
                 foreach (string s in oProperty.Keys)
                     if (s != "filename")
                     {
                         string temp = $"* @{s}:".PadRight(19);
-                        cppCode += $"{temp}{oProperty[s]}\n";
+                        desc += $"{temp}{oProperty[s]}\n";
                     }
 
-
-                cppCode += $"===========================================================\n";
-                cppCode += $"*/";
+                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, desc);
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1148,20 +1175,21 @@ namespace CFHelperUI
             if (MessageBox.Show(this, msg, this.Text,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string cppCode = "";
+                //string cppCode = "";
 
-                cppCode += $"/*\n";
-                cppCode += $"===========================================================\n";
-                cppCode += $"* @Name:            {item.Text.Trim()} \n";
-                cppCode += $"* @Author:          {txtAuthor.Text}\n";
-                cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
-                cppCode += $"* @url:             {this.txtProblemId.Text}\n";
-                cppCode += $"* @Description:     \n";
+                //cppCode += $"/*\n";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"* @Name:            {item.Text.Trim()} \n";
+                //cppCode += $"* @Author:          {txtAuthor.Text}\n";
+                //cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
+                //cppCode += $"* @url:             {this.txtProblemId.Text}\n";
+                //cppCode += $"* @Description:     \n";
 
 
-                cppCode += $"===========================================================\n";
-                cppCode += $"*/";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"*/";
 
+                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, "");
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
@@ -1184,18 +1212,20 @@ namespace CFHelperUI
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string cppCode = "";
 
-                cppCode += $"/*\n";
-                cppCode += $"===========================================================\n";
-                cppCode += $"* @Name:           UVa-{item.Text} {item.SubItems[1].Text}\n";
-                cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                cppCode += $"* @url:            \n";
-                cppCode += $"* @Description:    \n";
-                cppCode += $"===========================================================\n";
-                cppCode += $"*/";
 
+
+                //cppCode += $"/*\n";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"* @Name:           UVa-{item.Text} {item.SubItems[1].Text}\n";
+                //cppCode += $"* @Author:         {txtAuthor.Text}\n";
+                //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                //cppCode += $"* @url:            \n";
+                //cppCode += $"* @Description:    \n";
+                //cppCode += $"===========================================================\n";
+                //cppCode += $"*/";
+
+                string cppCode = GetTemplateCpp($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","");
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
                 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{subDirName}.cpp";
@@ -1203,6 +1233,33 @@ namespace CFHelperUI
 
                 Application.Exit();
             }
+        }
+
+        private string GetTemplateCpp(string p_Name,string p_Author,string p_CreateTime, string p_Url,string p_Description)
+        {
+            string cppCode = "";
+            if (File.Exists("template.cpp"))
+            {
+                cppCode = File.ReadAllText("template.cpp");
+                cppCode = cppCode.Replace("{Name}", p_Name);
+                cppCode = cppCode.Replace("{Author}", p_Author);
+                cppCode = cppCode.Replace("{CreateTime}", p_CreateTime);
+                cppCode = cppCode.Replace("{Url}", p_Url);
+                cppCode = cppCode.Replace("{Description}", p_Description);
+            }
+            else
+            {
+                cppCode += $"/*\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"* @Name:           {p_Name}\n";
+                cppCode += $"* @Author:         {p_Author}\n";
+                cppCode += $"* @Create Time:    {p_CreateTime}\n";
+                cppCode += $"* @Url:            {p_Url}\n";
+                cppCode += $"* @Description:    {p_Description}\n";
+                cppCode += $"===========================================================\n";
+                cppCode += $"*/";
+            }
+            return cppCode;
         }
 
         private string CreateDirAndCppFile(string path, string fileName, string cppCode)
