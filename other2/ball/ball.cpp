@@ -26,7 +26,7 @@ int main()
 		return 0;
 	}
 	
-	vector< vector<int> > dp(n + 1, vector<int>(m + 1)); // dp[i][j] Îª´«j´ÎÇòµ½µÚi¸öÈËµÄÇé¿ö×ÜÊý
+	vector< vector<int> > dp(n + 1, vector<int>(m + 1)); // dp[i][j] Îªï¿½ï¿½jï¿½ï¿½ï¿½òµ½µï¿½iï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	dp[1][0] = 1;
 	
