@@ -3,7 +3,7 @@
 * @Name:           1373D Maximum Sum on Even Positions
 * @Author:         Shawn
 * @Create Time:    2020/6/25 22:35:22  (UTC+08:00)
-* @Url:            https://codeforces.com/gym/1373/problem/D
+* @Url:            https://codeforces.com/contest/1373/problem/D
 * @File:           CF_1373D_MaximumSumonEvenPositions.cpp
 * @Description:    
 -------------------------------------------------------------------

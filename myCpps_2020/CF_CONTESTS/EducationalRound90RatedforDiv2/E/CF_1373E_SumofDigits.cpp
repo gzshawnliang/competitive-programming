@@ -3,7 +3,7 @@
 * @Name:           1373E Sum of Digits
 * @Author:         Shawn
 * @Create Time:    2020/6/25 22:35:22  (UTC+08:00)
-* @Url:            https://codeforces.com/gym/1373/problem/E
+* @Url:            https://codeforces.com/contest/1373/problem/E
 * @File:           CF_1373E_SumofDigits.cpp
 * @Description:    
 -------------------------------------------------------------------

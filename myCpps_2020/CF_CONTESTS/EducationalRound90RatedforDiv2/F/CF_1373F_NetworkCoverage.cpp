@@ -3,7 +3,7 @@
 * @Name:           1373F Network Coverage
 * @Author:         Shawn
 * @Create Time:    2020/6/25 22:35:23  (UTC+08:00)
-* @Url:            https://codeforces.com/gym/1373/problem/F
+* @Url:            https://codeforces.com/contest/1373/problem/F
 * @File:           CF_1373F_NetworkCoverage.cpp
 * @Description:    
 -------------------------------------------------------------------

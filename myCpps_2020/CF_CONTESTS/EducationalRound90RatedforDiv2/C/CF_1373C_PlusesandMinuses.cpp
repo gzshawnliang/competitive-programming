@@ -3,7 +3,7 @@
 * @Name:           1373C Pluses and Minuses
 * @Author:         Shawn
 * @Create Time:    2020/6/25 22:35:22  (UTC+08:00)
-* @Url:            https://codeforces.com/gym/1373/problem/C
+* @Url:            https://codeforces.com/contest/1373/problem/C
 * @File:           CF_1373C_PlusesandMinuses.cpp
 * @Description:    
 -------------------------------------------------------------------

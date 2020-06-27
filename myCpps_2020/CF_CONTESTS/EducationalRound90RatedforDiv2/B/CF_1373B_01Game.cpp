@@ -3,7 +3,7 @@
 * @Name:           1373B 01 Game
 * @Author:         Shawn
 * @Create Time:    2020/6/25 22:35:22  (UTC+08:00)
-* @Url:            https://codeforces.com/gym/1373/problem/B
+* @Url:            https://codeforces.com/contest/1373/problem/B
 * @File:           CF_1373B_01Game.cpp
 * @Description:    
 -------------------------------------------------------------------
