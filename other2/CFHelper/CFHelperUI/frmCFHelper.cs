@@ -985,6 +985,12 @@ namespace CFHelperUI
             if (listView1.CheckedItems.Count == 0)
                 return;
 
+            bool isGym = false;
+            if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
+                isGym = false;
+            else
+                isGym = true;
+
             //Codeforces Round #634 (Div. 3)
             contesName = contesName.Replace("Codeforces", "");
             contesName = contesName.Replace("#", "_");
@@ -1005,7 +1011,6 @@ namespace CFHelperUI
             string rootPath = $"{rootDir}\\{contestSubDir}\\{contesName}";
 
             msg = $"即将创建以下C++文件夹及相关文件：\n{rootPath}\n\n{msg}\n是否继续？";
-
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -1014,32 +1019,9 @@ namespace CFHelperUI
                     string problemKey = problem.Key;
                     string problemId = problem.Value;
 
-                    //string cppCode = "";
-
-                    //cppCode += $"/*\n";
-                    //cppCode += $"===========================================================\n";
-                    //cppCode +=
-                    //    $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
-                    //cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                    //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                    //if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
-                    //{
-                    //    cppCode +=
-                    //        $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
-                    //}
-                    //else
-                    //{
-                    //    cppCode +=
-                    //        $"* @url:            https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
-
-                    //}
-                    //cppCode += $"* @Description:    \n";
-                    //cppCode += $"===========================================================\n";
-                    //cppCode += $"*/";
-
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
                     string url;
-                    if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
+                    if (isGym==false)
                         url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
                     else
                         url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
