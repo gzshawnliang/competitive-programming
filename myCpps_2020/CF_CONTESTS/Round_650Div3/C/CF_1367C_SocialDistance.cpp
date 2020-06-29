@@ -3,7 +3,7 @@
 * @Name:           1367C Social Distance
 * @Author:         Shawn
 * @create Time:    2020/6/16 22:35:38
-* @url:            https://codeforces.com/gym/1367/problem/C
+* @url:            https://codeforces.com/contest/1367/problem/C
 * @Description:    
 ===========================================================
 */

@@ -3,7 +3,7 @@
 * @Name:           1374D Zero Remainder Array
 * @Author:         Shawn
 * @Create Time:    2020/6/28 22:35:16  (UTC+08:00)
-* @Url:            https://codeforces.com/gym/1374/problem/D
+* @Url:            https://codeforces.com/contest/1374/problem/D
 * @File:           CF_1374D_ZeroRemainderArray.cpp
 * @Description:    
 -------------------------------------------------------------------

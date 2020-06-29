@@ -3,7 +3,7 @@
 * @Name:           1367D Task On The Board
 * @Author:         Shawn
 * @create Time:    2020/6/16 22:35:38
-* @url:            https://codeforces.com/gym/1367/problem/D
+* @url:            https://codeforces.com/contest/1367/problem/D
 * @Description:    
 ===========================================================
 */

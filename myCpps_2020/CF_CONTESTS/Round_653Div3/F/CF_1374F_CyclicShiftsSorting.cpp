@@ -3,7 +3,7 @@
 * @Name:           1374F Cyclic Shifts Sorting
 * @Author:         Shawn
 * @Create Time:    2020/6/28 22:35:17  (UTC+08:00)
-* @Url:            https://codeforces.com/gym/1374/problem/F
+* @Url:            https://codeforces.com/contest/1374/problem/F
 * @File:           CF_1374F_CyclicShiftsSorting.cpp
 * @Description:    
 -------------------------------------------------------------------

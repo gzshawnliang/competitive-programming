@@ -3,7 +3,7 @@
 * @Name:           1367B Even Array
 * @Author:         Shawn
 * @create Time:    2020/6/16 22:35:38
-* @url:            https://codeforces.com/gym/1367/problem/B
+* @url:            https://codeforces.com/contest/1367/problem/B
 * @Description:    
 ===========================================================
 */

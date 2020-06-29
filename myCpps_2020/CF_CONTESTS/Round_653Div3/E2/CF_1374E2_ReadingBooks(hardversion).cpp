@@ -3,7 +3,7 @@
 * @Name:           1374E2 Reading Books (hard version)
 * @Author:         Shawn
 * @Create Time:    2020/6/28 22:35:16  (UTC+08:00)
-* @Url:            https://codeforces.com/gym/1374/problem/E2
+* @Url:            https://codeforces.com/contest/1374/problem/E2
 * @File:           CF_1374E2_ReadingBooks(hardversion).cpp
 * @Description:    
 -------------------------------------------------------------------
