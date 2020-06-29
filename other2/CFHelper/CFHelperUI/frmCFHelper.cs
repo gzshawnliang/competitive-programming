@@ -985,11 +985,11 @@ namespace CFHelperUI
             if (listView1.CheckedItems.Count == 0)
                 return;
 
-            bool isGym = false;
-            if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
-                isGym = false;
-            else
-                isGym = true;
+            //bool isGym = false;
+            //if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
+            //    isGym = false;
+            //else
+            //    isGym = true;
 
             //Codeforces Round #634 (Div. 3)
             contesName = contesName.Replace("Codeforces", "");
@@ -1020,11 +1020,14 @@ namespace CFHelperUI
                     string problemId = problem.Value;
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-                    string url;
-                    if (isGym==false)
-                        url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
-                    else
-                        url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
+
+                    //string url;
+                    //if (isGym==false)
+                    //    url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
+                    //else
+                    //    url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
+
+                    string url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
 
                     string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
                     string filePath = $"{rootDir}\\{contestSubDir}\\{contesName}\\{problemKey}";

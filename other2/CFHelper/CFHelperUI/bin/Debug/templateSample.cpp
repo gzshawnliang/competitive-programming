@@ -14,7 +14,6 @@
  <V VV /     \ VV V>
   \__\/|     |\/__/
 
-
                                       /\
                                       /\
                                       /\
@@ -70,5 +69,22 @@ _________________________/_]_[_\___[_]_[_]_[_]_____________________
 888888888888888888   d88888888888888b   88888888888888888888
 8888888888888888888oo8888888888888888oo888888888888888888888
 8888888888888888888888888888888888888888888888888Ojo 9888888
-  
+
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long int;
+
+int main()
+{
+
+#ifndef ONLINE_JUDGE
+    freopen("{fileNameNoExtension}.in", "r", stdin);
+    freopen("{fileNameNoExtension}.out", "w", stdout);
+#endif
+
+    return 0;
+}
