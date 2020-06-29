@@ -39,24 +39,35 @@ using ill = long long;
 class solution
 {
   public:
-    struct book
-    {
-        int 
-    };
-
     void solve()
     {
-        int tct; cin >> tct;
-        for (int tcc = 1; tcc <= tct; ++tcc)
+        int n, k; cin >> n >> k;
+        
+        vector<int> a, x, y;
+        for (int c = 1; c <= n; ++c)
         {
-            int n, k; cin >> n >> k;
-            
-            vector<int> a;
-            for (int c = 1; c <= n; ++c)
-            {
-                int tmp; cin >> tmp;
-            }
+            int t, xl, yl; cin >> t >> xl >> yl;
+            if (xl == 1 && yl == 1)      a.push_back(t);
+            else if (xl == 1 && yl == 0) x.push_back(t);
+            else if (xl == 0 && yl == 1) y.push_back(t);
         }
+
+        sort(x.begin(), x.end()); sort(y.begin(), y.end());
+
+        int siz = min(x.size(), y.size());
+        for (int i = 0; i <= siz - 1; ++i) a.push_back(x[i] + y[i]);
+
+        if ((int)a.size() < k)
+        {
+            cout << "-1\n";
+            return;
+        }
+
+        sort(a.begin(), a.end());
+
+        int ans = 0;
+        for (int i = 0; i <= k - 1; ++i) ans += a[i];
+        cout << ans << '\n';
     }
 };
 
