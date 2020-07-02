@@ -35,16 +35,13 @@ class solution
             {
                 cout << "No\n";
             }
+            else if (a + b < m + n)
+            {
+                cout << "No\n";
+            }
             else
             {
-                if (max(a, b) < n)
-                {
-                    cout << "No\n";
-                }
-                else
-                {
-                    cout << "Yes\n";
-                }
+                cout << "Yes\n";
             }
         }
     }

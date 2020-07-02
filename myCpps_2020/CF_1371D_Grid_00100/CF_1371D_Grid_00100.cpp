@@ -31,6 +31,37 @@ class solution
         for (int tcc = 1; tcc <= tct; ++tcc)
         {
             int n, k; cin >> n >> k;
+
+            if (k % n == 0) cout << "0\n";
+            else            cout << "2\n";
+
+            int cnt = k;
+            vector<vector<int>> a(n, vector<int>(n, 0));
+            for (int i = 0; i <= n - 1 && cnt > 0; ++i)
+            {
+                int x, y;
+                x = i, y = 0;
+                while (x <= n - 1 && y <= n - 1 && cnt > 0)
+                {
+                    a[y][x] = 1; --cnt;
+                    ++x; ++y;
+                }
+
+                if (i == 0) continue;
+
+                x = 0, y = n - i;
+                while (x <= n - 1 && y <= n - 1 && cnt > 0)
+                {
+                    a[y][x] = 1; --cnt;
+                    ++x; ++y;
+                }
+            }
+
+            for (int y = 0; y <= n - 1; ++y)
+            {
+                for (int x = 0; x <= n - 1; ++x) cout << a[y][x];
+                cout << '\n';
+            }
         }
     }
 };
