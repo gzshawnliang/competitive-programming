@@ -51,7 +51,6 @@
             this.ural = new System.Windows.Forms.RadioButton();
             this.poj = new System.Windows.Forms.RadioButton();
             this.hdu = new System.Windows.Forms.RadioButton();
-            this.linkCFAuthorization = new System.Windows.Forms.LinkLabel();
             this.PicCFAuth = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicCFAuth)).BeginInit();
             this.SuspendLayout();
@@ -253,7 +252,7 @@
             // uva
             // 
             this.uva.AutoSize = true;
-            this.uva.Location = new System.Drawing.Point(301, 55);
+            this.uva.Location = new System.Drawing.Point(252, 55);
             this.uva.Name = "uva";
             this.uva.Size = new System.Drawing.Size(50, 20);
             this.uva.TabIndex = 1;
@@ -264,7 +263,7 @@
             // usaco
             // 
             this.usaco.AutoSize = true;
-            this.usaco.Location = new System.Drawing.Point(357, 55);
+            this.usaco.Location = new System.Drawing.Point(308, 55);
             this.usaco.Name = "usaco";
             this.usaco.Size = new System.Drawing.Size(66, 20);
             this.usaco.TabIndex = 2;
@@ -275,7 +274,7 @@
             // spoj
             // 
             this.spoj.AutoSize = true;
-            this.spoj.Location = new System.Drawing.Point(429, 55);
+            this.spoj.Location = new System.Drawing.Point(380, 55);
             this.spoj.Name = "spoj";
             this.spoj.Size = new System.Drawing.Size(58, 20);
             this.spoj.TabIndex = 3;
@@ -286,7 +285,7 @@
             // ural
             // 
             this.ural.AutoSize = true;
-            this.ural.Location = new System.Drawing.Point(493, 55);
+            this.ural.Location = new System.Drawing.Point(444, 55);
             this.ural.Name = "ural";
             this.ural.Size = new System.Drawing.Size(218, 20);
             this.ural.TabIndex = 4;
@@ -297,7 +296,7 @@
             // poj
             // 
             this.poj.AutoSize = true;
-            this.poj.Location = new System.Drawing.Point(717, 55);
+            this.poj.Location = new System.Drawing.Point(668, 55);
             this.poj.Name = "poj";
             this.poj.Size = new System.Drawing.Size(50, 20);
             this.poj.TabIndex = 5;
@@ -308,24 +307,13 @@
             // hdu
             // 
             this.hdu.AutoSize = true;
-            this.hdu.Location = new System.Drawing.Point(773, 55);
+            this.hdu.Location = new System.Drawing.Point(724, 55);
             this.hdu.Name = "hdu";
             this.hdu.Size = new System.Drawing.Size(50, 20);
             this.hdu.TabIndex = 6;
             this.hdu.Text = "HDU";
             this.hdu.UseVisualStyleBackColor = true;
             this.hdu.CheckedChanged += new System.EventHandler(this.CheckedChanged);
-            // 
-            // linkCFAuthorization
-            // 
-            this.linkCFAuthorization.AutoSize = true;
-            this.linkCFAuthorization.Location = new System.Drawing.Point(243, 57);
-            this.linkCFAuthorization.Name = "linkCFAuthorization";
-            this.linkCFAuthorization.Size = new System.Drawing.Size(40, 16);
-            this.linkCFAuthorization.TabIndex = 13;
-            this.linkCFAuthorization.TabStop = true;
-            this.linkCFAuthorization.Text = "认证";
-            this.linkCFAuthorization.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCFAuthorization_LinkClicked);
             // 
             // PicCFAuth
             // 
@@ -345,7 +333,6 @@
             this.CancelButton = this.butCancel;
             this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.PicCFAuth);
-            this.Controls.Add(this.linkCFAuthorization);
             this.Controls.Add(this.hdu);
             this.Controls.Add(this.poj);
             this.Controls.Add(this.ural);
@@ -406,7 +393,6 @@
         private System.Windows.Forms.RadioButton ural;
         private System.Windows.Forms.RadioButton poj;
         private System.Windows.Forms.RadioButton hdu;
-        private System.Windows.Forms.LinkLabel linkCFAuthorization;
         private System.Windows.Forms.PictureBox PicCFAuth;
     }
 }

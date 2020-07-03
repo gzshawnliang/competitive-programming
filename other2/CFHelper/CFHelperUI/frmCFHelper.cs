@@ -216,7 +216,7 @@ namespace CFHelperUI
             else
                 txtWorkingDir.Text = workspaceFolder;
 
-            CheckCFAuth();
+            //CheckCFAuth();
 
             GetWindowsState();
             this.txtAuthor.Text = Registry.RegRead("Author");
