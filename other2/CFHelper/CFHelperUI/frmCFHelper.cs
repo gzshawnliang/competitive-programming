@@ -1507,16 +1507,19 @@ namespace CFHelperUI
 
         private string FormatPathName(string name)
         {
+            
+
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            List<string> otherInvalidChars = new List<string>() { ",", " ", "'" };
 
             string pathName = name;
             foreach (char c in invalid)
-            {
                 pathName = pathName.Replace(c.ToString(), "");
-            }
+            
+            foreach(string s in otherInvalidChars)
+                pathName = pathName.Replace(s, "");
+
             pathName = pathName.Replace("-", "_");
-            pathName = pathName.Replace(" ", "");
-            pathName = pathName.Replace("'", "");
 
             return pathName;
         }
