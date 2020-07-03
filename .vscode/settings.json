@@ -164,7 +164,7 @@
     "java.format.settings.url": "EclipseJavaFormatter.xml",
     "java.format.settings.profile": "MyJavaVSStyple",
     //"editor.formatOnPaste": true,
-    "editor.formatOnType": false,
+    "editor.formatOnType": true,
     "C_Cpp.default.cppStandard": "c++11",
     "telemetry.enableTelemetry": false,
     "files.defaultLanguage": "cpp"

@@ -1,12 +1,18 @@
 param(
-    [string]$InitialDirectory
+    [string]$InitialDirectory,
+    [string]$firstDirectory,
+    [string]$secondDirectory
 )
 
 Write-Host $InitialDirectory
+Write-Host $firstDirectory
+Write-Host $secondDirectory
 
 #获取父目录
-$parentDirectory = [System.IO.Directory]::GetParent($InitialDirectory)
-
+if([string]::IsNullOrEmpty($firstDirectory) -and [string]::IsNullOrEmpty($secondDirectory))
+{
+    $parentDirectory = [System.IO.Directory]::GetParent($InitialDirectory)
+}
 function Read-FolderBrowserDialog([string]$Message, [string]$InitialDirectory)
 {
     $app = New-Object -ComObject Shell.Application
@@ -26,17 +32,22 @@ function Read-FolderBrowserDialog([string]$Message, [string]$InitialDirectory)
     #     return ''
     # }
 }
-
-$firstDirectory = Read-FolderBrowserDialog "Please Select First Folder" $parentDirectory
 if([string]::IsNullOrEmpty($firstDirectory))
 {
-    return
+    $firstDirectory = Read-FolderBrowserDialog "Please Select First Folder" $parentDirectory
+    if([string]::IsNullOrEmpty($firstDirectory))
+    {
+        return
+    }
 }
 
-$secondDirectory = Read-FolderBrowserDialog "Please Select Second Folder" $parentDirectory
 if([string]::IsNullOrEmpty($secondDirectory))
 {
-    return
+    $secondDirectory = Read-FolderBrowserDialog "Please Select Second Folder" $parentDirectory
+    if([string]::IsNullOrEmpty($secondDirectory))
+    {
+        return
+    }
 }
 
 if($firstDirectory -eq $secondDirectory)
