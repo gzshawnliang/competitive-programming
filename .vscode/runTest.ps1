@@ -1,14 +1,12 @@
 # ===========================================================
-#  * @名称:    
-#  * @作者:       Thomas 
-#  * @创建时间:    2020-07-03 15:35:58 
-#  * @修改人:      Thomas 
-#  * @修改时间:    2020-07-03 15:35:58 
-#  * @备注:       运行命令行 
-#                PS > & "C:\competitive-programming\.vscode\runTest.ps1" -firstDirectory "c:\competitive-programming\other2\thomas\1374E1"
-#                第二个目录自动是第一个目录名+AC
-#                或 
-#                PS > & "C:\competitive-programming\.vscode\runTest.ps1" -firstDirectory "c:\competitive-programming\other2\thomas\1374E1" -secondDirectory "c:\competitive-programming\other2\thomas\1374E1AC"
+#  * @Name:         run and test OJ 2 cpp out file
+#  * @Author:       Thomas 
+#  * @Create Time:  2020-07-03 15:35:58 
+#  * @Description:  运行命令行 
+#                   PS > & "C:\competitive-programming\.vscode\runTest.ps1" -firstDirectory "c:\competitive-programming\other2\thomas\1374E1"
+#                   第二个目录自动是第一个目录名+AC
+#                   或 
+#                   PS > & "C:\competitive-programming\.vscode\runTest.ps1" -firstDirectory "c:\competitive-programming\other2\thomas\1374E1" -secondDirectory "c:\competitive-programming\other2\thomas\1374E1AC"
 # ===========================================================
 
 param(
