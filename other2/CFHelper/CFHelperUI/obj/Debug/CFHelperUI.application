@@ -7,14 +7,14 @@
     <framework targetVersion="4.6" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="CFHelperUI.exe.manifest" size="6097">
+    <dependentAssembly dependencyType="install" codebase="CFHelperUI.exe.manifest" size="6099">
       <assemblyIdentity name="CFHelperUI.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/a98t8gTOrIpO/e99bbTteckD7/7sb52MLca+dhNGnE=</dsig:DigestValue>
+        <dsig:DigestValue>kuQpSr87NxxxryCUEPgAEpyOMxuHzKfQv3zowiz0K4U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

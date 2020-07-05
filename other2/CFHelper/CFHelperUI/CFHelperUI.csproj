@@ -159,6 +159,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xCopy "$(TargetDir)*.*" "..\..\..\..\..\.vscode\CFHelper" /Y</PostBuildEvent>
+    <PostBuildEvent>XCopy "$(TargetDir)$(TargetName).*"  "..\..\..\..\..\.vscode\CFHelper" /Y
+XCopy "$(TargetDir)*.dll"  "..\..\..\..\..\.vscode\CFHelper" /Y
+XCopy "$(TargetDir)*.xml"  "..\..\..\..\..\.vscode\CFHelper" /Y
+XCopy "$(TargetDir)templateSample.cpp"  "..\..\..\..\..\.vscode\CFHelper" /Y
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
