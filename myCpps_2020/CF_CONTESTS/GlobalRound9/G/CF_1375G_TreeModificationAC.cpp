@@ -35,17 +35,15 @@ using namespace std;
 
 using ill = long long;
 
-int dfs(int u, int las, vector<vector<int>> &g)
+int dfs(int u, int las, vector<int> &col, vector<vector<int>> &g)
 {
     int ans = 0;
     for (auto v:g[u])
     {
-        if (g[v].size() > 1 && v != las)
+        if (v != las)
         {
-            int nxt = g[v][0];
-            if (nxt == u) nxt = g[v][1];
-
-            ans += 1 + dfs(nxt, v, g);
+            col[v] = 1 - col[u];
+            dfs(v, u, col, g);
         }
     }
 
@@ -66,17 +64,17 @@ class solution
             g[u].push_back(v); g[v].push_back(u);
         }
 
-        int centre = 0, maxD = 0;
+        vector<int> col(n + 1, -1); col[1] = 0;
+        dfs(1, -1, col, g);
+
+        int cnt0 = 0, cnt1 = 0;
         for (int u = 1; u <= n; ++u)
         {
-            int siz = g[u].size();
-            if (siz > maxD)
-            {
-                maxD = siz; centre = u;
-            }
+            if (col[u] == 0) ++cnt0;
+            else             ++cnt1;
         }
 
-        cout << dfs(centre, -1, g) << '\n';
+        cout << min(cnt0, cnt1) - 1 << '\n';
     }
 };
 

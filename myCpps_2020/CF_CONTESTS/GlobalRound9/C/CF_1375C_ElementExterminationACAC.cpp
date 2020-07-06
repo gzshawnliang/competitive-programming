@@ -1,9 +1,9 @@
 /*
 -------------------------------------------------------------------
-* @Name:           1375G Tree Modification
+* @Name:           1375C Element Extermination
 * @Author:         Shawn
-* @Create Time:    2020/7/4 22:45:40  (UTC+08:00)
-* @Url:            https://codeforces.com/contest/1375/problem/G
+* @Create Time:    2020/7/4 22:45:39  (UTC+08:00)
+* @Url:            https://codeforces.com/contest/1375/problem/C
 * @Description:    
 -------------------------------------------------------------------
                                      /~\
@@ -35,48 +35,21 @@ using namespace std;
 
 using ill = long long;
 
-int dfs(int u, int las, vector<vector<int>> &g)
-{
-    int ans = 0;
-    for (auto v:g[u])
-    {
-        if (g[v].size() > 1 && v != las)
-        {
-            int nxt = g[v][0];
-            if (nxt == u) nxt = g[v][1];
-
-            ans += 1 + dfs(nxt, v, g);
-        }
-    }
-
-    return ans;
-}
-
 class solution
 {
   public:
     void solve()
     {
-        int n; cin >> n;
-
-        vector<vector<int>> g(n + 1);
-        for (int c = 1; c <= n - 1; ++c)
+        int tct; cin >> tct;
+        for (int tcc = 1; tcc <= tct; ++tcc)
         {
-            int u, v; cin >> u >> v;
-            g[u].push_back(v); g[v].push_back(u);
-        }
+            int n; cin >> n;
 
-        int centre = 0, maxD = 0;
-        for (int u = 1; u <= n; ++u)
-        {
-            int siz = g[u].size();
-            if (siz > maxD)
-            {
-                maxD = siz; centre = u;
-            }
-        }
+            vector<int> a(n, 0);
+            for (int i = 0; i <= n - 1; ++i) cin >> a[i];
 
-        cout << dfs(centre, -1, g) << '\n';
+            cout << ((a[0] < a.back()) ? "YES" : "NO") << '\n';
+        }
     }
 };
 
@@ -86,8 +59,8 @@ int main()
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
-    freopen("CF_1375G_TreeModification.in", "r", stdin);
-    freopen("CF_1375G_TreeModification.out", "w", stdout);
+    freopen("CF_1375C_ElementExtermination.in", "r", stdin);
+    freopen("CF_1375C_ElementExtermination.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
 
