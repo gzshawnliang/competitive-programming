@@ -37,7 +37,7 @@ using ill = long long;
 
 class solution
 {
-  private:
+   //private:
     vector<vector<int>> g;
     vector<int> col;
 
@@ -56,7 +56,7 @@ class solution
         return ans;
     }
 
-  public:
+  public:  
     void solve()
     {
         int n;
@@ -100,7 +100,7 @@ int main()
 #endif
 
     solution sln1;
-    sln1.solve();
+    sln1.
     cout.flush();
 
 #ifndef ONLINE_JUDGE
