@@ -24,6 +24,7 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 using System.Globalization;
+using System.CodeDom;
 
 namespace CFHelperUI
 {
@@ -1019,7 +1020,7 @@ namespace CFHelperUI
 
             string rootPath = $"{rootDir}\\{contestSubDir}\\{contesName}";
 
-            msg = $"即将创建以下C++文件夹及相关文件：\n{rootPath}\n\n{msg}\n是否继续？";
+            msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootPath}\n\n{msg}\n是否继续？";
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -1069,7 +1070,7 @@ namespace CFHelperUI
                 msg += FormatPathName($"CF_{this.contestId}{item.ToUpper()}_{problemDict[item.ToUpper()]}") + Environment.NewLine;
             }
 
-            msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{msg}\n是否继续？";
+            msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{msg}\n是否继续？";
 
             //Dictionary<string, string> createResult = new Dictionary<string, string>();
             string contesName = lblContest.Text;
@@ -1107,35 +1108,14 @@ namespace CFHelperUI
             string subDirName = FormatPathName(item.Tag.ToString());
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                //string cppCode = "";
-
-                //cppCode += $"/*\n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"* @Name:           {item.Text.Trim()} \n";
-                //cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                //cppCode += $"* @url:            {this.txtProblemId.Text}\n";
-                //cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"*/";
-
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text,item.SubItems[2].Text.Trim(), fileName);
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
-
-                //msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
-                //msg += "\n是否打开文件夹查看？";
-
-                //if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
-                //    DialogResult.Yes)
-                //{
-                //    System.Diagnostics.Process.Start(rootDir);
-                //}
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
@@ -1155,7 +1135,7 @@ namespace CFHelperUI
             string fileName = item.Tag.ToString() ;
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1176,14 +1156,6 @@ namespace CFHelperUI
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                //msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
-                //msg += "\n是否打开文件夹查看？";
-
-                //if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
-                //    DialogResult.Yes)
-                //{
-                //    System.Diagnostics.Process.Start(rootDir);
-                //}
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
@@ -1208,7 +1180,7 @@ namespace CFHelperUI
             string fileName = "URAL_" + oProperty["filename"];
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1246,14 +1218,6 @@ namespace CFHelperUI
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                //msg = $"创建C++文件夹及相关文件完成：\n{rootDir}\n\n";
-                //msg += "\n是否打开文件夹查看？";
-
-                //if (MessageBox.Show(this, msg, this.Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) ==
-                //    DialogResult.Yes)
-                //{
-                //    System.Diagnostics.Process.Start(rootDir);
-                //}
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
@@ -1278,7 +1242,7 @@ namespace CFHelperUI
             string fileName = $"POJ_{tag}";
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1322,7 +1286,7 @@ namespace CFHelperUI
             string fileName = $"HDU_{tag}";
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
 
             if (MessageBox.Show(this, msg, this.Text,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1359,7 +1323,7 @@ namespace CFHelperUI
             string subDirName = item.Tag.ToString();
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下C++文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
