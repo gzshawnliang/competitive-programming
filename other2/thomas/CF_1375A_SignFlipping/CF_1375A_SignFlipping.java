@@ -45,11 +45,7 @@ class CF_1375A_SignFlipping_Solution
                 int n = in.nextInt();
                 for(int i=0;i<=n-1;++i)
                 {
-                    if (i % 2 == 0)
-                        out.print(Math.abs(in.nextInt()));
-                    else
-                        out.print(-Math.abs(in.nextInt()));
-
+                    out.print((i % 2 != 0) ? Math.abs(in.nextInt()) :-Math.abs(in.nextInt()));
                     out.print(' ');
                 }
                 out.print('\n');
