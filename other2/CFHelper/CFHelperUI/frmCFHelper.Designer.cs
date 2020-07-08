@@ -52,7 +52,12 @@
             this.poj = new System.Windows.Forms.RadioButton();
             this.hdu = new System.Windows.Forms.RadioButton();
             this.PicCFAuth = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.sourceJava = new System.Windows.Forms.RadioButton();
+            this.sourceCpp = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.PicCFAuth)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtProblemId
@@ -326,12 +331,61 @@
             this.PicCFAuth.TabStop = false;
             this.PicCFAuth.Visible = false;
             // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Location = new System.Drawing.Point(21, 677);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(96, 16);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Source Code";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.sourceJava);
+            this.panel1.Controls.Add(this.sourceCpp);
+            this.panel1.Location = new System.Drawing.Point(138, 674);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(138, 34);
+            this.panel1.TabIndex = 16;
+            // 
+            // sourceJava
+            // 
+            this.sourceJava.AutoSize = true;
+            this.sourceJava.Location = new System.Drawing.Point(77, 3);
+            this.sourceJava.Name = "sourceJava";
+            this.sourceJava.Size = new System.Drawing.Size(58, 20);
+            this.sourceJava.TabIndex = 3;
+            this.sourceJava.Text = "Java";
+            this.sourceJava.UseVisualStyleBackColor = true;
+            this.sourceJava.Click += new System.EventHandler(this.sourceJava_Click);
+            // 
+            // sourceCpp
+            // 
+            this.sourceCpp.AutoSize = true;
+            this.sourceCpp.Checked = true;
+            this.sourceCpp.Location = new System.Drawing.Point(3, 3);
+            this.sourceCpp.Name = "sourceCpp";
+            this.sourceCpp.Size = new System.Drawing.Size(50, 20);
+            this.sourceCpp.TabIndex = 2;
+            this.sourceCpp.TabStop = true;
+            this.sourceCpp.Text = "C++";
+            this.sourceCpp.UseVisualStyleBackColor = true;
+            this.sourceCpp.Click += new System.EventHandler(this.sourceCpp_Click);
+            // 
             // frmCFHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.PicCFAuth);
             this.Controls.Add(this.hdu);
             this.Controls.Add(this.poj);
@@ -357,6 +411,7 @@
             this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "frmCFHelper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CFHelper";
@@ -364,6 +419,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCFHelper_FormClosed);
             this.Load += new System.EventHandler(this.frmCFHelper_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PicCFAuth)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,6 +451,10 @@
         private System.Windows.Forms.RadioButton poj;
         private System.Windows.Forms.RadioButton hdu;
         private System.Windows.Forms.PictureBox PicCFAuth;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton sourceJava;
+        private System.Windows.Forms.RadioButton sourceCpp;
     }
 }
 

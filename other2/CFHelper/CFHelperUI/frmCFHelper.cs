@@ -170,6 +170,8 @@ namespace CFHelperUI
 
         private ContestType contestType;
 
+        private string sourceCodeFileExt="cpp";
+
         public frmCFHelper()
         {
             InitializeComponent();
@@ -254,6 +256,11 @@ namespace CFHelperUI
         }
 
         private void butGo_Click(object sender, EventArgs e)
+        {
+            RefreshtProblem();
+        }
+
+        private void RefreshtProblem()
         {
             string input = this.txtProblemId.Text.Trim();
 
@@ -489,7 +496,7 @@ namespace CFHelperUI
                     ListViewItem lvi = new ListViewItem(problemId.ToString());
                     lvi.Tag = s;
                     lvi.SubItems.Add(o.title.ToString());
-                    lvi.SubItems.Add(s + ".cpp");
+                    lvi.SubItems.Add(s + $".{sourceCodeFileExt}");
                     this.listView1.Items.Add(lvi);
 
                     this.listView1.EndUpdate();
@@ -598,7 +605,7 @@ namespace CFHelperUI
             if (result.Success)
             {
                 Debug.WriteLine( result.Value);
-                cppFileName = result.Value.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0]+".cpp";
+                cppFileName = result.Value.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0]+$".{sourceCodeFileExt}";
             }
 
 
@@ -660,7 +667,7 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(titleNode1.InnerText);
 
-            string cppFileName = s + ".cpp";
+            string cppFileName = s + $".{sourceCodeFileExt}";
 
             ListViewItem lvi = new ListViewItem(s);
             lvi.SubItems.Add(cppFileName);
@@ -723,7 +730,7 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(titleNode1.InnerText);
 
-            string cppFileName = "URAL_" + s + ".cpp";
+            string cppFileName = "URAL_" + s + $".{sourceCodeFileExt}";
 
             ListViewItem lvi = new ListViewItem(titleNode1.InnerText);
             lvi.SubItems.Add(cppFileName);
@@ -829,7 +836,7 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(titleNode1.InnerText);
 
-            string cppFileName = "POJ_" + s + ".cpp";
+            string cppFileName = "POJ_" + s + $".{sourceCodeFileExt}";
 
             ListViewItem lvi = new ListViewItem(titleNode1.InnerText);
             lvi.SubItems.Add(cppFileName);
@@ -893,7 +900,7 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(titleNode1.InnerText);
 
-            string cppFileName = "HDU_" + s + ".cpp";
+            string cppFileName = "HDU_" + s + $".{sourceCodeFileExt}";
 
             ListViewItem lvi = new ListViewItem(sTitle);
             lvi.SubItems.Add(cppFileName);
@@ -943,6 +950,8 @@ namespace CFHelperUI
 
         private void butOK_Click(object sender, EventArgs e)
         {
+            SetSourceCodeType();
+
             switch (contestType)
             {
                 case ContestType.codeforces:
@@ -1029,11 +1038,11 @@ namespace CFHelperUI
 
                     string url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
 
-                    string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
+                    string cppCode = GetTemplateSourceCode($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
                     string filePath = $"{rootDir}\\{contestSubDir}\\{contesName}\\{problemKey}";
                     CreateDirAndCppFile(filePath, fileName, cppCode);
 
-                    string cppfileName = $"{filePath}\\{fileName}.cpp";
+                    string cppfileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
 
                     RunVSCode(cppfileName);
                 }
@@ -1070,40 +1079,17 @@ namespace CFHelperUI
                 foreach (var problemId in problemIdList)
                 {
 
-                    //string cppCode = "";
-
-                    //cppCode += $"/*\n";
-                    //cppCode += $"===========================================================\n";
-                    //cppCode +=
-                    //    $"* @Name:           {contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}\n";
-                    //cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                    //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                    //if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
-                    //{
-                    //    cppCode +=
-                    //        $"* @url:            https://codeforces.com/contest/{contestId}/problem/{problemId}\n";
-                    //}
-                    //else
-                    //{
-                    //    cppCode +=
-                    //        $"* @url:            https://codeforces.com/gym/{contestId}/problem/{problemId}\n";
-                    //}
-
-                    //cppCode += $"* @Description:    \n";
-                    //cppCode += $"===========================================================\n";
-                    //cppCode += $"*/";
-
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
                     string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
                         url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
                     else
                         url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
-                    string cppCode = GetTemplateCpp($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
+                    string cppCode = GetTemplateSourceCode($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
 
                     CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
 
-                    string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.cpp";
+                    string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.{sourceCodeFileExt}";
                     RunVSCode(cppfileName);
                 }
 
@@ -1138,7 +1124,7 @@ namespace CFHelperUI
                 //cppCode += $"===========================================================\n";
                 //cppCode += $"*/";
 
-                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text,item.SubItems[2].Text.Trim(), fileName);
+                string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text,item.SubItems[2].Text.Trim(), fileName);
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1151,7 +1137,7 @@ namespace CFHelperUI
                 //    System.Diagnostics.Process.Start(rootDir);
                 //}
 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
                 RunVSCode(cppfileName);
 
@@ -1186,7 +1172,7 @@ namespace CFHelperUI
                 //cppCode += $"===========================================================\n";
                 //cppCode += $"*/";
 
-                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, item.SubItems[2].Text.Trim(), fileName);
+                string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, item.SubItems[2].Text.Trim(), fileName);
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1198,7 +1184,7 @@ namespace CFHelperUI
                 //{
                 //    System.Diagnostics.Process.Start(rootDir);
                 //}
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
                 Application.Exit();
@@ -1256,7 +1242,7 @@ namespace CFHelperUI
                         desc += $"{temp}{oProperty[s]}\n";
                     }
 
-                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, desc, fileName);
+                string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, desc, fileName);
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1268,7 +1254,7 @@ namespace CFHelperUI
                 //{
                 //    System.Diagnostics.Process.Start(rootDir);
                 //}
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
                 Application.Exit();
@@ -1313,7 +1299,7 @@ namespace CFHelperUI
 
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
                 Application.Exit();
             }
@@ -1355,10 +1341,10 @@ namespace CFHelperUI
                 //cppCode += $"===========================================================\n";
                 //cppCode += $"*/";
 
-                string cppCode = GetTemplateCpp(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, "", fileName);
+                string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, "", fileName);
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.cpp";
+                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
                 Application.Exit();
             }
@@ -1391,19 +1377,19 @@ namespace CFHelperUI
                 //cppCode += $"===========================================================\n";
                 //cppCode += $"*/";
 
-                string cppCode = GetTemplateCpp($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","", subDirName);
+                string cppCode = GetTemplateSourceCode($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","", subDirName);
                 CreateDirAndCppFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
                 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{subDirName}.cpp";
+                string cppfileName = $"{rootDir}\\{subDirName}\\{subDirName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
 
                 Application.Exit();
             }
         }
 
-        private string GetTemplateCpp(string p_Name,string p_Author,string p_CreateTime, string p_Url,string p_Description,string p_fileNameNoExtension)
+        private string GetTemplateSourceCode(string p_Name,string p_Author,string p_CreateTime, string p_Url,string p_Description,string p_fileNameNoExtension)
         {
-            string templateFile = $"{System.IO.Path.GetDirectoryName(Application.ExecutablePath)}\\template.cpp";
+            string templateFile = $"{System.IO.Path.GetDirectoryName(Application.ExecutablePath)}\\template.{sourceCodeFileExt}";
             string cppCode = "";
             
             if(_timeZoneDict.ContainsKey(TimeZoneInfo.Local.Id))
@@ -1440,7 +1426,7 @@ namespace CFHelperUI
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            string cppfileName = $"{path}\\{fileName}.cpp";
+            string cppfileName = $"{path}\\{fileName}.{sourceCodeFileExt}";
             if (!File.Exists(cppfileName))
             {
                 using (StreamWriter sw = File.CreateText(cppfileName))
@@ -1469,7 +1455,7 @@ namespace CFHelperUI
             return result.TrimStart(",".ToCharArray());
         }
 
-        private void RunVSCode(string cppFile)
+        private void RunVSCode(string codeFile)
         {
             //string exe = "\"%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe\"";
 
@@ -1495,14 +1481,7 @@ namespace CFHelperUI
             if (!System.IO.File.Exists(vsCodeExe))
                 vsCodeExe = "code";
 
-            System.Diagnostics.Process.Start(vsCodeExe, $"\"{cppFile}\"");
-
-            //string vsCodeExe = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Programs\Microsoft VS Code\Code.exe";
-            //if (!System.IO.File.Exists(vsCodeExe))
-            //{
-            //    vsCodeExe = "code";
-            //}
-            //System.Diagnostics.Process.Start(vsCodeExe, $"\"{cppFile}\"");
+            System.Diagnostics.Process.Start(vsCodeExe, $"\"{codeFile}\"");
         }
 
         private string FormatPathName(string name)
@@ -1645,6 +1624,30 @@ namespace CFHelperUI
             {
                 CheckCFAuth();
             }
+        }
+
+        private void SetSourceCodeType()
+        {
+            if (sourceCpp.Checked)
+                sourceCodeFileExt = "cpp";
+            else if (sourceJava.Checked)
+                sourceCodeFileExt = "java";
+
+        }
+
+        private void sourceCpp_Click(object sender, EventArgs e)
+        {
+            SetSourceCodeType();
+            if (!string.IsNullOrEmpty(txtProblemId.Text))
+                RefreshtProblem();
+
+        }
+
+        private void sourceJava_Click(object sender, EventArgs e)
+        {
+            SetSourceCodeType();
+            if (!string.IsNullOrEmpty(txtProblemId.Text))
+                RefreshtProblem();
         }
     }
 }

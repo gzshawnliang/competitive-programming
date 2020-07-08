@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="template.java" />
     <Content Include="templateSample.cpp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
