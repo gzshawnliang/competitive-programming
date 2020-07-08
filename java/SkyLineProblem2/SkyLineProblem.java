@@ -67,6 +67,7 @@ class Solution
             l *= 2;
             r *= 2;
 
+            
             for (int i = l; i <= r; ++i)
             {
                 a[i] = Math.max(a[i], h);
@@ -106,3 +107,5 @@ class Solution
         out.print('\n');
     }
 }
+
+

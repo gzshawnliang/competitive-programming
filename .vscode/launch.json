@@ -26,13 +26,8 @@
             "MIMode": "gdb",
             "miDebuggerPath": "gdb.exe",
             "preLaunchTask": "g++",
-            "internalConsoleOptions":"neverOpen",
+            "internalConsoleOptions": "neverOpen",
             "setupCommands": [
-                // {
-                //     "description": "gdbinit",
-                //     "text": "python import sys;sys.path.insert(0, 'C:/C++Compiler/MinGW/GCC-9.3.0/mingw64/share/gcc-9.3.0/python');from libstdcxx.v6.printers import register_libstdcxx_printers;register_libstdcxx_printers (None)",
-                //     "ignoreFailures": false
-                // },
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
@@ -43,23 +38,19 @@
                     "description": "ignore SIGPIPE",
                     "ignoreFailures": true
                 }
-            ],
-            // "logging": {
-            //     "moduleLoad": false,
-            //     "trace": true,
-            //     "engineLogging": true,
-            //     "exceptions": true
-            //     // "traceResponse": true
-            //  }
+            ]
         },
         {
             "type": "java",
             "name": "Java Launch",
             "request": "launch",
-            "mainClass": "",
-            "cwd":"${fileDirname}",
-            "console":"integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-        }        
+            "mainClass": "${file}",
+            "sourcePaths": [
+                "${fileDirname}"
+            ],
+            "cwd": "${fileDirname}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        }
     ]
 }
