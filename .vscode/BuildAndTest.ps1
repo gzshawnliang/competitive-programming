@@ -42,7 +42,7 @@ param(
 Set-Variable TLEWarningMsec -option Constant -value 3000        #Time Limit Exceeded 超时警告（毫秒）
 Set-Variable TLEErrorMsec -option Constant -value 5000          #Time Limit Exceeded 超时错误（毫秒）
 Set-Variable TLETerminateMsec -option Constant -value 60000     #Time Limit Exceeded 超时终止（毫秒）
-$JavaMainClassName = "Main" #Java Main Class Name
+$JavaMainClassName = "" #Java Main Class Name
 
 function getGCCVersion()
 {
@@ -617,7 +617,7 @@ function BuildJavaAndRun($SourceFileName) {
 
    
     #编译参数
-    $arguments = "-g:none -encoding UTF8 -J-Duser.language=en $SourceFileName"
+    $arguments = "-g:none -encoding UTF8 -J-Duser.language=en ""$SourceFileName"""
 
     #开始编译
     Write-Host
@@ -625,14 +625,29 @@ function BuildJavaAndRun($SourceFileName) {
     start-process $javaCompilerCmd $arguments -wait -NoNewWindow
     
     $exeFileName = $SourFile.DirectoryName + "\*.class" 
+    if([string]::IsNullOrEmpty($JavaMainClassName))
+    {
+        $JavaMainClassName =  $SourFile.BaseName
+    }
+
     $exeMainFileName = $SourFile.DirectoryName + "\" + $JavaMainClassName + ".class" 
+        
 
     #是否成功生成class文件
     if (Test-Path $exeFileName ) {
         Write-Host "java compile successfully."
 
         #获取当前class文件信息
-        $FirstClassFile = (Get-Item $exeFileName)[0]
+        if(Test-Path "$($SourFile.BaseName + "class")"){
+            $FirstClassFile = $SourFile.BaseName + ".class"
+        }
+        else 
+        {
+            $FirstClassFile = (Get-Item $exeFileName)[0]
+        }
+        
+
+        Write-Host "FirstClassFile: $FirstClassFile"
 
         if (-Not (Test-Path $exeMainFileName)) {
             $JavaMainClassName = $FirstClassFile.BaseName
@@ -657,12 +672,12 @@ function BuildJavaAndRun($SourceFileName) {
             Write-Host $FirstClassFile.DirectoryName
 
             # Write-Host $javacmd -cp $($FirstClassFile.DirectoryName) $($FirstClassFile.BaseName)
-            Write-Host "run command:    " -NoNewline
-            Write-Host $javacmd '-D"user.language=en"' $JavaMainClassName
+            Write-Host "run command: " -NoNewline
+            Write-Host $javacmd "-Xmx512M -Xss64M -Duser.language=en -Duser.region=US -Duser.variant=US" $JavaMainClassName
             $sw = [Diagnostics.Stopwatch]::StartNew()
             # &$javacmd -cp $($FirstClassFile.DirectoryName) $($FirstClassFile.BaseName)
             # & $javacmd -cp $($FirstClassFile.DirectoryName) $JavaMainClassName
-            & $javacmd '-D"user.language=en"' $JavaMainClassName
+            & "$javacmd" "-Xmx512M" "-Xss64M" "-Duser.language=en" "-Duser.region=US" "-Duser.variant=US" "-Dfile.encoding=UTF-8" "$JavaMainClassName"
             $sw.Stop()
             $msg = "$($JavaMainClassName + $FirstClassFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
             Write-Host
