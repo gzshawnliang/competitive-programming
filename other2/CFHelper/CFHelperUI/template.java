@@ -28,8 +28,11 @@ public class {fileNameNoExtension}
 {
     public static void main(String[] args) throws IOException
     {
-        if (System.getProperty("ONLINE_JUDGE") == null)
+        boolean isLocal= System.getProperty("ONLINE_JUDGE") == null;
+        long startTime = 0;
+        if (isLocal)
         {
+            startTime = System.currentTimeMillis();
             //redirect stdin/stdout to local file
             System.setIn(new FileInputStream(new File("{fileNameNoExtension}.in")));
             System.setOut(new PrintStream(new File("{fileNameNoExtension}.out")));
@@ -42,6 +45,11 @@ public class {fileNameNoExtension}
 
         in.close();
         out.close();
+        
+        if (isLocal)
+        {
+            System.err.println("program exited after: " + (System.currentTimeMillis() - startTime) + "ms");
+        }        
     }
 }
 
