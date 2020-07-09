@@ -109,6 +109,12 @@ namespace CFHelperUI
             var workingDir = newSrcPath.Replace(iwsDir, "$PROJECT_DIR$");
             workingDir = workingDir.Replace("\\", "/");
 
+            if (xElementRunManager == null)
+            {
+                xElementRunManager = new XElement("component", new XAttribute("name", "RunManager"));
+                root.Add(xElementRunManager);
+            }
+
             if (xElementRunManager != null)
             {
                 var configurations = xElementRunManager.Elements("configuration").ToList();
