@@ -150,9 +150,17 @@ namespace CFHelperUI
         { "Line Islands Standard Time"," (UTC+14:00) Kiritimati Island" },
     };
 
+        private string _javaModuleDir = string.Empty;
+
         private string rootDir
         {
-            get { return this.txtWorkingDir.Text; }
+            get
+            {
+                if (IntelliJ.Checked && !string.IsNullOrEmpty(_javaModuleDir))
+                    return _javaModuleDir;
+                
+                return this.txtWorkingDir.Text;
+            }
         }
         private enum ContestType
         {
@@ -995,12 +1003,6 @@ namespace CFHelperUI
             if (listView1.CheckedItems.Count == 0)
                 return;
 
-            //bool isGym = false;
-            //if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
-            //    isGym = false;
-            //else
-            //    isGym = true;
-
             //Codeforces Round #634 (Div. 3)
             contesName = contesName.Replace("Codeforces", "");
             contesName = contesName.Replace("#", "_");
@@ -1030,22 +1032,31 @@ namespace CFHelperUI
                     string problemId = problem.Value;
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-
-                    //string url;
-                    //if (isGym==false)
-                    //    url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
-                    //else
-                    //    url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
+                    if (this.IntelliJ.Checked)
+                        fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}");
 
                     string url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
 
                     string cppCode = GetTemplateSourceCode($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
                     string filePath = $"{rootDir}\\{contestSubDir}\\{contesName}\\{problemKey}";
-                    CreateDirAndCppFile(filePath, fileName, cppCode);
+                    IntelliJ intelliJ=null;
+                    if (this.IntelliJ.Checked)
+                    {
+                        intelliJ = new IntelliJ(txtWorkingDir.Text);
+                        filePath = $"{rootDir}\\{intelliJ.ModuleName}\\{contestSubDir}\\{contesName}\\{problemKey}";
+                    }
+                    
+                    CreateDirAndCodeFile(filePath, fileName, cppCode);
+                    string srcfileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
 
-                    string cppfileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
-
-                    RunVSCode(cppfileName);
+                    if (this.IntelliJ.Checked)
+                    {
+                        intelliJ.ProcessFile(filePath, fileName);
+                    }
+                    else
+                    {
+                        RunVSCode(srcfileName);
+                    }
                 }
                 Application.Exit();
             }
@@ -1088,7 +1099,7 @@ namespace CFHelperUI
                         url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
                     string cppCode = GetTemplateSourceCode($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
 
-                    CreateDirAndCppFile($"{rootDir}\\{fileName}", fileName, cppCode);
+                    CreateDirAndCodeFile($"{rootDir}\\{fileName}", fileName, cppCode);
 
                     string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.{sourceCodeFileExt}";
                     RunVSCode(cppfileName);
@@ -1115,7 +1126,7 @@ namespace CFHelperUI
             {
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text,item.SubItems[2].Text.Trim(), fileName);
 
-                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+                CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
@@ -1140,21 +1151,21 @@ namespace CFHelperUI
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                //string cppCode = "";
+                //string srcCode = "";
 
-                //cppCode += $"/*\n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"* @Name:           {item.Text.Trim()} \n";
-                //cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                //cppCode += $"* @url:            {this.txtProblemId.Text}\n";
-                //cppCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"*/";
+                //srcCode += $"/*\n";
+                //srcCode += $"===========================================================\n";
+                //srcCode += $"* @Name:           {item.Text.Trim()} \n";
+                //srcCode += $"* @Author:         {txtAuthor.Text}\n";
+                //srcCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                //srcCode += $"* @url:            {this.txtProblemId.Text}\n";
+                //srcCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
+                //srcCode += $"===========================================================\n";
+                //srcCode += $"*/";
 
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, item.SubItems[2].Text.Trim(), fileName);
 
-                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+                CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
@@ -1185,26 +1196,26 @@ namespace CFHelperUI
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                //string cppCode = "";
+                //string srcCode = "";
 
-                //cppCode += $"/*\n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"* @Name:            {item.Text.Trim()} \n";
-                //cppCode += $"* @Author:          {txtAuthor.Text}\n";
-                //cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
-                //cppCode += $"* @url:             {this.txtProblemId.Text}\n";
-                //cppCode += $"* @Description:     \n";
+                //srcCode += $"/*\n";
+                //srcCode += $"===========================================================\n";
+                //srcCode += $"* @Name:            {item.Text.Trim()} \n";
+                //srcCode += $"* @Author:          {txtAuthor.Text}\n";
+                //srcCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
+                //srcCode += $"* @url:             {this.txtProblemId.Text}\n";
+                //srcCode += $"* @Description:     \n";
 
                 //foreach (string s in oProperty.Keys)
                 //    if (s != "filename")
                 //    {
                 //        string temp = $"* @{s}:".PadRight(19);
-                //        cppCode += $"{temp}{oProperty[s]}\n";
+                //        srcCode += $"{temp}{oProperty[s]}\n";
                 //    }
 
 
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"*/";
+                //srcCode += $"===========================================================\n";
+                //srcCode += $"*/";
 
                 string desc = "\n";
                 foreach (string s in oProperty.Keys)
@@ -1216,7 +1227,7 @@ namespace CFHelperUI
 
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, desc, fileName);
 
-                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+                CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
@@ -1261,7 +1272,7 @@ namespace CFHelperUI
                 cppCode += $"===========================================================\n";
                 cppCode += $"*/";
 
-                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+                CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
@@ -1291,22 +1302,22 @@ namespace CFHelperUI
             if (MessageBox.Show(this, msg, this.Text,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                //string cppCode = "";
+                //string srcCode = "";
 
-                //cppCode += $"/*\n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"* @Name:            {item.Text.Trim()} \n";
-                //cppCode += $"* @Author:          {txtAuthor.Text}\n";
-                //cppCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
-                //cppCode += $"* @url:             {this.txtProblemId.Text}\n";
-                //cppCode += $"* @Description:     \n";
+                //srcCode += $"/*\n";
+                //srcCode += $"===========================================================\n";
+                //srcCode += $"* @Name:            {item.Text.Trim()} \n";
+                //srcCode += $"* @Author:          {txtAuthor.Text}\n";
+                //srcCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
+                //srcCode += $"* @url:             {this.txtProblemId.Text}\n";
+                //srcCode += $"* @Description:     \n";
 
 
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"*/";
+                //srcCode += $"===========================================================\n";
+                //srcCode += $"*/";
 
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, "", fileName);
-                CreateDirAndCppFile($"{rootDir}\\{subDirName}", fileName, cppCode);
+                CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
@@ -1331,18 +1342,18 @@ namespace CFHelperUI
 
 
 
-                //cppCode += $"/*\n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"* @Name:           UVa-{item.Text} {item.SubItems[1].Text}\n";
-                //cppCode += $"* @Author:         {txtAuthor.Text}\n";
-                //cppCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                //cppCode += $"* @url:            \n";
-                //cppCode += $"* @Description:    \n";
-                //cppCode += $"===========================================================\n";
-                //cppCode += $"*/";
+                //srcCode += $"/*\n";
+                //srcCode += $"===========================================================\n";
+                //srcCode += $"* @Name:           UVa-{item.Text} {item.SubItems[1].Text}\n";
+                //srcCode += $"* @Author:         {txtAuthor.Text}\n";
+                //srcCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
+                //srcCode += $"* @url:            \n";
+                //srcCode += $"* @Description:    \n";
+                //srcCode += $"===========================================================\n";
+                //srcCode += $"*/";
 
                 string cppCode = GetTemplateSourceCode($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","", subDirName);
-                CreateDirAndCppFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
+                CreateDirAndCodeFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
                 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{subDirName}.{sourceCodeFileExt}";
                 RunVSCode(cppfileName);
@@ -1384,7 +1395,7 @@ namespace CFHelperUI
             return cppCode;
         }
 
-        private string CreateDirAndCppFile(string path, string fileName, string cppCode)
+        private string CreateDirAndCodeFile(string path, string fileName, string srcCode)
         {
             string result = string.Empty;
             if (!Directory.Exists(path))
@@ -1395,12 +1406,12 @@ namespace CFHelperUI
             {
                 using (StreamWriter sw = File.CreateText(cppfileName))
                 {
-                    sw.WriteLine(cppCode);
+                    sw.WriteLine(srcCode);
                 }
             }
             else
             {
-                result = $"cpp文件已存在";
+                result = $"Source Code File Existed!";
             }
 
             string infileName = $"{path}\\{fileName}.in";
@@ -1414,7 +1425,7 @@ namespace CFHelperUI
             }
             else
             {
-                result += $",in文件已存在";
+                result += $",in File Existed";
             }
             return result.TrimStart(",".ToCharArray());
         }
@@ -1466,6 +1477,7 @@ namespace CFHelperUI
 
             return pathName;
         }
+
 
         private void butBrowse_Click(object sender, EventArgs e)
         {
@@ -1601,6 +1613,8 @@ namespace CFHelperUI
 
         private void sourceCpp_Click(object sender, EventArgs e)
         {
+            IntelliJ.Enabled = false;
+            vscode.Checked = true;
             SetSourceCodeType();
             if (!string.IsNullOrEmpty(txtProblemId.Text))
                 RefreshtProblem();
@@ -1609,9 +1623,28 @@ namespace CFHelperUI
 
         private void sourceJava_Click(object sender, EventArgs e)
         {
+            IntelliJ.Enabled = true;
             SetSourceCodeType();
             if (!string.IsNullOrEmpty(txtProblemId.Text))
                 RefreshtProblem();
+        }
+
+        private void sourceJava_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void IntelliJ_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IntelliJ.Checked)
+            {
+                var intelliJ = new IntelliJ(txtWorkingDir.Text);
+                _javaModuleDir = intelliJ.ModuleDir;
+            }
+            else
+            {
+                _javaModuleDir = string.Empty;
+            }
         }
     }
 }

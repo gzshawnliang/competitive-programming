@@ -95,6 +95,7 @@
     <Compile Include="frmCFAuthorization.Designer.cs">
       <DependentUpon>frmCFAuthorization.cs</DependentUpon>
     </Compile>
+    <Compile Include="IntelliJ.cs" />
     <Compile Include="StringCipher.cs" />
     <Compile Include="frmCFHelper.cs">
       <SubType>Form</SubType>
