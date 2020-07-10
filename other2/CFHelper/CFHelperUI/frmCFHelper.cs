@@ -1051,12 +1051,11 @@ namespace CFHelperUI
 
                     if (this.IntelliJ.Checked)
                     {
+                        intelliJ.StartIntelliJ();
                         intelliJ.ProcessFile(filePath, fileName);
                     }
-                    else
-                    {
-                        RunVSCode(srcfileName);
-                    }
+
+                    RunCodeIde(srcfileName);
                 }
                 Application.Exit();
             }
@@ -1102,7 +1101,7 @@ namespace CFHelperUI
                     CreateDirAndCodeFile($"{rootDir}\\{fileName}", fileName, cppCode);
 
                     string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.{sourceCodeFileExt}";
-                    RunVSCode(cppfileName);
+                    RunCodeIde(cppfileName);
                 }
 
                 Application.Exit();
@@ -1130,7 +1129,7 @@ namespace CFHelperUI
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
-                RunVSCode(cppfileName);
+                RunCodeIde(cppfileName);
 
                 Application.Exit();
             }
@@ -1168,7 +1167,7 @@ namespace CFHelperUI
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
-                RunVSCode(cppfileName);
+                RunCodeIde(cppfileName);
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
                 Application.Exit();
             }
@@ -1230,7 +1229,7 @@ namespace CFHelperUI
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
-                RunVSCode(cppfileName);
+                RunCodeIde(cppfileName);
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
                 Application.Exit();
             }
@@ -1275,7 +1274,7 @@ namespace CFHelperUI
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
-                RunVSCode(cppfileName);
+                RunCodeIde(cppfileName);
                 Application.Exit();
             }
         }
@@ -1320,7 +1319,7 @@ namespace CFHelperUI
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
-                RunVSCode(cppfileName);
+                RunCodeIde(cppfileName);
                 Application.Exit();
             }
         }
@@ -1356,7 +1355,7 @@ namespace CFHelperUI
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
                 
                 string cppfileName = $"{rootDir}\\{subDirName}\\{subDirName}.{sourceCodeFileExt}";
-                RunVSCode(cppfileName);
+                RunCodeIde(cppfileName);
 
                 Application.Exit();
             }
@@ -1430,6 +1429,14 @@ namespace CFHelperUI
             return result.TrimStart(",".ToCharArray());
         }
 
+        private void RunCodeIde(string codeFile)
+        {
+            if (vscode.Checked)
+                RunVSCode(codeFile);
+            else if (IntelliJ.Enabled && IntelliJ.Checked)
+                RunIntelliJ(codeFile);
+        }
+
         private void RunVSCode(string codeFile)
         {
             //string exe = "\"%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe\"";
@@ -1457,6 +1464,49 @@ namespace CFHelperUI
                 vsCodeExe = "code";
 
             System.Diagnostics.Process.Start(vsCodeExe, $"\"{codeFile}\"");
+        }
+        
+
+        private void RunIntelliJ(string codeFile)
+        {
+            //Environment.SpecialFolder.ProgramFiles
+            string intelliJExe = string.Empty;
+            //从进程中获取vscode路径
+            Process[] ps = Process.GetProcessesByName("idea64");
+            foreach (Process p in ps)
+            {
+                //输出进程路径
+                if (p.MainModule.FileVersionInfo.FileDescription == "IntelliJ IDEA")
+                {
+                    Debug.WriteLine(p.MainModule.FileName);
+                    intelliJExe = p.MainModule.FileName;
+                    break;
+                }
+            }
+
+            //获取不到,缺省路径启动一个进程
+            if (string.IsNullOrEmpty(intelliJExe))
+            {
+                string intelliJPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\JetBrains";
+                List<string> searchNames = new List<string> { "idea64.exe", "idea.bat", "idea.exe" };
+                
+                foreach (string fileName in searchNames)
+                {
+                    string[] fileEntries = Directory.GetFiles(intelliJPath, fileName, SearchOption.AllDirectories);
+                    if (fileEntries.Any())
+                    {
+                        intelliJExe = fileEntries.FirstOrDefault();
+                        break;
+                    }
+                }
+            }
+
+            //缺省路径找不到Code.exe，使用环境变量
+            if (!System.IO.File.Exists(intelliJExe))
+                intelliJExe = "idea64";
+
+            System.Diagnostics.Process.Start(intelliJExe, $"\"{codeFile}\"");
+
         }
 
         private string FormatPathName(string name)

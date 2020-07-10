@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Diagnostics;
+using System.Threading;
 
 namespace CFHelperUI
 {
@@ -22,35 +23,82 @@ namespace CFHelperUI
 
         private string _initDirName;
 
+        private string _iprFileName;
+
         public  IntelliJ(string dirName)
         {
             _initDirName = dirName;
             ModuleName = string.Empty;
-            string iprFileName = FindFileInDirectory(dirName, "*.ipr");
+            _iprFileName = FindFileInDirectory(dirName, "*.ipr");
 
             //获取模块名称
-            if (!string.IsNullOrEmpty(iprFileName))
+            if (!string.IsNullOrEmpty(_iprFileName))
             {
-                HandleIpr(iprFileName);
+                HandleIpr(_iprFileName);
             }
-
-            ////创建源码目录
-            //if (!string.IsNullOrEmpty(_moduleFileName))
-            //{
-            //    var fullModuleFileName = FindFileInDirectory(dirName, _moduleFileName);
-            //    ModuleDir = new FileInfo(fullModuleFileName).Directory.FullName;
-            //    HandleModuleFile(fullModuleFileName);
-            //}
-
-            ////创建编译选项
-            //string iwsFileName = FindFileInDirectory(dirName, "*.iws");
-            //if (!string.IsNullOrEmpty(iwsFileName))
-            //{
-            //    HandleIws(iwsFileName);
-            //}
         }
 
-        
+        public void StartIntelliJ()
+        {
+            if (!string.IsNullOrEmpty(_iprFileName))
+            {
+                string exeIntelliJFile = GetIntelliJExePath(out bool isRuning);
+                if (!string.IsNullOrEmpty(exeIntelliJFile))
+                {
+                    var process = System.Diagnostics.Process.Start(exeIntelliJFile, $"\"{_iprFileName}\"");
+                    var start = DateTime.Now;
+                    int timeout = 10000;
+                    while (!process.HasExited && process.MainWindowHandle == IntPtr.Zero)
+                    {
+                        Thread.Sleep(10);
+                        if ((DateTime.Now - start).TotalMilliseconds >= timeout)
+                        {
+                            return ;
+                        }
+                    }
+                }
+            }
+        }
+
+        public string GetIntelliJExePath(out bool isRuning)
+        {
+            //Environment.SpecialFolder.ProgramFiles
+            string intelliJExe = string.Empty;
+            isRuning = false;
+            //从进程中获取vscode路径
+            Process[] ps = Process.GetProcessesByName("idea64");
+            foreach (Process p in ps)
+            {
+                //输出进程路径
+                if (p.MainModule.FileVersionInfo.FileDescription == "IntelliJ IDEA")
+                {
+                    Debug.WriteLine(p.MainModule.FileName);
+                    intelliJExe = p.MainModule.FileName;
+                    isRuning = true;
+                    break;
+                }
+            }
+
+            //获取不到,缺省路径启动一个进程
+            if (string.IsNullOrEmpty(intelliJExe))
+            {
+                string intelliJPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\JetBrains";
+                List<string> searchNames = new List<string> { "idea64.exe", "idea.bat", "idea.exe" };
+
+                foreach (string fileName in searchNames)
+                {
+                    string[] fileEntries = Directory.GetFiles(intelliJPath, fileName, SearchOption.AllDirectories);
+                    if (fileEntries.Any())
+                    {
+                        intelliJExe = fileEntries.FirstOrDefault();
+                        break;
+                    }
+                }
+            }
+
+            return intelliJExe;
+        }
+
 
         private void HandleIpr(string fileName)
         {
@@ -169,6 +217,7 @@ namespace CFHelperUI
 
             return string.Empty;
         }
+
         public void ProcessFile(string pathName,string fileName)
         {
             //创建源码目录
