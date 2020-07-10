@@ -411,7 +411,7 @@
             // picIntelliJOK
             // 
             this.picIntelliJOK.Image = global::CFHelperUI.Properties.Resources.user_ok;
-            this.picIntelliJOK.Location = new System.Drawing.Point(214, 3);
+            this.picIntelliJOK.Location = new System.Drawing.Point(218, 3);
             this.picIntelliJOK.Name = "picIntelliJOK";
             this.picIntelliJOK.Size = new System.Drawing.Size(20, 20);
             this.picIntelliJOK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
