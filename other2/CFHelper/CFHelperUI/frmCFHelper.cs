@@ -1032,8 +1032,8 @@ namespace CFHelperUI
                     string problemId = problem.Value;
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-                    if (this.chkIntelliJ.Checked)
-                        fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}");
+                    //if (this.chkIntelliJ.Checked)
+                    //    fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}");
 
                     string url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
 
@@ -1088,8 +1088,8 @@ namespace CFHelperUI
                 {
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-                    if (this.chkIntelliJ.Checked)
-                        fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}");
+                    //if (this.chkIntelliJ.Checked)
+                    //    fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}");
 
                     string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
@@ -1502,10 +1502,8 @@ namespace CFHelperUI
 
         private string FormatPathName(string name)
         {
-            
-
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
-            List<string> otherInvalidChars = new List<string>() { ",", " ", "'" };
+            List<string> otherInvalidChars = new List<string>() { ",", " ", "'","(", ")","[", "]" };
 
             string pathName = name;
             foreach (char c in invalid)
