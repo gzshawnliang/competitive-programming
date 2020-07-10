@@ -61,7 +61,6 @@
             this.picIntelliJOK = new System.Windows.Forms.PictureBox();
             this.chkIntelliJ = new System.Windows.Forms.RadioButton();
             this.chkvscode = new System.Windows.Forms.RadioButton();
-            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PicCFAuth)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -72,7 +71,7 @@
             // 
             this.txtProblemId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtProblemId.Location = new System.Drawing.Point(138, 82);
+            this.txtProblemId.Location = new System.Drawing.Point(130, 81);
             this.txtProblemId.Margin = new System.Windows.Forms.Padding(4);
             this.txtProblemId.Name = "txtProblemId";
             this.txtProblemId.Size = new System.Drawing.Size(754, 26);
@@ -83,7 +82,7 @@
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butGo.Location = new System.Drawing.Point(900, 80);
+            this.butGo.Location = new System.Drawing.Point(892, 79);
             this.butGo.Margin = new System.Windows.Forms.Padding(4);
             this.butGo.Name = "butGo";
             this.butGo.Size = new System.Drawing.Size(100, 28);
@@ -104,10 +103,10 @@
             this.listView1.HideSelection = false;
             this.listView1.HotTracking = true;
             this.listView1.HoverSelection = true;
-            this.listView1.Location = new System.Drawing.Point(138, 116);
+            this.listView1.Location = new System.Drawing.Point(130, 115);
             this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(754, 358);
+            this.listView1.Size = new System.Drawing.Size(754, 399);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -116,7 +115,7 @@
             // butOK
             // 
             this.butOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butOK.Location = new System.Drawing.Point(792, 596);
+            this.butOK.Location = new System.Drawing.Point(786, 591);
             this.butOK.Margin = new System.Windows.Forms.Padding(4);
             this.butOK.Name = "butOK";
             this.butOK.Size = new System.Drawing.Size(100, 31);
@@ -129,7 +128,7 @@
             // 
             this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butCancel.Location = new System.Drawing.Point(900, 596);
+            this.butCancel.Location = new System.Drawing.Point(894, 591);
             this.butCancel.Margin = new System.Windows.Forms.Padding(4);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(100, 31);
@@ -142,7 +141,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(21, 82);
+            this.label1.Location = new System.Drawing.Point(13, 81);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 16);
@@ -153,7 +152,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(21, 115);
+            this.label2.Location = new System.Drawing.Point(13, 114);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 16);
@@ -166,7 +165,7 @@
             this.lblContest.BackColor = System.Drawing.Color.Transparent;
             this.lblContest.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblContest.ForeColor = System.Drawing.Color.Maroon;
-            this.lblContest.Location = new System.Drawing.Point(21, 19);
+            this.lblContest.Location = new System.Drawing.Point(13, 18);
             this.lblContest.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContest.Name = "lblContest";
             this.lblContest.Size = new System.Drawing.Size(620, 16);
@@ -178,7 +177,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(21, 485);
+            this.label3.Location = new System.Drawing.Point(15, 522);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 16);
@@ -191,7 +190,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWorkingDir.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtWorkingDir.ForeColor = System.Drawing.Color.Maroon;
-            this.txtWorkingDir.Location = new System.Drawing.Point(138, 482);
+            this.txtWorkingDir.Location = new System.Drawing.Point(130, 522);
             this.txtWorkingDir.Margin = new System.Windows.Forms.Padding(4);
             this.txtWorkingDir.Name = "txtWorkingDir";
             this.txtWorkingDir.ReadOnly = true;
@@ -202,7 +201,7 @@
             // 
             this.butBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butBrowse.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butBrowse.Location = new System.Drawing.Point(900, 478);
+            this.butBrowse.Location = new System.Drawing.Point(894, 519);
             this.butBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.butBrowse.Name = "butBrowse";
             this.butBrowse.Size = new System.Drawing.Size(100, 29);
@@ -216,7 +215,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(21, 516);
+            this.label4.Location = new System.Drawing.Point(15, 555);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 16);
@@ -227,7 +226,7 @@
             // 
             this.txtAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAuthor.Location = new System.Drawing.Point(138, 511);
+            this.txtAuthor.Location = new System.Drawing.Point(130, 551);
             this.txtAuthor.Margin = new System.Windows.Forms.Padding(4);
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.Size = new System.Drawing.Size(754, 26);
@@ -240,12 +239,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtError.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtError.ForeColor = System.Drawing.Color.Maroon;
-            this.txtError.Location = new System.Drawing.Point(138, 116);
+            this.txtError.Location = new System.Drawing.Point(130, 114);
             this.txtError.Margin = new System.Windows.Forms.Padding(4);
             this.txtError.Multiline = true;
             this.txtError.Name = "txtError";
             this.txtError.ReadOnly = true;
-            this.txtError.Size = new System.Drawing.Size(754, 358);
+            this.txtError.Size = new System.Drawing.Size(754, 399);
             this.txtError.TabIndex = 7;
             this.txtError.Visible = false;
             // 
@@ -253,7 +252,7 @@
             // 
             this.codeforces.AutoSize = true;
             this.codeforces.Checked = true;
-            this.codeforces.Location = new System.Drawing.Point(140, 55);
+            this.codeforces.Location = new System.Drawing.Point(132, 54);
             this.codeforces.Name = "codeforces";
             this.codeforces.Size = new System.Drawing.Size(106, 20);
             this.codeforces.TabIndex = 0;
@@ -265,7 +264,7 @@
             // uva
             // 
             this.uva.AutoSize = true;
-            this.uva.Location = new System.Drawing.Point(252, 55);
+            this.uva.Location = new System.Drawing.Point(244, 54);
             this.uva.Name = "uva";
             this.uva.Size = new System.Drawing.Size(50, 20);
             this.uva.TabIndex = 1;
@@ -276,7 +275,7 @@
             // usaco
             // 
             this.usaco.AutoSize = true;
-            this.usaco.Location = new System.Drawing.Point(308, 55);
+            this.usaco.Location = new System.Drawing.Point(300, 54);
             this.usaco.Name = "usaco";
             this.usaco.Size = new System.Drawing.Size(66, 20);
             this.usaco.TabIndex = 2;
@@ -287,7 +286,7 @@
             // spoj
             // 
             this.spoj.AutoSize = true;
-            this.spoj.Location = new System.Drawing.Point(380, 55);
+            this.spoj.Location = new System.Drawing.Point(372, 54);
             this.spoj.Name = "spoj";
             this.spoj.Size = new System.Drawing.Size(58, 20);
             this.spoj.TabIndex = 3;
@@ -298,7 +297,7 @@
             // ural
             // 
             this.ural.AutoSize = true;
-            this.ural.Location = new System.Drawing.Point(444, 55);
+            this.ural.Location = new System.Drawing.Point(436, 54);
             this.ural.Name = "ural";
             this.ural.Size = new System.Drawing.Size(218, 20);
             this.ural.TabIndex = 4;
@@ -309,7 +308,7 @@
             // poj
             // 
             this.poj.AutoSize = true;
-            this.poj.Location = new System.Drawing.Point(668, 55);
+            this.poj.Location = new System.Drawing.Point(660, 54);
             this.poj.Name = "poj";
             this.poj.Size = new System.Drawing.Size(50, 20);
             this.poj.TabIndex = 5;
@@ -320,7 +319,7 @@
             // hdu
             // 
             this.hdu.AutoSize = true;
-            this.hdu.Location = new System.Drawing.Point(724, 55);
+            this.hdu.Location = new System.Drawing.Point(716, 54);
             this.hdu.Name = "hdu";
             this.hdu.Size = new System.Drawing.Size(50, 20);
             this.hdu.TabIndex = 6;
@@ -331,7 +330,7 @@
             // PicCFAuth
             // 
             this.PicCFAuth.Image = global::CFHelperUI.Properties.Resources.user_ok;
-            this.PicCFAuth.Location = new System.Drawing.Point(114, 55);
+            this.PicCFAuth.Location = new System.Drawing.Point(106, 54);
             this.PicCFAuth.Name = "PicCFAuth";
             this.PicCFAuth.Size = new System.Drawing.Size(20, 20);
             this.PicCFAuth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -344,7 +343,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(21, 547);
+            this.label5.Location = new System.Drawing.Point(15, 591);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 16);
@@ -357,15 +356,15 @@
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.sourceJava);
             this.panel1.Controls.Add(this.sourceCpp);
-            this.panel1.Location = new System.Drawing.Point(138, 544);
+            this.panel1.Location = new System.Drawing.Point(132, 588);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(264, 34);
+            this.panel1.Size = new System.Drawing.Size(124, 34);
             this.panel1.TabIndex = 16;
             // 
             // sourceJava
             // 
             this.sourceJava.AutoSize = true;
-            this.sourceJava.Location = new System.Drawing.Point(114, 3);
+            this.sourceJava.Location = new System.Drawing.Point(59, 3);
             this.sourceJava.Name = "sourceJava";
             this.sourceJava.Size = new System.Drawing.Size(58, 20);
             this.sourceJava.TabIndex = 3;
@@ -390,7 +389,7 @@
             // emptyCode
             // 
             this.emptyCode.AutoSize = true;
-            this.emptyCode.Location = new System.Drawing.Point(780, 55);
+            this.emptyCode.Location = new System.Drawing.Point(772, 54);
             this.emptyCode.Name = "emptyCode";
             this.emptyCode.Size = new System.Drawing.Size(162, 20);
             this.emptyCode.TabIndex = 17;
@@ -404,15 +403,15 @@
             this.panel2.Controls.Add(this.picIntelliJOK);
             this.panel2.Controls.Add(this.chkIntelliJ);
             this.panel2.Controls.Add(this.chkvscode);
-            this.panel2.Location = new System.Drawing.Point(138, 578);
+            this.panel2.Location = new System.Drawing.Point(303, 588);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(264, 34);
+            this.panel2.Size = new System.Drawing.Size(242, 34);
             this.panel2.TabIndex = 20;
             // 
             // picIntelliJOK
             // 
             this.picIntelliJOK.Image = global::CFHelperUI.Properties.Resources.user_ok;
-            this.picIntelliJOK.Location = new System.Drawing.Point(244, 3);
+            this.picIntelliJOK.Location = new System.Drawing.Point(214, 3);
             this.picIntelliJOK.Name = "picIntelliJOK";
             this.picIntelliJOK.Size = new System.Drawing.Size(20, 20);
             this.picIntelliJOK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -424,7 +423,7 @@
             // 
             this.chkIntelliJ.AutoSize = true;
             this.chkIntelliJ.Enabled = false;
-            this.chkIntelliJ.Location = new System.Drawing.Point(114, 3);
+            this.chkIntelliJ.Location = new System.Drawing.Point(90, 3);
             this.chkIntelliJ.Name = "chkIntelliJ";
             this.chkIntelliJ.Size = new System.Drawing.Size(130, 20);
             this.chkIntelliJ.TabIndex = 3;
@@ -444,26 +443,13 @@
             this.chkvscode.Text = "VS Code";
             this.chkvscode.UseVisualStyleBackColor = true;
             // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(21, 578);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 16);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "IDE";
-            // 
             // frmCFHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
-            this.ClientSize = new System.Drawing.Size(1008, 646);
+            this.ClientSize = new System.Drawing.Size(1008, 643);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.emptyCode);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label5);
@@ -475,7 +461,6 @@
             this.Controls.Add(this.usaco);
             this.Controls.Add(this.uva);
             this.Controls.Add(this.codeforces);
-            this.Controls.Add(this.txtError);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtAuthor);
             this.Controls.Add(this.butBrowse);
@@ -489,6 +474,7 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.butGo);
             this.Controls.Add(this.txtProblemId);
+            this.Controls.Add(this.txtError);
             this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -543,7 +529,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton chkIntelliJ;
         private System.Windows.Forms.RadioButton chkvscode;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox picIntelliJOK;
     }
 }

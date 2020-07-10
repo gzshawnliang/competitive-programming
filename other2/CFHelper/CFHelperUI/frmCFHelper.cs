@@ -1041,10 +1041,7 @@ namespace CFHelperUI
                     string filePath = $"{rootDir}\\{contestSubDir}\\{contesName}\\{problemKey}";
                     IntelliJ intelliJ=null;
                     if (this.chkIntelliJ.Checked)
-                    {
                         intelliJ = new IntelliJ(txtWorkingDir.Text);
-                        filePath = $"{rootDir}\\{intelliJ.ModuleName}\\{contestSubDir}\\{contesName}\\{problemKey}";
-                    }
                     
                     CreateDirAndCodeFile(filePath, fileName, cppCode);
                     string srcfileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
@@ -1091,16 +1088,28 @@ namespace CFHelperUI
                 {
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
+                    if (this.chkIntelliJ.Checked)
+                        fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}");
+
                     string url;
                     if (CfContestType == "CF" || (contesName.Contains("Codeforces") && contesName.Contains("Round")))
                         url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
                     else
                         url = $"https://codeforces.com/gym/{contestId}/problem/{problemId}";
                     string cppCode = GetTemplateSourceCode($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
+                    string filePath = $"{rootDir}\\{fileName}";
+                    IntelliJ intelliJ = null;
+                    if (this.chkIntelliJ.Checked)
+                        intelliJ = new IntelliJ(this.txtWorkingDir.Text);
 
                     CreateDirAndCodeFile($"{rootDir}\\{fileName}", fileName, cppCode);
 
                     string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.{sourceCodeFileExt}";
+                    if (this.chkIntelliJ.Checked)
+                    {
+                        intelliJ.StartIntelliJ();
+                        intelliJ.ProcessFile(filePath, fileName);
+                    }
                     RunCodeIde(cppfileName);
                 }
 
@@ -1124,11 +1133,22 @@ namespace CFHelperUI
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text,item.SubItems[2].Text.Trim(), fileName);
+                string filePath = $"{rootDir}\\{subDirName}";
+                IntelliJ intelliJ = null;
+                if (this.chkIntelliJ.Checked)
+                    intelliJ = new IntelliJ(txtWorkingDir.Text);
 
-                CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
+                CreateDirAndCodeFile(filePath, fileName, cppCode);
+
+                string cppfileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
                 //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+
+                if (this.chkIntelliJ.Checked)
+                {
+                    intelliJ.StartIntelliJ();
+                    intelliJ.ProcessFile(filePath, fileName);
+                }
                 RunCodeIde(cppfileName);
 
                 Application.Exit();
