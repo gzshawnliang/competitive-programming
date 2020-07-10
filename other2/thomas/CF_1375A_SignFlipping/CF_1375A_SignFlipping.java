@@ -14,11 +14,15 @@ public class CF_1375A_SignFlipping
 {
     public static void main(String[] args) throws IOException
     {
-        if (System.getProperty("ONLINE_JUDGE") == null)
+        boolean isLocal= System.getProperty("ONLINE_JUDGE") == null;
+        long startTime = 0;
+
+        if (isLocal)
         {
-            //redirect stdin/stdout to local file
-            System.setIn(new FileInputStream(new File("CF_1375A_SignFlipping.in")));
-            System.setOut(new PrintStream(new File("CF_1375A_SignFlipping.out")));
+            startTime = System.currentTimeMillis();
+            System.setIn(new FileInputStream(new File("CF_1375A_SignFlipping.in")));    //redirect stdin to local file
+            System.setOut(new PrintStream(new File("CF_1375A_SignFlipping.out")));      //redirect stdout to local file
+            
         }
 
         Scanner in = new Scanner(System.in);
@@ -28,6 +32,11 @@ public class CF_1375A_SignFlipping
 
         in.close();
         out.close();
+
+        if (isLocal)
+        {
+            System.err.println("program exited after: " + (System.currentTimeMillis() - startTime) + "ms");
+        }
     }
 }
 
@@ -36,6 +45,7 @@ class CF_1375A_SignFlipping_Solution
 {
     public void Solve(Scanner in, PrintStream out)
     {
+        
         int t = in.nextInt();
         while (true)
         {
@@ -45,6 +55,7 @@ class CF_1375A_SignFlipping_Solution
                 int n = in.nextInt();
                 for(int i=0;i<=n-1;++i)
                 {
+
                     out.print((i % 2 != 0) ? Math.abs(in.nextInt()) :-Math.abs(in.nextInt()));
                     out.print(' ');
                 }
