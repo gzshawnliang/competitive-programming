@@ -15,37 +15,41 @@ namespace CFHelperUI
     public class IntelliJ
     {
         public string ModuleName { get; set; }
-
-        private string _moduleFileName;
-
-        //public string ModuleDir { get; set; }
         public string ModuleDir { get; set; }
 
         private string _initDirName;
-
+        private string _moduleFileName;
+        private string _fullModuleFileName;
         private string _iprFileName;
 
         public  IntelliJ(string dirName)
         {
             _initDirName = dirName;
             ModuleName = string.Empty;
-            _iprFileName = FindFileInDirectory(dirName, "*.ipr");
+            ModuleDir = string.Empty;
+            _moduleFileName = string.Empty;
+            _iprFileName = string.Empty;
 
-            //获取模块名称
+            //获取ipr项目文件路径
+            _iprFileName = FindFileInDirectory(dirName, "*.ipr");
             if (!string.IsNullOrEmpty(_iprFileName))
-            {
                 HandleIpr(_iprFileName);
-            }
+
+            //获取模块名称和路径
+            _fullModuleFileName = FindFileInDirectory(_initDirName, _moduleFileName);
+            if (!string.IsNullOrEmpty(_fullModuleFileName))
+                ModuleDir = new FileInfo(_fullModuleFileName).Directory.FullName;
         }
 
         public void StartIntelliJ()
         {
             if (!string.IsNullOrEmpty(_iprFileName))
             {
-                string exeIntelliJFile = GetIntelliJExePath(out bool isRuning);
+                string exeIntelliJFile = GetIntelliJExePath(out bool isRunning);
                 if (!string.IsNullOrEmpty(exeIntelliJFile))
                 {
-                    var process = System.Diagnostics.Process.Start(exeIntelliJFile, $"\"{_iprFileName}\"");
+                    var process = Process.Start(exeIntelliJFile, $"\"{_iprFileName}\"");
+
                     var start = DateTime.Now;
                     int timeout = 10000;
                     while (!process.HasExited && process.MainWindowHandle == IntPtr.Zero)
@@ -60,11 +64,12 @@ namespace CFHelperUI
             }
         }
 
-        public string GetIntelliJExePath(out bool isRuning)
+        public static string GetIntelliJExePath(out bool isRunning)
         {
             //Environment.SpecialFolder.ProgramFiles
             string intelliJExe = string.Empty;
-            isRuning = false;
+            isRunning = false;
+
             //从进程中获取vscode路径
             Process[] ps = Process.GetProcessesByName("idea64");
             foreach (Process p in ps)
@@ -74,7 +79,7 @@ namespace CFHelperUI
                 {
                     Debug.WriteLine(p.MainModule.FileName);
                     intelliJExe = p.MainModule.FileName;
-                    isRuning = true;
+                    isRunning = true;
                     break;
                 }
             }
@@ -98,7 +103,6 @@ namespace CFHelperUI
 
             return intelliJExe;
         }
-
 
         private void HandleIpr(string fileName)
         {
@@ -221,12 +225,8 @@ namespace CFHelperUI
         public void ProcessFile(string pathName,string fileName)
         {
             //创建源码目录
-            if (!string.IsNullOrEmpty(_moduleFileName))
-            {
-                var fullModuleFileName = FindFileInDirectory(_initDirName, _moduleFileName);
-                ModuleDir = new FileInfo(fullModuleFileName).Directory.FullName;
-                HandleModuleFile(fullModuleFileName, pathName);
-            }
+            if (!string.IsNullOrEmpty(_fullModuleFileName))
+                HandleModuleFile(_fullModuleFileName, pathName);
 
             //创建编译选项
             string iwsFileName = FindFileInDirectory(_initDirName, "*.iws");

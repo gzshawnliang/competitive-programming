@@ -156,7 +156,7 @@ namespace CFHelperUI
         {
             get
             {
-                if (IntelliJ.Checked && !string.IsNullOrEmpty(_javaModuleDir))
+                if (chkIntelliJ.Checked && !string.IsNullOrEmpty(_javaModuleDir))
                     return _javaModuleDir;
                 
                 return this.txtWorkingDir.Text;
@@ -1032,7 +1032,7 @@ namespace CFHelperUI
                     string problemId = problem.Value;
 
                     string fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}_{problemDict[problemId.ToUpper()]}");
-                    if (this.IntelliJ.Checked)
+                    if (this.chkIntelliJ.Checked)
                         fileName = FormatPathName($"CF_{this.contestId}{problemId.ToUpper()}");
 
                     string url = $"https://codeforces.com/contest/{contestId}/problem/{problemId}";
@@ -1040,7 +1040,7 @@ namespace CFHelperUI
                     string cppCode = GetTemplateSourceCode($"{contestId}{problemId.ToUpper()} {problemDict[problemId.ToUpper()]}", txtAuthor.Text, DateTime.Now.ToString("G"), url, "", fileName);
                     string filePath = $"{rootDir}\\{contestSubDir}\\{contesName}\\{problemKey}";
                     IntelliJ intelliJ=null;
-                    if (this.IntelliJ.Checked)
+                    if (this.chkIntelliJ.Checked)
                     {
                         intelliJ = new IntelliJ(txtWorkingDir.Text);
                         filePath = $"{rootDir}\\{intelliJ.ModuleName}\\{contestSubDir}\\{contesName}\\{problemKey}";
@@ -1049,7 +1049,7 @@ namespace CFHelperUI
                     CreateDirAndCodeFile(filePath, fileName, cppCode);
                     string srcfileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
 
-                    if (this.IntelliJ.Checked)
+                    if (this.chkIntelliJ.Checked)
                     {
                         intelliJ.StartIntelliJ();
                         intelliJ.ProcessFile(filePath, fileName);
@@ -1431,9 +1431,9 @@ namespace CFHelperUI
 
         private void RunCodeIde(string codeFile)
         {
-            if (vscode.Checked)
+            if (chkvscode.Checked)
                 RunVSCode(codeFile);
-            else if (IntelliJ.Enabled && IntelliJ.Checked)
+            else if (chkIntelliJ.Enabled && chkIntelliJ.Checked)
                 RunIntelliJ(codeFile);
         }
 
@@ -1469,37 +1469,8 @@ namespace CFHelperUI
 
         private void RunIntelliJ(string codeFile)
         {
-            //Environment.SpecialFolder.ProgramFiles
-            string intelliJExe = string.Empty;
-            //从进程中获取vscode路径
-            Process[] ps = Process.GetProcessesByName("idea64");
-            foreach (Process p in ps)
-            {
-                //输出进程路径
-                if (p.MainModule.FileVersionInfo.FileDescription == "IntelliJ IDEA")
-                {
-                    Debug.WriteLine(p.MainModule.FileName);
-                    intelliJExe = p.MainModule.FileName;
-                    break;
-                }
-            }
 
-            //获取不到,缺省路径启动一个进程
-            if (string.IsNullOrEmpty(intelliJExe))
-            {
-                string intelliJPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\JetBrains";
-                List<string> searchNames = new List<string> { "idea64.exe", "idea.bat", "idea.exe" };
-                
-                foreach (string fileName in searchNames)
-                {
-                    string[] fileEntries = Directory.GetFiles(intelliJPath, fileName, SearchOption.AllDirectories);
-                    if (fileEntries.Any())
-                    {
-                        intelliJExe = fileEntries.FirstOrDefault();
-                        break;
-                    }
-                }
-            }
+            string intelliJExe = IntelliJ.GetIntelliJExePath(out bool isRunning);
 
             //缺省路径找不到Code.exe，使用环境变量
             if (!System.IO.File.Exists(intelliJExe))
@@ -1663,8 +1634,8 @@ namespace CFHelperUI
 
         private void sourceCpp_Click(object sender, EventArgs e)
         {
-            IntelliJ.Enabled = false;
-            vscode.Checked = true;
+            chkIntelliJ.Enabled = false;
+            chkvscode.Checked = true;
             SetSourceCodeType();
             if (!string.IsNullOrEmpty(txtProblemId.Text))
                 RefreshtProblem();
@@ -1673,7 +1644,7 @@ namespace CFHelperUI
 
         private void sourceJava_Click(object sender, EventArgs e)
         {
-            IntelliJ.Enabled = true;
+            chkIntelliJ.Enabled = true;
             SetSourceCodeType();
             if (!string.IsNullOrEmpty(txtProblemId.Text))
                 RefreshtProblem();
@@ -1686,14 +1657,17 @@ namespace CFHelperUI
 
         private void IntelliJ_CheckedChanged(object sender, EventArgs e)
         {
-            if (IntelliJ.Checked)
+            if (chkIntelliJ.Checked)
             {
                 var intelliJ = new IntelliJ(txtWorkingDir.Text);
                 _javaModuleDir = intelliJ.ModuleDir;
+                if (!string.IsNullOrEmpty(intelliJ.ModuleName))
+                    picIntelliJOK.Visible = true;
             }
             else
             {
                 _javaModuleDir = string.Empty;
+                picIntelliJOK.Visible = false;
             }
         }
     }

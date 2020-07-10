@@ -58,12 +58,14 @@
             this.sourceCpp = new System.Windows.Forms.RadioButton();
             this.emptyCode = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.IntelliJ = new System.Windows.Forms.RadioButton();
-            this.vscode = new System.Windows.Forms.RadioButton();
+            this.picIntelliJOK = new System.Windows.Forms.PictureBox();
+            this.chkIntelliJ = new System.Windows.Forms.RadioButton();
+            this.chkvscode = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PicCFAuth)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIntelliJOK)).BeginInit();
             this.SuspendLayout();
             // 
             // txtProblemId
@@ -363,7 +365,7 @@
             // sourceJava
             // 
             this.sourceJava.AutoSize = true;
-            this.sourceJava.Location = new System.Drawing.Point(91, 3);
+            this.sourceJava.Location = new System.Drawing.Point(114, 3);
             this.sourceJava.Name = "sourceJava";
             this.sourceJava.Size = new System.Drawing.Size(58, 20);
             this.sourceJava.TabIndex = 3;
@@ -399,36 +401,48 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.IntelliJ);
-            this.panel2.Controls.Add(this.vscode);
+            this.panel2.Controls.Add(this.picIntelliJOK);
+            this.panel2.Controls.Add(this.chkIntelliJ);
+            this.panel2.Controls.Add(this.chkvscode);
             this.panel2.Location = new System.Drawing.Point(138, 578);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(264, 34);
             this.panel2.TabIndex = 20;
             // 
-            // IntelliJ
+            // picIntelliJOK
             // 
-            this.IntelliJ.AutoSize = true;
-            this.IntelliJ.Enabled = false;
-            this.IntelliJ.Location = new System.Drawing.Point(91, 3);
-            this.IntelliJ.Name = "IntelliJ";
-            this.IntelliJ.Size = new System.Drawing.Size(130, 20);
-            this.IntelliJ.TabIndex = 3;
-            this.IntelliJ.Text = "IntelliJ IDEA";
-            this.IntelliJ.UseVisualStyleBackColor = true;
-            this.IntelliJ.CheckedChanged += new System.EventHandler(this.IntelliJ_CheckedChanged);
+            this.picIntelliJOK.Image = global::CFHelperUI.Properties.Resources.user_ok;
+            this.picIntelliJOK.Location = new System.Drawing.Point(244, 3);
+            this.picIntelliJOK.Name = "picIntelliJOK";
+            this.picIntelliJOK.Size = new System.Drawing.Size(20, 20);
+            this.picIntelliJOK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picIntelliJOK.TabIndex = 15;
+            this.picIntelliJOK.TabStop = false;
+            this.picIntelliJOK.Visible = false;
             // 
-            // vscode
+            // chkIntelliJ
             // 
-            this.vscode.AutoSize = true;
-            this.vscode.Checked = true;
-            this.vscode.Location = new System.Drawing.Point(2, 3);
-            this.vscode.Name = "vscode";
-            this.vscode.Size = new System.Drawing.Size(82, 20);
-            this.vscode.TabIndex = 2;
-            this.vscode.TabStop = true;
-            this.vscode.Text = "VS Code";
-            this.vscode.UseVisualStyleBackColor = true;
+            this.chkIntelliJ.AutoSize = true;
+            this.chkIntelliJ.Enabled = false;
+            this.chkIntelliJ.Location = new System.Drawing.Point(114, 3);
+            this.chkIntelliJ.Name = "chkIntelliJ";
+            this.chkIntelliJ.Size = new System.Drawing.Size(130, 20);
+            this.chkIntelliJ.TabIndex = 3;
+            this.chkIntelliJ.Text = "IntelliJ IDEA";
+            this.chkIntelliJ.UseVisualStyleBackColor = true;
+            this.chkIntelliJ.CheckedChanged += new System.EventHandler(this.IntelliJ_CheckedChanged);
+            // 
+            // chkvscode
+            // 
+            this.chkvscode.AutoSize = true;
+            this.chkvscode.Checked = true;
+            this.chkvscode.Location = new System.Drawing.Point(2, 3);
+            this.chkvscode.Name = "chkvscode";
+            this.chkvscode.Size = new System.Drawing.Size(82, 20);
+            this.chkvscode.TabIndex = 2;
+            this.chkvscode.TabStop = true;
+            this.chkvscode.Text = "VS Code";
+            this.chkvscode.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -490,6 +504,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIntelliJOK)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -526,9 +541,10 @@
         private System.Windows.Forms.RadioButton sourceCpp;
         private System.Windows.Forms.RadioButton emptyCode;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton IntelliJ;
-        private System.Windows.Forms.RadioButton vscode;
+        private System.Windows.Forms.RadioButton chkIntelliJ;
+        private System.Windows.Forms.RadioButton chkvscode;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox picIntelliJOK;
     }
 }
 
