@@ -34,7 +34,7 @@ namespace CFHelperUI
         private Dictionary<string, string> problemDict;
         private readonly string _defaultDir;
 
-        private string inputFileContent;    //USACO SAMPLE INPUT数据
+        private string inputFileContent;    //USACO SAMPLE INPUT Data
 
         private readonly Dictionary<string, string> _timeZoneDict = new Dictionary<string, string>()
         {
@@ -233,12 +233,9 @@ namespace CFHelperUI
             GetWindowsState();
             this.txtAuthor.Text = Registry.RegRead("Author");
 
-            //string currFilePath = Assembly.GetExecutingAssembly().Location;
-            //DateTime dt = new FileInfo(currFilePath).LastWriteTime;
-
             this.Text += $" {Application.ProductVersion}";
-
             var ojType = Registry.RegRead("OJType");
+
             if (!string.IsNullOrEmpty(ojType))
             {
                 foreach (Control ctl in this.Controls)
@@ -249,15 +246,6 @@ namespace CFHelperUI
                             break;
                         }
             }
-
-            //TimeZoneInfo localZone = TimeZoneInfo.Local;
-            //Console.WriteLine("Local Time Zone ID: {0}", localZone.Id);
-            //Console.WriteLine("   BaseUtcOffset: {0}.", localZone.BaseUtcOffset.TotalHours);
-            //Console.WriteLine("   Display Name is: {0}.", localZone.DisplayName);
-            //Console.WriteLine("   Display Name eng is: {0}.", _timeZoneDict[TimeZoneInfo.Local.Id]);
-            //Console.WriteLine("   Standard name is: {0}.", localZone.StandardName);
-            //Console.WriteLine("   Daylight saving name is: {0}.", localZone.DaylightName);
-
         }
 
         private void butCancel_Click(object sender, EventArgs e)
@@ -953,10 +941,6 @@ namespace CFHelperUI
 
         static string GetApplicationRoot()
         {
-            //var exePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
-            //Regex appPathMatcher = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
-            //var appRoot = appPathMatcher.Match(exePath).Value;
-            //return appRoot;
             if(Directory.Exists(Application.StartupPath+"\\..\\.."))
                 return new DirectoryInfo(Application.StartupPath + "\\..\\..").FullName;
             return Application.StartupPath;
@@ -1703,11 +1687,13 @@ namespace CFHelperUI
 
                         this.txtProblemId.Enabled = false;
                         this.listView1.Enabled = false;
+                        this.butGo.Enabled = false;
                     }
                     else
                     {
                         this.txtProblemId.Enabled = true;
                         this.listView1.Enabled = true;
+                        this.butGo.Enabled = true;
                     }
                 }
             }
@@ -1745,11 +1731,6 @@ namespace CFHelperUI
             SetSourceCodeType();
             if (!string.IsNullOrEmpty(txtProblemId.Text))
                 RefreshtProblem();
-        }
-
-        private void sourceJava_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void IntelliJ_CheckedChanged(object sender, EventArgs e)

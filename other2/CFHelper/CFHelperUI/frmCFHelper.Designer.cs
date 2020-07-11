@@ -370,7 +370,6 @@
             this.sourceJava.TabIndex = 12;
             this.sourceJava.Text = "Java";
             this.sourceJava.UseVisualStyleBackColor = true;
-            this.sourceJava.CheckedChanged += new System.EventHandler(this.sourceJava_CheckedChanged);
             this.sourceJava.Click += new System.EventHandler(this.sourceJava_Click);
             // 
             // sourceCpp
