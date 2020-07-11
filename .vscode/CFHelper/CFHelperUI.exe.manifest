@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CFHelperUI.exe" size="127408">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CFHelperUI.exe" size="130992">
       <assemblyIdentity name="CFHelperUI" version="20.7.11.4" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oSOE1YTTRSE17zJQqP3/iIHuZAkTwczzOjoa/YDADpY=</dsig:DigestValue>
+        <dsig:DigestValue>7lvywSJLtb4Mn1kQnFkZuHvZDQOjB8PskMCxlu/aIHA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
