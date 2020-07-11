@@ -170,7 +170,8 @@ namespace CFHelperUI
             uva,
             ural,
             poj,
-            hdu
+            hdu,
+            none
         }
 
         //Enum: CF, IOI, ICPC. Scoring system used for the contest.
@@ -308,6 +309,10 @@ namespace CFHelperUI
             else if (codeforces.Checked)
             {
                 GetDataCF(input);
+            }
+            else if(emptyCode.Checked)
+            {
+                contestType = ContestType.none;
             }
             else if (isInt)
             {
@@ -604,7 +609,7 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(inputFileNode1.InnerText);
 
-            string cppFileName = string.Empty;
+            string codefileName = string.Empty;
             /*
              从以下字符串查找paintbarn.in
              INPUT FORMAT (file paintbarn.in):
@@ -614,12 +619,12 @@ namespace CFHelperUI
             if (result.Success)
             {
                 Debug.WriteLine( result.Value);
-                cppFileName = result.Value.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0]+$".{sourceCodeFileExt}";
+                codefileName = result.Value.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0]+$".{sourceCodeFileExt}";
             }
 
 
             ListViewItem lvi = new ListViewItem(titleNode2.InnerText.Trim());
-            lvi.SubItems.Add(cppFileName);
+            lvi.SubItems.Add(codefileName);
             lvi.SubItems.Add(titleNode1.InnerText.Trim());
             lvi.Tag = s;
             this.listView1.Items.Add(lvi);
@@ -676,10 +681,10 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(titleNode1.InnerText);
 
-            string cppFileName = s + $".{sourceCodeFileExt}";
+            string codefileName = s + $".{sourceCodeFileExt}";
 
             ListViewItem lvi = new ListViewItem(s);
-            lvi.SubItems.Add(cppFileName);
+            lvi.SubItems.Add(codefileName);
             lvi.SubItems.Add(titleNode1.InnerText.Trim());
             lvi.Tag = s;
             this.listView1.Items.Add(lvi);
@@ -739,10 +744,10 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(titleNode1.InnerText);
 
-            string cppFileName = "URAL_" + s + $".{sourceCodeFileExt}";
+            string codefileName = "URAL_" + s + $".{sourceCodeFileExt}";
 
             ListViewItem lvi = new ListViewItem(titleNode1.InnerText);
-            lvi.SubItems.Add(cppFileName);
+            lvi.SubItems.Add(codefileName);
             string desc = titleNode1.InnerText.Trim();
             HtmlNode descNode = doc.DocumentNode.SelectSingleNode("//div[@class='problem_source']");
             Dictionary<string,string> oProperty= new Dictionary<string, string>();
@@ -845,10 +850,10 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(titleNode1.InnerText);
 
-            string cppFileName = "POJ_" + s + $".{sourceCodeFileExt}";
+            string codefileName = "POJ_" + s + $".{sourceCodeFileExt}";
 
             ListViewItem lvi = new ListViewItem(titleNode1.InnerText);
-            lvi.SubItems.Add(cppFileName);
+            lvi.SubItems.Add(codefileName);
             string desc = titleNode1.InnerText.Trim();
             lvi.SubItems.Add(desc);
             lvi.Tag = s;
@@ -909,10 +914,10 @@ namespace CFHelperUI
             Debug.WriteLine(s);
             Debug.WriteLine(titleNode1.InnerText);
 
-            string cppFileName = "HDU_" + s + $".{sourceCodeFileExt}";
+            string codefileName = "HDU_" + s + $".{sourceCodeFileExt}";
 
             ListViewItem lvi = new ListViewItem(sTitle);
-            lvi.SubItems.Add(cppFileName);
+            lvi.SubItems.Add(codefileName);
             lvi.SubItems.Add(sTitle);
             lvi.Tag = s;
             this.listView1.Items.Add(lvi);
@@ -983,6 +988,9 @@ namespace CFHelperUI
                     break;
                 case ContestType.hdu:
                     CreateFileHDU();
+                    break;
+                case ContestType.none:
+                    CreateFileEmpty();
                     break;
             }
         }
@@ -1104,18 +1112,72 @@ namespace CFHelperUI
 
                     CreateDirAndCodeFile($"{rootDir}\\{fileName}", fileName, cppCode);
 
-                    string cppfileName = $"{rootDir}\\{fileName}\\{fileName}.{sourceCodeFileExt}";
+                    string codefileName = $"{rootDir}\\{fileName}\\{fileName}.{sourceCodeFileExt}";
                     if (this.chkIntelliJ.Checked)
                     {
                         intelliJ.StartIntelliJ();
                         intelliJ.ProcessFile(filePath, fileName);
                     }
-                    RunCodeIde(cppfileName);
+                    RunCodeIde(codefileName);
                 }
 
                 Application.Exit();
             }
         }
+
+
+        private string genRandProblemId()
+        {
+            return (new Random(new Guid().GetHashCode()).Next(1, 999999)).ToString().PadLeft(6, '0');
+        }
+
+        private void CreateFileEmpty()
+        {
+            var problemId = genRandProblemId();
+            string fileName = FormatPathName($"EM_{problemId}");
+            string filePath = $"{rootDir}\\{fileName}";
+            while (System.IO.Directory.Exists(filePath))
+            {
+                problemId = genRandProblemId();
+                fileName = FormatPathName($"EM_{problemId}");
+                filePath = $"{rootDir}\\{fileName}";
+            }
+            
+
+            string msg = FormatPathName($"EM_{problemId}") + Environment.NewLine;
+            
+
+            msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{msg}\n是否继续？";
+
+            //Dictionary<string, string> createResult = new Dictionary<string, string>();
+            string contesName = lblContest.Text;
+            if (MessageBox.Show(this, msg, this.Text,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+
+
+                    string cppCode = GetTemplateSourceCode("", txtAuthor.Text, DateTime.Now.ToString("G"), "", "", fileName);
+                    
+                    IntelliJ intelliJ = null;
+                    if (this.chkIntelliJ.Checked)
+                        intelliJ = new IntelliJ(this.txtWorkingDir.Text);
+
+                    CreateDirAndCodeFile(filePath, fileName, cppCode);
+
+                    string codefileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
+                    if (this.chkIntelliJ.Checked)
+                    {
+                        intelliJ.StartIntelliJ();
+                        intelliJ.ProcessFile(filePath, fileName);
+                    }
+                    RunCodeIde(codefileName);
+                
+
+                Application.Exit();
+            }
+        }
+
+
 
         private void CreateFileUSACO()
         {
@@ -1141,15 +1203,15 @@ namespace CFHelperUI
 
                 CreateDirAndCodeFile(filePath, fileName, cppCode);
 
-                string cppfileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
-                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+                string codefileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
+                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{codefileName}\"");
 
                 if (this.chkIntelliJ.Checked)
                 {
                     intelliJ.StartIntelliJ();
                     intelliJ.ProcessFile(filePath, fileName);
                 }
-                RunCodeIde(cppfileName);
+                RunCodeIde(codefileName);
 
                 Application.Exit();
             }
@@ -1186,9 +1248,9 @@ namespace CFHelperUI
 
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
-                RunCodeIde(cppfileName);
-                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+                string codefileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
+                RunCodeIde(codefileName);
+                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{codefileName}\"");
                 Application.Exit();
             }
         }
@@ -1248,9 +1310,9 @@ namespace CFHelperUI
 
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
-                RunCodeIde(cppfileName);
-                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{cppfileName}\"");
+                string codefileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
+                RunCodeIde(codefileName);
+                //System.Diagnostics.Process.Start("cmd.exe", $"/c code \"{codefileName}\"");
                 Application.Exit();
             }
         }
@@ -1293,8 +1355,8 @@ namespace CFHelperUI
 
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
-                RunCodeIde(cppfileName);
+                string codefileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
+                RunCodeIde(codefileName);
                 Application.Exit();
             }
         }
@@ -1338,8 +1400,8 @@ namespace CFHelperUI
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, "", fileName);
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
-                RunCodeIde(cppfileName);
+                string codefileName = $"{rootDir}\\{subDirName}\\{fileName}.{sourceCodeFileExt}";
+                RunCodeIde(codefileName);
                 Application.Exit();
             }
         }
@@ -1374,8 +1436,8 @@ namespace CFHelperUI
                 string cppCode = GetTemplateSourceCode($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","", subDirName);
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
                 
-                string cppfileName = $"{rootDir}\\{subDirName}\\{subDirName}.{sourceCodeFileExt}";
-                RunCodeIde(cppfileName);
+                string codefileName = $"{rootDir}\\{subDirName}\\{subDirName}.{sourceCodeFileExt}";
+                RunCodeIde(codefileName);
 
                 Application.Exit();
             }
@@ -1420,10 +1482,10 @@ namespace CFHelperUI
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            string cppfileName = $"{path}\\{fileName}.{sourceCodeFileExt}";
-            if (!File.Exists(cppfileName))
+            string codefileName = $"{path}\\{fileName}.{sourceCodeFileExt}";
+            if (!File.Exists(codefileName))
             {
-                using (StreamWriter sw = File.CreateText(cppfileName))
+                using (StreamWriter sw = File.CreateText(codefileName))
                 {
                     sw.WriteLine(srcCode);
                 }
@@ -1503,7 +1565,7 @@ namespace CFHelperUI
         private string FormatPathName(string name)
         {
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
-            List<string> otherInvalidChars = new List<string>() { ",", " ", "'","(", ")","[", "]","\"","#","."};
+            List<string> otherInvalidChars = new List<string>() { ",", " ", "'","(", ")","[", "]","\"","#",".", "+", "-" };
 
             string pathName = name;
             foreach (char c in invalid)
@@ -1629,8 +1691,26 @@ namespace CFHelperUI
         {
             var objRadioButton =  sender as RadioButton;
             if (objRadioButton != null)
-                if(objRadioButton.Checked)
+            {
+                if (objRadioButton.Checked)
+                {
                     Registry.RegWrite("OJType", objRadioButton.Name);
+                    if (objRadioButton.Name == "emptyCode")
+                    {
+                        contestType = ContestType.none;
+                        this.txtProblemId.Clear();
+                        this.listView1.Clear();
+
+                        this.txtProblemId.Enabled = false;
+                        this.listView1.Enabled = false;
+                    }
+                    else
+                    {
+                        this.txtProblemId.Enabled = true;
+                        this.listView1.Enabled = true;
+                    }
+                }
+            }
         }
 
         private void linkCFAuthorization_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1647,7 +1727,6 @@ namespace CFHelperUI
                 sourceCodeFileExt = "cpp";
             else if (sourceJava.Checked)
                 sourceCodeFileExt = "java";
-
         }
 
         private void sourceCpp_Click(object sender, EventArgs e)

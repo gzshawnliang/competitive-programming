@@ -395,6 +395,7 @@
             this.emptyCode.TabIndex = 17;
             this.emptyCode.Text = "Empty Code(No OJ)";
             this.emptyCode.UseVisualStyleBackColor = true;
+            this.emptyCode.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
             // panel2
             // 
