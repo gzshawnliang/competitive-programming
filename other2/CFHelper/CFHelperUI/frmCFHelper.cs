@@ -1396,31 +1396,28 @@ namespace CFHelperUI
                 return;
 
             var item = listView1.CheckedItems[0];
-            string subDirName = item.Tag.ToString();
+            string fileName = item.Tag.ToString();
 
             //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{fileName}\n是否继续？";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                string cppCode = GetTemplateSourceCode($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","", fileName);
+                string filePath = $"{rootDir}\\{fileName}";
+                IntelliJ intelliJ = null;
+                if (this.chkIntelliJ.Checked)
+                    intelliJ = new IntelliJ(this.txtWorkingDir.Text);
 
-
-
-                //srcCode += $"/*\n";
-                //srcCode += $"===========================================================\n";
-                //srcCode += $"* @Name:           UVa-{item.Text} {item.SubItems[1].Text}\n";
-                //srcCode += $"* @Author:         {txtAuthor.Text}\n";
-                //srcCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                //srcCode += $"* @url:            \n";
-                //srcCode += $"* @Description:    \n";
-                //srcCode += $"===========================================================\n";
-                //srcCode += $"*/";
-
-                string cppCode = GetTemplateSourceCode($"UVa-{item.Text} {item.SubItems[1].Text}", txtAuthor.Text, DateTime.Now.ToString("G"), "","", subDirName);
-                CreateDirAndCodeFile($"{rootDir}\\{subDirName}", subDirName, cppCode);
+                CreateDirAndCodeFile(filePath, fileName, cppCode);
                 
-                string codefileName = $"{rootDir}\\{subDirName}\\{subDirName}.{sourceCodeFileExt}";
+                string codefileName = $"{filePath}\\{fileName}.{sourceCodeFileExt}";
+                if (this.chkIntelliJ.Checked)
+                {
+                    intelliJ.StartIntelliJ();
+                    intelliJ.ProcessFile(filePath, fileName);
+                }
                 RunCodeIde(codefileName);
 
                 Application.Exit();
