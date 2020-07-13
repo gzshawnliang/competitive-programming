@@ -51,12 +51,12 @@
       <screen x="0" y="0" width="1920" height="1119" />
     </state>
     <state x="312" y="29" key="#Project_Structure/0.0.1920.1119/1920.87.1280.984/-1050.0.1050.1640@0.0.1920.1119" timestamp="1594271180212" />
-    <state x="526" y="220" width="1251" height="817" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594561772688">
-      <screen x="0" y="0" width="2464" height="1326" />
+    <state x="525" y="190" width="1251" height="817" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594612385099">
+      <screen x="0" y="0" width="2460" height="1146" />
     </state>
     <state x="409" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1916.980@0.0.1916.980" timestamp="1594370239299" />
     <state x="410" y="204" width="1251" height="817" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1119/1920.87.1280.984/-1050.0.1050.1640@0.0.1920.1119" timestamp="1594271678098" />
-    <state x="525" y="190" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2460.1146@0.0.2460.1146" timestamp="1594353619892" />
+    <state x="525" y="190" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2460.1146@0.0.2460.1146" timestamp="1594612385099" />
     <state x="526" y="220" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2464.1326@0.0.2464.1326" timestamp="1594561772688" />
     <state x="950" y="463" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594394111534">
       <screen x="0" y="0" width="2464" height="1326" />
