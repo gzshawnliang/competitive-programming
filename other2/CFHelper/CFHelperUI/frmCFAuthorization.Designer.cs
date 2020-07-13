@@ -1,4 +1,4 @@
-﻿namespace CFHelperUI
+﻿namespace OJAssistantUI
 {
     partial class frmCFAuthorization
     {

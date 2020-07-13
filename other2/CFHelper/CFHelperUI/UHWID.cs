@@ -3,7 +3,7 @@ using System.IO;
 using System.Management;
 using System.Runtime.InteropServices;
 
-namespace CFHelperUI
+namespace OJAssistantUI
 {
     public static class UHWID
     {

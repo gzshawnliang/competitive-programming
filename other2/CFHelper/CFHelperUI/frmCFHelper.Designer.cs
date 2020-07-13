@@ -1,4 +1,4 @@
-﻿namespace CFHelperUI
+﻿namespace OJAssistantUI
 {
     partial class frmCFHelper
     {
@@ -334,7 +334,7 @@
             // 
             // PicCFAuth
             // 
-            this.PicCFAuth.Image = global::CFHelperUI.Properties.Resources.user_ok;
+            this.PicCFAuth.Image = global::OJAssistantUI.Properties.Resources.user_ok;
             this.PicCFAuth.Location = new System.Drawing.Point(106, 54);
             this.PicCFAuth.Name = "PicCFAuth";
             this.PicCFAuth.Size = new System.Drawing.Size(20, 20);
@@ -415,7 +415,7 @@
             // 
             // picIntelliJOK
             // 
-            this.picIntelliJOK.Image = global::CFHelperUI.Properties.Resources.user_ok;
+            this.picIntelliJOK.Image = global::OJAssistantUI.Properties.Resources.user_ok;
             this.picIntelliJOK.Location = new System.Drawing.Point(218, 3);
             this.picIntelliJOK.Name = "picIntelliJOK";
             this.picIntelliJOK.Size = new System.Drawing.Size(20, 20);
@@ -486,7 +486,7 @@
             this.MinimumSize = new System.Drawing.Size(950, 480);
             this.Name = "frmCFHelper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CFHelper";
+            this.Text = "Online Judge Assistant";
             this.Activated += new System.EventHandler(this.frmCFHelper_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCFHelper_FormClosed);
             this.Load += new System.EventHandler(this.frmCFHelper_Load);

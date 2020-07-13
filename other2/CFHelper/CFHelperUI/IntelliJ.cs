@@ -10,7 +10,7 @@ using System.Xml;
 using System.Diagnostics;
 using System.Threading;
 
-namespace CFHelperUI
+namespace OJAssistantUI
 {
     public class IntelliJ
     {

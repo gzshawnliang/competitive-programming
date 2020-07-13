@@ -18,7 +18,7 @@ using System.Security.AccessControl;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
-using CFHelperUI.Properties;
+using OJAssistantUI.Properties;
 using HtmlAgilityPack;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -26,7 +26,7 @@ using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 using System.Globalization;
 using System.CodeDom;
 
-namespace CFHelperUI
+namespace OJAssistantUI
 {
     public partial class frmCFHelper : Form
     {

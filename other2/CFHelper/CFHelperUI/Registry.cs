@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace CFHelperUI
+namespace OJAssistantUI
 {
 	public static class Registry
 	{
