@@ -448,7 +448,7 @@
             this.chkvscode.Text = "VS Code";
             this.chkvscode.UseVisualStyleBackColor = true;
             // 
-            // frmCFHelper
+            // frmOJAssistant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -484,9 +484,10 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(950, 480);
-            this.Name = "frmCFHelper";
+            this.Name = "frmOJAssistant";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Online Judge Assistant";
+            this.TopMost = true;
             this.Activated += new System.EventHandler(this.frmCFHelper_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCFHelper_FormClosed);
             this.Load += new System.EventHandler(this.frmCFHelper_Load);

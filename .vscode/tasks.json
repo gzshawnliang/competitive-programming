@@ -21,8 +21,8 @@
             "isShellCommand": true
         },     
         {
-            "taskName": "CFHelperUI",
-            "command": "${workspaceFolder}\\.vscode\\CFHelper\\CFHelperUI.exe",
+            "taskName": "OJAssistant",
+            "command": "${workspaceFolder}\\.vscode\\OJAssistantUI\\OJAssistantUI.exe",
             "args": ["${workspaceFolder}"],
             "showOutput": "always",
             "isShellCommand": true
