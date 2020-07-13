@@ -360,6 +360,7 @@ namespace CFHelperUI
             catch (Exception e)
             {
                 ex = e;
+
             }
 
             return null;
@@ -392,6 +393,7 @@ namespace CFHelperUI
             lblContest.Text = "";
             listView1.Columns.Clear();
             listView1.Items.Clear();
+            this.listView1.Visible = true;
             txtError.Visible = false;
             txtError.Clear();
 
@@ -409,7 +411,7 @@ namespace CFHelperUI
                     lblContest.Text = o.result.contest.name;
                     //Debug.WriteLine(o.result.contest.type.ToString());
 
-                    this.listView1.Columns.Add("id", 36, HorizontalAlignment.Left);
+                    this.listView1.Columns.Add("", 36, HorizontalAlignment.Left);
                     this.listView1.Columns.Add("name", 300, HorizontalAlignment.Left);
                     this.listView1.Columns.Add("rating", 64, HorizontalAlignment.Left);
                     this.listView1.Columns.Add("tag", 300, HorizontalAlignment.Left);
@@ -458,6 +460,7 @@ namespace CFHelperUI
             {
                 txtError.Text = ex.ToString();
                 txtError.Visible = true;
+                this.listView1.Visible = false;
                 lblContest.Text = ex.Message;
             }
         }
@@ -475,6 +478,7 @@ namespace CFHelperUI
             lblContest.Text = "";
             listView1.Columns.Clear();
             listView1.Items.Clear();
+            listView1.Visible = true;
             txtError.Visible = false;
             txtError.Clear();
 
@@ -519,6 +523,7 @@ namespace CFHelperUI
                 txtError.Text = e.ToString();
                 txtError.Visible = true;
                 lblContest.Text = e.Message;
+                listView1.Visible = false;
                 //throw;
             }
         }
@@ -915,20 +920,29 @@ namespace CFHelperUI
 
         private JObject GetResponse(string url)
         {
-
             if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentNullException("url");
             }
 
+
+
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             HttpResponseMessage response = httpClient.GetAsync(url).Result;
-
+            
             string result = response.Content.ReadAsStringAsync().Result;
-            JObject jo = (JObject)JsonConvert.DeserializeObject(result);
-            return jo;
+            //JObject jo = (JObject)JsonConvert.DeserializeObject(result);
+            try
+            {
+                JObject jo = JObject.Parse(result);
+                return jo;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(result);
+            }
         }
 
         private void txtProblemId_KeyDown(object sender, KeyEventArgs e)
@@ -1743,6 +1757,60 @@ namespace CFHelperUI
             {
                 _javaModuleDir = string.Empty;
                 picIntelliJOK.Visible = false;
+            }
+        }
+
+        private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                e.DrawBackground();
+                bool value = false;
+                try
+                {
+                    value = Convert.ToBoolean(e.Header.Tag);
+                }
+                catch (Exception)
+                {
+                }
+                CheckBoxRenderer.DrawCheckBox(e.Graphics,
+                    new Point(e.Bounds.Left + 4, e.Bounds.Top + 4),
+                    value ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal :
+                    System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
+            }
+            else
+            {
+                e.DrawDefault = true;
+            }
+        }
+
+        private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        private void listView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == 0)
+            {
+                bool value = false;
+                try
+                {
+                    value = Convert.ToBoolean(this.listView1.Columns[e.Column].Tag);
+                }
+                catch (Exception)
+                {
+                }
+                this.listView1.Columns[e.Column].Tag = !value;
+                foreach (ListViewItem item in this.listView1.Items)
+                    item.Checked = !value;
+
+                this.listView1.Invalidate();
             }
         }
     }
