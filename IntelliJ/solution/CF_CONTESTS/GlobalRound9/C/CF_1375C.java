@@ -58,6 +58,7 @@ class CF_1375C_Solution
             int[] a= new int[n];
             for (int i = 0; i <= n - 1; ++i) a[i] = in.nextInt();
 
+
             out.println((a[0] < a[n - 1]) ? "YES" : "NO");
         }
     }

@@ -677,7 +677,12 @@ function BuildJavaAndRun($SourceFileName) {
             $sw = [Diagnostics.Stopwatch]::StartNew()
             # &$javacmd -cp $($FirstClassFile.DirectoryName) $($FirstClassFile.BaseName)
             # & $javacmd -cp $($FirstClassFile.DirectoryName) $JavaMainClassName
-            & "$javacmd" "-Xmx512M" "-Xss64M" "-Duser.language=en" "-Duser.region=US" "-Duser.variant=US" "-Dfile.encoding=UTF-8" "$JavaMainClassName"
+            $result = & "$javacmd" "-Xmx512M" "-Xss64M" "-Duser.language=en" "-Duser.region=US" "-Duser.variant=US" "-Dfile.encoding=UTF-8" "$JavaMainClassName" 2>&1 | % { "$_" }
+            
+            $result
+            # $output = & "$javacmd" "-Xmx512M" "-Xss64M" "-Duser.language=en" "-Duser.region=US" "-Duser.variant=US" "-Dfile.encoding=UTF-8" "$JavaMainClassName" 2>&1
+            # $output.CategoryInfo.TargetName | Out-Default
+
             $sw.Stop()
             $msg = "$($JavaMainClassName + $FirstClassFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
             Write-Host
