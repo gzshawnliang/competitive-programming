@@ -1,6 +1,6 @@
 ﻿namespace OJAssistantUI
 {
-    partial class frmCFHelper
+    partial class frmOJAssistant
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCFHelper));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOJAssistant));
             this.txtProblemId = new System.Windows.Forms.TextBox();
             this.butGo = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();

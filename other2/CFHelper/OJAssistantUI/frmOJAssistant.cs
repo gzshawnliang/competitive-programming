@@ -28,7 +28,7 @@ using System.CodeDom;
 
 namespace OJAssistantUI
 {
-    public partial class frmCFHelper : Form
+    public partial class frmOJAssistant : Form
     {
         private int contestId=0;
         private Dictionary<string, string> problemDict;
@@ -182,12 +182,12 @@ namespace OJAssistantUI
 
         private string sourceCodeFileExt="cpp";
 
-        public frmCFHelper()
+        public frmOJAssistant()
         {
             InitializeComponent();
         }
 
-        public frmCFHelper(string defaultDir):this()
+        public frmOJAssistant(string defaultDir):this()
         {
             _defaultDir = defaultDir;
             Config.EncryptKey = UHWID.GetID();

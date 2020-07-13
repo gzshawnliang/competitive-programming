@@ -32,7 +32,6 @@ C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssist
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\bin\Debug\Newtonsoft.Json.xml
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.csprojAssemblyReference.cache
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.frmCFAuthorization.resources
-C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.frmCFHelper.resources
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.Properties.Resources.resources
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.csproj.GenerateResource.cache
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.csproj.CoreCompileInputs.cache
@@ -41,3 +40,4 @@ C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssist
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.csproj.CopyComplete
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.exe
 C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.pdb
+C:\Users\thomas\Documents\codes\competitive-programming\other2\CFHelper\OJAssistantUI\obj\Debug\OJAssistantUI.frmOJAssistant.resources

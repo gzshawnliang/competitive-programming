@@ -97,11 +97,11 @@
     </Compile>
     <Compile Include="IntelliJ.cs" />
     <Compile Include="StringCipher.cs" />
-    <Compile Include="frmCFHelper.cs">
+    <Compile Include="frmOJAssistant.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCFHelper.Designer.cs">
-      <DependentUpon>frmCFHelper.cs</DependentUpon>
+    <Compile Include="frmOJAssistant.Designer.cs">
+      <DependentUpon>frmOJAssistant.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,8 +110,8 @@
     <EmbeddedResource Include="frmCFAuthorization.resx">
       <DependentUpon>frmCFAuthorization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCFHelper.resx">
-      <DependentUpon>frmCFHelper.cs</DependentUpon>
+    <EmbeddedResource Include="frmOJAssistant.resx">
+      <DependentUpon>frmOJAssistant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -20,7 +20,7 @@ namespace OJAssistantUI
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmCFHelper(defaultDir));
+            Application.Run(new frmOJAssistant(defaultDir));
         }
     }
 }
