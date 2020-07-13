@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OJAssistantUI")]
+[assembly: AssemblyTitle("Online Judge Assistant")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OJAssistantUI")]
+[assembly: AssemblyCompany("Shawn")]
+[assembly: AssemblyProduct("Online Judge Assistant")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("20.7.13.18")]
-[assembly: AssemblyFileVersion("20.7.13.18")]
+[assembly: AssemblyVersion("20.7.13.19")]
+[assembly: AssemblyFileVersion("20.7.13.19")]
