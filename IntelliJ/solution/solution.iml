@@ -3,9 +3,6 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/CF_CONTESTS/GlobalRound9/C" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CF_CONTESTS/GlobalRound9/B" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CF_CONTESTS/GlobalRound9/A" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
