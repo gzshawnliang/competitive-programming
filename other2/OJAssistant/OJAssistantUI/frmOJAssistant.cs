@@ -197,6 +197,12 @@ namespace OJAssistantUI
         private void frmCFHelper_Load(object sender, EventArgs e)
         {
             //this.Text += "["+_defaultDir;
+
+            if (System.Diagnostics.Debugger.IsAttached)
+                this.TopMost = false;
+            else
+                this.TopMost = true;
+
             string saveWorkingDir = Registry.RegRead("WorkingDir");
             if(!string.IsNullOrEmpty(saveWorkingDir))
                 saveWorkingDir = saveWorkingDir.TrimEnd();
@@ -327,31 +333,31 @@ namespace OJAssistantUI
                 $"https://codeforces.com/api/contest.standings?contestId={contestId}&from=1&count=1&showUnofficial=true";
 
 
-            string apiKey = Registry.RegRead("CFKey");
-            string apiSecret = Registry.RegRead("CFSecret");
+            //string apiKey = Registry.RegRead("CFKey");
+            //string apiSecret = Registry.RegRead("CFSecret");
 
-            //CF认证
-            //https://codeforces.com/apiHelp
-            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
-            {
-                try
-                {
-                    apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
-                }
-                catch (Exception e)
-                {
-                    ex = e;
-                    return null;
-                }
-                //apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
+            ////CF认证
+            ////https://codeforces.com/apiHelp
+            //if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+            //{
+            //    try
+            //    {
+            //        apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        ex = e;
+            //        return null;
+            //    }
+            //    //apiSecret = StringCipher.Decrypt(apiSecret, Config.EncryptKey);
 
-                string random6 = new Random().Next(100000, 999999).ToString();
-                string unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
-                string apiSig = $"{random6}/contest.standings?apiKey={apiKey}&contestId={contestId}&count=1&from=1&showUnofficial=true&time={unixTimestamp}#{apiSecret}";
-                apiSig = SHA.GenerateSHA512String(apiSig).ToLower();
+            //    string random6 = new Random().Next(100000, 999999).ToString();
+            //    string unixTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+            //    string apiSig = $"{random6}/contest.standings?apiKey={apiKey}&contestId={contestId}&count=1&from=1&showUnofficial=true&time={unixTimestamp}#{apiSecret}";
+            //    apiSig = SHA.GenerateSHA512String(apiSig).ToLower();
 
-                url += $"&apiKey={apiKey}&time={unixTimestamp}&apiSig={random6}{apiSig}";
-            }
+            //    url += $"&apiKey={apiKey}&time={unixTimestamp}&apiSig={random6}{apiSig}";
+            //}
 
             try
             {
@@ -1231,18 +1237,6 @@ namespace OJAssistantUI
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                //string srcCode = "";
-
-                //srcCode += $"/*\n";
-                //srcCode += $"===========================================================\n";
-                //srcCode += $"* @Name:           {item.Text.Trim()} \n";
-                //srcCode += $"* @Author:         {txtAuthor.Text}\n";
-                //srcCode += $"* @create Time:    {DateTime.Now.ToString("G")}\n";
-                //srcCode += $"* @url:            {this.txtProblemId.Text}\n";
-                //srcCode += $"* @Description:    {item.SubItems[2].Text.Trim()}\n";
-                //srcCode += $"===========================================================\n";
-                //srcCode += $"*/";
-
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, item.SubItems[2].Text.Trim(), fileName);
 
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
@@ -1276,26 +1270,6 @@ namespace OJAssistantUI
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                //string srcCode = "";
-
-                //srcCode += $"/*\n";
-                //srcCode += $"===========================================================\n";
-                //srcCode += $"* @Name:            {item.Text.Trim()} \n";
-                //srcCode += $"* @Author:          {txtAuthor.Text}\n";
-                //srcCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
-                //srcCode += $"* @url:             {this.txtProblemId.Text}\n";
-                //srcCode += $"* @Description:     \n";
-
-                //foreach (string s in oProperty.Keys)
-                //    if (s != "filename")
-                //    {
-                //        string temp = $"* @{s}:".PadRight(19);
-                //        srcCode += $"{temp}{oProperty[s]}\n";
-                //    }
-
-
-                //srcCode += $"===========================================================\n";
-                //srcCode += $"*/";
 
                 string desc = "\n";
                 foreach (string s in oProperty.Keys)
@@ -1382,20 +1356,6 @@ namespace OJAssistantUI
             if (MessageBox.Show(this, msg, this.Text,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                //string srcCode = "";
-
-                //srcCode += $"/*\n";
-                //srcCode += $"===========================================================\n";
-                //srcCode += $"* @Name:            {item.Text.Trim()} \n";
-                //srcCode += $"* @Author:          {txtAuthor.Text}\n";
-                //srcCode += $"* @create Time:     {DateTime.Now.ToString("G")}\n";
-                //srcCode += $"* @url:             {this.txtProblemId.Text}\n";
-                //srcCode += $"* @Description:     \n";
-
-
-                //srcCode += $"===========================================================\n";
-                //srcCode += $"*/";
-
                 string cppCode = GetTemplateSourceCode(item.Text.Trim(), txtAuthor.Text, DateTime.Now.ToString("G"), this.txtProblemId.Text, "", fileName);
                 CreateDirAndCodeFile($"{rootDir}\\{subDirName}", fileName, cppCode);
 
@@ -1561,7 +1521,7 @@ namespace OJAssistantUI
         private string FormatPathName(string name)
         {
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
-            List<string> otherInvalidChars = new List<string>() { ",", " ", "'","(", ")","[", "]","\"","#",".", "+", "-" };
+            List<string> otherInvalidChars = new List<string>() { ",", " ", "'","(", ")","[", "]","\"","#",".", "+", "-","`" };
 
             string pathName = name;
             foreach (char c in invalid)
@@ -1587,7 +1547,26 @@ namespace OJAssistantUI
                 Registry.RegWrite("WorkingDir", folderBrowserDialog1.SelectedPath);
                 this.txtWorkingDir.Text = folderBrowserDialog1.SelectedPath;
             }
+
+            refreshRootDir();
         }
+
+        private void refreshRootDir()
+        {
+            if (chkIntelliJ.Checked)
+            {
+                var intelliJ = new IntelliJ(txtWorkingDir.Text);
+                _javaModuleDir = intelliJ.ModuleDir;
+                if (!string.IsNullOrEmpty(intelliJ.ModuleName))
+                    picIntelliJOK.Visible = true;
+            }
+            else
+            {
+                _javaModuleDir = string.Empty;
+                picIntelliJOK.Visible = false;
+            }
+        }
+
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
@@ -1615,32 +1594,32 @@ namespace OJAssistantUI
             Registry.RegWrite("Author", this.txtAuthor.Text); 
         }
 
-        private void CheckCFAuth()
-        {
-            PicCFAuth.Visible = false;
-            string apiKey = Registry.RegRead("CFKey");
-            string apiSecret = Registry.RegRead("CFSecret");
+        //private void CheckCFAuth()
+        //{
+        //    PicCFAuth.Visible = false;
+        //    string apiKey = Registry.RegRead("CFKey");
+        //    string apiSecret = Registry.RegRead("CFSecret");
 
-            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
-            {
-                contestId = 556;
-                dynamic o = GetCfContest(contestId.ToString(), out Exception ex);
+        //    if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+        //    {
+        //        contestId = 556;
+        //        dynamic o = GetCfContest(contestId.ToString(), out Exception ex);
 
-                if (o != null)
-                {
-                    PicCFAuth.Visible = true;
-                    if (o.status == "OK")
-                    {
-                        PicCFAuth.Image = Resources.user_ok;
-                    }
-                    else
-                    {
-                        PicCFAuth.Image = Resources.user_error;
-                    }
-                }
+        //        if (o != null)
+        //        {
+        //            PicCFAuth.Visible = true;
+        //            if (o.status == "OK")
+        //            {
+        //                PicCFAuth.Image = Resources.user_ok;
+        //            }
+        //            else
+        //            {
+        //                PicCFAuth.Image = Resources.user_error;
+        //            }
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         
         private void GetWindowsState()
@@ -1711,13 +1690,6 @@ namespace OJAssistantUI
             }
         }
 
-        private void linkCFAuthorization_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if((new frmCFAuthorization().ShowDialog(this)== DialogResult.OK))
-            {
-                CheckCFAuth();
-            }
-        }
 
         private void SetSourceCodeType()
         {
@@ -1741,24 +1713,13 @@ namespace OJAssistantUI
         {
             chkIntelliJ.Enabled = true;
             SetSourceCodeType();
-            if (!string.IsNullOrEmpty(txtProblemId.Text))
+            if (!string.IsNullOrEmpty(txtProblemId.Text) && contestType != ContestType.codeforces)
                 RefreshtProblem();
         }
 
         private void IntelliJ_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkIntelliJ.Checked)
-            {
-                var intelliJ = new IntelliJ(txtWorkingDir.Text);
-                _javaModuleDir = intelliJ.ModuleDir;
-                if (!string.IsNullOrEmpty(intelliJ.ModuleName))
-                    picIntelliJOK.Visible = true;
-            }
-            else
-            {
-                _javaModuleDir = string.Empty;
-                picIntelliJOK.Visible = false;
-            }
+            refreshRootDir();
         }
 
         private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)

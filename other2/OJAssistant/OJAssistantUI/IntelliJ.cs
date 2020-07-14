@@ -172,9 +172,12 @@ namespace OJAssistantUI
                 var configurations = xElementRunManager.Elements("configuration").ToList();
                 foreach (var config in configurations)
                 {
-                    Debug.WriteLine(config.Attribute("name").Value);
-                    if (config.Attribute("name").Value == newJavaClassName)
-                        return;
+                    if (config.Attribute("name") != null)
+                    {
+                        Debug.WriteLine(config.Attribute("name").Value);
+                        if (config.Attribute("name").Value == newJavaClassName)
+                            return;
+                    }
                 }
 
                 var newConfig = new XElement("configuration",

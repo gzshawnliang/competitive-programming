@@ -51,7 +51,6 @@
             this.ural = new System.Windows.Forms.RadioButton();
             this.poj = new System.Windows.Forms.RadioButton();
             this.hdu = new System.Windows.Forms.RadioButton();
-            this.PicCFAuth = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.sourceJava = new System.Windows.Forms.RadioButton();
@@ -61,7 +60,6 @@
             this.picIntelliJOK = new System.Windows.Forms.PictureBox();
             this.chkIntelliJ = new System.Windows.Forms.RadioButton();
             this.chkvscode = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.PicCFAuth)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIntelliJOK)).BeginInit();
@@ -332,17 +330,6 @@
             this.hdu.UseVisualStyleBackColor = true;
             this.hdu.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
-            // PicCFAuth
-            // 
-            this.PicCFAuth.Image = global::OJAssistantUI.Properties.Resources.user_ok;
-            this.PicCFAuth.Location = new System.Drawing.Point(106, 54);
-            this.PicCFAuth.Name = "PicCFAuth";
-            this.PicCFAuth.Size = new System.Drawing.Size(20, 20);
-            this.PicCFAuth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicCFAuth.TabIndex = 14;
-            this.PicCFAuth.TabStop = false;
-            this.PicCFAuth.Visible = false;
-            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -458,7 +445,6 @@
             this.Controls.Add(this.emptyCode);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.PicCFAuth);
             this.Controls.Add(this.hdu);
             this.Controls.Add(this.poj);
             this.Controls.Add(this.ural);
@@ -487,11 +473,9 @@
             this.Name = "frmOJAssistant";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Online Judge Assistant";
-            this.TopMost = true;
             this.Activated += new System.EventHandler(this.frmCFHelper_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCFHelper_FormClosed);
             this.Load += new System.EventHandler(this.frmCFHelper_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.PicCFAuth)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -526,7 +510,6 @@
         private System.Windows.Forms.RadioButton ural;
         private System.Windows.Forms.RadioButton poj;
         private System.Windows.Forms.RadioButton hdu;
-        private System.Windows.Forms.PictureBox PicCFAuth;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton sourceJava;
