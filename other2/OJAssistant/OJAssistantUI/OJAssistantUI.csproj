@@ -142,11 +142,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <None Include="Resources\user-warning.png" />
     <Content Include="template.java" />
     <Content Include="templateSample.cpp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="template.cpp" />
+    <None Include="user-warning.png" />
     <None Include="user-ok.png" />
     <None Include="user-error.png" />
   </ItemGroup>

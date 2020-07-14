@@ -218,6 +218,9 @@ namespace OJAssistantUI
 
             _javaModuleDir = string.Empty;
             picIntelliJOK.Visible = false;
+            picIntelliJWarning.Visible = false;
+            lblIntelliJWarning.Visible = false;
+            lblIntelliJOK.Visible = false;
             if (chkIntelliJ.Checked)
             {
                 var intelliJ = new IntelliJ(txtWorkingDir.Text);
@@ -225,10 +228,13 @@ namespace OJAssistantUI
                 if (!string.IsNullOrEmpty(intelliJ.ModuleName))
                 {
                     picIntelliJOK.Visible = true;
+                    lblIntelliJOK.Visible = true;
                     isIDEOK = true;
                 }
                 else
                 {
+                    picIntelliJWarning.Visible = true;
+                    lblIntelliJWarning.Visible = true;
                     isIDEOK = false;
                 }
             }

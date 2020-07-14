@@ -57,11 +57,15 @@
             this.sourceCpp = new System.Windows.Forms.RadioButton();
             this.emptyCode = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.picIntelliJWarning = new System.Windows.Forms.PictureBox();
             this.picIntelliJOK = new System.Windows.Forms.PictureBox();
             this.chkIntelliJ = new System.Windows.Forms.RadioButton();
             this.chkvscode = new System.Windows.Forms.RadioButton();
+            this.lblIntelliJWarning = new System.Windows.Forms.Label();
+            this.lblIntelliJOK = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIntelliJWarning)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picIntelliJOK)).BeginInit();
             this.SuspendLayout();
             // 
@@ -393,13 +397,27 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.lblIntelliJOK);
+            this.panel2.Controls.Add(this.lblIntelliJWarning);
+            this.panel2.Controls.Add(this.picIntelliJWarning);
             this.panel2.Controls.Add(this.picIntelliJOK);
             this.panel2.Controls.Add(this.chkIntelliJ);
             this.panel2.Controls.Add(this.chkvscode);
             this.panel2.Location = new System.Drawing.Point(303, 546);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(242, 34);
+            this.panel2.Size = new System.Drawing.Size(476, 34);
             this.panel2.TabIndex = 20;
+            // 
+            // picIntelliJWarning
+            // 
+            this.picIntelliJWarning.Image = ((System.Drawing.Image)(resources.GetObject("picIntelliJWarning.Image")));
+            this.picIntelliJWarning.Location = new System.Drawing.Point(218, 3);
+            this.picIntelliJWarning.Name = "picIntelliJWarning";
+            this.picIntelliJWarning.Size = new System.Drawing.Size(20, 20);
+            this.picIntelliJWarning.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picIntelliJWarning.TabIndex = 16;
+            this.picIntelliJWarning.TabStop = false;
+            this.picIntelliJWarning.Visible = false;
             // 
             // picIntelliJOK
             // 
@@ -436,13 +454,38 @@
             this.chkvscode.Text = "VS Code";
             this.chkvscode.UseVisualStyleBackColor = true;
             // 
+            // lblIntelliJWarning
+            // 
+            this.lblIntelliJWarning.AutoSize = true;
+            this.lblIntelliJWarning.BackColor = System.Drawing.Color.Transparent;
+            this.lblIntelliJWarning.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblIntelliJWarning.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblIntelliJWarning.Location = new System.Drawing.Point(241, 4);
+            this.lblIntelliJWarning.Name = "lblIntelliJWarning";
+            this.lblIntelliJWarning.Size = new System.Drawing.Size(206, 16);
+            this.lblIntelliJWarning.TabIndex = 17;
+            this.lblIntelliJWarning.Text = "directory is not ready";
+            this.lblIntelliJWarning.Visible = false;
+            // 
+            // lblIntelliJOK
+            // 
+            this.lblIntelliJOK.AutoSize = true;
+            this.lblIntelliJOK.BackColor = System.Drawing.Color.Transparent;
+            this.lblIntelliJOK.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblIntelliJOK.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblIntelliJOK.Location = new System.Drawing.Point(241, 4);
+            this.lblIntelliJOK.Name = "lblIntelliJOK";
+            this.lblIntelliJOK.Size = new System.Drawing.Size(170, 16);
+            this.lblIntelliJOK.TabIndex = 18;
+            this.lblIntelliJOK.Text = "directory is ready";
+            this.lblIntelliJOK.Visible = false;
+            // 
             // frmOJAssistant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
             this.ClientSize = new System.Drawing.Size(1008, 601);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.emptyCode);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label5);
@@ -467,6 +510,7 @@
             this.Controls.Add(this.butGo);
             this.Controls.Add(this.txtProblemId);
             this.Controls.Add(this.txtError);
+            this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -481,6 +525,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIntelliJWarning)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picIntelliJOK)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -520,6 +565,9 @@
         private System.Windows.Forms.RadioButton chkIntelliJ;
         private System.Windows.Forms.RadioButton chkvscode;
         private System.Windows.Forms.PictureBox picIntelliJOK;
+        private System.Windows.Forms.PictureBox picIntelliJWarning;
+        private System.Windows.Forms.Label lblIntelliJWarning;
+        private System.Windows.Forms.Label lblIntelliJOK;
     }
 }
 
