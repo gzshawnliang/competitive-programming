@@ -58,6 +58,13 @@ class {fileNameNoExtension}_Solution
 {
     public void Solve(Scanner in, PrintStream out)
     {
+        /*
+        int n      = in.nextInt();        // read input as integer
+        long k     = in.nextLong();       // read input as long
+        double d   = in.nextDouble();     // read input as double
+        String str = in.next();           // read input as String
+        String s   = in.nextLine();       // read whole line as String
+        */        
         out.println("OK");
     }
 }
