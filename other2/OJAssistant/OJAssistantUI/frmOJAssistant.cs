@@ -194,10 +194,56 @@ namespace OJAssistantUI
             //Config.EncryptKey = "123";
         }
 
+        private void CheckIsReady()
+        {
+            bool isProblemOK = false;
+            bool isDirOK = false;
+            bool isIDEOK = false;
+
+            butOK.Enabled = false;
+           
+            if (!emptyCode.Checked)
+            {
+                if (listView1.CheckedItems.Count > 0)
+                    isProblemOK = true;
+                else
+                    isProblemOK = false;
+            }
+            else
+            {
+                isProblemOK = true;
+            }
+
+            isDirOK = !string.IsNullOrEmpty(this.txtWorkingDir.Text.Trim());
+
+            _javaModuleDir = string.Empty;
+            picIntelliJOK.Visible = false;
+            if (chkIntelliJ.Checked)
+            {
+                var intelliJ = new IntelliJ(txtWorkingDir.Text);
+                _javaModuleDir = intelliJ.ModuleDir;
+                if (!string.IsNullOrEmpty(intelliJ.ModuleName))
+                {
+                    picIntelliJOK.Visible = true;
+                    isIDEOK = true;
+                }
+                else
+                {
+                    isIDEOK = false;
+                }
+            }
+            else
+            {
+                isIDEOK = true;
+            }
+
+            butOK.Enabled = isProblemOK && isDirOK && isIDEOK;
+        }
+
         private void frmCFHelper_Load(object sender, EventArgs e)
         {
             //this.Text += "["+_defaultDir;
-
+            butOK.Enabled = false;
             if (System.Diagnostics.Debugger.IsAttached)
                 this.TopMost = false;
             else
@@ -263,6 +309,7 @@ namespace OJAssistantUI
         private void butGo_Click(object sender, EventArgs e)
         {
             RefreshtProblem();
+            CheckIsReady();
         }
 
         private void RefreshtProblem()
@@ -1548,23 +1595,7 @@ namespace OJAssistantUI
                 this.txtWorkingDir.Text = folderBrowserDialog1.SelectedPath;
             }
 
-            refreshRootDir();
-        }
-
-        private void refreshRootDir()
-        {
-            if (chkIntelliJ.Checked)
-            {
-                var intelliJ = new IntelliJ(txtWorkingDir.Text);
-                _javaModuleDir = intelliJ.ModuleDir;
-                if (!string.IsNullOrEmpty(intelliJ.ModuleName))
-                    picIntelliJOK.Visible = true;
-            }
-            else
-            {
-                _javaModuleDir = string.Empty;
-                picIntelliJOK.Visible = false;
-            }
+            CheckIsReady();
         }
 
 
@@ -1687,6 +1718,7 @@ namespace OJAssistantUI
                         this.butGo.Enabled = true;
                     }
                 }
+                CheckIsReady();
             }
         }
 
@@ -1719,7 +1751,7 @@ namespace OJAssistantUI
 
         private void IntelliJ_CheckedChanged(object sender, EventArgs e)
         {
-            refreshRootDir();
+            CheckIsReady();
         }
 
         private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
@@ -1774,6 +1806,11 @@ namespace OJAssistantUI
 
                 this.listView1.Invalidate();
             }
+        }
+
+        private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            CheckIsReady();
         }
     }
 }
