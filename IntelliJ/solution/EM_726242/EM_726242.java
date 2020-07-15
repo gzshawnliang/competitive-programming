@@ -92,9 +92,10 @@ class EM_726242_Solution
 
         out.print('\n');
         var map1=  new HashMap<Integer, Integer>(Map.of(1,2, 3,4));
+        map1.put(5,7);
         map1.forEach((key,val)->
         {
-            out.format("%d->%d,", key,val);
+            out.format("%d->%d\n", key,val);
         });
 
 

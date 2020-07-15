@@ -125,11 +125,9 @@ class CF_512B_FoxAndJumping_Solution
                 else                        f2.put(nxt, val + c[curr]);
             });
 
-
             f.clear();
             f.putAll(f2);
         }
-
 
         if (f.containsKey(1)) out.println(f.get(1));
         else                  out.println(-1);

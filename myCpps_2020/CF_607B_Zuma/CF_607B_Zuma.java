@@ -1,10 +1,10 @@
-﻿/*
+/*
 -------------------------------------------------------------------
-* @Name:           {Name}
-* @Author:         {Author}
-* @Create Time:    {CreateTime}
-* @Url:            {Url}
-* @Description:    {Description}
+* @Name:           607B Zuma
+* @Author:         Shawn
+* @Create Time:    2020/7/15 22:53:56  (UTC+08:00)
+* @Url:            https://codeforces.com/contest/607/problem/B
+* @Description:    
 -------------------------------------------------------------------
                                      /~\
                                     |oo )
@@ -24,7 +24,7 @@ ________________[_]_[_]_[_]________/_]_[_\_________________________
 import java.io.*;
 import java.util.*;
 
-public class {fileNameNoExtension}
+public class CF_607B_Zuma
 {
     public static void main(String[] args) throws IOException
     {
@@ -34,14 +34,14 @@ public class {fileNameNoExtension}
         {
             startTime = System.currentTimeMillis();
             //redirect stdin/stdout to local file
-            System.setIn(new FileInputStream(new File("{fileNameNoExtension}.in")));
-            System.setOut(new PrintStream(new File("{fileNameNoExtension}.out")));
+            System.setIn(new FileInputStream(new File("CF_607B_Zuma.in")));
+            System.setOut(new PrintStream(new File("CF_607B_Zuma.out")));
         }
 
         Scanner in = new Scanner(System.in);
         PrintStream out = System.out;
 
-        new {fileNameNoExtension}_Solution().Solve(in, out);
+        new CF_607B_Zuma_Solution().Solve(in, out);
 
         in.close();
         out.close();
@@ -54,8 +54,10 @@ public class {fileNameNoExtension}
 }
 
 
-class {fileNameNoExtension}_Solution
+class CF_607B_Zuma_Solution
 {
+    private int inf = Integer.MAX_VALUE / 2;
+
     public void Solve(Scanner In, PrintStream Out)
     {
         /*
@@ -65,7 +67,39 @@ class {fileNameNoExtension}_Solution
         String str = in.next();           // read input as String
         String s   = in.nextLine();       // read whole line as String
         */        
-        Out.println("OK");
+
+        int n = In.nextInt();
+
+        var a = new int[n];
+        for (int i = 0; i <= n - 1; ++i) a[i] = In.nextInt();
+
+        var f = new int[n][n];
+
+        for (int i = 0; i <= n - 1; ++i)
+            for (int j = 0; j <= n - 1; ++j)
+                f[i][j] = inf;
+
+        for (int len = 1; len <= n; ++len)
+        {
+            for (int i = 0; i <= n - 1; ++i)
+            {
+                int j = i + len - 1;
+                if (j >= n) break;
+
+                if (len == 1)      f[i][j] = 1;
+                else if (len == 2) f[i][j] = (a[i] == a[j]) ? 1 : 2;
+                else
+                {
+                    if (a[i] == a[j]) f[i][j] = Math.min(f[i][j], f[i + 1][j - 1]);
+
+                    for (int k = i; k + 1 <= j; ++k)
+                        f[i][j] = Math.min(f[i][j], f[i][k] + f[k + 1][j]);
+                }
+            }
+        }
+
+        Out.println(f[0][n - 1]);
     }
 }
+
 
