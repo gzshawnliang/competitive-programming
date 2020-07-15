@@ -89,6 +89,7 @@ class CF_512B_FoxAndJumping_Solution
             var f2 = new HashMap<Integer, Integer>();
             f2.putAll(f);
 
+            //while Version
 //            var it=f.entrySet().iterator();
 //            while (it.hasNext())
 //            {
@@ -102,6 +103,7 @@ class CF_512B_FoxAndJumping_Solution
 //                else                        f2.put(nxt, val + c[i]);
 //            }
 
+              //for Version
 //            for(var item : f.entrySet())
 //            {
 //                int key = item.getKey();
