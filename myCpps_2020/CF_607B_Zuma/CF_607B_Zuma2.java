@@ -53,7 +53,6 @@ public class CF_607B_Zuma2
     }
 }
 
-
 class CF_607B_Zuma_Solution2
 {
     private final int inf = Integer.MAX_VALUE / 2;
