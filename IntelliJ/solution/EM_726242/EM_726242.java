@@ -89,7 +89,7 @@ class EM_726242_Solution
         var myList=new ArrayList<ArrayList<Integer>>() ;
         myList.add(new ArrayList<Integer>(){{add(3);add(4);}});
 
-
+        out.format("%f, %1$+020.10f %n", Math.PI);
 
         out.println(myList.get(0).get(0));
 
