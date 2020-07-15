@@ -76,11 +76,6 @@ class EM_726242_Solution
 
         var kk=0;
 
-        for(int i=0;i<=al.size()-1;++i)
-        {
-            out.println(al.get(i));
-        }
-
         for(int i=0, len=al.size();i<=len-1;++i)
         {
             out.println(al.get(i));
