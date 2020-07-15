@@ -22,6 +22,7 @@ ________________[_]_[_]_[_]________/_]_[_\_________________________
 */
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class EM_726242
@@ -72,14 +73,15 @@ class EM_726242_Solution
 
         out.println(x.intValue()==y.intValue());
 
-        ArrayList<Integer> al=new ArrayList<>(5);
+        ArrayList<Integer> al=new ArrayList<>(Arrays.asList(1,2,3,4,5));
 
         var kk=0;
 
         for(int i=0, len=al.size();i<=len-1;++i)
         {
-            out.println(al.get(i));
+            out.format("%d ", al.get(i));
         }
+        out.print('\n');
 
         var myList=new ArrayList<ArrayList<Integer>>() ;
         myList.add(new ArrayList<Integer>(){{add(3);add(4);}});
