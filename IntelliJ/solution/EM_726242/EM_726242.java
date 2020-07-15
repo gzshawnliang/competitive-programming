@@ -66,8 +66,6 @@ class EM_726242_Solution
         Integer b=100;
         out.println(a ==b);
 
-
-
         Integer x=1000;
         Integer y=1000;
 
@@ -75,12 +73,33 @@ class EM_726242_Solution
 
         ArrayList<Integer> al=new ArrayList<>(Arrays.asList(1,2,3,4,5));
 
-        var kk=0;
-
         for(int i=0, len=al.size();i<=len-1;++i)
         {
             out.format("%d ", al.get(i));
         }
+        out.print('\n');
+
+        al.forEach(v-> out.format("%d ", v));
+        out.print('\n');
+
+        al.forEach(v-> 
+        {
+            if(v==3)
+                return;
+
+            out.format("%d ", v);
+        });
+
+        out.print('\n');
+        var map1=  new HashMap<Integer, Integer>(Map.of(1,2, 3,4));
+        map1.forEach((key,val)->
+        {
+            out.format("%d->%d,", key,val);
+        });
+
+
+
+
         out.print('\n');
 
         var myList=new ArrayList<ArrayList<Integer>>() ;
