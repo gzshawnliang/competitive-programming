@@ -110,6 +110,8 @@ class EM_726242_Solution
 
         out.println(myList.get(0).get(0));
 
+        
+
 //        for(int i = 0,int length = al.size(); i <= length-1; ++i)
 //        {
 //            out.println(al.get(i));
