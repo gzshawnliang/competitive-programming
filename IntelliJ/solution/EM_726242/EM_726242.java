@@ -106,9 +106,11 @@ class EM_726242_Solution
         var myList=new ArrayList<ArrayList<Integer>>() ;
         myList.add(new ArrayList<Integer>(){{add(3);add(4);}});
 
-        double pi2 =Math.PI;
-
+        var pi2 = Math.PI;        
         out.format("%f, %1$+020.10f %n", pi2);
+        for(int i=0;i<10;++i){
+
+        }
 
         out.println(myList.get(0).get(0));
 
