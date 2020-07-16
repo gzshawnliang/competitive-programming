@@ -22,7 +22,6 @@ ________________[_]_[_]_[_]________/_]_[_\_________________________
 */
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class EM_726242
@@ -95,10 +94,11 @@ class EM_726242_Solution
         map1.put(5,7);
         map1.forEach((key,val)->
         {
-            out.format("%d->%d\n", key,val);
+            out.format("%d->%d\n", key, val);
         });
 
-
+        var aa=new int[10];
+        aa[9]=3;
 
 
         out.print('\n');
@@ -106,11 +106,11 @@ class EM_726242_Solution
         var myList=new ArrayList<ArrayList<Integer>>() ;
         myList.add(new ArrayList<Integer>(){{add(3);add(4);}});
 
-        out.format("%f, %1$+020.10f %n", Math.PI);
+        double pi2 =Math.PI;
+
+        out.format("%f, %1$+020.10f %n", pi2);
 
         out.println(myList.get(0).get(0));
-
-        
 
 //        for(int i = 0,int length = al.size(); i <= length-1; ++i)
 //        {
@@ -120,5 +120,3 @@ class EM_726242_Solution
         //for(int i)
     }
 }
-
-

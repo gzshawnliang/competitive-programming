@@ -45,9 +45,9 @@
             "name": "Java Launch",
             "request": "launch",
             "mainClass": "${file}",
-            "sourcePaths": [
-                "${fileDirname}"
-            ],
+            "sourcePaths": ["${fileDirname}"],
+            "encoding":"UTF-8",
+            "vmArgs": "-Xmx512M -Xss64M -Duser.language=en -Duser.region=US -Duser.variant=US",
             "cwd": "${fileDirname}",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"

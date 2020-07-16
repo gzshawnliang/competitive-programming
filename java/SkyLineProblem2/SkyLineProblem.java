@@ -34,7 +34,7 @@ class SkyLineProblem
         Scanner in = new Scanner(System.in);
         PrintStream out = System.out;
 
-        new Solution().Solve(in, out);
+        new SkyLineProblemSolution().Solve(in, out);
 
         in.close();
         out.close();
@@ -42,7 +42,7 @@ class SkyLineProblem
 }
 
 
-class Solution
+class SkyLineProblemSolution
 {
     public void Solve(Scanner in, PrintStream out)
     {

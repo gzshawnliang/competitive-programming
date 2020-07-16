@@ -1001,6 +1001,7 @@ namespace OJAssistantUI
             }
             catch(Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
                 throw new Exception(result);
             }
         }
