@@ -1,5 +1,5 @@
 rem Clean java the workspace directory
-for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*java"') do rmdir /Q /S %%G
+for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*redhat.java"') do rmdir /Q /S %%G
 
 @if not defined _echo echo off
 rem set language to english set VSLANG=1033
