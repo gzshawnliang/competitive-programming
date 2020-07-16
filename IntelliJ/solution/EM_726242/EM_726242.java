@@ -26,9 +26,9 @@ import java.util.*;
 
 public class EM_726242
 {
-    public static void main(String[] args) throws IOException
+    public static void main(final String[] args) throws IOException
     {
-        boolean isLocal= System.getProperty("ONLINE_JUDGE") == null;
+        final boolean isLocal= System.getProperty("ONLINE_JUDGE") == null;
         long startTime = 0;
         if (isLocal)
         {
@@ -38,8 +38,8 @@ public class EM_726242
             //System.setOut(new PrintStream(new File("EM_726242.out")));
         }
 
-        Scanner in = new Scanner(System.in);
-        PrintStream out = System.out;
+        final Scanner in = new Scanner(System.in);
+        final PrintStream out = System.out;
 
         new EM_726242_Solution().Solve(in, out);
 
@@ -56,21 +56,21 @@ public class EM_726242
 
 class EM_726242_Solution
 {
-    public void Solve(Scanner in, PrintStream out)
+    public void Solve(final Scanner in, final PrintStream out)
     {
         //String c="a2342341";
         //out.println(c.hashCode());
 
-        Integer a=100;
-        Integer b=100;
+        final Integer a=100;
+        final Integer b=100;
         out.println(a ==b);
 
-        Integer x=1000;
-        Integer y=1000;
+        final Integer x=1000;
+        final Integer y=1000;
 
         out.println(x.intValue()==y.intValue());
 
-        ArrayList<Integer> al=new ArrayList<>(Arrays.asList(1,2,3,4,5));
+        final ArrayList<Integer> al=new ArrayList<>(Arrays.asList(1,2,3,4,5));
 
         for(int i=0, len=al.size();i<=len-1;++i)
         {
@@ -90,28 +90,29 @@ class EM_726242_Solution
         });
 
         out.print('\n');
-        var map1=  new HashMap<Integer, Integer>(Map.of(1,2, 3,4));
+        final var map1=  new HashMap<Integer, Integer>(Map.of(1,2, 3,4));
         map1.put(5,7);
         map1.forEach((key,val)->
         {
             out.format("%d->%d\n", key, val);
         });
 
-        var aa=new int[10];
+        final var aa=new int[10];
         aa[9]=3;
 
 
         out.print('\n');
 
-        var myList=new ArrayList<ArrayList<Integer>>() ;
+        final var myList=new ArrayList<ArrayList<Integer>>() ;
         myList.add(new ArrayList<Integer>(){{add(3);add(4);}});
 
-        var pi2 = Math.PI;        
-        out.format("%f, %1$+020.10f %n", pi2);
-        for(int i=0;i<10;++i){
 
-        }
-
+        final var pi2 = Math.PI;
+        out.printf("%f, %1$+020.10f %n", pi2);
+        
+        out.println(String.format("%2$s %1$s", "World", "Hello"));      // prints: "Hello World"
+        out.printf("%2$s %1$s %n", "World", "Hello");                   // prints: "Hello World"
+        
         out.println(myList.get(0).get(0));
 
 //        for(int i = 0,int length = al.size(); i <= length-1; ++i)

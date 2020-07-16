@@ -163,9 +163,9 @@
     
     //RedHat JDK 8
     "java.home": "C:\\Program Files\\RedHat\\java-11-openjdk-11.0.7-1",
-    "java.format.settings.url": "${workspaceFolder}\\.vscode\\EclipseJavaFormatter.xml",
+    "java.format.settings.url": ".vscode\\EclipseJavaFormatter.xml",
     "java.format.settings.profile": "MyJavaVSStyple",
-    "java.format.onType.enabled":true,
+
     //"editor.formatOnPaste": true,
     "editor.formatOnType": false,
     "C_Cpp.default.cppStandard": "c++11",
