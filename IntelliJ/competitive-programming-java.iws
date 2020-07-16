@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a58c5a0c-b4c2-4a0f-a8df-9694eedc0010" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/competitive-programming-java.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/competitive-programming-java.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/competitive-programming-java.iws" beforeDir="false" afterPath="$PROJECT_DIR$/competitive-programming-java.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution/EM_726242/EM_726242.java" beforeDir="false" afterPath="$PROJECT_DIR$/solution/EM_726242/EM_726242.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,27 +108,23 @@
     </recent_temporary>
   </component>
   <component name="SvnConfiguration" cleanupOnStartRun="true">
-    <configuration>C:\Users\lls\AppData\Roaming\Subversion</configuration>
+    <configuration>C:\Users\shawn\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
   </component>
   <component name="SvnFileUrlMappingImpl">
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\competitive-programming\IntelliJ" />
-          <option name="myCopyRoot" value="C:\competitive-programming\IntelliJ" />
-        </SvnCopyRootSimple>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\competitive-programming\IntelliJ\solution" />
-          <option name="myCopyRoot" value="C:\competitive-programming\IntelliJ\solution" />
+          <option name="myVcsRoot" value="C:\code\competitive-programming\IntelliJ" />
+          <option name="myCopyRoot" value="C:\code\competitive-programming\IntelliJ" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\competitive-programming\IntelliJ" />
-          <option name="myCopyRoot" value="C:\competitive-programming\IntelliJ" />
+          <option name="myVcsRoot" value="C:\code\competitive-programming\IntelliJ" />
+          <option name="myCopyRoot" value="C:\code\competitive-programming\IntelliJ" />
         </SvnCopyRootSimple>
       </list>
     </option>
