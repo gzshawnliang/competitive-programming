@@ -1,10 +1,11 @@
+@if not defined _echo echo off
+
 rem Clean java the workspace directory
-for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*redhat.java"') do rmdir /Q /S %%G
+echo checking java workspace Storage
+for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*redhat.java"') do rmdir /Q /S %%G && echo %%G deleted!
 rem for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*vscjava.vscode-java-test"') do rmdir /Q /S %%G
 
-@if not defined _echo echo off
 rem set language to english set VSLANG=1033
-
 set VSLANG=1033
 rem Start Developer Command Prompt
 for /f "usebackq delims=" %%i in (`%~dp0%.vscode\vswhere.exe -prerelease -latest -property installationPath`) do (
