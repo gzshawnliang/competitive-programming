@@ -79,6 +79,8 @@ class EM_726242_Solution
         out.print('\n');
 
         al.forEach(v-> out.format("%d ", v));
+
+
         out.print('\n');
 
         al.forEach(v-> 
@@ -92,26 +94,25 @@ class EM_726242_Solution
         out.print('\n');
         final var map1=  new HashMap<Integer, Integer>(Map.of(1,2, 3,4));
         map1.put(5,7);
-        map1.forEach((key,val)->
-        {
+        map1.forEach( (key,val) -> {
             out.format("%d->%d\n", key, val);
-        });
+        } );
 
-        final var aa=new int[10];
+        var aa=new int[10];
         aa[9]=3;
-
 
         out.print('\n');
 
         final var myList=new ArrayList<ArrayList<Integer>>() ;
         myList.add(new ArrayList<Integer>(){{add(3);add(4);}});
 
+        var pi2 = 3.67878;
 
-        final var pi2 = Math.PI;
         out.printf("%f, %1$+020.10f %n", pi2);
         
-        out.println(String.format("%2$s %1$s", "World", "Hello"));      // prints: "Hello World"
-        out.printf("%2$s %1$s %n", "World", "Hello");                   // prints: "Hello World"
+        out.printf(String.format("%2$s %1$s %n", "World", "Hello"));      // prints: "Hello World"
+
+        //out.println("%2$s %1$s %n");                   // prints: "Hello World"
         
         out.println(myList.get(0).get(0));
 
@@ -123,3 +124,6 @@ class EM_726242_Solution
         //for(int i)
     }
 }
+
+
+
