@@ -1,6 +1,6 @@
 #include<iostream>
 #include<stdlib.h>
-#define N 100000
+#define N 10
 
 using namespace std;
  
@@ -52,10 +52,10 @@ void GenerateRandomGraphs(int e)
 int main()
 {
 
-   freopen("CF_1364D_EhabsLastCorollary.in", "w", stdout);
+   freopen("1.in", "w", stdout);
 
    int n, i ,e;
-   e=199999;
+   e=14;
    cout << N << " " << e << " 3\n";
    GenerateRandomGraphs(e);
 }
