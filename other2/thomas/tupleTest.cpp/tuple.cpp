@@ -22,6 +22,7 @@ class solution
         a={2,3,4};
 
         cout << "size:" << tuple_size<decltype(a)>::value << '\n';
+        
         cout << "index 0:" << std::get<0>(a) <<'\n';
         cout << "index 1:" << get<1>(a) <<'\n';
         cout << "index 2:" << get<2>(a) <<'\n';
