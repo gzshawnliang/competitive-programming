@@ -52,57 +52,41 @@ class solution
             for (int i = 0; i <= n - 1; ++i) a[i] = (tmpA[i] == '1');
             for (int i = 0; i <= n - 1; ++i) b[i] = (tmpB[i] == '1');
 
-            int flp = 0, l = 0, r = n - 1;
-            vector<int> ans;
-            for (int i = n - 1; i >= 0; --i)
+            vector<int> ans0;
+            for (int i = 0; i <= n - 1; ++i)
             {
-                if (a[i] == b[i])
+                if (i == n - 1)
                 {
-                    if (flp == 0) --r;
-                    else          ++l;
-                    continue;
-                }
-
-                int front = -1;
-                if (flp == 0) front = l;
-                else          front = r;
-
-                if (i == 0)
-                {
-                    ans.push_back(1);
-
-                    a[front] = 1 - a[front];
-
-                    if (flp == 0) --r;
-                    else          ++l;
-                }
-                else if (a[i] == a[0])
-                {
-                    ans.push_back(i + 1);
-
-                    if (flp == 0) --r;
-                    else          ++l;
-
-                    flp = 1 - flp;
+                    if (a[i] == 1) ans0.push_back(i + 1);
                 }
                 else
                 {
-                    ans.push_back(1);
-                    ans.push_back(i + 1);
-
-                    a[front] = 1 - a[front];
-
-                    if (flp == 0) --r;
-                    else          ++l;
-
-                    flp = 1 - flp;
+                    if (a[i] != a[i + 1]) ans0.push_back(i + 1);
                 }
-
-                
             }
- 
-            cout << ans.size();
-            for (auto x:ans) cout << ' ' << x;
+
+            vector<int> ans1;
+            for (int i = 0; i <= n - 1; ++i)
+            {
+                if (i == n - 1)
+                {
+                    if (b[i] == 1) ans1.push_back(i + 1);
+                }
+                else
+                {
+                    if (b[i] != b[i + 1]) ans1.push_back(i + 1);
+                }
+            }
+
+            cout << ans0.size() + ans1.size() << '\n';
+            for (auto x:ans0) cout << x << ' ';
+
+            int siz = ans1.size();
+            for (int i = siz - 1; i >= 0; --i)
+            {
+                if (i < siz - 1) cout << ' ';
+                cout << ans1[i];
+            }
             cout << '\n';
         }
     }
