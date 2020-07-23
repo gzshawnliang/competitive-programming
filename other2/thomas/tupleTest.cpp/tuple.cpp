@@ -70,9 +70,12 @@ class solution
             cout << a << " " << b << " " << c << " " << y << '\n';
         }
 
+       
+        int i=10;
+        --i;
+
         for (int __s = 0; __s == 0; ++__s);
 
-        //delete [] a;
         
     }
 };
