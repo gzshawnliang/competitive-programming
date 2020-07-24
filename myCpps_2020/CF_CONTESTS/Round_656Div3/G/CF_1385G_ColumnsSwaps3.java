@@ -1,10 +1,10 @@
 /*
 -------------------------------------------------------------------
 * @Name:           1385G Columns Swaps
-* @Author:         Shawn
+* @Author:         Thomas
 * @Create Time:    2020/7/23 22:07:16  (UTC+08:00)
 * @Url:            https://codeforces.com/contest/1385/problem/G
-* @Description:    Time limit exceeded on test 3
+* @Description:    AC
 -------------------------------------------------------------------
                                      /~\
                                     |oo )
