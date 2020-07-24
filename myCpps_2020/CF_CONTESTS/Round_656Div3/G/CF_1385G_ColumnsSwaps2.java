@@ -72,7 +72,7 @@ class CF_1385G_ColumnsSwaps_Solution2
     {
         pth.add(u);
 
-        for (int i = 0, siz =(g[u]==null?0:g[u].size()); i <= siz - 1; ++i)
+        for (int i = 0, siz = (g[u] == null ? 0 : g[u].size()); i <= siz - 1; ++i)
         {
             var v = g[u].get(i);
             if (v.getKey().intValue() == las)
