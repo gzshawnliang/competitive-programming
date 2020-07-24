@@ -133,18 +133,6 @@ class CF_1385G_ColumnsSwaps_Solution2
                 pos[tmp].add(new Pair<Integer, Integer>(i, 0));
             }
 
-            // var pos = new ArrayList<ArrayList<Pair<Integer, Integer>>>(n + 1);
-            // for (int i = 0; i <= n; ++i)
-            // pos.add(new ArrayList<Pair<Integer, Integer>>());
-
-            // for (int i = 0; i <= n - 1; ++i)
-            // {
-            // int tmp = In.nextInt();
-            // ++cntX[tmp];
-
-            // pos.get(tmp).add(new Pair<Integer, Integer>(i, 0));
-            // }
-
             for (int i = 0; i <= n - 1; ++i)
             {
                 int tmp = In.nextInt();
@@ -173,10 +161,7 @@ class CF_1385G_ColumnsSwaps_Solution2
             }
 
             col = new int[n];
-            // g = new ArrayList<ArrayList<Pair<Integer, Integer>>>(n);
             g = new ArrayList[n + 1];
-            // for (int i = 0; i <= n - 1; ++i)
-            // g.add(new ArrayList<Pair<Integer, Integer>>());
 
             for (int x = 1; x <= n; ++x)
             {
