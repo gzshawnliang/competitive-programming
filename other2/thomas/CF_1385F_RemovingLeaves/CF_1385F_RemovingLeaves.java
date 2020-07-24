@@ -1,10 +1,10 @@
-﻿/*
+/*
 -------------------------------------------------------------------
-* @Name:           {Name}
-* @Author:         {Author}
-* @Create Time:    {CreateTime}
-* @Url:            {Url}
-* @Description:    {Description}
+* @Name:           1385F Removing Leaves
+* @Author:         Thomas
+* @Create Time:    2020/7/24 13:19:01  (UTC+08:00)
+* @Url:            https://codeforces.com/contest/1385/problem/F
+* @Description:    
 -------------------------------------------------------------------
                                      /~\
                                     |oo )
@@ -24,7 +24,7 @@ ________________[_]_[_]_[_]________/_]_[_\_________________________
 import java.io.*;
 import java.util.*;
 
-public class {fileNameNoExtension}
+public class CF_1385F_RemovingLeaves
 {
     public static void main(String[] args) throws IOException
     {
@@ -34,8 +34,8 @@ public class {fileNameNoExtension}
         {
             startTime = System.currentTimeMillis();
             //redirect stdin/stdout to local file
-            System.setIn(new FileInputStream(new File("{fileNameNoExtension}.in")));
-            System.setOut(new PrintStream(new File("{fileNameNoExtension}.out")));
+            System.setIn(new FileInputStream(new File("CF_1385F_RemovingLeaves.in")));
+            System.setOut(new PrintStream(new File("CF_1385F_RemovingLeaves.out")));
         }
 
         FastReader in = new FastReader(System.in);
@@ -126,5 +126,6 @@ public class {fileNameNoExtension}
         }
     }
 }
+
 
 

@@ -12,15 +12,16 @@ public class CF_1385G_ColumnsSwaps2
             startTime = System.currentTimeMillis();
             // redirect stdin/stdout to local file
             System.setIn(new FileInputStream(new File("CF_1385G_ColumnsSwaps.in")));
-            System.setOut(new PrintStream(new File("CF_1385G_ColumnsSwaps.out")));
+            System.setOut(new PrintStream(new File("CF_1385G_ColumnsSwaps2.out")));
         }
 
-        Scanner in = new Scanner(System.in);
+        // Scanner in = new Scanner(System.in);
+        FastReader in = new FastReader(System.in);
         PrintStream out = System.out;
 
         new CF_1385G_ColumnsSwaps_Solution2().Solve(in, out);
 
-        in.close();
+        // in.close();
         out.close();
 
         if (isLocal)
@@ -56,9 +57,51 @@ class Pair<Key, Value>
         this.key = key;
     }
 
-    public void setValue(Value value)
+    public void setValue(Value Value)
     {
         this.value = value;
+    }
+}
+
+class FastReader
+{
+    private BufferedReader reader;
+    private StringTokenizer tokenizer;
+
+    /** call this method to initialize reader for InputStream */
+    public FastReader(InputStream input)
+    {
+        reader = new BufferedReader(new InputStreamReader(input));
+        tokenizer = new StringTokenizer("");
+    }
+
+    /** get next word */
+    public String next()
+    {
+        while (!tokenizer.hasMoreTokens())
+        {
+            // TODO add check for eof if necessary
+
+            try{
+                tokenizer = new StringTokenizer(reader.readLine());
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace(); 
+            }
+            
+        }
+        return tokenizer.nextToken();
+    }
+
+    public int nextInt()
+    {
+        return Integer.parseInt(next());
+    }
+
+    public double nextDouble()
+    {
+        return Double.parseDouble(next());
     }
 }
 
@@ -93,33 +136,18 @@ class CF_1385G_ColumnsSwaps_Solution2
             if (dfs(v.getKey().intValue(), u) == false)
                 return false;
         }
-        
+
         return true;
     }
 
-    public void Solve(Scanner In, PrintStream Out)
+    public void Solve(FastReader In, PrintStream Out) throws IOException
     {
         int tct = In.nextInt();
         for (int tcc = 1; tcc <= tct; ++tcc)
         {
-            /*
-             * int n = in.nextInt(); // read input as integer long k = in.nextLong(); //
-             * read input as long double d = in.nextDouble(); // read input as double String
-             * str = in.next(); // read input as String String s = in.nextLine(); // read
-             * whole line as String
-             */
-
             int n = In.nextInt();
 
             var cntX = new int[n + 1];
-            // var pos = new ArrayList<ArrayList<Pair<Integer, Integer>>>(n + 1);
-            // for (int i = 0; i <= n - 1; ++i)
-            // {
-            // int tmp = In.nextInt();
-            // ++cntX[tmp];
-
-            // pos.get(tmp).add(new Pair<Integer, Integer>(i, 0));
-            // }
 
             ArrayList<Pair<Integer, Integer>>[] pos = new ArrayList[n + 1];
             for (int i = 0; i <= n - 1; ++i)
@@ -171,7 +199,7 @@ class CF_1385G_ColumnsSwaps_Solution2
                 int typ = (x0 == x1 ? 0 : 1);
 
                 x0 = pos[x].get(0).getKey().intValue();
-                x1 = pos[x].get(1).getKey().intValue();                
+                x1 = pos[x].get(1).getKey().intValue();
 
                 if (g[x0] == null)
                     g[x0] = new ArrayList<Pair<Integer, Integer>>();
