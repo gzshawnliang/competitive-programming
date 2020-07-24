@@ -57,13 +57,13 @@ foreach ($file in $files)
 }
 
 Write-Host "generating test data via $dataCpp" -ForegroundColor Green
-& "$PSScriptRoot\BuildAndTest.ps1" -SourceFileName "$firstDirectory\$dataCpp" -CompilerArgs "-Wl,--stack=268435456 -std=gnu++11 -O2 -lm -lstdc++fs -I C:\competitive-programming\include"
+& "$PSScriptRoot\BuildAndTest.ps1" -SourceFileName "$firstDirectory\$dataCpp" -CompilerArgs "-Wl,--stack=268435456 -std=gnu++11 -O2 -lm -lstdc++fs -I C:\code\competitive-programming\include"
 Copy-Item "$firstDirectory\*.in" -Destination "$secondDirectory" -Force
 
 Write-Host
 Write-Host "***********************************************************************************" -ForegroundColor Green
 Write-Host "runing first cpp file $firstCpp" -ForegroundColor Green
-& "$PSScriptRoot\BuildAndTest.ps1" -SourceFileName "$firstDirectory\$firstCpp" -DoTest -CompilerArgs "-Wl,--stack=268435456 -std=gnu++11 -O2 -lm -lstdc++fs -I C:\competitive-programming\include"
+& "$PSScriptRoot\BuildAndTest.ps1" -SourceFileName "$firstDirectory\$firstCpp" -DoTest -CompilerArgs "-Wl,--stack=268435456 -std=gnu++11 -O2 -lm -lstdc++fs -I C:\code\competitive-programming\include"
 
 
 $files = Get-Childitem $secondDirectory 
@@ -79,7 +79,7 @@ Write-Host
 Write-Host "***********************************************************************************" -ForegroundColor Green
 Write-Host "runing second cpp file $secondCpp" -ForegroundColor Green
 
-& "$PSScriptRoot\BuildAndTest.ps1" -SourceFileName "$secondDirectory\$secondCpp" -DoTest -CompilerArgs "-Wl,--stack=268435456 -std=gnu++11 -O2 -lm -lstdc++fs -I C:\competitive-programming\include"
+& "$PSScriptRoot\BuildAndTest.ps1" -SourceFileName "$secondDirectory\$secondCpp" -DoTest -CompilerArgs "-Wl,--stack=268435456 -std=gnu++11 -O2 -lm -lstdc++fs -I C:\code\competitive-programming\include"
 
 Write-Host
 Write-Host "***********************************************************************************" -ForegroundColor Green
