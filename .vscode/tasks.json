@@ -191,7 +191,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&'${workspaceFolder}\\.vscode\\BuildAndTest.ps1' -SourceFileName '\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"' -CompilerArgs '-Wl,--stack=268435456 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"\"\"${workspaceFolder}\\include\"\"\"' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&'${workspaceFolder}\\.vscode\\BuildAndTest.ps1' -SourceFileName '\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"' -CompilerArgs '-Wl,--stack=8589934592 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"\"\"${workspaceFolder}\\include\"\"\"' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "echoCommand": true,

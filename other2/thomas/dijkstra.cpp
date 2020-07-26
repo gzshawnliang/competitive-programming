@@ -92,7 +92,7 @@ class dijkstra
             reverse(i.begin(), i.end());
             multiPath2.push_back(i);
         }
-        return;
+        return multiPath2;
     }
 
     void RunNoPath(int s)

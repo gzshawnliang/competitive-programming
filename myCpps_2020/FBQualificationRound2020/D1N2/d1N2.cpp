@@ -27,29 +27,18 @@ class solution
             vector<ill> a(n, 0);
             for (ill i = 0; i <= n - 1; ++i) cin >> a[i];
 
-            multiset<ill> st; st.insert(0);
             vector<ill> f(n, inf); f[0] = 0;
             for (ill i = 1; i <= n - 1; ++i)
             {
-                if (st.empty()) break;
+                if (a[i] == 0 && i < n - 1) continue;
 
-                if (a[i] == 0 && i < n - 1)
+                for (int j = max(0LL, i - m); j <= i - 1; ++j)
                 {
-    
-                }
-                else
-                {
-                    f[i] = *st.begin();
-                    if (i < n - 1) f[i] += a[i];
-                    
-                    st.insert(f[i]);
+                    if (a[j] == 0 && j > 0) continue;
+                    f[i] = min(f[i], f[j]);
                 }
                 
-                if (i >= m && f[i - m] != inf) 
-                {
-                    auto it=st.find(f[i - m]);
-                    st.erase(it);
-                }
+                if (i < n - 1) f[i] += a[i];
             }
 
             cout << "Case #" << tcc << ": ";
@@ -64,8 +53,8 @@ int main()
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
-    freopen("d1.in", "r", stdin);
-    freopen("d1.out", "w", stdout);
+    freopen("d1N2.in", "r", stdin);
+    freopen("d1N2.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
 
