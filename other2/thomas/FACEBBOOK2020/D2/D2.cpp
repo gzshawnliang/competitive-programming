@@ -41,8 +41,6 @@ class solution
             mainPathPoint=curr;
         }
 
-        
-
         for (int i = 0,len=treeMatrix[curr].size(); i <= len - 1; ++i)
         {
             dfsMainPath(treeMatrix[curr][i],curr,mainPathPoint);
