@@ -18,7 +18,6 @@ class solution
     vector<pair<int,int>> treeP;
     vector<vector<int>> treeMatrix;
     vector<int> depth;    
-    vector<int> visted;
     vector<int> mainPath;
     vector<int> isMainPath;
     vector<vector<pair<int,int>>> mainPathData;
@@ -93,8 +92,7 @@ class solution
         //Make Tree Matrix
         treeMatrix= vector<vector<int>>(N+1);
         depth=vector<int>(N+1,-1);
-        visted=vector<int>(N+1);
-        
+       
         for (int i = 1; i <= N; ++i)
         {
             treeMatrix[treeP[i].first].push_back(i);
@@ -120,6 +118,8 @@ class solution
         //dfs(root,0);
         depth[root]=0;
         dfsMainPath(mainPath.back(),root,0);
+
+
 
         return;
     }
