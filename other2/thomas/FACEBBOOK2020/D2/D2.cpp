@@ -21,7 +21,9 @@ class solution
     vector<int> mainPath;
     vector<int> isMainPath;
     vector<vector<pair<int,int>>> mainPathData;
+    vector<vector<int>> mainPathData2;
 
+    int N,M;
     // void dfs(int curr,int p)
     // {
     //     depth[curr]=depth[p]+1;
@@ -30,6 +32,21 @@ class solution
     //         dfs(treeMatrix[curr][i],curr);
     //     }
     // }
+
+    void dfsNode(int curr,int p,int depth)
+    {
+        if(depth>=M)
+            return;
+        
+        if(depth>0)
+            mainPathData2[p].push_back(curr);
+
+        for (int i = 0,len=treeMatrix[curr].size(); i <= len - 1; ++i)
+        {
+            if(isMainPath[treeMatrix[curr][i]]==0)
+                dfsNode(treeMatrix[curr][i],p,depth+1);
+        }        
+    }
 
     void dfsMainPath(int curr,int p,int mainPathPoint)
     {
@@ -60,9 +77,11 @@ class solution
 
     void solve(int T)
     {
-        int N,M,A,B;
+        int A,B;
         cin >> N>>M>>A>>B;
         treeP = vector<pair<int,int>>(N+1);
+
+        mainPathData2=vector<vector<int>>(N+1);
         mainPathData = vector<vector<pair<int,int>>>(N+1);
 
         for (int i = 1; i <= N; ++i)
@@ -115,11 +134,14 @@ class solution
             isMainPath[mainPath[i]]=1;
         }
 
+        for (int i = 0,len=mainPath.size(); i <= len - 1; ++i)
+        {
+            dfsNode(mainPath[i],mainPath[i],0);
+        }
+
         //dfs(root,0);
         depth[root]=0;
-        dfsMainPath(mainPath.back(),root,0);
-
-
+        //dfsMainPath(mainPath.back(),root,0);
 
         return;
     }
