@@ -15,6 +15,8 @@ ofstream fout("SegTree.out");
 
 const int INF = INT_MAX;
 
+
+//线段树模板。原数组0开始下标
 class SegTree
 {
   private:
@@ -211,18 +213,19 @@ int main()
     SegTree sTree(&vec1);
 
     sTree.update(3, 5);
-    cout << "3~5:" << sTree.query(1, 3) << "\n";
+    cout << "1~3:" << sTree.query(1, 3) << "\n";
     cout << "2~5:" << sTree.query(2, 5) << "\n";
     cout << "3~4:" << sTree.query(3, 4) << "\n";
     cout << "2~8:" << sTree.query(2, 8) << "\n";
-    cout << "5~9:" << sTree.query(5, 6) << "\n";
+    cout << "5~6:" << sTree.query(5, 6) << "\n";
+    cout << "0~3:" << sTree.query(0, 3) << "\n";
 
     cout << "update:6->4";
     sTree.update(6, 4);
     cout << "sur:";
     sTree.printSource();
 
-    cout << "5~9:" << sTree.query(5, 6) << "\n";
+    cout << "5~9:" << sTree.query(5, 9) << "\n";
 
     cout << "updateRange:3-9:80";
     sTree.updateRange(3, 9, 80);
