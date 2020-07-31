@@ -22,26 +22,29 @@ class solution
         {
             ill n; cin >> n;
             set<ill> kp;
-            map<ill, ill> trees, f;
+            map<ill, ill> f;
+            map<ill, vector<ill>> trees;
             for (ill i = 0; i <= n - 1; ++i)
             {
                 ill p, h; cin >> p >> h;
 
                 kp.insert(p);
-                trees[p] = h;
+                trees[p].push_back(h);
             }
 
             ill ans = 0;
             for (auto p:kp)
             {
-                ill h = trees[p];
+                for (auto h:trees[p])
+                {
+                    f[p + h] = max(f[p + h], f[p] + h);
 
-                f[p + h] = max(f[p + h], f[p] + h);
+                    ans = max(ans, f[p] + h);
 
-                ans = max(ans, f[p] + h);
-
-                if (f.count(p - h)) f[p] = max(f[p], f[p - h] + h);
-                ans = max(ans, f[p]);
+                    f[p] = max(f[p], h);
+                    if (f.count(p - h)) f[p] = max(f[p], f[p - h] + h);
+                    ans = max(ans, f[p]);
+                }
             }
 
             cout << "Case #" << tcc << ": " << ans << '\n';
