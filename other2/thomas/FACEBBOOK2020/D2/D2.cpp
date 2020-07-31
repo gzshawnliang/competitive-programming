@@ -11,67 +11,40 @@
 using namespace std;
 
 using ill = long long;
-const ill INF = LONG_LONG_MAX;
+const ill INF = LLONG_MAX /2 ;
 
 class solution
 {
-    vector<pair<int,int>> treeP;
-    vector<vector<int>> treeMatrix;
-    vector<int> depth;    
+    vector<int> parent;
+    vector<int> cost;
+    vector<vector<int>> treeAdj;
+    vector<ill> dp;    
     vector<int> mainPath;
     vector<int> isMainPath;
-    vector<vector<pair<int,int>>> mainPathData;
-    vector<vector<int>> mainPathData2;
+
+    vector<int> branch;
 
     int N,M;
-    // void dfs(int curr,int p)
-    // {
-    //     depth[curr]=depth[p]+1;
-    //     for (int i = 0,len=treeMatrix[curr].size(); i <= len - 1; ++i)
-    //     {
-    //         dfs(treeMatrix[curr][i],curr);
-    //     }
-    // }
 
     void dfsNode(int curr,int p,int depth)
     {
         if(depth>=M)
             return;
         
-        if(depth>0)
-            mainPathData2[p].push_back(curr);
-
-        for (int i = 0,len=treeMatrix[curr].size(); i <= len - 1; ++i)
+        if(depth>0 && curr !=p)
         {
-            if(isMainPath[treeMatrix[curr][i]]==0)
-                dfsNode(treeMatrix[curr][i],p,depth+1);
-        }        
+            if((int)branch.size()<=depth)
+                branch.push_back(curr);
+            else if(cost[curr] >0 && cost[curr] < cost[branch[depth]]) 
+                branch[depth] = curr;
+        }
+
+        for (int i = 0,len=treeAdj[curr].size(); i <= len - 1; ++i)
+        {
+            if(isMainPath[treeAdj[curr][i]]==0)
+                dfsNode(treeAdj[curr][i],p,depth+1);
+        }
     }
-
-    void dfsMainPath(int curr,int p,int mainPathPoint)
-    {
-        depth[curr]=depth[p]+1;
-
-        if(isMainPath[curr]==1)
-        {
-            mainPathPoint=curr;
-        }
-
-        for (int i = 0,len=treeMatrix[curr].size(); i <= len - 1; ++i)
-        {
-            dfsMainPath(treeMatrix[curr][i],curr,mainPathPoint);
-        }
-
-        if(isMainPath[curr]==0)
-        {
-            int mainPathDepth=depth[curr]-depth[mainPathPoint];
-            mainPathData[mainPathPoint].push_back({mainPathDepth,treeP[curr].second});
-            // if(mainPathData[mainPathPoint].size()==0)
-            //     mainPathData[mainPathPoint].push_back({mainPathDepth,treeP[curr].second});
-            // else if (treeP[curr].second < mainPathData[mainPathPoint].back().second) 
-            //     mainPathData[mainPathPoint].push_back({mainPathDepth,treeP[curr].second});
-        }
-    }    
 
   public:
 
@@ -79,17 +52,18 @@ class solution
     {
         int A,B;
         cin >> N>>M>>A>>B;
-        treeP = vector<pair<int,int>>(N+1);
-
-        mainPathData2=vector<vector<int>>(N+1);
-        mainPathData = vector<vector<pair<int,int>>>(N+1);
+        parent = vector<int>(N+1);
+        cost = vector<int>(N+1);
+        cerr << "T-N:" << T << "-" << N << " " << M << "\n";
 
         for (int i = 1; i <= N; ++i)
-        {
-            int Pi,Ci;
-            cin >> Pi>>Ci;
-            treeP[i]= make_pair(Pi,Ci);
-        }
+            cin >> parent[i]>>cost[i];
+
+        // if(N>=1e6)
+        // {
+        //     cout << "Case #" << T <<": " << N << "\n";
+        //     return;        
+        // }
 
         //Change Root to B
         int root =B;
@@ -98,24 +72,30 @@ class solution
         while (true)
         {
             path.push_back(curr);
-            curr = treeP[curr].first;
+            curr = parent[curr];
             if(curr==0)
                 break;
         }
-        treeP[root].first=0;
+
+        parent[root]=0;
         for (int i = 1,len=path.size(); i <= len - 1; ++i)
-        {
-            treeP[path[i]].first =path[i-1];
-        }
+            parent[path[i]] =path[i-1];
+
 
         //Make Tree Matrix
-        treeMatrix= vector<vector<int>>(N+1);
-        depth=vector<int>(N+1,-1);
-       
+        treeAdj= vector<vector<int>>(N+1);
         for (int i = 1; i <= N; ++i)
-        {
-            treeMatrix[treeP[i].first].push_back(i);
-        }
+            treeAdj[parent[i]].push_back(i);
+        
+
+        // for (int i = 1; i <= N; ++i)
+        // {
+        //     for (int j = 0,len=treeAdj[i].size(); j <= len-1; ++j)
+        //     {
+        //         cout << i << " " << treeAdj[i][j] << "\n";
+        //     }
+        // }
+        // cout << "\n";
 
         //fill mainPath
         curr =A;
@@ -123,26 +103,83 @@ class solution
         while (true)
         {
             mainPath.push_back(curr);
-            curr = treeP[curr].first;
+            curr = parent[curr];
             if(curr==0)
                 break;
         }           
-        mainPath.pop_back();
+        //mainPath.pop_back();
 
         for (int i = 0,len=mainPath.size(); i <= len - 1; ++i)
-        {
             isMainPath[mainPath[i]]=1;
-        }
-
-        for (int i = 0,len=mainPath.size(); i <= len - 1; ++i)
+        
+        
+        dp = vector<ill>(mainPath.size() , INF);
+        dp[0]=0;
+        multiset<ill> st; 
+        st.insert(0);
+        for (int i = 1,len=mainPath.size(); i <= len - 1; ++i)
         {
-            dfsNode(mainPath[i],mainPath[i],0);
+            if (st.empty()) 
+                break;
+
+            int curr=mainPath[i];
+            //branch.clear();
+            branch.assign(1,0);
+            dfsNode(curr,curr,0);
+            
+            if(cost[curr]>0)
+            {
+                dp[i] = *st.begin() + cost[curr]*1LL;
+                st.insert(dp[i]);
+            }
+
+            for (int d=1;d <=M-1 && i-d>=0;++d)
+            {
+                if((int)branch.size()-1>=d)
+                {
+                    int replaceId = branch[d];
+                    if(cost[replaceId]==0)
+                        continue;
+
+                    for (int k = 1; k <= M-d; ++k)  //从i-1 到 i-(M-d)找最小值
+                    {
+                        if(i-k<0)
+                            break;
+
+                        if(dp[i-k]==INF)
+                            continue;
+
+                        ill replaceValue = dp[i - k] + cost[replaceId]*1LL;
+                        if(replaceValue < dp[i - d])
+                        {
+                            if(dp[i - d] !=INF)
+                            {
+                                auto it = st.find(dp[i - d]);
+                                if (it != st.end())
+                                    st.erase(it);
+                            }
+                            dp[i - d] = replaceValue;
+                            st.insert(replaceValue);
+                        }                        
+                    }
+                }
+            }
+
+            if (i >= M && dp[i - M] != INF) 
+            {
+                auto it=st.find(dp[i - M]);
+                 if (it != st.end())
+                    st.erase(it);
+            }            
         }
 
-        //dfs(root,0);
-        depth[root]=0;
-        //dfsMainPath(mainPath.back(),root,0);
+        auto begin = dp.begin();
+        if (M < (int)dp.size() - 1)
+            begin = dp.end() - 1 - M;
 
+        ill ans = *min_element(begin,dp.end());
+        cout << "Case #" << T << ": " << (ans == INF ? -1 : ans) << "\n";
+        //cout << "Case #" << T <<": " << (ans==INF?-1:ans) << "  (" << N <<")\n";
         return;
     }
 };
@@ -153,7 +190,7 @@ int main()
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
-    freopen("D2.in", "r", stdin);
+    freopen("D2.txt", "r", stdin);
     freopen("D2.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
