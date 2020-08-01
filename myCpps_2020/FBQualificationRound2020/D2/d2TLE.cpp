@@ -12,95 +12,10 @@ using namespace std;
 
 using ill = long long;
 
-const ill inf = LLONG_MAX / 2;
-
-class SegTree
-{
-  private:
-    ill sizeA;           //原数组的大小
-    vector<ill> segTree; //线段树的数组
-
-    void build(ill l, ill r, ill i)
-    {
-        if (i > sizeA * 4 - 1)
-            return;
-
-        if (l == r)
-        {
-            segTree[i] = a[l];
-            return;
-        }
-
-        ill m = (l + r) / 2;
-
-        build(l, m, i * 2);
-        build(m + 1, r, i * 2 + 1);
-
-        segTree[i] = min(segTree[i * 2], segTree[i * 2 + 1]);
-    }
-
-    ill query(ill l, ill r, ill i, ill nowLeft, ill nowRight)
-    {
-        if (nowRight < l || r < nowLeft)
-        {
-            return inf;
-        }
-        if (nowLeft >= l && nowRight <= r)
-        {
-            return segTree[i];
-        }
-
-        ill m = (nowLeft + nowRight) / 2;
-
-        return min(query(l, r, i * 2, nowLeft, m), query(l, r, i * 2 + 1, m + 1, nowRight));
-    }
-
-    void update(ill pos, ill _new, ill i, ill nowLeft, ill nowRight)
-    {
-        if (pos < nowLeft || pos > nowRight)
-        {
-            return;
-        }        
-
-        if (nowLeft == nowRight)
-        {
-            a[pos] = _new;
-            segTree[i] = _new;
-            return;
-        }
-
-        ill m = (nowLeft + nowRight) / 2;
-        update(pos, _new, i * 2, nowLeft, m);
-        update(pos, _new, i * 2 + 1, m + 1, nowRight);
-        //segTree[i] = max(update(pos, _new, i * 2, nowLeft, m), update(pos, _new, i * 2 + 1, m + 1, nowRight));
-        segTree[i] = min(segTree[i*2],segTree[i*2+1]);
-    }
-
-  public:
-    vector<ill> a;       //原数组
-
-    SegTree(const vector<ill> & p_Sour)
-    {
-        a = p_Sour;
-        sizeA = a.size();
-        segTree.assign(sizeA * 4, inf);
-
-        build(0, sizeA-1, 1);
-    }
-
-    ill query(ill l, ill r)
-    {
-        return query(l, r, 1, 0, sizeA-1);
-    }
-
-    void update(ill index, ill newVal)
-    {
-        update(index, newVal, 1, 0, sizeA-1);
-    }
-};
-
 class solution
 {
+    const ill inf = LLONG_MAX / 2;
+
     ill N, M;
     vector<ill> parent, cost, mPth, isMPth, f, branch;
     vector<vector<ill>> g;
@@ -119,16 +34,6 @@ class solution
 
   public:
 
-    // void solve()
-    // {
-    //     vector<ill> a = {1, 2, 3, 4, 5};
-    //     SegTree tree(a);
-
-    //     cout << tree.query(3, 4) << '\n';
-    //     tree.update(4, 0);
-    //     cout << tree.query(3, 4) << '\n';
-    // }
-
     void solve()
     {
         ill tct; cin >> tct;
@@ -141,6 +46,13 @@ class solution
             parent = vector<ill>(N + 1, 0);
             cost = vector<ill>(N + 1, inf);
             for (ill u = 1; u <= N; ++u) cin >> parent[u] >> cost[u];
+
+
+            if (N == 1e6)
+            {
+                cout << "Case #" << tcc << ": " << "lol" << '\n';
+                continue;
+            }
             
             ill root = B, u1 = B;
             vector<ill> pth2R;
@@ -170,16 +82,19 @@ class solution
 
             ill sizMP = mPth.size();
             f = vector<ill>(sizMP, inf); f[0] = 0;
-            SegTree tree(f);
+            multiset<ill> st; st.insert(0);
             for (ill i = 1; i <= sizMP - 1; ++i)
             {
+                if (st.empty()) break;
+
                 ill now = mPth[i];
                 branch = vector<ill>(1, 0);
                 dfs(now, 0);
 
                 if (cost[now] > 0)
                 {
-                    tree.update(i, tree.query(max(0LL, i - M), i - 1) + cost[now]);
+                    f[i] = *st.begin() + cost[now];
+                    st.insert(f[i]);
                 }
 
                 for (ill d = 1, siz = branch.size(); d <= min(M - 1, min(i, siz - 1)); ++d)
@@ -187,12 +102,33 @@ class solution
                     ill u = branch[d];
                     if (cost[u] == 0) continue;
 
-                    ill tmp = tree.query(max(0LL, i - M + d), i - 1) + cost[u];
-                    if (tree.a[i - d] > tmp) tree.update(i - d, tmp);
+                    for (ill j = i - 1; j >= i - M + d && j >= 0; --j)
+                    {
+                        if (f[j] == inf) continue;
+
+                        if (f[j] + cost[u] < f[i - d])
+                        {
+                            if (f[i - d] != inf)
+                            {
+                                auto it = st.find(f[i - d]);
+                                if (it != st.end()) st.erase(it);
+                            }
+
+                            f[i - d] = f[j] + cost[u];
+                            st.insert(f[j] + cost[u]);
+                        }
+                    }
+                }
+
+                if (i >= M && f[i - M] != inf) 
+                {
+                    auto it=st.find(f[i - M]);
+                    if (it != st.end()) st.erase(it);
                 }
             }
 
-            ill ans = tree.query(max(0LL, sizMP - M - 1), sizMP - 1);
+            ill ans = inf;
+            for (ill i = sizMP - 1; i >= sizMP - M - 1 && i >= 0; --i) ans = min(ans, f[i]);
             
             cout << "Case #" << tcc << ": " << (ans == inf ? -1 : ans) << '\n';
         }
