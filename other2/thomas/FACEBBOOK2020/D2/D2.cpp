@@ -206,12 +206,12 @@ class solution
 
     int N,M;
 
-    void dfsNode(int curr,int p,int depth)
+    void dfsNode(int curr,int depth)
     {
         if(depth>=M)
             return;
         
-        if(depth>0 && curr !=p)
+        if(depth>0)
         {
             if((int)branch.size()<=depth)
                 branch.push_back(curr);
@@ -222,7 +222,7 @@ class solution
         for (int i = 0,len=treeAdj[curr].size(); i <= len - 1; ++i)
         {
             if(isMainPath[treeAdj[curr][i]]==0)
-                dfsNode(treeAdj[curr][i],p,depth+1);
+                dfsNode(treeAdj[curr][i],depth+1);
         }
     }
 
@@ -302,7 +302,7 @@ class solution
             int curr=mainPath[i];
             //branch.clear();
             branch.assign(1,0);
-            dfsNode(curr,curr,0);
+            dfsNode(curr,0);
             
             if(cost[curr]>0)
             {
