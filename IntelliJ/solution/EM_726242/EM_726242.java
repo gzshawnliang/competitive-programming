@@ -101,6 +101,7 @@ class EM_726242_Solution
         var aa=new int[10];
         aa[9]=3;
 
+
         out.print('\n');
 
         final var myList=new ArrayList<ArrayList<Integer>>() ;
