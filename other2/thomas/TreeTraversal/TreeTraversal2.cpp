@@ -45,6 +45,23 @@ class BinaryTreeTraversal
         }
     }
 
+    void inOrder(int  p)
+    {
+        if (p > 0)
+        {
+            if((int)tree[p].size()>0)
+            {
+                postOrder(tree[p][0]);
+            }
+            cout << setw(2) << p << " ";
+            
+            for (int i = 1,len=tree[p].size(); i <= len - 1; ++i)
+            {
+                postOrder(tree[p][i]);
+            }
+        }
+    }
+
     void postOrder(int p)
     {
         if (p > 0)
@@ -91,9 +108,9 @@ int main()
     biTree.preOrder(1);
     cout << "\n";
 
-    // cout << setw(15) << "inOrder: ";
-    // biTree.inOrder(&root);
-    // cout << "\n";
+    cout << setw(15) << "inOrder: ";
+    biTree.inOrder(1);
+    cout << "\n";
 
     cout << setw(15) << "postOrder: ";
     biTree.postOrder(1);
