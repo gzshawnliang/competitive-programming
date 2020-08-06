@@ -1,5 +1,8 @@
 @if not defined _echo echo off
 
+rem %APPDATA%\Code\User
+rem %USERPROFILE%\.vscode\extensions
+
 rem Clean java the workspace directory
 echo checking java workspace Storage
 rem for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*redhat.java"') do rmdir /Q /S %%G && echo %%G deleted!
