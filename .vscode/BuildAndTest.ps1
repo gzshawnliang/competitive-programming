@@ -517,8 +517,8 @@ function BuildCppAndRun($SourceFileName) {
             # else {
             #     Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
             # }
-
-            Write-Host "now run `"$($ExeFile.BaseName + $ExeFile.Extension)`""
+            $time = "{0:yyyy/MM/dd} {0:HH:mm:ss}" -f (Get-Date) 
+            Write-Host "$time now run `"$($ExeFile.BaseName + $ExeFile.Extension)`""
             
             New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
