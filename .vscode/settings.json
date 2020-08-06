@@ -170,5 +170,6 @@
     "editor.formatOnType": false,
     "C_Cpp.default.cppStandard": "c++17",
     "telemetry.enableTelemetry": false,
-    "files.defaultLanguage": "cpp"
+    "files.defaultLanguage": "cpp",
+    "explorer.compactFolders": false
 }
