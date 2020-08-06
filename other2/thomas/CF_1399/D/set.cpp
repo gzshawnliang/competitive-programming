@@ -19,7 +19,6 @@ class solution
 
     void solve()
     {
-
         multiset<int> a;
         a.insert(10);
         a.insert(30);
