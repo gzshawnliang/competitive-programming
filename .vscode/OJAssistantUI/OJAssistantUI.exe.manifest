@@ -4,7 +4,7 @@
   <description asmv2:iconFile="App.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="OJAssistantUI" version="20.8.6.1" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="OJAssistantUI" version="20.8.7.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="OJAssistantUI.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -68,13 +68,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OJAssistantUI.exe" size="128944">
-      <assemblyIdentity name="OJAssistantUI" version="20.8.6.1" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="OJAssistantUI" version="20.8.7.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0k3s+3zztO1ftV29VDBNRm7ROVxyHfr5Al6oPazRjWI=</dsig:DigestValue>
+        <dsig:DigestValue>PlmWFN1+Dr1xh9NtJ0ng8zJFp41ShrxVjZMbDXgd94Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -1555,7 +1555,7 @@ namespace OJAssistantUI
             if (!System.IO.File.Exists(vsCodeExe))
                 vsCodeExe = "code";
 
-            System.Diagnostics.Process.Start(vsCodeExe, $"\"{codeFile}\"");
+            System.Diagnostics.Process.Start(vsCodeExe, $"--reuse-window \"{codeFile}\"");
         }
         
 
