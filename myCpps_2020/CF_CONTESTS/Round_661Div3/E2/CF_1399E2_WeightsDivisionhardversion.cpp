@@ -38,15 +38,15 @@ using ill = long long;
 
 class solution
 {
-    vector<int> mtime;
-    vector<vector<pair<int, int>>> g;
+    vector<ill> mtime;
+    vector<vector<pair<ill, ill>>> g;
 
-    void dfs(int u, int las)
+    void dfs(ill u, ill las)
     {
         bool flg = true;
         for (auto e:g[u])
         {
-            int v = e.first, w = e.second;
+            ill v = e.first, w = e.second;
             if (v == las) continue;
 
             dfs(v, u);
@@ -63,19 +63,19 @@ class solution
 
     struct edge
     {
-        int u;
-        int v;
-        int w;
+        ill u;
+        ill v;
+        ill w;
     };
 
     struct line
     {
-        int w;
-        int t;
+        ill w;
+        ill t;
 
         bool operator<(const line & tmp) const
         {
-            int dv1 = (w - w / 2) * t, dv2 = (tmp.w - tmp.w / 2) * tmp.t;
+            ill dv1 = (w - w / 2) * t, dv2 = (tmp.w - tmp.w / 2) * tmp.t;
             
             return dv1 < dv2;
         };
@@ -84,17 +84,17 @@ class solution
   public:
     void solve()
     {
-        int tct; cin >> tct;
-        for (int tcc = 1; tcc <= tct; ++tcc)
+        ill tct; cin >> tct;
+        for (ill tcc = 1; tcc <= tct; ++tcc)
         {
-            int N, S; cin >> N >> S;
+            ill N, S; cin >> N >> S;
             
-            mtime = vector<int>(N + 1, 0);
-            g = vector<vector<pair<int, int>>>(N + 1);
+            mtime = vector<ill>(N + 1, 0);
+            g = vector<vector<pair<ill, ill>>>(N + 1);
             vector<edge> allE1, allE2;
-            for (int c = 1; c <= N - 1; ++c)
+            for (ill c = 1; c <= N - 1; ++c)
             {
-                int u, v, w, cst; cin >> u >> v >> w >> cst;
+                ill u, v, w, cst; cin >> u >> v >> w >> cst;
                 g[u].push_back({v, w});
                 g[v].push_back({u, w});
 
@@ -105,7 +105,7 @@ class solution
 
             dfs(1, 0);
 
-            int tolW = 0;
+            ill tolW = 0;
             priority_queue<line> lnn1, lnn2;
             for (auto e:allE1)
             {
@@ -128,14 +128,39 @@ class solution
                 return (l.w - l.w / 2) * l.t;
             };
 
-            int ans = 0;
+            ill ans = 0;
             while (tolW > S)
             {
+                if (ans == 8)
+                {
+                    for (int __s = 0; __s == 0; ++__s);
+                }
+
+                if (!lnn1.empty())
+                {
+                    line now = lnn1.top();
+                    if (tolW - cnr(now) <= S)
+                    {
+                        ++ans;
+                        break;
+                    }
+                }
+
+                if (!lnn2.empty())
+                {
+                    line now = lnn2.top();
+                    if (tolW - cnr(now) <= S)
+                    {
+                        ans += 2;
+                        break;
+                    }
+                }
+
                 if (lnn1.empty())
                 {
                     line now = lnn2.top(); lnn2.pop();
 
-                    tolW -= (now.w - now.w / 2) * now.t;
+                    tolW -= cnr(now);
                     ans += 2;
 
                     now.w /= 2;
@@ -148,7 +173,7 @@ class solution
                 {
                     line now = lnn1.top(); lnn1.pop();
 
-                    tolW -= (now.w - now.w / 2) * now.t;
+                    tolW -= cnr(now);
                     ++ans;
 
                     now.w /= 2;
@@ -160,49 +185,69 @@ class solution
                 else
                 {
                     line now1E1 = lnn1.top();
+                    lnn1.pop();
+                    
+                    line hlfnow1E1 = {now1E1.w / 2, now1E1.t};
+                    
+                    line now2E1 = hlfnow1E1;
+                    if (lnn1.empty() == false)
+                        if (now2E1 < lnn1.top()) now2E1 = lnn1.top();
+                    //lnn1.push(now1E1);
 
-                    if (tolW - cnr(now1E1) <= S)
+                    line nowE2 = lnn2.top();
+
+                    int cnr_now1E1 = cnr(now1E1),
+                        cnr_now2E1 = cnr(now2E1),
+                        cnr_nowE2 = cnr(nowE2);
+
+                    if (cnr(now1E1) + cnr(now2E1) > cnr(nowE2))
                     {
+                        //lnn1.pop();
+                        if (hlfnow1E1.w > 0) lnn1.push(hlfnow1E1);
+
+                        // lnn1.pop();
+                        // line hlfnow2E1 = {now2E1.w / 2, now2E1.t};
+                        // lnn1.push(hlfnow2E1);
+
+                        // tolW -= cnr(now1E1) + cnr(now2E1);
+                        tolW -= cnr(now1E1);
+
                         ++ans;
-                        break;
                     }
-
-                    if (lnn1.size() >= 1)
+                    else
                     {
-                        lnn1.pop();
-                        
-                        line hlfnow1E1 = {now1E1.w / 2, now1E1.t};
-                        
-                        line now2E1 = hlfnow1E1;
-                        if (lnn1.empty() == false)
-                            if (now2E1 < lnn1.top()) now2E1 = lnn1.top();
                         lnn1.push(now1E1);
 
-                        line nowE2 = lnn2.top();
+                        lnn2.pop();
+                        line hlfnowE2 = {nowE2.w / 2, nowE2.t};
+                        if (hlfnowE2.w > 0) lnn2.push(hlfnowE2);
 
-                        if (cnr(now1E1) + cnr(now2E1) > cnr(nowE2))
-                        {
-                            lnn1.pop();
-                            lnn1.push(hlfnow1E1);
-
-                            lnn1.pop();
-                            line hlfnow2E1 = {now2E1.w / 2, now2E1.t};
-                            lnn1.push(hlfnow2E1);
-
-                            tolW -= cnr(now1E1) + cnr(now2E1);
-                        }
-                        else
-                        {
-                            lnn2.pop();
-                            line hlfnowE2 = {nowE2.w / 2, nowE2.t};
-                            lnn2.push(hlfnowE2);
-
-                            tolW -= cnr(nowE2);
-                        }
+                        tolW -= cnr(nowE2);
 
                         ans += 2;
                     }
                 }
+
+                // priority_queue tmp1 = lnn1, tmp2 = lnn2;
+                // cout << "Q1:";
+                // while (!tmp1.empty())
+                // {
+                //     cout << " (" << tmp1.top().w << ',' << tmp1.top().t << ')';
+                //     tmp1.pop();
+                // }
+                // cout << '\n';
+
+                // cout << "Q2:";
+                // while (!tmp2.empty())
+                // {
+                //     cout << " (" << tmp2.top().w << ',' << tmp2.top().t << ')';
+                //     tmp2.pop();
+                // }
+                // cout << '\n';
+
+                // cout << "Ans: " << ans << '\n';
+                // cout << "Remaining: " << tolW << '\n';
+                // cout << "----------------------------------------------\n";
             }
 
             cout << ans << '\n';
@@ -210,7 +255,7 @@ class solution
     }
 };
 
-int main()
+signed main()
 {
     ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
