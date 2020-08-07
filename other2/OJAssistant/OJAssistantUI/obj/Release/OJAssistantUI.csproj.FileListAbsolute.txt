@@ -52,7 +52,6 @@ C:\Users\thomas\Documents\codes\competitive-programming\src\other2\OJAssistant\O
 C:\Users\thomas\Documents\codes\competitive-programming\src\other2\OJAssistant\OJAssistantUI\bin\Release\HtmlAgilityPack.pdb
 C:\Users\thomas\Documents\codes\competitive-programming\src\other2\OJAssistant\OJAssistantUI\bin\Release\HtmlAgilityPack.xml
 C:\Users\thomas\Documents\codes\competitive-programming\src\other2\OJAssistant\OJAssistantUI\bin\Release\Newtonsoft.Json.xml
-C:\Users\thomas\Documents\codes\competitive-programming\src\other2\OJAssistant\OJAssistantUI\obj\Release\OJAssistantUI.csprojAssemblyReference.cache
 C:\Users\thomas\Documents\codes\competitive-programming\src\other2\OJAssistant\OJAssistantUI\obj\Release\OJAssistantUI.frmOJAssistant.resources
 C:\Users\thomas\Documents\codes\competitive-programming\src\other2\OJAssistant\OJAssistantUI\obj\Release\OJAssistantUI.Properties.Resources.resources
 C:\Users\thomas\Documents\codes\competitive-programming\src\other2\OJAssistant\OJAssistantUI\obj\Release\OJAssistantUI.csproj.GenerateResource.cache
