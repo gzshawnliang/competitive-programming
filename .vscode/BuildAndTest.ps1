@@ -479,7 +479,7 @@ function BuildCppAndRun($SourceFileName) {
         Set-Location -Path $ExeFile.DirectoryName 
 
         if ($DoTest.IsPresent) {
-            Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
+            Write-Host "Launching $($ExeFile.BaseName + $ExeFile.Extension)"
             RunTest($exeFileName)
         }
         else {
@@ -512,13 +512,13 @@ function BuildCppAndRun($SourceFileName) {
             #     $isRedirectStdInOut = $true
             #     $inFileObj = Get-Item -Path $currInFile
             #     $currOutFile = $inFileObj.DirectoryName + "\" + $inFileObj.BaseName + ".out"
-            #     Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension) redirecting $($inFileObj.BaseName).in and $($inFileObj.BaseName).out into Stdin and Stdout"
+            #     Write-Host "Launching $($ExeFile.BaseName + $ExeFile.Extension) redirecting $($inFileObj.BaseName).in and $($inFileObj.BaseName).out into Stdin and Stdout"
             # }
             # else {
-            #     Write-Host "now run $($ExeFile.BaseName + $ExeFile.Extension)"
+            #     Write-Host "Launching $($ExeFile.BaseName + $ExeFile.Extension)"
             # }
             $time = "{0:yyyy/MM/dd} {0:HH:mm:ss}" -f (Get-Date) 
-            Write-Host "$time now run `"$($ExeFile.BaseName + $ExeFile.Extension)`""
+            Write-Host "$time Launching `"$($ExeFile.BaseName + $ExeFile.Extension)`""
             
             New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
@@ -658,7 +658,7 @@ function BuildJavaAndRun($SourceFileName) {
             RunTest($exeFileName)
         }
         else {
-            # Write-Host "now run $($FirstClassFile.BaseName + $FirstClassFile.Extension):   " -NoNewline
+            # Write-Host "Launching $($FirstClassFile.BaseName + $FirstClassFile.Extension):   " -NoNewline
             # New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe
             # 可现实显示终端，实现cin输入，计算运行时间有些误差。可有进程返回值"
