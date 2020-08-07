@@ -30,7 +30,6 @@ class solution
         a.erase(it);
 
         std::priority_queue<int> mypq;
-
         mypq.push(10);
         mypq.push(20);
         mypq.push(15);
