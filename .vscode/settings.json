@@ -171,5 +171,6 @@
     "C_Cpp.default.cppStandard": "c++17",
     "telemetry.enableTelemetry": false,
     "files.defaultLanguage": "cpp",
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false
 }
