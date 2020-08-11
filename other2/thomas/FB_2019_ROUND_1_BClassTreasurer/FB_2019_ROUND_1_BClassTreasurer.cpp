@@ -63,7 +63,6 @@ class solution
                 ++d;
             }
             
-            
             if(d>K)
             {
                 pay.push_back(i);
