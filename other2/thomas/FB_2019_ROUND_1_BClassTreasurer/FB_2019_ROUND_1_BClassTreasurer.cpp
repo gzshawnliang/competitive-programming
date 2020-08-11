@@ -43,14 +43,17 @@ class solution
     {
         int N,K;
         cin >> N >> K;
+        
         vector<char> a(N+1);
-        vector<int> pay;
-
         cin.get();
-        int d=0;
         for (int i = 1; i <= N; ++i)
             cin.get(a[i]);
+        // string c;
+        // cin >> c;
+        // string a=' '+c;
 
+        vector<int> pay;
+        int d=0;
         for (int i = N; i >= 1; --i)
         {
             if(a[i]=='A')
