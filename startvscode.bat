@@ -3,11 +3,13 @@
 rem %APPDATA%\Code\User
 rem %USERPROFILE%\.vscode\extensions
 
+rem vc++ directory
+rem C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC
+
 rem Clean java the workspace directory
 echo checking java workspace Storage
-rem for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*redhat.java"') do rmdir /Q /S %%G && echo %%G deleted!
-for /f "tokens=*" %%G in ('dir /b /s /a:d "../usersetting/User/workspaceStorage/*redhat.java"') do rmdir /Q /S %%G && echo %%G deleted!
-rem for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*vscjava.vscode-java-test"') do rmdir /Q /S %%G
+for /f "tokens=*" %%G in ('dir /b /s /a:d "%APPDATA%\Code\User\workspaceStorage\*redhat.java"') do rmdir /Q /S %%G && echo %%G deleted!
+rem for /f "tokens=*" %%G in ('dir /b /s /a:d "../usersetting/User/workspaceStorage/*redhat.java"') do rmdir /Q /S %%G && echo %%G deleted!
 
 rem set language to english set VSLANG=1033
 set VSLANG=1033
