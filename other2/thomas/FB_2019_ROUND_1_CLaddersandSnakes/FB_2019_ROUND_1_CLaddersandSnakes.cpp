@@ -21,7 +21,6 @@ class solution
   public:
     void solve(int t)
     {
-        int ans = 0;
         int N, H;
         cin >> N >> H;
         vector<tuple<int, int, int>> ladder(N + 1);
@@ -39,25 +38,24 @@ class solution
         int s = 0;
         int e = N + 1;
 
-        auto min3 = [](int a, int b, int c) 
-        {
+        auto min3 = [](int a, int b, int c) {
             int r = min(a, b);
             r = min(r, c);
             return r;
         };
 
         //建图
-        g = vector<vector<int>>(N + 2, vector<int>(N + 2,-1));
-        for (int i = 1; i <= N - 1; ++i)
+        g = vector<vector<int>>(N + 2, vector<int>(N + 2, -1));
+        for (int i = 1; i <= N; ++i)
         {
             auto [x1, a1, b1] = ladder[i];
-            if(a1==0)
-                g[s][i] =INF;
-            
-            if(b1==H)
-                g[i][e] =INF;            
+            if (a1 == 0)
+                g[s][i] = INF;
 
-                /*
+            if (b1 == H)
+                g[i][e] = INF;
+
+            /*
                 情况1       情况2       情况3       情况4           情况5
                     b2          b2      b1         b1                       b2
                     |           |       |   b2      |                       |
@@ -72,12 +70,11 @@ class solution
                                                             a2      a1
                 */
 
-
             int next = i + 1;
             while (next <= N && b1 - a1 > 0)
             {
                 auto [x2, a2, b2] = ladder[next];
-                if (a1 > b2 || b1 < a2)          //情况4,情况5
+                if (a1 > b2 || b1 < a2) //情况4,情况5
                 {
                     //do nothing
                 }
@@ -86,7 +83,7 @@ class solution
                     g[i][next] = min3(b1 - a2, b1 - a1, b2 - a1);
                     g[next][i] = g[i][next];
 
-                    if (g[i][next] == b1 - a2)      //情况2
+                    if (g[i][next] == b1 - a2) //情况2
                     {
                         b1 = a2;
                     }
@@ -104,6 +101,8 @@ class solution
             }
         }
 
+        int ans = 0;
+        //int ans = maxflow(s,t);
         cout << "Case #" << t << ": " << ans << "\n";
         return;
     }
