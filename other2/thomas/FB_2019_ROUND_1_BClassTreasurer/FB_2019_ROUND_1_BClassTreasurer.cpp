@@ -64,8 +64,8 @@ class solution
 
             if (d >= K)
             {
-                //此刻i的位置转成A
-                pay.push_back(i);
+                //此刻i的位置是B，并且B的数量超过A是K个，必须转成A
+                pay.push_back(i);       //记录转成A的位置，不用真正转成A
                 --d;
                 d = max(0, d);
                 continue;
@@ -76,9 +76,8 @@ class solution
 
         ill ans = 0;
         for (int i = 0, len = pay.size(); i <= len - 1; ++i)
-        {
             ans = (ans % mod + pow2[pay[i]] % mod) % mod;
-        }
+
         cout << "Case #" << t << ": " << ans << "\n";
         return;
     }
