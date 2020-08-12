@@ -14,6 +14,130 @@ using ill = long long;
 
 const int INF = INT_MAX;
 
+
+
+class Dinic
+{
+  private:
+    vector<vector<int>> levelGraph;
+
+    int n; //图的顶点数
+    int s; //源点
+    int t; //汇点
+
+    //dfs代表一次增广,函数返回本次增广的流量,返回0表示无法增广
+    int dfs(int curr, int flow, const vector<int> & level)
+    {
+        if (curr == t)
+        {
+            return flow;
+        }
+
+        for (int i = 1; i <= n; ++i)
+        {
+            if (levelGraph[curr][i] > 0         //联通
+                && level[i] == level[curr] + 1) //是分层图的下一层
+            {
+                int minflow = min(flow, levelGraph[curr][i]);
+
+                int result = dfs(i, minflow, level);
+                if (result > 0)         //能到汇点result > 0
+                {
+                    //回溯时候更改路径上的正向流和反向流
+                    levelGraph[curr][i] -= result;
+                    levelGraph[i][curr] += result;
+                    return result;
+                }
+            }
+        }
+        return 0;
+    }
+
+    bool bfs_CreateLevelGraph(vector<int> & level)
+    {
+        level[s] = 0;
+        queue<int> q;
+        q.push(s);
+
+        while (!q.empty())
+        {
+            int cur = q.front();
+            q.pop();
+
+            for (int next = 1; next <= n; ++next)
+            {
+                if (levelGraph[cur][next] > 0       //若该残量不为0
+                    && level[next] < 0              //next还未分配层次
+                )
+                {
+                    level[next] = level[cur] + 1;
+                    q.push(next);
+                }
+            }
+        }
+        if (level[t] > 0)
+            return true;
+        else
+            return false;//汇点的level小于零,表明BFS不到汇点
+    }
+
+  public:
+    Dinic(vector<vector<int>> & sourGraph, int size1)
+    {
+        levelGraph = sourGraph;
+        this->n = size1;
+    }
+
+    int Maxflow(int s, int t)
+    {
+        this->s = s;
+        this->t = t;
+
+        int totalFlow = 0;
+
+        while (true)
+        {
+            //第i个节点的层次数组
+            vector<int> level(n + 1, -1);
+
+            //建立分层网络，无法到汇点停止
+            bool result = bfs_CreateLevelGraph(level);
+            if (result == false)
+            {
+                //分层网络无法到汇点
+                break;
+            }
+
+            //dfs深度搜索寻找增广路，找不到停止循环
+            int inf=INF;
+            while (true)
+            {
+                int new_flow = dfs(s, inf, level);
+                if (new_flow == 0)
+                {
+                    //找不到增广路退出
+                    break;
+                }
+                else if(new_flow==INF)
+                {
+                    totalFlow = INF;
+                }
+                else
+                {
+                    totalFlow += new_flow;
+                }
+                //cout << new_flow << " ";
+            }
+            if(totalFlow==INF)
+                break;
+        }
+
+        return totalFlow;
+    }
+};
+
+
+
 class solution
 {
     vector<vector<int>> g;
@@ -23,20 +147,20 @@ class solution
     {
         int N, H;
         cin >> N >> H;
-        vector<tuple<int, int, int>> ladder(N + 1);
-        for (int i = 1; i <= N; ++i)
+        vector<tuple<int, int, int>> ladder(N + 2);
+        for (int i = 2; i <= N+1; ++i)
         {
             int x, a, b;
             cin >> x >> a >> b;
             ladder[i] = {x, a, b};
         }
-        sort(ladder.begin() + 1, ladder.end());
+        sort(ladder.begin() + 2, ladder.end());
 
         // for (int i = 1; i <= N; ++i)
         //     get<3>(ladder[i]) = i;
 
-        int s = 0;
-        int e = N + 1;
+        int s = 1;
+        int e = N + 2;
 
         auto min3 = [](int a, int b, int c) {
             int r = min(a, b);
@@ -45,8 +169,8 @@ class solution
         };
 
         //建图
-        g = vector<vector<int>>(N + 2, vector<int>(N + 2, -1));
-        for (int i = 1; i <= N; ++i)
+        g = vector<vector<int>>(N + 3, vector<int>(N + 3, -1));
+        for (int i = 2; i <= N+1; ++i)
         {
             auto [x1, a1, b1] = ladder[i];
             if (a1 == 0)
@@ -71,7 +195,7 @@ class solution
                 */
 
             int next = i + 1;
-            while (next <= N && b1 - a1 > 0)
+            while (next <= N+1 && b1 - a1 > 0)
             {
                 auto [x2, a2, b2] = ladder[next];
                 if (a1 > b2 || b1 < a2) //情况4,情况5
@@ -101,9 +225,13 @@ class solution
             }
         }
 
-        int ans = 0;
+        Dinic Dinic1(g, N+2);
+        int ans = Dinic1.Maxflow(s, e);
+
+
+        //int ans = 0;
         //int ans = maxflow(s,t);
-        cout << "Case #" << t << ": " << ans << "\n";
+        cout << "Case #" << t << ": " << (ans==INF?-1:ans) << "\n";
         return;
     }
 };
