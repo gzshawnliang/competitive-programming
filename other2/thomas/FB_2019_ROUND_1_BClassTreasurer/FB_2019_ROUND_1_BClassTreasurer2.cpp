@@ -21,29 +21,30 @@ using namespace std;
 
 using ill = long long;
 
-const int mod = 1000000007;
+const int mod =1000000007;
 
 class solution
 {
     vector<ill> pow2;
-
   public:
+
     void initPow2()
     {
-        pow2 = vector<ill>(1000000 + 1);
-        pow2[0] = 1;
-        for (int i = 1; i <= 1000000; ++i)
+        pow2=vector<ill>(1000000+1);
+        pow2[0]=1;
+        for (int i = 1; i <= 1000000 ; ++i)
         {
-            pow2[i] = (pow2[i - 1] * 1LL % mod + pow2[i - 1] * 1LL % mod) % mod;
+            pow2[i]=(pow2[i-1]*1LL % mod + pow2[i-1]*1LL % mod ) % mod ;
         }
+
     }
 
     void solve(int t)
     {
-        int N, K;
+        int N,K;
         cin >> N >> K;
-
-        vector<char> a(N + 1);
+        
+        vector<char> a(N+1);
         cin.get();
         for (int i = 1; i <= N; ++i)
             cin.get(a[i]);
@@ -52,26 +53,26 @@ class solution
         // string a=' '+c;
 
         vector<int> pay;
-        int d = 0;
+        int d=0;
         for (int i = N; i >= 1; --i)
         {
-            if (a[i] == 'A')
+            if(a[i]=='A')
             {
                 --d;
-                d = max(0, d);
-                continue;
+                d=max(0,d);
             }
-
-            if (d >= K)
+            else 
             {
-                //此刻i的位置转成A
+                ++d;
+            }
+            
+            if(d>K)
+            {
                 pay.push_back(i);
                 --d;
-                d = max(0, d);
-                continue;
+                --d;
+                d=max(0,d);
             }
-
-            ++d;
         }
 
         ill ans = 0;
@@ -81,6 +82,7 @@ class solution
         }
         cout << "Case #" << t << ": " << ans << "\n";
         return;
+
     }
 };
 
@@ -94,12 +96,12 @@ signed main()
     freopen("FB_2019_ROUND_1_BClassTreasurer.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
-
+    
     int t;
     cin >> t;
     solution sln1;
     sln1.initPow2();
-    for (int i = 1; i <= t; ++i)
+    for (int i = 1; i <= t ; ++i)
         sln1.solve(i);
 
     cout.flush();
