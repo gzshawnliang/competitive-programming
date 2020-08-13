@@ -235,7 +235,7 @@ class solution
                         {
                             b1 = a2;
                         }
-                        else if (shadowLen == b1 - a1) //情况1,不知找下个线段，退出循环
+                        else if (shadowLen == b1 - a1) //情况1,不需要下个线段了，退出循环
                         {
                             break;
                         }
