@@ -144,6 +144,8 @@ class solution
         int N, H;
         cin >> N >> H;
         //起始点是1，终点是N+2，input点从2~N+1
+        int source = 1;
+        int target = N + 2;        
         vector<tuple<int, int, int>> ladder(N + 3);
         for (int i = 2; i <= N + 1; ++i)
         {
@@ -165,9 +167,6 @@ class solution
         //     cout << "\n";
         // }
         // cout << "------------------------\n";
-
-        int source = 1;
-        int target = N + 2;
 
         auto min4 = [](int a, int b, int c, int d) {
             int r = min(a, b);
