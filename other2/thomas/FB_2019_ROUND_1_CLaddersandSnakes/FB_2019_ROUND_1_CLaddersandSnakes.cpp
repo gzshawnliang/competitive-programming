@@ -14,8 +14,6 @@ using ill = long long;
 
 const int INF = INT_MAX;
 
-
-
 class Dinic
 {
   private:
@@ -128,14 +126,13 @@ class Dinic
                 }
                 //cout << new_flow << " ";
             }
-            if(totalFlow==INF)
+            if(totalFlow == INF)
                 break;
         }
 
         return totalFlow;
     }
 };
-
 
 
 class solution
@@ -147,24 +144,35 @@ class solution
     {
         int N, H;
         cin >> N >> H;
-        vector<tuple<int, int, int>> ladder(N + 2);
+        vector<tuple<int, int, int>> ladder(N + 3);
         for (int i = 2; i <= N+1; ++i)
         {
             int x, a, b;
             cin >> x >> a >> b;
             ladder[i] = {x, a, b};
         }
-        sort(ladder.begin() + 2, ladder.end());
+        sort(ladder.begin() + 2, ladder.end()-1);
 
-        // for (int i = 1; i <= N; ++i)
-        //     get<3>(ladder[i]) = i;
+        // for (int i = 2; i <= N+1; ++i)
+        // {
+        //     auto [x, a, b] = ladder[i];
+        //     x *=40;
 
-        int s = 1;
-        int e = N + 2;
+        //     cout << "(" << x << "," << a  << ")\n";
+        //     cout << "(" << x << "," << b  << ")\n";
+        //     cout << i <<". SEGMENT((" << x << "," << a  << "),("<< x << "," << b << "))\n";
+            
+        //     cout << "\n";
+        // }
+        // cout << "------------------------\n";
 
-        auto min3 = [](int a, int b, int c) {
+        int source = 1;
+        int target = N + 2;
+
+        auto min4 = [](int a, int b, int c,int d) {
             int r = min(a, b);
             r = min(r, c);
+            r = min(r, d);
             return r;
         };
 
@@ -172,62 +180,96 @@ class solution
         g = vector<vector<int>>(N + 3, vector<int>(N + 3, -1));
         for (int i = 2; i <= N+1; ++i)
         {
-            auto [x1, a1, b1] = ladder[i];
-            if (a1 == 0)
-                g[s][i] = INF;
+            auto [x1, A1, B1] = ladder[i];
 
-            if (b1 == H)
-                g[i][e] = INF;
+            if (A1 == 0)
+                g[source][i] = INF;
+
+            if (B1 == H)
+                g[i][target] = INF;
 
             /*
-                情况1       情况2       情况3       情况4           情况5
-                    b2          b2      b1         b1                       b2
-                    |           |       |   b2      |                       |
-                b1  |       b1  |       |   |       |                       |
-                |   |       |   |       |   |       |                       |
-                |   |       |   |       a1  |       a1                      a2
-                |   |       |   a2          a2                              
-                a1  |       a1                              b2      b1
-                    a2                                      |       |
-                                                            |       |
-                                                            |       |
-                                                            a2      a1
+                情况1       情况2       情况3       情况4       情况5                情况6
+                    b2          b2      b1         b1               b2          b1      
+                    |           |       |   b2      |               |           |       
+                b1  |       b1  |       |   |       |               |           |   b2
+                |   |       |   |       |   |       |               |           |   |
+                |   |       |   |       a1  |       a1              a2          |   |
+                |   |       |   a2          a2                                  |   |
+                a1  |       a1                          b2    b1                |   a2
+                    a2                                  |     |                 |
+                                                        |     |                 |
+                                                        |     |                 a1
+                                                        a2    a1
                 */
-
-            int next = i + 1;
-            while (next <= N+1 && b1 - a1 > 0)
+            queue<tuple<int,int>> q;
+            q.push({A1,B1});
+            set<int> ignore;
+            while (!q.empty())
             {
-                auto [x2, a2, b2] = ladder[next];
-                if (a1 > b2 || b1 < a2) //情况4,情况5
-                {
-                    //do nothing
-                }
-                else
-                {
-                    g[i][next] = min3(b1 - a2, b1 - a1, b2 - a1);
-                    g[next][i] = g[i][next];
+                auto [a1, b1] = q.front();
+                q.pop();
+                int next = i + 1;
 
-                    if (g[i][next] == b1 - a2) //情况2
+                while (next <= N+1 && b1 - a1 > 0)
+                {
+                    while(ignore.count(next)==1)
+                        ++next;
+                    if(next>N+1)                        
+                        break;
+
+                    auto [x2, a2, b2] = ladder[next];
+                    if (a1 > b2 || b1 < a2) //情况4,情况5
                     {
-                        b1 = a2;
+                        //do nothing
                     }
-                    else if (g[i][next] == b1 - a1) //情况1
+                    else
                     {
-                        a1 = 0;
-                        b1 = 0;
+                        //g[i][next] = min4(b1 - a2, b1 - a1, b2 - a1,b2-a2);
+                        int diff=min4(b1 - a2, b1 - a1, b2 - a1,b2-a2);
+                        if(g[i][next]==-1 )
+                            g[i][next] = diff;
+                        else
+                            g[i][next] += diff;
+
+                        //cout << i << "-" << next << ":" << g[i][next] <<endl;
+                        g[next][i] = g[i][next];
+                        if (diff == b1 - a2) //情况2
+                        {
+                            b1 = a2;
+                        }
+                        else if (diff == b1 - a1) //情况1
+                        {
+                            a1 = 0;
+                            b1 = 0;
+                        }
+                        else if (diff == b2 - a1) //情况3
+                        {
+                            a1 = b2;
+                        }
+                        else if (diff == b2 - a2) //情况6
+                        {
+                            q.push({a1,a2});
+                            q.push({b2,b1});
+                            ignore.insert(next);
+                            break;
+                        }
                     }
-                    else if (g[i][next] == b2 - a1) //情况3
-                    {
-                        a1 = b2;
-                    }
+                    ++next;
                 }
-                ++next;
+                
             }
+            
+
         }
 
-        Dinic Dinic1(g, N+2);
-        int ans = Dinic1.Maxflow(s, e);
+        // for (int i = 1; i <= N+2; ++i)
+        //     for (int j = 1; j <= N+2; ++j)
+        //         if(g[i][j]>=0 && i!=j)
+        //             cout << i << " " << j << " " << g[i][j] << "\n";
 
+        Dinic Dinic1(g, N+2);
+        int ans = Dinic1.Maxflow(1, target);
 
         //int ans = 0;
         //int ans = maxflow(s,t);
@@ -243,8 +285,8 @@ signed main()
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
     freopen("FB_2019_ROUND_1_CLaddersandSnakes.in", "r", stdin);
-    //freopen("FB_2019_ROUND_1_CLaddersandSnakes.out", "w", stdout);
-    auto startTime = std::chrono::high_resolution_clock::now();
+    //freopen("ladders_and_snakes2.out", "w", stdout);
+    freopen("FB_2019_ROUND_1_CLaddersandSnakes.out", "w", stdout);
 #endif
     int t;
     cin >> t;
@@ -253,13 +295,6 @@ signed main()
         sln1.solve(i);
 
     cout.flush();
-
-#ifndef ONLINE_JUDGE
-    auto endTime = std::chrono::high_resolution_clock::now();
-    std::cerr << "Execution time: "
-              << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count()
-              << " ms\n";
-#endif
 
     return 0;
 }
