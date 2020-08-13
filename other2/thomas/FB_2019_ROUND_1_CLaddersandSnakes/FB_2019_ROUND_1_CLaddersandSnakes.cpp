@@ -139,7 +139,7 @@ class solution
     vector<vector<int>> g;
 
   public:
-    void solve(int t)
+    void solve(int caseId)
     {
         int N, H;
         cin >> N >> H;
@@ -236,6 +236,7 @@ class solution
 
                         //cout << i << "-" << next << ":" << g[i][next] <<endl;
                         g[next][i] = g[i][next];
+                        
                         if (diff == b1 - a2) //情况2
                         {
                             b1 = a2;
@@ -270,7 +271,7 @@ class solution
         Dinic Dinic1(g, N + 2);
         int ans = Dinic1.Maxflow(1, target);
 
-        cout << "Case #" << t << ": " << (ans == INF ? -1 : ans) << "\n";
+        cout << "Case #" << caseId << ": " << (ans == INF ? -1 : ans) << "\n";
         return;
     }
 };
