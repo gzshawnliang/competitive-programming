@@ -39,7 +39,7 @@ class Dinic
                 int minflow = min(flow, levelGraph[curr][i]);
 
                 int result = dfs(i, minflow, level);
-                if (result > 0)         //能到汇点result > 0
+                if (result > 0) //能到汇点result > 0
                 {
                     //回溯时候更改路径上的正向流和反向流
                     levelGraph[curr][i] -= result;
@@ -64,8 +64,8 @@ class Dinic
 
             for (int next = 1; next <= n; ++next)
             {
-                if (levelGraph[cur][next] > 0       //若该残量不为0
-                    && level[next] < 0              //next还未分配层次
+                if (levelGraph[cur][next] > 0 //若该残量不为0
+                    && level[next] < 0        //next还未分配层次
                 )
                 {
                     level[next] = level[cur] + 1;
@@ -76,7 +76,7 @@ class Dinic
         if (level[t] > 0)
             return true;
         else
-            return false;//汇点的level小于零,表明BFS不到汇点
+            return false; //汇点的level小于零,表明BFS不到汇点
     }
 
   public:
@@ -107,7 +107,7 @@ class Dinic
             }
 
             //dfs深度搜索寻找增广路，找不到停止循环
-            int inf=INF;
+            int inf = INF;
             while (true)
             {
                 int new_flow = dfs(s, inf, level);
@@ -116,7 +116,7 @@ class Dinic
                     //找不到增广路退出
                     break;
                 }
-                else if(new_flow==INF)
+                else if (new_flow == INF)
                 {
                     totalFlow = INF;
                 }
@@ -126,14 +126,13 @@ class Dinic
                 }
                 //cout << new_flow << " ";
             }
-            if(totalFlow == INF)
+            if (totalFlow == INF)
                 break;
         }
 
         return totalFlow;
     }
 };
-
 
 class solution
 {
@@ -144,14 +143,15 @@ class solution
     {
         int N, H;
         cin >> N >> H;
+        //起始点是1，终点是N+2，input点从2~N+1
         vector<tuple<int, int, int>> ladder(N + 3);
-        for (int i = 2; i <= N+1; ++i)
+        for (int i = 2; i <= N + 1; ++i)
         {
             int x, a, b;
             cin >> x >> a >> b;
             ladder[i] = {x, a, b};
         }
-        sort(ladder.begin() + 2, ladder.end()-1);
+        sort(ladder.begin() + 2, ladder.end() - 1);
 
         // for (int i = 2; i <= N+1; ++i)
         // {
@@ -161,7 +161,7 @@ class solution
         //     cout << "(" << x << "," << a  << ")\n";
         //     cout << "(" << x << "," << b  << ")\n";
         //     cout << i <<". SEGMENT((" << x << "," << a  << "),("<< x << "," << b << "))\n";
-            
+
         //     cout << "\n";
         // }
         // cout << "------------------------\n";
@@ -169,7 +169,7 @@ class solution
         int source = 1;
         int target = N + 2;
 
-        auto min4 = [](int a, int b, int c,int d) {
+        auto min4 = [](int a, int b, int c, int d) {
             int r = min(a, b);
             r = min(r, c);
             r = min(r, d);
@@ -178,7 +178,7 @@ class solution
 
         //建图
         g = vector<vector<int>>(N + 3, vector<int>(N + 3, -1));
-        for (int i = 2; i <= N+1; ++i)
+        for (int i = 2; i <= N + 1; ++i)
         {
             auto [x1, A1, B1] = ladder[i];
 
@@ -201,9 +201,10 @@ class solution
                                                         |     |                 |
                                                         |     |                 a1
                                                         a2    a1
-                */
-            queue<tuple<int,int>> q;
-            q.push({A1,B1});
+            */
+           
+            queue<tuple<int, int>> q;
+            q.push({A1, B1});
             set<int> ignore;
             while (!q.empty())
             {
@@ -211,11 +212,12 @@ class solution
                 q.pop();
                 int next = i + 1;
 
-                while (next <= N+1 && b1 - a1 > 0)
+                while (next <= N + 1 && b1 - a1 > 0)
                 {
-                    while(ignore.count(next)==1)
+                    while (ignore.count(next) == 1)
                         ++next;
-                    if(next>N+1)                        
+
+                    if (next > N + 1)
                         break;
 
                     auto [x2, a2, b2] = ladder[next];
@@ -226,8 +228,9 @@ class solution
                     else
                     {
                         //g[i][next] = min4(b1 - a2, b1 - a1, b2 - a1,b2-a2);
-                        int diff=min4(b1 - a2, b1 - a1, b2 - a1,b2-a2);
-                        if(g[i][next]==-1 )
+                        int diff = min4(b1 - a2, b1 - a1, b2 - a1, b2 - a2);
+
+                        if (g[i][next] == -1)
                             g[i][next] = diff;
                         else
                             g[i][next] += diff;
@@ -249,18 +252,15 @@ class solution
                         }
                         else if (diff == b2 - a2) //情况6
                         {
-                            q.push({a1,a2});
-                            q.push({b2,b1});
+                            q.push({a1, a2});
+                            q.push({b2, b1});
                             ignore.insert(next);
                             break;
                         }
                     }
                     ++next;
                 }
-                
             }
-            
-
         }
 
         // for (int i = 1; i <= N+2; ++i)
@@ -268,12 +268,10 @@ class solution
         //         if(g[i][j]>=0 && i!=j)
         //             cout << i << " " << j << " " << g[i][j] << "\n";
 
-        Dinic Dinic1(g, N+2);
+        Dinic Dinic1(g, N + 2);
         int ans = Dinic1.Maxflow(1, target);
 
-        //int ans = 0;
-        //int ans = maxflow(s,t);
-        cout << "Case #" << t << ": " << (ans==INF?-1:ans) << "\n";
+        cout << "Case #" << t << ": " << (ans == INF ? -1 : ans) << "\n";
         return;
     }
 };
