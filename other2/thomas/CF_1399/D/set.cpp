@@ -55,7 +55,8 @@ int main()
 #ifndef ONLINE_JUDGE
     auto endTime = std::chrono::high_resolution_clock::now();
     std::cerr << "Execution time: "
-              << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count()
+              << std::chron
+              o::duration_cast<std::chrono::milliseconds>(endTime - startTime).count()
               << " ms" << std::endl;
 #endif
 
