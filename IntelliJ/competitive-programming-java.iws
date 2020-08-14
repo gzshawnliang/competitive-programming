@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a58c5a0c-b4c2-4a0f-a8df-9694eedc0010" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/competitive-programming-java.iws" beforeDir="false" afterPath="$PROJECT_DIR$/competitive-programming-java.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution/EM_726242/EM_726242.java" beforeDir="false" afterPath="$PROJECT_DIR$/solution/EM_726242/EM_726242.java" afterDir="false" />
-    </list>
+    <list default="true" id="a58c5a0c-b4c2-4a0f-a8df-9694eedc0010" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
