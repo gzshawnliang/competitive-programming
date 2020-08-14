@@ -134,6 +134,85 @@ class Dinic
     }
 };
 
+class EdmondsKarp
+{
+
+  private:
+    vector<vector<int>> bandwidth;
+    int n;
+
+    int bfs(int s, int t, vector<int> & parent)
+    {
+        //vector<vector<int>> bandwidth = *a;
+        parent[s] = -2;
+        queue<pair<int, int>> q;
+        q.push({s, INF});
+
+        while (!q.empty())
+        {
+            int cur = q.front().first;
+            int flow = q.front().second;
+            q.pop();
+
+            for (int next = 1; next <= n; ++next)
+            {
+                if (parent[next] == -1 && bandwidth[cur][next] > 0 && cur != next)
+                {
+                    parent[next] = cur;
+                    int new_flow = min(flow, bandwidth[cur][next]);
+                    if (next == t)
+                    {
+                        return new_flow;
+                    }
+                    q.push({next, new_flow});
+                }
+            }
+        }
+
+        return 0;
+    }
+
+  public:
+    EdmondsKarp(vector<vector<int>> & sourGraph, int size1)
+    {
+        this->n = size1;
+        this->bandwidth = sourGraph;
+    }
+
+    int Maxflow(int s, int t)
+    {
+        int flow = 0;
+
+        while (true)
+        {
+            vector<int> parent(n + 1, -1);
+            int new_flow = bfs(s, t, parent);
+            if (new_flow == 0)
+            {
+                break;
+            }
+            if (new_flow == INF)
+            {
+                return -1;
+            }            
+            //cout << new_flow << " ";
+            flow += new_flow;
+            int cur = t;
+            while (cur != s)
+            {
+                int prev = parent[cur];
+                bandwidth[prev][cur] -= new_flow;
+                bandwidth[cur][prev] += new_flow;
+                cur = prev;
+            }
+        }
+
+        return flow;
+    }
+};
+
+
+
 class solution
 {
     vector<vector<int>> g;
@@ -261,8 +340,11 @@ class solution
         //         if(g[i][j]>=0 && i!=j)
         //             cout << i << " " << j << " " << g[i][j] << "\n";
 
-        Dinic Dinic1(g, N + 2);
-        int ans = Dinic1.Maxflow(1, target);
+        // Dinic Dinic1(g, N + 2);
+        // int ans = Dinic1.Maxflow(source, target);
+
+        EdmondsKarp EdmondsKarp1(g, N+2);
+        int ans = EdmondsKarp1.Maxflow(source, target);       
 
         cout << "Case #" << caseId << ": " << (ans == INF ? -1 : ans) << "\n";
         return;
@@ -275,7 +357,7 @@ signed main()
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
-    freopen("FB_2019_ROUND_1_CLaddersandSnakes.in", "r", stdin);
+    freopen("ladders_and_snakes.in", "r", stdin);
     //freopen("ladders_and_snakes2.out", "w", stdout);
     freopen("FB_2019_ROUND_1_CLaddersandSnakes.out", "w", stdout);
 #endif

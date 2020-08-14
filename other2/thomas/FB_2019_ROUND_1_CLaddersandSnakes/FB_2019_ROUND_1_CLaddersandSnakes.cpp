@@ -237,20 +237,20 @@ class solution
                         //cout << i << "-" << next << ":" << g[i][next] <<endl;
                         g[next][i] = g[i][next];
                         
-                        if (diff == b1 - a2) //情况2
+                        if (diff == b1 - a2)        //情况2
                         {
                             b1 = a2;
                         }
-                        else if (diff == b1 - a1) //情况1
+                        else if (diff == b1 - a1)   //情况1
                         {
                             a1 = 0;
                             b1 = 0;
                         }
-                        else if (diff == b2 - a1) //情况3
+                        else if (diff == b2 - a1)   //情况3
                         {
                             a1 = b2;
                         }
-                        else if (diff == b2 - a2) //情况6
+                        else if (diff == b2 - a2)   //情况6
                         {
                             q.push({a1, a2});
                             q.push({b2, b1});
