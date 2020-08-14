@@ -59,26 +59,26 @@ class solution
         
         auto compare1 = [](const tuple<ill,ill> & a,const tuple<ill,ill> & b) 
         { 
-            if(get<0>(a) > get<0>(b))
+            if(get<0>(a) < get<0>(b))
             {
                 return true;
             }
             else if(get<0>(a) == get<0>(b))
             {
-                return (get<1>(a) > get<1>(b));
+                return (get<1>(a) < get<1>(b));
             }
             return false;
 
         };
         auto compare2 = [](const tuple<ill,ill> & a,const tuple<ill,ill> & b) 
         { 
-            if(get<1>(a) > get<1>(b))
+            if(get<1>(a) < get<1>(b))
             {
                 return true;
             }
             else if(get<1>(a) == get<1>(b))
             {
-                return (get<0>(a) > get<0>(b));
+                return (get<0>(a) < get<0>(b));
             }
             return false;
         };        
@@ -135,40 +135,50 @@ class solution
             horizontal.push(topV);
             
         }
+
+        while (!horizontal.empty())
+        {
+            horizontal.pop();
+        }
+        while (!vertical.empty())
+        {
+            vertical.pop();
+        }        
+
         //priority_queue<tuple<ill,ill>,vector<tuple<ill,ill>>,decltype(compare1)> horizontal(compare1);
         // priority_queue<tuple<ill,ill>,vector<tuple<ill,ill>>,decltype(compare1)> horizontal(compare1);
         // priority_queue<tuple<ill,ill>,vector<tuple<ill,ill>>,decltype(compare2)> vertical2(compare2);
         //vertical = priority_queue<tuple<ill,ill>,vector<tuple<ill,ill>>,decltype(compare2)>(compare2);
-        // for (ill i = 1; i <= N ; ++i)
-        //     vertical.push(dot[i]);
+
+        for (ill i = 1; i <= N ; ++i)
+            vertical.push(dot[i]);
         
-        // while (true)
-        // {
-        //     if(horizontal.size()<=H && vertical.size()<=V)
-        //         ans=min(ans,getMultisetTopH()+getMultisetTopV());
+        while (true)
+        {
+            if(horizontal.size()<=H && vertical.size()<=V)
+                ans=min(ans,getMultisetTopH()+getMultisetTopV());
             
-        //     //horizontal.size()<H && !vertical.empty()
-        //     if (vertical.empty() || horizontal.size()==H)
-        //         break;
+            //horizontal.size()<H && !vertical.empty()
+            if (vertical.empty() || horizontal.size()==H)
+                break;
 
-        //     auto topV = vertical.top();
-        //     vertical.pop();
-        //     horizontal.push(topV);
-        // }
+            auto topV = vertical.top();
+            vertical.pop();
+            horizontal.push(topV);
+        }
 
-        // while (true)
-        // {
-        //     if(horizontal.size()<=H && vertical.size()<=V)
-        //         ans=min(ans,getMultisetTopH()+getMultisetTopV());
+        while (true)
+        {
+            if(horizontal.size()<=H && vertical.size()<=V)
+                ans=min(ans,getMultisetTopH()+getMultisetTopV());
             
-        //     if (horizontal.empty() || vertical.size()==V)
-        //         break;
+            if (horizontal.empty() || vertical.size()==V)
+                break;
 
-        //     auto topH = horizontal.top();
-        //     horizontal.pop();
-        //     vertical.push(topH);
-            
-        // }        
+            auto topH = horizontal.top();
+            horizontal.pop();
+            vertical.push(topH);
+        }        
 
 
         cout << "Case #" << caseId << ": " << ans << "\n";
