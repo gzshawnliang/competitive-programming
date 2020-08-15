@@ -40,8 +40,11 @@ class solution
             auto [x2, y2] = dot[i - 2];
             auto [x1, y1] = dot[i - 1];
 
-            ill x = ((ax * x2 + bx * x1 + cx) % dx) + 1;
-            ill y = ((ay * y2 + by * y1 + cy) % dy) + 1;
+            // ill x = ((ax % dx * x2 % dx) % dx + (bx % dx * x1 % dx) % dx + cx % dx) % dx + 1;
+            // ill y = ((ay % dy * y2 % dy) % dy + (by % dy * y1 % dy) % dy + cy % dy) % dy + 1;
+            ill x = (ax * x2 + bx * x1  + cx) % dx + 1;
+            ill y = (ay * y2 + by * y1  + cy) % dy + 1;
+
             dot[i] = {x, y};
         }
         sort(dot.begin() + 1, dot.end());
@@ -49,13 +52,13 @@ class solution
         // for (ill i = 1; i <= N ; ++i)
         //     cout<<"(" <<get<0>(dot[i]) << "," << get<1>(dot[i])<<")\n";
 
-        auto checkillersectAndSwap=[](tuple<ill,ill> & dotV,tuple<ill,ill> & dotH)
-        {
-            auto[xH,yH]=dotH;
-            auto[xV,yV]=dotV;
-            if(xV<xH && yV>yH)
-                swap(dotH,dotV);
-        }; 
+        // auto checkillersectAndSwap=[](tuple<ill,ill> & dotV,tuple<ill,ill> & dotH)
+        // {
+        //     auto[xH,yH]=dotH;
+        //     auto[xV,yV]=dotV;
+        //     if(xV<xH && yV>yH)
+        //         swap(dotH,dotV);
+        // }; 
         
         auto compare1 = [](const tuple<ill,ill> & a,const tuple<ill,ill> & b) 
         { 
@@ -109,41 +112,47 @@ class solution
         
         while (true)
         {
-            if(horizontal.size()<=H && vertical.size()<=V)
-                ans=min(ans,getMultisetTopH()+getMultisetTopV());
-            
-            if (horizontal.empty() || vertical.size()==V)
+            if((ill)horizontal.size()<=H && (ill)vertical.size()<=V)
+            {
+                ill temp = getMultisetTopH() + getMultisetTopV();
+                ans = min(ans, temp);
+                cout << ans << ":" << temp << "\n";
+            }
+                
+            if (horizontal.empty() || (ill)vertical.size()==V)
                 break;
 
             auto topH = horizontal.top();
             horizontal.pop();
             vertical.push(topH);
-
         }
 
         while (true)
         {
-            if(horizontal.size()<=H && vertical.size()<=V)
-                ans=min(ans,getMultisetTopH()+getMultisetTopV());
+            if((ill)horizontal.size()<=H && (ill)vertical.size()<=V)
+            {
+                ill temp = getMultisetTopH() + getMultisetTopV();
+                ans = min(ans, temp);
+                cout << ans << ":" << temp << "\n";                
+            }
             
+            //cout << ans << "\n";
+
             //horizontal.size()<H && !vertical.empty()
-            if (vertical.empty() || horizontal.size()==H)
+            if (vertical.empty() || (ill)horizontal.size()==H)
                 break;
 
             auto topV = vertical.top();
             vertical.pop();
             horizontal.push(topV);
-            
         }
 
         while (!horizontal.empty())
-        {
             horizontal.pop();
-        }
+
         while (!vertical.empty())
-        {
             vertical.pop();
-        }        
+
 
         //priority_queue<tuple<ill,ill>,vector<tuple<ill,ill>>,decltype(compare1)> horizontal(compare1);
         // priority_queue<tuple<ill,ill>,vector<tuple<ill,ill>>,decltype(compare1)> horizontal(compare1);
@@ -155,11 +164,17 @@ class solution
         
         while (true)
         {
-            if(horizontal.size()<=H && vertical.size()<=V)
-                ans=min(ans,getMultisetTopH()+getMultisetTopV());
+            if((ill)horizontal.size()<=H && (ill)vertical.size()<=V)
+            {
+                ill temp = getMultisetTopH() + getMultisetTopV();
+                ans = min(ans, temp);
+                cout << ans << ":" << temp << "\n";                
+            }
             
+            //cout << ans << "\n";
+
             //horizontal.size()<H && !vertical.empty()
-            if (vertical.empty() || horizontal.size()==H)
+            if (vertical.empty() || (ill)horizontal.size()==H)
                 break;
 
             auto topV = vertical.top();
@@ -169,17 +184,23 @@ class solution
 
         while (true)
         {
-            if(horizontal.size()<=H && vertical.size()<=V)
-                ans=min(ans,getMultisetTopH()+getMultisetTopV());
+            if((ill)horizontal.size()<=H && (ill)vertical.size()<=V)
+            {
+                //ans=min(ans,getMultisetTopH()+getMultisetTopV());
+                ill temp = getMultisetTopH() + getMultisetTopV();
+                ans = min(ans, temp);
+                cout << ans << ":" << temp << "\n";                
+            }
             
-            if (horizontal.empty() || vertical.size()==V)
+            //cout << ans << "\n";
+
+            if (horizontal.empty() || (ill)vertical.size()==V)
                 break;
 
             auto topH = horizontal.top();
             horizontal.pop();
             vertical.push(topH);
-        }        
-
+        }
 
         cout << "Case #" << caseId << ": " << ans << "\n";
         return;
@@ -192,7 +213,7 @@ signed main()
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
-    freopen("FB_2019_ROUND_1_DConnecttheDots.in", "r", stdin);
+    freopen("FB_2019_ROUND_1_DConnecttheDots.err", "r", stdin);
     freopen("FB_2019_ROUND_1_DConnecttheDots.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
