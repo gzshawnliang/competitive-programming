@@ -202,6 +202,7 @@ class solution
             vertical.push(topH);
         }
 
+
         cout << "Case #" << caseId << ": " << ans << "\n";
         return;
     }
