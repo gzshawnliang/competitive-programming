@@ -116,7 +116,7 @@ class solution
             {
                 ill temp = getMultisetTopH() + getMultisetTopV();
                 ans = min(ans, temp);
-                cout << ans << ":" << temp << "\n";
+                //cout << ans << ":" << temp << "\n";
             }
                 
             if (horizontal.empty() || (ill)vertical.size()==V)
@@ -133,7 +133,7 @@ class solution
             {
                 ill temp = getMultisetTopH() + getMultisetTopV();
                 ans = min(ans, temp);
-                cout << ans << ":" << temp << "\n";                
+                //cout << ans << ":" << temp << "\n";                
             }
             
             //cout << ans << "\n";
@@ -168,7 +168,7 @@ class solution
             {
                 ill temp = getMultisetTopH() + getMultisetTopV();
                 ans = min(ans, temp);
-                cout << ans << ":" << temp << "\n";                
+                //cout << ans << ":" << temp << "\n";                
             }
             
             //cout << ans << "\n";
@@ -189,7 +189,7 @@ class solution
                 //ans=min(ans,getMultisetTopH()+getMultisetTopV());
                 ill temp = getMultisetTopH() + getMultisetTopV();
                 ans = min(ans, temp);
-                cout << ans << ":" << temp << "\n";                
+                //cout << ans << ":" << temp << "\n";                
             }
             
             //cout << ans << "\n";
@@ -214,7 +214,7 @@ signed main()
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
-    freopen("FB_2019_ROUND_1_DConnecttheDots.err", "r", stdin);
+    freopen("connect_the_dots_input.txt", "r", stdin);
     freopen("FB_2019_ROUND_1_DConnecttheDots.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
