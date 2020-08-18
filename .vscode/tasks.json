@@ -36,7 +36,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndDebug.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-Wl,--stack=268435456 -std=gnu++17 -lpsapi -DDEBUG -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\""
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndDebug.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -lpsapi -DDEBUG -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\""
             ], // 编译命令参数
             "problemMatcher": {
                 "owner": "cpp",
@@ -84,6 +84,7 @@
                 "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
                 "-o",
                 "\"${fileDirname}\\${fileBasenameNoExtension}.exe\"",
+                "-DLOCAL_DEBUG",
                 "-Wl,--stack=268435456",
                 "-lpsapi",
                 // "-lstdc++fs",
@@ -120,7 +121,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -NotRun -CompilerArgs '-Wl,--stack=268435456 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -NotRun -CompilerArgs '-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "problemMatcher": {
                 "owner": "cpp",
@@ -191,7 +192,7 @@
                 "&&",
                 "powershell",
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&'${workspaceFolder}\\.vscode\\BuildAndTest.ps1' -SourceFileName '\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"' -CompilerArgs '-Wl,--stack=8589934592 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"\"\"${workspaceFolder}\\include\"\"\"' -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&'${workspaceFolder}\\.vscode\\BuildAndTest.ps1' -SourceFileName '\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"' -CompilerArgs '-DLOCAL_DEBUG -Wl,--stack=8589934592 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"\"\"${workspaceFolder}\\include\"\"\"' -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "echoCommand": true,
@@ -204,7 +205,7 @@
             "command": "powershell",
             "args": [
                 "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-Wl,--stack=268435456 -std=gnu++17 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
+                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
             ],
             "isShellCommand": true,
             "echoCommand": true,
@@ -249,6 +250,7 @@
                 "/utf-8",
                 "/std:c++17",
                 "/EHsc",
+                "/DLOCAL_DEBUG",
                 "/Zi", 
                 "/Fe:",
                 "${fileDirname}\\${fileBasenameNoExtension}.ex2",
@@ -276,7 +278,7 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "-DoTest",
                 "-CompilerArgs",
-                "-Wl,--stack=268435456 -std=gnu++17 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include"
+                "-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include"
             ],
             "isShellCommand": true,
             "echoCommand": true,
