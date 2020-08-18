@@ -54,7 +54,7 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("a.in", "r", stdin);
-    //freopen("a.out", "w", stdout);
+    freopen("a.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
 
