@@ -161,8 +161,12 @@
     // RedHat JDK11
     // "java.home": "C:\\Program Files\\RedHat\\java-11-openjdk-11.0.2-2",
     
-    //RedHat JDK 8
+    //RedHat JDK 11
     "java.home": "C:\\Program Files\\RedHat\\java-11-openjdk-11.0.7-1",
+
+    //Oracle JDK 8
+    //"java.home": "C:\\Program Files\\Java\\jdk1.8.0_261",
+
     "java.format.settings.url": ".vscode\\EclipseJavaFormatter.xml",
     "java.format.settings.profile": "MyJavaVSStyple",
 
