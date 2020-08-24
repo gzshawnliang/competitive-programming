@@ -37,7 +37,7 @@ class solution
             g[u][v] = 1;
             g[v][u] = 1;
         }
-        
+
         vector<vector<int>> Si(N + 1);
         vector<vector<ill>> cost(N + 1, vector<ill>(S + 1,INF));
         for (int i = 1; i <= N; ++i)
@@ -53,7 +53,7 @@ class solution
                 cost[i][tmp]=0;
             }
         }
-
+        
         vector<vector<int>> recipe(S + 1); //recipe
         for (int i = 1; i <= R; ++i)
         {
