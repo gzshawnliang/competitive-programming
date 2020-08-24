@@ -17,6 +17,8 @@ using namespace std;
 
 using ill = long long;
 
+const ill INF=LLONG_MAX;
+
 class solution
 {
   public:
@@ -35,7 +37,9 @@ class solution
             g[u][v] = 1;
             g[v][u] = 1;
         }
+        
         vector<vector<int>> Si(N + 1);
+        vector<vector<ill>> cost(N + 1, vector<ill>(S + 1,INF));
         for (int i = 1; i <= N; ++i)
         {
             int c;
@@ -46,6 +50,7 @@ class solution
                 int tmp;
                 cin >> tmp;
                 Si[i].push_back(tmp);
+                cost[i][tmp]=0;
             }
         }
 
@@ -66,7 +71,8 @@ class solution
             cin >> result;
             recipe[result] = K;
         }
-        
+
+
         int ans = 0;
         cout << "Case #" << caseId << ": " << ans << "\n";
     }
