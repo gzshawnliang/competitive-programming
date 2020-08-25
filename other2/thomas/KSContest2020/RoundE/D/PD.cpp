@@ -72,7 +72,6 @@ class solution
             recipe[result] = K;
         }
 
-
         int ans = 0;
         cout << "Case #" << caseId << ": " << ans << "\n";
     }
