@@ -29,16 +29,12 @@ class solution
 
         int first;
         int second;
-        tie(first, second, std::ignore) = a;
-
-
-        //Structured Bindings
-        auto [x,y,z]=a;
+        tie(first, second, std::ignore) = a;  //c++14及其以下
+        
+        auto [x,y,z]=a;                      //c++17及其以上，Structured Bindings
         cout << "x :" << x <<'\n';
         cout << "y :" << y <<'\n';
         cout << "z :" << z <<'\n'; 
-
-    
 
         vector<tuple<int,int,int>> t;
         t.push_back({10,11,12});
@@ -48,7 +44,6 @@ class solution
         t.push_back({10,11,12});
 
         sort(t.begin(),t.end());
-
 
         set<tuple<int,int,int>> s;
         s.insert({10,11,12});
@@ -70,13 +65,8 @@ class solution
             cout << a << " " << b << " " << c << " " << y << '\n';
         }
 
-       
-        int i=10;
-        --i;
+        return;
 
-        for (int __s = 0; __s == 0; ++__s);
-
-        
     }
 };
 
