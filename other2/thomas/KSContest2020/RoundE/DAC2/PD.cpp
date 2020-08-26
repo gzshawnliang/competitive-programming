@@ -143,7 +143,7 @@ signed main()
     FastIO;
 
 #ifdef LOCAL_DEBUG
-    cerr << __cplusplus << endl;
+    //cerr << __cplusplus << endl;
     freopen("PD.in", "r", stdin);
     //freopen("PD.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
