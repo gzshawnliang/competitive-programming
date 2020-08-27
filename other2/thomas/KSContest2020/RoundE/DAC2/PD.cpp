@@ -94,24 +94,24 @@ class solution
                 done[u][c] = 1;
                 for (int id : recipeId[c])
                 {
-                    bool ok = true;
-                    ill tot = 0;
+                    bool mergeAble = true;
+                    ill totMergeCost = 0;
                     for (int x : recipe[id].first)
                     {
-                        tot += cost[u][x];
+                        totMergeCost += cost[u][x];
                         if (done[u][x] == 0)
                         {
-                            ok = false;
+                            mergeAble = false;
                             break;
                         }
                     }
-                    if (ok)
+                    if (mergeAble)
                     {
-                        int to = recipe[id].second;
-                        if (cost[u][to] > tot)
+                        int mergeTo = recipe[id].second;
+                        if (cost[u][mergeTo] > totMergeCost)
                         {
-                            cost[u][to] = tot;
-                            pq.push({-cost[u][to], u, to});
+                            cost[u][mergeTo] = totMergeCost;
+                            pq.push({-cost[u][mergeTo], u, mergeTo});
                         }
                     }
                 }
