@@ -295,9 +295,9 @@ signed main()
     cout.flush();
 
 #ifdef LOCAL_DEBUG
-    // cerr << "Execution time: "
-    //      << chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count()
-    //      << " ms\n";
+    cerr << "Execution time: "
+         << chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count()
+         << " ms\n";
 #endif
 
     return 0;
