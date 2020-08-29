@@ -79,6 +79,8 @@ class solution
 
         vector<vector<int>> AllGroup;
         vector<int> AllGroupCount;
+        AllGroup.push_back(vector<int>());
+        AllGroupCount.push_back(0);
         for (int i = 1; i <= N; ++i)
         {
             if(vist[i]==0)
@@ -91,161 +93,69 @@ class solution
             }
         }
         int maxSize = N;
-        //++maxSize;
-        vector<vector<int>> dp(AllGroupCount.size()+1,vector<int>(maxSize+1,-1));
+        vector<vector<int>> dp(AllGroupCount.size(),vector<int>(maxSize+1,-1));
 
-    // int[][] dp = new int[A.length+1][m+1];
-    // for(int i=0;i<A.length;i++){
-    //     for(int j=0;j<=m;j++){
-    //         if(A[i]>j)dp[i+1][j] = dp[i][j];
-    //         else dp[i+1][j] = Math.max(dp[i][j],dp[i][j-A[i]]+V[i]);
-    //     }
-    // }
-
-        dp[0][0] = 0;
-        for (int j = 1; j <= maxSize; ++j)
+        for (int j = 0; j <= maxSize; ++j)
             dp[0][j]=0;
 
-        
-        for (int i = 1; i <= AllGroupCount.size(); ++i)
+        for (int i = 1,len=AllGroupCount.size(); i <= len-1; ++i)
         {
             for (int j = 1; j <= maxSize; ++j)
             {
-                if(j-AllGroupCount[i-1]>=0)
-                    dp[i][j] = max(dp[i - 1][j], AllGroupCount[i - 1] + dp[i - 1][j - AllGroupCount[i - 1]]);
+                if(j-AllGroupCount[i]>=0)
+                    dp[i][j] = max(dp[i - 1][j], AllGroupCount[i] + dp[i - 1][j - AllGroupCount[i]]);
                 else 
                     dp[i][j]= dp[i-1][j];
-                
-                //cout << i << "-" << j << ":" << dp[i][j] << " ";
             }
-//            cout << "\n";
         }
 
-        // for(int i=0;i<=AllGroupCount.size()-1;++i)
-        //     cout << i << ":"<< AllGroupCount[i] << "\n";
-             
-        // cout << "\n";
+        auto getResult=[&](int size1,int & w)
+        {
+            set<int> result;
+            int j=size1;
+            int i=dp.size()-1;
 
-        // for(int i=0;i<=AllGroup.size()-1;++i)
-        // {
-        //     cout << i << ":";
-        //     for(auto j:AllGroup[i])
-        //     {
-        //         cout << j << " ";
-        //     }
-        //     cout << "\n";
-        // }        
-        // cout << "\n";
-
-        set<int> result1;
-        set<int> result2;
-
-        // for(int j=0;j<=dp[0].size()-1;++j)
-        //     cout <<  setw(2) << j << " ";
-        
-        // cout << "\n";
-        // for(int i=0;i<=dp.size()-1;++i)
-        // {
-        //     if(i==0)
-        //         cout <<  setw(2) << i << "    ";
-        //     else 
-        //         cout <<  setw(2) << i << " " << AllGroupCount[i-1] << " ";
-        //     for(int j=0;j<=dp[i].size()-1;++j)
-        //         cout <<  setw(2) << dp[i][j] << " ";
-            
-        //     cout << "\n";
-        // }
-
-        // for(int i=0;i<=dp.size()-1;++i)
-        // {
-        //     cout <<  setw(2) << i << ":";
-        //     for(int j=0;j<=dp[i].size()-1;++j)
-        //     {
-        //         cout <<  setw(2) << dp[i][j] << " ";
-        //         if(i>0)
-        //         {
-        //             if(dp[i][j]>dp[i-1][j])
-        //             {
-        //                 if(j==N/2+1 && w1+AllGroupCount[i-1] <=N/2+1)
-        //                 {
-        //                     result1.insert(i);                
-        //                     w1 +=AllGroupCount[i-1];
-        //                 }
-        //                 else if(j==N/2 && w2+AllGroupCount[i-1] <=N/2)    
-        //                 {
-        //                     result2.insert(i);                
-        //                     w2 +=AllGroupCount[i-1];
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     cout << "\n";
-        // }
-
-        int w1=0;
-        int w2=0;
+            while (j>0 && i>=1)
+            {
+                if(dp[i][j]==dp[i-1][j])
+                {
+                    --i;
+                    continue;
+                }
+                result.insert(i);
+                w+=AllGroupCount[i];
+                int nextJ=dp[i][j]-AllGroupCount[i];
+                while (j>0 && dp[i][j]>nextJ)
+                    --j;
+                
+                while (j>0 && dp[i][j-1]==nextJ)
+                    --j;
+                
+            }
+            return result;
+        };
 
         int j=N/2;
-        int i=dp.size()-1;
-
-        while (j>=0 && i>=1)
-        {
-            if(dp[i][j]==dp[i-1][j])
-            {
-                --i;
-                continue;
-            }
-            result1.insert(i);
-            w1+=AllGroupCount[i-1];
-            int nextJ=dp[i][j]-AllGroupCount[i-1];
-            while (dp[i][j]>nextJ)
-                --j;
-            
-            while (j>0 && dp[i][j-1]==nextJ)
-                --j;
-            
-        }
+        int w1=0;
+        set<int> result1=getResult(j,w1);
 
         j=N/2+1;
-        i=dp.size()-1;
-        while (j>=0 && i>=1)
-        {
-            if(dp[i][j]==dp[i-1][j])
-            {
-                --i;
-                continue;
-            }
-            result2.insert(i);
-            w2+=AllGroupCount[i-1];
-            int nextJ=dp[i][j]-AllGroupCount[i-1];
-            while (dp[i][j]>nextJ)
-                --j;
+        int w2=0;
+        set<int> result2=getResult(j,w2);
 
-            while (j>0 && dp[i][j-1]==nextJ)
-                --j;                
-        }        
+        set<int> result;
 
-        vector<int> ans1(N+1,0);
-        int cout1=0;
-        for(auto i:result1)
-        {
-            for(auto j:AllGroup[i-1])
-            {
-                ans1[j]=1;
-                ++cout1;
-            }
-        }
+        int w=min(abs(N-w1-w1),abs(N-w2-w2));
+        
+        if(abs(N-w1-w1)<abs(N-w2-w2))
+            result=result1;
+        else 
+            result=result2;
 
-        vector<int> ans2(N+1,0);
-        int cout2=0;
-        for(auto i:result2)
-        {
-            for(auto j:AllGroup[i-1])
-            {
-                ans2[j]=1;
-                ++cout2;
-            }
-        }        
+        vector<int> ans(N + 1, 0);
+        for (auto i : result)
+            for (auto j : AllGroup[i])
+                ans[j] = 1;
 
         // for(auto[x,y]:edge)
         // {
@@ -253,21 +163,11 @@ class solution
         // }
 
         cout << "Case #" << caseId << ": ";
-        if(abs(N-cout1-cout1)<abs(N-cout2-cout2))
-        {
-            for (int i = 1; i <= N; ++i)
-                cout <<ans1[i];
-            
-            //cout << " " << N-cout1-cout1 ;
-        }    
-        else 
-        {
-            for (int i = 1; i <= N; ++i)
-                cout <<ans2[i];
-            
-            //cout << " " << N-cout2-cout2 ;
-        }    
-        
+
+        for (int i = 1; i <= N; ++i)
+            cout << ans[i];
+
+        //cout << " " << w;
         cout << "\n";
     }
 };
