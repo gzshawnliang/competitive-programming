@@ -146,7 +146,7 @@ class solution
         set<int> result;
 
         int w=min(abs(N-w1-w1),abs(N-w2-w2));
-        
+
         if(abs(N-w1-w1)<abs(N-w2-w2))
             result=result1;
         else 
@@ -190,7 +190,6 @@ signed main()
         solution sln1;    
         sln1.solve(i);
     }
-    
     
     cout.flush();
 
