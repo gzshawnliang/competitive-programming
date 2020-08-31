@@ -60,6 +60,8 @@ class EM_726242_Solution
     {
         //String c="a2342341";
         //out.println(c.hashCode());
+        double do1=in.nextDouble();
+        out.println(do1);
 
         final Integer a=100;
         final Integer b=100;
