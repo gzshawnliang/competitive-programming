@@ -19,62 +19,90 @@ using ill = long long;
 
 class solution
 {
-    const int inf = INT_MAX / 10;
+    const ill inf = 10e12;
 
   public:
     void solve()
     {
-        int tct; cin >> tct;
-        for (int tcc = 1; tcc <= tct; ++tcc)
+        ill tct; cin >> tct;
+        for (ill tcc = 1; tcc <= tct; ++tcc)
         {
-            int n, m, s, r; cin >> n >> m >> s >> r;
-            vector<vector<int>> d(n + 1, vector<int>(n + 1, inf));
-
-            for (int c = 1; c <= m; ++c)
+            ill n, m, s, r; cin >> n >> m >> s >> r;
+            vector<vector<ill>> f(n + 1, vector<ill>(s + 1, inf)), g(n + 1);
+            for (ill c = 1; c <= m; ++c)
             {
-                int u, v; cin >> u >> v;
-                d[u][v] = 1; d[v][u] = 1;
+                ill u, v; cin >> u >> v;
+                g[u].push_back(v); g[v].push_back(u);
+            }
+            
+            priority_queue<tuple<ill, ill, ill>, vector<tuple<ill, ill, ill>>, greater<tuple<ill, ill, ill>>> q;
+            for (ill u = 1; u <= n; ++u)
+            {
+                ill tol; cin >> tol;
+                for (ill c = 1; c <= tol; ++c)
+                {
+                    ill st; cin >> st;
+                    f[u][st] = 0;
+
+                    q.push({0, u, st});
+                }
             }
 
-            for (int k = 1; k <= n; ++k)
+            vector<pair<vector<ill>, ill>> recs(r);
+            for (ill i = 0; i <= r - 1; ++i)
             {
-                for (int u = 1; u <= n; ++u)
+                ill tol; cin >> tol;
+                recs[i].first.assign(tol, 0);
+                for (ill j = 0; j <= tol - 1; ++j) cin >> recs[i].first[j];
+
+                cin >> recs[i].second;
+            }
+
+            while (!q.empty())
+            {
+                ill nowD = get<0>(q.top()), u = get<1>(q.top()), st = get<2>(q.top()); q.pop();
+
+                if (f[u][st] < nowD) continue;
+                    
+                for (auto v:g[u])
                 {
-                    for (int v = 1; v <= n; ++v)
+                    if (f[v][st] > nowD + 1)
                     {
-                        d[u][v] = min(d[u][v], d[u][k] + d[k][v]);
+                        f[v][st] = nowD + 1;
+                        q.push({f[v][st], v, st});
+                    }
+                }
+
+                for (auto nr:recs)
+                {
+                    bool flg = false;
+                    ill tmp = 0;
+                    for (auto st2:nr.first)
+                    {
+                        if (f[u][st2] == inf)
+                        {
+                            tmp = inf;
+                            break;
+                        }
+
+                        if (st2 == st) flg = true;
+
+                        tmp += f[u][st2];
+                    }
+                    
+                    if (f[u][nr.second] > tmp && flg == true)
+                    {
+                        f[u][nr.second] = tmp;
+                        q.push({f[u][nr.second], u, st});
                     }
                 }
             }
 
-            vector<vector<int>> stoneL(s + 1);
-            for (int u = 1; u <= n; ++u)
-            {
-                int tol; cin >> tol;
-                for (int c = 1; c <= tol; ++c)
-                {
-                    int st; cin >> st;
-                    stoneL[st].push_back(u);
-                }
-            }
+            ill ans = inf;
+            for (ill u = 1; u <= n; ++u) ans = min(ans, f[u][1]);
+            if (ans >= inf) ans = -1;
 
-            vector<vector<vector<int>>> stoneR(s + 1);
-            for (int c = 1; c <= r; ++c)
-            {
-                int tol; cin >> tol;
-                vector<int> tmp;
-                for (int c = 1; c <= tol; ++c)
-                {
-                    int st; cin >> st;
-                    tmp.push_back(st);
-                }
-
-                int resSt; cin >> resSt;
-
-                stoneR[resSt].push_back(tmp);
-            }
-
-            for (int __s = 0; __s == 0; ++__s);
+            cout << "Case #" << tcc << ": " << ans << '\n';
         }
     }
 };
