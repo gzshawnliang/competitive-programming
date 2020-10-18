@@ -11,18 +11,87 @@
 using namespace std;
 
 using ill = long long;
+using ull = unsigned long long;
+
 
 class solution
 {
+
+    // struct myHash
+    // {
+    //     ull operator()(const pair<ull, ull> &p) const
+    //     {
+    //         //return p.first ^ p.second;
+    //         ull r= ((ull)p.first << 16) | ((ull)p.second && 0xFFFF);
+    //          return r;
+    //     }
+    // };
+
   public:
     void solve()
     {
         ill n, m; cin >> n >> m;
         ill sx, sy, fx, fy; cin >> sx >> sy >> fx >> fy;
 
-        vector<pair<ill, ill>> allTP(m);
-        for (ill i = 0; i <= m - 1; ++i)
-            cin >> allTP[i].first >> allTP[i].second;
+        unordered_map<string,pair<ill, ill>> tmpIn;
+        for (int c = 1; c <= m; ++c)
+        {
+            int x, y; cin >> x >> y;
+            string key=to_string(x) + "_" + to_string(y);
+            tmpIn[key]=make_pair(x,y);
+        }
+
+        m = tmpIn.size();
+        int cntI = 0;
+        vector<pair<ill, ill>> allTP(m), tx, ty;
+        for (auto p:tmpIn)
+        {
+            allTP[cntI] = p.second;
+
+            tx.push_back({allTP[cntI].first, cntI});
+            ty.push_back({allTP[cntI].second, cntI});
+            ++cntI;
+        }
+        sort(tx.begin(), tx.end()); sort(ty.begin(), ty.end());
+
+        // for(auto i:allTP)
+        //     cout << i.first << " " << i.second << "|";
+        // cout  << "\n";
+
+        // for(auto i:tx)
+        //     cout << i.first << " " << i.second << "|";
+        
+        // cout  << "\n";
+        // for(auto i:ty)
+        //     cout << i.first << " " << i.second << "|";
+
+        // cout  << "\n";            
+
+        vector<unordered_set<ill>> g(m);
+        for (ill i = 0; i <= m - 2; ++i)
+            for (ill j = i + 1; j <= m - 1 && (tx[j].first == tx[i + 1].first); ++j)
+                    g[i].insert(j);
+        for (ill i = m - 1; i >= 1; --i)
+            for (ill j = i - 1; j >= 0 && (tx[j].first == tx[i - 1].first); --j)
+                    g[i].insert(j);
+
+        for (ill i = 0; i <= m - 2; ++i)
+            for (ill j = i + 1; j <= m - 1 && (ty[j].first == ty[i + 1].first); ++j)
+                    g[i].insert(j);
+        for (ill i = m - 1; i >= 1; --i)
+            for (ill j = i - 1; j >= 0 && (ty[j].first == ty[i - 1].first); --j)
+                    g[i].insert(j);
+
+        int id=0;
+        for(auto i:g)
+        {
+            cout << id << ":";
+            for(auto j:i)
+                cout << j << " ";
+
+            cout << "\n";
+            ++id;
+        }
 
         auto dis=[&](pair<ill, ill> myP, pair<ill, ill> tpP)
         {
@@ -36,8 +105,12 @@ class solution
             d[i] = dis({sx, sy}, allTP[i]);
             q.push({d[i], i});
         }
+        
+        for(auto j:d)
+                cout << j << " ";
+         cout << "\n";
 
-        ill ans = abs(sx - fx) + abs(sy - fy);
+        ill ans = LONG_LONG_MAX;
         while (!q.empty())
         {
             pair<ill, ill> now = q.top(); q.pop();
@@ -46,18 +119,20 @@ class solution
             pair<ill, ill> np = allTP[now.second];
             ans = min(ans, now.first + abs(np.first - fx) + abs(np.second - fy));
 
-            for (ill i = 0; i <= m - 1; ++i)
+            for (auto i : g[now.second])
             {
-                if (i == now.second) continue;
+                ill tmpD = dis(np, allTP[i]);
+                if (tmpD == 0) continue;
 
-                ill tmpD = now.first + dis(np, allTP[i]);
-                if (tmpD < d[i])
+                if (now.first + tmpD < d[i])
                 {
-                    d[i] = tmpD;
+                    d[i] = now.first + tmpD;
                     q.push({d[i], i});
                 }
             }
         }
+        
+        ans=min(ans,abs(sx - fx) + abs(sy - fy));
 
         cout << ans << '\n';
     }
@@ -70,7 +145,7 @@ signed main()
     std::cout.tie(nullptr);
 #ifndef ONLINE_JUDGE
     freopen("CF_1422D_ReturningHome.in", "r", stdin);
-    freopen("CF_1422D_ReturningHome.out", "w", stdout);
+    //freopen("CF_1422D_ReturningHome.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
 
