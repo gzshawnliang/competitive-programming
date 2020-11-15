@@ -24,9 +24,6 @@ int main()
 
     string currTime = getCurrTime();
 
-    // int k=44;
-    // vector<unordered_set<int>> aa(k);
-
     int len = to_string(FileCount).length();
 
     for (int fileId = 1; fileId <= FileCount; ++fileId)
@@ -36,17 +33,18 @@ int main()
 
         fout.open(ss.str());
 
-        int T = rdNum.GetRand(1, 100);
-        fout << T << "\n";
-        for (int i = 1; i <= T; ++i)
+        //***************************
+        //在此处写入测试数据
+        //***************************
+        int N = rdNum.GetRand(70, 1e2);//rdNum.GetRand(1, 1e9);
+        int M = rdNum.GetRand(1e4, 1e5);//rdNum.GetRand(1, 1e5);
+        fout << N << " " << M << "\n";
+
+        fout << rdNum.GetRand(1, N) << " " << rdNum.GetRand(1, N) << " " <<rdNum.GetRand(1, N) << " " << rdNum.GetRand(1, N) << "\n";
+
+        for (int i = 1; i <= M; ++i)
         {
-            int N = rdNum.GetRand(1, 1000);
-            fout << N << "\n";
-            for (int i = 1; i <= N; ++i)
-            {
-                fout << (int)100-(int)rdNum.GetRand(0, 200) << " ";
-            }            
-            fout<< "\n";
+            fout << rdNum.GetRand(1, N) << " " << rdNum.GetRand(1, N) << "\n";
         }
 
         fout.close();
