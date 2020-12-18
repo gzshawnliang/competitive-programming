@@ -38,6 +38,8 @@ using ill = long long;
 class solution
 {
   public:
+    const int inf = INT_MAX / 2;
+
     void solve()
     {
         int n, h, m; cin >> n >> h >> m;
@@ -49,11 +51,11 @@ class solution
             int u, v, d; cin >> u >> v >> d;
             allEdge.push_back({u, v, d});
             
-            allNum.insert(u); allNum.insert(v); allNum.insert(d);
+            allNum.insert(u); allNum.insert(v);
         }
 
         int cnt = 0;
-        vector<int> toE(n, -1);
+        vector<int> toE(n + 1, -1);
         for (auto x:allNum) toE[x] = cnt++;
 
         for (auto &[u, v, d]:allEdge)
@@ -61,7 +63,54 @@ class solution
             u = toE[u]; v = toE[v];
         }
 
-        for (int __s = 0; __s == 0; ++__s);
+        n = allNum.size();
+        vector<vector<int>> a(n, vector<int>(n, inf));
+        for (auto &[u, v, d]:allEdge)
+            a[u][v] = min(a[u][v], d);
+
+        vector<vector<vector<int>>> f(h + 1, vector<vector<int>> (n, vector<int>(n, inf)));
+        for (int i = 0; i <= n - 1; ++i) f[1][i][i] = 0;
+        // for (auto &[u, v, d]:allEdge)
+        //     f[u][v][2] = d;
+
+        int ans = inf;
+        for (int len = 2; len <= h; ++len)
+        {
+            for (int i = 0; i <= n - 1; ++i)
+            {
+                for (int j = i; j <= n - 1; ++j)
+                {
+                    for (int k = j; k > i; --k)
+                    {
+                        f[len][i][j] = min(f[len][i][j], a[i][j] + f[len - 1][j][k]);
+                        if (k < j)
+                            f[len][i][j] = min(f[len][i][j], a[i][k] + f[len - 1][k][j]);
+
+                        if (len == h) ans = min(ans, f[len][i][j]);
+                    }
+                }
+
+                for (int j = i; j >= 0; --j)
+                {
+                    for (int k = j; k < i; ++k)
+                    {
+                        f[len][i][j] = min(f[len][i][j], a[i][j] + f[len - 1][j][k]);
+                        if (k > j)
+                            f[len][i][j] = min(f[len][i][j], a[i][k] + f[len - 1][k][j]);
+
+                        if (len == h) ans = min(ans, f[len][i][j]);
+                    }
+                }
+            }
+        }
+
+        // for (int len = 2; len <= h; ++len)
+        //     for (int i = 0; i <= n - 1; ++i)
+        //         for (int j = 0; j <= n - 1; ++j)
+        //             if (f[len][i][j] < inf)
+        //                 cout << "f[" << len << "][" << i << "][" << j << "] = " << f[len][i][j] << '\n';
+
+        cout << ans << '\n';
     }
 };
 
