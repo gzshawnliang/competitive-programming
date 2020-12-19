@@ -72,6 +72,16 @@
 | 2019 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=969) | pump          | Shortest Path                    |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=970) | milkvisits    | LCA                              |Done        |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=971) | cowmbat       | DP                               |Done    |
+| 2020 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=993) | time          | dp                               |Done    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=994) | threesum      | 2D Prefix Sum                                  |        |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=995) | boards       |  dp+树状数组                              |    |
+| 2020 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1017) | timeline     |                                |Done    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1018) | help      |   动态规划+集合+前缀和                               |        |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1019) | deleg       |  DFS 树                              |    |
+| 2020 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1041) | haircut     | fenwick Tree                               |Done    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | fcolor      |  DSU                                |        |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | exercise    |  01背包变种                              | [sln](https://blog.csdn.net/weixin_39412108/article/details/107757637)|
+
 
 todo:
 - [x] 1DRQ  (2019 Jan sleepy) 
