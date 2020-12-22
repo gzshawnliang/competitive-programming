@@ -18,7 +18,7 @@ string getCurrTime()
 
 int main()
 {
-    const int FileCount = 1;  //note:文件数量
+    const int FileCount = 10;  //note:文件数量
     ofstream fout;             //note:文件流
     random rdNum;              //note:随机数
 
@@ -38,8 +38,8 @@ int main()
         //***************************
         //int N = rdNum.GetRand(1, 1e5);
         int N = 1000;
-        int D = rdNum.GetRand(1, 1e9);
-        int sNum = 800000;   //rdNum.GetRand(1, N*N);
+        int D = 1;
+        int sNum = 500000;   //rdNum.GetRand(1, N*N);
         vector<pair<int,int>> S;
         for (int i = 1; i <= sNum; ++i)
         {
@@ -53,32 +53,21 @@ int main()
         {
             for (int j = 1; j <= N; ++j)
             {
-                if(i==1 || j==1 || i==N || j==N)
+                if(i==1 || i%2==1 || i==N || j==1 || j==N)
                 {
                     fout << "#";    
                 }
-                else if(rdNum.GetRand(1, N*N)<i*j && icout<=sNum)
+                else if(rdNum.GetRand(1, N*N)<300000 && icout<=sNum)
                 {
                     fout << "S";
                     ++icout;
                 }
                 else 
                 {
-                    fout << ".";  
-
-                    // bool hasS=false;
-                    // for (auto k:S)
-                    // {
-                    //     if(i==k.first && j == k.second)
-                    //     {
-                    //         hasS=true;
-                    //         break;
-                    //     }
-                    // }
-                    // if(hasS==true)                    
-                    //     fout << "S";
+                    // if(rdNum.GetRand(1, N*N)% 3==1)
+                    //     fout << "#";
                     // else 
-                    //     fout << ".";    
+                        fout << ".";
                 }
             }
             fout << "\n";

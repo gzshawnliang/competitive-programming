@@ -177,11 +177,11 @@ signed main()
     ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr);
     std::cout.tie(nullptr);
-// #ifndef ONLINE_JUDGE
-//     freopen("A.in", "r", stdin);
-//     freopen("A.out", "w", stdout);
-//     //auto startTime = std::chrono::high_resolution_clock::now();
-// #endif
+#ifndef ONLINE_JUDGE
+    freopen("A.in", "r", stdin);
+    freopen("A.out", "w", stdout);
+    //auto startTime = std::chrono::high_resolution_clock::now();
+#endif
 
     solution sln1;
     sln1.solve();

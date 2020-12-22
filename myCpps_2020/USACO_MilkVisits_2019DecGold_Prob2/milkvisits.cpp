@@ -4,7 +4,7 @@
 * @Author:         Shawn
 * @create Time:    2020/1/18 18:21:23
 * @url:            http://www.usaco.org/index.php?page=viewproblem2&cpid=970&lang=zh
-* @Description:    USACO 2019 December Contest, Gold
+* @Description:    USACO 2019 December Contest, Gold LCA O(1) favor
 ===========================================================
 */
 #include <bits/stdc++.h>
