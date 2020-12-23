@@ -1,10 +1,10 @@
 /*
 -------------------------------------------------------------------
-* @Name:           
+* @Name:           Farmer John Solves 3SUM
 * @Author:         Shawn
 * @Create Time:    2020/12/22 22:59:00  (UTC+08:00)
-* @Url:            
-* @Description:    
+* @Url:            http://www.usaco.org/index.php?page=viewproblem2&cpid=994
+* @Description:    USACO 2020 January Contest, Gold Problem 2. Farmer John Solves 3SUM 区间DP
 -------------------------------------------------------------------
                                      /~\
                                     |oo )
