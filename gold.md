@@ -74,12 +74,12 @@
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=971) | cowmbat       | DP                               |Done    |
 | 2020 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=993) | time          | dp                               |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=994) | threesum      | 2D Prefix Sum ,区间DP                                 |     Done   |
-|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=995) | boards       |  dp+树状数组                              |    |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=995) | boards       |  dp+树状数组,平衡树                  |  [sln](https://www.cnblogs.com/Point-King/p/13639066.html) [sln2](https://www.cnblogs.com/groundwater/p/12683948.html)  |
 | 2020 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1017) | timeline     |                                |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1018) | help      |   动态规划+集合+前缀和                               |        |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1019) | deleg       |  DFS 树                              |    |
 | 2020 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1041) | haircut     | fenwick Tree                               |Done    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | fcolor      |  DSU                                |        |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | fcolor      |  DSU                               |  [sln](https://www.cnblogs.com/lyttt/p/14013199.html) |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | exercise    |  01背包变种                              | [sln](https://blog.csdn.net/weixin_39412108/article/details/107757637)|
 
 
