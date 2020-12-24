@@ -1,3 +1,26 @@
+/*
+-------------------------------------------------------------------
+* @Name:           
+* @Author:         Shawn
+* @Create Time:    2020/12/24 21:20:25  (UTC+08:00)
+* @Url:            
+* @Description:    
+-------------------------------------------------------------------
+                                     /~\
+                                    |oo )
+                                    _\=/_
+                    ___        #   /  _  \
+                   / ()\        \\//|/.\|\\
+                 _|_____|_       \/  \_/  ||
+                | | === | |         |\ /| ||
+                |_|  O  |_|         \_ _/  #
+                 ||  O  ||          | | |
+                 ||__*__||          | | |
+                |~ \___/ ~|         []|[]
+                /=\ /=\ /=\         | | |
+________________[_]_[_]_[_]________/_]_[_\_________________________
+*/
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -5,81 +28,78 @@ using namespace std;
 ifstream fin("fcolor.in");
 ofstream fout("fcolor.out");
 
-int fnd(vector<int> & f, int x)
+int fnd(int u, vector<int> &f)
 {
-    if (f[x] == x)
-        return x;
+    if (f[u] == u)
+        return u;
     else
-        return f[x] = fnd(f, f[x]);
+        return f[u] = fnd(f[u], f);
 }
 
-void dfs(int las, int u, int depth, vector<int> &depFirst, vector<int> &visited, vector<vector<int>> &g, vector<int> &f)
+void merge(int u, int v, vector<int> &f)
 {
-    visited[u] = 1;
-
-    if (u == 3)
-    {
-        for (int __s = 0; __s == 0; ++__s);
-    }
-
-    for (auto v:g[u])
-    {
-        if (v == las) continue;
-
-        if ((int)depFirst.size() - 1 < depth + 1)
-        {
-            depFirst.push_back(fnd(f, v));
-        }
-
-        f[fnd(f, v)] = fnd(f, depFirst[depth + 1]);
-
-        if (g[v].size() > 0 && visited[v] == 0)
-        {
-            dfs(u, v, depth + 1, depFirst, visited, g, f);
-        }
-    }
+    u = fnd(u, f); v = fnd(v, f);
 }
 
 int main()
 {
-    int n, m;
-    fin >> n >> m;
+    int n, m; fin >> n >> m;
+    
     vector<vector<int>> g(n + 1);
     for (int c = 1; c <= m; ++c)
     {
-        int u, v;
-        fin >> u >> v;
-        //if (u == v) continue;
-
+        int u, v; fin >> u >> v;
         g[u].push_back(v);
     }
 
-    vector<int> f(n + 1, 0);
-    for (int u = 1; u <= n; ++u)
-        f[u] = u;
-   
-    
-        
+    priority_queue<pair<int, int>> q;
+    vector<int> f(n + 1, -1);
     for (int u = 1; u <= n; ++u)
     {
-        if (g[u].size() > 0)
+        f[u] = u;
+        if (g[u].size() >= 2) q.push({g[u].size(), u});
+    }
+
+    while (!q.empty())
+    {
+        int v = q.top().second; q.pop();
+
+        bool flg = true;
+        int u0 = fnd(g[v][0], f);
+        vector<int> tmp = g[u0];
+        for (int i = 1, siz = g[v].size(); i <= siz - 1; ++i)
         {
-                vector<int> depFirst;
-                vector<int> visited(n + 1, 0);
-            dfs(-1, u, -1, depFirst, visited, g, f);
+            int u = g[v][i];
+            
+            if (fnd(u, f) != u0)
+            {
+                for (auto x:g[u]) tmp.push_back(x);
+                g[u].clear();
+                f[fnd(u, f)] = u0;
+
+                flg = false;
+            }
+        }
+        
+        if (flg == false)
+        {
+            g[u0] = tmp;
+            if (tmp.size() >= 2) q.push({g[u0].size(), u0});
         }
     }
 
-    int nowC = 0;
-    vector<int> colors(n + 1, -1);
+    vector<int> groupName(n + 1, -1);
+    for (int u = 1; u <= n; ++u)
+        groupName[u] = fnd(u, f);
+
+    int cnt = 1;
+    vector<int> groupCol(n + 1, -1);
     for (int u = 1; u <= n; ++u)
     {
-        if (colors[fnd(f, u)] == -1)
-            colors[fnd(f, u)] = ++nowC;
+        if (groupCol[fnd(u, f)] == -1)
+            groupCol[fnd(u, f)] = cnt++;
 
-        colors[u] = colors[fnd(f, u)];
-
-        fout << colors[u] << '\n';
+        fout << groupCol[fnd(u, f)] << '\n';
     }
 
     return 0;

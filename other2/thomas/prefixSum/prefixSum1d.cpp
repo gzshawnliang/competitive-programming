@@ -7,27 +7,27 @@ ofstream fout("prefixSum1d.out");
 
 int main()
 {
-    vector<int> a;
-    
-
-    int t;
-    while (fin>>t)
+    int n,m;
+    fin >> n >> m;
+    vector<int> a(n+1,0);
+    a[0]=0;
+    for (int i = 1; i <= n; ++i)
     {
-        a.push_back(t);
+        fin >> a[i];
     }
-    
-    int sizeA=a.size();
 
-
-    vector<int> b(sizeA);       //prefixSum of a
+    vector<int> b(n+1);       //prefixSum of a
     
     b[0]=a[0];
-    for (int i = 1; i <= sizeA - 1; ++i)
+    for (int i = 1; i <= n ; ++i)
         b[i]=b[i-1]+a[i];
 
-
-    for (int i = 0; i <= sizeA - 1; ++i)
-        fout <<  b[i] << " ";
+    for (int i = 1; i <= m ; ++i)
+    {
+        int p,q;
+        fin >> p >> q;
+        fout <<  b[q] - b[p-1] << "\n";
+    }
 
     return 0;
 }
