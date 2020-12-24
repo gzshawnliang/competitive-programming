@@ -1,10 +1,10 @@
 /*
 -------------------------------------------------------------------
-* @Name:           
+* @Name:           USACO 2020 US Open Contest, Gold Problem 2. Favorite Colors
 * @Author:         Shawn
 * @Create Time:    2020/12/24 21:20:25  (UTC+08:00)
-* @Url:            
-* @Description:    
+* @Url:            http://www.usaco.org/index.php?page=viewproblem2&cpid=1042
+* @Description:    DSU 并查集
 -------------------------------------------------------------------
                                      /~\
                                     |oo )
