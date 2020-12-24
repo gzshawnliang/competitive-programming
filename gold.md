@@ -79,7 +79,7 @@
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1018) | help      |   动态规划+集合+前缀和                               |        |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1019) | deleg       |  DFS 树                              |    |
 | 2020 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1041) | haircut     | fenwick Tree                               |Done    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | fcolor      |  DSU                               |  [sln](https://www.cnblogs.com/lyttt/p/14013199.html) |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | fcolor      |  DSU                               |  done |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | exercise    |  01背包变种                              | [sln](https://blog.csdn.net/weixin_39412108/article/details/107757637)|
 
 
