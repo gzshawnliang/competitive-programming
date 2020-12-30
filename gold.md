@@ -82,6 +82,13 @@
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1042) | fcolor      |  DSU                               |  done |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | exercise    |  01背包变种                              | [sln](https://blog.csdn.net/weixin_39412108/article/details/107757637)|
 
+| Contest   | #                                                              | Name          | Topic                            | Result |
+| --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
+| 2020 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1065) | Replication          |                     |Done    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1066) | Bovine Genetics    | dp                              |        |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1067) | Square Pasture       | two point                               |    |
+
+
 
 todo:
 - [x] 1DRQ  (2019 Jan sleepy) 
