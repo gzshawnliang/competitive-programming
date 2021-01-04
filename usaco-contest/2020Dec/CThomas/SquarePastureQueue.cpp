@@ -153,13 +153,13 @@ class solution
 
         int ans = n + 1;
         cows = vector<pair<int, int>>(n);
-        for (int i = 0; i <= n - 1; ++i)
-            cin >> cows[i].x >> cows[i].y;
+        for(auto & c:cows)
+            cin >> c.x >> c.y;
         ans += sum();
 
         //转90度
-        for (int i = 0; i <= n - 1; ++i)
-            swap(cows[i].x, cows[i].y);
+        for(auto & c:cows)
+            swap(c.x,c.y);
         ans += sum();
         
         assert(repeat % 2 == 0);
