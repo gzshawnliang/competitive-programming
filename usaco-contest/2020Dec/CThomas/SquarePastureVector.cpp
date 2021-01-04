@@ -65,6 +65,8 @@ class solution
                     continue;
                 }
 
+                //准备正方形需要的数据
+
                 vector<int> yLowVec;   //在正方形内，低于bottom的牛,在lo和bottom之间的牛,存放y坐标
                 vector<int> yHightVec; //在正方形内，高于top的牛，在top和hi之间，存放y坐标
 
@@ -90,7 +92,7 @@ class solution
                 auto lowCow = yLowVec.begin();
                 auto higCow = yHightVec.begin();
 
-                //判断正方形上下边是否有牛，旋转90度会重复
+                //判断正方形上下边是否有牛，有就计算重复数，旋转90度会重复
                 auto checkRepeat=[&]()
                 {
                     if (lowCow != yLowVec.end() && (*lowCow) - lo == 0) //最底低边是否有牛
@@ -114,7 +116,7 @@ class solution
                     }
                     else
                     {
-                        //按最小移动
+                        //移动到最近的牛，按上下距离最小值
                         lo +=min(downDist + 1,upDist);
                         if (downDist + 1 < upDist)  //下面牛消失，上面牛无进入
                         {
