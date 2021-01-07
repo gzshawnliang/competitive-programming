@@ -28,6 +28,7 @@
 
 # Executables
 *.exe
+*.ex2
 *.app
 
 
