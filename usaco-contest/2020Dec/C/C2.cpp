@@ -21,6 +21,7 @@ class solution
 {
   public:
     int ans, tolRep;
+    const int inf = INT_MAX / 2;
     vector<pair<int, int>> a;
 
     void getTol()
@@ -49,25 +50,47 @@ class solution
                     }
                 }
 
-                for (auto p:allP)
+                sort(allP.begin(), allP.end(), [](pair<int, int> pa, pair<int, int> pb)
                 {
-                    if      (lowY < p.second && p.second < higY) continue;
-                    else if (p.second < higY - l + 1 || p.second > lowY + l - 1) continue;
-                    else if (p.second <= lowY)
+                    return pa.second < pb.second;
+                });
+
+                int yd = -1, yu = -1, sizP = allP.size();
+                for (int i = 0; i <= sizP - 1; ++i)
+                {
+                    if (yd == -1 && allP[i].second >= higY - l + 1) yd = i;
+                    if (yu == -1 && allP[i].second >= higY)         yu = i;
+                }
+                
+                int nowY = higY - l + 1;
+                while (true)
+                {
+                    ++ans;
+                    if (mp.count(nowY) > 0 && mp.count(nowY + l - 1) > 0) ++tolRep;
+                    
+                    int disRid = inf, disNew = inf;
+                    if (allP[yd + 1].second <= lowY)
+                        disRid = (allP[yd].second + 1 - nowY);
+                    if (yu + 1 <= sizP - 1)
+                        disNew = (allP[yu + 1].second - (nowY + l - 1));
+                    
+                    if (disRid < disNew)
                     {
-                        if (mp.count(p.second + l - 1) > 0)
-                        {
-                            ++tolRep;
-                        }
-                        ++ans;
+                        nowY += disRid;
+                        ++yd;
+                    }
+                    else if (disNew < disRid)
+                    {
+                        nowY += disNew;
+                        if (nowY > lowY) break;
+
+                        ++yu;
                     }
                     else
                     {
-                        if (mp.count(p.second - l + 1) > 0)
-                        {
-                            ++tolRep;
-                        }
-                        ++ans;
+                        if (disNew == inf) break;
+                        nowY += disRid;
+                        ++yd; ++yu;
                     }
                 }
             }
@@ -88,7 +111,7 @@ class solution
             swap(a[i].first, a[i].second);
         getTol();
 
-        cout << n + ans - tolRep / 2 << '\n';
+        cout << n + ans - tolRep / 2 + 1 << '\n';
     }
 };
 
