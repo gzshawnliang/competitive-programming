@@ -84,9 +84,9 @@
 
 | Contest   | #                                                              | Name          | Topic                            | Result |
 | --------- | -------------------------------------------------------------- | ------------- | -------------------------------- | ------ |
-| 2020 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1065) | Replication          |                     |Done    |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1066) | Bovine Genetics    | dp                              |        |
-|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1067) | Square Pasture       | two point / PIE                                |    |
+| 2020 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1065) | Replication        |                            |Done    |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1066) | Bovine Genetics    | dp                         |Done    |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1067) | Square Pasture     | two point / PIE            |Done    |
 
 
 
