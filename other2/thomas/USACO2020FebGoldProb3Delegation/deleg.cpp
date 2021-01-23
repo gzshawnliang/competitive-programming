@@ -19,81 +19,47 @@ using ill = long long;
 
 class solution
 {
-    int n;
+    int N;
     vector<vector<int>> g;   //邻接矩阵判断相邻关系
-    vector<vector<int>> son; //son[2]代表以2为根，2的儿子们分别有多少个链,例如son[2]={1,2,8,1}；
-    vector<int> sub;         //sub数组表示子树的数量
+    vector<vector<int>> son; //son[2]代表以2为根，2的儿子里面子树节点数,例如son[2]={1,2,8,1}；
+    vector<int> sub;         //totleSon[2]代表以2为根，2的子树节点总数,包括2本身
 
-    //dfs求son[][]
-    void dfs(int child, int father)
+    void dfs(int c,int p)
     {
-        sub[child] = 1;
-        for (auto c : g[child])
+        sub[c]=1;
+        for(auto s:g[c])
         {
-            if (c != father)
+            if (s != p)
             {
-                dfs(c, child);
-                sub[child] += sub[c];
-                son[child].push_back(sub[c]);
+                dfs(s,c);
+                son[c].push_back(sub[s]);
+                sub[c] += sub[s];
             }
         }
-        if (sub[child] != n)
-            son[child].push_back(n - sub[child]);
-    }
 
-    //长度K是否满足
-    int check(int k)
-    {
-        if ((n - 1) % k != 0) //特判，如果不能整除，说明不能均分
-            return 0;
-
-        vector<int> c(k + 1); //c[i]表示长度是i的链的数量
-
-        for (int i = 1; i <= n; ++i)
-        {
-            int cnt = 0; //cnt代表不匹配的数量
-            for (auto s : son[i])
-            {
-                int m = s % k;
-                if (m == 0)
-                    continue;
-
-                if (c[k - m] > 0) //可以配对，减少不匹配链的数量
-                {
-                    --c[k - m];
-                    --cnt;
-                }
-                else //如果不能配对，保留，增加不匹配链的数量
-                {
-                    ++c[m];
-                    ++cnt;
-                }
-            }
-
-            if (cnt > 0) //如果有落单(不能匹配)的说明不行
-                return 0;
-        }
-        return 1;
+        if(N-sub[c]>0)
+            son[c].push_back(N-sub[c]);
     }
 
   public:
     int solve()
     {
-        cin >> n;
-        g = vector<vector<int>>(n + 1);
-        son = vector<vector<int>>(n + 1);
-        sub = vector<int>(n + 1);
+        cin >> N;
+        g = vector<vector<int>>(N + 1);
+        son = vector<vector<int>>(N + 1);
 
-        for (int i = 1; i <= n - 1; ++i)
+        sub = vector<int>(N + 1);
+
+        for (int i = 1; i <= N - 1; ++i)
         {
             int a, b;
             cin >> a >> b;
             g[a].push_back(b);
             g[b].push_back(a);
         }
-        dfs(1, 0);
-        for (int i = 1; i <= n - 1; ++i)
-            cout << check(i);
+         dfs(1, 0);
+        // for (int i = 1; i <= n - 1; ++i)
+        //     cout << check(i);
         return 0;
     }
 };
