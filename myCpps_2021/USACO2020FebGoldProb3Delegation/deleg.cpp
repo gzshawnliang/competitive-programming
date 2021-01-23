@@ -20,25 +20,33 @@ using ill = long long;
 class solution
 {
   public:
+  
     const int root = 1;
+    int n;
 
     vector<vector<int>> g;
-    vector<int> fat, tolSonOrg;
+    vector<vector<int>> cntTre;
 
-    void dfs(int u, int las)
+    int dfs(int u, int las)
     {
+        int ans = 0;
         for (int v:g[u])
         {
             if (v == las) continue;
-            dfs(v, u);
-            fat[v] = u;
-            tolSonOrg[u] += tolSonOrg[v];
+
+            int tmp = dfs(v, u);
+            ans += (tmp + 1);
+            cntTre[u].push_back(tmp + 1);
         }
+
+        cntTre[u].push_back(n - 1 - ans);
+
+        return ans;
     }
 
     void solve()
     {
-        int n; cin >> n;
+        cin >> n;
 
         g = vector<vector<int>>(n + 1);
         for (int c = 1; c <= n - 1; ++c)
@@ -48,16 +56,76 @@ class solution
             g[v].push_back(u);
         }
         
-        fat = vector<int>(n + 1, 0);
-        tolSonOrg = vector<int>(n + 1, 1);
+        cntTre = vector<vector<int>>(n + 1);
         dfs(root, 0);
 
-        for (int k = 1; k <= n; ++k)
+        for (int k = 1; k <= n - 1; ++k)
         {
-            if (n % k > 0) continue;
+            if ((n - 1) % k > 0)
+            {
+                cout << 0;
+                continue;
+            }
+            else if (k == 1)
+            {
+                cout << 1;
+                continue;
+            }
 
-            
+            int ind = -1;
+            bool flg = true;
+            vector<int> cntF(k, 0);
+            for (auto &tre : cntTre)
+            {
+                ++ind;
+
+                set<int> allPos;
+                for (auto x:tre)
+                {
+                    ++cntF[x % k];
+                    allPos.insert(x % k);
+                }
+
+                for (auto x:allPos)
+                {
+                    if (x == 0) continue;
+                    if (cntF[x] != cntF[k - x])
+                    {
+                        flg = false;
+                        cntF[x] = 0; cntF[k - x] = 0;
+                        //break;
+                    }
+                }
+                if (flg == false) break;
+
+                // int cntNotMatch = 0;
+                // for (auto x:tre)
+                // {
+                //     x = x % k;
+                //     if (x == 0) continue;
+
+                //     ++cntF[x];
+                //     if (cntF[k - x] > 0)
+                //     {
+                //         --cntF[k - x]; --cntF[x];
+                //         --cntNotMatch;
+                //     }
+                //     else
+                //     {
+                //         ++cntNotMatch;
+                //     }
+                // }
+
+                // if (cntNotMatch > 0)
+                // {
+                //     flg = false; break;
+                // }
+            }
+            cout << flg;
+
         }
+
+        cout << '\n';
     }
 };
 
