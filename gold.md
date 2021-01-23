@@ -77,7 +77,7 @@
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=995) | boards       |  dp+树状数组,平衡树               |  [sln](https://www.cnblogs.com/Point-King/p/13639066.html) [sln2](https://www.cnblogs.com/groundwater/p/12683948.html)  |
 | 2020 Feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1017) | timeline     |                                |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1018) | help      |   动态规划、集合、前缀和                  | [sln](https://www.cnblogs.com/bangdexuanyuan/p/14023642.html)       |
-|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1019) | deleg       |  DFS 树                              |    |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1019) | deleg       |  DFS 树、双指针、树形Dp                              |    |
 | 2020 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1041) | haircut     | fenwick Tree                               |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1042) | fcolor      |  DSU                               |  done |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1043) | exercise    |  01背包变种                              | [sln](https://blog.csdn.net/weixin_39412108/article/details/107757637)|
