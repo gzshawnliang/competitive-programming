@@ -41,6 +41,49 @@ class solution
             son[c].push_back(N-sub[c]);
     }
 
+    int check(int k)
+    {
+        if((N-1) % k !=0)
+            return 0;
+
+        if(k ==1)
+            return 1;
+
+        vector<int> cnt(k+1);   //cnt[1] 代表长度为1的链目前有多少条
+
+
+        for (int i = 1; i <= N; ++i)
+        {
+            int noMatchCout = 0;    //不匹配数量,如果大于0代表不匹配
+            for(auto c:son[i])
+            {
+                int m=c % k;
+                if(m == 0)          //直接匹配
+                    continue;
+
+                ++cnt[m];           //增加长度是m链的数量
+
+                int need=k-m;       //m需要一条k-m的链,才能凑成k的链
+
+                if(cnt[need]>0)     //找到need，匹配
+                {
+                    --cnt[need];    //取出need链，减少数量
+                    --cnt[m];       //取出m链，减少数量
+                    --noMatchCout;  //减少不匹配数量
+                }
+                else                //找不到匹配的need
+                {
+                    ++noMatchCout;  //增加不匹配数量
+                }
+            }
+
+            if(noMatchCout>0)        //存在不匹配的情况
+                return 0;
+
+        }
+
+        return 1;
+    }
   public:
     int solve()
     {
@@ -57,9 +100,9 @@ class solution
             g[a].push_back(b);
             g[b].push_back(a);
         }
-         dfs(1, 0);
-        // for (int i = 1; i <= n - 1; ++i)
-        //     cout << check(i);
+        dfs(1, 0);
+        for (int k = 1; k <= N - 1; ++k)
+            cout << check(k);
         return 0;
     }
 };
