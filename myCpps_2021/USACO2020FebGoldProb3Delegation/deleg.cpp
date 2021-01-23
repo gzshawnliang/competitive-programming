@@ -97,32 +97,8 @@ class solution
                     }
                 }
                 if (flg == false) break;
-
-                // int cntNotMatch = 0;
-                // for (auto x:tre)
-                // {
-                //     x = x % k;
-                //     if (x == 0) continue;
-
-                //     ++cntF[x];
-                //     if (cntF[k - x] > 0)
-                //     {
-                //         --cntF[k - x]; --cntF[x];
-                //         --cntNotMatch;
-                //     }
-                //     else
-                //     {
-                //         ++cntNotMatch;
-                //     }
-                // }
-
-                // if (cntNotMatch > 0)
-                // {
-                //     flg = false; break;
-                // }
             }
             cout << flg;
-
         }
 
         cout << '\n';
