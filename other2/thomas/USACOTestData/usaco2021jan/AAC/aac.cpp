@@ -9,7 +9,7 @@ int stor1[1<<10][20], stor2[1<<10][20];
  
 int main() {
     freopen("aac.in", "r", stdin);
-    freopen("aac.out", "w", stdout);    
+    //freopen("aac.out", "w", stdout);    
 	string s; cin >> s;
 	map<char,int> m; for(char c: s) m[c] = 0;
 	int cnt = 0; for (auto& t: m) t.s = cnt++;
