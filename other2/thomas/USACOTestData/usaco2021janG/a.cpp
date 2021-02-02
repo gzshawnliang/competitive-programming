@@ -29,24 +29,15 @@ class solution
   public:
     void solve2()
     {
-        bitset<8> b("0000010");
-        for (int i = 0; i <= 7; ++i)
-        {
-            bitset<8> b2(1 << i);
-            cerr << " " << b << "\n";
-            cerr << "^" << b2 << "\n";
-            cerr << "=" << (b^b2) << "\n";
-            cerr << "\n\n";
-        }
-        cerr << "--------------------------\n\n";
-        for (int i = 0; i <= 7; ++i)
-        {
-            bitset<8> b2(1 << i);
-            cerr << " " << b << "\n";
-            cerr << "&" << b2 << "\n";
-            cerr << "=" << (b&b2) << "\n";
-            cerr << "\n\n";
-        }        
+        bitset<8> b0("0011010");
+        bitset<8> b2("0000010");
+        bitset<8> b3("0001000");
+        bitset<8> b4("0100000");
+        cerr << (b0 & b2) << ", 是否包含b2\n";      //是否包含b2
+        cerr << (b0 & b3) << ", 是否包含b3\n";      //是否包含b3
+        cerr << (b0 & b4) << ", 是否包含b4\n";      //是否包含b4
+        cerr << (b0 ^ b2) << ", 排除b2\n";      //排除b2
+
     }
 
     void solve()
@@ -55,128 +46,69 @@ class solution
         cin >> s;
         int len = s.length();
         map<char, int> m;
-        map<int, char> m2;
         int last = 0;
         for (int i = 0; i <= len - 1; ++i)
         {
             if (m.count(s[i]) == 0)
             {
                 m[s[i]] = last;
-                m2[last]=s[i];
                 ++last;
             }
         }
-        int n = m.size();
-        v=vector<char>(n);
-        vector<vector<int>> occ(n, vector<int>(n, 0));
 
-        v[0]=m2[0];
+        int n = m.size();
+        vector<vector<int>> occ(n, vector<int>(n, 0));
         for (int i = 1; i <= len - 1; ++i)
         {
             char c1 = s[i - 1];
             char c2 = s[i];
             ++occ[m[c1]][m[c2]];
-            v[i]=m2[i];
         }
 
+        //2^n方案
         int total = (1 << n); //2^n
         vector<int> dp(total);
         dp[0] = 1;
-
-        for (int mask = 1; mask <= total - 1; ++mask)
+        for (int m = 1; m <= total - 1; ++m)
         {
-            bitset<8> b(mask);
-            printStr(b);
+            bitset<20> b(m);
+            //printStr(b);
+            //cerr << "\n";
      
-
-            cerr << "   " << b << "=" << b.to_ulong() << "\n";
-
             int result = INT_MAX;
             for (int i = 0; i <= n - 1; ++i)
             {
-                bitset<8> b3((1 << i));
-                if ((mask & (1 << i)) == 0)
+                bitset<20> b1;
+                b1.set(i);      
+                
+                if((b & b1) !=0)  //b集合包含b1集合
                 {
-                    cerr << "   '" << v[i] << "' not existed,continue;" << "\n";
-                    continue;
-                }
-               
-                if ((mask & (1 << i)) != 0)     //包含第i个字符的情况
-                {
-                    cerr <<"\n";
-                    cerr << "   " << "&" << b3 << "=" << (mask & (1 << i)) << " (" << v[i] <<")" <<"\n";
-                    bitset<8> b2(mask ^ (1 << i));
-                    cerr << "        ^" << b3 << "(1 << "<< i <<")" <<" ";
-                    printStr(b3);                     
-                    cerr << "\n";
-                    cerr << "        =" << b2 << "(" << b2.to_ulong() << ") dp[" << b2.to_ulong() << "]=" << dp[mask ^ (1 << i)] << " ";
-                    printStr(b2);
-                    cerr << "\n";
+                    // printStr(b1);
+                    // cerr << "\n";
 
-                    int ans = dp[mask ^ (1 << i)];
+                    bitset<20> c1 = b ^ b1;     //b排除b1之后的结果
+                    int ans = dp[c1.to_ulong()];
 
                     for (int j = 0; j <= n - 1; ++j)
                     {
-                        if ((mask & (1 << j)) != 0)     //包含第i个字符的情况
+                        bitset<20> b2;
+                        b2.set(j);
+                        if ((b & b2) != 0) //b集合包含b2集合
                         {
-                            bitset<8> b4(mask & (1 << j));
-                            cerr << "         " << b4 << ":";
-                            printStr(b4);                 
-
-                            cerr << "           occ[" << v[i] << "->" << v[j] << "]=" << occ[i][j] << " ";
                             ans += occ[i][j];
-                            cerr << "ans=" << ans << "\n";
-                        }
-                        else 
-                        {
-                            cerr << "\n";
                         }
                     }
                     result = min(result, ans);
                 }
             }
 
-            dp[mask] = result;
-            cerr << "           dp[" << mask << "]=" << dp[mask] << "\n";
+            // cerr << "   ans=" <<ans << "\n";
+            dp[m] = result;
+
         }
         cout << dp[total - 1] << "\n";
 
-
-
-        // for (int mask = 1; mask <= total - 1; ++mask)
-        // {
-        //     bitset<20> b(mask);
-        //     cerr << b.to_string() << "=" << b.to_ulong() << "\n";
-
-        //     int result = INT_MAX;
-        //     for (int i = 0; i <= n - 1; ++i)
-        //     {
-        //         if ((mask & (1 << i)) != 0)
-        //         {
-        //             bitset<20> b3((1 << i));
-        //             bitset<20> b2(mask ^ (1 << i));
-        //             cerr << "         ^" << b3.to_string() << "\n";
-        //             cerr << "         =" << b2.to_string() << "=" << b2.to_ulong() << "=dp[" << b2.to_ulong() << "]=" << dp[mask ^ (1 << i)] << "\n";
-
-        //             int ans = dp[mask ^ (1 << i)];
-
-        //             for (int j = 0; j <= n - 1; ++j)
-        //             {
-        //                 if ((mask & (1 << j)) != 0)
-        //                 {
-        //                     cerr << "           occ[" << i << "," << j << "]=" << occ[i][j] << " ";
-        //                     ans += occ[i][j];
-        //                     cerr << "ans=" << ans << "\n";
-        //                 }
-        //             }
-        //             result = min(result, ans);
-        //         }
-        //     }
-
-        //     dp[mask] = result;
-        //     cerr << "           dp[" << mask << "]=" << dp[mask] << "\n";
-        // }
-        // cout << dp[total - 1] << "\n";
+        //n!的阶乘方案
 
         // vector<int> v2;
         // for (int i = 0; i <= n - 1; ++i)
@@ -226,7 +158,7 @@ signed main()
 #endif
 
     solution sln1;
-    sln1.solve();
+    sln1.solve2();
     cout.flush();
 
 #ifdef LOCAL_DEBUG
