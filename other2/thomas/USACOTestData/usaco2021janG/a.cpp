@@ -66,10 +66,16 @@ class solution
         }
 
         //2^n方案
-        int total = (1 << n); //2^n
+        // int total = (1 << n); //2^n
+        // --total;
+        bitset<32> t;
+        for (int i = 0; i <= n-1; ++i)
+            t.set(i);
+        int total=t.to_ulong();
+
         vector<int> dp(total);
         dp[0] = 1;
-        for (int m = 1; m <= total - 1; ++m)
+        for (int m = 1; m <= total ; ++m)
         {
             bitset<20> b(m);
             //printStr(b);
@@ -158,7 +164,7 @@ signed main()
 #endif
 
     solution sln1;
-    sln1.solve2();
+    sln1.solve();
     cout.flush();
 
 #ifdef LOCAL_DEBUG
