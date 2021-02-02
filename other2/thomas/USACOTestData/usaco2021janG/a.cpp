@@ -29,15 +29,20 @@ class solution
   public:
     void solve2()
     {
-        bitset<8> b0("0011010");
-        bitset<8> b2("0000010");
-        bitset<8> b3("0001000");
-        bitset<8> b4("0100000");
-        cerr << (b0 & b2) << ", 是否包含b2\n";      //是否包含b2
-        cerr << (b0 & b3) << ", 是否包含b3\n";      //是否包含b3
-        cerr << (b0 & b4) << ", 是否包含b4\n";      //是否包含b4
-        cerr << (b0 ^ b2) << ", 排除b2\n";      //排除b2
-
+        // bitset<8> b0("0011010");
+        // bitset<8> b2("0000010");
+        // bitset<8> b3("0001000");
+        // bitset<8> b4("0100000");
+        // cerr << (b0 & b2) << ", 是否包含b2\n";      //是否包含b2
+        // cerr << (b0 & b3) << ", 是否包含b3\n";      //是否包含b3
+        // cerr << (b0 & b4) << ", 是否包含b4\n";      //是否包含b4
+        // cerr << (b0 ^ b2) << ", 排除b2\n";          //排除b2
+        int total = (1 << 5); //2^n
+        for (int m = 1; m <= total-1 ; ++m)
+        {
+            bitset<20> b(m);
+            cerr << b << "\n";
+        }
     }
 
     void solve()
@@ -66,14 +71,18 @@ class solution
         }
 
         //2^n方案
-        // int total = (1 << n); //2^n
-        // --total;
+        //int total = (1 << n); //2^n
+        
+
+        // bitset<32> t(total-1);
+        // int total2=t.to_ulong();
+
         bitset<32> t;
         for (int i = 0; i <= n-1; ++i)
             t.set(i);
+        
         int total=t.to_ulong();
-
-        vector<int> dp(total);
+        vector<int> dp(total+1);
         dp[0] = 1;
         for (int m = 1; m <= total ; ++m)
         {
@@ -87,7 +96,7 @@ class solution
                 bitset<20> b1;
                 b1.set(i);      
                 
-                if((b & b1) !=0)  //b集合包含b1集合
+                if((b & b1) !=0)  //如果b集合包含b1集合
                 {
                     // printStr(b1);
                     // cerr << "\n";
@@ -99,7 +108,7 @@ class solution
                     {
                         bitset<20> b2;
                         b2.set(j);
-                        if ((b & b2) != 0) //b集合包含b2集合
+                        if ((b & b2) != 0) //如果b集合包含b2集合
                         {
                             ans += occ[i][j];
                         }
@@ -112,7 +121,14 @@ class solution
             dp[m] = result;
 
         }
-        cout << dp[total - 1] << "\n";
+
+        // for (int i = 0; i <= dp.size() - 1; ++i)
+        // {
+        //     bitset<20> b(i);
+        //     cout << "dp[" << b.to_string() << "]=" << dp[i] << "\n";
+        // }
+
+        cout << dp[total] << "\n";
 
         //n!的阶乘方案
 
