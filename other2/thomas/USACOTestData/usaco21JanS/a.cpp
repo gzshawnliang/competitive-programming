@@ -1,3 +1,14 @@
+/*
+===========================================================
+ * @名称:    Dance Mooves
+ * @作者:    Thomas 
+ * @创建时间: 2021-02-04 22:24:37 
+ * @修改人:   Shawn 
+ * @修改时间: 2021-02-04 22:24:37 
+ * @备注:     并查集		
+ * @题目来源： USACO 2021 January Contest, Silver Problem 1. Dance Mooves
+===========================================================
+*/
 #ifndef LOCAL_DEBUG
 #define NDEBUG //ban assert when submit to online judge
 #endif
@@ -13,9 +24,6 @@
     std::cin.tie(nullptr);            \
     std::cout.tie(nullptr)
 
-#define a first
-#define b second
-
 using namespace std;
 
 using ill = long long;
@@ -27,7 +35,7 @@ class solution
     vector<int> vist;                       //第i个牛是否访问过
 
     vector<int> currPos;                    //第i个牛现在的位置
-    vector<unordered_set<int>> goPos;       //第i个牛到过的地方
+    vector<unordered_set<int>> vistPosSet;       //第i个牛到过的地方
     vector<int> fa;                         //第i个牛的父亲，同一个环父亲一样
 
     int find(int x)
@@ -60,13 +68,13 @@ class solution
         fa= vector<int>(n+1);
         g = vector<vector<int>>(n+1,vector<int>());
         vist= vector<int>(n+1);
-        goPos=vector<unordered_set<int>>(n+1);
+        vistPosSet=vector<unordered_set<int>>(n+1);
 
         for (int i = 1; i <= n; ++i)
         {
             fa[i]=i;
             currPos[i] = i;
-            goPos[i].insert(i);
+            vistPosSet[i].insert(i);
         }
 
         //模拟交换
@@ -75,8 +83,8 @@ class solution
             int ai,bi;
             cin>> ai>>bi;
 
-            goPos[currPos[ai]].insert(bi);
-            goPos[currPos[bi]].insert(ai);
+            vistPosSet[currPos[ai]].insert(bi);
+            vistPosSet[currPos[bi]].insert(ai);
 
             swap(currPos[ai],currPos[bi]);
         }
@@ -90,7 +98,7 @@ class solution
             if(vist[i]==0)
                 dfs(i,i);
 
-
+        //合并currPos[i]和i，他们是同属于一个环
         for(int i=1;i<=n;++i)
         {	
             int fx=find(i);
@@ -101,10 +109,10 @@ class solution
         }
 
         for (int i = 1; i <= n; ++i)
-            goPos[fa[i]].insert(goPos[i].begin(),goPos[i].end());
+            vistPosSet[fa[i]].insert(vistPosSet[i].begin(),vistPosSet[i].end());
 
         for (int i = 1; i <= n; ++i)
-            cout << goPos[fa[i]].size() << "\n";
+            cout << vistPosSet[fa[i]].size() << "\n";
     }
 };
 
