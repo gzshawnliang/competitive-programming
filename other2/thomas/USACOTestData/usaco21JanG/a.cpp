@@ -1,14 +1,3 @@
-/*
-===========================================================
- * @名称:    Dance Mooves
- * @作者:    Thomas 
- * @创建时间: 2021-02-04 22:24:37 
- * @修改人:   Shawn 
- * @修改时间: 2021-02-04 22:24:37 
- * @备注:     并查集		
- * @题目来源： USACO 2021 January Contest, Silver Problem 1. Dance Mooves
-===========================================================
-*/
 #ifndef LOCAL_DEBUG
 #define NDEBUG //ban assert when submit to online judge
 #endif
@@ -62,8 +51,8 @@ class solution
   public:
     void solve()
     {
-        int n,k;
-        cin >>n>>k;
+        ill n,k,m;
+        cin >>n>>k>>m;
         currPos = vector<int>(n+1);
         fa= vector<int>(n+1);
         g = vector<vector<int>>(n+1,vector<int>());

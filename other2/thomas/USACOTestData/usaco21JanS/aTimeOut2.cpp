@@ -54,7 +54,7 @@ class solution
             else
             {
                 //mergeSet(pos3[v],pos3[u]);
-                //pos3[v].insert(pos3[u].begin(),pos3[u].end());
+                pos3[v].insert(pos3[u].begin(),pos3[u].end());
                 group[v]=max(group[u],(int)pos3[v].size());
                 group[u]=group[v];
                 parent[v]=u;
