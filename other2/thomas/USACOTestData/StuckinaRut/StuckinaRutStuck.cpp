@@ -65,13 +65,10 @@ class solution
             int x,y;
             cin >> c>> x>>y;
             if(c=='E')
-            {
                 eastCow.push_back({id,x,y});
-            }
             else if(c=='N')
-            {
                 northCow.push_back({id,x,y});
-            }
+            
             ++id;
         }
 
@@ -82,17 +79,17 @@ class solution
         {
             for (int j = 0,lenN=northCow.size(); j <= lenN - 1; ++j)
             {
-                if(get<1>(eastCow[i])>get<1>(northCow[j]))
+                if(get<1>(eastCow[i])>get<1>(northCow[j]))      //情况一，不相交。无交点
                     continue;
 
-                if(get<2>(eastCow[i])<get<2>(northCow[j]))
+                if(get<2>(eastCow[i])<get<2>(northCow[j]))      //情况二，不相交。无交点
                     continue;
 
-                //创建交点，如果相交，放入队列,距离近的放入
                 pair<int,int> point={get<1>(northCow[j]),get<2>(eastCow[i])};
-                if(abs(point.first-get<1>(eastCow[i]))==abs(point.second-get<2>(northCow[j])))
+                if(abs(point.first-get<1>(eastCow[i]))==abs(point.second-get<2>(northCow[j])))  //情况三，距离相等、不相交。无交点
                     continue;
                 
+                //创建交点，如果相交，放入队列,距离近的放入
                 CrossPoint crossPoint;
                 crossPoint.minDis=min(abs(point.first-get<1>(eastCow[i])),abs(point.second-get<2>(northCow[j])));
                 crossPoint.cow1=get<0>(eastCow[i]);
