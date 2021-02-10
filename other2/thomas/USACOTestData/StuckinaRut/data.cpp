@@ -18,7 +18,7 @@ string getCurrTime()
 
 int main()
 {
-    const int FileCount = 1000;  //note:文件数量
+    const int FileCount = 500;  //note:文件数量
     ofstream fout;             //note:文件流
     random rdNum;              //note:随机数
 
@@ -43,12 +43,12 @@ int main()
         unordered_set<int> Y;
         while (X.size()<N)
         {
-            X.insert(rdNum.GetRand(1, 3e1));
+            X.insert(rdNum.GetRand(1, 2e1));
         }
 
         while (Y.size()<N)
         {
-            Y.insert(rdNum.GetRand(1, 3e1));
+            Y.insert(rdNum.GetRand(1, 2e1));
         }
 
         auto itX=X.begin();

@@ -32,8 +32,8 @@ void dfs(long long x,long long ffa){
 	}
 }
 int main(){
-    freopen("AC.in", "r", stdin);
-    freopen("AC.out", "w", stdout);    
+    freopen("StuckinaRut.in", "r", stdin);
+    freopen("StuckinaRut.ok", "w", stdout);    
 	scanf("%lld",&T);
 	for(long long i=1;i<=T;i++){
 		cin>>a[i].c;
