@@ -58,15 +58,15 @@ class solution
             ++id;
         }
 
-        std::sort(vE.begin(), vE.end(), [](tuple<int,int,int> const & a, tuple<int,int,int> const & b) 
-        {
-            return get<1>(a) < get<1>(b); 
-        });
+        // std::sort(vE.begin(), vE.end(), [](tuple<int,int,int> const & a, tuple<int,int,int> const & b) 
+        // {
+        //     return get<1>(a) < get<1>(b); 
+        // });
 
-        std::sort(vN.begin(), vN.end(), [](tuple<int,int,int> const & a, tuple<int,int,int> const & b) 
-        {
-            return get<2>(a) < get<2>(b); 
-        });
+        // std::sort(vN.begin(), vN.end(), [](tuple<int,int,int> const & a, tuple<int,int,int> const & b) 
+        // {
+        //     return get<2>(a) < get<2>(b); 
+        // });
 
         // //crossover point
         // auto compare = [](const tuple<int,int,int> & a, const tuple<int,int,int> & b)
@@ -93,18 +93,8 @@ class solution
                 if(abs(point.first-get<1>(vE[i]))==abs(point.second-get<2>(vN[j])))
                     continue;
                 
-                //int dis=min(abs(point.first-get<1>(vE[i])),abs(point.second-get<2>(vN[j])));
                 int dis=min(abs(point.first-get<1>(vE[i])),abs(point.second-get<2>(vN[j])));
                 pq.push({0-dis,get<0>(vE[i]),abs(point.first-get<1>(vE[i])),get<0>(vN[j]),abs(point.second-get<2>(vN[j])),0});
-
-                // if(abs(point.first-get<1>(vE[i]))>abs(point.second-get<2>(vN[j])))
-                // {
-                //     pq.push({0-dis,get<0>(vN[j]),get<0>(vE[i])});
-                // }
-                // else
-                // {
-                //     pq.push({0-dis,get<0>(vE[i]),get<0>(vN[j])});
-                // }
             }
         }
         
@@ -159,25 +149,15 @@ class solution
                     g[cow2].push_back(cow1);
                 }
             }
-
-            // if(stop[get<1>(curr)]==0 && stop[get<2>(curr)]==0)
-            // {
-            //     stop[get<2>(curr)]=1;
-            //     g[get<1>(curr)].push_back(get<2>(curr));
-            //     //cerr << "dis:" << get<0>(curr) << ", " << get<1>(curr) << " stop " << get<2>(curr) << "\n";
-            // }
         }
 
         for (int i = 1; i <= N; ++i)
-        {
             if(vist[i]==0)
                 dfs(i,i);
-        }
 
         for (int i = 1; i <= N; ++i)
-        {
             cout << childCount[i]-1 << "\n";
-        }
+        
         return;
     }
 };
