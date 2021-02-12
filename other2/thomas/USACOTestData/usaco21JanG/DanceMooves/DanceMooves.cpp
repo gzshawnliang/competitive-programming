@@ -236,20 +236,15 @@ signed main()
     FastIO;
 
 #ifdef LOCAL_DEBUG
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
-    auto startTime = chrono::high_resolution_clock::now();
+    freopen("DanceMooves.in", "r", stdin);
+    freopen("DanceMooves.out", "w", stdout);
 #endif
 
     solution sln1;
     sln1.solve();
     cout.flush();
 
-#ifdef LOCAL_DEBUG
-    cerr << "Execution time: "
-         << chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count()
-         << " ms\n";
-#endif
+
 
     return 0;
 }

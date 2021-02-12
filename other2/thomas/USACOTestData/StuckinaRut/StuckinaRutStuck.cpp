@@ -167,8 +167,8 @@ signed main()
     FastIO;
 
 #ifdef LOCAL_DEBUG
-    freopen("StuckinaRut.in", "r", stdin);
-    freopen("StuckinaRut.out", "w", stdout);
+    freopen("StuckinaRutStuck.in", "r", stdin);
+    freopen("StuckinaRutStuck.out", "w", stdout);
 #endif
 
     solution sln1;

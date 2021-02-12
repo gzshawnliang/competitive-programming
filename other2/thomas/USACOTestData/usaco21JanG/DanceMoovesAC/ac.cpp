@@ -50,8 +50,8 @@ void dfs(int node)
 
 int main()
 {
-    freopen("a.in", "r", stdin);
-    freopen("a.ok", "w", stdout);
+    freopen("ac.in", "r", stdin);
+    freopen("ac.ok", "w", stdout);
 
     cin >> N >> K >> M;
     for (int i = 0; i < K; i++)
