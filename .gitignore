@@ -30,6 +30,7 @@
 *.exe
 *.ex2
 *.app
+*.class
 
 
 ## Ignore Visual Studio temporary files, build results, and
