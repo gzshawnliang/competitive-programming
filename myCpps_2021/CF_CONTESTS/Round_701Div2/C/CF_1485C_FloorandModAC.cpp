@@ -45,23 +45,44 @@ class solution
   public:
     void solve()
     {
-        int tct; cin >> tct;
-        for (int tcc = 1; tcc <= tct; ++tcc)
+        ill tct; cin >> tct;
+        for (ill tcc = 1; tcc <= tct; ++tcc)
         {
-            int x, y; cin >> x >> y;
-            int stt = sqrt(x);
-
-            int ans = (1 + stt - 1) * (stt - 1) / 2;
-
-            int nowI = stt + 1;
-            for (int val = stt - 1; val >= 1; --val)
+            ill x, y; cin >> x >> y;
+            if (y == 1)
             {
-                int nxtI = min(x / val, y + 1);
-                ans += max(0, (nxtI - nowI) * val);
+                cout << "0\n"; continue;
+            }
+            //ill stt = sqrt(x); if (x >= 3) stt = max(stt, 2LL);
+            //ill actStt = min(y - 1, stt - 1);
 
-                //cout << (nxtI - nowI) << "*" << val << '\n';
+            bool flg = true;
+            ill actStt = 1;
+            while ((actStt + 1) * actStt + actStt <= x)
+            {
+                ++actStt;
+                if (actStt >= y){
+                    flg = false;
+                    break;
+                }
+            }
+            --actStt;
 
-                nowI = nxtI;
+            ill ans = (1 + actStt) * (actStt) / 2;
+
+            if (flg)
+            {
+                ill nowI = actStt + 2;
+                for (ill val = actStt; val >= 1; --val)
+                {
+                    ill nxtI = min(x / val, y + 1);
+
+                    ans += ((nxtI - nowI) * val);
+
+                    //cout << (nxtI - nowI) << "*" << val << '\n';
+
+                    nowI = nxtI;
+                }
             }
 
             cout << ans << '\n';
