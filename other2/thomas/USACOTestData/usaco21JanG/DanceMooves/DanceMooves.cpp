@@ -76,7 +76,6 @@ class solution
             cowStep[i].push_back({i, 0});
         }
 
-
         //模拟交换k次,一个回合，如果m<k则m次
         for (int i = 1; i <= min(k, m); ++i)
         {
@@ -123,8 +122,8 @@ class solution
                 int size = cycle.size();
                 //cerr << "cycle  size:" << size <<",";
 
-                int roundCount = roundCnt;  //牛交换的回合数==环中走的步数
-                int R=remCnt;               //完成交换回合数之后，还需要交换remCnt次
+                int roundCount = roundCnt; //牛交换的回合数==环中走的步数
+                int R = remCnt;            //完成交换回合数之后，还需要交换remCnt次
                 if (roundCount >= size)
                 {
                     //回合数大于环的长度
@@ -169,7 +168,7 @@ class solution
                 };
 
                 int last = 0;
-                
+
                 //循环圈
                 for (int cyclePos = 0; cyclePos <= size - 1; ++cyclePos)
                 {
