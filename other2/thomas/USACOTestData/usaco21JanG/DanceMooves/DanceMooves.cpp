@@ -19,7 +19,7 @@ using ill = long long;
 
 class solution
 {
-    vector<int> ans;                        //编号i的牛答案
+    vector<int> ans;                        //编号i的牛占据的不同的位置数量(答案)
     vector<int> vist;                       //编号i牛是否访问过,dfs使用
     vector<int> currPosCow;                 //currPosCow[i]=j,编号i位置现在是编号j牛
     vector<int> currCowPos;                 //currCowPos[i]=j,编号i牛现在是位置j
@@ -45,6 +45,7 @@ class solution
     {
         ill n, k, m;
         cin >> n >> k >> m;
+        
         to = vector<int>(n + 1);
         from = vector<int>(n + 1);
         vist = vector<int>(n + 1);
@@ -206,6 +207,7 @@ class solution
                 }
             }
 
+            //输出答案
             for (int i = 1; i <= n; ++i)
                 cout << ans[i] << "\n";
         }
