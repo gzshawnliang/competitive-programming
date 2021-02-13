@@ -19,14 +19,14 @@ using ill = long long;
 
 class solution
 {
-    vector<int> ans;                    //编号i的牛答案
-    vector<int> vist;                   //编号i牛是否访问过,dfs使用
-    vector<int> currPosCow;             //currPosCow[i]=j,编号i位置现在是编号j牛
-    vector<int> currCowPos;             //currCowPos[i]=j,编号i牛现在是位置j
-    vector<unordered_set<int>> vistPos; //编号i牛到过的地方
+    vector<int> ans;                        //编号i的牛占据的不同的位置数量(答案)
+    vector<int> vist;                       //编号i牛是否访问过,dfs使用
+    vector<int> currPosCow;                 //currPosCow[i]=j,编号i位置现在是编号j牛
+    vector<int> currCowPos;                 //currCowPos[i]=j,编号i牛现在是位置j
+    vector<unordered_set<int>> vistPos;     //编号i牛到过的地方
 
-    vector<int> to;   //to[i]=j,编号i牛下个回合到编号j牛
-    vector<int> from; //from[i]=j,编号i的牛来自(上回合)编号j牛
+    vector<int> to;                         //to[i]=j,编号i牛下个回合到编号j牛
+    vector<int> from;                       //from[i]=j,编号i的牛来自(上回合)编号j牛
 
     vector<vector<pair<int, int>>> cowStep; //cowStep[i]={j1,k1},{j2,k2} 编号i的牛在第k1步到达位置j1,k2步到达j2
 
@@ -45,6 +45,7 @@ class solution
     {
         ill n, k, m;
         cin >> n >> k >> m;
+        
         to = vector<int>(n + 1);
         from = vector<int>(n + 1);
         vist = vector<int>(n + 1);
@@ -91,7 +92,7 @@ class solution
         if (m <= k) //m<=k输出答案，不够一个回合
         {
             for (int i = 1; i <= n; ++i)
-                cout << vistPos[i].size() << "\n";
+                cout << cowStep[i].size() << "\n";
         }
         else
         {
@@ -100,7 +101,6 @@ class solution
             {
                 to[currPosCow[i]] = i;
                 from[i] = currPosCow[i];
-                ans[i] = vistPos[i].size();
             }
 
             ill roundCnt = m / k;          //牛交换的回合数==环中走的步数
@@ -118,10 +118,7 @@ class solution
                 else
                     continue;
 
-                ans[i] = vistPos[i].size();
                 int size = cycle.size();
-                //cerr << "cycle  size:" << size <<",";
-
                 int roundCount = roundCnt; //牛交换的回合数==环中走的步数
                 int R = remCnt;            //完成交换回合数之后，还需要交换remCnt次
                 if (roundCount >= size)
@@ -210,6 +207,7 @@ class solution
                 }
             }
 
+            //输出答案
             for (int i = 1; i <= n; ++i)
                 cout << ans[i] << "\n";
         }
