@@ -130,6 +130,10 @@ class solution
                     roundCnt=size;
                     remCnt=0;
                 }
+                else
+                {
+                    remCnt = m % k;         //完成交换回合数之后，还需要交换remCnt次
+                }
                 //cerr << " roundCnt:" << roundCnt <<",";
 
                 //模拟在环中走roundCnt步，每个节点次走roundCnt步
@@ -188,7 +192,6 @@ class solution
                             {
                                 int next=to[j];
                                 addCow(next);
-                                //currPosCow[j]=from[currPosCow[j]];
                                 j=next;
                                 ++step;
                             }  
@@ -211,8 +214,16 @@ class solution
                
                 }
                 
-                //todo:模拟交换剩余次数
-                
+                //todo:往前走remCnt步，模拟交换剩余次数
+                // for (int i = 1; i <= remCnt; ++i)
+                // {
+                //     auto s = q.front();
+                //     q.pop();
+                //     int a=s.first;
+                //     int b=s.second;
+
+                // }
+
                 
                 // auto endTime = chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count();
                 // cerr << "Execution time: " << endTime << " ms\n";                
