@@ -95,7 +95,7 @@ class solution
             currCowPos[currPosCow[b]] = b;
         }
 
-        if (m <= k) //m<=k输出答案，最多1个回合,直接输出答案
+        if (m <= k)         //m<=k输出答案，最多1个回合,直接输出答案
         {
             for (int i = 1; i <= n; ++i)
                 cout << vistPos[i].size() << "\n";
@@ -145,7 +145,7 @@ class solution
 
             int totalStep = roundCount - 1; //已经走了一步
 
-            int currAns = 0;
+            int posCnt = 0;
             vector<int> posPassCnt(n + 1); //posPassCnt[i]=j.编号i的位置访问了j次
 
             auto addCow = [&](int cowId, int len) {
@@ -155,7 +155,7 @@ class solution
                         return;
 
                     if (posPassCnt[c.second] == 0) //增加位置c访问数量  posPassCnt.count(c)==0 ||
-                        ++currAns;
+                        ++posCnt;
 
                     ++posPassCnt[c.second];
                 }
@@ -171,7 +171,7 @@ class solution
                         continue;
 
                     if (posPassCnt[c.second] == 1)
-                        --currAns;
+                        --posCnt;
                     //posPassCnt.erase(c);
 
                     --posPassCnt[c.second]; //减少位置c访问数量
@@ -188,7 +188,7 @@ class solution
 
                 if (cyclePos == 0) //在环中第0个节点创建双指针
                 {
-                    currAns = vistPos[pBegin].size();
+                    posCnt = vistPos[pBegin].size();
                     for (auto kk : vistPos[pBegin])
                         posPassCnt[kk] = 1;
 
@@ -211,7 +211,7 @@ class solution
                 if (R > 0)
                     addCow(to[pEnd], R);
 
-                ans[pBegin] = currAns;      //记录当前答案
+                ans[pBegin] = posCnt;      //记录当前答案
 
                 //撤销前走R步，需要模拟下个节点
                 if (R > 0)
