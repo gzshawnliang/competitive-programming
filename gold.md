@@ -88,11 +88,11 @@
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1066) | Bovine Genetics    | dp                         |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1067) | Square Pasture     | two point / PIE            |Done    |
 
-| Contest   | #                                                               | Name          | Topic                            | Result |
-| --------- | --------------------------------------------------------------  | ------------- | -------------------------------- | ------ |
-| 2020 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=1077)  | Uddered but not Herd        |                    |        |
-|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1066) | Telephone                   | Shortest Path      |*Done    |
-|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1067) | Dance Mooves                |                    |        |
+| Contest   | #                                                               | Name          | Topic                                | Result |
+| --------- | --------------------------------------------------------------  | ------------- | --------------------------------     | ------ |
+| 2020 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=1077)  | Uddered but not Herd        | DP with Bitmask bitset | Done   |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1066) | Telephone                   | Shortest Path          |*Done   |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1067) | Dance Mooves                | two point Window Sliding + 模拟 | Done   |
 
 
 todo:
