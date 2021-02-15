@@ -1,3 +1,14 @@
+/*
+===========================================================
+ * @名称:		Problem 3. Dance Mooves
+ * @作者:		Shawn 
+ * @创建时间: 2021-02-15 10:11:26 
+ * @修改人:   Shawn 
+ * @修改时间: 2021-02-15 10:11:26 
+ * @备注:	USACO 2021 January Contest, Gold	(AC)
+ * @题目来源： http://www.usaco.org/index.php?page=viewproblem2&cpid=1091
+===========================================================
+*/
 #ifndef LOCAL_DEBUG
 #define NDEBUG //ban assert when submit to online judge
 #endif
