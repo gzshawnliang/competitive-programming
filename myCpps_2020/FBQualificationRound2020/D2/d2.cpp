@@ -205,7 +205,7 @@ int main()
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 #ifndef ONLINE_JUDGE
-    freopen("running_on_fumes_chapter_2_input.txt", "r", stdin);
+    freopen("d2.in", "r", stdin);
     freopen("d2.out", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
