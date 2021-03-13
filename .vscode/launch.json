@@ -10,7 +10,7 @@
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "preLaunchTask": "msvc_build",
-            "externalConsole": true
+            "console":"internalConsole"
         },
         {
             "name": "C++ Launch (GDB)",
