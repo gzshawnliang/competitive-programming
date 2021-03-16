@@ -19,15 +19,42 @@ using ill = long long;
 
 class solution
 {
+    //左上角3x3最基础的正方形，对角线包含蓝色正方形的个数
+    const vector<vector<int>> baseSqr = {{1, 0, 1}, {0, 2, 0}, {1, 0, 3}};
+
+    //x,y在多大的正方形
+    int SqrLen(int x,int y)
+    {
+        int max1=max(x,y);
+        int r=1;
+        while (r<max1)
+        {
+            r=r*3;
+        }
+        return r;
+    }
+
+    //在长度是n的正方形内，(0,y-x),(x,y)经过了多少个蓝色正方形
+    int blueSqrCount(int x,int y,int n)
+    {
+        if(n==3)
+        {
+            
+        }
+        int base=n/3;
+        if(y<base)
+            return baseSqr[x][y];
+
+    }
+
   public:
-    void solve()
+    void genData()
     {
         int N=1000;
         for (int x = 0; x <= N-1; ++x)
         {
             for (int y = 0; y <= N-1; ++y)
             {
-                int k=0;
                 int r=1;
                 bool tag=false;
                 while (r<=N)
@@ -59,6 +86,20 @@ class solution
             cout<<"\n";
         }
     }
+
+
+    void solve()
+    {
+        //baseSqr = {{1, 0, 1}, {0, 2, 0}, {1, 0, 3}};
+
+        int x=0;
+        int y=2;
+        if(x>y)
+            swap(x,y);
+        cout << y-x << "\n";
+
+        cout << SqrLen(x,y) << "\n";
+    }
 };
 
 signed main()
@@ -66,8 +107,8 @@ signed main()
     FastIO;
 
 #ifdef LOCAL_DEBUG
-    //freopen("counttheCows.in", "r", stdin);
-    freopen("counttheCows.out", "w", stdout);
+    freopen("counttheCows.in", "r", stdin);
+    //freopen("counttheCows.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
