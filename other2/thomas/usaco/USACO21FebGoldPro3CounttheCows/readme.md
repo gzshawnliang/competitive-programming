@@ -15,8 +15,9 @@ $\Rightarrow 3^i \times 3^i \Rightarrow 3^{i-1} \times 3^{i-1}$
 
 <img src="images/3.png"/>
 
-<img src="images/4.png"/>
+## 基本矩形 $3\times3 $
 
+<img src="images/4.png"/>
 
 <img src="images/5.png"/>
 
