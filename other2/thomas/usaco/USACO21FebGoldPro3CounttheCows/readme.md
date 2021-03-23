@@ -76,3 +76,39 @@ $i$-维正方形在坐标$(0,3^{i-1})$处形成的对角线，不经过任何蓝
 
 
 ## 算法设计
+- 对角线$(0,y-x) \rightarrow (x,y)$在多大$3^i$的正方形？
+```cpp
+    //对角线(0,y-x)->(x,y)在多大3^i的正方形？
+    ill sqrLen(ill x, ill y)
+    {
+        ill max1 = max(x, y);
+        ill r = 1ll;
+        while (r <= max1)
+            r *= 3ll;
+
+        return r;
+    }
+```
+
+- 如果$y-x=diff$，则以点$(0,diff)$为对角线，也就是说直线 $y=x+diff$ 在长度是 $n(n=3^i,n>diff)$ 的正方形内经过多少个蓝色格子？
+
+<img src="images/14.png"/>
+
+如果$n=1$或$n==3$
+<img src="images/15.png"/>
+```cpp
+if(n==1ll)
+{
+    return 1ll;
+}    
+else if(n==3ll)
+{
+    if(diff==0ll)
+        return 3ll;
+    else if(diff==1)
+        return 0ll;
+    else if(diff==2)
+        return 1ll;
+} 
+```
+
