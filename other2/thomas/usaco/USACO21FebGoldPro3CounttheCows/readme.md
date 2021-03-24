@@ -70,13 +70,21 @@ $i$-维正方形在坐标$(0,3^{i-1})$处形成的对角线，不经过任何蓝
 
 
 ## 分治
-对角线每经过一个正方形，都可拆分成最小单位的基础正方形$3\times3$，最终答案是由正方形 $3\times3$累加而得。
+- 对角线每经过一个正方形，都可拆分成最小单位的基础正方形$3\times3$，最终答案是由正方形 $3\times3$累加而得。
 如下图：
 <img src="images/13.png"/>
 
+- 如下图,很明显
+$ans=ans1+ans3+ans5$
+正方形1,3都是完整的穿越的，因此
+$ans=2*ans1+ans5$
+算法拆分2部分，先计算穿越完整的正方形答案再计算不完整的正方形答案
+<img src="images/23.png"/>
+
 
 ## 算法设计
-- 对角线$(0,y-x) \rightarrow (x,y)$在多大$3^i$的正方形？
+- 令 $diff=y-x$
+- 对角线$(0,diff) \rightarrow (x,y)$在多大$3^i$的正方形？
 ```cpp
     //对角线(0,y-x)->(x,y)在多大3^i的正方形？
     ill sqrLen(ill x, ill y)
@@ -90,11 +98,14 @@ $i$-维正方形在坐标$(0,3^{i-1})$处形成的对角线，不经过任何蓝
     }
 ```
 
-- 如果$y-x=diff$，则以点$(0,diff)$为对角线，也就是说直线 $y=x+diff$ 在长度是 $n(n=3^i,n>diff)$ 的正方形内经过多少个蓝色格子？
+- 以点$(0,diff)$为对角线，也就是说直线 $y=x+diff$ 在长度是$n(n=3^i,n>diff)$的正方形内经过多少个蓝色格子？$n$必须能包住对角线。
+```cpp
+ill sumCompleteBlueSqrCnt(ill diff, ill n)
+```
 
 <img src="images/14.png"/>
 
-如果$n=1$或$n==3$
+- 情况一： 如果$n=1$或$n=3$
 <img src="images/15.png"/>
 ```cpp
 if(n==1ll)
@@ -112,3 +123,97 @@ else if(n==3ll)
 } 
 ```
 
+- 情况二： $diff < \frac{n}{3}$,穿过$1,3,5 == 3 \times1$
+
+<img src="images/17.png"/>
+```cpp
+    n /=3ll;
+    if (diff < n)   //情况二：x<y<n,穿过1,3,5
+    {
+        return 3ll * sumCompleteBlueSqrCnt(diff, n);
+    }
+```
+
+- 情况三： $diff = \frac{n}{3}$,穿过空白格子
+<img src="images/18.png"/>
+```cpp
+    n /=3ll;
+    ...
+    else if(diff==n)    //情况三：穿过空白格子
+    {
+        return 0ll;
+    } 
+```
+
+- 情况四： $\frac{n}{3} < diff  < 2\times n$,穿过4号格子。处理办法：等同于在1号格子对角线的上部。计算走几步到达4号正方形，计算x,y坐标再递归调用情况二。
+
+<img src="images/19.png"/>
+<img src="images/21.png"/>
+```cpp
+    n /=3ll;
+    ...
+    else if (diff < 2*n) //情况四：穿过4号格子，等同于在1号格子对角线的上部。计算走几步到达4号正方形，计算x,y坐标再递归调用情况二。
+    {
+        ill x1 = (2ll * n - diff);
+        ill y1 = 0ll;
+        if (x1 > y1)
+            swap(y1, x1);
+
+        return sumCompleteBlueSqrCnt(y1 - x1, n);
+    }
+```
+- 情况五：等同情况一，穿过4号格子，处理办法：等同于在1号格子对角线或者对角线的下部
+<img src="images/22.png"/>
+```cpp
+    n /=3ll;
+    ...
+
+    else        //情况五：等同情况一，穿过4号格子，处理办法：等同于在1号格子对角线或者对角线的下部
+    {
+        return sumCompleteBlueSqrCnt(diff % n, n);
+    }
+```
+- 完整sumCompleteBlueSqrCnt代码
+```cpp
+    //在长度是n的正方形内，(0,diff) 开始的对角线，在n长度的正方形经过了多少个蓝色格子
+    ill sumCompleteBlueSqrCnt(ill diff, ill n)
+    {
+        //情况一：
+        if(n==1ll)
+        {
+            return 1ll;
+        }
+        else if(n==3ll)
+        {
+            if(diff==0ll)
+                return 3ll;
+            else if(diff==1)
+                return 0ll;
+            else if(diff==2)
+                return 1ll;
+        }   
+        
+        n /=3ll;
+        if (diff < n)   //情况二：x<y<n,穿过1,3,5
+        {
+            return 3ll * sumCompleteBlueSqrCnt(diff, n);
+        }
+        else if(diff==n)    //情况三：穿过空白格子
+        {
+            return 0ll;
+        }        
+        else if (diff < 2*n) //情况四：穿过4号格子
+        {
+            ill x1 = (2ll * n - diff);
+            ill y1 = 0ll;
+            if (x1 > y1)
+                swap(y1, x1);
+
+            return sumCompleteBlueSqrCnt(y1 - x1, n);
+        }
+        else        //情况五：等同情况一，穿过4号格子，处理办法：等同于在1号格子对角线或者对角线的下部
+        {
+            return sumCompleteBlueSqrCnt(diff % n, n);
+        }
+    }
+```

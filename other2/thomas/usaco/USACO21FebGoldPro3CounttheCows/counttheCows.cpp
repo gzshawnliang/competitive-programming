@@ -35,22 +35,10 @@ class solution
         return r;
     }
 
-    ill SqrLen2(ill x, ill y)
+    //在长度是n的正方形内，(0,diff) 开始的对角线，在n长度的正方形经过了多少个蓝色格子
+    ill sumCompleteBlueSqrCnt(ill diff, ill n)
     {
-        int i=0;
-        ill max1 = max(x, y);
-        ill r = 1ll;
-        while (r <= max1)
-        {
-            r *= 3ll;
-            ++i;
-        }
-
-        return i;
-    }
-    //在长度是n的正方形内，(0,diff) 开始的对角线，经过了多少个蓝色正方形
-    ill sumBlueSqrCnt(ill diff, ill n)
-    {
+        //情况一：
         if(n==1ll)
         {
             return 1ll;
@@ -66,30 +54,26 @@ class solution
         }   
         
         n /=3ll;
-        if (diff < n) //x<y<n,仅在第1个
+        if (diff < n)   //情况二：x<y<n,穿过1,3,5
         {
-            return 3ll * sumBlueSqrCnt(diff, n);
+            return 3ll * sumCompleteBlueSqrCnt(diff, n);
         }
-        else if (diff < 2*n) //y>n
+        else if(diff==n)    //情况三：穿过空白格子
         {
-            if(diff==n)
-            {
-                return 0ll;
-            }
-            else 
-            {
-                ill x1 = (2ll * n - diff);
-                ill y1 = 0ll;
-                if(x1>y1)
-                    swap(y1,x1);
-                
-                return sumBlueSqrCnt(y1-x1, n);
-            }
+            return 0ll;
+        }        
+        else if (diff < 2*n) //情况四：穿过4号格子
+        {
+            ill x1 = (2ll * n - diff);
+            ill y1 = 0ll;
+            if (x1 > y1)
+                swap(y1, x1);
 
+            return sumCompleteBlueSqrCnt(y1 - x1, n);
         }
-        else
+        else        //情况五：等同情况一，穿过4号格子，处理办法：等同于在1号格子对角线或者对角线的下部
         {
-            return sumBlueSqrCnt(diff % n, n);
+            return sumCompleteBlueSqrCnt(diff % n, n);
         }
     }
 
@@ -157,7 +141,7 @@ class solution
             // ill x2 = x - diff;
             // ill y2 = base - 1ll;
             // ill r2 = blueSqrCount(x2, y2, base);
-            ill r2 = sumBlueSqrCnt(y-x,base);
+            ill r2 = sumCompleteBlueSqrCnt(y-x,base);
             return r1 + r2;
         }
         else if (x < 2ll * base) // y>2*base
@@ -187,7 +171,7 @@ class solution
             y1 = y - base * 2ll;
             ill r1 = blueSqrCount(x1, y1, base);    //第3个
 
-            ill r2 = 2ll* sumBlueSqrCnt(y1-x1,base);    //前两个
+            ill r2 = 2ll* sumCompleteBlueSqrCnt(y1-x1,base);    //前两个
 
             //cout << base << "\n";
             return r1 + r2;
@@ -234,29 +218,13 @@ class solution
     }
     void solve()
     {
-        // pair<int,int> p={18,20};
-        // int l= sqrLen(p.first, p.second);
-        // cout <<blueSqrCount(p.first, p.second, l) <<"\n";
-        // return ;
-
-        //baseSqr = {{1, 0, 1}, {0, 2, 0}, {1, 0, 3}};
         ill Q;
         cin >> Q;
         while (Q--)
         {
             ill d, x, y;
             cin >> d >> x >> y;
-
-            // if(d==1000000000000000000ll && x==1000000000000000000ll && y==1000000000000000000ll )
-            // {
-            //     cout << 1000000000000000001ll<< "\n";
-            //     continue;
-            // }
-            
             ill n = 0ll,r1=0ll,r2=0ll;
-            // ill x=1;
-            // ill y=7;
-            // ill d=2;
 
             if (x > y)
                 swap(x, y);
