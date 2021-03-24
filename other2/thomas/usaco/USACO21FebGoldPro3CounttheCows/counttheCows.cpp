@@ -77,13 +77,9 @@ class solution
         }
     }
 
-
-
-    //在长度是n的正方形内，(0,y-x),(x,y)经过了多少个蓝色(大)正方形
-    ill blueSqrCount(ill x, ill y, ill n)
+    //在长度是n的正方形内，线段(0,y-x)->(x,y)经过了多少个蓝色格子
+    ill sumAllBlueSqrCnt(ill x, ill y, ill n)
     {
-        ///++loopCount;
-
         if (x > y)
             swap(x, y);
 
@@ -92,89 +88,58 @@ class solution
         else if (n == 3ll)
             return baseSqr[x][y];
 
-        //cout << "base:" << n << "\n";
-        ill base = n/3ll;
-        //ill baseNo = pow(3,base);
+        ill topLeftSquareLen = n / 3ll; //左上角正方形大小3^(i-1)
 
-        ill x1, y1;
-
-        if (y < base) //x<y<base,仅在第1个
+        if (y < topLeftSquareLen) //图一
         {
-            return blueSqrCount(x, y, base);
+            return sumAllBlueSqrCnt(x, y, topLeftSquareLen);
         }
-        else if (x < base) //y>base
+        else if (x < topLeftSquareLen) 
         {
-            if(y-x<base)
+            if (y < x+ topLeftSquareLen) //图二
             {
-                y1 = base - 1ll;
-                x1 = x - (y - y1);
-
-                return  blueSqrCount(x1, y1, base);
-
+                return sumCompleteBlueSqrCnt(y-x, topLeftSquareLen);
             }
-            else if(y-x==base)
+            else if (y >= x + topLeftSquareLen && y < 2ll * topLeftSquareLen) //图三
             {
                 return 0ll;
             }
-            else if (y-x > base && y < 2ll * base)
+            else  //图五  ,y >= 2ll * topLeftSquareLen
             {
-                // y1 = max(base - 1ll, 0ll);
-                // x1 = max(x - (y - y1), 0ll);
-
-                // return  blueSqrCount(x1, y1, base);
-                return 0ll;
+                return sumAllBlueSqrCnt(x, y%topLeftSquareLen, topLeftSquareLen);
             }
-            else
+
+        }
+        else if (y == x + topLeftSquareLen) //图四
+        {
+            return 0ll;
+        }
+        else if (x < 2ll*topLeftSquareLen) 
+        {
+            if (y < 2ll * topLeftSquareLen) //图六 
             {
-                x1 = x;
-                y1 = y - 2ll * base;
-                return  blueSqrCount(x1, y1, base);
+                return sumCompleteBlueSqrCnt(y-x, topLeftSquareLen) + sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+            }
+            else if (y < x + topLeftSquareLen) //图七
+            {
+                return 2ll*sumCompleteBlueSqrCnt(y-x, topLeftSquareLen);
+            }
+            else  //图八  
+            {
+                ill y1=2ll*topLeftSquareLen;
+                ill x1=x-(y-y1);
+                y1 %=topLeftSquareLen;
+                x1 %=topLeftSquareLen;
+                if(x1>y1)
+                    swap(x1,y1);
+                
+                return sumCompleteBlueSqrCnt(y1-x1, topLeftSquareLen);
+                
             }
         }
-        else if (y < 2ll * base) // 1* base <x<2*base ,到达第2个
+        else        //图九
         {
-            x1 = x - base;
-            y1 = y - base;
-            ill r1 = blueSqrCount(x1, y1, base);
-            
-            // ill diff = y - base + 1ll;
-            // ill x2 = x - diff;
-            // ill y2 = base - 1ll;
-            // ill r2 = blueSqrCount(x2, y2, base);
-            ill r2 = sumCompleteBlueSqrCnt(y-x,base);
-            return r1 + r2;
-        }
-        else if (x < 2ll * base) // y>2*base
-        {
-            if ((y - x) == base) //在空白处正对角线上
-            {
-                return 0;
-            }
-            else if ((y - x) < base) //在空白处正对角线上面,穿过1,3
-            {
-                ill diff = y - base + 1ll;
-                x1 = x - diff;
-                y1 = y - diff;
-                return 2ll * blueSqrCount(x1, y1, n);
-            }
-            else
-            {
-                ill diff = x - (base - 1ll);
-                x1 = x - diff;
-                y1 = y - diff;
-                return blueSqrCount(x1, y1, n);
-            }
-        }
-        else // y>2*base && x>2 * base  穿越3个
-        {
-            x1 = x - base * 2ll;
-            y1 = y - base * 2ll;
-            ill r1 = blueSqrCount(x1, y1, base);    //第3个
-
-            ill r2 = 2ll* sumCompleteBlueSqrCnt(y1-x1,base);    //前两个
-
-            //cout << base << "\n";
-            return r1 + r2;
+            return 2ll*sumCompleteBlueSqrCnt(y-x, topLeftSquareLen)+sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
         }
     }
 
@@ -231,22 +196,10 @@ class solution
             if(x>0)
             {
                 n= sqrLen(x-1ll, y-1ll);
-                // cout << y-x << "\n";
-                //cout << "sqrLen:" << n << "\n";
-                r1 = blueSqrCount(x-1ll, y-1ll, n);
-
-                //cerr << SqrLen2(x-1ll, y-1ll)  << "," << n << "," << x-1ll<< ","<<y-1ll <<"," << r1 << "," << (ill)pow(3,38) << "\n";
+                r1 = sumAllBlueSqrCnt(x-1ll, y-1ll, n);
             }
-            //cout << r1 << "\n";
-            // cout << "loopCount1:" << loopCount << "\n";
-            // cout << "sqrLen:" << n <<"\n";
-
             n = sqrLen(x+d, y+d);
-            r2 = blueSqrCount(x+d, y+d, n);
-            //cerr << SqrLen2(x+d, y+d) << "," << n << "," << x+d << ","<<y+d <<"," << r2 << "," << (ill)pow(3,37) <<  "\n";
-            //cout << "loopCount2:" << loopCount << "\n";
-            // cout << r1 << "\n";
-            // cout << r2 << "\n";
+            r2 = sumAllBlueSqrCnt(x+d, y+d, n);
             cout << r2 - r1 << "\n";
         }
     }
@@ -259,7 +212,7 @@ signed main()
 #ifdef LOCAL_DEBUG
     freopen("counttheCows.in", "r", stdin);
     freopen("counttheCows.out", "w", stdout);
-    //auto startTime = chrono::high_resolution_clock::now();
+    auto startTime = chrono::high_resolution_clock::now();
 #endif
 
     solution sln1;
@@ -267,9 +220,9 @@ signed main()
     cout.flush();
 
 #ifdef LOCAL_DEBUG
-    // cerr << "Execution time: "
-    //      << chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count()
-    //      << " ms\n";
+    cerr << "Execution time: "
+         << chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count()
+         << " ms\n";
 #endif
 
     return 0;

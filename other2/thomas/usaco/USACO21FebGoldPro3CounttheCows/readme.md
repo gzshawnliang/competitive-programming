@@ -217,3 +217,73 @@ else if(n==3ll)
         }
     }
 ```
+```cpp
+    //在长度是n的正方形内，线段(0,y-x)->(x,y)经过了多少个蓝色格子
+    ill sumAllBlueSqrCnt(ill x, ill y, ill n)
+    {
+        if (x > y)
+            swap(x, y);
+
+        if (n == 1)
+            return 1ll;
+        else if (n == 3ll)
+            return baseSqr[x][y];
+
+        ill topLeftSquareLen = n / 3ll; //左上角正方形大小3^(i-1)
+
+        if (y < topLeftSquareLen) //图一
+        {
+            return sumAllBlueSqrCnt(x, y, topLeftSquareLen);
+        }
+        else if (x < topLeftSquareLen) 
+        {
+            if (y < x+ topLeftSquareLen) //图二
+            {
+                return sumCompleteBlueSqrCnt(y-x, topLeftSquareLen);
+            }
+            else if (y >= x + topLeftSquareLen && y < 2ll * topLeftSquareLen) //图三
+            {
+                return 0ll;
+            }
+            else  //图五  ,y >= 2ll * topLeftSquareLen
+            {
+                return sumAllBlueSqrCnt(x, y%topLeftSquareLen, topLeftSquareLen);
+            }
+
+        }
+        else if (y == x + topLeftSquareLen) //图四
+        {
+            return 0ll;
+        }
+        else if (x < 2ll*topLeftSquareLen) 
+        {
+            if (y < 2ll * topLeftSquareLen) //图六 
+            {
+                return sumCompleteBlueSqrCnt(y-x, topLeftSquareLen) + sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+            }
+            else if (y < x + topLeftSquareLen) //图七
+            {
+                return 2ll*sumCompleteBlueSqrCnt(y-x, topLeftSquareLen);
+            }
+            else  //图八  
+            {
+                ill y1=2ll*topLeftSquareLen;
+                ill x1=x-(y-y1);
+                y1 %=topLeftSquareLen;
+                x1 %=topLeftSquareLen;
+                if(x1>y1)
+                    swap(x1,y1);
+                
+                return sumCompleteBlueSqrCnt(y1-x1, topLeftSquareLen);
+                
+            }
+        }
+        else        //图九
+        {
+            return 2ll*sumCompleteBlueSqrCnt(y-x, topLeftSquareLen)+sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+        }
+    }
+```
+
+
+<img src="images/24.png"/>
