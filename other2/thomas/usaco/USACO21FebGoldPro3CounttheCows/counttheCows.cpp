@@ -36,7 +36,7 @@ class solution
     }
 
     //在长度是n的正方形内，(0,diff) 开始的对角线，在n长度的正方形经过了多少个蓝色格子
-    ill sumCompleteBlueSqrCnt(ill diff, ill n)
+    ill fullSqrBlueCnt(ill diff, ill n)
     {
         //情况一：
         if(n==1ll)
@@ -56,7 +56,7 @@ class solution
         n /=3ll;
         if (diff < n)   //情况二：x<y<n,穿过1,3,5
         {
-            return 3ll * sumCompleteBlueSqrCnt(diff, n);
+            return 3ll * fullSqrBlueCnt(diff, n);
         }
         else if(diff==n)    //情况三：穿过空白格子
         {
@@ -69,11 +69,11 @@ class solution
             if (x1 > y1)
                 swap(y1, x1);
 
-            return sumCompleteBlueSqrCnt(y1 - x1, n);
+            return fullSqrBlueCnt(y1 - x1, n);
         }
         else        //情况五：等同情况一，穿过4号格子，处理办法：等同于在1号格子对角线或者对角线的下部
         {
-            return sumCompleteBlueSqrCnt(diff % n, n);
+            return fullSqrBlueCnt(diff % n, n);
         }
     }
 
@@ -98,7 +98,7 @@ class solution
         {
             if (y < x+ topLeftSquareLen) //图二
             {
-                return sumCompleteBlueSqrCnt(y-x, topLeftSquareLen);
+                return fullSqrBlueCnt(y-x, topLeftSquareLen);
             }
             else if (y >= x + topLeftSquareLen && y < 2ll * topLeftSquareLen) //图三
             {
@@ -118,11 +118,11 @@ class solution
         {
             if (y < 2ll * topLeftSquareLen) //图六 
             {
-                return sumCompleteBlueSqrCnt(y-x, topLeftSquareLen) + sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+                return fullSqrBlueCnt(y-x, topLeftSquareLen) + sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
             }
             else if (y < x + topLeftSquareLen) //图七
             {
-                return 2ll*sumCompleteBlueSqrCnt(y-x, topLeftSquareLen);
+                return 2ll*fullSqrBlueCnt(y-x, topLeftSquareLen);
             }
             else  //图八  
             {
@@ -133,13 +133,13 @@ class solution
                 if(x1>y1)
                     swap(x1,y1);
                 
-                return sumCompleteBlueSqrCnt(y1-x1, topLeftSquareLen);
+                return fullSqrBlueCnt(y1-x1, topLeftSquareLen);
                 
             }
         }
         else        //图九
         {
-            return 2ll*sumCompleteBlueSqrCnt(y-x, topLeftSquareLen)+sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+            return 2ll*fullSqrBlueCnt(y-x, topLeftSquareLen)+sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
         }
     }
 
