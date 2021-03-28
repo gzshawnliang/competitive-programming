@@ -78,7 +78,7 @@ class solution
     }
 
     //在长度是n的正方形内，线段(0,y-x)->(x,y)经过了多少个蓝色格子
-    ill sumAllBlueSqrCnt(ill x, ill y, ill n)
+    ill sum(ill x, ill y, ill n)
     {
         if (x > y)
             swap(x, y);
@@ -92,7 +92,7 @@ class solution
 
         if (y < topLeftSquareLen) //图一
         {
-            return sumAllBlueSqrCnt(x, y, topLeftSquareLen);
+            return sum(x, y, topLeftSquareLen);
         }
         else if (x < topLeftSquareLen) 
         {
@@ -106,7 +106,7 @@ class solution
             }
             else  //图五  ,y >= 2ll * topLeftSquareLen
             {
-                return sumAllBlueSqrCnt(x, y%topLeftSquareLen, topLeftSquareLen);
+                return sum(x, y%topLeftSquareLen, topLeftSquareLen);
             }
 
         }
@@ -118,7 +118,7 @@ class solution
         {
             if (y < 2ll * topLeftSquareLen) //图六 
             {
-                return fullSqrBlueCnt(y-x, topLeftSquareLen) + sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+                return fullSqrBlueCnt(y-x, topLeftSquareLen) + sum(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
             }
             else if (y < x + topLeftSquareLen) //图七
             {
@@ -139,7 +139,7 @@ class solution
         }
         else        //图九
         {
-            return 2ll*fullSqrBlueCnt(y-x, topLeftSquareLen)+sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+            return 2ll*fullSqrBlueCnt(y-x, topLeftSquareLen)+sum(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
         }
     }
 
@@ -196,10 +196,10 @@ class solution
             if(x>0)
             {
                 n= sqrLen(x-1ll, y-1ll);
-                r1 = sumAllBlueSqrCnt(x-1ll, y-1ll, n);
+                r1 = sum(x-1ll, y-1ll, n);
             }
             n = sqrLen(x+d, y+d);
-            r2 = sumAllBlueSqrCnt(x+d, y+d, n);
+            r2 = sum(x+d, y+d, n);
             cout << r2 - r1 << "\n";
         }
     }

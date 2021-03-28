@@ -98,7 +98,7 @@ $ans=2*ans1+ans5$
 
 - 以点$(0,diff)$为对角线，也就是说直线 $y=x+diff$ 在长度是$n(n=3^i,n>diff)$的正方形内经过多少个蓝色格子？$n$必须能包住对角线。
 ```cpp
-ill sumCompleteBlueSqrCnt(ill diff, ill n)
+ill fullSqrBlueCnt(ill diff, ill n)
 ```
 
 ![](images/14.png)
@@ -129,7 +129,7 @@ else if(n==3ll)
     n /=3ll;
     if (diff < n)   //情况二：x<y<n,穿过1,3,5
     {
-        return 3ll * sumCompleteBlueSqrCnt(diff, n);
+        return 3ll * fullSqrBlueCnt(diff, n);
     }
 ```
 
@@ -159,7 +159,7 @@ else if(n==3ll)
         if (x1 > y1)
             swap(y1, x1);
 
-        return sumCompleteBlueSqrCnt(y1 - x1, n);
+        return fullSqrBlueCnt(y1 - x1, n);
     }
 ```
 - 情况五：等同情况一，穿过4号格子，处理办法：等同于在1号格子对角线或者对角线的下部
@@ -171,13 +171,13 @@ else if(n==3ll)
 
     else        //情况五：等同情况一，穿过4号格子，处理办法：等同于在1号格子对角线或者对角线的下部
     {
-        return sumCompleteBlueSqrCnt(diff % n, n);
+        return fullSqrBlueCnt(diff % n, n);
     }
 ```
-- 完整sumCompleteBlueSqrCnt代码
+- 完整fullSqrBlueCnt代码
 ```cpp
     //在长度是n的正方形内，(0,diff) 开始的对角线，在n长度的正方形经过了多少个蓝色格子
-    ill sumCompleteBlueSqrCnt(ill diff, ill n)
+    ill fullSqrBlueCnt(ill diff, ill n)
     {
         //情况一：
         if(n==1ll)
@@ -197,7 +197,7 @@ else if(n==3ll)
         n /=3ll;
         if (diff < n)   //情况二：x<y<n,穿过1,3,5
         {
-            return 3ll * sumCompleteBlueSqrCnt(diff, n);
+            return 3ll * fullSqrBlueCnt(diff, n);
         }
         else if(diff==n)    //情况三：穿过空白格子
         {
@@ -210,17 +210,17 @@ else if(n==3ll)
             if (x1 > y1)
                 swap(y1, x1);
 
-            return sumCompleteBlueSqrCnt(y1 - x1, n);
+            return fullSqrBlueCnt(y1 - x1, n);
         }
         else        //情况五：等同情况一，穿过4号格子，处理办法：等同于在1号格子对角线或者对角线的下部
         {
-            return sumCompleteBlueSqrCnt(diff % n, n);
+            return fullSqrBlueCnt(diff % n, n);
         }
     }
 ```
 ```cpp
     //在长度是n的正方形内，线段(0,y-x)->(x,y)经过了多少个蓝色格子
-    ill sumAllBlueSqrCnt(ill x, ill y, ill n)
+    ill sum(ill x, ill y, ill n)
     {
         if (x > y)
             swap(x, y);
@@ -234,13 +234,13 @@ else if(n==3ll)
 
         if (y < topLeftSquareLen) //图一
         {
-            return sumAllBlueSqrCnt(x, y, topLeftSquareLen);
+            return sum(x, y, topLeftSquareLen);
         }
         else if (x < topLeftSquareLen) 
         {
             if (y < x+ topLeftSquareLen) //图二
             {
-                return sumCompleteBlueSqrCnt(y-x, topLeftSquareLen);
+                return fullSqrBlueCnt(y-x, topLeftSquareLen);
             }
             else if (y >= x + topLeftSquareLen && y < 2ll * topLeftSquareLen) //图三
             {
@@ -248,7 +248,7 @@ else if(n==3ll)
             }
             else  //图五  ,y >= 2ll * topLeftSquareLen
             {
-                return sumAllBlueSqrCnt(x, y%topLeftSquareLen, topLeftSquareLen);
+                return sum(x, y%topLeftSquareLen, topLeftSquareLen);
             }
 
         }
@@ -260,11 +260,11 @@ else if(n==3ll)
         {
             if (y < 2ll * topLeftSquareLen) //图六 
             {
-                return sumCompleteBlueSqrCnt(y-x, topLeftSquareLen) + sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+                return fullSqrBlueCnt(y-x, topLeftSquareLen) + sum(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
             }
             else if (y < x + topLeftSquareLen) //图七
             {
-                return 2ll*sumCompleteBlueSqrCnt(y-x, topLeftSquareLen);
+                return 2ll*fullSqrBlueCnt(y-x, topLeftSquareLen);
             }
             else  //图八  
             {
@@ -275,13 +275,13 @@ else if(n==3ll)
                 if(x1>y1)
                     swap(x1,y1);
                 
-                return sumCompleteBlueSqrCnt(y1-x1, topLeftSquareLen);
+                return fullSqrBlueCnt(y1-x1, topLeftSquareLen);
                 
             }
         }
         else        //图九
         {
-            return 2ll*sumCompleteBlueSqrCnt(y-x, topLeftSquareLen)+sumAllBlueSqrCnt(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
+            return 2ll*fullSqrBlueCnt(y-x, topLeftSquareLen)+sum(x%topLeftSquareLen, y%topLeftSquareLen, topLeftSquareLen);
         }
     }
 ```
