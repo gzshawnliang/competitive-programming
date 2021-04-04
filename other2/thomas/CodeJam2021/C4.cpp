@@ -15,6 +15,15 @@ using ill = long long;
 class solution
 {
 
+    int q(int l,int r,int m)
+    {
+        int res;
+        cout << l << " " << r << " " << m << "\n";
+        cout.flush();
+        cin >> res;
+        return res;
+    }
+
   public:
     void solve()
     {
@@ -29,9 +38,8 @@ class solution
             list<int> A;
             queue<int> qu;
             for (int i = 1; i <= N; ++i)
-            {
                 qu.push(i);
-            }
+
 
             int l= qu.front();
             qu.pop();
@@ -42,13 +50,7 @@ class solution
             int r = qu.front();
             qu.pop();
 
-            int result;
-            // int time = 0;
-
-            cout << l << " " << m << " " << r << "\n";
-
-            cout.flush();
-            cin >> result;
+            int result = q(l, r, m);
 
             if (result == l)
             {
@@ -57,9 +59,6 @@ class solution
             else if (result == r)
             {
                 swap(r, m);
-            }
-            else
-            {
             }
 
             A.push_back(l);
@@ -83,11 +82,14 @@ class solution
                     int l2 = *i;
                     int r2 = *j;
 
-                    cout << l2 << " " << r2 << " " << newNo << "\n";
-                    cout.flush();
-                    cin >> result;
+                    result = q(l2, r2, newNo);
 
-                    if (result == l2 && i == A.begin())
+                    if (result == -1)
+                    {
+                        //judge error,may be queried too many times.
+                        return;
+                    }
+                    else if (result == l2 && i == A.begin())
                     {
                         A.push_front(newNo);
                         i = A.begin();
@@ -124,12 +126,10 @@ class solution
             }
             //cout << "Case #" << tcc << ": ";
             for (auto x : A)
-            {
                 cout << x << " ";
-            }
+
             cout<<"\n";
             cout.flush();
-            ++tcc;
             int judgeError;
             cin >> judgeError;
 
