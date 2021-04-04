@@ -32,9 +32,10 @@ class solution
 
         int N,Q;
         cin >> N >> Q;        
+        int tcc=1;
         while (T--)
         {
-            vector<int> A;
+            list<int> A;
             queue<int> qu;
             for (int i = 1; i <= N; ++i)
                 qu.push(i);
@@ -64,9 +65,9 @@ class solution
             A.push_back(m);
             A.push_back(r);
 
-            int i = 0;
-            int j = 1;
-            m = 0;
+            auto i = A.begin();
+            auto j = A.begin();
+            ++j;
 
             while (A.size() < N)
             {
@@ -76,82 +77,50 @@ class solution
                 result = -1;
                 int newNo = qu.front();
                 qu.pop();
-
                 while (true)
                 {
-                    int left = A[i];
-                    int mid = A[m];
-                    int right = A[j];
-                    
-                    if(j - i == 1)
-                        result = q(left, right, newNo);
-                    else 
-                        result = q(left, mid, newNo);
+                    int l2 = *i;
+                    int r2 = *j;
+
+                    result = q(l2, r2, newNo);
 
                     if (result == -1)
                     {
                         //judge error,may be queried too many times.
                         return;
                     }
-                    else if (j - i > 1)
+                    else if (result == l2 && i == A.begin())
                     {
-                        if(result == newNo)     //左端
-                        {
-                            j=m;
-                            m=(i+j)/2;
-                            // if(j-i==1)
-                            // {
-                            //     A.insert(A.begin()+j,newNo);
-                            //     break;
-                            // }                            
-                        }
-                        else if(result == mid)    //右端
-                        {
-                            i=m;
-                            m=(i+j)/2;
-                        }
-                        continue;
+                        A.push_front(newNo);
+                        i = A.begin();
+                        j = A.begin();
+                        ++j;
+                        break;
+                    }
+                    else if (result == l2 && i != A.begin())
+                    {
+                        --i;
+                        --j;
                     }
                     else if (result == newNo)
                     {
-                        A.insert(A.begin()+j,newNo);
-                        i = 0;
-                        j =1;
-                        m = 0;
-                        break;
-                    }                    
-                    else if (result == left && i == 0)
-                    {
-                        
-                        //A.push_front(newNo);
-                        A.insert(A.begin(),newNo);
-                        i = 0;
-                        j =1;
-                        m = 0;
+                        A.insert(j,newNo);
+                        i = A.begin();
+                        j = A.begin();
+                        ++j;
                         break;
                     }
-                    else if (result == left && i > 0)
-                    {
-                        --j;
-                        i = 0;
-                        m=(i+j)/2;
-                        continue;
-                        //改为二分查找
-                    }
-                    else if (result == right && j == A.size()-1)
+                    else if (result == r2 && j == (--A.end()))
                     {
                         A.push_back(newNo);
-                        j = A.size()-1;                        
-                        i = j-1;
-                        m=i; 
+                        i = (--(--A.end()));
+                        j = (--A.end());                        
                         break;
                     }
-                    else if (result == right && j < A.size()-1)
+                    else
                     {
                         ++i;
-                        j=A.size()-1;
-                        m=(i+j)/2;
-                        continue;
+                        ++j;
                     }
                 }
             }

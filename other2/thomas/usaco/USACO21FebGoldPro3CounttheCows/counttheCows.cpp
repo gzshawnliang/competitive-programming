@@ -211,7 +211,7 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("counttheCows.in", "r", stdin);
-    freopen("counttheCows.out", "w", stdout);
+    freopen("counttheCows.ok", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
