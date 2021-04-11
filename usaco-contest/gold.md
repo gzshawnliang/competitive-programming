@@ -87,12 +87,15 @@
 | 2020 Dec  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1065) | Replication        |                            |Done    |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1066) | Bovine Genetics    | dp                         |Done    |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1067) | Square Pasture     | two point / PIE            |Done    |
-| 2020 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=1077)  | Uddered but not Herd        | DP with Bitmask bitset | Done   |
+| 2021 Jan  | [1](http://www.usaco.org/index.php?page=viewproblem&cpid=1077)  | Uddered but not Herd        | DP with Bitmask bitset | Done   |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1066) | Telephone                   | Shortest Path          |*Done   |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1067) | Dance Mooves                | two point Window Sliding + 模拟 | Done   |
-| 2020 feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1113) | Stone Game        | 模拟  | Done   |
+| 2021 feb  | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1113) | Stone Game        | 模拟  | Done   |
 |           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1114) | Modern Art 3                   |  DP         |Done   |
 |           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1115) | Count the Cows                | Divide-and-Conquer or DP     | Done   |
+| 2021 Open | [1](http://www.usaco.org/index.php?page=viewproblem2&cpid=1137) | United Cows of Farmer John        | 线段树 or 树状数组 or statistic tree  | Done   |
+|           | [2](http://www.usaco.org/index.php?page=viewproblem2&cpid=1138) | Portals                   |  并查集 or 最小生成树         |Done   |
+|           | [3](http://www.usaco.org/index.php?page=viewproblem2&cpid=1139) | Permutation                | DP     |    |
 
 
 todo:
