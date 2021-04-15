@@ -173,12 +173,12 @@ namespace OJAssistantUI
             hdu,
             none
         }
+        private ContestType contestType;
 
         //Enum: CF, IOI, ICPC. Scoring system used for the contest.
         //https://codeforces.com/apiHelp/objects#Contest
         private string CfContestType;
 
-        private ContestType contestType;
 
         private string sourceCodeFileExt="cpp";
 
@@ -190,7 +190,7 @@ namespace OJAssistantUI
         public frmOJAssistant(string defaultDir):this()
         {
             _defaultDir = defaultDir;
-            Config.EncryptKey = UHWID.GetID();
+            //Config.EncryptKey = UHWID.GetID();
             //Config.EncryptKey = "123";
         }
 

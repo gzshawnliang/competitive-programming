@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OJAssistantUI.exe" size="128944">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OJAssistantUI.exe" size="122880">
       <assemblyIdentity name="OJAssistantUI" version="20.8.7.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>md5E753eTrmghcB+QXwlBgrmlw8PEBQjUbmLm0Ax58g=</dsig:DigestValue>
+        <dsig:DigestValue>SdGHxvDnePNPT7L6f6xBF6R7ryggmKC5fUUeyqAnTJA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
