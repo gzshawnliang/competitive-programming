@@ -518,9 +518,9 @@
             this.Name = "frmOJAssistant";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Online Judge Assistant";
-            this.Activated += new System.EventHandler(this.frmCFHelper_Activated);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCFHelper_FormClosed);
-            this.Load += new System.EventHandler(this.frmCFHelper_Load);
+            this.Activated += new System.EventHandler(this.frmOJAssistant_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmOJAssistant_FormClosed);
+            this.Load += new System.EventHandler(this.frmOJAssistant_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

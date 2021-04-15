@@ -190,8 +190,6 @@ namespace OJAssistantUI
         public frmOJAssistant(string defaultDir):this()
         {
             _defaultDir = defaultDir;
-            //Config.EncryptKey = UHWID.GetID();
-            //Config.EncryptKey = "123";
         }
 
         private void CheckIsReady()
@@ -244,67 +242,6 @@ namespace OJAssistantUI
             }
 
             butOK.Enabled = isProblemOK && isDirOK && isIDEOK;
-        }
-
-        private void frmCFHelper_Load(object sender, EventArgs e)
-        {
-            //this.Text += "["+_defaultDir;
-            butOK.Enabled = false;
-            if (System.Diagnostics.Debugger.IsAttached)
-                this.TopMost = false;
-            else
-                this.TopMost = true;
-
-            string saveWorkingDir = Registry.RegRead("WorkingDir");
-            if(!string.IsNullOrEmpty(saveWorkingDir))
-                saveWorkingDir = saveWorkingDir.TrimEnd();
-            string workspaceFolder = _defaultDir;
-            if (string.IsNullOrEmpty(workspaceFolder))
-                workspaceFolder = GetApplicationRoot();
-
-            if (string.IsNullOrEmpty(saveWorkingDir))
-                    txtWorkingDir.Text = workspaceFolder;
-            else if (Directory.Exists(saveWorkingDir))
-            {
-                DirectoryInfo di1 = new DirectoryInfo(workspaceFolder);
-                DirectoryInfo di2 = new DirectoryInfo(saveWorkingDir);
-                bool isParent = false;
-                while (di2.Parent != null)
-                {
-                    if (di2.Parent.FullName == di1.FullName)
-                    {
-                        isParent = true;
-                        break;
-                    }
-                    else di2 = di2.Parent;
-                }
-
-                if (isParent)
-                    txtWorkingDir.Text = saveWorkingDir;
-                else
-                    txtWorkingDir.Text = workspaceFolder;
-            }
-            else
-                txtWorkingDir.Text = workspaceFolder;
-
-            //CheckCFAuth();
-
-            GetWindowsState();
-            this.txtAuthor.Text = Registry.RegRead("Author");
-
-            this.Text += $" {Application.ProductVersion}";
-            var ojType = Registry.RegRead("OJType");
-
-            if (!string.IsNullOrEmpty(ojType))
-            {
-                foreach (Control ctl in this.Controls)
-                    if (ctl is RadioButton)
-                        if (ctl.Name == ojType)
-                        {
-                            ((RadioButton)ctl).Checked = true;
-                            break;
-                        }
-            }
         }
 
         private void butCancel_Click(object sender, EventArgs e)
@@ -1088,8 +1025,8 @@ namespace OJAssistantUI
             }
 
             string rootPath = $"{rootDir}\\{contestSubDir}\\{contesName}";
+            msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootPath}\n\n{msg}\ncontinue?";
 
-            msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootPath}\n\n{msg}\n是否继续？";
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -1144,7 +1081,7 @@ namespace OJAssistantUI
                 msg += FormatPathName($"CF_{this.contestId}{item.ToUpper()}_{problemDict[item.ToUpper()]}") + Environment.NewLine;
             }
 
-            msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{msg}\n是否继续？";
+            msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootDir}\n\n{msg}\ncontinue?";
 
             //Dictionary<string, string> createResult = new Dictionary<string, string>();
             string contesName = lblContest.Text;
@@ -1204,9 +1141,7 @@ namespace OJAssistantUI
             
 
             string msg = FormatPathName($"EM_{problemId}") + Environment.NewLine;
-            
-
-            msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{msg}\n是否继续？";
+            msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootDir}\n\n{msg}\ncontinue?";
 
             //Dictionary<string, string> createResult = new Dictionary<string, string>();
             string contesName = lblContest.Text;
@@ -1247,8 +1182,7 @@ namespace OJAssistantUI
             string fileName = FormatPathName(item.SubItems[1].Text.Split(".".ToCharArray())[0]);
             string subDirName = FormatPathName(item.Tag.ToString());
 
-            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootDir}\n\n{subDirName}\ncontinue?";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1284,9 +1218,7 @@ namespace OJAssistantUI
             var item = listView1.CheckedItems[0];
             string subDirName = FormatPathName("SPOJ_" + item.Tag.ToString());
             string fileName = item.Tag.ToString() ;
-
-            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootDir}\n\n{subDirName}\ncontinue?";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1317,9 +1249,7 @@ namespace OJAssistantUI
 
             string subDirName = FormatPathName("URAL_" + oProperty["filename"]);
             string fileName = "URAL_" + oProperty["filename"];
-
-            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootDir}\n\n{subDirName}\ncontinue?";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1359,9 +1289,7 @@ namespace OJAssistantUI
 
             string subDirName = FormatPathName($"POJ_{tag}");
             string fileName = $"POJ_{tag}";
-
-            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootDir}\n\n{subDirName}\ncontinue?";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1403,9 +1331,7 @@ namespace OJAssistantUI
 
             string subDirName = FormatPathName($"HDU_{tag}");
             string fileName = $"HDU_{tag}";
-
-            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{subDirName}\n是否继续？";
+            string msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootDir}\n\ncontinue?";
 
             if (MessageBox.Show(this, msg, this.Text,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1426,9 +1352,7 @@ namespace OJAssistantUI
 
             var item = listView1.CheckedItems[0];
             string fileName = item.Tag.ToString();
-
-            //string pathName = FormatPathName($"CF_{this.contestId}{problemIdList[0].ToUpper()}_{problemDict[problemIdList[0].ToUpper()]}");
-            string msg = $"即将创建以下{sourceCodeFileExt}文件夹及相关文件：\n{rootDir}\n\n{fileName}\n是否继续？";
+            string msg = $"The operation will create {sourceCodeFileExt} files and directories in \n{rootDir}\n\n{fileName}\ncontinue?";
 
             if (MessageBox.Show(this, msg, this.Text,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -1531,14 +1455,12 @@ namespace OJAssistantUI
 
         private void RunVSCode(string codeFile)
         {
-            //string exe = "\"%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe\"";
-
             string vsCodeExe = string.Empty;
-            //从进程中获取vscode路径
+            //get vscode path from Processes
             Process[] ps = Process.GetProcessesByName("Code");
             foreach (Process p in ps)
             {
-                //输出进程路径
+                //output path
                 if (p.MainModule.FileVersionInfo.FileDescription == "Visual Studio Code")
                 {
                     Debug.WriteLine(p.MainModule.FileName);
@@ -1547,11 +1469,11 @@ namespace OJAssistantUI
                 }
             }
 
-            //获取不到,缺省路径启动一个进程
-            if(string.IsNullOrEmpty(vsCodeExe))
+            //vscode path not existed,start one
+            if (string.IsNullOrEmpty(vsCodeExe))
                 vsCodeExe = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Programs\Microsoft VS Code\Code.exe";
 
-            //缺省路径找不到Code.exe，使用环境变量
+            //default path not find Code.exe,use system path
             if (!System.IO.File.Exists(vsCodeExe))
                 vsCodeExe = "code";
 
@@ -1564,7 +1486,7 @@ namespace OJAssistantUI
 
             string intelliJExe = IntelliJ.GetIntelliJExePath(out bool isRunning);
 
-            //缺省路径找不到Code.exe，使用环境变量
+            //default path not find idea64,use system path
             if (!System.IO.File.Exists(intelliJExe))
                 intelliJExe = "idea64";
 
@@ -1625,40 +1547,6 @@ namespace OJAssistantUI
                     Process.Start(url);
             }
         }
-
-        private void frmCFHelper_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            SaveWindowsState();
-            Registry.RegWrite("Author", this.txtAuthor.Text); 
-        }
-
-        //private void CheckCFAuth()
-        //{
-        //    PicCFAuth.Visible = false;
-        //    string apiKey = Registry.RegRead("CFKey");
-        //    string apiSecret = Registry.RegRead("CFSecret");
-
-        //    if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
-        //    {
-        //        contestId = 556;
-        //        dynamic o = GetCfContest(contestId.ToString(), out Exception ex);
-
-        //        if (o != null)
-        //        {
-        //            PicCFAuth.Visible = true;
-        //            if (o.status == "OK")
-        //            {
-        //                PicCFAuth.Image = Resources.user_ok;
-        //            }
-        //            else
-        //            {
-        //                PicCFAuth.Image = Resources.user_error;
-        //            }
-        //        }
-
-        //    }
-        //}
-
         
         private void GetWindowsState()
         {
@@ -1677,7 +1565,7 @@ namespace OJAssistantUI
                     {
                         this.Size = new Size(iWidth, iHeight);
 
-                        //居中
+                        //center
                         this.Left = Screen.PrimaryScreen.WorkingArea.Width / 2 - iWidth / 2;
                         this.Top = Screen.PrimaryScreen.WorkingArea.Height / 2 - iHeight / 2;
                     }
@@ -1693,11 +1581,6 @@ namespace OJAssistantUI
                 Registry.RegWrite("Form.WindowState", "2");
             else
                 Registry.RegWrite("Form.WindowState", "0");
-        }
-
-        private void frmCFHelper_Activated(object sender, EventArgs e)
-        {
-            this.txtProblemId.Focus();
         }
 
         private void CheckedChanged(object sender, EventArgs e)
@@ -1818,6 +1701,76 @@ namespace OJAssistantUI
         private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             CheckIsReady();
+        }
+
+        private void frmOJAssistant_Load(object sender, EventArgs e)
+        {
+            butOK.Enabled = false;
+            if (System.Diagnostics.Debugger.IsAttached)
+                this.TopMost = false;
+            else
+                this.TopMost = true;
+
+            string saveWorkingDir = Registry.RegRead("WorkingDir");
+            if (!string.IsNullOrEmpty(saveWorkingDir))
+                saveWorkingDir = saveWorkingDir.TrimEnd();
+            string workspaceFolder = _defaultDir;
+            if (string.IsNullOrEmpty(workspaceFolder))
+                workspaceFolder = GetApplicationRoot();
+
+            if (string.IsNullOrEmpty(saveWorkingDir))
+                txtWorkingDir.Text = workspaceFolder;
+            else if (Directory.Exists(saveWorkingDir))
+            {
+                DirectoryInfo di1 = new DirectoryInfo(workspaceFolder);
+                DirectoryInfo di2 = new DirectoryInfo(saveWorkingDir);
+                bool isParent = false;
+                while (di2.Parent != null)
+                {
+                    if (di2.Parent.FullName == di1.FullName)
+                    {
+                        isParent = true;
+                        break;
+                    }
+                    else di2 = di2.Parent;
+                }
+
+                if (isParent)
+                    txtWorkingDir.Text = saveWorkingDir;
+                else
+                    txtWorkingDir.Text = workspaceFolder;
+            }
+            else
+                txtWorkingDir.Text = workspaceFolder;
+
+            //CheckCFAuth();
+            GetWindowsState();
+            this.txtAuthor.Text = Registry.RegRead("Author");
+
+            this.Text += $" {Application.ProductVersion}";
+            var ojType = Registry.RegRead("OJType");
+
+            if (!string.IsNullOrEmpty(ojType))
+            {
+                foreach (Control ctl in this.Controls)
+                    if (ctl is RadioButton)
+                        if (ctl.Name == ojType)
+                        {
+                            ((RadioButton)ctl).Checked = true;
+                            break;
+                        }
+            }
+        }
+
+        private void frmOJAssistant_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveWindowsState();
+            Registry.RegWrite("Author", this.txtAuthor.Text);
+        }
+
+        private void frmOJAssistant_Activated(object sender, EventArgs e)
+        {
+            this.txtProblemId.Focus();
         }
     }
 }
