@@ -20,43 +20,80 @@ using ill = long long;
 class solution
 {
   public:
-    ill tolS, ans;
-    vector<ill> a;
-
-    void dfs(ill nowPr, ill nowSum, int nowPos)
-    {
-        if (nowPr == tolS - nowSum)
-        {
-            ans = nowPr;
-        }
-        else if (nowPr < tolS - nowSum)
-        {
-            int sizA = a.size();
-            for (int i = nowPos; i <= sizA - 1; ++i)
-            {
-                dfs(nowPr * a[i], nowSum + a[i], i + 1);
-            }
-        }
-    }
+    const int N = 500;
 
     void solve()
     {
+        vector<bool> isPrime(500, true);
+        isPrime[0] = false, isPrime[1] = false;
+        vector<int> allPrimes;
+        
+        for (int i = 2; i <= N; ++i)
+        {
+            if (isPrime[i] == true)
+            {
+                allPrimes.push_back(i);
+
+                for (int j = i * i; j <= N; j += i)
+                {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
         int tct; cin >> tct;
         for (int tcc = 1; tcc <= tct; ++tcc)
         {
-            int n; cin >> n;
-            
-            tolS = 0LL;
-            ans = 0LL;
-            a.clear();
-            for (int c = 1; c <= n; ++c)
+            if (tcc == 6)
             {
-                ill x, tt; cin >> x >> tt;
-                for (int i = 1; i <= tt; ++i) a.push_back(x);
-                tolS += (x * tt);
+                for(int _s_=0;_s_==0;++_s_);
             }
 
-            dfs(1LL, 0LL, 0);
+            int n; cin >> n;
+            ill tolS = 0;
+            vector<pair<ill, ill>> a(n);
+            unordered_map<ill, ill> ump;
+            for (int i = 0; i <= n - 1; ++i)
+            {
+                cin >> a[i].first >> a[i].second;
+                ump[a[i].first] = a[i].second;
+                tolS += (a[i].first * a[i].second);
+            }
+
+            ill ans = 0;
+            for (ill score = tolS; score >= max(tolS - 60LL * 499LL, 0LL); --score)
+            {
+                if (score == 40223)
+                {
+                    for(int _s_=0;_s_==0;++_s_);
+                }
+
+                bool flg = true;
+                ill ts = score, nowS = 0;
+                for (int i = 0, siz = allPrimes.size(); i <= siz - 1 && flg == true && ts > 1; ++i)
+                {
+                    ill tmpCnt = 0;
+                    while (ts % allPrimes[i] == 0)
+                    {
+                        ts /= allPrimes[i];
+                        nowS += allPrimes[i];
+                        ++tmpCnt;
+
+                        if (ump[allPrimes[i]] < tmpCnt)
+                        {
+                            flg = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (flg == true && ts == 1 && tolS - nowS == score)
+                {
+                    ans = score;
+                    break;
+                }
+            }
+
             cout << "Case #" << tcc << ": " << ans << '\n';
         }
     }
