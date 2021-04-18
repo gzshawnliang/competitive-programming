@@ -57,12 +57,12 @@
             this.sourceCpp = new System.Windows.Forms.RadioButton();
             this.emptyCode = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblIntelliJOK = new System.Windows.Forms.Label();
+            this.lblIntelliJWarning = new System.Windows.Forms.Label();
             this.picIntelliJWarning = new System.Windows.Forms.PictureBox();
             this.picIntelliJOK = new System.Windows.Forms.PictureBox();
             this.chkIntelliJ = new System.Windows.Forms.RadioButton();
             this.chkvscode = new System.Windows.Forms.RadioButton();
-            this.lblIntelliJWarning = new System.Windows.Forms.Label();
-            this.lblIntelliJOK = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIntelliJWarning)).BeginInit();
@@ -74,9 +74,9 @@
             this.txtProblemId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtProblemId.Location = new System.Drawing.Point(130, 81);
-            this.txtProblemId.Margin = new System.Windows.Forms.Padding(4);
+            this.txtProblemId.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtProblemId.Name = "txtProblemId";
-            this.txtProblemId.Size = new System.Drawing.Size(754, 26);
+            this.txtProblemId.Size = new System.Drawing.Size(754, 24);
             this.txtProblemId.TabIndex = 4;
             this.txtProblemId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProblemId_KeyDown);
             // 
@@ -84,10 +84,10 @@
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butGo.Location = new System.Drawing.Point(892, 79);
-            this.butGo.Margin = new System.Windows.Forms.Padding(4);
+            this.butGo.Location = new System.Drawing.Point(891, 79);
+            this.butGo.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.butGo.Name = "butGo";
-            this.butGo.Size = new System.Drawing.Size(100, 28);
+            this.butGo.Size = new System.Drawing.Size(101, 28);
             this.butGo.TabIndex = 5;
             this.butGo.Text = "Go";
             this.butGo.UseVisualStyleBackColor = true;
@@ -106,7 +106,7 @@
             this.listView1.HotTracking = true;
             this.listView1.HoverSelection = true;
             this.listView1.Location = new System.Drawing.Point(130, 115);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4);
+            this.listView1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.listView1.Name = "listView1";
             this.listView1.OwnerDraw = true;
             this.listView1.Size = new System.Drawing.Size(754, 357);
@@ -124,9 +124,9 @@
             // 
             this.butOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butOK.Location = new System.Drawing.Point(786, 549);
-            this.butOK.Margin = new System.Windows.Forms.Padding(4);
+            this.butOK.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.butOK.Name = "butOK";
-            this.butOK.Size = new System.Drawing.Size(100, 31);
+            this.butOK.Size = new System.Drawing.Size(101, 31);
             this.butOK.TabIndex = 15;
             this.butOK.Text = "OK";
             this.butOK.UseVisualStyleBackColor = true;
@@ -137,9 +137,9 @@
             this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.butCancel.Location = new System.Drawing.Point(894, 549);
-            this.butCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.butCancel.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.butCancel.Name = "butCancel";
-            this.butCancel.Size = new System.Drawing.Size(100, 31);
+            this.butCancel.Size = new System.Drawing.Size(101, 31);
             this.butCancel.TabIndex = 16;
             this.butCancel.Text = "Quit";
             this.butCancel.UseVisualStyleBackColor = true;
@@ -150,9 +150,9 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Location = new System.Drawing.Point(13, 81);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 16);
+            this.label1.Size = new System.Drawing.Size(71, 16);
             this.label1.TabIndex = 5;
             this.label1.Text = "ProblemId";
             // 
@@ -161,9 +161,9 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Location = new System.Drawing.Point(13, 114);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 16);
+            this.label2.Size = new System.Drawing.Size(67, 16);
             this.label2.TabIndex = 6;
             this.label2.Text = "Problems";
             // 
@@ -171,12 +171,12 @@
             // 
             this.lblContest.AutoSize = true;
             this.lblContest.BackColor = System.Drawing.Color.Transparent;
-            this.lblContest.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblContest.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblContest.ForeColor = System.Drawing.Color.Maroon;
             this.lblContest.Location = new System.Drawing.Point(13, 18);
-            this.lblContest.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblContest.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblContest.Name = "lblContest";
-            this.lblContest.Size = new System.Drawing.Size(620, 16);
+            this.lblContest.Size = new System.Drawing.Size(529, 18);
             this.lblContest.TabIndex = 7;
             this.lblContest.Text = "Input the Codeforces/UVa problemId or USACO URL or SPOJ URL, please ";
             // 
@@ -186,9 +186,9 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Location = new System.Drawing.Point(15, 480);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 16);
+            this.label3.Size = new System.Drawing.Size(82, 16);
             this.label3.TabIndex = 9;
             this.label3.Text = "Working Dir";
             // 
@@ -199,7 +199,7 @@
             this.txtWorkingDir.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtWorkingDir.ForeColor = System.Drawing.Color.Maroon;
             this.txtWorkingDir.Location = new System.Drawing.Point(130, 480);
-            this.txtWorkingDir.Margin = new System.Windows.Forms.Padding(4);
+            this.txtWorkingDir.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtWorkingDir.Name = "txtWorkingDir";
             this.txtWorkingDir.ReadOnly = true;
             this.txtWorkingDir.Size = new System.Drawing.Size(754, 21);
@@ -210,9 +210,9 @@
             this.butBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butBrowse.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.butBrowse.Location = new System.Drawing.Point(894, 477);
-            this.butBrowse.Margin = new System.Windows.Forms.Padding(4);
+            this.butBrowse.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.butBrowse.Name = "butBrowse";
-            this.butBrowse.Size = new System.Drawing.Size(100, 29);
+            this.butBrowse.Size = new System.Drawing.Size(101, 29);
             this.butBrowse.TabIndex = 9;
             this.butBrowse.Text = "Browse";
             this.butBrowse.UseVisualStyleBackColor = true;
@@ -224,9 +224,9 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Location = new System.Drawing.Point(15, 513);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 16);
+            this.label4.Size = new System.Drawing.Size(50, 16);
             this.label4.TabIndex = 12;
             this.label4.Text = "Author";
             // 
@@ -235,9 +235,9 @@
             this.txtAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAuthor.Location = new System.Drawing.Point(130, 509);
-            this.txtAuthor.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAuthor.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtAuthor.Name = "txtAuthor";
-            this.txtAuthor.Size = new System.Drawing.Size(754, 26);
+            this.txtAuthor.Size = new System.Drawing.Size(754, 24);
             this.txtAuthor.TabIndex = 10;
             // 
             // txtError
@@ -248,7 +248,7 @@
             this.txtError.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtError.ForeColor = System.Drawing.Color.Maroon;
             this.txtError.Location = new System.Drawing.Point(130, 114);
-            this.txtError.Margin = new System.Windows.Forms.Padding(4);
+            this.txtError.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtError.Multiline = true;
             this.txtError.Name = "txtError";
             this.txtError.ReadOnly = true;
@@ -260,9 +260,9 @@
             // 
             this.codeforces.AutoSize = true;
             this.codeforces.Checked = true;
-            this.codeforces.Location = new System.Drawing.Point(132, 54);
+            this.codeforces.Location = new System.Drawing.Point(133, 54);
             this.codeforces.Name = "codeforces";
-            this.codeforces.Size = new System.Drawing.Size(106, 20);
+            this.codeforces.Size = new System.Drawing.Size(96, 20);
             this.codeforces.TabIndex = 0;
             this.codeforces.TabStop = true;
             this.codeforces.Text = "codeforces";
@@ -272,9 +272,9 @@
             // uva
             // 
             this.uva.AutoSize = true;
-            this.uva.Location = new System.Drawing.Point(244, 54);
+            this.uva.Location = new System.Drawing.Point(235, 54);
             this.uva.Name = "uva";
-            this.uva.Size = new System.Drawing.Size(50, 20);
+            this.uva.Size = new System.Drawing.Size(51, 20);
             this.uva.TabIndex = 1;
             this.uva.Text = "UVa";
             this.uva.UseVisualStyleBackColor = true;
@@ -283,9 +283,9 @@
             // usaco
             // 
             this.usaco.AutoSize = true;
-            this.usaco.Location = new System.Drawing.Point(300, 54);
+            this.usaco.Location = new System.Drawing.Point(292, 54);
             this.usaco.Name = "usaco";
-            this.usaco.Size = new System.Drawing.Size(66, 20);
+            this.usaco.Size = new System.Drawing.Size(74, 20);
             this.usaco.TabIndex = 2;
             this.usaco.Text = "USACO";
             this.usaco.UseVisualStyleBackColor = true;
@@ -294,9 +294,9 @@
             // spoj
             // 
             this.spoj.AutoSize = true;
-            this.spoj.Location = new System.Drawing.Point(372, 54);
+            this.spoj.Location = new System.Drawing.Point(370, 54);
             this.spoj.Name = "spoj";
-            this.spoj.Size = new System.Drawing.Size(58, 20);
+            this.spoj.Size = new System.Drawing.Size(61, 20);
             this.spoj.TabIndex = 3;
             this.spoj.Text = "SPOJ";
             this.spoj.UseVisualStyleBackColor = true;
@@ -305,9 +305,9 @@
             // ural
             // 
             this.ural.AutoSize = true;
-            this.ural.Location = new System.Drawing.Point(436, 54);
+            this.ural.Location = new System.Drawing.Point(437, 54);
             this.ural.Name = "ural";
-            this.ural.Size = new System.Drawing.Size(218, 20);
+            this.ural.Size = new System.Drawing.Size(185, 20);
             this.ural.TabIndex = 4;
             this.ural.Text = "Timus Online Judge(Ural)";
             this.ural.UseVisualStyleBackColor = true;
@@ -316,9 +316,9 @@
             // poj
             // 
             this.poj.AutoSize = true;
-            this.poj.Location = new System.Drawing.Point(660, 54);
+            this.poj.Location = new System.Drawing.Point(628, 54);
             this.poj.Name = "poj";
-            this.poj.Size = new System.Drawing.Size(50, 20);
+            this.poj.Size = new System.Drawing.Size(52, 20);
             this.poj.TabIndex = 5;
             this.poj.Text = "POJ";
             this.poj.UseVisualStyleBackColor = true;
@@ -327,9 +327,9 @@
             // hdu
             // 
             this.hdu.AutoSize = true;
-            this.hdu.Location = new System.Drawing.Point(716, 54);
+            this.hdu.Location = new System.Drawing.Point(686, 54);
             this.hdu.Name = "hdu";
-            this.hdu.Size = new System.Drawing.Size(50, 20);
+            this.hdu.Size = new System.Drawing.Size(54, 20);
             this.hdu.TabIndex = 6;
             this.hdu.Text = "HDU";
             this.hdu.UseVisualStyleBackColor = true;
@@ -341,9 +341,9 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Location = new System.Drawing.Point(15, 549);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(96, 16);
+            this.label5.Size = new System.Drawing.Size(91, 16);
             this.label5.TabIndex = 15;
             this.label5.Text = "Source Code";
             // 
@@ -353,9 +353,9 @@
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.sourceJava);
             this.panel1.Controls.Add(this.sourceCpp);
-            this.panel1.Location = new System.Drawing.Point(132, 546);
+            this.panel1.Location = new System.Drawing.Point(133, 546);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(124, 34);
+            this.panel1.Size = new System.Drawing.Size(123, 34);
             this.panel1.TabIndex = 16;
             // 
             // sourceJava
@@ -363,7 +363,7 @@
             this.sourceJava.AutoSize = true;
             this.sourceJava.Location = new System.Drawing.Point(59, 3);
             this.sourceJava.Name = "sourceJava";
-            this.sourceJava.Size = new System.Drawing.Size(58, 20);
+            this.sourceJava.Size = new System.Drawing.Size(55, 20);
             this.sourceJava.TabIndex = 12;
             this.sourceJava.Text = "Java";
             this.sourceJava.UseVisualStyleBackColor = true;
@@ -375,7 +375,7 @@
             this.sourceCpp.Checked = true;
             this.sourceCpp.Location = new System.Drawing.Point(3, 3);
             this.sourceCpp.Name = "sourceCpp";
-            this.sourceCpp.Size = new System.Drawing.Size(50, 20);
+            this.sourceCpp.Size = new System.Drawing.Size(52, 20);
             this.sourceCpp.TabIndex = 11;
             this.sourceCpp.TabStop = true;
             this.sourceCpp.Text = "C++";
@@ -385,9 +385,9 @@
             // emptyCode
             // 
             this.emptyCode.AutoSize = true;
-            this.emptyCode.Location = new System.Drawing.Point(772, 54);
+            this.emptyCode.Location = new System.Drawing.Point(746, 54);
             this.emptyCode.Name = "emptyCode";
-            this.emptyCode.Size = new System.Drawing.Size(162, 20);
+            this.emptyCode.Size = new System.Drawing.Size(151, 20);
             this.emptyCode.TabIndex = 7;
             this.emptyCode.Text = "Empty Code(No OJ)";
             this.emptyCode.UseVisualStyleBackColor = true;
@@ -405,15 +405,41 @@
             this.panel2.Controls.Add(this.chkvscode);
             this.panel2.Location = new System.Drawing.Point(303, 546);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(476, 34);
+            this.panel2.Size = new System.Drawing.Size(475, 34);
             this.panel2.TabIndex = 20;
+            // 
+            // lblIntelliJOK
+            // 
+            this.lblIntelliJOK.AutoSize = true;
+            this.lblIntelliJOK.BackColor = System.Drawing.Color.Transparent;
+            this.lblIntelliJOK.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblIntelliJOK.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblIntelliJOK.Location = new System.Drawing.Point(241, 4);
+            this.lblIntelliJOK.Name = "lblIntelliJOK";
+            this.lblIntelliJOK.Size = new System.Drawing.Size(170, 16);
+            this.lblIntelliJOK.TabIndex = 18;
+            this.lblIntelliJOK.Text = "directory is ready";
+            this.lblIntelliJOK.Visible = false;
+            // 
+            // lblIntelliJWarning
+            // 
+            this.lblIntelliJWarning.AutoSize = true;
+            this.lblIntelliJWarning.BackColor = System.Drawing.Color.Transparent;
+            this.lblIntelliJWarning.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblIntelliJWarning.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblIntelliJWarning.Location = new System.Drawing.Point(241, 4);
+            this.lblIntelliJWarning.Name = "lblIntelliJWarning";
+            this.lblIntelliJWarning.Size = new System.Drawing.Size(206, 16);
+            this.lblIntelliJWarning.TabIndex = 17;
+            this.lblIntelliJWarning.Text = "directory is not ready";
+            this.lblIntelliJWarning.Visible = false;
             // 
             // picIntelliJWarning
             // 
             this.picIntelliJWarning.Image = ((System.Drawing.Image)(resources.GetObject("picIntelliJWarning.Image")));
             this.picIntelliJWarning.Location = new System.Drawing.Point(218, 3);
             this.picIntelliJWarning.Name = "picIntelliJWarning";
-            this.picIntelliJWarning.Size = new System.Drawing.Size(20, 20);
+            this.picIntelliJWarning.Size = new System.Drawing.Size(21, 20);
             this.picIntelliJWarning.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picIntelliJWarning.TabIndex = 16;
             this.picIntelliJWarning.TabStop = false;
@@ -424,7 +450,7 @@
             this.picIntelliJOK.Image = global::OJAssistantUI.Properties.Resources.user_ok;
             this.picIntelliJOK.Location = new System.Drawing.Point(218, 3);
             this.picIntelliJOK.Name = "picIntelliJOK";
-            this.picIntelliJOK.Size = new System.Drawing.Size(20, 20);
+            this.picIntelliJOK.Size = new System.Drawing.Size(21, 20);
             this.picIntelliJOK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picIntelliJOK.TabIndex = 15;
             this.picIntelliJOK.TabStop = false;
@@ -436,7 +462,7 @@
             this.chkIntelliJ.Enabled = false;
             this.chkIntelliJ.Location = new System.Drawing.Point(90, 3);
             this.chkIntelliJ.Name = "chkIntelliJ";
-            this.chkIntelliJ.Size = new System.Drawing.Size(130, 20);
+            this.chkIntelliJ.Size = new System.Drawing.Size(99, 20);
             this.chkIntelliJ.TabIndex = 14;
             this.chkIntelliJ.Text = "IntelliJ IDEA";
             this.chkIntelliJ.UseVisualStyleBackColor = true;
@@ -454,38 +480,12 @@
             this.chkvscode.Text = "VS Code";
             this.chkvscode.UseVisualStyleBackColor = true;
             // 
-            // lblIntelliJWarning
-            // 
-            this.lblIntelliJWarning.AutoSize = true;
-            this.lblIntelliJWarning.BackColor = System.Drawing.Color.Transparent;
-            this.lblIntelliJWarning.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblIntelliJWarning.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblIntelliJWarning.Location = new System.Drawing.Point(241, 4);
-            this.lblIntelliJWarning.Name = "lblIntelliJWarning";
-            this.lblIntelliJWarning.Size = new System.Drawing.Size(206, 16);
-            this.lblIntelliJWarning.TabIndex = 17;
-            this.lblIntelliJWarning.Text = "directory is not ready";
-            this.lblIntelliJWarning.Visible = false;
-            // 
-            // lblIntelliJOK
-            // 
-            this.lblIntelliJOK.AutoSize = true;
-            this.lblIntelliJOK.BackColor = System.Drawing.Color.Transparent;
-            this.lblIntelliJOK.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblIntelliJOK.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblIntelliJOK.Location = new System.Drawing.Point(241, 4);
-            this.lblIntelliJOK.Name = "lblIntelliJOK";
-            this.lblIntelliJOK.Size = new System.Drawing.Size(170, 16);
-            this.lblIntelliJOK.TabIndex = 18;
-            this.lblIntelliJOK.Text = "directory is ready";
-            this.lblIntelliJOK.Visible = false;
-            // 
             // frmOJAssistant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.butCancel;
-            this.ClientSize = new System.Drawing.Size(1008, 601);
+            this.ClientSize = new System.Drawing.Size(1008, 600);
             this.Controls.Add(this.emptyCode);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label5);
@@ -511,16 +511,16 @@
             this.Controls.Add(this.txtProblemId);
             this.Controls.Add(this.txtError);
             this.Controls.Add(this.panel2);
-            this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(950, 480);
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.MinimumSize = new System.Drawing.Size(950, 479);
             this.Name = "frmOJAssistant";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Online Judge Assistant";
-            this.Activated += new System.EventHandler(this.frmCFHelper_Activated);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmCFHelper_FormClosed);
-            this.Load += new System.EventHandler(this.frmCFHelper_Load);
+            this.Activated += new System.EventHandler(this.frmOJAssistant_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmOJAssistant_FormClosed);
+            this.Load += new System.EventHandler(this.frmOJAssistant_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

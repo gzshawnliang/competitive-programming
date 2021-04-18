@@ -27,22 +27,22 @@ class solution
         int n=P.size();
 
 
-        // for (int i = 0; i <= n - 1; ++i)
-        // {
-        //     for (int j = i+1; j <= n - 1; ++j)
-        //     {
-        //         for (int k = j+1; k <= n - 1; ++k)
-        //         {
-        //             int r =P[i] + P[j] + P[k];
-        //             if(Ps.count(r)==1)
-        //             {
-        //                 cout << P[i] << " " <<  P[j] << " " << P[k] << "=" << r << "\n";
-        //             }
-        //         }
-        //     }
-        // }
-
-        cout << std::gcd(12,16);
+        for (int i = 0; i <= n - 1; ++i)
+        {
+            for (int j = i+1; j <= n - 1; ++j)
+            {
+                for (int k = j+1; k <= n - 1; ++k)
+                {
+                    int r =P[i] + P[j] + P[k];
+                    if(Ps.count(r)==1)
+                    {
+                        cout << P[i] << " " <<  P[j] << " " << P[k] << "=" << r << "\n";
+                    }
+                }
+            }
+        }
+        n= std::gcd(120,116);
+        cout << n;
 
     }
 };

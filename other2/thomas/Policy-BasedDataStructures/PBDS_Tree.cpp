@@ -1,8 +1,7 @@
 // Program showing a policy-based data structure.
+#include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
-#include <functional> // for less
-#include <iostream>
 using namespace __gnu_pbds;
 using namespace std;
   
@@ -21,7 +20,6 @@ int main()
     p.insert(4);
     
 
-  
     // value at 3rd index in sorted array.
     cout << "The value at 3rd index ::" << * p.find_by_order(3) << endl;
 
