@@ -115,7 +115,8 @@
         "concepts": "cpp",
         "numbers": "cpp",
         "span": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "rope": "cpp"
     },
     "files.exclude": {
         "**/.git": true,
