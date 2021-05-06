@@ -1,43 +1,40 @@
 {
-    "version": "0.1.0",
-    "command": "cmd",
-    "isShellCommand": true,
-    "showOutput": "always",
-    "args": [
-        "/c",
-        "chcp 65001"
-    ],
+    "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "rebuild python",
+            "label": "rebuild python",
+            "type": "shell",
             "command": "python",
-            "args": ["${file}"],
-            "showOutput": "always",
-            "options": {
-                "env": {
-                    "PYTHONIOENCODING": "UTF-8"
-                }
-            },
-            "isShellCommand": true
-        },     
-        {
-            "taskName": "OJAssistant",
-            "command": "${workspaceFolder}\\.vscode\\OJAssistantUI\\OJAssistantUI.exe",
-            "args": ["${workspaceFolder}"],
-            "showOutput": "always",
-            "isShellCommand": true
-        },             
-        {
-            "taskName": "g++",
-            "command": "cmd",
             "args": [
-                "/c",
-                "@chcp 65001",
-                "&&",
-                "powershell",
-                "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndDebug.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -lpsapi -DDEBUG -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\""
-            ], // 编译命令参数
+                "${file}"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "OJAssistant",
+            "type": "shell",
+            "command": "${workspaceFolder}\\.vscode\\OJAssistantUI\\OJAssistantUI.exe",
+            "args": [
+                "${workspaceFolder}"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "g++",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-executionpolicy",
+                "bypass",
+                "-File",
+                "\"${workspaceFolder}\\.vscode\\BuildAndDebug.ps1\"",
+                "-SourceFileName",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
+                "-CompilerArgs",
+                "'-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -lpsapi -DDEBUG -Wall -lstdc++fs -lm -I \"${workspaceFolder}\\include\"'",
+                "-WorkspaceFolder",
+                "'${workspaceFolder}'"
+            ],
             "problemMatcher": {
                 "owner": "cpp",
                 "fileLocation": [
@@ -53,12 +50,13 @@
                     "message": 5
                 }
             },
-            "isShellCommand": true,
-            "showOutput": "always"
-        },        
+            "presentation": {
+                "clear": true
+            }
+        },
         {
-            "taskName": "rebuild and run(onlinejudge)",
-            "suppressTaskName": true,
+            "label": "rebuild and run(onlinejudge)",
+            "type": "shell",
             "command": "powershell",
             "args": [
                 "-executionpolicy",
@@ -72,56 +70,24 @@
                 "-WorkspaceFolder",
                 "\"${workspaceFolder}\""
             ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
-        },        
-        {
-            "taskName": "g++_bat_old",
-            "command": "${workspaceFolder}\\.vscode\\BuildDebug.bat",
-            "args": [
-                "-g",
-                "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
-                "-o",
-                "\"${fileDirname}\\${fileBasenameNoExtension}.exe\"",
-                "-DLOCAL_DEBUG",
-                "-Wl,--stack=268435456",
-                "-lpsapi",
-                // "-lstdc++fs",
-                "-std=gnu++17",
-                "-DDEBUG",
-                "-I",
-                "\"${workspaceFolder}\\include\""
-            ], // 编译命令参数
-            "problemMatcher": {
-                "owner": "cpp",
-                "fileLocation": [
-                    "relative",
-                    "${fileDirname}"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            },
-            "isShellCommand": true,
-            "showOutput": "always"
+            "problemMatcher": []
         },
         {
-            "taskName": "build",
-            "suppressTaskName": true,
-            "command": "cmd",
+            "label": "build",
+            "type": "shell",
+            "command": "powershell",
             "args": [
-                "/C",
-                "@chcp 65001",
-                "&&",
-                "powershell",
-                "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -NotRun -CompilerArgs '-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I ${workspaceFolder}\\include' -WorkspaceFolder '${workspaceFolder}'\"",
+                "-executionpolicy",
+                "bypass",
+                "-File",
+                "\"${workspaceFolder}\\.vscode\\BuildAndTest.ps1\"",
+                "-SourceFileName",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
+                "-NotRun",
+                "-CompilerArgs",
+                "'-DLOCAL_DEBUG -Wl,--stack=8589934592 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"${workspaceFolder}\\include\"'",
+                "-WorkspaceFolder",
+                "'${workspaceFolder}'"
             ],
             "problemMatcher": {
                 "owner": "cpp",
@@ -138,28 +104,28 @@
                     "message": 5
                 }
             },
-            "isShellCommand": true,
-            "isBuildCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "clear": true,
+            }
         },
         {
-            "taskName": "run",
-            "suppressTaskName": true,
+            "label": "run",
+            "type": "shell",
             "command": "C:\\cygwin64\\bin\\time.exe",
             "args": [
                 "-f",
                 "\"Process exited after %e seconds\"",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
+            "problemMatcher": []
         },
         {
-            //vscode输出窗口不强制显示英文提示，可能错误出现乱码
-            "taskName": "rebuild and run(local) chs",
-            "suppressTaskName": true,
+            "label": "rebuild and run(local) chs",
+            "type": "shell",
             "command": "cmd",
             "args": [
                 "/C",
@@ -177,56 +143,54 @@
                 "-WorkspaceFolder",
                 "\"${workspaceFolder}\""
             ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
+            "problemMatcher": []
         },
         {
-            //vscode输出窗口强制显示英文提示，否则出现乱码
-            "taskName": "rebuild and run(local)",
-            "suppressTaskName": true,
-            "command": "cmd",
-            "args": [
-                "/C",
-                "@chcp 65001",
-                "&&",
-                "powershell",
-                "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&'${workspaceFolder}\\.vscode\\BuildAndTest.ps1' -SourceFileName '\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"' -CompilerArgs '-DLOCAL_DEBUG -Wl,--stack=8589934592 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"\"\"${workspaceFolder}\\include\"\"\"' -WorkspaceFolder '${workspaceFolder}'\"",
-            ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always",
-        },  
-        {
-            //DevC++弹出输出窗口
-            "taskName": "rebuild and run(DevCppMode)",
-            "suppressTaskName": true,
+            "label": "rebuild and run(local)",
+            "type": "shell",
             "command": "powershell",
             "args": [
-                "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';$ErrorView='CategoryView';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName '${fileDirname}\\${fileBasenameNoExtension}.cpp' -CompilerArgs '-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -O2 -Wall -lm -lstdc++fs -I ${workspaceFolder}\\include' -DevCppMode -WorkspaceFolder '${workspaceFolder}'\"",
+                "-executionpolicy",
+                "bypass",
+                "-File",
+                "\"${workspaceFolder}\\.vscode\\BuildAndTest.ps1\"",
+                "-SourceFileName",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
+                "-CompilerArgs",
+                "'-DLOCAL_DEBUG -Wl,--stack=8589934592 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"${workspaceFolder}\\include\"'",
+                "-WorkspaceFolder",
+                "'${workspaceFolder}'"
             ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always",
-        },            
-        {
-            // vscode输出窗口强制显示英文提示，否则出现乱码
-            "taskName": "rebuild and run(java)",
-            "suppressTaskName": true,
-            "command": "powershell",
-            "args": [
-                "-Command",
-                "\"[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US';&${workspaceFolder}\\.vscode\\BuildAndTest.ps1 -SourceFileName ${fileDirname}\\${fileBasenameNoExtension}.java -ShowShellConsole -WorkspaceFolder \"${workspaceFolder}\" \""
-            ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
+            "problemMatcher": [],
+            "presentation": {
+                "clear": true,
+            }
         },
         {
-            "taskName": "rebuild and run(java2)",
-            "suppressTaskName": true,
+            "label": "rebuild and run(DevCppMode)",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-executionpolicy",
+                "bypass",
+                "-File",
+                "\"${workspaceFolder}\\.vscode\\BuildAndTest.ps1\"",
+                "-SourceFileName",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
+                "-DevCppMode",
+                "-CompilerArgs",
+                "'-DLOCAL_DEBUG -Wl,--stack=8589934592 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"${workspaceFolder}\\include\"'",
+                "-WorkspaceFolder",
+                "'${workspaceFolder}'"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "clear": true,
+            }
+        },        
+        {
+            "label": "rebuild and run(java)",
+            "type": "shell",
             "command": "powershell",
             "args": [
                 "-executionpolicy",
@@ -235,14 +199,15 @@
                 "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
                 "-SourceFileName",
                 "${fileDirname}\\${fileBasenameNoExtension}.java",
-                "-ShowShellConsole"
+                "-ShowShellConsole",
+                "-WorkspaceFolder",
+                "\"${workspaceFolder}\""
             ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
+            "problemMatcher": []
         },
         {
-            "taskName": "msvc_build",
+            "label": "msvc_build",
+            "type": "shell",
             "command": "${env:VCToolsInstallDir}\\bin\\Hostx64\\x86\\cl.exe",
             "args": [
                 "/I",
@@ -251,23 +216,20 @@
                 "/std:c++17",
                 "/EHsc",
                 "/DLOCAL_DEBUG",
-                "/Zi", 
+                "/Zi",
                 "/Fe:",
                 "${fileDirname}\\${fileBasenameNoExtension}.ex2",
                 "${fileDirname}\\${fileBasenameNoExtension}.cpp",
                 "/Fo:",
-                "${fileDirname}\\",  
+                "${fileDirname}\\",
                 "/link",
-                "/INCREMENTAL:NO",
-            ], // 编译命令参数
-            // Use the standard MS compiler pattern to detect errors, warnings and infos
-            "problemMatcher": "$msCompile",
-            "isShellCommand": true,
-            "showOutput": "always"
-        },        
+                "/INCREMENTAL:NO"
+            ],
+            "problemMatcher": "$msCompile"
+        },
         {
-            "taskName": "rebuild and test(multi files)",
-            "suppressTaskName": true,
+            "label": "rebuild and test(multi files)",
+            "type": "shell",
             "command": "powershell",
             "args": [
                 "-executionpolicy",
@@ -280,13 +242,11 @@
                 "-CompilerArgs",
                 "-DLOCAL_DEBUG -Wl,--stack=268435456 -std=gnu++17 -O2 -lm -lstdc++fs -I ${workspaceFolder}\\include"
             ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
+            "problemMatcher": []
         },
         {
-            "taskName": "Compare output files",
-            "suppressTaskName": true,
+            "label": "Compare output files",
+            "type": "shell",
             "command": "powershell",
             "args": [
                 "-executionpolicy",
@@ -296,9 +256,7 @@
                 "-InitialDirectory",
                 "${fileDirname}"
             ],
-            "isShellCommand": true,
-            "echoCommand": true,
-            "showOutput": "always"
+            "problemMatcher": []
         }
     ]
 }
