@@ -167,7 +167,6 @@ class solution
 
             cout << "Case #" << i << ": " << *ret << "\n";
         }
-
         return;
     }
 };
@@ -179,7 +178,7 @@ signed main()
 #ifdef LOCAL_DEBUG
     freopen("B3_AC_Set1.in", "r", stdin);
     freopen("B3_AC_Set1.out", "w", stdout);
-    auto startTime = chrono::high_resolution_clock::now();
+    //auto startTime = chrono::high_resolution_clock::now();
 #endif
 
     solution sln1;
@@ -187,9 +186,9 @@ signed main()
     cout.flush();
 
 #ifdef LOCAL_DEBUG
-    cerr << "Execution time: "
-         << chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count()
-         << " ms\n";
+    // cerr << "Execution time: "
+    //      << chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count()
+    //      << " ms\n";
 #endif
 
     return 0;

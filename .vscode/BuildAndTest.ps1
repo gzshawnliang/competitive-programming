@@ -410,7 +410,7 @@ function BuildCppAndRun($SourceFileName) {
     }
 
     #显示编译器信息
-    Write-Host
+    Write-Host 
     start-process $cppCompilerCmd "--version" -wait -NoNewWindow
 
     $exeFileName = $SourFile.DirectoryName + "\" + $SourFile.BaseName + ".exe" 
@@ -467,7 +467,7 @@ function BuildCppAndRun($SourceFileName) {
         #获取当前exe文件信息
         $ExeFile = Get-Item -Path $exeFileName
         Write-Host
-        Write-Host "g++ compile successfully."
+        Write-Host "g++ compile successfully." -ForegroundColor DarkYellow
         
 
         if ($NotRun.IsPresent) {
@@ -518,7 +518,7 @@ function BuildCppAndRun($SourceFileName) {
             #     Write-Host "Launching $($ExeFile.BaseName + $ExeFile.Extension)"
             # }
             $time = "{0:yyyy/MM/dd} {0:HH:mm:ss}" -f (Get-Date) 
-            Write-Host "$time Launching `"$($ExeFile.BaseName + $ExeFile.Extension)`""
+            Write-Host "$time Launching `"$($ExeFile.BaseName + $ExeFile.Extension)`"" 
             
             New-Variable -Name exitCode
             # 使用System.Diagnostics.Process方式启动exe

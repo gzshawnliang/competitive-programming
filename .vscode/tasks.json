@@ -1,5 +1,9 @@
 {
     "version": "2.0.0",
+    "presentation": {
+        "clear": true,
+        "showReuseMessage":false,
+    },    
     "tasks": [
         {
             "label": "rebuild python",
@@ -50,9 +54,6 @@
                     "message": 5
                 }
             },
-            "presentation": {
-                "clear": true
-            }
         },
         {
             "label": "rebuild and run(onlinejudge)",
@@ -108,9 +109,6 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "presentation": {
-                "clear": true,
-            }
         },
         {
             "label": "run",
@@ -162,9 +160,6 @@
                 "'${workspaceFolder}'"
             ],
             "problemMatcher": [],
-            "presentation": {
-                "clear": true,
-            }
         },
         {
             "label": "rebuild and run(DevCppMode)",
@@ -184,9 +179,6 @@
                 "'${workspaceFolder}'"
             ],
             "problemMatcher": [],
-            "presentation": {
-                "clear": true,
-            }
         },        
         {
             "label": "rebuild and run(java)",

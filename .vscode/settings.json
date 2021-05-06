@@ -147,14 +147,6 @@
     "C_Cpp.errorSquiggles":"Enabled",
 
 
-    // "terminal.integrated.shell.windows": "cmd.exe",
-    // //"terminal.integrated.shell.windows": "C:\\cmder\\Cmder.exe",
-    // "terminal.integrated.shellArgs.windows": [
-    //     "/K","C:\\cmder\\vendor\\init.bat"
-    // ],
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.cursorStyle": "line",
- 
     "java.debug.settings.enableRunDebugCodeLens": false,
     "java.debug.settings.forceBuildBeforeLaunch":false,
     "java.autobuild.enabled":true,
@@ -177,5 +169,6 @@
     "telemetry.enableTelemetry": false,
     "files.defaultLanguage": "cpp",
     "explorer.compactFolders": false,
-    "workbench.editor.enablePreviewFromQuickOpen": false
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "terminal.integrated.rightClickBehavior": "default"
 }
