@@ -26,6 +26,7 @@
 #  * @更新:     2019-10-18 19:26 取消ctl+f11重新定向到功能，大型input文件非常慢，不好测量程序运行时间
 #  * @更新:     2020-01-11 19:17 增加文件/文件夹允许带空格(未测试in，out文件),调试BuildDebug.bat所在文件夹不能有空格
 #  * @更新:     2020-02-01 23:24 增加判断GCC版本，如果小于8，不使用-lstdc++fs编译参数
+#  * @更新:     2021-05-07 11:54 改进兼容powershell7,powershell7暂时不能测量内存使用
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -71,9 +72,9 @@ function getGCCVersion()
     if($p.ExitCode -eq 0)
     {
         # 取出版本9.2.0
-        $cppVersion2 = $stdout.Split("`n`r")[0].Split(' ')[-1];
-        # Write-Host $cppVersion2
-        
+        # $cppVersion2 = $stdout.Split("`n`r")[0].Split(' ')[-1];
+        $cppVersion2 = $stdout.Split("`r")[0].Split(' ')[-1];
+
         # 取出版本9
         $cppVersion2 = $cppVersion2.Split('.')[0]
         # Write-Host $cppVersion2
@@ -85,6 +86,8 @@ function getGCCVersion()
         # else {
         #     Write-Host "smart"
         # }
+
+
         return [int]$cppVersion2
     }
     return 0
@@ -560,20 +563,26 @@ function BuildCppAndRun($SourceFileName) {
                 $ps.WaitForExit()
                 $LASTEXITCODE=$ps.ExitCode
                 $sw.Stop()
-                
-                # 使用C#调用GetProcessMemoryInfo 
-                # [void][reflection.assembly]::LoadFile("$PSScriptRoot\ProcessMemoryInfo.dll")
-                # $memoryPeakWorkingSet64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakWorkingSetSize($ps.Handle)
-                $peakPagedMemorySize64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakPagefileUsage($ps.Handle)
 
-
-                $msg = "`"$($ExeFile.BaseName + $ExeFile.Extension)`" program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
-                if($peakPagedMemorySize64 -gt 0)
+                # $PSVersionTable.PSVersion.Major
+                if($PSVersionTable.PSVersion.Major -ge 6)
                 {
-                    $msg= $msg + "Memory: {0:n0} KB." -f ($peakPagedMemorySize64/1024)                    
+                    $msg = "`"$($ExeFile.BaseName + $ExeFile.Extension)`" program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
+                }
+                else 
+                {
+                    # 使用C#调用GetProcessMemoryInfo 
+                    # [void][reflection.assembly]::LoadFile("$PSScriptRoot\ProcessMemoryInfo.dll")
+                    # $memoryPeakWorkingSet64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakWorkingSetSize($ps.Handle)
+                    $peakPagedMemorySize64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakPagefileUsage($ps.Handle)
+
+                    $msg = "`"$($ExeFile.BaseName + $ExeFile.Extension)`" program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
+                    if($peakPagedMemorySize64 -gt 0)
+                    {
+                        $msg= $msg + "Memory: {0:n0} KB." -f ($peakPagedMemorySize64/1024)                    
+                    }
                 }
                 
-                Write-Host
                 if ($LASTEXITCODE -eq 0 ) {
                     if (Test-Path $currInFile) {
                         $inFileObj = Get-Item -Path $currInFile
@@ -591,6 +600,7 @@ function BuildCppAndRun($SourceFileName) {
                 
                 Write-Host $msg -ForegroundColor Green -NoNewline
                 showExitCodeInfo $LASTEXITCODE
+
                 Write-Host                
             }
 
@@ -722,4 +732,6 @@ if (Test-Path $SourceFileName) {
 else {
     Write-Host  "source file $SourceFileName does not exist" -ForegroundColor Red
 }
+
+exit 0
 
