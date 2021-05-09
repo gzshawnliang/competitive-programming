@@ -39,6 +39,7 @@ class solution
         }
         sort(merge3Plus.begin(), merge3Plus.end());
 
+        //x 取值范围 [1,999999999]
         auto merge2=[](ull x)
         {
             string s=to_string(x) + to_string(x+1);
