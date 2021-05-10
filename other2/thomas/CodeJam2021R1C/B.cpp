@@ -104,7 +104,8 @@ class solution
             if(ansL>Y)
                 ans1=min(ans1,ansL);
 
-            ull ans2 = *lower_bound(merge3Plus.begin(), merge3Plus.end(), Y+1);
+            //ull ans2 = *lower_bound(merge3Plus.begin(), merge3Plus.end(), Y+1);
+            ull ans2 = *upper_bound(merge3Plus.begin(), merge3Plus.end(), Y);
 
             cout << "Case #" << cat << ": " << min(ans1,ans2) << "\n";
         }
