@@ -10,70 +10,186 @@
 
 #define FastIO                        \
     ios_base::sync_with_stdio(false); \
-    std::cin.tie(nullptr);            \
-    std::cout.tie(nullptr)
+    cin.tie(nullptr);                 \
+    cout.tie(nullptr)
 
 using namespace std;
 
 using ill = long long;
 
+const int INF = INT_MAX/2;
+
 class node
 {
-    public:
+  public:
     string s;
     int step;
-    node(string S,int Step)
+    node(string S, int Step)
     {
-        s=S;
-        step=Step;
+        s = S;
+        step = Step;
     }
 };
 
 class solution
 {
 
-
     string doubleOper(string s)
     {
-        if(s!="0")
+        if (s != "0")
             s.push_back('0');
         return s;
     }
     string notOper(string s)
     {
-        for (int i = 0,len=s.length(); i <= len - 1; ++i)
+        for (int i = 0, len = s.length(); i <= len - 1; ++i)
         {
-            if(s[i]=='1')
-                s[i]='0';
-            else 
-                s[i]='1';
+            if (s[i] == '1')
+                s[i] = '0';
+            else
+                s[i] = '1';
         }
-        while ((*s.begin())=='0' && s.length()>1)
+        while ((*s.begin()) == '0' && s.length() > 1)
         {
             s.erase(s.begin());
         }
         return s;
     }
 
+    vector<int> part(string s)
+    {
+        vector<int> res;
+        int cnt = 0;
+        for (int i = 0; i < (int)s.size(); ++i)
+        {
+            ++cnt;
+            if (i + 1 == (int)s.size() || s[i] != s[i + 1])
+            {
+                res.push_back(cnt);
+                cnt = 0;
+            }
+        }
+        return res;
+    }
+
   public:
     void solve()
     {
         int T;
-        cin>>T;
+        cin >> T;
+        for (int cas = 1; cas <= T; ++cas)
+        {
+
+            string s, t;
+            cin >> s >> t;
+            cout << "Case #" << cas << ": ";
+            
+            vector<int> a(part(s)), b(part(t));
+            if (s == "0" && t == "0")
+            {
+                cout << 0 << "\n";
+                continue;
+            }
+            if (t == "0")
+            {
+                cout << a.size() << "\n";
+                continue;
+            }
+            int ans = INF;
+            int sum = a.size() + t.size();
+            if (a.size() & 1)
+            {
+                if (a.size() + 1 >= b.size())
+                {
+                    ans = min(ans, sum);
+                }
+            }
+            else
+            {
+                if (a.size() >= b.size())
+                {
+                    ans = min(ans, sum);
+                }
+            }
+            for (int i = 0; i < (int)a.size() && i < (int)b.size(); ++i)
+            {
+                bool flag = true;
+                for (int j = 0; j < i; ++j)
+                {
+                    flag &= a[a.size() - i - 1 + j] == b[j];
+                }
+                flag &= a.back() <= b[i];
+                if (!flag)
+                {
+                    continue;
+                }
+                if (a.back() == b[i])
+                {
+                    if (a.size() & 1)
+                    {
+                        flag &= a.size() + 1 >= b.size();
+                    }
+                    else
+                    {
+                        flag &= a.size() >= b.size();
+                    }
+                }
+                else
+                {
+                    if (a.size() & 1)
+                    {
+                        flag &= a.size() >= b.size() + 1;
+                    }
+                    else
+                    {
+                        flag &= a.size() >= b.size();
+                    }
+                }
+                if (flag)
+                {
+                    int sum = t.size();
+                    for (int j = 0; j <= i; ++j)
+                    {
+                        sum -= a[a.size() - j - 1];
+                    }
+                    sum += a.size() - i - 1;
+                    ans = min(ans, sum);
+                }
+            }
+            if (s == "0")
+            {
+                ++ans;
+            }
+            
+            if (ans >= INF)
+            {
+                cout << "IMPOSSIBLE\n";
+            }
+            else
+            {
+                cout << ans << "\n";
+            }
+        }
+    }
+    
+    void solve_Set1()
+    {
+        int T;
+        cin >> T;
         for (int cas = 1; cas <= T; ++cas)
         {
             int ans = 0;
-            string S,E;
-            cin >> S>>E;
+            string S, E;
+            cin >> S >> E;
 
-            if(S!=E)
+            if (S != E)
             {
-                node startNode(S,0);
+                node startNode(S, 0);
                 set<string> nodeSet;
                 queue<node> q;
                 q.push(startNode);
                 nodeSet.insert(S);
-                int cnt=0;
+                int cnt = 0;
                 while (!q.empty())
                 {
                     node curr = q.front();
@@ -83,49 +199,46 @@ class solution
                     // {
                     //     ans=-1;
                     //     break;
-                    // }                    
+                    // }
 
                     //cout << curr.step << "->" <<curr.s << endl;
-                    node node1(notOper(curr.s),curr.step+1);
-                    if(node1.s==E)
+                    node node1(notOper(curr.s), curr.step + 1);
+                    if (node1.s == E)
                     {
-                        ans=node1.step;
+                        ans = node1.step;
                         break;
                     }
-                    else if(node1.s!=S && nodeSet.count(node1.s)==0)
+                    else if (node1.s != S && nodeSet.count(node1.s) == 0)
                     {
-                        q.push(node1);    
-                        nodeSet.insert(node1.s);                    
+                        q.push(node1);
+                        nodeSet.insert(node1.s);
                     }
-                    
-                    node node2(doubleOper(curr.s),curr.step+1);
-                    if(node2.s==E)
+
+                    node node2(doubleOper(curr.s), curr.step + 1);
+                    if (node2.s == E)
                     {
-                        ans=node2.step;
+                        ans = node2.step;
                         break;
                     }
-                    else if(node2.s!=S && nodeSet.count(node2.s)==0)
+                    else if (node2.s != S && nodeSet.count(node2.s) == 0)
                     {
                         q.push(node2);
                         nodeSet.insert(node2.s);
                     }
                     ++cnt;
-                    if(cnt>1e4)
+                    if (cnt > 1e4)
                     {
-                        ans=-1;
+                        ans = -1;
                         break;
                     }
                 }
             }
 
-            if(ans==-1)
+            if (ans == -1)
                 cout << "Case #" << cas << ": IMPOSSIBLE\n";
-            else 
+            else
                 cout << "Case #" << cas << ": " << ans << "\n";
-            
-            cout.flush();
         }
-       
     }
 };
 
