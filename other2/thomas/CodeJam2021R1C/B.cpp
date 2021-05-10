@@ -47,7 +47,7 @@ class solution
         // 2345678910111213
         // 234567891011121314
         // ...
-        // 9999989999991000000        
+        // 999998 999999 1000000        
 
         vector<ull> merge3Plus;
         for (int i = 1; i <= 999998; ++i)
@@ -82,14 +82,11 @@ class solution
         {
             ull Y;
             cin >> Y;
-            if(Y<12)
-            {
-                cout << "Case #" << cat << ": 12\n";
-                continue;
-            }
-
-            ull ans1 = *lower_bound(merge3Plus.begin(), merge3Plus.end(), Y+1);
-
+            // if(Y<12)
+            // {
+            //     cout << "Case #" << cat << ": 12\n";
+            //     continue;
+            // }
             ull l=1,r=999999999;
             while (r-l>1)
             {
@@ -100,7 +97,14 @@ class solution
                 else if(ret<=Y)
                     l=m;
             }
-            ull ans2 = merge2(r);
+            ull ans1 = merge2(r);
+
+            //小于12的情况
+            ull ansL = merge2(l);
+            if(ansL>Y)
+                ans1=min(ans1,ansL);
+
+            ull ans2 = *lower_bound(merge3Plus.begin(), merge3Plus.end(), Y+1);
 
             cout << "Case #" << cat << ": " << min(ans1,ans2) << "\n";
         }
