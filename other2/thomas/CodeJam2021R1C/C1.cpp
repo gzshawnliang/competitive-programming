@@ -10,8 +10,8 @@ mt19937 rnd(228);
 int main()
 {
 #ifdef LOCAL_DEBUG
-    freopen("C.in", "r", stdin);
-    freopen("C.ok", "w", stdout);
+    freopen("C1.in", "r", stdin);
+    freopen("C1.ok", "w", stdout);
 #endif
     ios::sync_with_stdio(0);
     cin.tie(0);
