@@ -290,7 +290,8 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("c_test.in", "r", stdin);
-    //freopen("C_Optimal.out", "w", stdout);
+    // freopen("C_Optimal.in", "r", stdin);
+    // freopen("C_Optimal.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
