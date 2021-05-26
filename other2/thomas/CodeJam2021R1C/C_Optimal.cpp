@@ -128,12 +128,22 @@ class solution_set1
 
 class solution_set2
 {
-    // string exec_double(string s)
-    // {
-    //     if (s != "0")
-    //         s.push_back('0');
-    //     return s;
-    // }
+    string exec_double(string s)
+    {
+        return exec_double(s,1);
+    }
+    string exec_double(string s,int times)
+    {
+        if (s != "0")
+        {
+            for (int i = 1; i <= times; ++i)
+            {
+                s.push_back('0');                
+            }
+        }
+
+        return s;
+    }    
     string exec_not(string s)
     {
         for (int i = 0, len = s.length(); i <= len - 1; ++i)
@@ -189,7 +199,9 @@ class solution_set2
             return a == b.substr(0, a.length());
     }
 
-    void solve(const string & S, const string & E)
+    //官方解决方案（比较难理解）
+    //https://codingcompetitions.withgoogle.com/codejam/round/00000000004362d7/00000000007c1139#analysis
+    void solve_official(const string & S, const string & E)
     {
         int ans = 0;
 
@@ -218,7 +230,6 @@ class solution_set2
             for (int X = 0; X <= K; ++X)
             {
                 //进行X次NOT操作之后，是否可以构造E
-
                 if (isPrefix(prefix, E))    //只有是E的前缀才可能构建
                 {
                     int Y = E.length() - prefix.length();   //需要Y次double
@@ -269,6 +280,285 @@ class solution_set2
             cout << ans << "\n";
     }
 
+    //模拟解决方案1（比较难理解）
+    void solve1(const string & S, const string & E)
+    {
+        int ans = 0;
+
+        vector<int> a = createGroup(S);
+        vector<int> b = createGroup(E);
+        if (S == E)
+        {
+            ans = 0;
+        }
+        else if (E == "0")
+        {
+            ans = a.size();
+        }
+        else if (S == "0" && E == "1")
+        {
+            ans = 1;
+        }
+        else if (S == "0" && b.size() > 2)
+        {
+            ans = INF;
+        }
+        else 
+        {
+            ans = INF;
+
+            int K = a.size();
+            string prefix = S;
+
+            for (int X = 0; X <= K+1; ++X)
+            {
+                //进行X次NOT操作之后，是否可以构造E
+                if (isPrefix(prefix, E))    //只有是E的前缀才可能构建
+                {
+                    //int Y = E.length() - prefix.length();   //需要Y次double
+                    string suffix = E.substr(prefix.length(), E.length() - prefix.length());   //E移除前缀之后的后缀
+
+                    vector<int> suffixGroup = createGroup(suffix);      //后缀产生的组
+                    int M = suffixGroup.size();                         //M=组的长度。至少M次NOT操作才能产生后缀
+                    int cnt=0;
+
+                    //模拟
+                    string e1 = S;
+                    int begin=0;
+                    if(prefix.back()=='1' && suffix.front()=='1')
+                    {
+                        if(S.back()=='1')
+                        {
+                            ++cnt;
+                            e1=exec_not(S);
+                        }
+                        else
+                        {
+                            int times=suffixGroup[0];
+                            cnt+=times;
+                            e1=exec_double(S,times);
+                            ++begin;
+                        }
+                    }
+                    if(prefix.back()=='1' && suffix.front()=='0')
+                    {
+                        if(S.back()=='0')
+                        {
+                            ++cnt;
+                            e1=exec_not(S);                            
+                        }
+                        else 
+                        {
+                            int times=suffixGroup[0];
+                            cnt+=times;
+                            e1=exec_double(S,times);
+                            ++begin;                        
+                        }
+                    }                    
+                    else if(prefix.back()=='0' && suffix.front()=='1')
+                    {
+                        if(S.back()=='0')
+                        {
+                            ++cnt;
+                            e1=exec_not(S);
+                        }
+                        else 
+                        {                        
+                            int times=suffixGroup[0];
+                            cnt+=times;
+                            e1=exec_double(S,times);
+                            ++begin;
+                        }
+                    } 
+                    else if(prefix.back()=='0' && suffix.front()=='0')
+                    {
+                        if(S.back()=='1')
+                        {
+                            ++cnt;
+                            e1=exec_not(S);
+                        }
+                    }                         
+
+
+                    for (int i = begin; i <= M - 1; ++i)
+                    {
+                        if(i>0)
+                        {
+                            ++cnt;
+                            e1=exec_not(e1);                              
+                        }
+
+                        e1=exec_double(e1,suffixGroup[i]);
+                        cnt +=suffixGroup[i];
+                    }
+                    while (e1.length()>E.length())
+                    {
+                        ++cnt;
+                        e1=exec_not(e1);    
+                    }
+                    
+
+                    if(e1==E)
+                        ans=min(ans,cnt);
+                }
+                else if (prefix=="0")    
+                {
+                    //int Y = E.length();   //需要Y次double
+                    string suffix = E;   //E移除前缀之后的后缀
+
+                    vector<int> suffixGroup = createGroup(suffix);      //后缀产生的组
+                    int M = suffixGroup.size();                         //M=组的长度。至少M次NOT操作才能产生后缀
+                    int cnt=0;
+
+                    //模拟
+                    string e1 = S;
+
+                    if(S.back()=='0' )
+                    {
+                        ++cnt;
+                        e1=exec_not(S);
+                    }                         
+
+                    for (int i = 0; i <= M - 1; ++i)
+                    {
+                        if(i>0)
+                        {
+                            ++cnt;
+                            e1=exec_not(e1);                              
+                        }
+
+                        e1=exec_double(e1,suffixGroup[i]);
+                        cnt +=suffixGroup[i];
+                    }
+                    while (e1.length()>E.length())
+                    {
+                        ++cnt;
+                        e1=exec_not(e1);    
+                    }                    
+
+                    if(e1==E)
+                        ans=min(ans,cnt);
+
+                }                
+                prefix = exec_not(prefix);
+            }
+        }
+
+        if (ans == INF)
+            cout << "IMPOSSIBLE";
+        else
+            cout << ans << "";
+    }
+
+    //模拟解决方案2（比较容易理解）
+    void solve2(const string & S, const string & E)
+    {
+        int ans = 0;
+
+        vector<int> a = createGroup(S);
+        vector<int> b = createGroup(E);
+        if (S == E)         //两个字符串相同不需要操作
+        {
+            ans = 0;
+        }
+        else if (E == "0")  //特殊情况1
+        {
+            ans = a.size();
+        }
+        else if (S == "0" && E == "1")  //特殊情况2
+        {
+            ans = 1;
+        }
+        else if (S == "0" && b.size() > 2)  //特殊情况3
+        {
+            ans = INF;
+        }
+        else 
+        {
+            ans = INF;
+
+            int K = a.size();
+            string prefix = S;
+
+            for (int X = 0; X <= K+1; ++X)
+            {
+                //根据后缀计算生成E需要的步骤，
+                //isNOT=true表示，开始先进行NOT操作,
+                //isNOT=false表示，开始先进行DOUBLE操作
+                auto getCnt=[&](bool isNOT,const string & suffix)
+                {
+                    vector<int> suffixGroup = createGroup(suffix);      //后缀产生的组
+                    int cnt=0;
+
+                    //模拟
+                    string e1 = S;
+                    int begin=0;
+                    if(isNOT)
+                    {
+                        ++cnt;
+                        e1=exec_not(S);
+                    }
+                    else
+                    {
+                        if(suffixGroup.size()>0)
+                        {
+                            int times=suffixGroup[0];
+                            cnt+=times;
+                            e1=exec_double(S,times);
+                            ++begin;
+                        }
+                    }
+
+                    int M = suffixGroup.size();                         //M=组的长度。至少M次NOT操作才能产生后缀
+                    for (int i = begin; i <= M - 1; ++i)
+                    {
+                        if(i>0)
+                        {
+                            ++cnt;
+                            e1=exec_not(e1);                              
+                        }
+
+                        e1=exec_double(e1,suffixGroup[i]);
+                        cnt +=suffixGroup[i];
+                    }
+                    while (e1.length()>E.length())
+                    {
+                        ++cnt;
+                        e1=exec_not(e1);    
+                    }
+                    
+                    if(e1==E)
+                        return cnt;
+                    else 
+                        return INF;
+                };
+
+
+                //进行X次NOT操作之后，是否可以构造E
+                if (isPrefix(prefix, E))    //只有是E的前缀才可能构建
+                {
+                    string suffix = E.substr(prefix.length(), E.length() - prefix.length());   //E移除前缀之后的后缀
+
+                    ans = min(ans,getCnt(true,suffix));
+                    ans = min(ans,getCnt(false,suffix));
+                }
+                else if (prefix=="0")    
+                {
+                    string suffix = E;      //E移除前缀之后的后缀
+                    ans = min(ans,getCnt(true,suffix));
+                    ans = min(ans,getCnt(false,suffix));
+                }                
+                prefix = exec_not(prefix);
+            }
+        }
+
+        if (ans == INF)
+            cout << "IMPOSSIBLE";
+        else
+            cout << ans << "";
+    }
+
+
   public:
     void solve()
     {
@@ -279,10 +569,15 @@ class solution_set2
             string S, E;
             cin >> S >> E;
             cout << "Case #" << cas << ": ";
-            solve(S,E);
+            solve2(S,E);
+            cout << "\n";
+            // cout << "->";
+            // solve_official(S,E);
         }
     }
 };
+
+
 
 signed main()
 {
@@ -290,8 +585,8 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("c_test.in", "r", stdin);
-    // freopen("C_Optimal.in", "r", stdin);
-    // freopen("C_Optimal.out", "w", stdout);
+    freopen("C_Optimal.in", "r", stdin);
+    freopen("C_Optimal.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
