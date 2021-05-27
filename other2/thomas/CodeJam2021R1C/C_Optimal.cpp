@@ -480,63 +480,63 @@ class solution_set2
             int K = a.size();
             string prefix = S;
 
+            //根据后缀模拟计算生成E需要的步骤，
+            //isNOT=true表示，开始先进行NOT操作,
+            //isNOT=false表示，开始先进行DOUBLE操作
+            auto constructE = [&](bool isNOT, const string & suffix)
+            {
+                vector<int> suffixGroup = createGroup(suffix);      //后缀产生的组
+                int step=0;
+
+                //模拟
+                string e1 = S;
+                int begin=0;
+                if(isNOT)       //开始先进行NOT操作
+                {
+                    ++step;
+                    e1=exec_not(S);
+                }
+                else            //开始先进行DOUBLE操作
+                {
+                    if(suffixGroup.size()>0)
+                    {
+                        int times=suffixGroup[0];
+                        step+=times;
+                        e1=exec_double(S,times);
+                        ++begin;
+                    }
+                }
+
+                int M = suffixGroup.size();   //M=组的长度。至少M次NOT操作才能产生后缀
+                for (int i = begin; i <= M - 1; ++i)
+                {
+                    if(i>0)
+                    {
+                        ++step;
+                        e1=exec_not(e1);                              
+                    }
+
+                    e1=exec_double(e1,suffixGroup[i]);
+                    step +=suffixGroup[i];
+                }
+
+                //如果还有多余的前缀，使用NOT移除
+                while (e1.length()>E.length())
+                {
+                    ++step;
+                    e1=exec_not(e1);    
+                }
+                
+                if(e1==E)       //可以成功构造E
+                    return step;
+                else            //不能构造E
+                    return INF;
+            };
+
             for (int X = 0; X <= K+1; ++X)
             {
-                //根据后缀模拟计算生成E需要的步骤，
-                //isNOT=true表示，开始先进行NOT操作,
-                //isNOT=false表示，开始先进行DOUBLE操作
-                auto constructE = [&](bool isNOT, const string & suffix)
-                {
-                    vector<int> suffixGroup = createGroup(suffix);      //后缀产生的组
-                    int step=0;
-
-                    //模拟
-                    string e1 = S;
-                    int begin=0;
-                    if(isNOT)
-                    {
-                        ++step;
-                        e1=exec_not(S);
-                    }
-                    else
-                    {
-                        if(suffixGroup.size()>0)
-                        {
-                            int times=suffixGroup[0];
-                            step+=times;
-                            e1=exec_double(S,times);
-                            ++begin;
-                        }
-                    }
-
-                    int M = suffixGroup.size();   //M=组的长度。至少M次NOT操作才能产生后缀
-                    for (int i = begin; i <= M - 1; ++i)
-                    {
-                        if(i>0)
-                        {
-                            ++step;
-                            e1=exec_not(e1);                              
-                        }
-
-                        e1=exec_double(e1,suffixGroup[i]);
-                        step +=suffixGroup[i];
-                    }
-
-                    //使用NOT移除多余的前缀
-                    while (e1.length()>E.length())
-                    {
-                        ++step;
-                        e1=exec_not(e1);    
-                    }
-                    
-                    if(e1==E)
-                        return step;
-                    else 
-                        return INF;
-                };
-
                 //进行X次NOT操作之后，是否可以构造E
-                if (isPrefix(prefix, E))    //只有是E的前缀才可能构建
+                if (isPrefix(prefix, E))    //只有是E的前缀才可能构建，可以利用S的的后缀
                 {
                     //移除前缀之后的后缀
                     string suffix = E.substr(prefix.length(), E.length() - prefix.length());   //E移除前缀之后的后缀
@@ -544,7 +544,7 @@ class solution_set2
                     ans = min(ans,constructE(true,suffix));
                     ans = min(ans,constructE(false,suffix));
                 }
-                else if (prefix=="0")       //0表示NOT完全消除了S,不能利用任何S进行构建E
+                else if (prefix=="0")       //0表示NOT完全消除了S,不能利用任何S的后缀，进行构建E
                 {
                     string suffix = E;      //E移除前缀之后的后缀
                     ans = min(ans,constructE(true,suffix));
@@ -573,8 +573,7 @@ class solution_set2
             cout << "Case #" << cas << ": ";
             solve2(S,E);
             cout << "\n";
-            // cout << "->";
-            // solve_official(S,E);
+            // cout << "->";solve_official(S,E);
         }
     }
 };
