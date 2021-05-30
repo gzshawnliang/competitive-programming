@@ -483,12 +483,13 @@ class solution_set2
             //根据后缀模拟计算生成E需要的步骤，
             //isNOT=true表示，开始先进行NOT操作,
             //isNOT=false表示，开始先进行DOUBLE操作
+            //返回构建E的步骤数量，无法构建返回INF
             auto constructE = [&](bool isNOT, const string & suffix)
             {
                 vector<int> suffixGroup = createGroup(suffix);      //后缀产生的组
                 int step=0;
 
-                //模拟
+                //开始模拟
                 string e1 = S;
                 int begin=0;
                 if(isNOT)       //开始先进行NOT操作
@@ -520,7 +521,7 @@ class solution_set2
                     step +=suffixGroup[i];
                 }
 
-                //如果还有多余的前缀，使用NOT移除
+                //如果还有多余的前缀，NOT移除
                 while (e1.length()>E.length())
                 {
                     ++step;
@@ -539,16 +540,16 @@ class solution_set2
                 if (isPrefix(prefix, E))    //只有是E的前缀才可能构建，可以利用S的的后缀
                 {
                     //移除前缀之后的后缀
-                    string suffix = E.substr(prefix.length(), E.length() - prefix.length());   //E移除前缀之后的后缀
+                    string suffix = E.substr(prefix.length(), E.length() - prefix.length()); 
 
-                    ans = min(ans,constructE(true,suffix));
-                    ans = min(ans,constructE(false,suffix));
+                    ans = min(ans,constructE(true,suffix));     //先NOT一次再模拟
+                    ans = min(ans,constructE(false,suffix));    //先Double一次再模拟
                 }
                 else if (prefix=="0")       //0表示NOT完全消除了S,不能利用任何S的后缀，进行构建E
                 {
                     string suffix = E;      //E移除前缀之后的后缀
-                    ans = min(ans,constructE(true,suffix));
-                    ans = min(ans,constructE(false,suffix));
+                    ans = min(ans,constructE(true,suffix));     //先NOT一次再模拟
+                    ans = min(ans,constructE(false,suffix));    //先Double一次再模拟
                 }                
                 prefix = exec_not(prefix);
             }
@@ -585,8 +586,8 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("c_test.in", "r", stdin);
-    freopen("C_Optimal.in", "r", stdin);
-    freopen("C_Optimal.out", "w", stdout);
+    // freopen("C_Optimal.in", "r", stdin);
+    // freopen("C_Optimal.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
