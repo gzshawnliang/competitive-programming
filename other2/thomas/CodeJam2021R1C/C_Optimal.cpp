@@ -594,7 +594,6 @@ signed main()
     solution_set2 sln1;
     sln1.solve();
     cout.flush();
-
 #ifdef LOCAL_DEBUG
     cerr << "Execution time: "
          << chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - startTime).count()
