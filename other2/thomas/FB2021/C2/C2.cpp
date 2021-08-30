@@ -100,10 +100,10 @@ class solution
                         while (p>1)
                         {
                             jionRoot[p]=1;
-                            cout << p << " ";
+                            //cout << p << " ";
                             p=parent[p];
                         }
-                        cout << '\n';
+                        //cout << '\n';
                     }
                 }
 
@@ -138,7 +138,7 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("C2.in", "r", stdin);
-    //freopen("C2.txt", "w", stdout);
+    freopen("C2.txt", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 

@@ -31,12 +31,13 @@ class solution
         cout << t << "\n";
         while (t--)
         {
-            int N =rdNum.GetRand(10, 20);
+            int N =rdNum.GetRand(50, 50);
+            int K =rdNum.GetRand(0, 50);
             //int N =50;
-            cout << N << "\n";
+            cout << N << " " << K <<"\n";
             for (int i = 1; i <= N; ++i)
             {
-                cout << rdNum.GetRand(15000000, 20000000) << " ";
+                cout << rdNum.GetRand(0, 20000000) << " ";
             }
             cout << "\n";
             Tree tree(N);
@@ -54,7 +55,7 @@ int main()
     
 #ifndef ONLINE_JUDGE
     //freopen("tree.in", "r", stdin);
-    freopen("tree.in", "w", stdout);
+    freopen("C2.in", "w", stdout);
     auto startTime = std::chrono::high_resolution_clock::now();
 #endif
 

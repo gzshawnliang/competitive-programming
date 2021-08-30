@@ -103,7 +103,7 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("C1.in", "r", stdin);
-    freopen("C1.txt", "w", stdout);
+    freopen("C1.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
