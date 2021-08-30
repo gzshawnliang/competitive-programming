@@ -10,12 +10,11 @@
                 "_DEBUG",
                 "UNICODE"
             ],
-            "intelliSenseMode":"gcc-x64",
+            "intelliSenseMode":"windows-msvc-x64",
             "browse": {
                 "path": [
                     "${workspaceRoot}",
                     "${workspaceRoot}/**"
-
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
