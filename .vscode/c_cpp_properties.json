@@ -10,7 +10,8 @@
                 "_DEBUG",
                 "UNICODE"
             ],
-            "intelliSenseMode":"gcc-x64",
+            "intelliSenseMode":"windows-gcc-x64",
+            "compilerPath": "C:/C++Compiler/MinGW/GCC-10.1.0-3/mingw64/bin/g++.exe",
             "browse": {
                 "path": [
                     "${workspaceRoot}",
