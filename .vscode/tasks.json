@@ -144,6 +144,20 @@
             "problemMatcher": []
         },
         {
+            "label": "rebuild and run(local)_pwsh7",
+            "type": "shell",
+            "command": "\"${workspaceFolder}\\.vscode\\BuildAndTest.ps1\"",
+            "args": [
+                "-SourceFileName",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.cpp\"",
+                "-CompilerArgs",
+                "'-DLOCAL_DEBUG -Wl,--stack=8589934592 -std=gnu++17 -O2 -Wall -lstdc++fs -lm -I \"${workspaceFolder}\\include\"'",
+                "-WorkspaceFolder",
+                "'${workspaceFolder}'"
+            ],
+            "problemMatcher": [],
+        },
+        {
             "label": "rebuild and run(local)",
             "type": "shell",
             "command": "powershell",
@@ -160,7 +174,7 @@
                 "'${workspaceFolder}'"
             ],
             "problemMatcher": [],
-        },
+        },        
         {
             "label": "rebuild and run(DevCppMode)",
             "type": "shell",
