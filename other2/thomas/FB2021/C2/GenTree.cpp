@@ -26,18 +26,18 @@ class solution
         // Tree t(9);
         // Tree t(9)t.random(1,1);
         // cout << t << '\n';    
-        int t=30;
+        int t=10;
         random rdNum;              //note:随机数
         cout << t << "\n";
         while (t--)
         {
-            int N =rdNum.GetRand(50, 50);
+            int N =rdNum.GetRand(1, 20);
             int K =rdNum.GetRand(0, 50);
             //int N =50;
             cout << N << " " << K <<"\n";
             for (int i = 1; i <= N; ++i)
             {
-                cout << rdNum.GetRand(0, 20000000) << " ";
+                cout << rdNum.GetRand(0, 20) << " ";
             }
             cout << "\n";
             Tree tree(N);
