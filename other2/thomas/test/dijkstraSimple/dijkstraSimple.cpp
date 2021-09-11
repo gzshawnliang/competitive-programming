@@ -4,6 +4,11 @@ using namespace std;
 
 //ifstream fin("dijkstraSimple.in");
 //ofstream fout("dijkstraSimple.out");
+/*
+ref:
+https://vinkle.top/2020/07/13/Dijkstra/
+<Competitive Programming 3 - Steven Halim>
+*/
 
 const int INF=INT_MAX/2;
 
