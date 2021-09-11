@@ -40,6 +40,7 @@ int dijkstra(vector<vector<pair<int,int>>> & g,int s,int t)
         //         pq.push({dist[v],v});
         //     }
         // }
+        
         vist[u]=1;
         for (auto curr:g[u])
         {
