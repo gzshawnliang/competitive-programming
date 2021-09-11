@@ -7,68 +7,150 @@ using namespace std;
 
 const int INF=INT_MAX/2;
 
-int dijkstra(vector<vector<pair<int,int>>> & g,int s,int t)
+class dijkstra
 {
-    int n=g.size();
-    vector<int> dist(n,INF);
-    vector<int> vist(n,0);
-    dist[s]=0;
-    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-    pq.push({0,s});
+    private:
+     vector<vector<pair<int,int>>> g;
+     vector<int> parent;
 
-    while (!pq.empty()) 
-    { 
-        pair<int,int> front=pq.top();
-        pq.pop();
-        
-        int d = front.first;
-        int u = front.second;
+    void reSet(vector<vector<pair<int,int>>> & graph)
+    {
+        this->g=graph;
+        parent=vector<int>(this->g.size(),-1);
+    }
 
-        if (d > dist[u]) 
-            continue;         //重要
+    void printPath(int j)
+    {
+        // Base Case : If j is source
+        if (parent[j]==-1)
+            return;
 
-        // for (int i = 0,size=g[u].size(); i <= size-1 ; ++i)
-        // {
-        //     pair<int,int> curr=g[u][i];
-        //     int distV=curr.first;
-        //     int v=curr.second;
+        printPath(parent[j]);
+        cout << "->" << j ;
+    }    
+
+    public:
+    dijkstra(vector<vector<pair<int,int>>> & graph)
+    {
+        reSet(graph);
+    }
+
+    int run(int s,int t)
+    {
+        int n=g.size();
+        vector<int> dist(n,INF);
+        vector<int> vist(n,0);
+        dist[s]=0;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        pq.push({0,s});
+
+        while (!pq.empty()) 
+        { 
+            pair<int,int> front=pq.top();
+            pq.pop();
             
-        //     //u->v
-        //     if(dist[u] + distV < dist[v])
-        //     {
-        //         dist[v]=dist[u]+distV;
-        //         pq.push({dist[v],v});
-        //     }
-        // }
-        
-        vist[u]=1;
-        for (auto curr:g[u])
-        {
-            int distV=curr.first;
-            int v=curr.second;
-            
-            //u->v
-            if(vist[v]==0 && dist[u] + distV < dist[v])
+            int d = front.first;
+            int u = front.second;
+
+            if (d > dist[u]) 
+                continue;         //重要
+
+            // for (int i = 0,size=g[u].size(); i <= size-1 ; ++i)
+            // {
+            //     pair<int,int> curr=g[u][i];
+            //     int distV=curr.first;
+            //     int v=curr.second;
+                
+            //     //u->v
+            //     if(dist[u] + distV < dist[v])
+            //     {
+            //         dist[v]=dist[u]+distV;
+            //         pq.push({dist[v],v});
+            //     }
+            // }
+
+            vist[u]=1;
+            for (auto curr:g[u])
             {
-                dist[v]=dist[u]+distV;
-                pq.push({dist[v],v});
+                int distV=curr.first;
+                int v=curr.second;
+                
+                //u->v
+                if(vist[v]==0 && dist[u] + distV < dist[v])
+                {
+                    dist[v]=dist[u]+distV;
+                    parent[v]=u;
+
+                    pq.push({dist[v],v});
+                }
+            }
+
+        }
+        
+        return dist[t];
+    }
+
+    int run2(int s,int t)
+    {
+        int n=g.size();
+        vector<int> dist(n,INF);
+        vector<int> vist(n,0);
+        dist[s]=0;
+        priority_queue<pair<int,int>> pq;
+        pq.push({0,s});
+
+        while (!pq.empty()) 
+        { 
+            pair<int,int> front=pq.top();
+            pq.pop();
+            
+            int d = 0 - front.first;
+            int u = front.second;
+
+            if (d > dist[u]) 
+                continue;         //重要
+
+            vist[u]=1;
+            for (auto curr:g[u])
+            {
+                int distV=curr.first;
+                int v=curr.second;
+                
+                //u->v
+                if(vist[v]==0 && dist[u] + distV < dist[v])
+                {
+                    dist[v]=dist[u]+distV;
+                    parent[v]=u;
+                    pq.push({0-dist[v],v});
+                }
             }
         }
-
+        
+        return dist[t];
     }
-    
-    return dist[t];
-}
 
-void solve(vector<vector<pair<int,int>>> & g,int s,int t)
-{
-    int result=dijkstra(g,s,t);
-    cout << "from " << s << " to " << t << "  shortest paths is:";
-    if(result==INF)
-        cout << "INF\n";
-    else
-        cout << result << '\n';
-}
+    void runAndPrint(int s,int t)
+    {
+        int result=run2(s,t);
+        cout << s << " -> " << t << ",shortest paths is:";
+        if(result==INF)
+            cout << "INF\n";
+        else
+        {
+            cout << result << ",path is:" << s << "";
+            printPath(t);
+            cout << "\n";
+        }
+    } 
+
+    void runAndPrint(vector<vector<pair<int,int>>> & graph,int s,int t)
+    {
+        //this->g = graph;
+        reSet(graph);
+        runAndPrint(s,t);
+    }       
+};
+
 
 int main()
 {
@@ -84,7 +166,8 @@ int main()
                             //4->无
     int s=2;
     int t=4;
-    solve(g,s,t);
+    dijkstra dijkstra1(g);
+    dijkstra1.runAndPrint(s,t);
 
     g = vector<vector<pair<int, int>>>(7);
                                 //0->无    
@@ -100,7 +183,8 @@ int main()
                                 //6->无
     s=1;
     t=6;
-    solve(g,s,t);
+    dijkstra1.runAndPrint(g,s,t);
+
     return 0;
 }
 
