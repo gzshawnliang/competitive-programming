@@ -45,7 +45,7 @@ class dijkstra
     {
         int n=g.size();
         vector<int> dist(n,INF);
-        vector<int> vist(n,0);
+        //vector<int> vist(n,0);
         dist[s]=0;
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
         pq.push({0,s});
@@ -55,8 +55,9 @@ class dijkstra
             pair<int,int> front=pq.top();
             pq.pop();
             
-            int d = front.first;
+            
             int u = front.second;
+            int d = front.first;
 
             if (d > dist[u]) 
                 continue;         //重要
@@ -75,14 +76,14 @@ class dijkstra
             //     }
             // }
 
-            vist[u]=1;
+            //vist[u]=1;
             for (auto curr:g[u])
             {
-                int distV=curr.first;
-                int v=curr.second;
+                int v=curr.first;
+                int distV=curr.second;
                 
                 //u->v
-                if(vist[v]==0 && dist[u] + distV < dist[v])
+                if(dist[u] + distV < dist[v])       //vist[v]==0 &&
                 {
                     dist[v]=dist[u]+distV;
                     parent[v]=u;
@@ -100,7 +101,7 @@ class dijkstra
     {
         int n=g.size();
         vector<int> dist(n,INF);
-        vector<int> vist(n,0);
+        // vector<int> vist(n,0);
         dist[s]=0;
         priority_queue<pair<int,int>> pq;
         pq.push({0,s});
@@ -110,20 +111,21 @@ class dijkstra
             pair<int,int> front=pq.top();
             pq.pop();
             
-            int d = 0 - front.first;
             int u = front.second;
+            int d = 0 - front.first;
 
             if (d > dist[u]) 
-                continue;         //重要
+                continue;         //重要,当前取出的路径更长，则忽略（重要）
 
-            vist[u]=1;
+            //vist[u]=1;
             for (auto curr:g[u])
             {
-                int distV=curr.first;
-                int v=curr.second;
+                
+                int v=curr.first;
+                int distV=curr.second;
                 
                 //u->v
-                if(vist[v]==0 && dist[u] + distV < dist[v])
+                if(dist[u] + distV < dist[v])       //vist[v]==0 &&
                 {
                     dist[v]=dist[u]+distV;
                     parent[v]=u;
@@ -137,7 +139,7 @@ class dijkstra
 
     void runAndPrint(int s,int t)
     {
-        int result=run2(s,t);
+        int result=run(s,t);
         cout << s << " -> " << t << ",shortest paths is:";
         if(result==INF)
             cout << "INF\n";
@@ -160,36 +162,59 @@ class dijkstra
 
 int main()
 {
-    vector<vector<pair<int,int>>> g(5);
+    
+    #ifndef ONLINE_JUDGE
+        freopen("dijkstraSimple.in", "r", stdin);
+        //freopen("dijkstraSimple.out", "w", stdout);
+    #endif    
 
-    g[0].push_back({1,4});  //0->4:1
-    g[1].push_back({3,3});  //1->3:3
-    g[1].push_back({6,4});  //1->4:6
-    g[2].push_back({2,1});  //2->1:2
-    g[2].push_back({7,3});  //2->3:7
-    g[2].push_back({6,0});  //2->0:6
-    g[3].push_back({5,4});  //3->4:5
-                            //4->无
-    int s=2;
-    int t=4;
-    dijkstra dijkstra1(g);
-    dijkstra1.runAndPrint(s,t);
+    int T;
+    cin >> T;
+    while (T--)
+    {
+        int n , m,s,t;
+        cin >> n>> m >> s >> t;
+        vector<vector<pair<int,int>>> g(n);
+        while (m--)
+        {
+            int u,v,w;
+            cin >> u >> v >> w;
+            g[u].push_back({v,w});
+        }
+        dijkstra dijkstra1(g);
+        dijkstra1.runAndPrint(s,t);
+    }
+    
 
-    g = vector<vector<pair<int, int>>>(7);
-                                //0->无    
-    g[1].push_back({1,2});      //1->2:1
-    g[1].push_back({12,3});     //1->3:12
-    g[2].push_back({9,3});      //2->3:9
-    g[2].push_back({3,4});      //2->4:3
-    g[3].push_back({5,5});      //3->5:5
-    g[4].push_back({4,3});      //4->3:4
-    g[4].push_back({13,5});     //4->5:13
-    g[4].push_back({15,6});     //4->6:15
-    g[5].push_back({4,6});      //5->6:4
-                                //6->无
-    s=1;
-    t=6;
-    dijkstra1.runAndPrint(g,s,t);
+    // vector<vector<pair<int,int>>> g(5);
+    // g[0].push_back({1,4});  //0->4:1
+    // g[1].push_back({3,3});  //1->3:3
+    // g[1].push_back({6,4});  //1->4:6
+    // g[2].push_back({2,1});  //2->1:2
+    // g[2].push_back({7,3});  //2->3:7
+    // g[2].push_back({6,0});  //2->0:6
+    // g[3].push_back({5,4});  //3->4:5
+    //                         //4->无
+    // int s=2;
+    // int t=4;
+    // dijkstra dijkstra1(g);
+    // dijkstra1.runAndPrint(s,t);
+
+    // g = vector<vector<pair<int, int>>>(7);
+    //                             //0->无    
+    // g[1].push_back({1,2});      //1->2:1
+    // g[1].push_back({12,3});     //1->3:12
+    // g[2].push_back({9,3});      //2->3:9
+    // g[2].push_back({3,4});      //2->4:3
+    // g[3].push_back({5,5});      //3->5:5
+    // g[4].push_back({4,3});      //4->3:4
+    // g[4].push_back({13,5});     //4->5:13
+    // g[4].push_back({15,6});     //4->6:15
+    // g[5].push_back({4,6});      //5->6:4
+    //                             //6->无
+    // s=1;
+    // t=6;
+    // dijkstra1.runAndPrint(g,s,t);
 
     return 0;
 }
