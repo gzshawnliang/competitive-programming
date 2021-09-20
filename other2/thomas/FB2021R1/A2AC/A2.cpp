@@ -26,16 +26,16 @@ class solution
         int N;
         string S;
         cin >> N >> S;
-        int b = -1, ans = 0;
-        for (int a = 0; a <= N-1; ++a)
+        int a = -1, ans = 0;
+        for (int b = 0; b <= N - 1; ++b)
         {
-            if (S[a] == 'F')
+            if (S[b] == 'F')
                 continue;
 
-            if (b >= 0 && S[a] != S[b])
-                ans = (ans + (ill)(b + 1) * (N - a)) % MOD;
-            
-            b = a;
+            if (a >= 0 && S[b] != S[a])
+                ans = (ans + (ill)(a + 1) * (N - b)) % MOD;
+
+            a = b;
         }
         return ans;
     }
