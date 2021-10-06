@@ -180,7 +180,7 @@ class solution
         }
         b[2][0] = 1; b[1][0] = 1; b[1][1] = 1;
 
-        if (peq(pos[8], {3, 0}))
+        if (peq(pos[8], {3, 0}) || (peq(pos[8], {3, 1}) && peq(pos[0], {3, 0})))
         {
             b[2][0] = 0;
             moveTmp(8, {1, 2}); b[pos[8].first][pos[8].second] = 1;
@@ -200,12 +200,10 @@ class solution
             for (int x = 0; x <= 3; ++x) b[1][x] = 1;
         }
 
-        //------------------------------------------------------------------------
-
         moveEmpTo({3, 3});
 
         move(9);
-        if (peq(pos[10], {3, 0}))
+        if (peq(pos[10], {3, 0}) || (peq(pos[10], {3, 1}) && peq(pos[0], {3, 0})))
         {
             b[2][0] = 0;
             moveTmp(10, {2, 2}); b[pos[10].first][pos[10].second] = 1;
@@ -231,12 +229,19 @@ class solution
         touch(pos[9]); touch(pos[10]); touch(pos[11]);
         b[3][1] = 1; b[3][0] = 1; b[2][0] = 1;
 
-        moveTmp(12, {2, 3});
+        if (peq(pos[12], {2, 2}))
+        {
+            touch(pos[11]); touch(pos[10]); touch(pos[9]);
+        }
+        else
+        {
+            moveTmp(12, {2, 3});
 
 
-        moveEmpTo({2, 1});
-        touch(pos[11]); touch(pos[10]); touch(pos[9]);
-        touch({3, 2}); touch({2, 2}); touch(pos[12]);
+            moveEmpTo({2, 1});
+            touch(pos[11]); touch(pos[10]); touch(pos[9]);
+            touch({3, 2}); touch({2, 2}); touch(pos[12]);
+        }
 
         b[3][1] = 0; b[3][0] = 0; b[2][0] = 0;
         b[3][0] = 1; for (int x = 0; x <= 2; ++x) b[2][x] = 1;
