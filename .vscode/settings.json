@@ -170,6 +170,5 @@
     "files.defaultLanguage": "cpp",
     "explorer.compactFolders": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
-    "terminal.integrated.rightClickBehavior": "default",
-    "git.ignoreLimitWarning": true
+    "terminal.integrated.rightClickBehavior": "default"
 }
