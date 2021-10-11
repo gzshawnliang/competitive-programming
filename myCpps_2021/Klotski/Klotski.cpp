@@ -271,8 +271,8 @@ signed main()
     FastIO;
 
 #ifdef LOCAL_DEBUG
-    freopen("Klotski.in", "r", stdin);
-    freopen("Klotski.out", "w", stdout);
+    //freopen("Klotski.in", "r", stdin);
+    //freopen("Klotski.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
