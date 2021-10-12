@@ -18,7 +18,7 @@ string getCurrTime()
 
 int main()
 {
-    const int FileCount = 1; //note:文件数量
+    const int FileCount = 3; //note:文件数量
     ofstream fout;           //note:文件流
     random rdNum;            //note:随机数
 
@@ -29,8 +29,8 @@ int main()
     for (int fileId = 1; fileId <= FileCount; ++fileId)
     {
         stringstream ss;
-        //ss << "test_" << currTime << "_" << setw(len) << setfill('0') << fileId << ".in";
-        ss << "Klotski.in";
+        ss << "test_" << currTime << "_" << setw(len) << setfill('0') << fileId << ".in";
+        //ss << "Klotski.in";
 
         fout.open(ss.str());
 
@@ -50,17 +50,17 @@ int main()
         int swapCount = 0;
         int zCount = 0;
         //int maxZCount=rdNum.GetRand(1000, 2000);
-        int maxZCount=5;
+        int maxZCount=15;
         while (true)
         {
             vector<pair<int, int>> swapPairVec;
 
             for (auto c : b)
             {
-                if (a[z.first + c][z.second] > 0)
+                if (a[z.first + c][z.second] > 0 && z.first + c>=3)
                     swapPairVec.push_back({z.first + c, z.second});
 
-                if (a[z.first][z.second + c] > 0)
+                if (a[z.first][z.second + c] > 0 && z.first>=3)
                     swapPairVec.push_back({z.first, z.second + c});
             }
 
@@ -78,7 +78,7 @@ int main()
                     break;
                 }
             }
-
+            cerr << nextPair.first << endl;
             std::swap(a[z.first][z.second], a[nextPair.first][nextPair.second]);
             z = nextPair;
 
