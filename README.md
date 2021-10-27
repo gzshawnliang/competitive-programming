@@ -5,5 +5,5 @@ My solutions to problems on various contest platforms.
 [shawnliang.wiki](https://shawnliang.wiki/)
 
 ## Resources
-[Awesome Competitive Programming](https://github.com/lnishan/awesome-competitive-programming)
+[Awesome Competitive Programming](https://github.com/lnishan/awesome-competitive-programming) <br>
 [E-Maxx Algorithms](https://cp-algorithms.com/)
