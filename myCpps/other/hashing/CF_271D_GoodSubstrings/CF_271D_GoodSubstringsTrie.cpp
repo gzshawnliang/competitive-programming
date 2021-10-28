@@ -1,9 +1,9 @@
 /*
 ===========================================================
  * @名称:		D. Good Substrings
- * @作者:		Thomas 
+ * @作者:		Shawn 
  * @创建时间: 2019-10-09 16:38:22 
- * @修改人:   Thomas
+ * @修改人:   Shawn
  * @修改时间: 2019-10-09 16:38:22 
  * @备注:		AC:Time 186 ms,Memory 229000 KB
  * @题目来源： https://codeforces.com/contest/271/problem/D

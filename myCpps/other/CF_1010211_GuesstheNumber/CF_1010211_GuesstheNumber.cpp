@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           1010211 Guess the Number
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/5/16 11:54:33
 * @url:            https://codeforces.com/gym/101021/problem/1
 * @Description:    

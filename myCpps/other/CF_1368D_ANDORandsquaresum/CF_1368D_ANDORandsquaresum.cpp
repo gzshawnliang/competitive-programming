@@ -1,7 +1,7 @@
 /*
 -------------------------------------------------------------------
 * @Name:           1368D AND, OR and square sum
-* @Author:         Thomas
+* @Author:         Shawn
 * @Create Time:    2020/7/3 19:27:48  (UTC+08:00)
 * @Url:            https://codeforces.com/contest/1368/problem/D
 * @Description:    

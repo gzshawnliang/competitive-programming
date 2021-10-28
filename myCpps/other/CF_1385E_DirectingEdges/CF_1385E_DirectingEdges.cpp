@@ -1,7 +1,7 @@
 /*
 -------------------------------------------------------------------
 * @Name:           1385E Directing Edges
-* @Author:         Thomas
+* @Author:         Shawn
 * @Create Time:    2020/7/19 10:12:06  (UTC+08:00)
 * @Url:            https://codeforces.com/contest/1385/problem/E
 * @Description:    topo拓扑排序

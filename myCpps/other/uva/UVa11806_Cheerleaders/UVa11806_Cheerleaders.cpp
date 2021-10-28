@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           UVa-11806 Cheerleaders
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/2/26 19:23:32
 * @url:            
 * @Description:    容斥原理

@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           UVa-1476 Error Curves
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/5/23 20:02:29
 * @url:            https://onlinejudge.org/external/14/1476.pdf
 * @Description:    

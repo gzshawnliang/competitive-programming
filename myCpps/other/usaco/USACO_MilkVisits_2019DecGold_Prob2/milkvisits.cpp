@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           Problem 2. Milk Visits 
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/1/14 16:35:52
 * @url:            http://www.usaco.org/index.php?page=viewproblem2&cpid=970&lang=zh
 * @Description:    USACO 2019 December Contest, Gold

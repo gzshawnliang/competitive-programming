@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           803F Coprime Subsequences
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/3/2 20:13:32
 * @url:            https://codeforces.com/contest/803/problem/F
 * @Description:    

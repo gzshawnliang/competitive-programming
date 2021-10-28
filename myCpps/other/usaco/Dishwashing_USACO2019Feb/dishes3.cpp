@@ -1,9 +1,9 @@
 /*
 ===========================================================
  * @名称:    Problem 2. Dishwashing
- * @作者:    Thomas 
+ * @作者:    Shawn 
  * @创建时间: 2020-01-02 22:21:24 
- * @修改人:   Thomas 
+ * @修改人:   Shawn 
  * @修改时间: 2020-01-02 22:21:24 
  * @备注:    USACO 2019 February Contest, Gold
  * @题目来源： http://www.usaco.org/index.php?page=viewproblem2&cpid=922

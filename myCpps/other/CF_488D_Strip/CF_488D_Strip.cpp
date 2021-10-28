@@ -1,9 +1,9 @@
 /*
 ===========================================================
  * @名称:		Strip
- * @作者:		Thomas 
+ * @作者:		Shawn 
  * @创建时间: 2020-02-12 20:54:33 
- * @修改人:   Thomas 
+ * @修改人:   Shawn 
  * @修改时间: 2020-02-12 20:54:33 
  * @备注:	  Sparse Table + Sliding Window(双指针) + DP
  * @题目来源： https://codeforces.com/problemset/problem/488/D

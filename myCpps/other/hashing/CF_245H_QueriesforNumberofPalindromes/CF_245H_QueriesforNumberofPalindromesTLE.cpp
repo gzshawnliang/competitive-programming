@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           245H Queries for Number of Palindromes
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2019/11/24 21:03:07
 * @url:            https://codeforces.com/contest/245/problem/H
 * @Description:    

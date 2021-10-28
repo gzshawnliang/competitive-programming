@@ -1,9 +1,9 @@
 /*
 ===========================================================
  * @名称:		D. Good Substrings
- * @作者:		Thomas 
+ * @作者:		Shawn 
  * @创建时间: 2019-10-09 16:38:22 
- * @修改人:   Thomas
+ * @修改人:   Shawn
  * @修改时间: 2019-10-09 16:38:22 
  * @备注:	 unordered_set   AC： 872 ms	         Memory:37500 KB
  *          unordered_map    AC: Time:1154 ms	Memory:45900 KB	

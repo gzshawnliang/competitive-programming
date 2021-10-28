@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           900D Unusual Sequences
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/3/6 16:44:56
 * @url:            https://codeforces.com/contest/900/problem/D
 * @Description:    

@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           782B The Meeting Place Cannot Be Changed
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/6/4 15:17:13
 * @url:            https://codeforces.com/contest/782/problem/B
 * @Description:    三分法

@@ -1,7 +1,7 @@
 /*
 -------------------------------------------------------------------
 * @Name:           1375A Sign Flipping
-* @Author:         Thomas
+* @Author:         Shawn
 * @Create Time:    2020/7/8 18:31:49  (UTC+08:00)
 * @Url:            https://codeforces.com/contest/1375/problem/A
 * @Description:    

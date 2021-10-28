@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           578C Weakness and Poorness
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/5/31 21:19:29
 * @url:            https://codeforces.com/contest/578/problem/C
 * @Description:    三分+dp，double精度不够，long double才行

@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           514D R2D2 and Droid Army
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/2/21 9:42:21
 * @url:            https://codeforces.com/contest/514/problem/D
 * @Description:    SparseTable + 暴力超时

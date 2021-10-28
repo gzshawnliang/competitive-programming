@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           1043F Make It One
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/3/8 11:49:59
 * @url:            https://codeforces.com/contest/1043/problem/F
 * @Description:    容斥原理，组合数比较大，Pascal公式超内存，需要逆元计算组合数o

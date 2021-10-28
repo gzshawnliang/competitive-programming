@@ -2,8 +2,8 @@
 
 using namespace std;
 
-ifstream fin("secretWord_UVA12467Thomas.in");
-ofstream fout("secretWord_UVA12467Thomas.out");
+ifstream fin("secretWord_UVA12467Shawn.in");
+ofstream fout("secretWord_UVA12467Shawn.out");
 
 
 class KMP
