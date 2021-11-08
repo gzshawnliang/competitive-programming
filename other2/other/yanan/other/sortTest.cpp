@@ -36,7 +36,7 @@ int main()
 	no1.Math = 150;
 	no1.English = 135;
 	
-	no2.name = "Thomas";
+	no2.name = "Shawn";
 	no2.Math = 40;
 	no2.English = 50;
 	

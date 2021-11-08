@@ -1,7 +1,7 @@
 /*
 -------------------------------------------------------------------
 * @Name:           1385F Removing Leaves
-* @Author:         Thomas
+* @Author:         Shawn
 * @Create Time:    2020/7/24 13:17:34  (UTC+08:00)
 * @Url:            https://codeforces.com/contest/1385/problem/F
 * @Description:    

@@ -11,7 +11,7 @@
 
 using namespace std;
 
-ifstream fin("ACMContestAndBlackout_UVA10600_Thomas.in");
+ifstream fin("ACMContestAndBlackout_UVA10600_Shawn.in");
 ofstream fout("ACMContestAndBlackout_UVA10600.out");
 
 struct edge

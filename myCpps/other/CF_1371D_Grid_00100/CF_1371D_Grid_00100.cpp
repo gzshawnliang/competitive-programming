@@ -1,7 +1,7 @@
 /*
 -------------------------------------------------------------------
 * @Name:           1371D Grid-00100
-* @Author:         Thomas
+* @Author:         Shawn
 * @Create Time:    2020/7/2 16:12:18  (UTC+08:00)
 * @Url:            https://codeforces.com/contest/1371/problem/D
 * @Description:    

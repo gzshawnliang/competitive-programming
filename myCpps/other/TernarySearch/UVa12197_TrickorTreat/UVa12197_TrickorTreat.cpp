@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           UVa-12197 Trick or Treat
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/5/25 10:24:05
 * @url:            https://onlinejudge.org/external/121/12197.pdf
 * @Description:    

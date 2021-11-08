@@ -11,7 +11,7 @@ int main()
 {
     //code
     // C++11 style further ahead
-    vector<string> a = {"Ann", "Thomas"};
+    vector<string> a = {"Ann", "Shawn"};
     a[1] = "Ann";
     // int b;
     // //b2=0;

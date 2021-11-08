@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           113B Petr#
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2019/11/12 15:20:50
 * @url:            https://codeforces.com/contest/113/problem/B
 * @Description:    

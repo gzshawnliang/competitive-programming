@@ -1,11 +1,11 @@
 /***********************************************************
- * @Ãû³Æ:		3n + 1 problem
- * @×÷Õß:		Shawn 
- * @´´½¨Ê±¼ä: 2017-11-14 20:38:17 
- * @ÐÞ¸ÄÈË:   Thomas 
- * @ÐÞ¸ÄÊ±¼ä: 2017-11-14 21:05:17 
- * @±¸×¢:		derp
- * @ÌâÄ¿À´Ô´£º https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=3&page=show_problem&problem=36
+ * @ï¿½ï¿½ï¿½ï¿½:		3n + 1 problem
+ * @ï¿½ï¿½ï¿½ï¿½:		Shawn 
+ * @ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½: 2017-11-14 20:38:17 
+ * @ï¿½Þ¸ï¿½ï¿½Shawnhomas 
+ * @ï¿½Þ¸ï¿½Ê±ï¿½ï¿½: 2017-11-14 21:05:17 
+ * @ï¿½ï¿½×¢:		derp
+ * @ï¿½ï¿½Ä¿ï¿½ï¿½Ô´ï¿½ï¿½ https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=3&page=show_problem&problem=36
 ***********************************************************/
 
 #include <fstream>
@@ -47,8 +47,8 @@ long long numberLoop(long long a, long long b)
 
 int main()
 {
-    ifstream fin("numberLoopThomas.in");
-    ofstream fout("numberLoopThomas.out");
+    ifstream fin("numberLoopShawn.in");
+    ofstream fout("numberLoopShawn.out");
 
     //int minB, maxB, ans = 0, out;
     //fin >> minB >> maxB;

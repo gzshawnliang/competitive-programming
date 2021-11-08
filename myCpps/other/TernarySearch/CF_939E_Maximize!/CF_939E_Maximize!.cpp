@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           939E Maximize!
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/6/3 9:13:19
 * @url:            https://codeforces.com/contest/939/problem/E
 * @Description:    三分搜索

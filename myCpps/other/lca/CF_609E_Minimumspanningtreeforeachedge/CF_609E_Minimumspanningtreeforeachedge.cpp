@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           609E Minimum spanning tree for each edge
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2019/12/18 21:35:08
 * @url:            https://codeforces.com/contest/609/problem/E
 * @Description:    

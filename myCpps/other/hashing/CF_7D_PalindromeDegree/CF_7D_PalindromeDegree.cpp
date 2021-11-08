@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           7D Palindrome Degree
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2019/11/30 19:02:54
 * @url:            https://codeforces.com/contest/7/problem/D
 * @Description:    

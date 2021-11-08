@@ -1,7 +1,7 @@
 /*
 -------------------------------------------------------------------
 * @Name:           1374E2 Reading Books (hard version)
-* @Author:         Thomas
+* @Author:         Shawn
 * @Create Time:    2020/7/1 17:44:59  (UTC+08:00)
 * @Url:            https://codeforces.com/contest/1374/problem/E2
 * @Description:    

@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           1367F1 Flying Sort (Easy Version)
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/6/19 14:20:19
 * @url:            https://codeforces.com/contest/1367/problem/F2
 * @Description:    

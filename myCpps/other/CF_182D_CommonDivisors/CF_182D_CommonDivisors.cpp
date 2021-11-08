@@ -1,9 +1,9 @@
 /*
 ===========================================================
  * @名称:    182D Common Divisors
- * @作者:    Thomas 
+ * @作者:    Shawn 
  * @创建时间: 2019-11-08 16:28:30 
- * @修改人:   Thomas 
+ * @修改人:   Shawn 
  * @修改时间: 2019-11-08 16:28:30 
  * @备注:    字符串的前i项是Divisor
  * @题目来源： https://codeforces.com/problemset/problem/182/D

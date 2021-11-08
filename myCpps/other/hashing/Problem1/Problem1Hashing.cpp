@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           Problem 1
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2019/11/12 18:10:00
 * @url:            https://www.quora.com/q/threadsiiithyderabad/String-Hashing-for-competitive-programming
                    https://www.geeksforgeeks.org/palindrome-substring-queries/

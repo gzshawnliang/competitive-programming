@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           1076E Vasya and a Tree
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/3/26 17:15:00
 * @url:            https://codeforces.com/contest/1076/problem/E
 * @Description:    树状数组+DFS

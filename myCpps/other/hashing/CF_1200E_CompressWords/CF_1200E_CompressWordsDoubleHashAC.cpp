@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           1200E Compress Words
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2019/11/18 9:45:43
 * @url:            https://codeforces.com/contest/1200/problem/E
 * @Description:    Double Hash版本

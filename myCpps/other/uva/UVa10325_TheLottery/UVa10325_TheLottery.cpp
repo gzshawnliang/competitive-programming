@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           UVa-10325 The Lottery
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/2/25 8:37:38
 * @url:            
 * @Description:    

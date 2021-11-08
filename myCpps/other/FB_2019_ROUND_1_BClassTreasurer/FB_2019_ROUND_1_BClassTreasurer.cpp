@@ -1,7 +1,7 @@
 /*
 -------------------------------------------------------------------
 * @Name:           Problem B: Class Treasurer
-* @Author:         Thomas
+* @Author:         Shawn
 * @Create Time:    2020/8/11 21:44:33  (UTC+08:00)
 * @Url:            https://www.facebook.com/codingcompetitions/hacker-cup/2019/round-1/problems/B
 * @Description:    Facebook Hacker Cup 2019 Round 1

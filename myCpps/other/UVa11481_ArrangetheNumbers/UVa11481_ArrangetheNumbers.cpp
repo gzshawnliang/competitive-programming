@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           UVa-11481 Arrange the Numbers
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/2/27 20:52:32
 * @url:            
 * @Description:    todo

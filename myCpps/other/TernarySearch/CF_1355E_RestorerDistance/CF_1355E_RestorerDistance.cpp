@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           1355E Restorer Distance
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2020/5/25 15:01:25
 * @url:            https://codeforces.com/contest/1355/problem/E
 * @Description:    

@@ -1,7 +1,7 @@
 /*
 ===========================================================
 * @Name:           835D Palindromic characteristics
-* @Author:         Thomas
+* @Author:         Shawn
 * @create Time:    2019/12/13 16:03:49
 * @url:            https://codeforces.com/contest/835/problem/D
 * @Description:    

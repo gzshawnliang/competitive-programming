@@ -1,11 +1,11 @@
 /***********************************************************
- * @Ãû³Æ:		ÔÚÏßÌâ¿â£¬±¾µØ²âÊÔÄ£°å
- * @×÷Õß:		Thomas 
- * @´´½¨Ê±¼ä: 2017-11-16 21:23:21 
- * @ÐÞ¸ÄÈË:   Thomas 
- * @ÐÞ¸ÄÊ±¼ä: 2017-11-24 07:38:58
- * @±¸×¢:		
- * @ÌâÄ¿À´Ô´£º 
+ * @ï¿½ï¿½ï¿½ï¿½:		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â£¬ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+ * @ï¿½ï¿½ï¿½Shawnomas 
+ * @ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½: 2017-11-16 21:23:21 
+ * @ï¿½Þ¸ï¿½ï¿½Shawnhomas 
+ * @ï¿½Þ¸ï¿½Ê±ï¿½ï¿½: 2017-11-24 07:38:58
+ * @ï¿½ï¿½×¢:		
+ * @ï¿½ï¿½Ä¿ï¿½ï¿½Ô´ï¿½ï¿½ 
 ***********************************************************/
 
 #include <fstream>
@@ -27,10 +27,10 @@ using namespace std;
 void pauseMe()
 {
     #ifdef _WIN32
-        //WindowsÏÂµ÷ÊÔÊ¹ÓÃÔÝÍ£¹¦ÄÜ
+        //Windowsï¿½Âµï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
         system("pause");
     #else
-        //LinuxÏÂµ÷ÊÔÔÝÍ£
+        //Linuxï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½Í£
         cout << "Press ENTER key to continue...";
         cin.clear();
         cin.get(); 
@@ -40,7 +40,7 @@ void pauseMe()
 void solve()
 {
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    ³ÌÐòËã·¨´úÂë
+    ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨ï¿½ï¿½ï¿½ï¿½
     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     // string cins = "";
     // vector<string> vec1;
@@ -60,17 +60,17 @@ void solve()
     //     ++i;
     // }
 
-    //Òç³ö²âÊÔ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     // int i2=1000;
     // cout << vec1[i2] << endl;
 
-    //c++ 11±ê×¼
+    //c++ 11ï¿½ï¿½×¼
     // vector<vector<int>> vec2;
     // vector<int> vec3;
     // vec3.push_back(34);
     // vec2.push_back(vec3);
 
-    //SET²âÊÔ        
+    //SETï¿½ï¿½ï¿½ï¿½        
     set<int> set1;
 
     set1.insert(10);
@@ -96,7 +96,7 @@ int main()
 #ifndef ONLINE_JUDGE
     #ifndef DEBUG
         //F11
-        //ÖØÐÂ¶¨Ïò±ê×¼iostream(cin/cout)µ½ÎÄ¼þ
+        //ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½ï¿½×¼iostream(cin/cout)ï¿½ï¿½ï¿½Ä¼ï¿½
         freopen("oj_template.in", "r", stdin);
         freopen("oj_template.out", "w", stdout);
     #endif        
@@ -104,7 +104,7 @@ int main()
 
 #ifdef CODE_STATISTICS
     //CRL+ F11 
-    //³ÌÐò¿ªÊ¼Ê±¼ä
+    //ï¿½ï¿½ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
     clock_t tStart = clock();
 #endif
 
@@ -121,7 +121,7 @@ int main()
 
 #ifdef CODE_STATISTICS
     //CRL+ F11 
-    //Êä³ö¼ÆËãÔËÐÐÊ±¼ä
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     cout << "The Program has completed running after " << (double)(clock() - tStart) / CLOCKS_PER_SEC << " seconds\n";
     pauseMe();
 #endif

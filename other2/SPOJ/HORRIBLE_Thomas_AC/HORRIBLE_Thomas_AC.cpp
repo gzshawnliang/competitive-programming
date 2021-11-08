@@ -2,8 +2,8 @@
 
 using namespace std;
 
-ifstream fin("HORRIBLE_Thomas_AC.in");
-ofstream fout("HORRIBLE_Thomas_AC.out");
+ifstream fin("HORRIBLE_Shawn_AC.in");
+ofstream fout("HORRIBLE_Shawn_AC.out");
 
 //typedef long long LL;
 
