@@ -414,7 +414,7 @@ function BuildCppAndRun($SourceFileName) {
 
     #显示编译器信息
     Write-Host 
-    start-process $cppCompilerCmd "--version" -wait -NoNewWindow
+    start-process -FilePath $cppCompilerCmd -ArgumentList "--version" -NoNewWindow
 
     $exeFileName = $SourFile.DirectoryName + "\" + $SourFile.BaseName + ".exe" 
 
