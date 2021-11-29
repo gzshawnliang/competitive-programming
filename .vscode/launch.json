@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "C++ Launch (msvc)",
             "type": "cppvsdbg",
             "request": "launch",
@@ -10,7 +17,7 @@
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "preLaunchTask": "msvc_build",
-            "console":"internalConsole"
+            "console": "internalConsole"
         },
         {
             "name": "C++ Launch (GDB)",
@@ -45,8 +52,10 @@
             "name": "Java Launch",
             "request": "launch",
             "mainClass": "${file}",
-            "sourcePaths": ["${fileDirname}"],
-            "encoding":"UTF-8",
+            "sourcePaths": [
+                "${fileDirname}"
+            ],
+            "encoding": "UTF-8",
             "vmArgs": "-Xmx512M -Xss64M -Duser.language=en -Duser.region=US -Duser.variant=US",
             "cwd": "${fileDirname}",
             "console": "integratedTerminal",
