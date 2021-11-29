@@ -723,7 +723,7 @@ function BuildPythonAndRun($SourceFileName) {
 
     #显示编译器信息
     Write-Host
-    start-process $pythonCompilerCmd "--version" -wait -NoNewWindow
+    start-process $pythonCompilerCmd "-V -V" -wait -NoNewWindow
     # start-process $pythonCmd "--version" -wait -NoNewWindow    
     
     $SourFile = Get-Item -Path $SourceFileName
