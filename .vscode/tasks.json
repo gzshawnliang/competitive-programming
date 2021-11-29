@@ -212,6 +212,23 @@
             "problemMatcher": []
         },
         {
+            "label": "rebuild and run(python)",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-executionpolicy",
+                "bypass",
+                "-File",
+                "${workspaceFolder}\\.vscode\\BuildAndTest.ps1",
+                "-SourceFileName",
+                "${fileDirname}\\${fileBasenameNoExtension}.py",
+                "-ShowShellConsole",
+                "-WorkspaceFolder",
+                "\"${workspaceFolder}\""
+            ],
+            "problemMatcher": []
+        },        
+        {
             "label": "msvc_build",
             "type": "shell",
             "command": "${env:VCToolsInstallDir}\\bin\\Hostx64\\x86\\cl.exe",

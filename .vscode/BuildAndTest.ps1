@@ -27,6 +27,7 @@
 #  * @更新:     2020-01-11 19:17 增加文件/文件夹允许带空格(未测试in，out文件),调试BuildDebug.bat所在文件夹不能有空格
 #  * @更新:     2020-02-01 23:24 增加判断GCC版本，如果小于8，不使用-lstdc++fs编译参数
 #  * @更新:     2021-05-07 11:54 改进兼容powershell7,powershell7暂时不能测量内存使用
+#  * @更新:     2021-11-29 17:37 支持python
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -714,6 +715,52 @@ function BuildJavaAndRun($SourceFileName) {
     }
 }
 
+# 编译Python并且执行
+function BuildPythonAndRun($SourceFileName) {
+    #编译器命令行
+    $pythonCompilerCmd = "python.exe"
+    $pythonCmd = 'python'
+
+    #显示编译器信息
+    Write-Host
+    start-process $pythonCompilerCmd "--version" -wait -NoNewWindow
+    # start-process $pythonCmd "--version" -wait -NoNewWindow    
+    
+    $SourFile = Get-Item -Path $SourceFileName
+   
+    #编译参数
+    $arguments = """$SourceFileName"""
+
+    #开始编译
+    Write-Host $pythonCompilerCmd $arguments 
+    Write-Host
+
+    $ps = new-object System.Diagnostics.Process
+    $ps.StartInfo.Filename = $pythonCompilerCmd 
+    $ps.StartInfo.arguments = """$SourceFileName"""
+    $ps.StartInfo.UseShellExecute = $false
+    $ps.StartInfo.WorkingDirectory = $SourFile.DirectoryName
+
+    # 开始计时
+    $sw = [Diagnostics.Stopwatch]::StartNew()
+
+    $ps.start() | Out-Null
+    $ps.WaitForExit()
+    $LASTEXITCODE=$ps.ExitCode
+
+    # start-process $pythonCompilerCmd $arguments -wait -NoNewWindow
+    $sw.Stop()
+
+    Write-Host "python compile successfully."
+    $msg = "$($SourceFileName) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+
+    Write-Host
+    Write-Host $msg -ForegroundColor Green -NoNewline
+    showExitCodeInfo $LASTEXITCODE
+    Write-Host 
+    
+}
+
 # [Threading.Thread]::CurrentThread.CurrentCulture = 'en-US'
 # [cultureinfo]::CurrentCulture = 'en-US'
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
@@ -728,6 +775,10 @@ if (Test-Path $SourceFileName) {
     elseif ($SrcFile.Extension.ToLower() -eq ".java") {
         BuildJavaAndRun($SourceFileName)
     }
+    elseif ($SrcFile.Extension.ToLower() -eq ".py") {
+        BuildPythonAndRun($SourceFileName)
+    }
+        
 }
 else {
     Write-Host  "source file $SourceFileName does not exist" -ForegroundColor Red
