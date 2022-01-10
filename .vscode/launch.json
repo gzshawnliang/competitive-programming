@@ -2,6 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
             "name": "Python: 当前文件",
             "type": "python",
             "request": "launch",
