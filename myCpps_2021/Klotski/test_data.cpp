@@ -18,7 +18,7 @@ string getCurrTime()
 
 int main()
 {
-    const int FileCount = 3; //note:文件数量
+    const int FileCount = 6; //note:文件数量
     ofstream fout;           //note:文件流
     random rdNum;            //note:随机数
 
@@ -48,19 +48,20 @@ int main()
         pair<int, int> zLast = z;
 
         int swapCount = 0;
+        int maxSwapCount = 0;
         int zCount = 0;
-        //int maxZCount=rdNum.GetRand(1000, 2000);
-        int maxZCount=15;
+        int maxZCount=rdNum.GetRand(10000, 20000);
+        //int maxZCount=15;
         while (true)
         {
             vector<pair<int, int>> swapPairVec;
 
             for (auto c : b)
             {
-                if (a[z.first + c][z.second] > 0 && z.first + c>=3)
+                if (a[z.first + c][z.second] > 0 && z.first + c>=1)
                     swapPairVec.push_back({z.first + c, z.second});
 
-                if (a[z.first][z.second + c] > 0 && z.first>=3)
+                if (a[z.first][z.second + c] > 0 && z.first>=1)
                     swapPairVec.push_back({z.first, z.second + c});
             }
 
@@ -78,7 +79,7 @@ int main()
                     break;
                 }
             }
-            cerr << nextPair.first << endl;
+            //cerr << nextPair.first << endl;
             std::swap(a[z.first][z.second], a[nextPair.first][nextPair.second]);
             z = nextPair;
 
@@ -90,8 +91,18 @@ int main()
             if (z == make_pair(4, 4))
             {
                 ++zCount;
-                if (zCount >= maxZCount)
-                    break;
+                // if (zCount >= maxZCount)
+                //     break;
+            }
+
+            if (zCount >= maxZCount && maxSwapCount==0)
+            {
+                maxSwapCount = swapCount + rdNum.GetRand(10, 30);
+            }
+
+            if (maxSwapCount>0 && swapCount > maxSwapCount)
+            {
+                break;
             }
         }
 
