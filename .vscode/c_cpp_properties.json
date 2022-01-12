@@ -22,7 +22,29 @@
             },
             "cStandard": "c11",
             "cppStandard": "c++17"
-        }
+        },
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceRoot}",
+                "${workspaceRoot}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE"
+            ],
+            "intelliSenseMode":"clang-x64",
+            "browse": {
+                "path": [
+                    "${workspaceRoot}",
+                    "${workspaceRoot}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }        
     ],
     "version": 4
 }
