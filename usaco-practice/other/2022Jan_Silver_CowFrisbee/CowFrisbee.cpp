@@ -52,7 +52,7 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("CowFrisbee.in", "r", stdin);
-    //freopen("CowFrisbee.out", "w", stdout);
+    freopen("CowFrisbee.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
