@@ -411,10 +411,11 @@ function BuildCppAndRun($SourceFileName) {
     }
     else {
         $cppCompilerCmd = $env:CppCompiler + "\g++.exe"
+        Write-Host "System has find g++ compiler" $cppCompilerCmd 
     }
 
     #显示编译器信息
-    Write-Host 
+    Write-Host
     start-process -FilePath $cppCompilerCmd -ArgumentList "--version" -NoNewWindow
 
     $exeFileName = $SourFile.DirectoryName + "\" + $SourFile.BaseName + ".exe" 
