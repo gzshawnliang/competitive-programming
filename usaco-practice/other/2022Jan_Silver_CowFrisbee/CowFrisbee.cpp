@@ -1,5 +1,5 @@
 #ifndef LOCAL_DEBUG
-#define NDEBUG //ban assert when submit to online judge
+#define NDEBUG // ban assert when submit to online judge
 #endif
 
 #ifdef LOCAL_DEBUG
@@ -23,50 +23,51 @@ class solution
     {
         int n;
         cin >> n;
-        vector<int> a(n+1);
+        vector<int> a(n + 1);
         stack<int> s;
         for (int i = 1; i <= n; ++i)
             cin >> a[i];
         ill ans = 0;
         for (int pos = 1; pos <= n; ++pos)
         {
-            while (!s.empty() && a[pos]>a[s.top()])
+            while (!s.empty() && a[pos] > a[s.top()])
             {
-                ans +=pos-s.top()+1;
+                ans += pos - s.top() + 1;
                 s.pop();
             }
-            
-            if(!s.empty())
-                ans +=pos-s.top()+1;
-                
+
+            if (!s.empty())
+                ans += pos - s.top() + 1;
+
             s.push(pos);
         }
         cout << ans << '\n';
-    }    
+    }
+
   public:
     void solve()
     {
         int n;
         cin >> n;
-        vector<pair<int,int>> a(n+1);
-        stack<pair<int,int>> s;
+        vector<pair<int, int>> a(n + 1);
+        stack<pair<int, int>> s;
         for (int i = 1; i <= n; ++i)
         {
-            a[i].first = i;            
+            a[i].first = i;
             cin >> a[i].second;
         }
 
         ill ans = 0;
         for (int pos = 1; pos <= n; ++pos)
         {
-            while (!s.empty() && a[pos].second>s.top().second)
+            while (!s.empty() && a[pos].second > s.top().second)
             {
-                ans +=pos-s.top().first+1;
+                ans += pos - s.top().first + 1;
                 s.pop();
             }
-            
-            if(!s.empty())
-                ans +=pos-s.top().first+1;
+
+            if (!s.empty())
+                ans += pos - s.top().first + 1;
 
             s.push(a[pos]);
         }
@@ -80,7 +81,7 @@ signed main()
 
 #ifdef LOCAL_DEBUG
     freopen("CowFrisbee.in", "r", stdin);
-    //freopen("CowFrisbee.out", "w", stdout);
+    // freopen("CowFrisbee.out", "w", stdout);
     auto startTime = chrono::high_resolution_clock::now();
 #endif
 
