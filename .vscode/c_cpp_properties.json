@@ -11,7 +11,7 @@
                 "UNICODE"
             ],
             "intelliSenseMode":"windows-gcc-x64",
-            "compilerPath": "C:/C++Compiler/MinGW/GCC-11.2.0-2/mingw64/bin/g++.exe",
+            "compilerPath": "${CppCompiler}\\g++.exe",
             "browse": {
                 "path": [
                     "${workspaceRoot}",
