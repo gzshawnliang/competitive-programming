@@ -4,17 +4,17 @@
   <description asmv2:publisher="OJAssistantUI" asmv2:product="OJAssistantUI" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" />
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
-    <framework targetVersion="4.6" profile="Full" supportedRuntime="4.0.30319" />
+    <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="OJAssistantUI.exe.manifest" size="6506">
+    <dependentAssembly dependencyType="install" codebase="OJAssistantUI.exe.manifest" size="6473">
       <assemblyIdentity name="OJAssistantUI.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QGyV5I3jr/jlNHBTyW88SSyhGd/2Wf/T/ra98/Gv0MM=</dsig:DigestValue>
+        <dsig:DigestValue>EMZzuftNbKldyhlxzHCtKD99glmHpIcRWDcbinASsK8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
