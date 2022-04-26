@@ -473,9 +473,11 @@ function BuildCppAndRun($SourceFileName) {
         $ExeFile = Get-Item -Path $exeFileName
         Write-Host
         Write-Host "g++ compile successfully." -ForegroundColor DarkYellow
+
         
 
         if ($NotRun.IsPresent) {
+            Write-Host "Create file `"$($ExeFile.Name)`" size:$($ExeFile.length/1000) KB successfully." -ForegroundColor Green
             exit
         }
         Write-Host
