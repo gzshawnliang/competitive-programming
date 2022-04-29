@@ -1,1 +1,1 @@
-python interactive_runner.py python3 local_testing_tool.py 0 -- 1.exe
+python interactive_runner.py python3 local_testing_tool.py 0 -- C.exe
