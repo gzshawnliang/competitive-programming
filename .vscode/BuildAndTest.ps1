@@ -28,6 +28,7 @@
 #  * @更新:     2020-02-01 23:24 增加判断GCC版本，如果小于8，不使用-lstdc++fs编译参数
 #  * @更新:     2021-05-07 11:54 改进兼容powershell7,powershell7暂时不能测量内存使用
 #  * @更新:     2021-11-29 17:37 支持python
+#  * @更新:     2022-09-23 14:46 python,c++,java支持Linux下编译
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -46,11 +47,16 @@ Set-Variable TLEErrorMsec -option Constant -value 600000          #Time Limit Ex
 Set-Variable TLETerminateMsec -option Constant -value 600000     #Time Limit Exceeded 超时终止（毫秒）
 $JavaMainClassName = "" #Java Main Class Name
 
+$pathSeparator = "\"
+if ($IsLinux -eq $True) {
+    $pathSeparator = "/"
+}
+
 function getGCCVersion()
 {
     $cppCompilerCmd=""
     if ([String]::IsNullOrEmpty($env:CppCompiler)) {
-        $cppCompilerCmd = "g++.exe"
+        $cppCompilerCmd = "g++"
     }
     else {
         $cppCompilerCmd = $env:CppCompiler + "\g++.exe"
@@ -72,24 +78,30 @@ function getGCCVersion()
     
     if($p.ExitCode -eq 0)
     {
-        # 取出版本9.2.0
-        # $cppVersion2 = $stdout.Split("`n`r")[0].Split(' ')[-1];
-        $cppVersion2 = $stdout.Split("`r")[0].Split(' ')[-1];
+        # Write-Host $stdout
+        if ($IsLinux -eq $True) {
+        
+            # 取出版本9.2.0
+            # $cppVersion2 = $stdout.Split("`n`r")[0].Split(' ')[-1];
+            $cppVersion2 = $stdout.Split("`n")[0].Split(' ')[-1];
 
-        # 取出版本9
-        $cppVersion2 = $cppVersion2.Split('.')[0]
-        # Write-Host $cppVersion2
-    
-        # if([int]$cppVersion2 -ge 8)
-        # {
-        #     Write-Host "Large"
-        # }
-        # else {
-        #     Write-Host "smart"
-        # }
+            # 取出版本9
+            $cppVersion2 = $cppVersion2.Split('.')[0]
+
+            # Write-Host $cppVersion2
 
 
-        return [int]$cppVersion2
+            return [int]$cppVersion2
+        }
+        else {
+            # 取出版本9.2.0
+            # $cppVersion2 = $stdout.Split("`n`r")[0].Split(' ')[-1];
+            $cppVersion2 = $stdout.Split("`r")[0].Split(' ')[-1];
+
+            # 取出版本9
+            $cppVersion2 = $cppVersion2.Split('.')[0]
+            return [int]$cppVersion2
+        }
     }
     return 0
 }
@@ -407,7 +419,7 @@ function BuildCppAndRun($SourceFileName) {
 
     #编译器命令行
     if ([String]::IsNullOrEmpty($env:CppCompiler)) {
-        $cppCompilerCmd = "g++.exe"
+        $cppCompilerCmd = "g++"
     }
     else {
         $cppCompilerCmd = $env:CppCompiler + "\g++.exe"
@@ -418,7 +430,7 @@ function BuildCppAndRun($SourceFileName) {
     Write-Host
     start-process -FilePath $cppCompilerCmd -ArgumentList "--version" -NoNewWindow
 
-    $exeFileName = $SourFile.DirectoryName + "\" + $SourFile.BaseName + ".exe" 
+    $exeFileName = $SourFile.DirectoryName + $pathSeparator + $SourFile.BaseName + ".exe" 
 
     #如果有exe文件则删除
     if (Test-Path $exeFileName) {
@@ -601,10 +613,9 @@ function BuildCppAndRun($SourceFileName) {
                         }
                     }
                 }
-                
+                Write-Host                
                 Write-Host $msg -ForegroundColor Green -NoNewline
                 showExitCodeInfo $LASTEXITCODE
-
                 Write-Host                
             }
 
@@ -613,10 +624,10 @@ function BuildCppAndRun($SourceFileName) {
     }
 }
 
-# 编译Java并且执行
+# 编译Java并且执行 Windows
 function BuildJavaAndRun($SourceFileName) {
     #编译器命令行
-    $javaCompilerCmd = "javac.exe"
+    $javaCompilerCmd = "javac"
     $javacmd = 'java'
 
     #显示编译器信息
@@ -626,8 +637,8 @@ function BuildJavaAndRun($SourceFileName) {
     
     $SourFile = Get-Item -Path $SourceFileName
     Write-Host
-    Write-Host "removing $($SourFile.Directory.FullName)\*.class"
-    Remove-Item -Path "$($SourFile.Directory.FullName)\*.class"
+    Write-Host "removing $($SourFile.Directory.FullName)$($pathSeparator)*.class"
+    Remove-Item -Path "$($SourFile.Directory.FullName)$($pathSeparator)*.class"
 
    
     #编译参数
@@ -638,13 +649,117 @@ function BuildJavaAndRun($SourceFileName) {
     Write-Host $javaCompilerCmd $arguments 
     start-process $javaCompilerCmd $arguments -wait -NoNewWindow
     
-    $exeFileName = $SourFile.DirectoryName + "\*.class" 
+    $exeFileName = $SourFile.DirectoryName + "$($pathSeparator)*.class" 
     if([string]::IsNullOrEmpty($JavaMainClassName))
     {
         $JavaMainClassName =  $SourFile.BaseName
     }
 
-    $exeMainFileName = $SourFile.DirectoryName + "\" + $JavaMainClassName + ".class" 
+    $exeMainFileName = $SourFile.DirectoryName + $pathSeparator + $JavaMainClassName + ".class" 
+        
+
+    #是否成功生成class文件
+    if (Test-Path $exeFileName ) {
+        Write-Host "java compile successfully."
+
+        #获取当前class文件信息
+        if(Test-Path "$($SourFile.BaseName + "class")"){
+            $FirstClassFile = $SourFile.BaseName + ".class"
+        }
+        else 
+        {
+            $FirstClassFile = (Get-Item $exeFileName)[0]
+        }
+        
+
+        Write-Host "FirstClassFile: $FirstClassFile"
+
+        if (-Not (Test-Path $exeMainFileName)) {
+            $JavaMainClassName = $FirstClassFile.BaseName
+        }
+
+        if ($DoTest.IsPresent) {
+            Write-Host "now test $($FirstClassFile.BaseName + $FirstClassFile.Extension)"
+            RunTest($exeFileName)
+        }
+        else {
+            # Write-Host "Launching $($FirstClassFile.BaseName + $FirstClassFile.Extension):   " -NoNewline
+            # New-Variable -Name exitCode
+            # 使用System.Diagnostics.Process方式启动exe
+            # 可现实显示终端，实现cin输入，计算运行时间有些误差。可有进程返回值"
+            # 2019-2-14 此方法，如开三维vector可能会引发std::bad_alloc，暂时屏蔽
+            # StartProcess $exeFileName
+            # StartProcessWithNewInputFile $exeFileName 
+            Write-Host
+            Set-Location -Path $FirstClassFile.DirectoryName 
+            
+            Write-Host "Change to current directory:"
+            Write-Host $FirstClassFile.DirectoryName
+
+            # Write-Host $javacmd -cp $($FirstClassFile.DirectoryName) $($FirstClassFile.BaseName)
+            Write-Host "run command: " -NoNewline
+            Write-Host $javacmd "-Xmx512M -Xss64M -Duser.language=en -Duser.region=US -Duser.variant=US" $SourceFileName
+            $sw = [Diagnostics.Stopwatch]::StartNew()
+            # &$javacmd -cp $($FirstClassFile.DirectoryName) $($FirstClassFile.BaseName)
+            # & $javacmd -cp $($FirstClassFile.DirectoryName) $JavaMainClassName
+            $result = & "$javacmd" "-Xmx512M" "-Xss64M" "-Duser.language=en" "-Duser.region=US" "-Duser.variant=US" "-Dfile.encoding=UTF-8" "$SourceFileName" 2>&1 | % { "$_" }
+            
+            $result
+            # $output = & "$javacmd" "-Xmx512M" "-Xss64M" "-Duser.language=en" "-Duser.region=US" "-Duser.variant=US" "-Dfile.encoding=UTF-8" "$JavaMainClassName" 2>&1
+            # $output.CategoryInfo.TargetName | Out-Default
+
+            $sw.Stop()
+            $msg = "$($JavaMainClassName + $FirstClassFile.Extension) program exited after $($sw.Elapsed) with return value $($LASTEXITCODE)."
+            # Write-Host
+            if ($LASTEXITCODE -eq 0 ) {
+                $leftFile = $SourFile.BaseName + ".ok"
+                $rightFile = $SourFile.BaseName + ".out"
+                if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
+                    if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
+                        Write-Host "Compare $leftFile -> $rightFile"
+                        & "$WorkspaceFolder/.vscode/compareTextFiles.ps1" $leftFile $rightFile
+                        Write-Host
+                    }
+                }
+            }
+            Write-Host $msg -ForegroundColor Green -NoNewline
+            showExitCodeInfo $LASTEXITCODE
+            Write-Host 
+        }
+    }
+}
+
+
+# 编译Java并且执行 Linux
+function BuildJavaAndRunLinux($SourceFileName) {
+    #编译器命令行
+    $javaCompilerCmd = "java"
+
+    #显示编译器信息
+    Write-Host
+    start-process $javaCompilerCmd "-version" -wait -NoNewWindow
+    
+    $SourFile = Get-Item -Path $SourceFileName
+    Write-Host
+    Write-Host "removing $($SourFile.Directory.FullName)$($pathSeparator)*.class"
+    Remove-Item -Path "$($SourFile.Directory.FullName)$($pathSeparator)*.class"
+
+   
+    #编译参数
+    $arguments = """$SourceFileName"""
+
+    #开始编译
+    Write-Host
+    Write-Host $javaCompilerCmd $arguments 
+    start-process $javaCompilerCmd $arguments -wait -NoNewWindow
+    
+    $exeFileName = $SourFile.DirectoryName + "$($pathSeparator)*.class" 
+    if([string]::IsNullOrEmpty($JavaMainClassName))
+    {
+        $JavaMainClassName =  $SourFile.BaseName
+    }
+
+    $exeMainFileName = $SourFile.DirectoryName + $pathSeparator + $JavaMainClassName + ".class" 
         
 
     #是否成功生成class文件
@@ -706,7 +821,7 @@ function BuildJavaAndRun($SourceFileName) {
                 if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
                     if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
                         Write-Host "Compare $leftFile -> $rightFile"
-                        & "$WorkspaceFolder\.vscode\compareTextFiles.ps1" $leftFile $rightFile
+                        & "$WorkspaceFolder/.vscode/compareTextFiles.ps1" $leftFile $rightFile
                         Write-Host
                     }
                 }
@@ -721,8 +836,8 @@ function BuildJavaAndRun($SourceFileName) {
 # 编译Python并且执行
 function BuildPythonAndRun($SourceFileName) {
     #编译器命令行
-    $pythonCompilerCmd = "python.exe"
-    $pythonCmd = 'python'
+    $pythonCompilerCmd = "python"
+    # $pythonCmd = 'python3'
 
     #显示编译器信息
     Write-Host

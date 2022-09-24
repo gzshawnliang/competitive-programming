@@ -280,6 +280,86 @@
                 "${fileDirname}"
             ],
             "problemMatcher": []
-        }
+        },
+        {
+            "label": "rebuild and run(cpp)_linux",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-File",
+                "${workspaceFolder}/.vscode/BuildAndTest.ps1",
+                "-SourceFileName",
+                "${fileDirname}/${fileBasenameNoExtension}.cpp",
+                "-CompilerArgs",
+                "'-DLOCAL_DEBUG -std=gnu++17 -O2 -Wall -lstdc++fs -lm'",
+                "-WorkspaceFolder",
+                "'${workspaceFolder}'"
+            ],
+            "problemMatcher": [],
+        },  
+        {
+            "label": "rebuild and run(python)_linux",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-File",
+                "${workspaceFolder}/.vscode/BuildAndTest.ps1",
+                "-SourceFileName",
+                "${fileDirname}/${fileBasenameNoExtension}.py",
+                "-ShowShellConsole",
+                "-WorkspaceFolder",
+                "\"${workspaceFolder}\""
+            ],
+            "problemMatcher": []
+        },          
+        {
+            "label": "rebuild and run(java)_linux",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-File",
+                "${workspaceFolder}/.vscode/BuildAndTest.ps1",
+                "-SourceFileName",
+                "${fileDirname}/${fileBasenameNoExtension}.java",
+                "-ShowShellConsole",
+                "-WorkspaceFolder",
+                "\"${workspaceFolder}\""
+            ],
+            "problemMatcher": []
+        },                   
+        {
+            "label": "cpp_build_linux",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${fileDirname}/${fileBasenameNoExtension}.cpp",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "'-DLOCAL_DEBUG -std=gnu++17 -lpsapi -DDEBUG -Wall -lstdc++fs -lm -I \"${workspaceFolder}\\include\"'"
+                //"-DDEBUG -DLOCAL_DEBUG -Wall -lstdc++fs -std=gnu++17"
+            ],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+            
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${fileDirname}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }        
     ]
 }

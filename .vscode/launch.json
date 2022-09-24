@@ -33,7 +33,6 @@
             "name": "C++ Launch (GDB)",
             "type": "cppdbg",
             "request": "launch",
-            "targetArchitecture": "x86",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
@@ -41,8 +40,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "gdb.exe",
-            "preLaunchTask": "g++",
+            "preLaunchTask": "cpp_build_linux",
             "internalConsoleOptions": "neverOpen",
             "setupCommands": [
                 {
@@ -54,7 +52,12 @@
                     "text": "handle SIGPIPE nostop noprint pass",
                     "description": "ignore SIGPIPE",
                     "ignoreFailures": true
-                }
+                },
+                {
+                    "description":  "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }                
             ]
         },
         {
