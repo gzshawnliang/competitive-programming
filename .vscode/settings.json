@@ -1,6 +1,10 @@
 // 将设置放入此文件中以覆盖默认值和用户设置。
 {
-    "editor.quickSuggestions": true,
+    "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on",
+        "other": "on"
+    },
     "editor.detectIndentation": false,
     "files.encoding": "utf8",
     // 针对 [cpp] 语言，配置替代编辑器设置。
