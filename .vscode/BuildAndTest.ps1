@@ -676,15 +676,6 @@ function BuildCAndRun($SourceFileName) {
     
     #编译参数`"
     $arguments = "-x c `"$SourceFileName`" -o `"$exeFileName`""
-    if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
-        if(getGCCVersion -lt 8)
-        {
-            # GCC版本小于8不使用-lstdc++fs,-O2编译参数
-            $CompilerArgs = $CompilerArgs.Replace("-lstdc++fs","")
-            $CompilerArgs = $CompilerArgs.Replace("-O2","")
-        }
-        $arguments += " " + $CompilerArgs
-    }
 
     #开始编译
     Write-Host
