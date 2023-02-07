@@ -29,6 +29,7 @@
 #  * @更新:     2021-05-07 11:54 改进兼容powershell7,powershell7暂时不能测量内存使用
 #  * @更新:     2021-11-29 17:37 支持python
 #  * @更新:     2022-09-23 14:46 python,c++,java支持Linux下编译
+#  * @更新:     2023-02-27 14:15 c语言编译
 # ***********************************************************/
 [CmdletBinding()]
 param(
@@ -624,6 +625,218 @@ function BuildCppAndRun($SourceFileName) {
     }
 }
 
+# 编译C并且执行
+function BuildCAndRun($SourceFileName) {
+
+    $SourFile = Get-Item -Path $SourceFileName
+
+    #编译器命令行
+    if ([String]::IsNullOrEmpty($env:CppCompiler)) {
+        $cppCompilerCmd = "gcc "
+    }
+    else {
+        $cppCompilerCmd = $env:CppCompiler + "\gcc.exe"
+        Write-Host "System has find gcc compiler" $cppCompilerCmd 
+    }
+
+    #显示编译器信息
+    Write-Host
+    start-process -FilePath $cppCompilerCmd -ArgumentList "--version" -NoNewWindow
+
+    $exeFileName = $SourFile.DirectoryName + $pathSeparator + $SourFile.BaseName + ".exe" 
+
+    #如果有exe文件则删除
+    if (Test-Path $exeFileName) {
+
+        # 如果进程在运行则先停止
+        $processName = $SourFile.BaseName
+        if ($null -eq (Get-Process $processName  -ErrorAction SilentlyContinue)) {
+            Write-Host "`"$processName.exe`" is not running"
+        } 
+        else {
+            Write-Host "`"$processName.exe`" is running,try to stop the process."
+            # Stop-Process -Name $processName
+            # $procs = Get-Process -Name $processName | Stop-Process -Force
+            $procs = Get-Process -Name $processName 
+            Write-Output $procs
+
+            $procs | Stop-Process -Force
+            Get-Process | Where-Object {$_.HasExited}
+            $procs | Wait-Process
+            Get-Process | Where-Object {$_.HasExited}
+            Start-Sleep -s 1
+            
+            Write-Host "`"$processName.exe`" is stoped."
+        }
+
+        # 删除exe文件
+        Write-Host  "delete the old executable file `"$exeFileName`""
+        Remove-Item $exeFileName -Force
+    }
+    
+    #编译参数`"
+    $arguments = "-x c `"$SourceFileName`" -o `"$exeFileName`""
+    if (-not [string]::IsNullOrEmpty($CompilerArgs)) {
+        if(getGCCVersion -lt 8)
+        {
+            # GCC版本小于8不使用-lstdc++fs,-O2编译参数
+            $CompilerArgs = $CompilerArgs.Replace("-lstdc++fs","")
+            $CompilerArgs = $CompilerArgs.Replace("-O2","")
+        }
+        $arguments += " " + $CompilerArgs
+    }
+
+    #开始编译
+    Write-Host
+    Write-Host "`"$cppCompilerCmd`"" $arguments 
+    start-process $cppCompilerCmd $arguments -wait -NoNewWindow
+
+    #是否成功生成exe文件
+    if (Test-Path $exeFileName) {
+
+        #获取当前exe文件信息
+        $ExeFile = Get-Item -Path $exeFileName
+        Write-Host
+        Write-Host "gcc compile successfully." -ForegroundColor DarkYellow
+
+        
+
+        if ($NotRun.IsPresent) {
+            Write-Host "Create file `"$($ExeFile.Name)`" size:$($ExeFile.length/1000) KB successfully." -ForegroundColor Green
+            exit
+        }
+        Write-Host
+
+        # 设置当前目录为源码目录
+        Set-Location -Path $ExeFile.DirectoryName 
+
+        if ($DoTest.IsPresent) {
+            Write-Host "Launching $($ExeFile.BaseName + $ExeFile.Extension)"
+            RunTest($exeFileName)
+        }
+        else {
+            $currInFile = $ExeFile.DirectoryName + "\" + $ExeFile.BaseName + ".in" 
+            # $isRedirectStdInOut = $false
+            # #检测in文件，规则：
+            # #1）c++文件移除拓展名cpp.in
+            # #2）c++文件移除拓展名移除OJ后缀.in
+            # #3）Input.in
+            # #4）Input.txt
+            # #5）input.in
+            # #6）input.txt
+            # #out文件=in文件名移除拓展名.out
+            # $inputFileArray = @(($ExeFile.BaseName + ".in").ToString(), ($ExeFile.BaseName.Trim("OJ") + ".in").ToString() , "Input.in", "Input.txt", "input.in", "input.txt");
+
+            # foreach ($n in $inputFileArray) {
+            #     if (Test-Path ($ExeFile.DirectoryName + "\" + $n)) {
+            #         # Write-Host($n + ":OK")
+            #         $currInFile = $ExeFile.DirectoryName + "\" + $n
+            #         # Write-Host($currInFile)
+            #         break
+            #     }
+            #     else {
+            #         # Write-Host($n + ":Not OK")
+            #     } 
+            # }
+            # $currOutFile = ""
+
+            # if ($RedirectStdInOut.IsPresent -and (Test-Path $currInFile)) {
+            #     $isRedirectStdInOut = $true
+            #     $inFileObj = Get-Item -Path $currInFile
+            #     $currOutFile = $inFileObj.DirectoryName + "\" + $inFileObj.BaseName + ".out"
+            #     Write-Host "Launching $($ExeFile.BaseName + $ExeFile.Extension) redirecting $($inFileObj.BaseName).in and $($inFileObj.BaseName).out into Stdin and Stdout"
+            # }
+            # else {
+            #     Write-Host "Launching $($ExeFile.BaseName + $ExeFile.Extension)"
+            # }
+            $time = "{0:yyyy/MM/dd} {0:HH:mm:ss}" -f (Get-Date) 
+            Write-Host "$time Launching `"$($ExeFile.BaseName + $ExeFile.Extension)`"" 
+            
+            New-Variable -Name exitCode
+            # 使用System.Diagnostics.Process方式启动exe
+            # 可现实显示终端，实现cin输入，计算运行时间有些误差。可有进程返回值"
+            # 2019-2-14 此方法，如开三维vector可能会引发std::bad_alloc，暂时屏蔽
+            # StartProcess $exeFileName
+            # StartProcessWithNewInputFile $exeFileName 
+
+            if($DevCppMode.IsPresent)
+            {
+                # 使用Dev-C++ 方式的弹dos窗口，好处是可以在dos进行cin输入
+                StartConsolePauserRun($exeFileName)
+                Write-Host "$($ExeFile.BaseName + $ExeFile.Extension) closed." 
+            }
+            else {
+                
+                # $sw = [Diagnostics.Stopwatch]::StartNew()
+                
+                # 内存测量，参考
+                # https://docs.microsoft.com/zh-cn/windows/win32/api/psapi/ns-psapi-process_memory_counters
+                # The peak working set size, in bytes.
+                # $memoryPeakWorkingSet64=0       
+                
+                # The peak value in bytes of the Commit Charge during the lifetime of this process.
+                $peakPagedMemorySize64=0
+
+                # 使用powershell call operator (&)解决'std::bad_alloc'问题
+                # & $exeFileName
+                
+                $ps = new-object System.Diagnostics.Process
+                $ps.StartInfo.Filename = $exeFileName 
+                $ps.StartInfo.UseShellExecute = $false
+                $ps.StartInfo.WorkingDirectory = $ExeFile.DirectoryName
+
+                # 开始计时
+                $sw = [Diagnostics.Stopwatch]::StartNew()
+
+                $ps.start() | Out-Null
+                $ps.WaitForExit()
+                $LASTEXITCODE=$ps.ExitCode
+                $sw.Stop()
+
+                # $PSVersionTable.PSVersion.Major
+                if($PSVersionTable.PSVersion.Major -ge 6)
+                {
+                    $msg = "`"$($ExeFile.BaseName + $ExeFile.Extension)`" program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
+                }
+                else 
+                {
+                    # 使用C#调用GetProcessMemoryInfo 
+                    # [void][reflection.assembly]::LoadFile("$PSScriptRoot\ProcessMemoryInfo.dll")
+                    # $memoryPeakWorkingSet64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakWorkingSetSize($ps.Handle)
+                    $peakPagedMemorySize64 = [ProcessMemoryInfo.ProcessMemoryInfo]::GetPeakPagefileUsage($ps.Handle)
+
+                    $msg = "`"$($ExeFile.BaseName + $ExeFile.Extension)`" program exited after $($sw.Elapsed) with return value $($LASTEXITCODE). "
+                    if($peakPagedMemorySize64 -gt 0)
+                    {
+                        $msg= $msg + "Memory: {0:n0} KB." -f ($peakPagedMemorySize64/1024)                    
+                    }
+                }
+                
+                if ($LASTEXITCODE -eq 0 ) {
+                    if (Test-Path $currInFile) {
+                        $inFileObj = Get-Item -Path $currInFile
+                        $leftFile = $inFileObj.BaseName + ".ok"
+                        $rightFile = $inFileObj.BaseName + ".out"
+                        if ((Test-Path $leftFile) -and (Test-Path $rightFile)) {
+                            if (-Not([String]::IsNullOrEmpty($WorkspaceFolder))) {
+                                Write-Host "Compare $leftFile -> $rightFile : " -NoNewline
+                                & "$WorkspaceFolder\.vscode\compareTextFiles.ps1" $leftFile $rightFile
+                                Write-Host
+                            }
+                        }
+                    }
+                }
+                Write-Host                
+                Write-Host $msg -ForegroundColor Green -NoNewline
+                showExitCodeInfo $LASTEXITCODE
+                Write-Host                
+            }
+
+
+        }
+    }
+}
+
 # 编译Java并且执行 Windows
 function BuildJavaAndRun($SourceFileName) {
     #编译器命令行
@@ -890,6 +1103,9 @@ if (Test-Path $SourceFileName) {
     if ($SrcFile.Extension.ToLower() -eq ".cpp") {
         BuildCppAndRun($SourceFileName)
     }
+    if ($SrcFile.Extension.ToLower() -eq ".c") {
+        BuildCAndRun($SourceFileName)
+    }    
     elseif ($SrcFile.Extension.ToLower() -eq ".java") {
         BuildJavaAndRun($SourceFileName)
     }

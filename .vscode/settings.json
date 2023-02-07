@@ -159,7 +159,10 @@
     // "java.home": "C:\\Program Files\\RedHat\\java-11-openjdk-11.0.2-2",
     
     //RedHat JDK 11
-    "java.jdt.ls.java.home": "C:\\Java\\java-11-openjdk-11.0.14.9-1.windows.redhat.x86_64",
+    "java.jdt.ls.java.home2": "C:\\Java\\java-11-openjdk-11.0.14.9-1.windows.redhat.x86_64",
+
+    //RedHat JDK 17
+    "java.jdt.ls.java.home": "C:\\Java\\java-17-openjdk-17.0.5.0.8-2.win.x86_64",
 
     //Oracle JDK 8
     //"java.home": "C:\\Program Files\\Java\\jdk1.8.0_261",

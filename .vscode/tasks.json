@@ -174,7 +174,23 @@
                 "'${workspaceFolder}'"
             ],
             "problemMatcher": [],
-        },        
+        },  
+        {
+            "label": "rebuild and run C",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-executionpolicy",
+                "bypass",
+                "-File",
+                "\"${workspaceFolder}\\.vscode\\BuildAndTest.ps1\"",
+                "-SourceFileName",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.c\"",
+                "-WorkspaceFolder",
+                "'${workspaceFolder}'"
+            ],
+            "problemMatcher": [],
+        },                 
         {
             "label": "rebuild and run(DevCppMode)",
             "type": "shell",
@@ -360,6 +376,40 @@
                     "message": 5
                 }
             }
-        }        
+        },
+        {
+            "label": "c_build_linux",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-x",
+                "c",
+                "-g",
+                "${fileDirname}/${fileBasenameNoExtension}.c",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.exe"
+            ],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+            
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${fileDirname}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }                     
     ]
 }
